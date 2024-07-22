@@ -53,6 +53,13 @@ print(summary(Treesdata))
 #
 write_csv(Treesdata,"C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Woody2.csv")
 
+
+
+
+
+
+
+
 ########################################################################
 ############################################################### GRASSES DATA CLEANING
 
