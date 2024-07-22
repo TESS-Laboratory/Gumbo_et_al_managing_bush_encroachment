@@ -30,18 +30,7 @@ Woody_species_unique <- Woody_P %>%
   #theme_classic()
 ggplot(Woody_species_unique) + 
   geom_col(aes(x = Site, y = n_species), fill = "lightgreen", colour = "darkgreen", width = 0.75) +
-  labs(y = "Species composition") + theme_classic()
-
-
-####### With no colours
-ggplot(Woody_species_unique) + 
-  geom_col(aes(x = Site, y = n_species), fill = "lightgreen", colour = "darkgreen", width = 0.75) +
-  labs(y = "No. of species") + theme_classic() +
-  theme(axis.title.x = element_text(size = 32), 
-    axis.title.y = element_text(size = 32),
-    axis.text.x = element_text(size = 30),  
-    axis.text.y = element_text(size = 30)) 
-
+  labs(y = "No. of woody species") + theme_classic()
 
 
 

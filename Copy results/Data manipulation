@@ -1,0 +1,13 @@
+############script for importing, manipulating and visualizing data
+
+##loadpackages
+
+library(tidyverse)
+
+### import data
+Data <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/Woody plants.csv")
+
+###view first few rows
+head(Data)
+update.packages()
+Library
