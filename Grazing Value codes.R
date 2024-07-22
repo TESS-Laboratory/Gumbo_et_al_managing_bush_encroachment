@@ -3,7 +3,7 @@ if (!require(readxl)) install.packages("readxl")
 library(readxl)
 library(ggplot2)
 library(dplyr)
-
+library(tidyverse)
 ####
 data <- read_excel("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/jUNK DATA/2.2-GRASSES sheet.xlsx")
 
@@ -26,9 +26,6 @@ ggplot(data, aes(x = Grazing_value, fill = Grazing_value)) +
   labs(title = "Grazing Value Distribution", x = "Grazing Value", y = "Frequency") +
   scale_fill_manual(values = c("High" = "red", "Moderate" = "blue", "Low" = "green")) +
   theme_minimal()
-
-
-
 
 
 
@@ -91,10 +88,9 @@ for (site in sites) {
 #######Combing grazing value across all sites
 p_summary <- ggplot(data, aes(x = Site, fill = Grazing_value)) +
   geom_bar(position = "dodge") +
-  labs(title = "Grazing value across sites",
-       x = "Site", y = "Frequency") +
+  labs(x = "Site", y = "Frequency") +
   scale_fill_manual(values = c("High" = "green", "Moderate" = "blue", "Low" = "red")) +
-  theme_minimal() +
+  theme_classic() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1.5))
 
 print(p_summary)
@@ -114,6 +110,8 @@ if (!require(readxl)) install.packages("readxl")
 if (!require(dplyr)) install.packages("dplyr")
 if (!require(ggplot2)) install.packages("ggplot2")
 library(readxl)
+
+library(tidyverse)
 library(dplyr)
 library(ggplot2)
 
@@ -210,13 +208,16 @@ summary_data <- data %>%
 print(summary_data)
 
 # Create a boxplot to visualize DPM_Height grouped by Site
-ggplot(data, aes(x = Site, y = DPM_Height, fill =)) +
+ggplot(data, aes(x = Site, y = DPM_Height)) +
   geom_col() +
   labs(
     x = "Site",
-    y = "DPM Height (cm)"
-  ) +
-  theme_classic()
+    y = "DPM Height (cm)")+
+  theme_classic()+
+  theme(axis.title.x = element_text(size = 32), 
+        axis.title.y = element_text(size = 32),
+        axis.text.x = element_text(size = 30),  
+        axis.text.y = element_text(size = 30)) 
 
 
 
@@ -263,5 +264,8 @@ ggplot(diversity_data, aes(x = Site, y = Simpson_Index, fill = Site)) +
     x = "Site",
     y = "Simpson's Diversity Index"
   ) +
-  theme_minimal()
+  theme_minimal() + theme(axis.title.x = element_text(size = 32), 
+                        axis.title.y = element_text(size = 32),
+                        axis.text.x = element_text(size = 30),  
+                        axis.text.y = element_text(size = 30)) 
 
