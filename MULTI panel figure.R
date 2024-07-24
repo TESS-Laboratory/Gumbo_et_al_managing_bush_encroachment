@@ -173,69 +173,10 @@ ggsave("multi_panel_plot.png", multi_panel_plot, width = 16, height = 12, units 
 
 
 
-#### include tag labels
-
-# Display the multi-panel plot
-# print(multi_panel_plot)
-
-##ggsave("multi_panel_plot", width=16, height=16, units=cm)
 
 
 ###############################################################################################
 ###############################################################################################
-
-## USING GEOM POINT
-
-
-panel1 <- ggplot(average_height, aes(x = Site, y = average_height)) +
-  geom_bar(stat = "identity") +
-  labs(
-    x = "Site",
-    y = "Mean grass height (cm)"
-  ) +
-  theme_classic()+
-  theme(axis.title.x = element_text(size = 18), 
-        axis.title.y = element_text(size = 18),
-        axis.text.x = element_text(size = 16),  
-        axis.text.y = element_text(size = 16)) 
-
-
-
-panel2 <- ggplot(Grass_species_unique) +
-  geom_col(aes(x = Site, y = n_species), fill = "lightgreen", colour = "darkgreen", width = 0.75) +
-  labs(y = "No. of species") + theme_classic()+
-  theme(axis.title.x = element_text(size = 20), 
-        axis.title.y = element_text(size = 20),
-        axis.text.x = element_text(size = 18),  
-        axis.text.y = element_text(size = 18))
-
-
-panel3 <- ggplot(diversity_index, aes(x = Site, y = DiversityIndex)) +
-  geom_bar(stat = "identity")+ #fill = "green") +
-  theme_classic() +
-  labs(,
-       x = "Site",
-       y = "Diversity index")+
-  theme(axis.title.x = element_text(size = 20), 
-        axis.title.y = element_text(size = 20),
-        axis.text.x = element_text(size = 18),  
-        axis.text.y = element_text(size = 18)) 
-
-
-
-plot_canopy <- ggplot(data_summary, aes(x = Site, y = CanopyCover)) +
-  geom_point() +
-  theme_minimal() +
-  labs(title = "Canopy Cover", x = "Site", y = "Canopy Cover")
-
-
-
-
-
-
-
-
-
 
 
 
@@ -250,38 +191,181 @@ plot_canopy <- ggplot(data_summary, aes(x = Site, y = CanopyCover)) +
 Treespp <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Woody spp only.csv")
 view(Treesspp)
 ###### Group species counts by Site and Spp_name
-Treespp <- Treespp %>%
-  group_by(Site, Spp_name) %>%
-  summarise(Count = n()) %>%
-  ungroup()
-view(Treespp)
-
-##### Group by Site and Species, then sum the counts
-Treespp <- Treespp %>%
-  group_by(Site, Spp_name) %>%
-  summarise(Count = sum(Count)) %>%
-  spread(Spp_name, Count, fill = 0)
-# View the grouped and summarized dataset
-view(Treespp)
-
-# Convert data to a matrix for vegan package
-species_matrix <- as.data.frame(Treespp %>% column_to_rownames(var = "Site"))
 
 
-# Ensure all columns are numeric
-species_matrix <- as.data.frame(lapply(species_matrix, as.numeric))
+###(1) No. of Tree spp
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
 
-# Calculate Shannon-Wiener diversity index for each site
-shannon_index <- diversity(species_matrix, index = "shannon")
+#### Counting woody species
+Woody_species <- Woody_P %>%
+  group_by(Site) %>%
+  count(Spp_name)
 
-##Combine the Shannon index with site data
-diversity_data <- data.frame(Site = rownames(species_matrix), Shannon_Index = shannon_index)
+###### Number of woody plant spp per site
+Woody_species_unique <- Woody_P %>%
+  group_by(Site) %>%
+  summarise(n_species = length(unique(Spp_name)))
 
 
-ggplot(diversity_data, aes(x = Site, y = Shannon_Index)) +
-  geom_bar(stat = "identity") +
-  labs(
-    x = "Site",
-    y = "Diversity indices"
+ggplot(Woody_species_unique) + 
+  geom_col(aes(x = Site, y = n_species), fill = "lightgreen", colour = "darkgreen", width = 0.75) +
+  labs(y = "Species composition") + theme_classic()
+
+
+####### With no colours 1
+ggplot(Woody_species_unique) + 
+  geom_col(aes(x = Site, y = n_species), fill = "lightgreen", colour = "darkgreen", width = 0.75) +
+  labs(y = "No. of species") + theme_classic() +
+  theme(axis.title.x = element_text(size = 22), 
+        axis.title.y = element_text(size = 22),
+        axis.text.x = element_text(size = 18),  
+        axis.text.y = element_text(size = 18)) 
+
+##(2) Mean Tree height
+ggplot(Results) +
+  geom_col(aes(x = SITE, y = Mean_height_of_trees), fill = "darkgrey", colour = "black", width = 0.75) +
+  labs(y = "Mean tree height") + theme_classic() + 
+  theme(axis.title.x = element_text(size = 14), 
+        axis.title.y = element_text(size = 14), 
+        axis.text.x = element_text(size = 12),  
+        axis.text.y = element_text(size = 12))
+
+
+##  (3) STEM COUNT PER HECTARE
+# Reshape the data for plotting
+plant_height2_long <- plant_height2 %>%
+  select(Site, Stem_count)%>%     ###Trees, Seedlings, Saplings) %>%
+  pivot_longer(cols = -Site, names_to = "Category", values_to = "Density")
+
+# Plot the density for each category per site
+ggplot(plant_height2_long, aes(x = Site, y = Density)) +   #, ##fill = Category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Site",
+       y = "Stem count (per hectare)"
   ) +
-  theme_classic()
+  theme_classic() +
+  theme(
+    axis.title.x = element_text(size = 14),
+    axis.title.y = element_text(size = 14),
+    axis.text.x = element_text(size = 12),
+    axis.text.y = element_text(size = 12),
+    plot.title = element_text(size = 16, face = "bold")
+  )
+
+## (4) PLANT DENSITY
+# Given data
+plant_height2 <- data.frame(
+  Site = c("A", "B", "C", "D", "E", "F"),
+  Trees = c(1853, 1348, 2749, 2488, 2606, 1703),
+  ###Stem_count = c(13512, 12008, 18337, 16543, 15108, 11432)
+  Seedlings = c(1437, 1658, 1793, 1393, 2990, 825),
+  Saplings = c(2413, 1074, 810, 1826, 1288, 1134)
+)
+
+# Define the plot area in square meters
+plot_area_sqm <- 12000
+
+# Convert the plot area to hectares
+plot_area_hectares <- plot_area_sqm / 10000
+
+
+
+# Pivot the data
+plant_height2_long <- plant_height2 %>%
+  pivot_longer(cols = c("Trees", "Seedlings", "Saplings"), 
+               names_to = "Category", 
+               values_to = "Density")
+
+# Print the pivoted data to check
+print(plant_height2_long)
+
+# Create a bar graph
+plantD <- ggplot(plant_height2_long, aes(x = Site, y = Density, fill = Category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_minimal() +
+  labs(x = "Site", y = "Density", fill = "Category")
+
+# Print the bar graph
+print(plantD)
+
+# Save the bar graph
+ggsave("plant_density_bar_graph.png", p, width = 8, height = 6, units = "in")
+
+
+#######name your panels e.g W_panel1 = No of spp, W_panel2 = Tree height, w_panel3= Stem count panel4 = Plant density
+
+W_panel1 <- ggplot(Woody_species_unique) + 
+  geom_col(aes(x = Site, y = n_species), fill = "lightgreen", colour = "darkgreen", width = 0.75) +
+  labs(y = "No. of species") + theme_classic() +
+  #theme(axis.title.x = element_text(size = 22), 
+   #     axis.title.y = element_text(size = 22),
+    #    axis.text.x = element_text(size = 18),  
+     #   axis.text.y = element_text(size = 18)) +
+  theme(plot.title = element_text(hjust = -0.1),axis.title.y = element_text(size = 10), 
+        axis.title.x = element_text(size = 10))
+
+
+W_panel2 <- ggplot(Results) +
+  geom_col(aes(x = SITE, y = Mean_height_of_trees), fill = "darkgrey", colour = "black", width = 0.75) +
+  labs(y = "Mean tree height") + theme_classic() + 
+  #theme(axis.title.x = element_text(size = 14), 
+   #     axis.title.y = element_text(size = 14), 
+    #    axis.text.x = element_text(size = 12),  
+     #   axis.text.y = element_text(size = 12))+
+  theme(plot.title = element_text(hjust = -0.1),axis.title.y = element_text(size = 10), 
+        axis.title.x = element_text(size = 10))
+
+
+W_panel3 <- ggplot(plant_height2_long, aes(x = Site, y = Density)) +   #, ##fill = Category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Site",
+       y = "Stem count (per hectare)"
+  ) +
+  theme_classic() +
+  #theme(
+   # axis.title.x = element_text(size = 14),
+    #axis.title.y = element_text(size = 14),
+    #axis.text.x = element_text(size = 12),
+    #axis.text.y = element_text(size = 12),
+  theme(plot.title = element_text(hjust = -0.1),axis.title.y = element_text(size = 10), 
+        axis.title.x = element_text(size = 10))
+
+
+W_panel4 <- plantD <- ggplot(plant_height2_long, aes(x = Site, y = Density, fill = Category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_minimal() +
+  labs(x = "Site", y = "Density per hectare", fill = "Category")+
+  theme_classic()+
+  #theme(
+   # axis.title.x = element_text(size = 14),
+    #axis.title.y = element_text(size = 14),
+    #axis.text.x = element_text(size = 12),
+    #axis.text.y = element_text(size = 12),
+    #plot.title = element_text(size = 16, face = "bold")
+  theme(plot.title = element_text(hjust = -0.1),axis.title.y = element_text(size = 10), 
+  axis.title.x = element_text(size = 10))
+  
+
+# Create a multi-panel layout using Patchwork
+multi_panel_plot <- (W_panel1+W_panel2)/(W_panel3+W_panel4)+
+  plot_annotation(tag_levels = 'a') +
+  theme(plot.tag.position = c(0, 1), plot.tag = element_text(size = 0.5, hjust = -0.5))
+
+
+#####combined_plot <- (plot_height + plot_diversity) / (plot_canopy + plot_density) +
+###plot_annotation(tag_levels = 'a')
+
+print(multi_panel_plot)
+
+ggsave("multi_panel_plot.png", multi_panel_plot, width = 16, height = 13, units = "cm")
+
+
+
+
+
+
+
+
+
