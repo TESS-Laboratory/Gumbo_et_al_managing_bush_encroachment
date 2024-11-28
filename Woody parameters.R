@@ -6,15 +6,14 @@ install.packages("reshape2")
 library(ggplot2)
 
 # Create the data frame
-data <- data.frame(
+woodyparameters <- data.frame(
   Site = c("A", "B", "C", "D", "E", "F"),
-  Trees = c(2224, 1618, 3299, 2985, 3127, 2044),
   Seedlings = c(1724, 1990, 2151, 1671, 3588, 990),
-  Saplings = c(2896, 1289, 972, 2191, 1545, 1361)
-)
+  Saplings = c(2896, 1289, 972, 2191, 1545, 1361),
+  Trees = c(2224, 1618, 3299, 2985, 3127, 2044))
 
 # Convert the data to long format for ggplot
-data_long <- reshape2::melt(data, id.vars = "Site")
+data_long <- reshape2::melt(woodyparameters, id.vars = "Site")
 
 # Plot the data
 ggplot(data_long, aes(x = Site, y = value, fill = variable)) +

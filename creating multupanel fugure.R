@@ -2,8 +2,8 @@
 
 
 ## Load Packages
-# install.packages("ggplot2")
-# install.packages("patchwork")
+ install.packages("ggplot2")
+install.packages("patchwork")
 # install.packages("jpeg")
 # install.packages("grid")
 # install.packages("cowplot")
@@ -50,4 +50,47 @@ multi_panel_plot <- (plot1 + plot2) / (plot3 + plot4)
 
 ggsave("multi_panel_plot.jpg", multi_panel_plot, width=16, height=16, units=cm)
 
+########################### TRYING NEW WAY
 
+library(tidyverse)
+library(patchwork)
+library(ggplot2)
+
+# Read the data from CSV files
+# Assuming each script reads from a different CSV
+data_species <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Woody spp only.csv")
+data_height <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Cleaned folders/Cleaned - Woody2.csv")
+data_diversity <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Woody spp only.csv")
+
+
+### manually entered
+plant_density <- data.frame(
+  Site = c("A", "B", "C", "D", "E", "F"),
+  Trees = c(1853, 1348, 2749, 2488, 2606, 1703),
+  ##Stem_count = c(13512, 12008, 18337, 16543, 15108, 11432)
+  Seedlings = c(1437, 1658, 1793, 1393, 2990, 825),
+  Saplings = c(2413, 1074, 810, 1826, 1288, 1134)
+)
+
+
+# Analysis and Plot for Plant Height
+# Replace with your script logic for determining plant height
+plot_species <- ggplot(data_species, aes(x = Site, y = Spp_name)) +
+geom_point() +
+theme_minimal() +
+labs(x = "Site", y = "Spp_Name")
+
+
+ #Analysis and Plot for Diversity
+ #Replace with your script logic for determining diversity
+plot_diversity <- ggplot(data_diversity, aes(x = Site, y = diversity)) +
+ geom_point() +
+  theme_minimal() +
+  labs(x = "Site", y = "Diversity indices")
+
+# Analysis and Plot for Canopy Cover
+# Replace with your script logic for determining canopy cover
+plot_height <- ggplot(data_height, aes(x = Site, y = Max_Height..m.)) +
+  geom_point() 
+
+  

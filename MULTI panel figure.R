@@ -18,12 +18,12 @@ print(average_height)
 
 # Plot average height per site
 ggplot(average_height, aes(x = Site, y = average_height)) +
-  geom_bar(stat = "identity") +
+  geom_boxplot(stat = "identity") +
   labs(
     x = "Site",
     y = "Mean height (cm)"
   ) +
-  theme_minimal() #+ theme(axis.title.x = element_text(size = 16), 
+  theme_minimal()#+ theme(axis.title.x = element_text(size = 16), 
                    #    axis.title.y = element_text(size = 16),
                     #   axis.text.x = element_text(size = 14),  
                      #  axis.text.y = element_text(size = 14)) 
@@ -112,7 +112,7 @@ ggplot(diversity_index, aes(x = Site, y = DiversityIndex)) +
 library(patchwork)
 
 #######name your panels e.g panel1 = height, panel2 = number of spp, panel3= diversity index
-panel1 <- ggplot(average_height, aes(x = Site, y = average_height)) +
+panel2 <- ggplot(average_height, aes(x = Site, y = average_height)) +
   geom_bar(stat = "identity") +
   labs(
     x = "Site",
@@ -128,12 +128,12 @@ panel1 <- ggplot(average_height, aes(x = Site, y = average_height)) +
 
 
 
-panel2 <-ggplot(Grass_species_unique, aes(x = Site, y = n_species)) +
+panel1 <-ggplot(Grass_species_unique, aes(x = Site, y = n_species)) +
   geom_bar(stat = "identity")+ #fill = "green") +
   theme_classic() +
-  labs(,
+  labs(
        x = "Site",
-       y = "No.of species")+
+       y = "No.of grass species")+
  # theme(axis.title.x = element_text(size = 16), 
   #      axis.title.y = element_text(size = 16),
    #     axis.text.x = element_text(size = 14),  
@@ -159,17 +159,16 @@ panel3 <- ggplot(diversity_index, aes(x = Site, y = DiversityIndex)) +
    
 
 # Create a multi-panel layout using Patchwork
-multi_panel_plot <- (panel1)/(panel3+panel2)+
-  plot_annotation(tag_levels = 'a') +
+multi_panel_plot <- (panel2)/(panel1+panel3)+
   theme(plot.tag.position = c(0, 1), plot.tag = element_text(size = 0.5, hjust = -0.5))
 
 
 #####combined_plot <- (plot_height + plot_diversity) / (plot_canopy + plot_density) +
   ###plot_annotation(tag_levels = 'a')
 
-#print(multi_panel_plot)
+print(multi_panel_plot)
 
-ggsave("multi_panel_plot.png", multi_panel_plot, width = 16, height = 12, units = "cm")
+ggsave("multi_panel_plot.png", multi_panel_plot, width = 16, height = 13, units = "cm")
 
 
 
@@ -309,7 +308,7 @@ W_panel1 <- ggplot(Woody_species_unique) +
 
 W_panel2 <- ggplot(Results) +
   geom_col(aes(x = SITE, y = Mean_height_of_trees), fill = "darkgrey", colour = "black", width = 0.75) +
-  labs(y = "Mean tree height") + theme_classic() + 
+  labs(y = "Mean tree height(m)") + theme_classic() + 
   #theme(axis.title.x = element_text(size = 14), 
    #     axis.title.y = element_text(size = 14), 
     #    axis.text.x = element_text(size = 12),  
@@ -336,7 +335,7 @@ W_panel3 <- ggplot(plant_height2_long, aes(x = Site, y = Density)) +   #, ##fill
 W_panel4 <- plantD <- ggplot(plant_height2_long, aes(x = Site, y = Density, fill = Category)) +
   geom_bar(stat = "identity", position = "dodge") +
   theme_minimal() +
-  labs(x = "Site", y = "Density per hectare", fill = "Category")+
+  labs(x = "Site", y = "Density (per hectare)", fill = "Category")+
   theme_classic()+
   #theme(
    # axis.title.x = element_text(size = 14),

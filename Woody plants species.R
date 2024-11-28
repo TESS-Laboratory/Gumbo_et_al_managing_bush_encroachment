@@ -12,7 +12,6 @@ library(ggplot2)
 
 
 
-
 #### Counting woody species
 Woody_species <- Woody_P %>%
   group_by(Site) %>%
