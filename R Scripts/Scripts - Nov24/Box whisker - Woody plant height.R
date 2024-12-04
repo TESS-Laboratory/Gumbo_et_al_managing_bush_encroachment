@@ -5,7 +5,9 @@ library(ggplot2)
 library(patchwork)
 
 # Load the data
-data <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Cleaned folders/Cleaned - Woody2.csv")
+#data <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Cleaned folders/Cleaned - Woody2.csv")
+
+data <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Cleaned folders/Cleaned - Woody2.csv")
 
 # Create the box-and-whisker plot for Mean tree height
 b <- ggplot(data, aes(x = Site, y = Max_Height)) +
@@ -71,7 +73,10 @@ multi_panel_plot
 
 GRASSSES 
 
-Grassspp<- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Grasses spp only.csv")
+Grassspp<- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Grasses spp only.csv")
+
+
+#Grassspp<- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Grasses spp only.csv")
 
 summary(Grassspp)
 
@@ -91,7 +96,7 @@ a <- ggplot(Grass_species_unique) +
   plot_annotation("(a)")
 
 
-Grasssheight <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Grasses height.csv")
+Grasssheight <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Grasses height.csv")
 ggplot(Grasssheight, aes(x = Site, y = DPM.Height )) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
@@ -100,7 +105,7 @@ ggplot(Grasssheight, aes(x = Site, y = DPM.Height )) +
   plot_annotation("(b)")
 
 
-DataGspp <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Grasses spp only.csv", stringsAsFactors = FALSE)
+DataGspp <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Grasses spp only.csv", stringsAsFactors = FALSE)
 # Print the column names and the first few rows to verify the data structure
 print(colnames(DataGspp))
 print(head(DataGspp))
@@ -159,7 +164,7 @@ geom_bar(stat = "identity", fill = "grey") +
 
 CREATING MULTI-PANEL FOR GRASSES
 # Example data for plotting
-data <- read.csv("path/to/your/file.csv")
+#data <- read.csv("path/to/your/file.csv")
 
 # Plot 1: Boxplot of Max Height by Site
 
@@ -312,7 +317,7 @@ ggsave("multi_panel_figure5.png", multi_panel, width = 10, height = 12, dpi = 30
 
 ################################################################################## MULTI-PANEL TREES
 
-data <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Cleaned folders/Cleaned - Woody2.csv")
+data <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Cleaned folders/Cleaned - Woody2.csv")
 
 plot1 <- ggplot(Woody_species_unique) + 
   geom_col(aes(x = Site, y = n_species), fill = "grey", colour = "grey", width = 0.75) +
@@ -330,7 +335,7 @@ plot1 <- ggplot(Woody_species_unique) +
   #theme_minimal+ 
   #ggtitle("(b)")
   
-  plot2 <- data <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Cleaned folders/Cleaned - Woody2.csv")
+  plot2 <- data <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Cleaned folders/Cleaned - Woody2.csv")
   
   # Create the box-and-whisker plot for Mean tree height
   plot2 <- ggplot(data, aes(x = Site, y = Max_Height)) +
