@@ -1,7 +1,7 @@
 ############################ GRASS GRAZING VALUE CLEANED DATA
 library(tidyverse)
 
-GrazingVC <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Cleaned folders/Grazing value only.csv")
+GrazingVC <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Cleaned folders/Grazing value only.csv")
 head(GrazingVC)
 
    

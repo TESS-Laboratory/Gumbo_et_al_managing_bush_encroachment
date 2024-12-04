@@ -1,11 +1,10 @@
 #################CALCULATING WOODY DENSITY CLEANED DATA AND OLD 
 # Load necessary libraries
 library(tidyverse)
-library(ggplot2)
 library(reshape2)
 
 # Read the data (assuming it's a CSV file, you need to convert the image data to CSV first)
-Plantheight <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Cleaned folders/Cleaned - Woody2.csv", stringsAsFactors = FALSE)
+Plantheight <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Cleaned folders/Cleaned - Woody2.csv", stringsAsFactors = FALSE)
 
 # Define height classes
 Plantheight <- Plantheight %>%

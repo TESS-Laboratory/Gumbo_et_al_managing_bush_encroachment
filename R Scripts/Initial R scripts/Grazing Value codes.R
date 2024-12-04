@@ -1,7 +1,5 @@
 ####
-if (!require(readxl)) install.packages("readxl")
-library(readxl)
-library(ggplot2)
+
 library(dplyr)
 library(tidyverse)
 ####
@@ -33,11 +31,7 @@ ggplot(data, aes(x = Grazing_value, fill = Grazing_value)) +
 
 #combining
 # ##
-if (!require(readxl)) install.packages("readxl")
-if (!require(dplyr)) install.packages("dplyr")
-if (!require(ggplot2)) install.packages("ggplot2")
-if (!require(stringr)) install.packages("stringr")
-library(readxl)
+
 library(dplyr)
 library(ggplot2)
 library(stringr)
@@ -106,14 +100,11 @@ print(p_summary)
 
 
 ###dividing
-if (!require(readxl)) install.packages("readxl")
-if (!require(dplyr)) install.packages("dplyr")
-if (!require(ggplot2)) install.packages("ggplot2")
-library(readxl)
+
 
 library(tidyverse)
 library(dplyr)
-library(ggplot2)
+
 
 #
 data <- read_excel("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/jUNK DATA/2.2-GRASSES sheet.xlsx")
@@ -164,7 +155,7 @@ library(ggplot2)
 library(dplyr)
 
 # Load the data
-data <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Desktop/Grass height.csv")
+data <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Desktop/Grass height.csv")
 
 # Summarize DPM_Height by Site
 summary_data <- data %>%
@@ -180,7 +171,7 @@ print(summary_data)
 
 ########GRASS HEIGHT REVISED TO REMOVE NA OR EMPTY
 
-data <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Desktop/Grass height.csv")
+data <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Desktop/Grass height.csv")
 
 # View the data to identify the correct column
 head(data)

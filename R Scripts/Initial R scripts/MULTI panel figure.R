@@ -1,12 +1,11 @@
 #### CREATING MULTIPANELS FOR GRASSES 
 library(tidyverse)
 library(patchwork)
-library(ggplot2)
 
 
 ###(1) Grass height
 
-Grassheight <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Grasses height.csv")
+Grassheight <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Grasses height.csv")
 
 # Calculate average height per site
 average_height <- Grassheight %>%
@@ -66,7 +65,7 @@ ggplot(Grass_species_unique, aes(x = Site, y = n_species)) +
 ####(3)GRASS SPECIES DIVERSITY
 
 #data <- read.csv("path/to/your/data.csv", fileEncoding = "UTF-8")
-DataGspp <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Grasses spp only.csv", stringsAsFactors = FALSE)
+DataGspp <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Grasses spp only.csv", stringsAsFactors = FALSE)
 # Print the column names and the first few rows to verify the data structure
 print(colnames(DataGspp))
 print(head(DataGspp))
@@ -188,15 +187,13 @@ ggsave("multi_panel_plot.png", multi_panel_plot, width = 16, height = 13, units 
 
 #############
 ############ WOODY PLANT SPP DIVERSITY AFTER MANIPULATION################################
-Treespp <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Woody spp only.csv")
+Treespp <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/CSV. files/Woody spp only.csv")
 view(Treesspp)
 ###### Group species counts by Site and Spp_name
 
 
 ###(1) No. of Tree spp
-library(tidyverse)
-library(dplyr)
-library(ggplot2)
+
 
 #### Counting woody species
 Woody_species <- Woody_P %>%

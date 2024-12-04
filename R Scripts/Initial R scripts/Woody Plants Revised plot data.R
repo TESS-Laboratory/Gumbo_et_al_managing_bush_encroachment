@@ -1,9 +1,9 @@
 library(tidyverse)
-library(ggplot2)
+
 # Install the readr package if not already installed
 # install.packages("readr")
 
-WoodyP <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/WoodyPlants2.csv")
+WoodyP <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/WoodyPlants2.csv")
 head(WoodyP)
 
 # Group by Site, Plot, Subplot, and calculate the mean Max_Height and sum of Stem_count

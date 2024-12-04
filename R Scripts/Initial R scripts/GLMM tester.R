@@ -5,7 +5,7 @@ install.packages("MuMIn")
 library(lme4)
 library(MuMIn)
 
-dataW <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/Woody_P_Tester_2.csv")
+dataW <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project developement - Taps/Woody_P_Tester_2.csv")
 
 ###Ensure columns are properly formatted
 dataW$Site <- as.factor(dataW$Site)
