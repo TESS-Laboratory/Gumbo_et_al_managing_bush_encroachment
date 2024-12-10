@@ -171,30 +171,31 @@ diversity_index <- species_counts %>%
 # Print the diversity index for each site
 view(diversity_index)
 ### bar graph for the diversity index
+
 ggplot(diversity_index, aes(x = Site, y = DiversityIndex)) +
-  geom_boxplot(fill = "lightblue", color = "darkblue") +
+  geom_point(fill = "lightblue", color = "darkblue") +
   labs(
     x = "Site",
     y = "Diversity index") + theme_beautiful() +
   plot_annotation("(c)")
 
-
-
 #ggplot(diversity_index, aes(x = Site, y = DiversityIndex)) +
- # geom_bar(stat = "identity", fill = "grey") +
-  #theme_beautiful() +
+ # geom_boxplot(fill = "lightblue", color = "darkblue") +
   #labs(
    # x = "Site",
-    #y = "Diversity Index") +
-  #theme(plot.title = element_text(hjust = 0.5))+
+    #y = "Diversity index") + theme_beautiful() +
   #plot_annotation("(c)")
 
 
-#geom_boxplot(fill = "lightblue", color = "darkblue") +
-# labs(
-#  x = "Site",
- #y = "Diversity index") + theme_beautiful() +
-#plot_annotation("(c)")
+#ggplot(diversity_index, aes(x = Site, y = DiversityIndex)) +
+ #geom_bar(stat = "identity", fill = "grey") +
+  #theme_beautiful() +
+  #labs(
+   #x = "Site",
+    #y = "Diversity Index") +
+  #theme_beautiful()+
+  #plot_annotation("(c)")
+
 
 
 #########  CREATING MULTI-PANEL FOR GRASSES
@@ -229,13 +230,10 @@ plot3 <- ggplot(data, aes(x = Stem_count, y = Max_Height)) +
 
 
 
-############################### Creating multi-panel using images
-
 #######################################################################################################################
-##################################################### MULTI-PANEL ATTEMPT 2         MULTI-PANEL 2
+##################################################### MULTI-PANEL ATTEMPT          MULTI-PANEL 
 
-#library(ggplot2)
-#library(dplyr)
+
 #library(patchwork)
 
 Grass_species_unique <- Grassspp %>%
@@ -283,13 +281,6 @@ plot1 <- ggplot(Woody_species_unique) +
   labs(y = "No. of woody species") + theme_beautiful() +
   ggtitle("(a)")
 
-
-# Plot 3: Scatter plot of Max Height vs Stem Count
-#plot2 <- ggplot(data, aes(x = Stem_count, y = Max_Height)) +
-# geom_point(color = "purple") +
-#labs(title = "(c) Max Height vs Stem Count") +
-#theme_minimal+ 
-#ggtitle("(b)")
 
 plot2 <- data <- read_csv("C:/workspace/gumbo_dev/DATA/Woody2.csv")
 
@@ -348,8 +339,6 @@ ggsave("Plots-/multi_panel.png", multi_panel, width = 10, height = 12, dpi = 300
 
 ####CATTLE POPULATION AT SHR
 
-library(tidyverse)
-
 
 # Create the data frame
 cattle_data <- data.frame(
@@ -363,7 +352,7 @@ ggplot(cattle_data, aes(x = year, y = cattle_population)) +
   labs(
     x = "Year",
     y = "Cattle numbers"
-  ) + theme_beautiful
+  ) + theme_beautiful()
 #theme_classic() +theme(plot.title = element_text(size = 16),  # Adjust title font size
 #                     axis.title = element_text(size = 14),  # Axis title font size
 #                    axis.text = element_text(size = 14))
