@@ -1,0 +1,97 @@
+Site,Plot,Sub plot,Burn_Class
+A,2,Z1,Clean
+A,2,Z2,Clean
+A,2,Z3,Clean
+A,2,Z4,Clean
+A,3,Z1,Clean
+A,3,Z2,Clean
+A,3,Z3,Clean
+A,3,Z4,Clean
+A,4,Z1,Clean
+A,4,Z2,Clean
+A,4,Z3,Moderately clean
+A,4,Z4,Clean
+A,5,Z1,Clean
+A,5,Z2,Clean
+A,5,Z3,Patchy
+A,5,Z4,Moderately clean
+B,2,Z1,Clean
+B,2,Z2,Moderately clean
+B,2,Z3,Moderately clean
+B,2,Z4,Patchy
+B,3,Z1,Moderately clean
+B,3,Z2,Moderately clean
+B,3,Z3,Patchy
+B,3,Z4,Clean
+B,4,Z1,Clean
+B,4,Z2,Moderately clean
+B,4,Z3,Clean
+B,4,Z4,Moderately clean
+B,5,Z1,Moderately clean
+B,5,Z2,Patchy
+B,5,Z3,Patchy
+B,5,Z4,Patchy
+C,2,Z1,No burn
+C,2,Z2,No burn
+C,2,Z3,No burn
+C,2,Z4,No burn
+C,3,Z1,No burn
+C,3,Z2,No burn
+C,3,Z3,No burn
+C,3,Z4,No burn
+C,4,Z1,No burn
+C,4,Z2,No burn
+C,4,Z3,No burn
+C,4,Z4,No burn
+C,5,Z1,No burn
+C,5,Z2,No burn
+C,5,Z3,No burn
+C,5,Z4,No burn
+D,2,Z1,Moderately clean
+D,2,Z2,Moderately clean
+D,2,Z3,Clean
+D,2,Z4,Patchy
+D,3,Z1,Clean
+D,3,Z2,Moderately clean
+D,3,Z3,Clean
+D,3,Z4,Clean
+D,4,Z1,Clean
+D,4,Z2,Patchy
+D,4,Z3,Patchy
+D,4,Z4,Clean
+D,5,Z1,Moderately clean
+D,5,Z2,Moderately clean
+D,5,Z3,Clean
+D,5,Z4,Patchy
+E,2,Z1,Patchy
+E,2,Z2,Patchy
+E,2,Z3,No burn
+E,2,Z4,Clean
+E,3,Z1,No burn
+E,3,Z2,Patchy
+E,3,Z3,No burn
+E,3,Z4,Patchy
+E,4,Z1,Moderately clean
+E,4,Z2,Moderately clean
+E,4,Z3,Patchy
+E,4,Z4,Patchy
+E,5,Z1,Moderately clean
+E,5,Z2,No burn
+E,5,Z3,Clean
+E,5,Z4,Patchy
+F,2,Z1,No burn
+F,2,Z2,No burn
+F,2,Z3,Moderately clean
+F,2,Z4,Patchy
+F,3,Z1,Patchy
+F,3,Z2,Clean
+F,3,Z3,Clean
+F,3,Z4,Moderately clean
+F,4,Z1,Clean
+F,4,Z2,Moderately clean
+F,4,Z3,Patchy
+F,4,Z4,Patchy
+F,5,Z1,Patchy
+F,5,Z2,Patchy
+F,5,Z3,Patchy
+F,5,Z4,Patchy

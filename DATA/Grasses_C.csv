@@ -1,0 +1,2454 @@
+Site,Plot,Subplot,Quadrat,Spp_name,Rank_dominant_grass,Grazing_value,DPM Height,Grazing_activity,Quadrat_under_canopy,Dung_presence
+A,1,Z1,Q1,Digitaria eriantha,1,High,19,N,N,N
+A,1,Z1,Q1,Urochloa mosambicensis,3,Moderate,18.9,NA,NA,NA
+A,1,Z1,Q1,Hyperrhenia filipendula,2,Moderate,11.6,NA,NA,NA
+A,1,Z1,Q1,NA,NA,NA,11.3,NA,NA,NA
+A,1,Z1,Q2,Aristida adscensionis,2,Low,18.7,N,Y,N
+A,1,Z1,Q2,Urochloa mosambicensis,NA,Moderate,18.5,NA,NA,NA
+A,1,Z1,Q2,Heteropogon contortus,3,Moderate,19.2,NA,NA,NA
+A,1,Z1,Q2,Digitaria eriantha,NA,High,19.5,NA,NA,NA
+A,1,Z1,Q2,Sporobolus africanus,1,Low,NA,NA,NA,NA
+A,1,Z1,Q3,Setaria sphacelata,3,High,19.3,N,N,N
+A,1,Z1,Q3,Heteropogon contortus,1,Moderate,18.3,NA,NA,NA
+A,1,Z1,Q3,Cymbopogon excavatus,2,Low,18.9,NA,NA,NA
+A,1,Z1,Q3,NA,NA,NA,19.6,NA,NA,NA
+A,1,Z1,Q4,Aristida adscensionis,2,Low,9.1,N,N,N
+A,1,Z1,Q4,Urochloa mosambicensis,NA,Moderate,9,NA,NA,NA
+A,1,Z1,Q4,Heteropogon contortus,1,Moderate,9.1,NA,NA,NA
+A,1,Z1,Q4,Hyperrhenia filipendula,3,Moderate,8.1,NA,NA,NA
+A,1,Z1,Q4,Digitaria eriantha,NA,High,NA,NA,NA,NA
+A,1,Z1,Q4,Setaria sphacelata,NA,High,NA,NA,NA,NA
+A,1,Z1,Q4,Eragrostis superba,NA,Moderate,NA,NA,NA,NA
+A,1,Z1,Q5,Themeda triandra,2,High,14.2,N,N,N
+A,1,Z1,Q5,Urochloa mosambicensis,1,Moderate,20,NA,NA,NA
+A,1,Z1,Q5,Digitaria eriantha,3,High,19.7,NA,NA,NA
+A,1,Z1,Q5,Setaria sphacelata,NA,High,19.6,NA,NA,NA
+A,1,Z2,Q1,Digitaria eriantha,1,High,19,N,N,N
+A,1,Z2,Q1,Urochloa mosambicensis,3,Moderate,18.9,NA,NA,NA
+A,1,Z2,Q1,Hyperrhenia filipendula,2,Moderate,11.6,NA,NA,NA
+A,1,Z2,Q1,NA,NA,NA,11.3,NA,NA,NA
+A,1,Z2,Q2,Hyperrhenia filipendula,1,Moderate,NA,N,N,N
+A,1,Z2,Q2,Setaria sphacelata,2,High,NA,NA,NA,NA
+A,1,Z2,Q2,NA,NA,NA,NA,NA,NA,NA
+A,1,Z2,Q2,NA,NA,NA,NA,NA,NA,NA
+A,1,Z2,Q3,Bothriochloa insculpta,3,Moderate,18.2,N,Y,N
+A,1,Z2,Q3,Urochloa mosambicensis,1,Moderate,20.2,NA,NA,NA
+A,1,Z2,Q3,Hyperrhenia filipendula,2,Moderate,NA,NA,NA,NA
+A,1,Z2,Q3,NA,NA,NA,NA,NA,NA,NA
+A,1,Z2,Q4,Urochloa mosambicensis,NA,Moderate,18,N,Y,N
+A,1,Z2,Q4,Hyperrhenia filipendula,2,Moderate,19.9,NA,NA,NA
+A,1,Z2,Q4,Setaria sphacelata,1,High,19.9,NA,NA,NA
+A,1,Z2,Q4,Heteropogon contortus,3,Moderate,21,NA,NA,NA
+A,1,Z2,Q4,Eragrostis gummiflua,NA,Low,NA,NA,NA,NA
+A,1,Z2,Q5,Hyperrhenia filipendula,2,Moderate,21.1,N,Y,N
+A,1,Z2,Q5,Setaria sphacelata,1,High,21.1,NA,NA,NA
+A,1,Z2,Q5,NA,NA,NA,20.4,NA,NA,NA
+A,1,Z2,Q5,NA,NA,NA,20.2,NA,NA,NA
+A,1,Z3,Q1,Setaria sphacelata,3,High,23.7,N,Y,N
+A,1,Z3,Q1,Aristida adscensionis,2,Low,23,NA,NA,NA
+A,1,Z3,Q1,Digitaria eriantha,1,High,22.4,NA,NA,NA
+A,1,Z3,Q1,NA,NA,NA,21.7,NA,NA,NA
+A,1,Z3,Q2,NA,NA,NA,0,N,Y,N
+A,1,Z3,Q3,Heteropogon contortus,3,Moderate,NA,N,Y,N
+A,1,Z3,Q3,Digitaria eriantha,2,High,NA,NA,NA,NA
+A,1,Z3,Q3,Hyperrhenia filipendula,1,Moderate,NA,NA,NA,NA
+A,1,Z3,Q3,NA,NA,NA,NA,NA,NA,NA
+A,1,Z3,Q4,Pogonarthria squarrosa,NA,Low,16.3,N,N,N
+A,1,Z3,Q4,Cymbopogon excavatus,2,Low,18.7,NA,NA,NA
+A,1,Z3,Q4,Urochloa mosambicensis,1,Moderate,18.1,NA,NA,NA
+A,1,Z3,Q4,Hyperrhenia filipendula,3,Moderate,19.9,NA,NA,NA
+A,1,Z3,Q5,Panicum maximum,1,High,NA,N,Y,N
+A,1,Z3,Q5,Heteropogon contortus,2,Moderate,NA,NA,NA,NA
+A,1,Z3,Q5,NA,NA,NA,NA,NA,NA,NA
+A,1,Z3,Q5,NA,NA,NA,NA,NA,NA,NA
+A,1,Z4,Q1,Bothriochloa insculpta,2,Moderate,17.4,N,N,N
+A,1,Z4,Q1,Cymbopogon excavatus,NA,Low,12.9,NA,NA,NA
+A,1,Z4,Q1,Urochloa mosambicensis,1,Moderate,16.6,NA,NA,NA
+A,1,Z4,Q1,Aristida adscensionis,3,Low,18.5,NA,NA,NA
+A,1,Z4,Q1,Aristida diffusa,NA,Low,NA,NA,NA,NA
+A,1,Z4,Q2,Hyperrhenia filipendula,NA,Moderate,21.7,N,N,N
+A,1,Z4,Q2,Urochloa mosambicensis,3,Moderate,20.8,NA,NA,NA
+A,1,Z4,Q2,Heteropogon contortus,1,Moderate,13.5,NA,NA,NA
+A,1,Z4,Q2,Digitaria eriantha,2,High,13.3,NA,NA,NA
+A,1,Z4,Q3,Setaria sphacelata,2,High,17.6,N,Y,N
+A,1,Z4,Q3,Bothriochloa insculpta,1,Moderate,17.4,NA,NA,NA
+A,1,Z4,Q3,Urochloa mosambicensis,3,Moderate,15.4,NA,NA,NA
+A,1,Z4,Q3,Hyperrhenia filipendula,NA,Moderate,17.2,NA,NA,NA
+A,1,Z4,Q4,Heteropogon contortus,1,Moderate,NA,N,N,N
+A,1,Z4,Q4,Urochloa mosambicensis,2,Moderate,NA,NA,NA,NA
+A,1,Z4,Q4,Hyperrhenia filipendula,3,Moderate,NA,NA,NA,NA
+A,1,Z4,Q4,NA,NA,NA,NA,NA,NA,NA
+A,1,Z4,Q5,Heteropogon contortus,2,Moderate,NA,Y,Y,N
+A,1,Z4,Q5,Urochloa mosambicensis,1,Moderate,NA,NA,NA,NA
+A,1,Z4,Q5,Hyperrhenia hirta,3,Moderate,26.2,NA,NA,NA
+A,1,Z4,Q5,NA,NA,NA,25.1,NA,NA,NA
+A,2,Z1,Q1,Heteropogon contortus,2,Moderate,21.7,N,N,Y
+A,2,Z1,Q1,Andropogon eucomus,3,Low,18.7,NA,NA,NA
+A,2,Z1,Q1,Bothriochloa insculpta,1,Moderate,15.9,NA,NA,NA
+A,2,Z1,Q1,NA,NA,NA,17.6,NA,NA,NA
+A,2,Z1,Q2,Bothriochloa insculpta,1,Moderate,23.3,N,N,N
+A,2,Z1,Q2,Aristida adscensionis,2,Low,18.9,NA,NA,NA
+A,2,Z1,Q2,Cymbopogon excavatus,3,Low,21.1,NA,NA,NA
+A,2,Z1,Q2,Loudetia simplex,NA,Moderate,22.4,NA,NA,NA
+A,2,Z1,Q2,Cymbopogon plurinodis,NA,Low,NA,NA,NA,NA
+A,2,Z1,Q3,Bothriochloa insculpta,2,Moderate,NA,N,Y,N
+A,2,Z1,Q3,Urochloa mosambicensis,1,Moderate,NA,NA,NA,NA
+A,2,Z1,Q3,Eragrostis gummiflua,3,Low,NA,NA,NA,NA
+A,2,Z1,Q3,NA,NA,NA,NA,NA,NA,NA
+A,2,Z1,Q4,Loudetia simplex,NA,Moderate,14.6,N,N,N
+A,2,Z1,Q4,Bothriochloa insculpta,1,Moderate,14.2,NA,NA,NA
+A,2,Z1,Q4,Eragrostis gummiflua,2,Low,15.3,NA,NA,NA
+A,2,Z1,Q4,Hyperrhenia filipendula,3,Moderate,16.7,NA,NA,NA
+A,2,Z1,Q5,Bothriochloa insculpta,1,Moderate,20.2,N,Y,N
+A,2,Z1,Q5,Hyperrhenia filipendula,2,Moderate,22.4,NA,NA,NA
+A,2,Z1,Q5,Setaria pumila ,3,Moderate,23.3,NA,NA,NA
+A,2,Z1,Q5,NA,NA,NA,21.5,NA,NA,NA
+A,2,Z2,Q1,Heteropogon contortus,NA,Moderate,17.6,N,Y,N
+A,2,Z2,Q1,Bothriochloa insculpta,2,Moderate,18.6,NA,NA,NA
+A,2,Z2,Q1,Loudetia simplex,3,Moderate,17.2,NA,NA,NA
+A,2,Z2,Q1,Eragrostis gummiflua,NA,Low,19.4,NA,NA,NA
+A,2,Z2,Q1,Hyperrhenia filipendula,1,Moderate,NA,NA,NA,NA
+A,2,Z2,Q2,Hyperrhenia filipendula,1,Moderate,NA,N,Y,N
+A,2,Z2,Q2,NA,NA,NA,NA,NA,NA,NA
+A,2,Z2,Q2,NA,NA,NA,NA,NA,NA,NA
+A,2,Z2,Q2,NA,NA,NA,25.5,NA,NA,NA
+A,2,Z2,Q3,Heteropogon contortus,3,Moderate,23.3,N,N,N
+A,2,Z2,Q3,Hyperrhenia filipendula,1,Moderate,18.8,NA,NA,NA
+A,2,Z2,Q3,Urochloa mosambicensis,2,Moderate,23.7,NA,NA,NA
+A,2,Z2,Q3,NA,NA,NA,NA,NA,NA,NA
+A,2,Z2,Q4,Heteropogon contortus,1,Moderate,14.1,NA,NA,NA
+A,2,Z2,Q4,Hyperrhenia filipendula,2,Moderate,20.5,NA,NA,NA
+A,2,Z2,Q4,NA,NA,NA,15.5,NA,NA,NA
+A,2,Z2,Q4,NA,NA,NA,13.9,NA,NA,NA
+A,2,Z2,Q5,Hyperrhenia filipendula,1,Moderate,11.8,N,Y,N
+A,2,Z2,Q5,Urochloa mosambicensis,2,Moderate,17.9,NA,NA,NA
+A,2,Z2,Q5,NA,NA,NA,23.4,NA,NA,NA
+A,2,Z2,Q5,NA,NA,NA,22.1,NA,NA,NA
+A,2,Z3,Q1,Bothriochloa insculpta,1,Moderate,21.1,N,Y,N
+A,2,Z3,Q1,Eragrostis gummiflua,3,Low,22.1,NA,NA,NA
+A,2,Z3,Q1,Hyperrhenia filipendula,2,Moderate,23.6,NA,NA,NA
+A,2,Z3,Q1,NA,NA,NA,22.3,NA,NA,NA
+A,2,Z3,Q2,Heteropogon contortus,2,Moderate,13.7,N,N,N
+A,2,Z3,Q2,Bothriochloa insculpta,1,Moderate,10.5,NA,NA,NA
+A,2,Z3,Q2,NA,NA,NA,10.3,NA,NA,NA
+A,2,Z3,Q2,NA,NA,NA,10.7,NA,NA,NA
+A,2,Z3,Q3,Bothriochloa insculpta,2,Moderate,NA,N,Y,N
+A,2,Z3,Q3,Eragrostis gummiflua,3,Low,NA,NA,NA,NA
+A,2,Z3,Q3,Urochloa mosambicensis,1,Moderate,NA,NA,NA,NA
+A,2,Z3,Q3,NA,NA,NA,NA,NA,NA,NA
+A,2,Z3,Q4,Bothriochloa insculpta,1,Moderate,23.4,N,N,N
+A,2,Z3,Q4,Urochloa mosambicensis,2,Moderate,23.8,NA,NA,NA
+A,2,Z3,Q4,Heteropogon contortus,3,Moderate,22.7,NA,NA,NA
+A,2,Z3,Q4,NA,NA,NA,23.7,NA,NA,NA
+A,2,Z3,Q5,Eragrostis gummiflua,NA,Low,10.2,N,N,N
+A,2,Z3,Q5,Bothriochloa insculpta,1,Moderate,13.9,NA,NA,NA
+A,2,Z3,Q5,Cymbopogon excavatus,2,Low,11,NA,NA,NA
+A,2,Z3,Q5,Eragrostis superba,3,Moderate,10.9,NA,NA,NA
+A,2,Z4,Q1,Aristida adscensionis,3,Low,12.5,N,N,N
+A,2,Z4,Q1,Hyperrhenia filipendula,1,Moderate,12.3,NA,NA,NA
+A,2,Z4,Q1,Setaria pumila ,2,Moderate,17,NA,NA,NA
+A,2,Z4,Q1,NA,NA,NA,16.3,NA,NA,NA
+A,2,Z4,Q2,Hyperrhenia filipendula,1,Moderate,17.2,N,N,N
+A,2,Z4,Q2,Urochloa mosambicensis,2,Moderate,9.6,NA,NA,NA
+A,2,Z4,Q2,NA,NA,NA,NA,NA,NA,NA
+A,2,Z4,Q2,NA,NA,NA,NA,NA,NA,NA
+A,2,Z4,Q3,Heteropogon contortus,1,Moderate,13.1,N,Y,N
+A,2,Z4,Q3,Cymbopogon excavatus,2,Low,16.9,NA,NA,NA
+A,2,Z4,Q3,Urochloa mosambicensis,NA,Moderate,18.2,NA,NA,NA
+A,2,Z4,Q3,Hyperrhenia filipendula,3,Moderate,21.2,NA,NA,NA
+A,2,Z4,Q4,Urochloa mosambicensis,2,Moderate,NA,N,N,N
+A,2,Z4,Q4,Hyperrhenia filipendula,1,Moderate,NA,NA,NA,NA
+A,2,Z4,Q4,NA,NA,NA,NA,NA,NA,NA
+A,2,Z4,Q4,NA,NA,NA,NA,NA,NA,NA
+A,2,Z4,Q5,Urochloa mosambicensis,2,Moderate,NA,N,Y,N
+A,2,Z4,Q5,Hyperrhenia filipendula,1,Moderate,NA,NA,NA,NA
+A,2,Z4,Q5,NA,NA,NA,NA,NA,NA,NA
+A,2,Z4,Q5,NA,NA,NA,NA,NA,NA,NA
+A,3,Z1,Q1,Aristida diffusa,2,Low,NA,N,N,N
+A,3,Z1,Q1,Aristida congesta C,NA,Low,NA,NA,NA,NA
+A,3,Z1,Q1,Melinis repens,3,Low,22,NA,NA,NA
+A,3,Z1,Q1,Urochloa mosambicensis,1,Moderate,23.9,NA,NA,NA
+A,3,Z1,Q2,Hyperrhenia filipendula,1,Moderate,11.8,N,Y,N
+A,3,Z1,Q2,NA,NA,NA,17.1,NA,NA,NA
+A,3,Z1,Q2,NA,NA,NA,15.3,NA,NA,NA
+A,3,Z1,Q2,NA,NA,NA,15.7,NA,NA,NA
+A,3,Z1,Q3,Bothriochloa insculpta,1,Moderate,15.4,N,N,N
+A,3,Z1,Q3,Urochloa mosambicensis,2,Moderate,16.8,NA,NA,NA
+A,3,Z1,Q3,Cymbopogon excavatus,3,Low,16.7,NA,NA,NA
+A,3,Z1,Q3,NA,NA,NA,16.7,NA,NA,NA
+A,3,Z1,Q4,Hyperrhenia filipendula,3,Moderate,21.9,N,N,N
+A,3,Z1,Q4,Bothriochloa insculpta,1,Moderate,21.8,NA,NA,NA
+A,3,Z1,Q4,Urochloa mosambicensis,2,Moderate,20.9,NA,NA,NA
+A,3,Z1,Q4,NA,NA,NA,18.4,NA,NA,NA
+A,3,Z1,Q5,Urochloa mosambicensis,NA,Moderate,17.6,N,Y,N
+A,3,Z1,Q5,Hyperrhenia filipendula,3,Moderate,15.9,NA,NA,NA
+A,3,Z1,Q5,Heteropogon contortus,1,Moderate,15.3,NA,NA,NA
+A,3,Z1,Q5,Aristida adscensionis,2,Low,15.4,NA,NA,NA
+A,3,Z2,Q1,Urochloa mosambicensis,2,Moderate,NA,N,Y,N
+A,3,Z2,Q1,Loudetia simplex,3,Low,NA,NA,NA,NA
+A,3,Z2,Q1,Bothriochloa insculpta,1,Moderate,NA,NA,NA,NA
+A,3,Z2,Q1,NA,NA,NA,25.3,NA,NA,NA
+A,3,Z2,Q2,Bothriochloa insculpta,2,Moderate,3.6,N,Y,N
+A,3,Z2,Q2,Cymbopogon excavatus,3,Low,11.2,NA,NA,NA
+A,3,Z2,Q2,Aristida adscensionis,1,Low,12.5,NA,NA,NA
+A,3,Z2,Q2,NA,NA,NA,12.7,NA,NA,NA
+A,3,Z2,Q3,Bothriochloa insculpta,2,Moderate,NA,N,Y,N
+A,3,Z2,Q3,Hyperrhenia hirta,1,Moderate,NA,NA,NA,NA
+A,3,Z2,Q3,NA,NA,NA,NA,NA,NA,NA
+A,3,Z2,Q3,NA,NA,NA,NA,NA,NA,NA
+A,3,Z2,Q4,Bothriochloa insculpta,2,Moderate,5.9,N,Y,N
+A,3,Z2,Q4,Hyperrhenia hirta,NA,Moderate,8.7,NA,NA,NA
+A,3,Z2,Q4,Digitaria eriantha,1,High,12.6,NA,NA,NA
+A,3,Z2,Q4,Eragrostis gummiflua,3,Low,12.7,NA,NA,NA
+A,3,Z2,Q5,Urochloa mosambicensis,3,Moderate,11.8,N,N,N
+A,3,Z2,Q5,Bothriochloa insculpta,1,Moderate,15.7,NA,NA,NA
+A,3,Z2,Q5,Eragrostis gummiflua,2,Low,18.6,NA,NA,NA
+A,3,Z2,Q5,NA,NA,NA,20.6,NA,NA,NA
+A,3,Z3,Q1,Heteropogon contortus,2,Moderate,10.7,N,N,N
+A,3,Z3,Q1,Aristida adscensionis,NA,Low,16.9,NA,NA,NA
+A,3,Z3,Q1,Melinis repens,1,Low,13.6,NA,NA,NA
+A,3,Z3,Q1,Eragrostis rigidior,3,Moderate,13.5,NA,NA,NA
+A,3,Z3,Q2,Cynodon dactylon,1,High,NA,N,Y,N
+A,3,Z3,Q2,Urochloa mosambicensis,2,Moderate,NA,NA,NA,NA
+A,3,Z3,Q2,Setaria pumila ,3,Moderate,NA,NA,NA,NA
+A,3,Z3,Q2,NA,NA,NA,25.9,NA,NA,NA
+A,3,Z3,Q3,Heteropogon contortus,1,Moderate,NA,N,Y,N
+A,3,Z3,Q3,Aristida adscensionis,2,Low,19.2,NA,NA,NA
+A,3,Z3,Q3,Urochloa mosambicensis,NA,Moderate,17.8,NA,NA,NA
+A,3,Z3,Q3,Cymbopogon excavatus,NA,Low,16.9,NA,NA,NA
+A,3,Z3,Q3,Digitaria eriantha,3,High,NA,NA,NA,NA
+A,3,Z3,Q4,Aristida adscensionis,1,Low,6.8,N,N,N
+A,3,Z3,Q4,Urochloa mosambicensis,NA,Moderate,11.5,NA,NA,NA
+A,3,Z3,Q4,Hyperrhenia filipendula,1,Moderate,17.8,NA,NA,NA
+A,3,Z3,Q4,Setaria incrassata,3,High,14.2,NA,NA,NA
+A,3,Z3,Q4,Eragrostis superba,NA,Moderate,NA,NA,NA,NA
+A,3,Z3,Q5,Urochloa mosambicensis,2,Moderate,NA,N,Y,N
+A,3,Z3,Q5,Hyperrhenia filipendula,NA,Moderate,19.9,NA,NA,NA
+A,3,Z3,Q5,Hyperrhenia hirta,1,Moderate,18.7,NA,NA,NA
+A,3,Z3,Q5,Pogonarthria squarrosa,3,Low,18.5,NA,NA,NA
+A,3,Z4,Q1,Heteropogon contortus,1,Moderate,14.9,N,Y,N
+A,3,Z4,Q1,Aristida adscensionis,2,Low,17.3,NA,NA,NA
+A,3,Z4,Q1,NA,NA,NA,19.4,NA,NA,NA
+A,3,Z4,Q1,NA,NA,NA,16.1,NA,NA,NA
+A,3,Z4,Q2,Heteropogon contortus,2,Moderate,8.5,N,Y,N
+A,3,Z4,Q2,Melinis repens,1,Low,9.7,NA,NA,NA
+A,3,Z4,Q2,Digitaria eriantha,3,High,11.6,NA,NA,NA
+A,3,Z4,Q2,Setaria incrassata,NA,High,10.6,NA,NA,NA
+A,3,Z4,Q3,Heteropogon contortus,2,Moderate,6,N,N,N
+A,3,Z4,Q3,Urochloa mosambicensis,1,Moderate,10.9,NA,NA,NA
+A,3,Z4,Q3,Themeda triandra,3,High,11.4,NA,NA,NA
+A,3,Z4,Q3,NA,NA,NA,13.2,NA,NA,NA
+A,3,Z4,Q4,Urochloa mosambicensis,1,Moderate,NA,N,Y,N
+A,3,Z4,Q4,Melinis repens,2,Low,NA,NA,NA,NA
+A,3,Z4,Q4,Cymbopogon excavatus,3,Low,NA,NA,NA,NA
+A,3,Z4,Q4,NA,NA,NA,NA,NA,NA,NA
+A,3,Z4,Q5,Heteropogon contortus,NA,Moderate,6.4,N,N,N
+A,3,Z4,Q5,Aristida adscensionis,3,Low,18,NA,NA,NA
+A,3,Z4,Q5,Urochloa mosambicensis,1,Moderate,21,NA,NA,NA
+A,3,Z4,Q5,Hyperrhenia filipendula,2,Moderate,23.8,NA,NA,NA
+A,3,Z4,Q5,Pogonarthria squarrosa,NA,Low,NA,NA,NA,NA
+A,4,Z1,Q1,Bothriochloa insculpta,1,Moderate,19.7,N,Y,N
+A,4,Z1,Q1,NA,NA,NA,22.4,NA,NA,NA
+A,4,Z1,Q1,NA,NA,NA,22.6,NA,NA,NA
+A,4,Z1,Q1,NA,NA,NA,25,NA,NA,NA
+A,4,Z1,Q2,Brachiaria serrata,2,Moderate,21,N,N,N
+A,4,Z1,Q2,Eragrostis gummiflua,3,Low,20.5,NA,NA,NA
+A,4,Z1,Q2,Bothriochloa insculpta,1,Moderate,20.4,NA,NA,NA
+A,4,Z1,Q2,NA,NA,NA,20.5,NA,NA,NA
+A,4,Z1,Q3,Heteropogon contortus,1,Moderate,22.5,N,Y,N
+A,4,Z1,Q3,Themeda triandra,2,High,22.5,NA,NA,NA
+A,4,Z1,Q3,NA,NA,NA,22.5,NA,NA,NA
+A,4,Z1,Q3,NA,NA,NA,22.5,NA,NA,NA
+A,4,Z1,Q4,Bothriochloa insculpta,1,Moderate,24.1,N,N,N
+A,4,Z1,Q4,Cymbopogon excavatus,2,Low,NA,NA,NA,NA
+A,4,Z1,Q4,NA,NA,NA,NA,NA,NA,NA
+A,4,Z1,Q4,NA,NA,NA,NA,NA,NA,NA
+A,4,Z1,Q5,Bothriochloa insculpta,1,Moderate,NA,N,Y,N
+A,4,Z1,Q5,Urochloa mosambicensis,2,Moderate,NA,NA,NA,NA
+A,4,Z1,Q5,NA,NA,NA,NA,NA,NA,NA
+A,4,Z1,Q5,NA,NA,NA,NA,NA,NA,NA
+A,4,Z2,Q1,Bothriochloa insculpta,1,Moderate,20.5,N,Y,N
+A,4,Z2,Q1,Digitaria eriantha,2,High,21.7,NA,NA,NA
+A,4,Z2,Q1,NA,NA,NA,22,NA,NA,NA
+A,4,Z1,Q1,NA,NA,NA,21.4,NA,NA,NA
+A,4,Z2,Q2,Aristida adscensionis,NA,Low,18.7,N,Y,N
+A,4,Z2,Q2,Cymbopogon excavatus,3,Low,19.2,NA,NA,NA
+A,4,Z2,Q2,Heteropogon contortus,1,Moderate,18.9,NA,NA,NA
+A,4,Z2,Q2,Digitaria eriantha,2,High,18.5,NA,NA,NA
+A,4,Z2,Q3,Aristida adscensionis,1,Low,20.5,N,Y,N
+A,4,Z2,Q3,Heteropogon contortus,2,Moderate,20.7,NA,NA,NA
+A,4,Z2,Q3,NA,NA,NA,20.5,NA,NA,NA
+A,4,Z2,Q3,NA,NA,NA,21.4,NA,NA,NA
+A,4,Z2,Q4,Cymbopogon excavatus,1,Low,NA,N,Y,N
+A,4,Z2,Q4,Heteropogon contortus,2,Moderate,NA,NA,NA,NA
+A,4,Z2,Q4,Andropogon eucomus,3,Low,NA,NA,NA,NA
+A,4,Z2,Q4,NA,NA,NA,NA,NA,NA,NA
+A,4,Z2,Q5,Aristida adscensionis,2,Low,23,N,Y,N
+A,4,Z2,Q5,Themeda triandra,1,High,23.1,NA,NA,NA
+A,4,Z2,Q5,NA,NA,NA,21.7,NA,NA,NA
+A,4,Z2,Q5,NA,NA,NA,21.1,NA,NA,NA
+A,4,Z3,Q1,Loudetia simplex,2,Low,20.2,N,N,N
+A,4,Z3,Q1,Bothriochloa insculpta,1,Moderate,20.1,NA,NA,NA
+A,4,Z3,Q1,NA,NA,NA,20.1,NA,NA,NA
+A,4,Z3,Q1,NA,NA,NA,20.4,NA,NA,NA
+A,4,Z3,Q2,Bothriochloa insculpta,1,Moderate,20.2,N,N,N
+A,4,Z3,Q2,Aristida adscensionis,2,Low,20.3,NA,NA,NA
+A,4,Z3,Q2,NA,NA,NA,20.6,NA,NA,NA
+A,4,Z3,Q2,NA,NA,NA,20,NA,NA,NA
+A,4,Z3,Q3,Bothriochloa insculpta,1,Moderate,12.7,N,Y,N
+A,4,Z3,Q3,Andropogon eucomus,2,Low,17.2,NA,NA,NA
+A,4,Z3,Q3,NA,NA,NA,16.1,NA,NA,NA
+A,4,Z3,Q3,NA,NA,NA,17.3,NA,NA,NA
+A,4,Z3,Q4,Urochloa mosambicensis,3,Moderate,3.7,N,Y,N
+A,4,Z3,Q4,Digitaria eriantha,1,High,9.5,NA,NA,NA
+A,4,Z3,Q4,Andropogon eucomus,NA,Low,13,NA,NA,NA
+A,4,Z3,Q4,Bothriochloa insculpta,2,Moderate,11.4,NA,NA,NA
+A,4,Z3,Q5,Bothriochloa insculpta,1,Moderate,19.6,N,N,N
+A,4,Z3,Q5,Aristida adscensionis,2,Low,20,NA,NA,NA
+A,4,Z3,Q5,NA,NA,NA,20.1,NA,NA,NA
+A,4,Z3,Q5,NA,NA,NA,20.1,NA,NA,NA
+A,4,Z4,Q1,Bothriochloa insculpta,1,Moderate,18.3,N,Y,N
+A,4,Z4,Q1,Heteropogon contortus,2,Moderate,18.9,NA,NA,NA
+A,4,Z4,Q1,Melinis repens,3,Low,19,NA,NA,NA
+A,4,Z4,Q1,NA,NA,NA,18.9,NA,NA,NA
+A,4,Z4,Q2,Andropogon eucomus,3,Low,17.9,N,Y,N
+A,4,Z4,Q2,Urochloa mosambicensis,1,Moderate,19.1,NA,NA,NA
+A,4,Z4,Q2,Cymbopogon excavatus,2,Low,19.4,NA,NA,NA
+A,4,Z4,Q2,NA,NA,NA,19.4,NA,NA,NA
+A,4,Z4,Q3,Heteropogon contortus,1,Moderate,23,N,N,N
+A,4,Z4,Q3,Themeda triandra,3,High,22.2,NA,NA,NA
+A,4,Z4,Q3,Eragrostis superba,2,Moderate,21.3,NA,NA,NA
+A,4,Z4,Q3,NA,NA,NA,20.8,NA,NA,NA
+A,4,Z4,Q4,Bothriochloa insculpta,1,Moderate,19.9,N,N,N
+A,4,Z4,Q4,Heteropogon contortus,2,Moderate,19.9,NA,NA,NA
+A,4,Z4,Q4,Digitaria eriantha,3,High,19.5,NA,NA,NA
+A,4,Z4,Q4,NA,NA,NA,19.2,NA,NA,NA
+A,4,Z4,Q5,Heteropogon contortus,1,Moderate,25.7,N,N,N
+A,4,Z4,Q5,Themeda triandra,2,High,17.1,NA,NA,NA
+A,4,Z4,Q5,Eragrostis superba,NA,Moderate,17.8,NA,NA,NA
+A,4,Z4,Q5,Digitaria eriantha,3,High,22.1,NA,NA,NA
+A,5,Z1,Q1,Hyperrhenia hirta,NA,Moderate,12.1,N,N,N
+A,5,Z1,Q1,Urochloa mosambicensis,2,Moderate,13.8,NA,NA,NA
+A,5,Z1,Q1,Hyperrhenia filipendula,3,Moderate,13.7,NA,NA,NA
+A,5,Z1,Q1,Bothriochloa insculpta,NA,Moderate,14.2,NA,NA,NA
+A,5,Z1,Q1,Heteropogon contortus,1,Moderate,NA,NA,NA,NA
+A,5,Z1,Q1,Aristida adscensionis,NA,Low,NA,NA,NA,NA
+A,5,Z1,Q2,Urochloa mosambicensis,2,Moderate,25.6,N,Y,N
+A,5,Z1,Q2,Aristida adscensionis,1,Low,20.8,NA,NA,NA
+A,5,Z1,Q2,NA,NA,NA,22.3,NA,NA,NA
+A,5,Z1,Q2,NA,NA,NA,22.7,NA,NA,NA
+A,5,Z1,Q3,Cymbopogon excavatus,3,Low,NA,N,Y,N
+A,5,Z1,Q3,Bothriochloa insculpta,1,Moderate,NA,NA,NA,NA
+A,5,Z1,Q3,Urochloa mosambicensis,2,Moderate,NA,NA,NA,NA
+A,5,Z1,Q3,NA,NA,NA,NA,NA,NA,NA
+A,5,Z1,Q4,Hyperrhenia hirta,3,Moderate,21,N,Y,N
+A,5,Z1,Q4,Heteropogon contortus,1,Moderate,17.1,NA,NA,NA
+A,5,Z1,Q4,Urochloa mosambicensis,2,Moderate,21.7,NA,NA,NA
+A,5,Z1,Q4,NA,NA,NA,23,NA,NA,NA
+A,5,Z1,Q5,Urochloa mosambicensis,2,Moderate,17.1,N,N,N
+A,5,Z1,Q5,Hyperrhenia filipendula,3,Moderate,14.7,NA,NA,NA
+A,5,Z1,Q5,Bothriochloa insculpta,1,Moderate,21.1,NA,NA,NA
+A,5,Z1,Q5,NA,NA,NA,21.4,NA,NA,NA
+A,5,Z2,Q1,Urochloa mosambicensis,2,Moderate,22.6,N,N,N
+A,5,Z2,Q1,Heteropogon contortus,3,Moderate,16.8,NA,NA,NA
+A,5,Z2,Q1,Aristida adscensionis,1,Low,14.9,NA,NA,NA
+A,5,Z2,Q1,Setaria sphacelata,NA,High,13.6,NA,NA,NA
+A,5,Z2,Q2,Urochloa mosambicensis,NA,Moderate,10.6,N,Y,N
+A,5,Z2,Q2,Bothriochloa insculpta,1,Moderate,14.8,NA,NA,NA
+A,5,Z2,Q2,Heteropogon contortus,2,Moderate,17,NA,NA,NA
+A,5,Z2,Q2,Aristida adscensionis,3,Low,19.8,NA,NA,NA
+A,5,Z2,Q2,Melinis repens,NA,Low,NA,NA,NA,NA
+A,5,Z2,Q3,Panicum maximum,1,High,10.8,N,N,N
+A,5,Z2,Q3,Hyperrhenia filipendula,2,Moderate,9.2,NA,NA,NA
+A,5,Z2,Q3,NA,NA,NA,11.4,NA,NA,NA
+A,5,Z2,Q3,NA,NA,NA,10.3,NA,NA,NA
+A,5,Z2,Q4,Heteropogon contortus,1,Moderate,17.7,N,Y,N
+A,5,Z2,Q4,Hyperrhenia filipendula,2,Moderate,17.5,NA,NA,NA
+A,5,Z2,Q4,Cymbopogon excavatus,3,Low,17.4,NA,NA,NA
+A,5,Z2,Q4,NA,NA,NA,16.4,NA,NA,NA
+A,5,Z2,Q5,Urochloa mosambicensis,1,Moderate,15.1,N,Y,N
+A,5,Z2,Q5,Cymbopogon excavatus,2,Low,17.3,NA,NA,NA
+A,5,Z2,Q5,NA,NA,NA,20.1,NA,NA,NA
+A,5,Z2,Q5,NA,NA,NA,22.7,NA,NA,NA
+A,5,Z3,Q1,Bothriochloa insculpta,1,Moderate,NA,N,Y,N
+A,5,Z3,Q1,Urochloa mosambicensis,2,Moderate,NA,NA,NA,NA
+A,5,Z3,Q1,NA,NA,NA,22.3,NA,NA,NA
+A,5,Z3,Q1,NA,NA,NA,22.3,NA,NA,NA
+A,5,Z3,Q2,Bothriochloa insculpta,1,Moderate,NA,N,Y,N
+A,5,Z3,Q2,Heteropogon contortus,3,Moderate,NA,NA,NA,NA
+A,5,Z3,Q2,Eragrostis gummiflua,NA,Low,NA,NA,NA,NA
+A,5,Z3,Q2,Andropogon eucomus,2,Low,NA,NA,NA,NA
+A,5,Z3,Q3,Aristida adscensionis,2,Low,20.4,N,N,N
+A,5,Z3,Q3,Bothriochloa insculpta,1,Moderate,17.1,NA,NA,NA
+A,5,Z3,Q3,NA,NA,NA,19.3,NA,NA,NA
+A,5,Z3,Q3,NA,NA,NA,18.6,NA,NA,NA
+A,5,Z3,Q4,Bothriochloa insculpta,1,Moderate,17.1,N,N,N
+A,5,Z3,Q4,Aristida adscensionis,2,Low,17,NA,NA,NA
+A,5,Z3,Q4,Cymbopogon excavatus,3,Low,20.2,NA,NA,NA
+A,5,Z3,Q4,Eragrostis superba,NA,Moderate,22.5,NA,NA,NA
+A,5,Z3,Q5,Heteropogon contortus,3,Moderate,8.7,N,Y,N
+A,5,Z3,Q5,Bothriochloa insculpta,1,Moderate,11.6,NA,NA,NA
+A,5,Z3,Q5,Hyperrhenia hirta,2,Moderate,11.3,NA,NA,NA
+A,5,Z3,Q5,NA,NA,NA,10.3,NA,NA,NA
+A,5,Z4,Q1,Bothriochloa insculpta,1,Moderate,13.2,N,N,N
+A,5,Z4,Q1,Heteropogon contortus,2,Moderate,17.8,NA,NA,NA
+A,5,Z4,Q1,Aristida adscensionis,3,Low,18.3,NA,NA,NA
+A,5,Z4,Q1,Cymbopogon excavatus,NA,Low,17.6,NA,NA,NA
+A,5,Z4,Q2,Eragrostis gummiflua,3,Low,19.1,N,N,N
+A,5,Z4,Q2,Bothriochloa insculpta,2,Moderate,16,NA,NA,NA
+A,5,Z4,Q2,Cymbopogon excavatus,1,Low,17.5,NA,NA,NA
+A,5,Z4,Q2,NA,NA,NA,18.1,NA,NA,NA
+A,5,Z4,Q3,Bothriochloa insculpta,1,Moderate,20.8,N,Y,N
+A,5,Z4,Q3,Aristida adscensionis,2,Low,18.1,NA,NA,NA
+A,5,Z4,Q3,Urochloa mosambicensis,3,Moderate,23.3,NA,NA,NA
+A,5,Z4,Q3,Hyperrhenia filipendula,NA,Moderate,24.5,NA,NA,NA
+A,5,Z4,Q4,Bothriochloa insculpta,1,Moderate,NA,N,Y,N
+A,5,Z4,Q4,Cymbopogon excavatus,2,Low,24.2,NA,NA,NA
+A,5,Z4,Q4,NA,NA,NA,19,NA,NA,NA
+A,5,Z4,Q4,NA,NA,NA,23.6,NA,NA,NA
+A,5,Z4,Q5,Heteropogon contortus,3,Moderate,18.8,N,N,N
+A,5,Z4,Q5,Bothriochloa insculpta,1,Moderate,15.6,NA,NA,NA
+A,5,Z4,Q5,Urochloa mosambicensis,2,Moderate,18.3,NA,NA,NA
+A,5,Z4,Q5,NA,NA,NA,18.6,NA,NA,NA
+B,1,Z1,Q1,Eragrostis superba,3,Moderate,6.4,Y,N,N
+B,1,Z1,Q1,Heteropogon contortus,1,Moderate,2.8,NA,NA,NA
+B,1,Z1,Q1,Cymbopogon excavatus,2,Low,5.8,NA,NA,NA
+B,1,Z1,Q1,NA,NA,NA,2.6,NA,NA,NA
+B,1,Z1,Q2,Eragrostis gummiflua,2,Low,5.1,N,N,N
+B,1,Z1,Q2,Heteropogon contortus,1,Moderate,4.2,NA,NA,NA
+B,1,Z1,Q2,Cymbopogon excavatus,3,Low,6.7,NA,NA,NA
+B,1,Z1,Q2,NA,NA,NA,6.2,NA,NA,NA
+B,1,Z1,Q3,Cymbopogon excavatus,NA,Low,6.1,Y,Y,N
+B,1,Z1,Q3,Heteropogon contortus,1,Moderate,3.7,NA,NA,NA
+B,1,Z1,Q3,Melinis repens,2,Low,3.2,NA,NA,NA
+B,1,Z1,Q3,Aristida congesta C,3,Low,2.4,NA,NA,NA
+B,1,Z1,Q4,Eragrostis gummiflua,NA,Low,8.5,Y,N,N
+B,1,Z1,Q4,Eragrostis rigidior,2,Moderate,3.1,3,NA,NA
+B,1,Z1,Q4,Melinis repens,3,Low,4.4,1,NA,NA
+B,1,Z1,Q4,Heteropogon contortus,1,Moderate,4.2,NA,NA,NA
+B,1,Z1,NA,NA,NA,NA,NA,NA,NA,NA
+B,1,Z1,Q5,Aristida congesta C,2,Low,6.7,Y,N,Y
+B,1,Z1,Q5,Heteropogon contortus,1,Moderate,6,NA,NA,NA
+B,1,Z1,Q5,NA,NA,NA,6.7,NA,NA,NA
+B,1,Z1,Q5,NA,NA,NA,5.3,NA,NA,NA
+B,1,Z2,Q1,Cymbopogon excavatus,NA,Low,2.2,N,N,N
+B,1,Z2,Q1,Eragrostis rigidior,1,Moderate,8,NA,NA,NA
+B,1,Z2,Q1,Heteropogon contortus,3,Moderate,14,NA,NA,NA
+B,1,Z2,Q1,Aristida  canescens,2,Low,20,NA,NA,NA
+B,1,Z2,Q2,Aristida congesta C,3,Low,7,Y,N,Y
+B,1,Z2,Q2,Eragrostis rigidior,2,Moderate,8.2,NA,NA,NA
+B,1,Z2,Q2,Heteropogon contortus,1,Moderate,5.9,NA,NA,NA
+B,1,Z2,Q2,Aristida  canescens,NA,Low,6.6,NA,NA,NA
+B,1,Z2,Q3,Bothriochloa insculpta,1,Moderate,2.6,Y,N,N
+B,1,Z2,Q3,Melinis repens,2,Low,6,NA,NA,NA
+B,1,Z2,Q3,Heteropogon contortus,3,Moderate,7.6,NA,NA,NA
+B,1,Z2,Q3,NA,NA,NA,6.6,NA,NA,NA
+B,1,Z2,Q4,Cymbopogon excavatus,2,Low,11.4,N,Y,N
+B,1,Z2,Q4,Bothriochloa insculpta,1,Moderate,22.9,NA,NA,NA
+B,1,Z2,Q4,NA,NA,NA,6.3,NA,NA,NA
+B,1,Z2,Q4,NA,NA,NA,NA,NA,NA,NA
+B,1,Z2,Q5,Heteropogon contortus,1,Moderate,5.6,Y,N,N
+B,1,Z2,Q5,Melinis repens,3,Low,7.2,NA,NA,NA
+B,1,Z2,Q5,Bothriochloa insculpta,2,Moderate,5.2,NA,NA,NA
+B,1,Z2,Q5,NA,NA,NA,7.5,NA,NA,NA
+B,1,Z3,Q1,Aristida congesta B,3,Low,4,Y,N,N
+B,1,Z3,Q1,Eragrostis rigidior,2,Moderate,4.7,NA,NA,NA
+B,1,Z3,Q1,Eragrostis superba,NA,Moderate,4.7,NA,NA,NA
+B,1,Z3,Q1,Cymbopogon excavatus,NA,Low,10.5,NA,NA,NA
+B,1,Z3,Q1,Hyperrhenia filipendula,NA,Moderate,NA,NA,NA,NA
+B,1,Z3,Q1,Heteropogon contortus,1,Moderate,NA,NA,NA,NA
+B,1,Z3,Q2,Eragrostis gummiflua,2,Low,10.7,N,Y,N
+B,1,Z3,Q2,Heteropogon contortus,1,Moderate,11.9,NA,NA,NA
+B,1,Z3,Q2,Eragrostis superba,3,Moderate,10.6,NA,NA,NA
+B,1,Z3,Q2,NA,NA,NA,9.7,NA,NA,NA
+B,1,Z3,Q3,Aristida congesta B,NA,Low,7.3,Y,N,N
+B,1,Z3,Q3,Eragrostis superba,2,Moderate,8.8,NA,NA,NA
+B,1,Z3,Q3,Heteropogon contortus,1,Moderate,12.3,NA,NA,NA
+B,1,Z3,Q3,Eragrostis gummiflua,3,Low,5.6,NA,NA,NA
+B,1,Z3,Q3,Aristida adscensionis,NA,Moderate,NA,NA,NA,NA
+B,1,Z3,Q3,Bothriochloa insculpta,NA,Moderate,NA,NA,NA,NA
+B,1,Z3,Q4,Aristida congesta B,NA,Low,5.3,Y,Y,N
+B,1,Z3,Q4,Heteropogon contortus,1,Moderate,5.9,NA,NA,NA
+B,1,Z3,Q4,Eragrostis gummiflua,NA,Low,5.3,NA,NA,NA
+B,1,Z3,Q4,Aristida adscensionis,3,Low,5.2,NA,NA,NA
+B,1,Z3,Q4,Melinis repens,NA,Low,NA,NA,NA,NA
+B,1,Z3,Q4,Themeda triandra,NA,High,NA,NA,NA,NA
+B,1,Z3,Q4,Setaria sphacelata,2,High,NA,NA,NA,NA
+B,1,Z3,Q5,Heteropogon contortus,1,Moderate,5.1,Y,Y,N
+B,1,Z3,Q5,Cymbopogon excavatus,2,Low,5.5,NA,NA,NA
+B,1,Z3,Q5,NA,NA,NA,5.9,NA,NA,NA
+B,1,Z3,Q5,NA,NA,NA,6.5,NA,NA,NA
+B,1,Z4,Q1,Eragrostis gummiflua,2,Low,2.8,Y,Y,N
+B,1,Z4,Q1,Heteropogon contortus,NA,Moderate,5.7,NA,NA,NA
+B,1,Z4,Q1,Cymbopogon excavatus,3,Low,8.2,NA,NA,NA
+B,1,Z4,Q1,Melinis repens,NA,Low,7.1,NA,NA,NA
+B,1,Z4,Q1,Bothriochloa insculpta,1,Moderate,NA,NA,NA,NA
+B,1,Z4,Q2,Heteropogon contortus,1,Moderate,3.8,Y,Y,N
+B,1,Z4,Q2,Cymbopogon excavatus,2,Low,7,NA,NA,NA
+B,1,Z4,Q2,NA,NA,NA,5.8,NA,NA,NA
+B,1,Z4,Q2,NA,NA,NA,5.8,NA,NA,NA
+B,1,Z4,Q3,Cymbopogon excavatus,NA,Low,16.4,N,Y,N
+B,1,Z4,Q3,Eragrostis superba,NA,Moderate,17.6,NA,NA,NA
+B,1,Z4,Q3,Eragrostis gummiflua,3,Low,14.9,NA,NA,NA
+B,1,Z4,Q3,Aristida congesta B,2,Low,13.4,NA,NA,NA
+B,1,Z4,Q3,Heteropogon contortus,1,Moderate,NA,NA,NA,NA
+B,1,Z4,Q4,Heteropogon contortus,2,Moderate,4,Y,N,N
+B,1,Z4,Q4,Cymbopogon excavatus,NA,Low,3.4,NA,NA,NA
+B,1,Z4,Q4,Melinis repens,3,Low,4.8,NA,NA,NA
+B,1,Z4,Q4,Bothriochloa insculpta,1,Moderate,4.9,NA,NA,NA
+B,1,Z4,Q5,Heteropogon contortus,1,Moderate,1.9,Y,Y,N
+B,1,Z4,Q5,Eragrostis gummiflua,3,Low,4.2,NA,NA,NA
+B,1,Z4,Q5,Eragrostis superba,2,Moderate,6.7,NA,NA,NA
+B,1,Z4,Q5,NA,NA,NA,7,NA,NA,NA
+B,2,Z1,Q1,Brachiaria serrata,2,Moderate,7.9,Y,N,N
+B,2,Z1,Q1,Heteropogon contortus,3,Moderate,8.2,NA,NA,NA
+B,2,Z1,Q1,Aristida adscensionis,NA,Low,8.9,NA,NA,NA
+B,2,Z1,Q1,Bothriochloa insculpta,1,Moderate,9.8,NA,NA,NA
+B,2,Z1,Q2,Heteropogon contortus,NA,Moderate,18.5,N,Y,N
+B,2,Z1,Q2,Cymbopogon excavatus,1,Low,18.5,NA,NA,NA
+B,2,Z1,Q2,Aristida adscensionis,2,Low,16.1,NA,NA,NA
+B,2,Z1,Q2,Themeda triandra,3,High,17.4,NA,NA,NA
+B,2,Z1,Q3,Heteropogon contortus,2,Moderate,10.7,N,Y,N
+B,2,Z1,Q3,Cymbopogon excavatus,1,Low,11,NA,NA,NA
+B,2,Z1,Q3,NA,NA,NA,14.8,NA,NA,NA
+B,2,Z1,Q3,NA,NA,NA,14.9,NA,NA,NA
+B,2,Z1,Q4,Heteropogon contortus,1,Moderate,9.5,N,N,N
+B,2,Z1,Q4,Cymbopogon excavatus,3,Low,10.4,NA,NA,NA
+B,2,Z1,Q4,Aristida adscensionis,2,Low,13.2,NA,NA,NA
+B,2,Z1,Q4,Eragrostis rigidior,NA,Moderate,12.3,NA,NA,NA
+B,2,Z1,Q5,Cymbopogon excavatus,2,Low,17.1,Y,N,N
+B,2,Z1,Q5,Aristida adscensionis,1,Low,17.2,NA,NA,NA
+B,2,Z1,Q5,Melinis repens,3,Low,18.8,NA,NA,NA
+B,2,Z1,Q5,NA,NA,NA,15.6,NA,NA,NA
+B,2,Z2,Q1,Cymbopogon excavatus,NA,Low,16.8,N,Y,N
+B,2,Z2,Q1,Hyperrhenia filipendula,NA,Moderate,13.3,NA,NA,NA
+B,2,Z2,Q1,Heteropogon contortus,1,Moderate,11,NA,NA,NA
+B,2,Z2,Q1,Melinis repens,2,Low,22.9,NA,NA,NA
+B,2,Z2,Q1,Bothriochloa insculpta,3,Moderate,NA,NA,NA,NA
+B,2,Z2,Q2,Heteropogon contortus,1,Moderate,3.4,N,Y,N
+B,2,Z2,Q2,Melinis repens,2,Low,5.7,NA,NA,NA
+B,2,Z2,Q2,Panicum maximum,3,High,7.4,NA,NA,NA
+B,2,Z2,Q2,NA,NA,NA,12,NA,NA,NA
+B,2,Z2,Q3,Eragrostis gummiflua,3,Low,9.6,Y,Y,N
+B,2,Z2,Q3,Heteropogon contortus,2,Moderate,9.4,NA,NA,NA
+B,2,Z2,Q3,Cymbopogon excavatus,NA,Low,9.7,NA,NA,NA
+B,2,Z2,Q3,Bothriochloa insculpta,1,Moderate,9.4,NA,NA,NA
+B,2,Z2,Q4,Eragrostis gummiflua,NA,Low,9.3,Y,N,N
+B,2,Z2,Q4,Heteropogon contortus,1,Moderate,8.3,NA,NA,NA
+B,2,Z2,Q4,Cymbopogon excavatus,NA,Low,7.8,NA,NA,NA
+B,2,Z2,Q4,Bothriochloa insculpta,2,Moderate,7.5,NA,NA,NA
+B,2,Z2,Q4,Eragrostis rigidior,NA,Moderate,NA,NA,NA,NA
+B,2,Z2,Q4,Melinis repens,3,Low,NA,NA,NA,NA
+B,2,Z2,Q5,Cymbopogon excavatus,2,Low,9.3,N,Y,N
+B,2,Z2,Q5,Eragrostis gummiflua,3,Low,15.3,NA,NA,NA
+B,2,Z2,Q5,Heteropogon contortus,1,Moderate,11,NA,NA,NA
+B,2,Z2,Q5,Urochloa mosambicensis,NA,Moderate,6.1,NA,NA,NA
+B,2,Z3,Q1,Heteropogon contortus,1,Moderate,6.3,N,N,N
+B,2,Z3,Q1,Aristida adscensionis,2,Low,5.7,NA,NA,NA
+B,2,Z3,Q1,Bothriochloa insculpta,3,Moderate,10.9,NA,NA,NA
+B,2,Z3,Q1,NA,NA,NA,11.1,NA,NA,NA
+B,2,Z3,Q2,Heteropogon contortus,1,Moderate,2.1,N,N,N
+B,2,Z3,Q2,Cymbopogon excavatus,2,Low,4.6,NA,NA,NA
+B,2,Z3,Q2,NA,NA,NA,6.9,NA,NA,NA
+B,2,Z3,Q2,NA,NA,NA,10.6,NA,NA,NA
+B,2,Z3,Q3,Eragrostis gummiflua,2,Low,25.2,N,N,N
+B,2,Z3,Q3,Heteropogon contortus,1,Moderate,24.3,NA,NA,NA
+B,2,Z3,Q3,Cymbopogon excavatus,NA,Moderate,24,NA,NA,NA
+B,2,Z3,Q3,Aristida adscensionis,NA,Low,NA,NA,NA,NA
+B,2,Z3,Q3,Melinis repens,3,Low,NA,NA,NA,NA
+B,2,Z3,Q3,Digitaria eriantha,NA,High,NA,NA,NA,NA
+B,2,Z3,Q4,Heteropogon contortus,2,Moderate,6,N,N,N
+B,2,Z3,Q4,Cymbopogon excavatus,3,Low,4.5,NA,NA,NA
+B,2,Z3,Q4,Setaria pumila ,1,Moderate,4.7,NA,NA,NA
+B,2,Z3,Q4,NA,NA,NA,3.8,NA,NA,NA
+B,2,Z3,Q5,Aristida adscensionis,3,Low,10.6,N,N,N
+B,2,Z3,Q5,Heteropogon contortus,1,Moderate,13,NA,NA,NA
+B,2,Z3,Q5,Digitaria eriantha,NA,High,12.3,NA,NA,NA
+B,2,Z3,Q5,NA,2,NA,NA,NA,NA,NA
+B,2,Z4,Q1,Heteropogon contortus,2,Moderate,16.8,N,N,N
+B,2,Z4,Q1,Cymbopogon excavatus,1,NA,19.1,NA,NA,NA
+B,2,Z4,Q1,NA,NA,NA,16.8,NA,NA,NA
+B,2,Z4,Q1,NA,NA,NA,17.2,NA,NA,NA
+B,2,Z4,Q2,Heteropogon contortus,2,Moderate,12.2,N,N,Y
+B,2,Z4,Q2,Cymbopogon excavatus,1,Low,19.4,NA,NA,NA
+B,2,Z4,Q2,NA,NA,NA,14.9,NA,NA,NA
+B,2,Z4,Q2,NA,NA,NA,13.2,NA,NA,NA
+B,2,Z4,Q3,Heteropogon contortus,1,Moderate,9.3,N,N,N
+B,2,Z4,Q3,Cymbopogon excavatus,3,Low,10.1,NA,NA,NA
+B,2,Z4,Q3,Eragrostis rigidior,NA,Moderate,10.8,NA,NA,NA
+B,2,Z4,Q3,Aristida  canescens,NA,Low,10,NA,NA,NA
+B,2,Z4,Q3,Setaria incrassata,NA,High,NA,NA,NA,NA
+B,2,Z4,Q3,Eragrostis gummiflua,2,Low,NA,NA,NA,NA
+B,2,Z4,Q4,Heteropogon contortus,1,Moderate,9.8,N,N,N
+B,2,Z4,Q4,Aristida congesta B,2,Low,7.6,NA,NA,NA
+B,2,Z4,Q4,NA,NA,NA,10,NA,NA,NA
+B,2,Z4,Q4,NA,NA,NA,9,NA,NA,NA
+B,2,Z4,Q4,Heteropogon contortus,1,Moderate,9.8,N,N,N
+B,2,Z4,Q4,Aristida congesta B,2,Low,7.6,NA,NA,NA
+B,2,Z4,Q4,NA,NA,NA,10,NA,NA,NA
+B,2,Z4,Q4,NA,NA,NA,9,NA,NA,NA
+B,2,Z4,Q5,Heteropogon contortus,1,Moderate,8.6,N,N,N
+B,2,Z4,Q5,Eragrostis gummiflua,2,Low,5.2,NA,NA,NA
+B,2,Z4,Q5,NA,NA,NA,5.4,NA,NA,NA
+B,2,Z4,Q5,NA,NA,NA,4,NA,NA,NA
+B,3,Z1,Q1,Cymbopogon excavatus,1,Low,6.8,Y,N,N
+B,3,Z1,Q1,Cynodon dactylon,3,High,8.1,NA,NA,NA
+B,3,Z1,Q1,Eragrostis superba,NA,Moderate,8.7,NA,NA,NA
+B,3,Z1,Q1,Themeda triandra,NA,High,10.5,NA,NA,NA
+B,3,Z1,Q1,Bothriochloa insculpta,2,Moderate,NA,NA,NA,NA
+B,3,Z1,Q2,Cymbopogon plurinodis,NA,Low,9.5,Y,N,N
+B,3,Z1,Q2,Cymbopogon excavatus,NA,Low,9.9,NA,NA,NA
+B,3,Z1,Q2,Setaria incrassata,3,High,9.1,NA,NA,NA
+B,3,Z1,Q2,Eragrostis superba,NA,Moderate,10.2,NA,NA,NA
+B,3,Z1,Q2,Digitaria eriantha,2,High,NA,NA,NA,NA
+B,3,Z1,Q2,Heteropogon contortus,1,Moderate,NA,NA,NA,NA
+B,3,Z1,Q2,Melinis repens,NA,Low,NA,NA,NA,NA
+B,3,Z1,Q3,Heteropogon contortus,1,Moderate,7.5,N,N,Y
+B,3,Z1,Q3,Melinis repens,2,Low,6.8,NA,NA,NA
+B,3,Z1,Q3,Aristida adscensionis,3,Low,7.3,NA,NA,NA
+B,3,Z1,Q3,Bothriochloa insculpta,NA,Moderate,8.6,NA,NA,NA
+B,3,Z1,Q4,Cynodon dactylon,1,High,14.1,Y,N,N
+B,3,Z1,Q4,Melinis repens,2,Low,10.9,NA,NA,NA
+B,3,Z1,Q4,Aristida adscensionis,NA,Low,10.1,NA,NA,NA
+B,3,Z1,Q4,Cymbopogon excavatus,3,Low,10.4,NA,NA,NA
+B,3,Z1,Q4,Cymbopogon plurinodis,NA,Low,NA,NA,NA,NA
+B,3,Z1,Q5,Heteropogon contortus,1,Moderate,15.4,N,N,N
+B,3,Z1,Q5,Melinis repens,NA,Low,16.2,NA,NA,NA
+B,3,Z1,Q5,Aristida adscensionis,NA,Low,17.1,NA,NA,NA
+B,3,Z1,Q5,Bothriochloa insculpta,3,Moderate,16.9,NA,NA,NA
+B,3,Z1,Q5,Cymbopogon plurinodis,2,Low,NA,NA,NA,NA
+B,3,Z2,Q1,Cynodon dactylon,1,High,10.2,NA,N,N
+B,3,Z2,Q1,Themeda triandra,2,High,15.3,NA,NA,NA
+B,3,Z2,Q1,Melinis repens,3,Low,16.6,NA,NA,NA
+B,3,Z2,Q1,Eragrostis gummiflua,NA,Low,17.2,NA,NA,NA
+B,3,Z2,Q2,Themeda triandra,NA,High,16.9,NA,N,N
+B,3,Z2,Q2,Hyperrhenia filipendula,2,Moderate,17.3,NA,NA,NA
+B,3,Z2,Q2,Cymbopogon excavatus,1,Low,15,NA,NA,NA
+B,3,Z2,Q2,Setaria pumila ,NA,Moderate,13.6,NA,NA,NA
+B,3,Z2,Q2,Sporobolus africanus,3,Low,NA,NA,NA,NA
+B,3,Z2,Q3,Heteropogon contortus,1,Moderate,17.3,NA,Y,N
+B,3,Z2,Q3,Melinis repens,2,Low,15.8,NA,NA,NA
+B,3,Z2,Q3,Aristida adscensionis,3,Low,14.8,NA,NA,NA
+B,3,Z2,Q3,Cymbopogon plurinodis,NA,Low,14.6,NA,NA,NA
+B,3,Z2,Q4,Cymbopogon excavatus,3,Low,24.7,NA,N,N
+B,3,Z2,Q4,Heteropogon contortus,1,Moderate,26.3,NA,NA,NA
+B,3,Z2,Q4,Melinis repens,NA,Low,19.7,NA,NA,NA
+B,3,Z2,Q4,Eragrostis gummiflua,2,Low,21.3,NA,NA,NA
+B,3,Z2,Q5,Heteropogon contortus,1,Moderate,7.5,NA,N,N
+B,3,Z2,Q5,Cymbopogon excavatus,3,Low,8.5,NA,NA,NA
+B,3,Z2,Q5,Eragrostis gummiflua,2,Low,12.4,NA,NA,NA
+B,3,Z2,Q5,NA,NA,NA,13.5,NA,NA,NA
+B,3,Z3,Q1,Eragrostis superba,2,Moderate,7.9,Y,N,N
+B,3,Z3,Q1,Heteropogon contortus,1,Moderate,10.7,NA,NA,NA
+B,3,Z3,Q1,Melinis repens,3,Low,10.2,NA,NA,NA
+B,3,Z3,Q1,Eragrostis gummiflua,NA,Low,9.6,NA,NA,NA
+B,3,Z3,Q2,Digitaria eriantha,NA,High,3.2,N,N,Y
+B,3,Z3,Q2,Heteropogon contortus,1,Moderate,2.8,NA,NA,NA
+B,3,Z3,Q2,Melinis repens,2,Low,5.7,NA,NA,NA
+B,3,Z3,Q2,Eragrostis gummiflua,3,Low,10.1,NA,NA,NA
+B,3,Z3,Q3,Heteropogon contortus,1,Moderate,7.3,N,N,N
+B,3,Z3,Q3,Setaria sphacelata,2,High,9.7,NA,NA,NA
+B,3,Z3,Q3,Themeda triandra,NA,High,11.3,NA,NA,NA
+B,3,Z3,Q3,Digitaria eriantha,3,high,11.9,NA,NA,NA
+B,3,Z3,Q4,Heteropogon contortus,1,Moderate,13,Y,N,N
+B,3,Z3,Q4,Cymbopogon plurinodis,3,Low,16.9,NA,NA,NA
+B,3,Z3,Q4,Cymbopogon excavatus,2,Low,16.7,NA,NA,NA
+B,3,Z3,Q4,NA,NA,NA,16.2,NA,NA,NA
+B,3,Z3,Q5,Heteropogon contortus,1,Moderate,5.9,Y,N,N
+B,3,Z3,Q5,Aristida adscensionis,NA,Low,9.5,NA,NA,NA
+B,3,Z3,Q5,Eragrostis superba,3,Moderate,10.8,NA,NA,NA
+B,3,Z3,Q5,Eragrostis gummiflua,2,Low,10.1,NA,NA,NA
+B,3,Z4,Q1,Heteropogon contortus,1,Moderate,8.4,N,N,N
+B,3,Z4,Q1,Aristida adscensionis,2,Low,7.2,NA,NA,NA
+B,3,Z4,Q1,Digitaria eriantha,3,High,10.7,NA,NA,NA
+B,3,Z4,Q1,Eragrostis gummiflua,NA,Low,10.1,NA,NA,NA
+B,3,Z4,Q1,Cymbopogon plurinodis,NA,Low,NA,NA,NA,NA
+B,3,Z4,Q2,Heteropogon contortus,2,Moderate,13.1,N,N,N
+B,3,Z4,Q2,Aristida adscensionis,1,Low,12.6,NA,NA,NA
+B,3,Z4,Q2,Digitaria eriantha,3,High,14.6,NA,NA,NA
+B,3,Z4,Q2,NA,NA,NA,13.1,NA,NA,NA
+B,3,Z4,Q3,Heteropogon contortus,1,Moderate,15,N,N,Y
+B,3,Z4,Q3,Aristida adscensionis,2,Low,14.5,NA,NA,NA
+B,3,Z4,Q3,Setaria pumila ,3,Moderate,14.1,NA,NA,NA
+B,3,Z4,Q3,NA,NA,NA,15,NA,NA,NA
+B,3,Z4,Q4,Heteropogon contortus,1,Moderate,7.9,Y,N,N
+B,3,Z4,Q4,Melinis repens,2,Low,10,NA,NA,NA
+B,3,Z4,Q4,Eragrostis gummiflua,3,Low,10.3,NA,NA,NA
+B,3,Z4,Q4,NA,NA,NA,10.1,NA,NA,NA
+B,3,Z4,Q5,Heteropogon contortus,2,Moderate,6,Y,N,N
+B,3,Z4,Q5,Digitaria eriantha,1,High,7.8,NA,NA,NA
+B,3,Z4,Q5,Eragrostis gummiflua,3,Low,6.6,NA,NA,NA
+B,3,Z4,Q5,NA,NA,NA,8.1,NA,NA,NA
+B,4,Z1,Q1,Cymbopogon excavatus,1,Low,17.7,N,Y,N
+B,4,Z1,Q1,Eragrostis superba,2,Moderate,17.6,NA,NA,NA
+B,4,Z1,Q1,Heteropogon contortus,3,Moderate,20,NA,NA,NA
+B,4,Z1,Q1,NA,NA,NA,15.4,NA,NA,NA
+B,4,Z1,Q2,Eragrostis gummiflua,3,Low,11.8,Y,N,N
+B,4,Z1,Q2,Heteropogon contortus,1,Moderate,13,NA,NA,NA
+B,4,Z1,Q2,Aristida adscensionis,NA,Low,11.2,NA,NA,NA
+B,4,Z1,Q2,Digitaria eriantha,2,High,13.4,NA,NA,NA
+B,4,Z1,Q2,Eragrostis superba,NA,Moderate,NA,NA,NA,NA
+B,4,Z1,Q2,Cymbopogon plurinodis,NA,Low,NA,NA,NA,NA
+B,4,Z1,Q3,Heteropogon contortus,1,Moderate,10.2,Y,N,N
+B,4,Z1,Q3,Eragrostis rigidior,NA,Low,9,NA,NA,NA
+B,4,Z1,Q3,Melinis repens,2,Low,9,NA,NA,NA
+B,4,Z1,Q3,Bothriochloa insculpta,3,Moderate,10.2,NA,NA,NA
+B,4,Z1,Q4,Heteropogon contortus,1,Moderate,7.8,N,N,N
+B,4,Z1,Q4,Eragrostis superba,2,Moderate,7.4,NA,NA,NA
+B,4,Z1,Q4,Aristida congesta C,NA,Low,8,NA,NA,NA
+B,4,Z1,Q4,Themeda triandra,3,High,10,NA,NA,NA
+B,4,Z1,Q5,Heteropogon contortus,1,Moderate,17.3,N,Y,N
+B,4,Z1,Q5,Aristida adscensionis,NA,Low,12.7,NA,NA,NA
+B,4,Z1,Q5,Melinis repens,3,Low,13.3,NA,NA,NA
+B,4,Z1,Q5,Aristida diffusa,NA,Low,12.7,NA,NA,NA
+B,4,Z1,Q5,Hyperrhenia filipendula,NA,Moderate,NA,NA,NA,NA
+B,4,Z1,Q5,Setaria pumila ,2,Moderate,NA,NA,NA,NA
+B,4,Z2,Q1,Cymbopogon excavatus,3,Low,3.7,Y,N,N
+B,4,Z2,Q1,Heteropogon contortus,1,Moderate,3.3,NA,NA,NA
+B,4,Z2,Q1,Melinis repens,2,Low,8.4,NA,NA,NA
+B,4,Z2,Q1,NA,NA,NA,12.3,NA,NA,NA
+B,4,Z2,Q2,Cymbopogon excavatus,3,Low,17.7,Y,Y,N
+B,4,Z2,Q2,Heteropogon contortus,1,Moderate,17.1,NA,NA,NA
+B,4,Z2,Q2,Eragrostis gummiflua,NA,Low,13.3,NA,NA,NA
+B,4,Z2,Q2,Setaria pumila ,2,Moderate,12.7,NA,NA,NA
+B,4,Z2,Q3,Cymbopogon excavatus,2,Low,4.1,N,Y,N
+B,4,Z2,Q3,Heteropogon contortus,1,Moderate,10.4,NA,NA,NA
+B,4,Z2,Q3,Aristida diffusa,3,Low,8.8,NA,NA,NA
+B,4,Z2,Q3,NA,NA,NA,6.9,NA,NA,NA
+B,4,Z2,Q4,Eragrostis gummiflua,3,Low,6.4,N,N,N
+B,4,Z2,Q4,Cymbopogon excavatus,2,Low,6.6,NA,NA,NA
+B,4,Z2,Q4,Heteropogon contortus,1,Moderate,7.3,NA,NA,NA
+B,4,Z2,Q4,Melinis repens,NA,Low,7.6,NA,NA,NA
+B,4,Z2,Q4,Eragrostis rigidior,NA,Moderate,NA,NA,NA,NA
+B,4,Z2,Q4,Aristida  canescens,NA,Low,NA,NA,NA,NA
+B,4,Z2,Q5,Cymbopogon excavatus,3,Low,21.1,N,N,N
+B,4,Z2,Q5,Heteropogon contortus,1,Moderate,15.1,NA,NA,NA
+B,4,Z2,Q5,Eragrostis superba,2,Moderate,12.2,NA,NA,NA
+B,4,Z2,Q5,NA,NA,NA,14.9,NA,NA,NA
+B,4,Z3,Q1,Heteropogon contortus,2,Moderate,18.3,N,Y,N
+B,4,Z3,Q1,Melinis repens,3,Low,26,NA,NA,NA
+B,4,Z3,Q1,Hyperrhenia filipendula,1,Moderate,24.6,NA,NA,NA
+B,4,Z3,Q1,Themeda triandra,NA,High,21,NA,NA,NA
+B,4,Z3,Q2,Heteropogon contortus,1,Moderate,18.8,Y,Y,N
+B,4,Z3,Q2,Melinis repens,2,Low,11.2,NA,NA,NA
+B,4,Z3,Q2,Eragrostis rigidior,3,Moderate,2,NA,NA,NA
+B,4,Z3,Q2,NA,NA,NA,3.3,NA,NA,NA
+B,4,Z3,Q3,Heteropogon contortus,1,Moderate,4.4,Y,N,N
+B,4,Z3,Q3,Digitaria eriantha,2,High,4.2,NA,NA,NA
+B,4,Z3,Q3,NA,NA,NA,4.1,NA,NA,NA
+B,4,Z3,Q3,NA,NA,NA,5,NA,NA,NA
+B,4,Z3,Q4,Heteropogon contortus,1,Moderate,14.1,N,N,N
+B,4,Z3,Q4,Melinis repens,NA,Low,23.2,NA,NA,NA
+B,4,Z3,Q4,Hyperrhenia filipendula,3,Moderate,19.2,NA,NA,NA
+B,4,Z3,Q4,Themeda triandra,2,High,11.4,NA,NA,NA
+B,4,Z3,Q4,Eragrostis superba,NA,Moderate,NA,NA,NA,NA
+B,4,Z3,Q5,Digitaria eriantha,3,High,7.3,N,Y,N
+B,4,Z3,Q5,Heteropogon contortus,1,Moderate,7.7,NA,NA,NA
+B,4,Z3,Q5,Melinis repens,NA,Low,7.8,NA,NA,NA
+B,4,Z3,Q5,Aristida adscensionis,2,Low,9.4,NA,NA,NA
+B,4,Z4,Q1,Eragrostis rigidior,2,Moderate,10.7,N,N,N
+B,4,Z4,Q1,Heteropogon contortus,3,Moderate,NA,NA,NA,NA
+B,4,Z4,Q1,Digitaria eriantha,1,High,NA,NA,NA,NA
+B,4,Z4,Q1,Cymbopogon excavatus,NA,Low,20.7,NA,NA,NA
+B,4,Z4,Q1,Eragrostis superba,NA,Moderate,NA,NA,NA,NA
+B,4,Z4,Q2,Heteropogon contortus,1,Moderate,17.1,Y,N,N
+B,4,Z4,Q2,Melinis repens,NA,Low,17.2,NA,NA,NA
+B,4,Z4,Q2,Aristida adscensionis,3,Low,16.3,NA,NA,NA
+B,4,Z4,Q2,Setaria pumila ,2,Moderate,14.7,NA,NA,NA
+B,4,Z4,Q3,Heteropogon contortus,1,Moderate,16,Y,N,N
+B,4,Z4,Q3,Aristida adscensionis,2,Low,15,NA,NA,NA
+B,4,Z4,Q3,Setaria pumila ,3,Moderate,18.1,NA,NA,NA
+B,4,Z4,Q3,Eragrostis superba,NA,Moderate,19.4,NA,NA,NA
+B,4,Z4,Q4,Cymbopogon excavatus,3,Low,7.8,N,Y,N
+B,4,Z4,Q4,Melinis repens,2,Low,7.6,NA,NA,NA
+B,4,Z4,Q4,Heteropogon contortus,1,Moderate,7.5,NA,NA,NA
+B,4,Z4,Q4,Eragrostis gummiflua,NA,Low,7.6,NA,NA,NA
+B,4,Z4,Q5,Cymbopogon excavatus,2,Low,NA,N,N,N
+B,4,Z4,Q5,Melinis repens,3,Low,NA,NA,NA,NA
+B,4,Z4,Q5,Heteropogon contortus,1,Moderate,NA,NA,NA,NA
+B,4,Z4,Q5,Eragrostis gummiflua,NA,Low,NA,NA,NA,NA
+B,5,Z1,Q1,Cynodon dactylon,1,High,13.2,Y,N,N
+B,5,Z1,Q1,Heteropogon contortus,2,Moderate,10.8,NA,NA,NA
+B,5,Z1,Q1,Setaria pumila ,NA,Moderate,11.6,NA,NA,NA
+B,5,Z1,Q1,Aristida congesta B,3,Low,11,NA,NA,NA
+B,5,Z1,Q2,Heteropogon contortus,1,Moderate,14.5,N,Y,N
+B,5,Z1,Q2,Melinis repens,3,Low,14.6,NA,NA,NA
+B,5,Z1,Q2,Hyperrhenia filipendula,2,Moderate,14,NA,NA,NA
+B,5,Z1,Q2,Themeda triandra,NA,High,14.9,NA,NA,NA
+B,5,Z1,Q2,Setaria pumila ,NA,Moderate,NA,NA,NA,NA
+B,5,Z1,Q3,Cynodon dactylon,1,High,4.3,Y,N,Y
+B,5,Z1,Q3,Heteropogon contortus,2,Moderate,5.5,NA,NA,NA
+B,5,Z1,Q3,Cymbopogon excavatus,3,Low,10.1,NA,NA,NA
+B,5,Z1,Q3,NA,NA,NA,9.7,NA,NA,NA
+B,5,Z1,Q4,Cynodon dactylon,1,High,13.9,N,N,N
+B,5,Z1,Q4,Cymbopogon excavatus,2,Low,8.2,NA,NA,NA
+B,5,Z1,Q4,Setaria pumila ,3,Moderate,8.5,NA,NA,NA
+B,5,Z1,Q4,NA,NA,NA,9.1,NA,NA,NA
+B,5,Z1,Q5,Bothriochloa insculpta,1,Moderate,9.7,NA,NA,NA
+B,5,Z1,Q5,Heteropogon contortus,2,Moderate,8.6,Y,N,N
+B,5,Z1,Q5,NA,NA,NA,7.1,NA,NA,NA
+B,5,Z1,Q5,NA,NA,NA,7.5,NA,NA,NA
+B,5,Z2,Q1,Cynodon dactylon,2,High,12.5,Y,N,N
+B,5,Z2,Q1,Heteropogon contortus,1,Moderate,10,NA,NA,NA
+B,5,Z2,Q1,Aristida congesta B,3,Low,10.1,NA,NA,NA
+B,5,Z2,Q1,Melinis repens,NA,Low,9.9,NA,NA,NA
+B,5,Z2,Q1,Eragrostis gummiflua,NA,Low,NA,NA,NA,NA
+B,5,Z2,Q1,Eragrostis superba,NA,Moderate,NA,NA,NA,NA
+B,5,Z2,Q2,Cynodon dactylon,1,High,5,Y,N,N
+B,5,Z2,Q2,Heteropogon contortus,2,Moderate,3.4,NA,NA,NA
+B,5,Z2,Q2,Setaria pumila ,3,Moderate,4.1,NA,NA,NA
+B,5,Z2,Q2,NA,NA,NA,4.2,NA,NA,NA
+B,5,Z2,Q3,Heteropogon contortus,1,Moderate,6,Y,N,N
+B,5,Z2,Q3,Eragrostis superba,2,Moderate,7.1,NA,NA,NA
+B,5,Z2,Q3,Bothriochloa insculpta,NA,Moderate,6.4,NA,NA,NA
+B,5,Z2,Q3,Themeda triandra,3,High,5.8,NA,NA,NA
+B,5,Z2,Q4,Setaria pumila ,3,Moderate,20.4,Y,N,N
+B,5,Z2,Q4,Heteropogon contortus,1,Moderate,11.8,NA,NA,NA
+B,5,Z2,Q4,Brachiaria serrata,2,Moderate,8.8,NA,NA,NA
+B,5,Z2,Q4,Aristida congesta B,NA,Low,9.7,NA,NA,NA
+B,5,Z2,Q5,Eragrostis superba,NA,Moderate,6.9,Y,N,N
+B,5,Z2,Q5,Setaria pumila ,2,Moderate,10.1,NA,NA,NA
+B,5,Z2,Q5,Heteropogon contortus,1,Moderate,10.4,NA,NA,NA
+B,5,Z2,Q5,Cymbopogon excavatus,3,Low,10.4,NA,NA,NA
+B,5,Z3,Q1,Heteropogon contortus,1,Moderate,8.6,N,Y,N
+B,5,Z3,Q1,Setaria pumila ,2,Moderate,6.3,NA,NA,NA
+B,5,Z3,Q1,NA,NA,NA,6,NA,NA,NA
+B,5,Z3,Q1,NA,NA,NA,6.1,NA,NA,NA
+B,5,Z3,Q2,Cynodon dactylon,1,High,6.3,NA,NA,NA
+B,5,Z3,Q2,Heteropogon contortus,2,Moderate,17.1,NA,NA,NA
+B,5,Z3,Q2,Eragrostis superba,NA,Moderate,16.8,NA,NA,NA
+B,5,Z3,Q2,Setaria pumila ,NA,Moderate,8.5,NA,NA,NA
+B,5,Z3,Q2,Sporobolus africanus,NA,Low,NA,NA,NA,NA
+B,5,Z3,Q2,Aristida congesta B,3,Low,NA,NA,NA,NA
+B,5,Z3,Q3,Cymbopogon plurinodis,2,Low,12.1,Y,N,Y
+B,5,Z3,Q3,Cynodon dactylon,1,High,9.5,NA,NA,NA
+B,5,Z3,Q3,Heteropogon contortus,3,Moderate,9.7,NA,NA,NA
+B,5,Z3,Q3,Eragrostis superba,NA,Moderate,9.6,NA,NA,NA
+B,5,Z3,Q3,Aristida congesta B,NA,Low,NA,NA,NA,NA
+B,5,Z3,Q3,Eragrostis gummiflua,NA,Low,NA,NA,NA,NA
+B,5,Z3,Q4,Heteropogon contortus,1,Moderate,7.5,N,Y,N
+B,5,Z3,Q4,Setaria pumila ,2,Moderate,6,NA,NA,NA
+B,5,Z3,Q4,NA,NA,NA,2,NA,NA,NA
+B,5,Z3,Q4,NA,NA,NA,3.9,NA,NA,NA
+B,5,Z3,Q5,Aristida congesta B,3,Low,5.7,Y,N,N
+B,5,Z3,Q5,Heteropogon contortus,1,Moderate,5.3,NA,NA,NA
+B,5,Z3,Q5,Eragrostis gummiflua,2,Low,8.4,NA,NA,NA
+B,5,Z3,Q5,NA,NA,NA,6.5,NA,NA,NA
+B,5,Z4,Q1,Cynodon dactylon,1,High,8.6,Y,N,N
+B,5,Z4,Q1,Heteropogon contortus,2,Moderate,9.2,NA,NA,NA
+B,5,Z4,Q1,Setaria pumila ,3,Moderate,13.2,NA,NA,NA
+B,5,Z4,Q1,Aristida congesta B,NA,Low,13.2,NA,NA,NA
+B,5,Z4,Q1,Melinis repens,NA,Low,NA,NA,NA,NA
+B,5,Z4,Q2,Bothriochloa insculpta,1,Moderate,10.7,Y,Y,Y
+B,5,Z4,Q2,Heteropogon contortus,2,Moderate,3.1,NA,NA,NA
+B,5,Z4,Q2,Eragrostis superba,3,Moderate,8.5,NA,NA,NA
+B,5,Z4,Q2,NA,NA,NA,6.5,NA,NA,NA
+B,5,Z4,Q3,Cynodon dactylon,1,Moderate,13.6,Y,Y,N
+B,5,Z4,Q3,Eragrostis rigidior,NA,Moderate,12.1,NA,NA,NA
+B,5,Z4,Q3,Digitaria eriantha,2,High,9.4,NA,NA,NA
+B,5,Z4,Q3,Sporobolus africanus,3,Low,10.1,NA,NA,NA
+B,5,Z4,Q4,Heteropogon contortus,3,Moderate,9.3,Y,N,N
+B,5,Z4,Q4,Eragrostis superba,NA,Moderate,10,NA,NA,NA
+B,5,Z4,Q4,Bothriochloa insculpta,2,Moderate,12,NA,NA,NA
+B,5,Z4,Q4,Themeda triandra,NA,High,12.5,NA,NA,NA
+B,5,Z4,Q4,Setaria pumila ,NA,Moderate,NA,NA,NA,NA
+B,5,Z4,Q4,Cynodon dactylon,1,High,NA,NA,NA,NA
+B,5,Z4,Q5,Heteropogon contortus,2,Moderate,8.8,Y,N,Y
+B,5,Z4,Q5,Eragrostis superba,3,Moderate,7.7,NA,NA,NA
+B,5,Z4,Q5,Bothriochloa insculpta,1,Moderate,6.4,NA,NA,NA
+B,5,Z4,Q5,Aristida adscensionis,NA,Low,7,NA,NA,NA
+B,5,Z4,Q5,Aristida congesta B,NA,Low,NA,NA,NA,NA
+C,1,Z1,Q1,NA,NA,NA,0,N,N,N
+C,1,Z1,Q2,Cynodon dactylon,2,High,5.8,N,Y,N
+C,1,Z1,Q2,Aristida adscensionis,1,Low,6.8,NA,NA,NA
+C,1,Z1,Q2,NA,NA,NA,6.8,NA,NA,NA
+C,1,Z1,Q2,NA,NA,NA,6.1,NA,NA,NA
+C,1,Z1,Q3,Heteropogon contortus,1,Moderate,2.5,N,N,Y
+C,1,Z1,Q3,Brachiaria brizantha,2,Moderate,2.4,NA,NA,NA
+C,1,Z1,Q3,NA,NA,NA,2.7,NA,NA,NA
+C,1,Z1,Q3,NA,NA,NA,2.5,NA,NA,NA
+C,1,Z1,Q4,Setaria incrassata,1,High,4.6,N,N,Y
+C,1,Z1,Q4,Heteropogon contortus,2,Moderate,4.2,NA,NA,NA
+C,1,Z1,Q4,NA,NA,NA,4.4,NA,NA,NA
+C,1,Z1,Q4,NA,NA,NA,4.6,NA,NA,NA
+C,1,Z1,Q5,Heteropogon contortus,1,Moderate,2,N,Y,Y
+C,1,Z1,Q5,NA,NA,NA,2.4,NA,NA,NA
+C,1,Z1,Q5,NA,NA,NA,2.4,NA,NA,NA
+C,1,Z1,Q5,NA,NA,NA,2.3,NA,NA,NA
+C,1,Z2,Q1,Setaria incrassata,2,High,4.1,N,Y,Y
+C,1,Z2,Q1,Heteropogon contortus,1,Moderate,2.9,NA,NA,NA
+C,1,Z2,Q1,NA,NA,NA,3.3,NA,NA,NA
+C,1,Z2,Q1,NA,NA,NA,4.8,NA,NA,NA
+C,1,Z2,Q2,Eragrostis gummiflua,1,Low,2.2,N,N,Y
+C,1,Z2,Q2,Heteropogon contortus,2,Moderate,4,NA,NA,NA
+C,1,Z2,Q2,NA,NA,NA,2.4,NA,NA,NA
+C,1,Z2,Q2,NA,NA,NA,4.1,NA,NA,NA
+C,1,Z2,Q3,Sporobolus africanus,NA,Low,3.3,Y,Y,N
+C,1,Z2,Q3,Aristida  canescens,1,Low,3.9,NA,NA,NA
+C,1,Z2,Q3,Brachiaria brizantha,3,Moderate,3.6,NA,NA,NA
+C,1,Z2,Q3,Eragrostis gummiflua,NA,Low,3.5,NA,NA,NA
+C,1,Z2,Q3,Heteropogon contortus,2,Moderate,NA,NA,NA,NA
+C,1,Z2,Q4,Heteropogon contortus,2,Moderate,5.3,Y,N,Y
+C,1,Z2,Q4,Panicum maximum,1,High,5,NA,NA,NA
+C,1,Z2,Q4,NA,NA,NA,5,NA,NA,NA
+C,1,Z2,Q4,NA,NA,NA,4.7,NA,NA,NA
+C,1,Z2,Q5,Hyperrhenia filipendula,1,Moderate,1.9,N,N,Y
+C,1,Z2,Q5,NA,NA,NA,2.1,NA,NA,NA
+C,1,Z2,Q5,NA,NA,NA,2.8,NA,NA,NA
+C,1,Z2,Q5,NA,NA,NA,2,NA,NA,NA
+C,1,Z3,Q1,Setaria incrassata,1,High,3.9,N,N,Y
+C,1,Z3,Q1,Melinis repens,2,Low,3.9,NA,NA,NA
+C,1,Z3,Q1,NA,NA,NA,4,NA,NA,NA
+C,1,Z3,Q1,NA,NA,NA,4.1,NA,NA,NA
+C,1,Z3,Q2,Heteropogon contortus,1,Moderate,2.2,N,N,N
+C,1,Z3,Q2,NA,NA,NA,3,NA,NA,NA
+C,1,Z3,Q2,NA,NA,NA,2.6,NA,NA,NA
+C,1,Z3,Q2,NA,NA,NA,2.8,NA,NA,NA
+C,1,Z3,Q3,Heteropogon contortus,1,Moderate,3.5,N,N,Y
+C,1,Z3,Q3,Melinis repens,2,Low,3.8,NA,NA,NA
+C,1,Z3,Q3,NA,NA,NA,3.2,NA,NA,NA
+C,1,Z3,Q3,NA,NA,NA,3.1,NA,NA,NA
+C,1,Z3,Q4,Eragrostis gummiflua,2,Low,4.4,Y,Y,N
+C,1,Z3,Q4,Panicum maximum,1,High,4.1,NA,NA,NA
+C,1,Z3,Q4,Digitaria eriantha,3,High,3.2,NA,NA,NA
+C,1,Z3,Q4,NA,NA,NA,2.1,NA,NA,NA
+C,1,Z3,Q5,Eragrostis gummiflua,2,Low,3.6,N,N,Y
+C,1,Z3,Q5,Heteropogon contortus,1,Moderate,3.1,NA,NA,NA
+C,1,Z3,Q5,Setaria incrassata,3,High,3.1,NA,NA,NA
+C,1,Z3,Q5,NA,NA,NA,3.3,NA,NA,NA
+C,1,Z4,Q1,Heteropogon contortus,1,Moderate,2.6,N,Y,N
+C,1,Z4,Q1,Melinis repens,2,Low,3.5,NA,NA,NA
+C,1,Z4,Q1,NA,NA,NA,3,NA,NA,NA
+C,1,Z4,Q1,NA,NA,NA,2.8,NA,NA,NA
+C,1,Z4,Q2,Heteropogon contortus,1,Moderate,4.9,N,Y,N
+C,1,Z4,Q2,Setaria incrassata,2,High,5,NA,NA,NA
+C,1,Z4,Q2,NA,NA,NA,4.4,NA,NA,NA
+C,1,Z4,Q2,NA,NA,NA,4.4,NA,NA,NA
+C,1,Z4,Q3,Heteropogon contortus,1,Moderate,3.7,N,Y,Y
+C,1,Z4,Q3,Digitaria eriantha,2,High,3.7,NA,NA,NA
+C,1,Z4,Q3,NA,NA,NA,3.5,NA,NA,NA
+C,1,Z4,Q3,NA,NA,NA,3.4,NA,NA,NA
+C,1,Z4,Q4,Heteropogon contortus,1,Moderate,4.4,N,Y,N
+C,1,Z4,Q4,NA,NA,NA,3.8,NA,NA,NA
+C,1,Z4,Q4,NA,NA,NA,3.3,NA,NA,NA
+C,1,Z4,Q4,NA,NA,NA,3.6,NA,NA,NA
+C,1,Z4,Q5,Eragrostis gummiflua,1,Low,2.5,N,Y,Y
+C,1,Z4,Q5,NA,NA,NA,2.3,NA,NA,NA
+C,1,Z4,Q5,NA,NA,NA,2.3,NA,NA,NA
+C,1,Z4,Q5,NA,NA,NA,2.2,NA,NA,NA
+C,2,Z1,Q1,Panicum maximum,1,High,4.4,N,Y,N
+C,2,Z1,Q1,NA,NA,NA,3.9,NA,NA,NA
+C,2,Z1,Q1,NA,NA,NA,6.2,NA,NA,NA
+C,2,Z1,Q1,NA,NA,NA,3.5,NA,NA,NA
+C,2,Z1,Q2,Panicum maximum,1,High,8.1,N,Y,N
+C,2,Z1,Q2,Eragrostis superba,2,Moderate,7.3,NA,NA,NA
+C,2,Z1,Q2,Heteropogon contortus,3,Moderate,6.9,NA,NA,NA
+C,2,Z1,Q2,NA,NA,NA,6.2,NA,NA,NA
+C,2,Z1,Q3,Panicum maximum,1,High,4,N,Y,N
+C,2,Z1,Q3,NA,NA,NA,4.3,NA,NA,NA
+C,2,Z1,Q3,NA,NA,NA,4,NA,NA,NA
+C,2,Z1,Q3,NA,NA,NA,4.1,NA,NA,NA
+C,2,Z1,Q4,Panicum maximum,1,High,1.9,N,N,N
+C,2,Z1,Q4,NA,NA,NA,2.5,NA,NA,NA
+C,2,Z1,Q4,NA,NA,NA,2.5,NA,NA,NA
+C,2,Z1,Q4,NA,NA,NA,2.6,NA,NA,NA
+C,2,Z1,Q5,Eragrostis rigidior,1,Moderate,2.2,Y,Y,Y
+C,2,Z1,Q5,Eragrostis gummiflua,2,Low,2.3,NA,NA,NA
+C,2,Z1,Q5,NA,NA,NA,2,NA,NA,NA
+C,2,Z1,Q5,NA,NA,NA,3,NA,NA,NA
+C,2,Z2,Q1,Panicum maximum,1,High,4.3,Y,N,Y
+C,2,Z2,Q1,NA,NA,NA,5,NA,NA,NA
+C,2,Z2,Q1,NA,NA,NA,5.3,NA,NA,NA
+C,2,Z2,Q1,NA,NA,NA,5,NA,NA,NA
+C,2,Z2,Q2,Panicum maximum,1,High,4.3,N,Y,N
+C,2,Z2,Q2,NA,NA,NA,5,NA,NA,NA
+C,2,Z2,Q2,NA,NA,NA,5.3,NA,NA,NA
+C,2,Z2,Q2,NA,NA,NA,5,NA,NA,NA
+C,2,Z2,Q2,Panicum maximum,1,High,4.2,N,Y,N
+C,2,Z2,Q2,NA,NA,NA,3.6,NA,NA,NA
+C,2,Z2,Q2,NA,NA,NA,4,NA,NA,NA
+C,2,Z2,Q2,NA,NA,NA,3.7,NA,NA,NA
+C,2,Z2,Q4,NA,NA,NA,0,N,Y,N
+C,2,Z2,Q5,Panicum maximum,1,High,6.7,N,Y,N
+C,2,Z2,Q5,NA,NA,NA,6.9,NA,NA,NA
+C,2,Z2,Q5,NA,NA,NA,6.4,NA,NA,NA
+C,2,Z2,Q5,NA,NA,NA,6.4,NA,NA,NA
+C,2,Z3,Q1,Digitaria eriantha,1,High,5.3,N,Y,N
+C,2,Z3,Q1,Heteropogon contortus,3,Moderate,5.1,NA,NA,NA
+C,2,Z3,Q1,Eragrostis rigidior,2,Moderate,6.1,NA,NA,NA
+C,2,Z3,Q1,NA,NA,NA,6.2,NA,NA,NA
+C,2,Z3,Q2,Eragrostis rigidior,1,Moderate,1.7,N,N,N
+C,2,Z3,Q2,NA,NA,NA,2.8,NA,NA,NA
+C,2,Z3,Q2,NA,NA,NA,2.8,NA,NA,NA
+C,2,Z3,Q2,NA,NA,NA,2.8,NA,NA,NA
+C,2,Z3,Q3,Panicum maximum,1,High,20.7,Y,N,N
+C,2,Z3,Q3,NA,NA,NA,19.4,NA,NA,NA
+C,2,Z3,Q3,NA,NA,NA,NA,NA,NA,NA
+C,2,Z3,Q3,NA,NA,NA,24,NA,NA,NA
+C,2,Z3,Q4,Panicum maximum,1,High,10.3,N,Y,N
+C,2,Z3,Q4,NA,NA,NA,7.8,NA,NA,NA
+C,2,Z3,Q4,NA,NA,NA,6.8,NA,NA,NA
+C,2,Z3,Q4,NA,NA,NA,7.8,NA,NA,NA
+C,2,Z3,Q5,Eragrostis viscosa,2,Low,1.9,N,N,N
+C,2,Z3,Q5,Eragrostis gummiflua,1,Low,1.8,NA,NA,NA
+C,2,Z3,Q5,NA,NA,NA,1.7,NA,NA,NA
+C,2,Z3,Q5,NA,NA,NA,2,NA,NA,NA
+C,2,Z4,Q1,Panicum maximum,1,High,3,N,Y,N
+C,2,Z4,Q1,NA,NA,NA,3.1,NA,NA,NA
+C,2,Z4,Q1,NA,NA,NA,2.8,NA,NA,NA
+C,2,Z4,Q1,NA,NA,NA,3.3,NA,NA,NA
+C,2,Z4,Q2,Brachiaria brizantha,1,Moderate,8,Y,N,N
+C,2,Z4,Q2,Eragrostis rigidior,2,Moderate,7.2,NA,NA,NA
+C,2,Z4,Q2,NA,NA,NA,8.4,NA,NA,NA
+C,2,Z4,Q2,NA,NA,NA,9.1,NA,NA,NA
+C,2,Z4,Q3,Panicum maximum,1,High,4.7,N,Y,N
+C,2,Z4,Q3,NA,NA,NA,4.9,NA,NA,NA
+C,2,Z4,Q3,NA,NA,NA,5.3,NA,NA,NA
+C,2,Z4,Q3,NA,NA,NA,6.1,NA,NA,NA
+C,2,Z4,Q4,Panicum maximum,1,High,3.8,NA,NA,NA
+C,2,Z4,Q4,NA,NA,NA,4,N,Y,N
+C,2,Z4,Q4,NA,NA,NA,3.9,NA,NA,NA
+C,2,Z4,Q4,NA,NA,NA,3.3,NA,NA,NA
+C,2,Z4,Q5,NA,NA,NA,0,N,Y,Y
+C,3,Z1,Q1,Heteropogon contortus,3,Moderate,12.2,N,N,N
+C,3,Z1,Q1,Eragrostis rigidior,2,Moderate,11.8,NA,NA,NA
+C,3,Z1,Q1,Pogonarthria squarrosa,1,Low,11.2,NA,NA,NA
+C,3,Z1,Q1,NA,NA,NA,10.6,NA,NA,NA
+C,3,Z1,Q2,Heteropogon contortus,1,Moderate,8.8,N,Y,N
+C,3,Z1,Q2,Digitaria eriantha,2,High,8.6,NA,NA,NA
+C,3,Z1,Q2,Brachiaria brizantha,3,Moderate,8.4,NA,NA,NA
+C,3,Z1,Q2,NA,NA,NA,8.3,NA,NA,NA
+C,3,Z1,Q3,Heteropogon contortus,1,Moderate,4.9,N,Y,N
+C,3,Z1,Q3,Panicum maximum,2,High,4.3,NA,NA,NA
+C,3,Z1,Q3,Digitaria eriantha,3,High,4,NA,NA,NA
+C,3,Z1,Q3,Melinis repens,NA,Low,5.9,NA,NA,NA
+C,3,Z1,Q4,Heteropogon contortus,1,Moderate,4.2,N,Y,N
+C,3,Z1,Q4,NA,NA,NA,4,NA,NA,NA
+C,3,Z1,Q4,NA,NA,NA,4.3,NA,NA,NA
+C,3,Z1,Q4,NA,NA,NA,5.1,NA,NA,NA
+C,3,Z1,Q5,Heteropogon contortus,1,Moderate,2.2,Y,N,N
+C,3,Z1,Q5,Panicum maximum,1,High,3.6,NA,NA,NA
+C,3,Z1,Q5,NA,NA,NA,3.8,NA,NA,NA
+C,3,Z1,Q5,NA,NA,NA,3.5,NA,NA,NA
+C,3,Z2,Q1,Digitaria eriantha,1,High,2.4,N,Y,N
+C,3,Z2,Q1,Pogonarthria squarrosa,2,Low,3.2,NA,NA,NA
+C,3,Z2,Q1,Brachiaria brizantha,3,Moderate,3.2,NA,NA,NA
+C,3,Z2,Q1,Setaria incrassata,NA,High,3.3,NA,NA,NA
+C,3,Z2,Q2,Digitaria eriantha,1,High,4.1,N,N,N
+C,3,Z2,Q2,Pogonarthria squarrosa,2,Low,4.4,NA,NA,NA
+C,3,Z2,Q2,Brachiaria brizantha,3,Moderate,5.1,NA,NA,NA
+C,3,Z2,Q2,NA,NA,NA,5.1,NA,NA,NA
+C,3,Z2,Q3,Panicum maximum,1,High,12.8,N,Y,N
+C,3,Z2,Q3,NA,NA,NA,8.3,NA,NA,NA
+C,3,Z2,Q3,NA,NA,NA,7.2,NA,NA,NA
+C,3,Z2,Q3,NA,NA,NA,6.6,NA,NA,NA
+C,3,Z2,Q4,Heteropogon contortus,1,Moderate,4.4,N,Y,N
+C,3,Z2,Q4,NA,NA,NA,4.6,NA,NA,NA
+C,3,Z2,Q4,NA,NA,NA,4,NA,NA,NA
+C,3,Z2,Q4,NA,NA,NA,3.7,NA,NA,NA
+C,3,Z2,Q5,Pogonarthria squarrosa,1,Low,5.3,N,N,N
+C,3,Z2,Q5,Brachiaria brizantha,2,Moderate,5.2,NA,NA,NA
+C,3,Z2,Q5,Heteropogon contortus,3,Moderate,4.4,NA,NA,NA
+C,3,Z2,Q5,NA,NA,NA,4.4,NA,NA,NA
+C,3,Z3,Q1,Pogonarthria squarrosa,1,Low,2.2,N,N,N
+C,3,Z3,Q1,Setaria incrassata,2,High,2.4,NA,NA,NA
+C,3,Z3,Q1,Heteropogon contortus,3,Moderate,3.8,NA,NA,NA
+C,3,Z3,Q1,NA,NA,NA,4.7,NA,NA,NA
+C,3,Z3,Q2,Pogonarthria squarrosa,1,Low,5.9,N,N,N
+C,3,Z3,Q2,Heteropogon contortus,2,Moderate,5.4,NA,NA,NA
+C,3,Z3,Q2,Eragrostis rigidior,3,Moderate,4.9,NA,NA,NA
+C,3,Z3,Q2,NA,NA,NA,4.7,NA,NA,NA
+C,3,Z3,Q3,Pogonarthria squarrosa,1,Low,2,N,N,N
+C,3,Z3,Q3,Eragrostis rigidior,2,Moderate,2.5,NA,NA,NA
+C,3,Z3,Q3,Digitaria eriantha,3,High,3.5,NA,NA,NA
+C,3,Z3,Q3,NA,NA,NA,4.9,NA,NA,NA
+C,3,Z3,Q4,Heteropogon contortus,1,Moderate,3.4,N,Y,N
+C,3,Z3,Q4,Pogonarthria squarrosa,2,Low,2.9,NA,NA,NA
+C,3,Z3,Q4,Melinis repens,3,Low,3,NA,NA,NA
+C,3,Z3,Q4,NA,NA,NA,2.2,NA,NA,NA
+C,3,Z3,Q5,Cynodon dactylon,1,High,2.9,N,Y,N
+C,3,Z3,Q5,Hyperrhenia filipendula,2,Moderate,2,NA,NA,NA
+C,3,Z3,Q5,NA,NA,NA,4.1,NA,NA,NA
+C,3,Z3,Q5,NA,NA,NA,2.9,NA,NA,NA
+C,3,Z4,Q1,Pogonarthria squarrosa,2,Low,2.4,N,N,N
+C,3,Z4,Q1,Heteropogon contortus,3,Moderate,3.5,NA,NA,NA
+C,3,Z4,Q1,Hyperrhenia filipendula,1,Moderate,4.2,NA,NA,NA
+C,3,Z4,Q1,NA,NA,NA,4,NA,NA,NA
+C,3,Z4,Q2,Melinis repens,2,Low,4.4,N,Y,Y
+C,3,Z4,Q2,Eragrostis rigidior,3,Moderate,5.2,NA,NA,NA
+C,3,Z4,Q2,Digitaria eriantha,1,High,6.5,NA,NA,NA
+C,3,Z4,Q2,Brachiaria brizantha,NA,Moderate,5.5,NA,NA,NA
+C,3,Z4,Q3,Pogonarthria squarrosa,3,Low,4.9,N,N,N
+C,3,Z4,Q3,Eragrostis rigidior,1,Moderate,6.9,NA,NA,NA
+C,3,Z4,Q3,Digitaria eriantha,2,High,4.9,NA,NA,NA
+C,3,Z4,Q3,NA,NA,NA,4.5,NA,NA,NA
+C,3,Z4,Q4,Heteropogon contortus,2,Moderate,5.3,N,Y,N
+C,3,Z4,Q4,Digitaria eriantha,3,High,5.5,NA,NA,NA
+C,3,Z4,Q4,Brachiaria brizantha,1,Moderate,5.3,NA,NA,NA
+C,3,Z4,Q4,NA,NA,NA,4.6,NA,NA,NA
+C,3,Z4,Q5,Eragrostis rigidior,3,Moderate,4,N,N,N
+C,3,Z4,Q5,Digitaria eriantha,NA,High,5.5,NA,NA,NA
+C,3,Z4,Q5,Brachiaria brizantha,NA,Moderate,4.4,NA,NA,NA
+C,3,Z4,Q5,Pogonarthria squarrosa,1,Low,4.1,NA,NA,NA
+C,3,Z4,Q5,Eragrostis gummiflua,2,Low,NA,NA,NA,NA
+C,4,Z1,Q1,Heteropogon contortus,1,Moderate,3.4,N,Y,N
+C,4,Z1,Q1,Eragrostis rigidior,2,Moderate,5.8,NA,NA,NA
+C,4,Z1,Q1,NA,NA,NA,4.8,NA,NA,NA
+C,4,Z1,Q1,NA,NA,NA,4.4,NA,NA,NA
+C,4,Z1,Q2,Pogonarthria squarrosa,1,Low,3.2,N,N,N
+C,4,Z1,Q2,Heteropogon contortus,2,Moderate,3.8,NA,NA,NA
+C,4,Z1,Q2,Panicum maximum,3,High,3.7,NA,NA,NA
+C,4,Z1,Q2,NA,NA,NA,4.3,NA,NA,NA
+C,4,Z1,Q3,Eragrostis rigidior,2,Moderate,2.7,N,N,N
+C,4,Z1,Q3,Digitaria eriantha,1,High,4.8,NA,NA,NA
+C,4,Z1,Q3,NA,NA,NA,4.6,NA,NA,NA
+C,4,Z1,Q3,NA,NA,NA,4.7,NA,NA,NA
+C,4,Z1,Q4,Pogonarthria squarrosa,1,Low,2.9,N,N,N
+C,4,Z1,Q4,Heteropogon contortus,2,Moderate,3.8,NA,NA,NA
+C,4,Z1,Q4,NA,NA,NA,3.7,NA,NA,NA
+C,4,Z1,Q4,NA,NA,NA,3.6,NA,NA,NA
+C,4,Z1,Q5,Heteropogon contortus,2,Moderate,4.2,Y,N,N
+C,4,Z1,Q5,Panicum maximum,1,High,6.4,NA,NA,NA
+C,4,Z1,Q5,Digitaria eriantha,3,High,7.1,NA,NA,NA
+C,4,Z1,Q5,NA,NA,NA,6.8,NA,NA,NA
+C,4,Z2,Q1,Heteropogon contortus,1,Moderate,3,N,Y,N
+C,4,Z2,Q1,Aristida congesta C,2,Low,3.1,NA,NA,NA
+C,4,Z2,Q1,NA,NA,NA,2.9,NA,NA,NA
+C,4,Z2,Q1,NA,NA,NA,2.8,NA,NA,NA
+C,4,Z2,Q2,Pogonarthria squarrosa,2,Low,8,N,Y,N
+C,4,Z2,Q2,Heteropogon contortus,3,Moderate,7.1,NA,NA,NA
+C,4,Z2,Q2,Panicum maximum,1,High,6.6,NA,NA,NA
+C,4,Z2,Q2,Digitaria eriantha,NA,High,5.8,NA,NA,NA
+C,4,Z2,Q2,Eragrostis gummiflua,NA,Low,NA,NA,NA,NA
+C,4,Z2,Q2,Eragrostis superba,NA,Moderate,NA,NA,NA,NA
+C,4,Z2,Q3,Heteropogon contortus,1,Moderate,6.6,Y,Y,N
+C,4,Z2,Q3,Digitaria eriantha,2,Moderate,6.2,NA,NA,NA
+C,4,Z2,Q3,Eragrostis rigidior,NA,Moderate,6.3,NA,NA,NA
+C,4,Z2,Q3,Setaria incrassata,3,High,6.5,NA,NA,NA
+C,4,Z2,Q4,Pogonarthria squarrosa,2,Low,3.6,N,N,N
+C,4,Z2,Q4,Heteropogon contortus,3,Moderate,3.7,NA,NA,NA
+C,4,Z2,Q4,Panicum maximum,1,High,5.3,NA,NA,NA
+C,4,Z2,Q4,Aristida congesta B,NA,Low,4.5,NA,NA,NA
+C,4,Z2,Q5,Pogonarthria squarrosa,1,Low,6.6,N,N,N
+C,4,Z2,Q5,Heteropogon contortus,3,Moderate,5.8,NA,NA,NA
+C,4,Z2,Q5,NA,NA,NA,5,NA,NA,NA
+C,4,Z2,Q5,NA,NA,NA,5,NA,NA,NA
+C,4,Z3,Q1,Heteropogon contortus,2,Moderate,5.4,N,N,N
+C,4,Z3,Q1,Eragrostis gummiflua,3,Low,5,NA,NA,NA
+C,4,Z3,Q1,Digitaria eriantha,NA,High,4.8,NA,NA,NA
+C,4,Z3,Q1,Eragrostis rigidior,1,Moderate,5,NA,NA,NA
+C,4,Z3,Q2,Heteropogon contortus,1,Moderate,5.4,N,N,N
+C,4,Z3,Q2,Eragrostis gummiflua,NA,Low,5.4,NA,NA,NA
+C,4,Z3,Q2,Pogonarthria squarrosa,2,Low,5.5,NA,NA,NA
+C,4,Z3,Q2,Panicum maximum,3,High,5.4,NA,NA,NA
+C,4,Z3,Q3,Heteropogon contortus,2,Moderate,4,N,Y,N
+C,4,Z3,Q3,Melinis repens,3,Low,7.8,NA,NA,NA
+C,4,Z3,Q3,Aristida adscensionis,1,Low,4.7,NA,NA,NA
+C,4,Z3,Q4,Panicum maximum,3,High,2.3,N,Y,N
+C,4,Z3,Q4,Digitaria eriantha,1,High,2.7,NA,NA,NA
+C,4,Z3,Q4,Eragrostis gummiflua,2,Low,2.8,NA,NA,NA
+C,4,Z3,Q4,NA,NA,NA,2.5,NA,NA,NA
+C,4,Z3,Q5,Heteropogon contortus,2,Moderate,6.7,N,Y,N
+C,4,Z3,Q5,Panicum maximum,1,High,5.5,NA,NA,NA
+C,4,Z3,Q5,NA,NA,NA,5.4,NA,NA,NA
+C,4,Z3,Q5,NA,NA,NA,5.3,NA,NA,NA
+C,4,Z4,Q1,Hyperrhenia filipendula,3,Moderate,22,Y,N,N
+C,4,Z4,Q1,Eragrostis gummiflua,NA,Low,19,NA,NA,NA
+C,4,Z4,Q1,Pogonarthria squarrosa,1,Low,14.3,NA,NA,NA
+C,4,Z4,Q1,Panicum maximum,NA,High,14.1,NA,NA,NA
+C,4,Z4,Q1,Heteropogon contortus,NA,Moderate,NA,NA,NA,NA
+C,4,Z4,Q1,Aristida adscensionis,2,Low,NA,NA,NA,NA
+C,4,Z4,Q1,Eragrostis superba,NA,Moderate,NA,NA,NA,NA
+C,4,Z4,Q2,Setaria incrassata,2,High,18.3,N,Y,N
+C,4,Z4,Q2,Hyperrhenia filipendula,1,Moderate,20.9,NA,NA,NA
+C,4,Z4,Q2,NA,NA,NA,NA,NA,NA,NA
+C,4,Z4,Q2,NA,NA,NA,18.8,NA,NA,NA
+C,4,Z4,Q3,Eragrostis gummiflua,1,Low,8.7,N,N,N
+C,4,Z4,Q3,Heteropogon contortus,3,Moderate,7.6,NA,NA,NA
+C,4,Z4,Q3,Aristida adscensionis,2,Low,5.8,NA,NA,NA
+C,4,Z4,Q3,NA,NA,NA,5.4,NA,NA,NA
+C,4,Z4,Q4,Heteropogon contortus,1,Moderate,1.7,N,Y,N
+C,4,Z4,Q4,Aristida adscensionis,2,Low,1.4,NA,NA,NA
+C,4,Z4,Q4,NA,NA,NA,1.6,NA,NA,NA
+C,4,Z4,Q4,NA,NA,NA,2.1,NA,NA,NA
+C,4,Z4,Q5,Aristida adscensionis,1,Low,3.9,N,Y,N
+C,4,Z4,Q5,Brachiaria brizantha,2,Moderate,2.9,NA,NA,NA
+C,4,Z4,Q5,Chloris virgata,3,Moderate,2.9,NA,NA,NA
+C,4,Z4,Q5,NA,NA,NA,3.2,NA,NA,NA
+C,5,Z1,Q1,Eragrostis gummiflua,1,Low,6.7,N,Y,N
+C,5,Z1,Q1,Digitaria eriantha,2,High,6,NA,NA,NA
+C,5,Z1,Q1,NA,NA,NA,5.5,NA,NA,NA
+C,5,Z1,Q1,NA,NA,NA,5.1,NA,NA,NA
+C,5,Z1,Q2,Digitaria eriantha,1,High,5,NA,NA,NA
+C,5,Z1,Q2,Heteropogon contortus,2,Moderate,5.3,N,Y,N
+C,5,Z1,Q2,NA,NA,NA,5.2,NA,NA,NA
+C,5,Z1,Q2,NA,NA,NA,5,NA,NA,NA
+C,5,Z1,Q3,Pogonarthria squarrosa,1,Low,4.9,N,N,N
+C,5,Z1,Q3,Heteropogon contortus,NA,Moderate,5.2,NA,NA,NA
+C,5,Z1,Q3,Digitaria eriantha,3,High,5.2,NA,NA,NA
+C,5,Z1,Q3,Eragrostis rigidior,2,Moderate,4.2,NA,NA,NA
+C,5,Z1,Q4,Pogonarthria squarrosa,2,Low,9.8,N,Y,N
+C,5,Z1,Q4,Digitaria eriantha,1,High,8.4,NA,NA,NA
+C,5,Z1,Q4,NA,NA,NA,7.1,NA,NA,NA
+C,5,Z1,Q4,NA,NA,NA,7.5,NA,NA,NA
+C,5,Z1,Q5,Panicum maximum,1,High,12.5,Y,Y,N
+C,5,Z1,Q5,Melinis repens,2,Low,5.5,NA,NA,NA
+C,5,Z1,Q5,NA,NA,NA,8.4,NA,NA,NA
+C,5,Z1,Q5,NA,NA,NA,5.9,NA,NA,NA
+C,5,Z2,Q1,Heteropogon contortus,1,Moderate,7.5,N,Y,N
+C,5,Z2,Q1,NA,NA,NA,7.4,NA,NA,NA
+C,5,Z2,Q1,NA,NA,NA,7.3,NA,NA,NA
+C,5,Z2,Q1,NA,NA,NA,7.1,NA,NA,NA
+C,5,Z2,Q2,Heteropogon contortus,1,Moderate,2.3,N,Y,N
+C,5,Z2,Q2,Brachiaria brizantha,2,NA,1.9,NA,NA,NA
+C,5,Z2,Q2,NA,NA,NA,2.3,NA,NA,NA
+C,5,Z2,Q2,NA,NA,NA,2.6,NA,NA,NA
+C,5,Z2,Q3,Pogonarthria squarrosa,1,Low,5.6,N,N,N
+C,5,Z2,Q3,Perotis patens,3,Low,5.3,NA,NA,NA
+C,5,Z2,Q3,Digitaria eriantha,2,High,5.1,NA,NA,NA
+C,5,Z2,Q3,NA,NA,NA,5,NA,NA,NA
+C,5,Z2,Q4,Heteropogon contortus,3,Moderate,5.6,Y,N,N
+C,5,Z2,Q4,Pogonarthria squarrosa,1,Low,6,NA,NA,NA
+C,5,Z2,Q4,Diheteropogon amplectens,2,Moderate,6,NA,NA,NA
+C,5,Z2,Q4,Perotis patens,NA,Low,5.8,NA,NA,NA
+C,5,Z2,Q5,Panicum maximum,1,High,6.7,N,Y,N
+C,5,Z2,Q5,Digitaria eriantha,2,High,6.6,NA,NA,NA
+C,5,Z2,Q5,NA,NA,NA,6.5,NA,NA,NA
+C,5,Z2,Q5,NA,NA,NA,6.3,NA,NA,NA
+C,5,Z3,Q1,Eragrostis gummiflua,1,Low,3.1,N,Y,N
+C,5,Z3,Q1,Panicum maximum,NA,High,3.1,NA,NA,NA
+C,5,Z3,Q1,Heteropogon contortus,2,Moderate,3.1,NA,NA,NA
+C,5,Z3,Q1,Aristida adscensionis,NA,Low,2.4,NA,NA,NA
+C,5,Z3,Q1,Digitaria eriantha,3,High,NA,NA,NA,NA
+C,5,Z3,Q2,Eragrostis gummiflua,3,Low,5.9,N,Y,N
+C,5,Z3,Q2,Aristida adscensionis,NA,Low,5.5,NA,NA,NA
+C,5,Z3,Q2,Digitaria eriantha,NA,High,5.2,NA,NA,NA
+C,5,Z3,Q2,Eragrostis viscosa,NA,Low,4.9,NA,NA,NA
+C,5,Z3,Q2,Brachiaria brizantha,2,Moderate,NA,NA,NA,NA
+C,5,Z3,Q2,Pogonarthria squarrosa,1,Low,NA,NA,NA,NA
+C,5,Z3,Q3,NA,NA,NA,0,N,Y,N
+C,5,Z3,Q4,Panicum maximum,1,High,8.8,N,Y,N
+C,5,Z3,Q4,Digitaria eriantha,2,High,5.4,NA,NA,NA
+C,5,Z3,Q4,NA,NA,NA,4.2,NA,NA,NA
+C,5,Z3,Q4,NA,NA,NA,5.7,NA,NA,NA
+C,5,Z3,Q5,Panicum maximum,1,High,4.2,N,Y,N
+C,5,Z3,Q5,NA,NA,NA,5.3,NA,NA,NA
+C,5,Z3,Q5,NA,NA,NA,7.7,NA,NA,NA
+C,5,Z3,Q5,NA,NA,NA,7.4,NA,NA,NA
+C,5,Z4,Q1,Eragrostis gummiflua,1,Low,3.3,N,Y,N
+C,5,Z4,Q1,Pogonarthria squarrosa,2,Low,2.9,NA,NA,NA
+C,5,Z4,Q1,Eragrostis superba,3,Moderate,3.5,NA,NA,NA
+C,5,Z4,Q1,NA,NA,NA,3.1,NA,NA,NA
+C,5,Z4,Q2,Digitaria eriantha,3,High,7.8,NA,NA,NA
+C,5,Z4,Q2,Heteropogon contortus,1,Moderate,7.1,N,Y,N
+C,5,Z4,Q2,Eragrostis rigidior,2,Moderate,6.6,NA,NA,NA
+C,5,Z4,Q2,NA,NA,NA,6.2,NA,NA,NA
+C,5,Z4,Q3,Eragrostis gummiflua,NA,Low,3.3,N,N,N
+C,5,Z4,Q3,Digitaria eriantha,1,High,3.2,NA,NA,NA
+C,5,Z4,Q3,Heteropogon contortus,2,Moderate,3.2,NA,NA,NA
+C,5,Z4,Q3,Brachiaria brizantha,3,Moderate,3.1,NA,NA,NA
+C,5,Z4,Q4,Panicum maximum,1,High,4,N,Y,N
+C,5,Z4,Q4,NA,NA,NA,4.7,NA,NA,NA
+C,5,Z4,Q4,NA,NA,NA,4.6,NA,NA,NA
+C,5,Z4,Q4,NA,NA,NA,5,NA,NA,NA
+C,5,Z4,Q5,Heteropogon contortus,2,Moderate,6.6,Y,Y,N
+C,5,Z4,Q5,Pogonarthria squarrosa,1,Low,4.8,NA,NA,NA
+C,5,Z4,Q5,Aristida adscensionis,3,Low,3.8,NA,NA,NA
+C,5,Z4,Q5,Brachiaria brizantha,NA,Moderate,4,NA,NA,NA
+D,1,Z1,Q1,Brachiaria nigropedata,1,High,1.8,N,Y,Y
+D,1,Z1,Q1,Eragrostis rigidior,2,Moderate,2.9,NA,NA,NA
+D,1,Z1,Q1,Heteropogon contortus,3,Moderate,2.9,NA,NA,NA
+D,1,Z1,Q1,NA,NA,NA,2.7,NA,NA,NA
+D,1,Z1,Q2,NA,NA,NA,0,N,Y,Y
+D,1,Z1,Q3,Eragrostis rigidior,1,Moderate,6.8,N,N,Y
+D,1,Z1,Q3,Heteropogon contortus,2,Moderate,6.6,NA,NA,NA
+D,1,Z1,Q3,NA,NA,NA,5.5,NA,NA,NA
+D,1,Z1,Q3,NA,NA,NA,5,NA,NA,NA
+D,1,Z1,Q4,Brachiaria nigropedata,1,High,2.6,N,Y,N
+D,1,Z1,Q4,Chloris virgata,2,Moderate,2.6,NA,NA,NA
+D,1,Z1,Q4,NA,NA,NA,2.6,NA,NA,NA
+D,1,Z1,Q4,NA,NA,NA,2.6,NA,NA,NA
+D,1,Z1,Q5,Eragrostis rigidior,2,Moderate,17.3,N,Y,N
+D,1,Z1,Q5,Sporobolus ioclados,1,Moderate,12.7,NA,NA,NA
+D,1,Z1,Q5,NA,NA,NA,12.8,NA,NA,NA
+D,1,Z1,Q5,NA,NA,NA,12.3,NA,NA,NA
+D,1,Z2,Q1,Chloris virgata,1,Moderate,7.5,Y,N,N
+D,1,Z2,Q1,Aristida adscensionis,2,Low,5.8,NA,NA,NA
+D,1,Z2,Q1,NA,NA,NA,5.8,NA,NA,NA
+D,1,Z2,Q1,NA,NA,NA,6.6,NA,NA,NA
+D,1,Z2,Q2,Eragrostis rigidior,2,Moderate,8,Y,Y,N
+D,1,Z2,Q2,Sporobolus ioclados,1,Moderate,11.5,NA,NA,NA
+D,1,Z2,Q2,NA,NA,NA,17.2,NA,NA,NA
+D,1,Z2,Q2,NA,NA,NA,15.6,NA,NA,NA
+D,1,Z2,Q3,Chloris virgata,2,Moderate,6.2,N,N,N
+D,1,Z2,Q3,Brachiaria nigropedata,1,High,5.8,NA,NA,NA
+D,1,Z2,Q3,NA,NA,NA,5.6,NA,NA,NA
+D,1,Z2,Q3,NA,NA,NA,5.8,NA,NA,NA
+D,1,Z2,Q4,Enteropogon macrostachyus,1,High,6.9,N,Y,N
+D,1,Z2,Q4,Aristida adscensionis,2,Low,7,NA,NA,NA
+D,1,Z2,Q4,Digitaria eriantha,3,High,6.6,NA,NA,NA
+D,1,Z2,Q4,NA,NA,NA,6.5,NA,NA,NA
+D,1,Z2,Q5,Heteropogon contortus,1,Moderate,3.2,N,Y,N
+D,1,Z2,Q5,Themeda triandra,2,High,8.9,NA,NA,NA
+D,1,Z2,Q5,NA,NA,NA,8.4,NA,NA,NA
+D,1,Z2,Q5,NA,NA,NA,8.5,NA,NA,NA
+D,1,Z3,Q1,Aristida diffusa,1,Low,11.7,N,N,N
+D,1,Z3,Q1,Chloris virgata,2,Moderate,9,NA,NA,NA
+D,1,Z3,Q1,NA,NA,NA,11.4,NA,NA,NA
+D,1,Z3,Q1,NA,NA,NA,10.9,NA,NA,NA
+D,1,Z3,Q2,Aristida adscensionis,1,Low,6.6,N,Y,N
+D,1,Z3,Q2,Panicum maximum,2,High,5.6,NA,NA,NA
+D,1,Z3,Q2,NA,NA,NA,5.6,NA,NA,NA
+D,1,Z3,Q2,NA,NA,NA,6.1,NA,NA,NA
+D,1,Z3,Q3,Heteropogon contortus,1,Moderate,2.2,N,Y,N
+D,1,Z3,Q3,Aristida adscensionis,2,Low,2.3,NA,NA,NA
+D,1,Z3,Q3,Digitaria eriantha,3,High,2.1,NA,NA,NA
+D,1,Z3,Q3,NA,NA,NA,3.3,NA,NA,NA
+D,1,Z3,Q4,NA,NA,NA,0,N,Y,N
+D,1,Z3,Q5,Aristida diffusa,1,Low,2.3,N,N,N
+D,1,Z3,Q5,Aristida adscensionis,2,Low,2.3,NA,NA,NA
+D,1,Z3,Q5,NA,NA,NA,2.3,NA,NA,NA
+D,1,Z3,Q5,NA,NA,NA,2.3,NA,NA,NA
+D,1,Z4,Q1,Heteropogon contortus,1,Moderate,3,Y,Y,N
+D,1,Z4,Q1,Setaria pumila ,2,Moderate,3,NA,NA,NA
+D,1,Z4,Q1,NA,NA,NA,3,NA,NA,NA
+D,1,Z4,Q1,NA,NA,NA,3,NA,NA,NA
+D,1,Z4,Q2,Enteropogon macrostachyus,1,High,9.9,Y,Y,N
+D,1,Z4,Q2,Andropogon eucomus,2,Low,10.5,NA,NA,NA
+D,1,Z4,Q2,Aristida adscensionis,3,Low,11.1,NA,NA,NA
+D,1,Z4,Q2,NA,NA,NA,11.6,NA,NA,NA
+D,1,Z4,Q3,Andropogon eucomus,2,Low,10,Y,N,Y
+D,1,Z4,Q3,Heteropogon contortus,1,Moderate,13.2,NA,NA,NA
+D,1,Z4,Q3,Eragrostis rigidior,3,Moderate,11.8,NA,NA,NA
+D,1,Z4,Q3,NA,NA,NA,12.4,NA,NA,NA
+D,1,Z4,Q4,Chloris virgata,1,Moderate,7.2,N,Y,N
+D,1,Z4,Q4,NA,NA,NA,7.5,NA,NA,NA
+D,1,Z4,Q4,NA,NA,NA,7.5,NA,NA,NA
+D,1,Z4,Q4,NA,NA,NA,5.4,NA,NA,NA
+D,1,Z4,Q5,Chloris virgata,1,Moderate,4.6,N,Y,N
+D,1,Z4,Q5,Eragrostis rigidior,2,Moderate,4.1,NA,NA,NA
+D,1,Z4,Q5,Brachiaria nigropedata,3,High,3.8,NA,NA,NA
+D,1,Z4,Q5,NA,NA,NA,3.8,NA,NA,NA
+D,2,Z1,Q1,Panicum maximum,1,High,3.2,N,N,N
+D,2,Z1,Q1,NA,NA,NA,3.3,NA,NA,NA
+D,2,Z1,Q1,NA,NA,NA,3,NA,NA,NA
+D,2,Z1,Q1,NA,NA,NA,3,NA,NA,NA
+D,2,Z1,Q2,Andropogon eucomus,2,Low,18.5,Y,Y,N
+D,2,Z1,Q2,Enteropogon macrostachyus,1,High,17.5,NA,NA,NA
+D,2,Z1,Q2,NA,NA,NA,19.2,NA,NA,NA
+D,2,Z1,Q2,NA,NA,NA,15,NA,NA,NA
+D,2,Z1,Q3,Heteropogon contortus,1,Moderate,8,Y,Y,N
+D,2,Z1,Q3,Aristida adscensionis,2,Low,6.4,NA,NA,NA
+D,2,Z1,Q3,Enteropogon macrostachyus,3,High,9.8,NA,NA,NA
+D,2,Z1,Q3,NA,NA,NA,10.3,NA,NA,NA
+D,2,Z1,Q4,Brachiaria nigropedata,NA,High,3.4,N,Y,N
+D,2,Z1,Q4,Heteropogon contortus,3,Moderate,5.5,NA,NA,NA
+D,2,Z1,Q4,Aristida adscensionis,1,Low,6.1,NA,NA,NA
+D,2,Z1,Q4,Enteropogon macrostachyus,2,High,6.6,NA,NA,NA
+D,2,Z1,Q5,Eragrostis rigidior,1,Moderate,11.7,N,Y,N
+D,2,Z1,Q5,Chloris virgata,3,Moderate,6.5,NA,NA,NA
+D,2,Z1,Q5,Setaria incrassata,2,High,8.6,NA,NA,NA
+D,2,Z1,Q5,NA,NA,NA,8.7,NA,NA,NA
+D,2,Z2,Q1,Heteropogon contortus,3,Moderate,5,N,Y,N
+D,2,Z2,Q1,Aristida adscensionis,1,Low,5.1,NA,NA,NA
+D,2,Z2,Q1,Aristida diffusa,2,Low,5.1,NA,NA,NA
+D,2,Z2,Q1,NA,NA,NA,5.7,NA,NA,NA
+D,2,Z2,Q2,Enteropogon macrostachyus,1,High,14.1,N,Y,N
+D,2,Z2,Q2,Aristida adscensionis,2,Low,9.2,NA,NA,NA
+D,2,Z2,Q2,NA,NA,NA,9.2,NA,NA,NA
+D,2,Z2,Q2,NA,NA,NA,9.2,NA,NA,NA
+D,2,Z2,Q3,Panicum maximum,1,High,7.5,N,N,N
+D,2,Z2,Q3,Brachiaria nigropedata,3,High,9.6,NA,NA,NA
+D,2,Z2,Q3,Eragrostis rigidior,NA,Moderate,11.4,NA,NA,NA
+D,2,Z2,Q3,Chloris virgata,2,Moderate,8.9,NA,NA,NA
+D,2,Z2,Q4,Heteropogon contortus,1,Moderate,20.4,N,Y,N
+D,2,Z2,Q4,Brachiaria nigropedata,2,High,15.5,NA,NA,NA
+D,2,Z2,Q4,NA,NA,NA,13.4,NA,NA,NA
+D,2,Z2,Q4,NA,NA,NA,13.2,NA,NA,NA
+D,2,Z2,Q5,Enteropogon macrostachyus,1,High,8.5,N,Y,N
+D,2,Z2,Q5,Brachiaria nigropedata,2,High,8.5,NA,NA,NA
+D,2,Z2,Q5,NA,NA,NA,6.6,NA,NA,NA
+D,2,Z2,Q5,NA,NA,NA,6.5,NA,NA,NA
+D,2,Z3,Q1,Heteropogon contortus,2,Moderate,9.1,N,Y,N
+D,2,Z3,Q1,Andropogon eucomus,3,Low,6.6,NA,NA,NA
+D,2,Z3,Q1,Aristida adscensionis,NA,Low,5.2,NA,NA,NA
+D,2,Z3,Q1,Eragrostis rigidior,1,Moderate,5.2,NA,NA,NA
+D,2,Z3,Q1,Eragrostis gummiflua,NA,Low,NA,NA,NA,NA
+D,2,Z3,Q2,Heteropogon contortus,1,Moderate,7.2,N,Y,N
+D,2,Z3,Q2,Andropogon eucomus,2,Low,6.8,NA,NA,NA
+D,2,Z3,Q2,Eragrostis rigidior,3,Moderate,6.8,NA,NA,NA
+D,2,Z3,Q2,NA,NA,NA,20.5,NA,NA,NA
+D,2,Z3,Q3,Andropogon eucomus,1,Low,11.9,N,Y,N
+D,2,Z3,Q3,Setaria incrassata,2,High,17.2,NA,NA,NA
+D,2,Z3,Q3,NA,NA,NA,13.9,NA,NA,NA
+D,2,Z3,Q3,NA,NA,NA,12.9,NA,NA,NA
+D,2,Z3,Q4,Heteropogon contortus,1,Moderate,7.5,N,Y,N
+D,2,Z3,Q4,Enteropogon macrostachyus,2,High,6,NA,NA,NA
+D,2,Z3,Q4,NA,NA,NA,5.9,NA,NA,NA
+D,2,Z3,Q4,NA,NA,NA,7.7,NA,NA,NA
+D,2,Z3,Q5,Heteropogon contortus,1,Moderate,2.4,N,Y,N
+D,2,Z3,Q5,NA,NA,NA,2.4,NA,NA,NA
+D,2,Z3,Q5,NA,NA,NA,5.9,NA,NA,NA
+D,2,Z3,Q5,NA,NA,NA,4.9,NA,NA,NA
+D,2,Z4,Q1,Enteropogon macrostachyus,3,High,7.1,N,Y,N
+D,2,Z4,Q1,Panicum maximum,1,High,6.6,NA,NA,NA
+D,2,Z4,Q1,Heteropogon contortus,2,Moderate,7.3,NA,NA,NA
+D,2,Z4,Q1,NA,NA,NA,8.4,NA,NA,NA
+D,2,Z4,Q2,Andropogon eucomus,3,Low,17.8,N,Y,N
+D,2,Z4,Q2,Heteropogon contortus,1,Moderate,16.8,NA,NA,NA
+D,2,Z4,Q2,Aristida adscensionis,2,Low,17.4,NA,NA,NA
+D,2,Z4,Q2,NA,NA,NA,18.8,NA,NA,NA
+D,2,Z4,Q3,Heteropogon contortus,1,Moderate,14.8,N,Y,N
+D,2,Z4,Q3,Aristida adscensionis,2,Low,16.1,NA,NA,NA
+D,2,Z4,Q3,Chloris virgata,3,Moderate,16.9,NA,NA,NA
+D,2,Z4,Q3,NA,NA,NA,16.8,NA,NA,NA
+D,2,Z4,Q4,Panicum maximum,1,High,21.3,N,Y,N
+D,2,Z4,Q4,Heteropogon contortus,2,Moderate,18.3,NA,NA,NA
+D,2,Z4,Q4,NA,NA,NA,11.9,NA,NA,NA
+D,2,Z4,Q4,NA,NA,NA,12.8,NA,NA,NA
+D,2,Z4,Q5,Heteropogon contortus,1,Moderate,20.4,N,Y,N
+D,2,Z4,Q5,Chloris virgata,2,Moderate,17.1,NA,NA,NA
+D,2,Z4,Q5,NA,NA,NA,17.9,NA,NA,NA
+D,2,Z4,Q5,NA,NA,NA,16.2,NA,NA,NA
+D,3,Z1,Q1,Heteropogon contortus,1,Moderate,NA,Y,Y,N
+D,3,Z1,Q1,Chloris virgata,3,Moderate,NA,NA,NA,NA
+D,3,Z1,Q1,Sporobolus ioclados,2,Moderate,NA,NA,NA,NA
+D,3,Z1,Q1,NA,NA,NA,24.4,NA,NA,NA
+D,3,Z1,Q2,Aristida adscensionis,1,Low,14.9,N,Y,N
+D,3,Z1,Q2,NA,NA,NA,14.5,NA,NA,NA
+D,3,Z1,Q2,NA,NA,NA,14.5,NA,NA,NA
+D,3,Z1,Q2,NA,NA,NA,14.6,NA,NA,NA
+D,3,Z1,Q3,Heteropogon contortus,1,Low,8.3,N,Y,N
+D,3,Z1,Q3,Setaria incrassata,2,High,7.3,NA,NA,NA
+D,3,Z1,Q3,NA,NA,NA,6,NA,NA,NA
+D,3,Z1,Q3,NA,NA,NA,6,NA,NA,NA
+D,3,Z1,Q4,Heteropogon contortus,1,Moderate,3.7,N,Y,N
+D,3,Z1,Q4,Aristida adscensionis,2,Low,3.6,NA,NA,NA
+D,3,Z1,Q4,Chloris virgata,NA,Moderate,3.8,NA,NA,NA
+D,3,Z1,Q4,Brachiaria nigropedata,NA,High,3.8,NA,NA,NA
+D,3,Z1,Q4,Aristida diffusa,3,Low,NA,NA,NA,NA
+D,3,Z1,Q5,Enteropogon macrostachyus,3,High,5,N,Y,N
+D,3,Z1,Q5,Heteropogon contortus,2,Moderate,4.8,NA,NA,NA
+D,3,Z1,Q5,Setaria incrassata,1,High,8.1,NA,NA,NA
+D,3,Z1,Q5,NA,NA,NA,8.7,NA,NA,NA
+D,3,Z2,Q1,Andropogon eucomus,1,Low,13.1,N,Y,N
+D,3,Z2,Q1,Heteropogon contortus,2,Moderate,14.4,NA,NA,NA
+D,3,Z2,Q1,NA,NA,NA,11.9,NA,NA,NA
+D,3,Z2,Q1,NA,NA,NA,11.5,NA,NA,NA
+D,3,Z2,Q2,Heteropogon contortus,1,Moderate,NA,N,Y,N
+D,3,Z2,Q2,Enteropogon macrostachyus,2,High,21.3,NA,NA,NA
+D,3,Z2,Q2,NA,NA,NA,21.3,NA,NA,NA
+D,3,Z2,Q2,NA,NA,NA,20.4,NA,NA,NA
+D,3,Z2,Q3,Panicum maximum,1,High,6.1,N,Y,N
+D,3,Z2,Q3,NA,NA,NA,6.1,NA,NA,NA
+D,3,Z2,Q3,NA,NA,NA,6.1,NA,NA,NA
+D,3,Z2,Q3,NA,NA,NA,6.1,NA,NA,NA
+D,3,Z2,Q4,Enteropogon macrostachyus,1,High,5.5,N,Y,N
+D,3,Z2,Q4,Aristida adscensionis,2,Low,5.9,NA,NA,NA
+D,3,Z2,Q4,Heteropogon contortus,3,Moderate,5.6,NA,NA,NA
+D,3,Z2,Q4,Chloris virgata,NA,Moderate,4.8,NA,NA,NA
+D,3,Z2,Q5,Enteropogon macrostachyus,2,High,5.8,Y,Y,Y
+D,3,Z2,Q5,Aristida adscensionis,1,Low,8.5,NA,NA,NA
+D,3,Z2,Q5,Heteropogon contortus,3,Moderate,8.7,NA,NA,NA
+D,3,Z2,Q5,NA,NA,NA,8.3,NA,NA,NA
+D,3,Z3,Q1,Aristida diffusa,1,Low,16.5,N,Y,N
+D,3,Z3,Q1,NA,NA,NA,16.4,NA,NA,NA
+D,3,Z3,Q1,NA,NA,NA,15.6,NA,NA,NA
+D,3,Z3,Q1,NA,NA,NA,15.7,NA,NA,NA
+D,3,Z3,Q2,Aristida diffusa,3,Low,17.5,N,Y,N
+D,3,Z3,Q2,Heteropogon contortus,1,Moderate,16.3,NA,NA,NA
+D,3,Z3,Q2,Aristida adscensionis,2,Low,15.7,NA,NA,NA
+D,3,Z3,Q2,NA,NA,NA,15.6,NA,NA,NA
+D,3,Z3,Q3,Andropogon eucomus,NA,Low,7.5,Y,Y,N
+D,3,Z3,Q3,Heteropogon contortus,1,Moderate,5.5,NA,NA,NA
+D,3,Z3,Q3,Brachiaria nigropedata,2,High,10.6,NA,NA,NA
+D,3,Z3,Q3,Eragrostis gummiflua,3,Low,9.5,NA,NA,NA
+D,3,Z3,Q4,Enteropogon macrostachyus,1,High,11.7,Y,Y,N
+D,3,Z3,Q4,Setaria pumila ,2,Moderate,11,NA,NA,NA
+D,3,Z3,Q4,NA,NA,NA,10.7,NA,NA,NA
+D,3,Z3,Q4,NA,NA,NA,9.7,NA,NA,NA
+D,3,Z3,Q5,NA,NA,NA,0,N,Y,N
+D,3,Z4,Q1,Panicum maximum,2,High,7.8,N,Y,N
+D,3,Z4,Q1,Enteropogon macrostachyus,3,High,7.5,NA,NA,NA
+D,3,Z4,Q1,Aristida adscensionis,1,Low,7.5,NA,NA,NA
+D,3,Z4,Q1,NA,NA,NA,9.1,NA,NA,NA
+D,3,Z4,Q2,Heteropogon contortus,1,Moderate,1.9,N,Y,N
+D,3,Z4,Q2,Aristida adscensionis,2,Low,4.4,NA,NA,NA
+D,3,Z4,Q2,Brachiaria nigropedata,3,High,4.8,NA,NA,NA
+D,3,Z4,Q2,NA,NA,NA,4.1,NA,NA,NA
+D,3,Z4,Q3,Themeda triandra,1,High,10,N,Y,N
+D,3,Z4,Q3,Heteropogon contortus,3,Moderate,4.3,NA,NA,NA
+D,3,Z4,Q3,Andropogon eucomus,2,Low,7.7,NA,NA,NA
+D,3,Z4,Q3,NA,NA,NA,7.7,NA,NA,NA
+D,3,Z4,Q4,Heteropogon contortus,1,Moderate,8.3,N,Y,N
+D,3,Z4,Q4,Digitaria eriantha,2,High,7.6,NA,NA,NA
+D,3,Z4,Q4,NA,NA,NA,6.7,NA,NA,NA
+D,3,Z4,Q4,NA,NA,NA,7.3,NA,NA,NA
+D,3,Z4,Q5,NA,NA,NA,0,N,Y,N
+D,4,Z1,Q1,Enteropogon macrostachyus,2,High,12.5,Y,Y,N
+D,4,Z1,Q1,Heteropogon contortus,1,Moderate,11.2,NA,NA,NA
+D,4,Z1,Q1,NA,NA,NA,11,NA,NA,NA
+D,4,Z1,Q1,NA,NA,NA,10,NA,NA,NA
+D,4,Z1,Q2,Sporobolus ioclados,3,Moderate,2.5,N,Y,N
+D,4,Z1,Q2,Setaria incrassata,2,High,5.2,NA,NA,NA
+D,4,Z1,Q2,Heteropogon contortus,NA,Moderate,6.3,NA,NA,NA
+D,4,Z1,Q2,Brachiaria nigropedata,1,High,5.9,NA,NA,NA
+D,4,Z1,Q2,Melinis repens,NA,Low,NA,NA,NA,NA
+D,4,Z1,Q3,Enteropogon macrostachyus,NA,High,2.6,N,Y,N
+D,4,Z1,Q3,Sporobolus ioclados,3,Moderate,2.6,NA,NA,NA
+D,4,Z1,Q3,Heteropogon contortus,1,Moderate,2.6,NA,NA,NA
+D,4,Z1,Q3,Aristida adscensionis,2,Low,5.1,NA,NA,NA
+D,4,Z1,Q4,Enteropogon macrostachyus,1,High,2.4,Y,N,N
+D,4,Z1,Q4,Heteropogon contortus,2,Moderate,2,NA,NA,NA
+D,4,Z1,Q4,NA,NA,NA,5.1,NA,NA,NA
+D,4,Z1,Q4,NA,NA,NA,4.2,NA,NA,NA
+D,4,Z1,Q5,Themeda triandra,2,High,11.9,N,Y,N
+D,4,Z1,Q5,Aristida adscensionis,1,Low,11.1,NA,NA,NA
+D,4,Z1,Q5,Enteropogon macrostachyus,NA,High,10.7,NA,NA,NA
+D,4,Z1,Q5,Melinis repens,NA,Low,10.2,NA,NA,NA
+D,4,Z1,Q5,Eragrostis gummiflua,3,Low,NA,NA,NA,NA
+D,4,Z2,Q1,Enteropogon macrostachyus,1,High,7,Y,Y,N
+D,4,Z2,Q1,Aristida adscensionis,2,Low,7.5,NA,NA,NA
+D,4,Z2,Q1,NA,NA,NA,7.7,NA,NA,NA
+D,4,Z2,Q1,NA,NA,NA,7.8,NA,NA,NA
+D,4,Z2,Q2,Enteropogon macrostachyus,2,High,3.8,Y,N,N
+D,4,Z2,Q2,Aristida adscensionis,3,Low,4.4,NA,NA,NA
+D,4,Z2,Q2,Heteropogon contortus,1,Moderate,4.2,NA,NA,NA
+D,4,Z2,Q2,NA,NA,NA,4.6,NA,NA,NA
+D,4,Z2,Q3,Enteropogon macrostachyus,3,High,8.2,Y,Y,N
+D,4,Z2,Q3,Digitaria eriantha,1,High,8.2,NA,NA,NA
+D,4,Z2,Q3,Setaria incrassata,NA,High,6.7,NA,NA,NA
+D,4,Z2,Q3,Sporobolus ioclados,2,Moderate,6,NA,NA,NA
+D,4,Z2,Q4,Heteropogon contortus,1,Moderate,9.5,Y,Y,N
+D,4,Z2,Q4,Aristida diffusa,2,Low,8.8,NA,NA,NA
+D,4,Z2,Q4,NA,NA,NA,8.6,NA,NA,NA
+D,4,Z2,Q4,NA,NA,NA,8.4,NA,NA,NA
+D,4,Z2,Q5,Heteropogon contortus,3,Moderate,5.6,Y,Y,N
+D,4,Z2,Q5,Sporobolus ioclados,2,Moderate,7,NA,NA,NA
+D,4,Z2,Q5,Aristida diffusa,1,Low,6.8,NA,NA,NA
+D,4,Z2,Q5,Eragrostis rigidior,NA,Moderate,6.4,NA,NA,NA
+D,4,Z2,Q5,Andropogon eucomus,NA,Low,NA,NA,NA,NA
+D,4,Z3,Q1,Heteropogon contortus,2,Moderate,10.5,N,Y,Y
+D,4,Z3,Q1,Setaria incrassata,1,High,8.1,NA,NA,NA
+D,4,Z3,Q1,Andropogon eucomus,3,Low,8.1,NA,NA,NA
+D,4,Z3,Q1,NA,NA,NA,7.8,NA,NA,NA
+D,4,Z3,Q2,Enteropogon macrostachyus,1,High,11.5,Y,N,N
+D,4,Z3,Q2,Heteropogon contortus,2,Moderate,11.5,NA,NA,NA
+D,4,Z3,Q2,Andropogon eucomus,3,Low,13.8,NA,NA,NA
+D,4,Z3,Q2,NA,NA,NA,14.9,NA,NA,NA
+D,4,Z3,Q3,Enteropogon macrostachyus,1,High,11.9,N,Y,N
+D,4,Z3,Q3,Eragrostis superba,2,Moderate,18.5,NA,NA,NA
+D,4,Z3,Q3,Aristida adscensionis,3,Low,17.7,NA,NA,NA
+D,4,Z3,Q3,NA,NA,NA,18.4,NA,NA,NA
+D,4,Z3,Q4,Heteropogon contortus,3,Moderate,4.6,N,N,N
+D,4,Z3,Q4,Aristida adscensionis,2,Low,3.2,NA,NA,NA
+D,4,Z3,Q4,Pogonarthria squarrosa,1,Low,3.6,NA,NA,NA
+D,4,Z3,Q4,NA,NA,NA,4,NA,NA,NA
+D,4,Z3,Q5,Digitaria eriantha,1,High,11.7,N,Y,N
+D,4,Z3,Q5,Enteropogon macrostachyus,3,High,12.9,NA,NA,NA
+D,4,Z3,Q5,Panicum maximum,NA,High,13,NA,NA,NA
+D,4,Z3,Q5,Aristida adscensionis,NA,Low,14.1,NA,NA,NA
+D,4,Z3,Q5,Heteropogon contortus,2,Moderate,NA,NA,NA,NA
+D,4,Z4,Q1,Pogonarthria squarrosa,NA,Low,11.4,Y,N,N
+D,4,Z4,Q1,Digitaria eriantha,1,High,10,NA,NA,NA
+D,4,Z4,Q1,Heteropogon contortus,2,Moderate,10.6,NA,NA,NA
+D,4,Z4,Q1,Sporobolus ioclados,3,Moderate,10.1,NA,NA,NA
+D,4,Z4,Q2,Heteropogon contortus,1,Moderate,23,Y,Y,N
+D,4,Z4,Q2,Eragrostis superba,NA,Moderate,NA,NA,NA,NA
+D,4,Z4,Q2,Eragrostis gummiflua,2,Low,NA,NA,NA,NA
+D,4,Z4,Q2,Enteropogon macrostachyus,3,High,NA,NA,NA,NA
+D,4,Z4,Q3,Enteropogon macrostachyus,1,High,6.2,N,Y,N
+D,4,Z4,Q3,Heteropogon contortus,2,Moderate,6.2,NA,NA,NA
+D,4,Z4,Q3,Sporobolus ioclados,NA,Moderate,6.2,NA,NA,NA
+D,4,Z4,Q3,Brachiaria nigropedata,3,High,6,NA,NA,NA
+D,4,Z4,Q4,Heteropogon contortus,1,Moderate,6.8,Y,Y,N
+D,4,Z4,Q4,Enteropogon macrostachyus,NA,High,6.6,NA,NA,NA
+D,4,Z4,Q4,Sporobolus ioclados,2,Moderate,4.9,NA,NA,NA
+D,4,Z4,Q4,Aristida diffusa,3,Low,5.3,NA,NA,NA
+D,4,Z4,Q5,Themeda triandra,2,High,7.5,N,N,N
+D,4,Z4,Q5,Heteropogon contortus,1,Moderate,7.4,NA,NA,NA
+D,4,Z4,Q5,NA,NA,NA,8.9,NA,NA,NA
+D,4,Z4,Q5,NA,NA,NA,9.8,NA,NA,NA
+D,5,Z1,Q1,Andropogon eucomus,2,Low,17.2,Y,Y,N
+D,5,Z1,Q1,Enteropogon macrostachyus,3,High,16.6,NA,NA,NA
+D,5,Z1,Q1,Heteropogon contortus,1,Moderate,16.7,NA,NA,NA
+D,5,Z1,Q1,NA,NA,NA,16,NA,NA,NA
+D,5,Z1,Q2,Aristida diffusa,1,Low,10,N,Y,N
+D,5,Z1,Q2,Heteropogon contortus,2,Moderate,9.3,NA,NA,NA
+D,5,Z1,Q2,NA,NA,NA,10.9,NA,NA,NA
+D,5,Z1,Q2,NA,NA,NA,10.7,NA,NA,NA
+D,5,Z1,Q3,Enteropogon macrostachyus,2,High,16,N,Y,N
+D,5,Z1,Q3,Hyperrhenia hirta,1,Low,15.2,NA,NA,NA
+D,5,Z1,Q3,NA,NA,NA,13.4,NA,NA,NA
+D,5,Z1,Q3,NA,NA,NA,17.2,NA,NA,NA
+D,5,Z1,Q4,Enteropogon macrostachyus,2,High,9.5,Y,Y,Y
+D,5,Z1,Q4,Heteropogon contortus,1,Moderate,13.8,NA,NA,NA
+D,5,Z1,Q4,NA,NA,NA,14.5,NA,NA,NA
+D,5,Z1,Q4,NA,NA,NA,17.8,NA,NA,NA
+D,5,Z1,Q5,Enteropogon macrostachyus,2,High,13.3,Y,N,N
+D,5,Z1,Q5,Heteropogon contortus,1,Moderate,13.9,NA,NA,NA
+D,5,Z1,Q5,Setaria incrassata,1,High,17.1,NA,NA,NA
+D,5,Z1,Q5,NA,NA,NA,17.3,NA,NA,NA
+D,5,Z2,Q1,Heteropogon contortus,1,Moderate,7.7,Y,Y,N
+D,5,Z2,Q1,Aristida congesta B,2,Low,7.6,NA,NA,NA
+D,5,Z2,Q1,Eragrostis rigidior,NA,Moderate,7.8,NA,NA,NA
+D,5,Z2,Q1,Eragrostis gummiflua,3,Low,7.8,NA,NA,NA
+D,5,Z2,Q2,Aristida diffusa,1,Low,4.5,N,Y,N
+D,5,Z2,Q2,Enteropogon macrostachyus,3,High,4.2,NA,NA,NA
+D,5,Z2,Q2,Heteropogon contortus,2,Moderate,4.6,NA,NA,NA
+D,5,Z2,Q2,Brachiaria nigropedata,NA,High,4.9,NA,NA,NA
+D,5,Z2,Q3,Enteropogon macrostachyus,2,High,2.9,N,N,N
+D,5,Z2,Q3,Brachiaria nigropedata,3,High,2.7,NA,NA,NA
+D,5,Z2,Q3,Sporobolus ioclados,1,Moderate,2.7,NA,NA,NA
+D,5,Z2,Q3,Aristida diffusa,NA,Low,2.7,NA,NA,NA
+D,5,Z2,Q3,Perotis patens,NA,Low,NA,NA,NA,NA
+D,5,Z2,Q4,Brachiaria nigropedata,NA,High,6.5,N,Y,N
+D,5,Z2,Q4,Enteropogon macrostachyus,2,Moderate,6.4,NA,NA,NA
+D,5,Z2,Q4,Aristida diffusa,3,Low,7.5,NA,NA,NA
+D,5,Z2,Q4,Aristida adscensionis,1,Low,7.9,NA,NA,NA
+D,5,Z2,Q5,Brachiaria nigropedata,2,High,8.2,N,N,N
+D,5,Z2,Q5,Eragrostis rigidior,1,Moderate,7.7,NA,NA,NA
+D,5,Z2,Q5,NA,NA,NA,7.3,NA,NA,NA
+D,5,Z2,Q5,NA,NA,NA,6,NA,NA,NA
+D,5,Z3,Q1,Heteropogon contortus,1,Moderate,5.7,Y,Y,N
+D,5,Z3,Q1,Enteropogon macrostachyus,2,High,6.8,NA,NA,NA
+D,5,Z3,Q1,Sporobolus ioclados,NA,Moderate,7.4,NA,NA,NA
+D,5,Z3,Q1,Aristida adscensionis,3,Low,7.7,NA,NA,NA
+D,5,Z3,Q1,Themeda triandra,NA,High,NA,NA,NA,NA
+D,5,Z3,Q2,Heteropogon contortus,1,Moderate,1.8,N,Y,N
+D,5,Z3,Q2,Aristida diffusa,2,Low,1.8,NA,NA,NA
+D,5,Z3,Q2,NA,NA,NA,1.8,NA,NA,NA
+D,5,Z3,Q2,NA,NA,NA,1.8,NA,NA,NA
+D,5,Z3,Q3,Cymbopogon excavatus,1,Low,8.1,N,Y,N
+D,5,Z3,Q3,Cynodon dactylon,2,High,9.6,NA,NA,NA
+D,5,Z3,Q3,NA,NA,NA,10,NA,NA,NA
+D,5,Z3,Q3,NA,NA,NA,11.4,NA,NA,NA
+D,5,Z3,Q4,Enteropogon macrostachyus,2,High,7,N,Y,N
+D,5,Z3,Q4,Heteropogon contortus,1,Moderate,9.9,NA,NA,NA
+D,5,Z3,Q4,Hyperrhenia hirta,3,Moderate,10.9,NA,NA,NA
+D,5,Z3,Q4,NA,NA,NA,11.4,NA,NA,NA
+D,5,Z3,Q5,Enteropogon macrostachyus,2,High,6.3,Y,N,N
+D,5,Z3,Q5,Eragrostis rigidior,3,Moderate,7.4,NA,NA,NA
+D,5,Z3,Q5,Heteropogon contortus,1,Moderate,8,NA,NA,NA
+D,5,Z3,Q5,NA,NA,NA,8.8,NA,NA,NA
+D,5,Z4,Q1,Sporobolus ioclados,2,Moderate,1.5,N,Y,N
+D,5,Z4,Q1,Aristida diffusa,1,Low,1.5,NA,NA,NA
+D,5,Z4,Q1,Cymbopogon excavatus,3,Low,6,NA,NA,NA
+D,5,Z4,Q1,NA,NA,NA,6,NA,NA,NA
+D,5,Z4,Q2,Aristida diffusa,1,Low,11,N,N,Y
+D,5,Z4,Q2,Heteropogon contortus,2,Moderate,11.4,NA,NA,NA
+D,5,Z4,Q2,Panicum maximum,3,High,10.9,NA,NA,NA
+D,5,Z4,Q2,NA,NA,NA,11,NA,NA,NA
+D,5,Z4,Q3,Cymbopogon excavatus,1,Low,11.6,N,Y,N
+D,5,Z4,Q3,NA,NA,NA,11.6,NA,NA,NA
+D,5,Z4,Q3,NA,NA,NA,17.8,NA,NA,NA
+D,5,Z4,Q3,NA,NA,NA,20,NA,NA,NA
+D,5,Z4,Q4,Enteropogon macrostachyus,2,High,14,N,Y,N
+D,5,Z4,Q4,Eragrostis gummiflua,1,Low,14.6,NA,NA,NA
+D,5,Z4,Q4,Aristida diffusa,3,Low,10.5,NA,NA,NA
+D,5,Z4,Q4,NA,NA,NA,12,NA,NA,NA
+D,5,Z4,Q5,Heteropogon contortus,1,Moderate,10.3,N,Y,N
+D,5,Z4,Q5,Enteropogon macrostachyus,2,High,9.7,NA,NA,NA
+D,5,Z4,Q5,Eragrostis cylindriflora,3,Moderate,9.1,NA,NA,NA
+D,5,Z4,Q5,NA,NA,NA,8.4,NA,NA,NA
+E,1,Z1,Q1,Heteropogon contortus,1,Moderate,3.9,N,N,N
+E,1,Z1,Q1,Aristida adscensionis,2,Low,4.2,NA,NA,NA
+E,1,Z1,Q1,NA,NA,NA,9.5,NA,NA,NA
+E,1,Z1,Q1,NA,NA,NA,7.8,NA,NA,NA
+E,1,Z1,Q2,Heteropogon contortus,1,Moderate,22,N,Y,N
+E,1,Z1,Q2,Brachiaria nigropedata,2,High,17,NA,NA,NA
+E,1,Z1,Q2,NA,NA,NA,14.3,NA,NA,NA
+E,1,Z1,Q2,NA,NA,NA,13.6,NA,NA,NA
+E,1,Z1,Q3,Brachiaria nigropedata,NA,High,6.6,N,Y,N
+E,1,Z1,Q3,Heteropogon contortus,1,Moderate,5.8,NA,NA,NA
+E,1,Z1,Q3,Eragrostis superba,3,Moderate,6.2,NA,NA,NA
+E,1,Z1,Q3,Eragrostis gummiflua,2,Low,6.2,NA,NA,NA
+E,1,Z1,Q4,Heteropogon contortus,1,Moderate,3.2,N,Y,N
+E,1,Z1,Q4,Panicum maximum,2,High,3.2,NA,NA,NA
+E,1,Z1,Q4,NA,NA,NA,3.2,NA,NA,NA
+E,1,Z1,Q4,NA,NA,NA,3.2,NA,NA,NA
+E,1,Z1,Q5,Brachiaria nigropedata,2,High,2.5,N,Y,N
+E,1,Z1,Q5,Aristida adscensionis,NA,Low,3.9,NA,NA,NA
+E,1,Z1,Q5,Eragrostis gummiflua,1,Low,3.6,NA,NA,NA
+E,1,Z1,Q5,Heteropogon contortus,NA,Moderate,3.9,NA,NA,NA
+E,1,Z1,Q5,Eragrostis rigidior,3,Moderate,NA,NA,NA,NA
+E,1,Z2,Q1,Panicum maximum,2,High,10.3,N,Y,N
+E,1,Z2,Q1,Eragrostis gummiflua,NA,Low,10.1,NA,NA,NA
+E,1,Z2,Q1,Aristida adscensionis,1,Low,9.5,NA,NA,NA
+E,1,Z2,Q1,Pogonarthria squarrosa,3,Low,9,NA,NA,NA
+E,1,Z2,Q2,Digitaria eriantha,1,High,10.2,N,Y,N
+E,1,Z2,Q2,Eragrostis rigidior,2,Moderate,12.4,NA,NA,NA
+E,1,Z2,Q2,NA,NA,NA,19.2,NA,NA,NA
+E,1,Z2,Q2,NA,NA,NA,18.7,NA,NA,NA
+E,1,Z2,Q3,Digitaria eriantha,2,High,11.2,N,Y,N
+E,1,Z2,Q3,Heteropogon contortus,1,Moderate,10.4,NA,NA,NA
+E,1,Z2,Q3,NA,NA,NA,10.7,NA,NA,NA
+E,1,Z2,Q3,NA,NA,NA,9.9,NA,NA,NA
+E,1,Z2,Q4,Andropogon eucomus,1,Low,8.6,N,N,N
+E,1,Z2,Q4,Aristida adscensionis,2,Low,9.2,NA,NA,NA
+E,1,Z2,Q4,Pogonarthria squarrosa,3,Low,10.2,NA,NA,NA
+E,1,Z2,Q4,NA,NA,NA,10.5,NA,NA,NA
+E,1,Z2,Q5,Digitaria eriantha,1,High,2.5,N,Y,N
+E,1,Z2,Q5,NA,NA,NA,4.1,NA,NA,NA
+E,1,Z2,Q5,NA,NA,NA,4.6,NA,NA,NA
+E,1,Z2,Q5,NA,NA,NA,4.8,NA,NA,NA
+E,1,Z3,Q1,Panicum maximum,1,High,6.7,N,Y,N
+E,1,Z3,Q1,NA,NA,NA,10.6,NA,NA,NA
+E,1,Z3,Q1,NA,NA,NA,9.9,NA,NA,NA
+E,1,Z3,Q1,NA,NA,NA,9.1,NA,NA,NA
+E,1,Z3,Q2,Panicum maximum,3,High,3.2,N,Y,N
+E,1,Z3,Q2,Heteropogon contortus,1,Moderate,9.7,NA,NA,NA
+E,1,Z3,Q2,Eragrostis rigidior,2,Moderate,9,NA,NA,NA
+E,1,Z3,Q2,NA,NA,NA,7.6,NA,NA,NA
+E,1,Z3,Q3,Digitaria eriantha,2,High,8.9,N,N,N
+E,1,Z3,Q3,Eragrostis rigidior,1,Moderate,12.6,NA,NA,NA
+E,1,Z3,Q3,Brachiaria nigropedata,3,High,12.7,NA,NA,NA
+E,1,Z3,Q3,NA,NA,NA,11.1,NA,NA,NA
+E,1,Z3,Q4,Heteropogon contortus,3,Moderate,13.5,N,Y,N
+E,1,Z3,Q4,Digitaria eriantha,1,High,12,NA,NA,NA
+E,1,Z3,Q4,Eragrostis gummiflua,2,Low,11.1,NA,NA,NA
+E,1,Z3,Q4,Aristida adscensionis,NA,Low,10.7,NA,NA,NA
+E,1,Z3,Q5,Brachiaria nigropedata,1,High,2.1,N,N,N
+E,1,Z3,Q5,Aristida adscensionis,2,Low,5.6,NA,NA,NA
+E,1,Z3,Q5,Enteropogon macrostachyus,3,High,5.7,NA,NA,NA
+E,1,Z3,Q5,NA,NA,NA,0,NA,NA,NA
+E,1,Z4,Q1,Digitaria eriantha,1,High,6.2,N,N,N
+E,1,Z4,Q1,NA,NA,NA,4.9,NA,NA,NA
+E,1,Z4,Q1,NA,NA,NA,5.1,NA,NA,NA
+E,1,Z4,Q1,NA,NA,NA,8.3,NA,NA,NA
+E,1,Z4,Q2,Digitaria eriantha,1,High,6.8,N,Y,N
+E,1,Z4,Q2,Aristida adscensionis,2,Low,5.7,NA,NA,NA
+E,1,Z4,Q2,Pogonarthria squarrosa,3,Low,3.9,NA,NA,NA
+E,1,Z4,Q2,Chloris virgata,NA,Moderate,3.8,NA,NA,NA
+E,1,Z4,Q3,Digitaria eriantha,1,High,11.9,N,N,Y
+E,1,Z4,Q3,Aristida adscensionis,2,Low,14.2,NA,NA,NA
+E,1,Z4,Q3,NA,NA,NA,12.1,NA,NA,NA
+E,1,Z4,Q3,NA,NA,NA,12,NA,NA,NA
+E,1,Z4,Q4,Digitaria eriantha,NA,High,10.9,N,N,N
+E,1,Z4,Q4,Eragrostis gummiflua,2,Low,6,NA,NA,NA
+E,1,Z4,Q4,Andropogon eucomus,1,Low,12.4,NA,NA,NA
+E,1,Z4,Q4,Eragrostis superba,3,Moderate,11.5,NA,NA,NA
+E,1,Z4,Q5,Digitaria eriantha,2,High,7.3,N,Y,N
+E,1,Z4,Q5,Panicum maximum,1,High,17.7,NA,NA,NA
+E,1,Z4,Q5,NA,NA,NA,18,NA,NA,NA
+E,1,Z4,Q5,NA,NA,NA,16.5,NA,NA,NA
+E,1,Z4,Q5,NA,NA,NA,NA,NA,NA,NA
+E,2,Z1,Q1,Panicum maximum,1,High,8.3,Y,Y,N
+E,2,Z1,Q1,NA,NA,NA,8.7,NA,NA,NA
+E,2,Z1,Q1,NA,NA,NA,8.1,NA,NA,NA
+E,2,Z1,Q1,NA,NA,NA,8.1,NA,NA,NA
+E,2,Z1,Q2,Heteropogon contortus,2,Moderate,4.1,N,Y,N
+E,2,Z1,Q2,Enteropogon macrostachyus,1,High,3.4,NA,NA,NA
+E,2,Z1,Q2,NA,NA,NA,3.4,NA,NA,NA
+E,2,Z1,Q2,NA,NA,NA,5.1,NA,NA,NA
+E,2,Z1,Q3,Urochloa mosambicensis,1,Moderate,5.6,N,Y,N
+E,2,Z1,Q3,Eragrostis gummiflua,2,Low,4.6,NA,NA,NA
+E,2,Z1,Q3,Aristida adscensionis,3,Low,0,NA,NA,NA
+E,2,Z1,Q3,NA,NA,NA,7.3,NA,NA,NA
+E,2,Z1,Q4,NA,NA,NA,0,N,N,N
+E,2,Z1,Q5,Panicum maximum,3,High,4.7,N,Y,N
+E,2,Z1,Q5,Heteropogon contortus,1,Moderate,4.6,NA,NA,NA
+E,2,Z1,Q5,Enteropogon macrostachyus,2,High,4.4,NA,NA,NA
+E,2,Z1,Q5,NA,NA,NA,4.7,NA,NA,NA
+E,2,Z2,Q1,Urochloa mosambicensis,1,Moderate,11.3,N,Y,N
+E,2,Z2,Q1,Enteropogon macrostachyus,2,High,11.1,NA,NA,NA
+E,2,Z2,Q1,Eragrostis gummiflua,NA,Low,10.9,NA,NA,NA
+E,2,Z2,Q1,Heteropogon contortus,3,Moderate,10.7,NA,NA,NA
+E,2,Z2,Q2,Enteropogon macrostachyus,2,High,11.3,N,Y,N
+E,2,Z2,Q2,Eragrostis gummiflua,3,Low,12.9,NA,NA,NA
+E,2,Z2,Q2,Eragrostis rigidior,1,Moderate,12.5,NA,NA,NA
+E,2,Z2,Q2,NA,NA,NA,12.7,NA,NA,NA
+E,2,Z2,Q3,Heteropogon contortus,2,Moderate,10.9,N,N,N
+E,2,Z2,Q3,Enteropogon macrostachyus,1,High,10.7,NA,NA,NA
+E,2,Z2,Q3,NA,NA,NA,11.3,NA,NA,NA
+E,2,Z2,Q3,NA,NA,NA,12.7,NA,NA,NA
+E,2,Z2,Q4,Enteropogon macrostachyus,1,High,12.3,Y,Y,N
+E,2,Z2,Q4,Panicum maximum,2,High,11.9,NA,NA,NA
+E,2,Z2,Q4,Aristida adscensionis,3,Low,11.4,NA,NA,NA
+E,2,Z2,Q4,NA,NA,NA,11.2,NA,NA,NA
+E,2,Z2,Q5,Heteropogon contortus,1,Moderate,10.8,N,Y,N
+E,2,Z2,Q5,Urochloa mosambicensis,2,Moderate,10.6,NA,NA,NA
+E,2,Z2,Q5,NA,NA,NA,4.6,NA,NA,NA
+E,2,Z2,Q5,NA,NA,NA,4.7,NA,NA,NA
+E,2,Z3,Q1,Panicum maximum,2,High,4.2,N,Y,N
+E,2,Z3,Q1,Heteropogon contortus,1,Moderate,4,NA,NA,NA
+E,2,Z3,Q1,NA,NA,NA,5.8,NA,NA,NA
+E,2,Z3,Q1,NA,NA,NA,5.5,NA,NA,NA
+E,2,Z3,Q2,Heteropogon contortus,2,High,2.5,N,N,N
+E,2,Z3,Q2,Eragrostis rigidior,1,Moderate,3.5,NA,NA,NA
+E,2,Z3,Q2,NA,NA,NA,0,NA,NA,NA
+E,2,Z3,Q2,NA,NA,NA,0,NA,NA,NA
+E,2,Z3,Q3,Panicum maximum,1,High,7.6,N,Y,N
+E,2,Z3,Q3,Enteropogon macrostachyus,2,High,8.3,NA,NA,NA
+E,2,Z3,Q3,NA,NA,NA,7.6,NA,NA,NA
+E,2,Z3,Q3,NA,NA,NA,9.2,NA,NA,NA
+E,2,Z3,Q4,Panicum maximum,1,High,8.7,N,N,N
+E,2,Z3,Q4,NA,NA,NA,4,NA,NA,NA
+E,2,Z3,Q4,NA,NA,NA,15.1,NA,NA,NA
+E,2,Z3,Q4,NA,NA,NA,15.3,NA,NA,NA
+E,2,Z3,Q5,Enteropogon macrostachyus,1,High,6.3,N,Y,N
+E,2,Z3,Q5,Panicum maximum,2,High,6.1,NA,NA,NA
+E,2,Z3,Q5,NA,NA,NA,5.7,NA,NA,NA
+E,2,Z3,Q5,NA,NA,NA,6.7,NA,NA,NA
+E,2,Z4,Q1,Enteropogon macrostachyus,1,High,10.2,N,Y,N
+E,2,Z4,Q1,Panicum maximum,2,High,11.2,NA,NA,NA
+E,2,Z4,Q1,NA,NA,NA,10.7,NA,NA,NA
+E,2,Z4,Q1,NA,NA,NA,12.6,NA,NA,NA
+E,2,Z4,Q2,Enteropogon macrostachyus,2,High,5.3,N,Y,N
+E,2,Z4,Q2,Panicum maximum,1,High,6.1,NA,NA,NA
+E,2,Z4,Q2,NA,NA,NA,9.3,NA,NA,NA
+E,2,Z4,Q2,NA,NA,NA,10.8,NA,NA,NA
+E,2,Z4,Q3,Heteropogon contortus,1,Moderate,23.3,N,Y,N
+E,2,Z4,Q3,Panicum maximum,2,High,19,NA,NA,NA
+E,2,Z4,Q3,NA,NA,NA,16.7,NA,NA,NA
+E,2,Z4,Q3,NA,NA,NA,19.9,NA,NA,NA
+E,2,Z4,Q4,Pogonarthria squarrosa,NA,Low,17,N,Y,N
+E,2,Z4,Q4,Aristida adscensionis,3,Low,15.1,NA,NA,NA
+E,2,Z4,Q4,Heteropogon contortus,1,Moderate,13.7,NA,NA,NA
+E,2,Z4,Q4,Eragrostis rigidior,2,Moderate,17.9,NA,NA,NA
+E,2,Z4,Q5,Aristida adscensionis,NA,Low,12,N,Y,N
+E,2,Z4,Q5,Heteropogon contortus,2,Moderate,11.4,NA,NA,NA
+E,2,Z4,Q5,Eragrostis rigidior,3,Moderate,10.9,NA,NA,NA
+E,2,Z4,Q5,Setaria incrassata,NA,High,10.3,NA,NA,NA
+E,2,Z4,Q5,Eragrostis gummiflua,1,Low,NA,NA,NA,NA
+E,3,Z1,Q1,Heteropogon contortus,2,Moderate,3.3,N,N,N
+E,3,Z1,Q1,Urochloa mosambicensis,1,Moderate,9.5,NA,NA,NA
+E,3,Z1,Q1,NA,NA,NA,10,NA,NA,NA
+E,3,Z1,Q1,NA,NA,NA,15.9,NA,NA,NA
+E,3,Z1,Q2,Panicum maximum,2,High,4.4,N,Y,N
+E,3,Z1,Q2,Aristida adscensionis,NA,Low,3.6,NA,NA,NA
+E,3,Z1,Q2,Heteropogon contortus,1,Moderate,3.3,NA,NA,NA
+E,3,Z1,Q2,Eragrostis rigidior,3,Moderate,5.2,NA,NA,NA
+E,3,Z1,Q3,Panicum maximum,1,High,11.4,N,N,N
+E,3,Z1,Q3,Heteropogon contortus,2,Moderate,9,NA,NA,NA
+E,3,Z1,Q3,NA,NA,NA,8.5,NA,NA,NA
+E,3,Z1,Q3,NA,NA,NA,8.5,NA,NA,NA
+E,3,Z1,Q4,Panicum maximum,2,High,6.7,N,Y,N
+E,3,Z1,Q4,Digitaria eriantha,1,High,8.5,NA,NA,NA
+E,3,Z1,Q4,NA,NA,NA,9.4,NA,NA,NA
+E,3,Z1,Q4,NA,NA,NA,7,NA,NA,NA
+E,3,Z1,Q5,Urochloa mosambicensis,NA,Moderate,3,N,Y,N
+E,3,Z1,Q5,Aristida adscensionis,NA,Low,4.2,NA,NA,NA
+E,3,Z1,Q5,Heteropogon contortus,1,Moderate,4.2,NA,NA,NA
+E,3,Z1,Q5,Cymbopogon excavatus,2,Low,4.6,NA,NA,NA
+E,3,Z1,Q5,Eragrostis gummiflua,3,Low,NA,NA,NA,NA
+E,3,Z2,Q1,Urochloa mosambicensis,1,NA,2,N,N,N
+E,3,Z2,Q1,NA,NA,NA,2,NA,NA,NA
+E,3,Z2,Q1,NA,NA,NA,2,NA,NA,NA
+E,3,Z2,Q1,NA,NA,NA,2,NA,NA,NA
+E,3,Z2,Q2,Aristida diffusa,NA,NA,9.7,N,Y,N
+E,3,Z2,Q2,Panicum maximum,2,NA,8.9,NA,NA,NA
+E,3,Z2,Q2,Aristida adscensionis,3,NA,8.4,NA,NA,NA
+E,3,Z2,Q2,Eragrostis rigidior,1,NA,7.8,NA,NA,NA
+E,3,Z2,Q3,Panicum maximum,1,NA,11.5,N,Y,N
+E,3,Z2,Q3,NA,NA,NA,11.9,NA,NA,NA
+E,3,Z2,Q3,NA,NA,NA,11.5,NA,NA,NA
+E,3,Z2,Q3,NA,NA,NA,11.2,NA,NA,NA
+E,3,Z2,Q4,Panicum maximum,2,NA,24.4,N,Y,N
+E,3,Z2,Q4,Enteropogon macrostachyus,1,NA,15,NA,NA,NA
+E,3,Z2,Q4,NA,NA,NA,12,NA,NA,NA
+E,3,Z2,Q4,NA,NA,NA,14.6,NA,NA,NA
+E,3,Z2,Q5,Panicum maximum,1,NA,5.8,N,Y,N
+E,3,Z2,Q5,NA,NA,NA,3.7,NA,NA,NA
+E,3,Z2,Q5,NA,NA,NA,5.6,NA,NA,NA
+E,3,Z2,Q5,NA,NA,NA,5.5,NA,NA,NA
+E,3,Z3,Q1,Eragrostis rigidior,1,Moderate,3,N,Y,N
+E,3,Z3,Q1,Heteropogon contortus,2,Moderate,4.4,NA,NA,NA
+E,3,Z3,Q1,Cymbopogon excavatus,3,Low,9.6,NA,NA,NA
+E,3,Z3,Q1,NA,NA,NA,10.4,NA,NA,NA
+E,3,Z3,Q2,Heteropogon contortus,2,Moderate,12,N,N,N
+E,3,Z3,Q2,Urochloa mosambicensis,1,Moderate,12.1,NA,NA,NA
+E,3,Z3,Q2,Panicum maximum,3,High,12.7,NA,NA,NA
+E,3,Z3,Q2,NA,NA,NA,10.5,NA,NA,NA
+E,3,Z3,Q3,Eragrostis rigidior,1,Moderate,0,Y,N,Y
+E,3,Z3,Q3,Heteropogon contortus,2,Moderate,1.7,NA,NA,NA
+E,3,Z3,Q3,Panicum maximum,NA,High,1.8,NA,NA,NA
+E,3,Z3,Q3,Eragrostis superba,NA,Moderate,5.2,NA,NA,NA
+E,3,Z3,Q3,Eragrostis gummiflua,3,Low,NA,NA,NA,NA
+E,3,Z3,Q3,Aristida adscensionis,NA,Low,NA,NA,NA,NA
+E,3,Z3,Q3,Pogonarthria squarrosa,NA,Low,NA,NA,NA,NA
+E,3,Z3,Q4,Eragrostis rigidior,NA,Moderate,6.5,N,N,N
+E,3,Z3,Q4,Heteropogon contortus,2,Moderate,4.3,NA,NA,NA
+E,3,Z3,Q4,Eragrostis gummiflua,1,Low,7.1,NA,NA,NA
+E,3,Z3,Q4,Aristida adscensionis,3,Low,8.3,NA,NA,NA
+E,3,Z3,Q5,Heteropogon contortus,1,Moderate,5.3,N,N,N
+E,3,Z3,Q5,Eragrostis gummiflua,2,Low,4.6,NA,NA,NA
+E,3,Z3,Q5,NA,NA,NA,4.1,NA,NA,NA
+E,3,Z3,Q5,NA,NA,NA,4.5,NA,NA,NA
+E,3,Z4,Q1,Cymbopogon excavatus,2,Low,4.5,N,N,N
+E,3,Z4,Q1,Heteropogon contortus,1,Moderate,4.5,NA,NA,NA
+E,3,Z4,Q1,Urochloa mosambicensis,3,Moderate,9.9,NA,NA,NA
+E,3,Z4,Q1,NA,NA,NA,12.9,NA,NA,NA
+E,3,Z4,Q2,Panicum maximum,1,High,11.7,N,Y,N
+E,3,Z4,Q2,NA,NA,NA,10.8,NA,NA,NA
+E,3,Z4,Q2,NA,NA,NA,8.4,NA,NA,NA
+E,3,Z4,Q2,NA,NA,NA,9.9,NA,NA,NA
+E,3,Z4,Q3,Heteropogon contortus,1,Moderate,18.2,N,Y,N
+E,3,Z4,Q3,NA,NA,NA,22.3,NA,NA,NA
+E,3,Z4,Q3,NA,NA,NA,17.6,NA,NA,NA
+E,3,Z4,Q3,NA,NA,NA,17.5,NA,NA,NA
+E,3,Z4,Q4,Panicum maximum,3,High,4.3,N,N,N
+E,3,Z4,Q4,Eragrostis rigidior,2,Moderate,4.5,NA,NA,NA
+E,3,Z4,Q4,Eragrostis gummiflua,1,Low,6.8,NA,NA,NA
+E,3,Z4,Q4,NA,NA,NA,6.2,NA,NA,NA
+E,3,Z4,Q5,Panicum maximum,2,High,8.5,N,Y,N
+E,3,Z4,Q5,Eragrostis rigidior,1,Moderate,8.3,NA,NA,NA
+E,3,Z4,Q5,NA,NA,NA,7.4,NA,NA,NA
+E,3,Z4,Q5,NA,NA,NA,7.9,NA,NA,NA
+E,4,Z1,Q1,Heteropogon contortus,1,High,5.4,N,Y,N
+E,4,Z1,Q1,NA,NA,NA,6.1,NA,NA,NA
+E,4,Z1,Q1,NA,NA,NA,6.7,NA,NA,NA
+E,4,Z1,Q1,NA,NA,NA,6.6,NA,NA,NA
+E,4,Z1,Q2,Panicum maximum,1,High,7,N,N,N
+E,4,Z1,Q2,NA,NA,NA,7.6,NA,NA,NA
+E,4,Z1,Q2,NA,NA,NA,5.7,NA,NA,NA
+E,4,Z1,Q2,NA,NA,NA,5.6,NA,NA,NA
+E,4,Z1,Q3,Digitaria eriantha,2,High,2.7,N,Y,N
+E,4,Z1,Q3,Heteropogon contortus,3,Moderate,2.6,NA,NA,NA
+E,4,Z1,Q3,Eragrostis gummiflua,1,Low,2.6,NA,NA,NA
+E,4,Z1,Q3,Aristida adscensionis,NA,Low,2.6,NA,NA,NA
+E,4,Z1,Q4,Heteropogon contortus,1,Moderate,8.3,N,Y,N
+E,4,Z1,Q4,NA,NA,NA,8.1,NA,NA,NA
+E,4,Z1,Q4,NA,NA,NA,8,NA,NA,NA
+E,4,Z1,Q4,NA,NA,NA,7.7,NA,NA,NA
+E,4,Z1,Q5,Enteropogon macrostachyus,1,High,13.3,N,Y,N
+E,4,Z1,Q5,NA,NA,NA,15.4,NA,NA,NA
+E,4,Z1,Q5,NA,NA,NA,13.9,NA,NA,NA
+E,4,Z1,Q5,NA,NA,NA,13.6,NA,NA,NA
+E,4,Z2,Q1,Heteropogon contortus,1,Moderate,5.2,N,Y,N
+E,4,Z2,Q1,Aristida adscensionis,2,Low,14.8,NA,NA,NA
+E,4,Z2,Q1,NA,NA,NA,14.6,NA,NA,NA
+E,4,Z2,Q1,NA,NA,NA,14.4,NA,NA,NA
+E,4,Z2,Q2,Heteropogon contortus,2,Moderate,3,N,N,N
+E,4,Z2,Q2,Eragrostis gummiflua,3,Low,3.6,NA,NA,NA
+E,4,Z2,Q2,Aristida adscensionis,1,Low,3.8,NA,NA,NA
+E,4,Z2,Q2,Eragrostis rigidior,NA,Moderate,5.6,NA,NA,NA
+E,4,Z2,Q3,Heteropogon contortus,1,Moderate,8.1,N,N,N
+E,4,Z2,Q3,NA,NA,NA,6.5,NA,NA,NA
+E,4,Z2,Q3,NA,NA,NA,6.3,NA,NA,NA
+E,4,Z2,Q3,NA,NA,NA,6.1,NA,NA,NA
+E,4,Z2,Q4,Heteropogon contortus,1,Moderate,6.5,N,N,N
+E,4,Z2,Q4,NA,NA,NA,6.6,NA,NA,NA
+E,4,Z2,Q4,NA,NA,NA,9.4,NA,NA,NA
+E,4,Z2,Q4,NA,NA,NA,10.3,NA,NA,NA
+E,4,Z2,Q5,Heteropogon contortus,1,Moderate,10.4,N,Y,N
+E,4,Z2,Q5,Cymbopogon excavatus,2,Low,7.4,NA,NA,NA
+E,4,Z2,Q5,NA,NA,NA,7.6,NA,NA,NA
+E,4,Z2,Q5,NA,NA,NA,6.8,NA,NA,NA
+E,4,Z3,Q1,Panicum maximum,1,High,9.8,N,N,N
+E,4,Z3,Q1,NA,NA,NA,11.7,NA,NA,NA
+E,4,Z3,Q1,NA,NA,NA,11.3,NA,NA,NA
+E,4,Z3,Q1,NA,NA,NA,12.3,NA,NA,NA
+E,4,Z3,Q2,Pogonarthria squarrosa,3,Low,13.2,N,Y,N
+E,4,Z3,Q2,Panicum maximum,2,High,5.6,NA,NA,NA
+E,4,Z3,Q2,Aristida adscensionis,1,Low,2.8,NA,NA,NA
+E,4,Z3,Q2,NA,NA,NA,5,NA,NA,NA
+E,4,Z3,Q3,Heteropogon contortus,1,Moderate,20.3,N,N,N
+E,4,Z3,Q3,NA,NA,NA,16,NA,NA,NA
+E,4,Z3,Q3,NA,NA,NA,16.9,NA,NA,NA
+E,4,Z3,Q3,NA,NA,NA,14.9,NA,NA,NA
+E,4,Z3,Q4,Heteropogon contortus,1,Moderate,7.1,N,Y,N
+E,4,Z3,Q4,Eragrostis gummiflua,3,Low,6.9,NA,NA,NA
+E,4,Z3,Q4,Eragrostis rigidior,2,Moderate,7.1,NA,NA,NA
+E,4,Z3,Q4,NA,NA,NA,7.2,NA,NA,NA
+E,4,Z3,Q5,Panicum maximum,1,High,6.6,N,Y,N
+E,4,Z3,Q5,NA,NA,NA,3.5,NA,NA,NA
+E,4,Z3,Q5,NA,NA,NA,6.3,NA,NA,NA
+E,4,Z3,Q5,NA,NA,NA,12.9,NA,NA,NA
+E,4,Z4,Q1,Heteropogon contortus,2,Moderate,8.1,N,Y,N
+E,4,Z4,Q1,Enteropogon macrostachyus,3,High,7.5,NA,NA,NA
+E,4,Z4,Q1,Urochloa mosambicensis,1,Moderate,6.8,NA,NA,NA
+E,4,Z4,Q1,NA,NA,NA,6.3,NA,NA,NA
+E,4,Z4,Q2,Eragrostis rigidior,1,Moderate,3.1,N,N,Y
+E,4,Z4,Q2,NA,NA,NA,2.4,NA,NA,NA
+E,4,Z4,Q2,NA,NA,NA,0,NA,NA,NA
+E,4,Z4,Q2,NA,NA,NA,0,NA,NA,NA
+E,4,Z4,Q3,Panicum maximum,1,High,6.1,N,N,N
+E,4,Z4,Q3,Heteropogon contortus,2,Moderate,5.3,NA,NA,NA
+E,4,Z4,Q3,Eragrostis rigidior,3,Moderate,7.3,NA,NA,NA
+E,4,Z4,Q3,NA,NA,NA,10.2,NA,NA,NA
+E,4,Z4,Q4,Heteropogon contortus,1,Moderate,13.5,N,Y,N
+E,4,Z4,Q4,NA,NA,NA,15.7,NA,NA,NA
+E,4,Z4,Q4,NA,NA,NA,18.8,NA,NA,NA
+E,4,Z4,Q4,NA,NA,NA,19,NA,NA,NA
+E,4,Z4,Q5,Enteropogon macrostachyus,2,High,7,N,Y,N
+E,4,Z4,Q5,Urochloa mosambicensis,3,Moderate,5.3,NA,NA,NA
+E,4,Z4,Q5,Heteropogon contortus,1,Moderate,5.5,NA,NA,NA
+E,4,Z4,Q5,NA,NA,NA,6,NA,NA,NA
+E,5,Z1,Q1,Eragrostis rigidior,NA,Moderate,5.8,N,N,N
+E,5,Z1,Q1,Brachiaria nigropedata,3,High,5.8,NA,NA,NA
+E,5,Z1,Q1,Heteropogon contortus,1,Moderate,9.8,NA,NA,NA
+E,5,Z1,Q1,Enteropogon macrostachyus,NA,High,8.5,NA,NA,NA
+E,5,Z1,Q1,Pogonarthria squarrosa,2,Low,NA,NA,NA,NA
+E,5,Z1,Q2,Digitaria eriantha,1,High,15.3,N,Y,N
+E,5,Z1,Q2,Panicum maximum,2,High,15.8,NA,NA,NA
+E,5,Z1,Q2,Heteropogon contortus,3,Moderate,13.8,NA,NA,NA
+E,5,Z1,Q2,Eragrostis gummiflua,NA,Low,14.5,NA,NA,NA
+E,5,Z1,Q3,Enteropogon macrostachyus,1,High,8.7,N,Y,N
+E,5,Z1,Q3,Panicum maximum,2,High,11.4,NA,NA,NA
+E,5,Z1,Q3,NA,NA,NA,13.4,NA,NA,NA
+E,5,Z1,Q3,NA,NA,NA,11.4,NA,NA,NA
+E,5,Z1,Q4,Aristida adscensionis,3,Low,8.7,N,Y,Y
+E,5,Z1,Q4,Heteropogon contortus,3,Moderate,8.5,NA,NA,NA
+E,5,Z1,Q4,Cymbopogon excavatus,2,Low,8.5,NA,NA,NA
+E,5,Z1,Q4,NA,NA,NA,8.3,NA,NA,NA
+E,5,Z1,Q5,Heteropogon contortus,1,Moderate,10,N,N,N
+E,5,Z1,Q5,Eragrostis rigidior,2,Moderate,10.6,NA,NA,NA
+E,5,Z1,Q5,NA,NA,NA,10.4,NA,NA,NA
+E,5,Z1,Q5,NA,NA,NA,10.5,NA,NA,NA
+E,5,Z2,Q1,Panicum maximum,1,High,8.9,N,Y,N
+E,5,Z2,Q1,NA,NA,NA,9.1,NA,NA,NA
+E,5,Z2,Q1,NA,NA,NA,9.7,NA,NA,NA
+E,5,Z2,Q1,NA,NA,NA,10.3,NA,NA,NA
+E,5,Z2,Q2,Panicum maximum,3,High,10.8,N,Y,N
+E,5,Z2,Q2,Enteropogon macrostachyus,1,High,10.8,NA,NA,NA
+E,5,Z2,Q2,Heteropogon contortus,2,Moderate,8.9,NA,NA,NA
+E,5,Z2,Q2,NA,NA,NA,7.7,NA,NA,NA
+E,5,Z2,Q3,Brachiaria nigropedata,3,High,12.2,N,Y,N
+E,5,Z2,Q3,Heteropogon contortus,2,Moderate,11.3,NA,NA,NA
+E,5,Z2,Q3,Digitaria eriantha,1,High,10.5,NA,NA,NA
+E,5,Z2,Q3,NA,NA,NA,10.5,NA,NA,NA
+E,5,Z2,Q4,Eragrostis rigidior,2,Moderate,12.9,N,Y,N
+E,5,Z2,Q4,Heteropogon contortus,3,Moderate,15,NA,NA,NA
+E,5,Z2,Q4,Pogonarthria squarrosa,NA,Low,14.3,NA,NA,NA
+E,5,Z2,Q4,Aristida adscensionis,1,Low,5.6,NA,NA,NA
+E,5,Z2,Q5,Enteropogon macrostachyus,2,High,10.7,N,Y,N
+E,5,Z2,Q5,Heteropogon contortus,1,Moderate,10.6,NA,NA,NA
+E,5,Z2,Q5,Aristida adscensionis,3,Low,10.4,NA,NA,NA
+E,5,Z2,Q5,NA,NA,NA,10.1,NA,NA,NA
+E,5,Z3,Q1,Aristida adscensionis,3,Low,10.6,N,Y,N
+E,5,Z3,Q1,Digitaria eriantha,1,High,10.2,NA,NA,NA
+E,5,Z3,Q1,Eragrostis gummiflua,2,Low,10.5,NA,NA,NA
+E,5,Z3,Q1,NA,NA,NA,10.4,NA,NA,NA
+E,5,Z3,Q2,Eragrostis gummiflua,1,Low,5.1,N,N,N
+E,5,Z3,Q2,Eragrostis rigidior,NA,Moderate,13.2,NA,NA,NA
+E,5,Z3,Q2,Heteropogon contortus,NA,Moderate,11.4,NA,NA,NA
+E,5,Z3,Q2,Digitaria eriantha,2,High,19.9,NA,NA,NA
+E,5,Z3,Q2,Pogonarthria squarrosa,3,Low,NA,NA,NA,NA
+E,5,Z3,Q3,Heteropogon contortus,1,Moderate,6.8,N,Y,N
+E,5,Z3,Q3,Digitaria eriantha,3,High,8.1,NA,NA,NA
+E,5,Z3,Q3,Panicum maximum,2,High,8.1,NA,NA,NA
+E,5,Z3,Q3,NA,NA,NA,8.8,NA,NA,NA
+E,5,Z3,Q4,Aristida adscensionis,2,Low,6.3,N,Y,N
+E,5,Z3,Q4,Eragrostis gummiflua,3,Low,6,NA,NA,NA
+E,5,Z3,Q4,Eragrostis rigidior,NA,Moderate,8.3,NA,NA,NA
+E,5,Z3,Q4,Heteropogon contortus,1,Moderate,7.2,NA,NA,NA
+E,5,Z3,Q4,Enteropogon macrostachyus,NA,High,NA,NA,NA,NA
+E,5,Z3,Q5,Aristida adscensionis,2,Low,2.8,N,Y,N
+E,5,Z3,Q5,Heteropogon contortus,1,Moderate,2.8,NA,NA,NA
+E,5,Z3,Q5,NA,NA,NA,2.8,NA,NA,NA
+E,5,Z3,Q5,NA,NA,NA,2.8,NA,NA,NA
+E,5,Z4,Q1,Heteropogon contortus,1,Moderate,13.2,N,Y,N
+E,5,Z4,Q1,Enteropogon macrostachyus,2,High,12,NA,NA,NA
+E,5,Z4,Q1,NA,NA,NA,11.4,NA,NA,NA
+E,5,Z4,Q1,NA,NA,NA,11.6,NA,NA,NA
+E,5,Z4,Q2,Pogonarthria squarrosa,1,Low,8.3,N,Y,N
+E,5,Z4,Q2,Brachiaria nigropedata,2,High,8.4,NA,NA,NA
+E,5,Z4,Q2,NA,NA,NA,9.1,NA,NA,NA
+E,5,Z4,Q2,NA,NA,NA,10,NA,NA,NA
+E,5,Z4,Q3,Brachiaria nigropedata,3,High,13.2,N,Y,N
+E,5,Z4,Q3,Digitaria eriantha,2,High,12.7,NA,NA,NA
+E,5,Z4,Q3,Panicum maximum,1,High,12.2,NA,NA,NA
+E,5,Z4,Q3,NA,NA,NA,12.3,NA,NA,NA
+E,5,Z4,Q4,Enteropogon macrostachyus,1,High,11.6,N,Y,N
+E,5,Z4,Q4,Digitaria eriantha,2,High,12.2,NA,NA,NA
+E,5,Z4,Q4,Sporobolus africanus,3,Low,12.3,NA,NA,NA
+E,5,Z4,Q4,NA,NA,NA,13.1,NA,NA,NA
+E,5,Z4,Q5,Enteropogon macrostachyus,1,High,5.1,N,Y,N
+E,5,Z4,Q5,Aristida adscensionis,2,Low,12.8,NA,NA,NA
+E,5,Z4,Q5,Sporobolus ioclados,3,Moderate,12.5,NA,NA,NA
+E,5,Z4,Q5,NA,NA,NA,12.1,NA,NA,NA
+F,1,Z1,Q1,Heteropogon contortus,1,Moderate,4,Y,Y,N
+F,1,Z1,Q1,Eragrostis rigidior,2,Moderate,5.6,NA,NA,NA
+F,1,Z1,Q1,NA,NA,NA,3.8,NA,NA,NA
+F,1,Z1,Q1,NA,NA,NA,13.6,NA,NA,NA
+F,1,Z1,Q2,Heteropogon contortus,3,Moderate,3.4,N,Y,N
+F,1,Z1,Q2,Eragrostis rigidior,2,Moderate,20.7,NA,NA,NA
+F,1,Z1,Q2,Eragrostis gummiflua,1,Low,7.8,NA,NA,NA
+F,1,Z1,Q2,NA,NA,NA,3.6,NA,NA,NA
+F,1,Z1,Q3,Aristida congesta C,2,Low,3.5,N,N,N
+F,1,Z1,Q3,Heteropogon contortus,NA,Moderate,4.7,NA,NA,NA
+F,1,Z1,Q3,Eragrostis rigidior,3,Moderate,4.8,NA,NA,NA
+F,1,Z1,Q3,Eragrostis gummiflua,1,Low,5.2,NA,NA,NA
+F,1,Z1,Q4,Aristida adscensionis,2,Low,9,Y,Y,N
+F,1,Z1,Q4,Eragrostis rigidior,3,Low,12.7,NA,NA,NA
+F,1,Z1,Q4,Eragrostis gummiflua,1,Low,12.8,NA,NA,NA
+F,1,Z1,Q4,Eragrostis superba,NA,Moderate,12.7,NA,NA,NA
+F,1,Z1,Q5,Eragrostis rigidior,2,Moderate,5.5,Y,Y,N
+F,1,Z1,Q5,Eragrostis gummiflua,1,Low,5.9,NA,NA,NA
+F,1,Z1,Q5,Eragrostis superba,3,Moderate,7.9,NA,NA,NA
+F,1,Z1,Q5,NA,NA,NA,7.5,NA,NA,NA
+F,1,Z2,Q1,Heteropogon contortus,2,Moderate,4.9,N,Y,N
+F,1,Z2,Q1,Eragrostis rigidior,1,Moderate,7.8,NA,NA,NA
+F,1,Z2,Q1,Eragrostis gummiflua,3,Low,7.5,NA,NA,NA
+F,1,Z2,Q1,Digitaria eriantha,NA,High,13.3,NA,NA,NA
+F,1,Z2,Q2,Heteropogon contortus,1,Moderate,19.7,N,Y,N
+F,1,Z2,Q2,Eragrostis rigidior,2,Moderate,10.5,NA,NA,NA
+F,1,Z2,Q2,Eragrostis gummiflua,3,Low,20,NA,NA,NA
+F,1,Z2,Q2,Panicum maximum,NA,High,22.5,NA,NA,NA
+F,1,Z2,Q3,Aristida junciformis,3,Low,9.8,N,Y,N
+F,1,Z2,Q3,Digitaria eriantha,2,High,8.7,NA,NA,NA
+F,1,Z2,Q3,Heteropogon contortus,1,Moderate,8.9,NA,NA,NA
+F,1,Z2,Q3,NA,NA,NA,8.2,NA,NA,NA
+F,1,Z2,Q4,Heteropogon contortus,1,Moderate,8.6,Y,Y,N
+F,1,Z2,Q4,Eragrostis rigidior,2,Moderate,8.6,NA,NA,NA
+F,1,Z2,Q4,Eragrostis superba,NA,Moderate,8.3,NA,NA,NA
+F,1,Z2,Q4,Panicum maximum,3,High,7.7,NA,NA,NA
+F,1,Z2,Q5,Eragrostis rigidior,1,Moderate,15.3,N,N,Y
+F,1,Z2,Q5,Eragrostis gummiflua,2,Low,14.7,NA,NA,NA
+F,1,Z2,Q5,NA,NA,NA,13.6,NA,NA,NA
+F,1,Z2,Q5,NA,NA,NA,13.8,NA,NA,NA
+F,1,Z3,Q1,Heteropogon contortus,3,Moderate,5.4,N,Y,N
+F,1,Z3,Q1,Eragrostis rigidior,NA,Moderate,5.1,NA,NA,NA
+F,1,Z3,Q1,Eragrostis gummiflua,1,Low,4.6,NA,NA,NA
+F,1,Z3,Q1,Loudetia simplex,2,Moderate,12.8,NA,NA,NA
+F,1,Z3,Q2,Eragrostis gummiflua,1,Low,3.4,N,Y,N
+F,1,Z3,Q2,Aristida  canescens,2,Low,4.8,NA,NA,NA
+F,1,Z3,Q2,NA,NA,NA,5.4,NA,NA,NA
+F,1,Z3,Q2,NA,NA,NA,7.8,NA,NA,NA
+F,1,Z3,Q3,Eragrostis gummiflua,1,Low,2.2,Y,N,N
+F,1,Z3,Q3,NA,NA,NA,2.1,NA,NA,NA
+F,1,Z3,Q3,NA,NA,NA,2,NA,NA,NA
+F,1,Z3,Q3,NA,NA,NA,2.4,NA,NA,NA
+F,1,Z3,Q4,Digitaria eriantha,NA,High,2.4,N,N,N
+F,1,Z3,Q4,Brachiaria brizantha,3,Moderate,4,NA,NA,NA
+F,1,Z3,Q4,Eragrostis rigidior,2,Moderate,4.5,NA,NA,NA
+F,1,Z3,Q4,Heteropogon contortus,1,Moderate,4.5,NA,NA,NA
+F,1,Z3,Q5,Eragrostis rigidior,2,Moderate,3.4,Y,N,N
+F,1,Z3,Q5,Eragrostis gummiflua,1,Low,4.3,NA,NA,NA
+F,1,Z3,Q5,NA,NA,NA,4.8,NA,NA,NA
+F,1,Z3,Q5,NA,NA,NA,5,NA,NA,NA
+F,1,Z4,Q1,Eragrostis gummiflua,1,Low,1.6,N,N,N
+F,1,Z4,Q1,Digitaria eriantha,2,High,3.3,NA,NA,NA
+F,1,Z4,Q1,Heteropogon contortus,3,Moderate,3.7,NA,NA,NA
+F,1,Z4,Q1,NA,NA,NA,4.4,NA,NA,NA
+F,1,Z4,Q2,Eragrostis gummiflua,1,Low,4.6,N,Y,N
+F,1,Z4,Q2,Eragrostis rigidior,2,Moderate,4.7,NA,NA,NA
+F,1,Z4,Q2,Heteropogon contortus,3,Moderate,5.1,NA,NA,NA
+F,1,Z4,Q2,Aristida congesta C,NA,Low,5.2,NA,NA,NA
+F,1,Z4,Q3,Eragrostis gummiflua,1,Low,8.7,Y,N,Y
+F,1,Z4,Q3,Aristida diffusa,2,Low,6.6,NA,NA,NA
+F,1,Z4,Q3,NA,NA,NA,4.8,NA,NA,NA
+F,1,Z4,Q3,NA,NA,NA,5.1,NA,NA,NA
+F,1,Z4,Q4,Aristida congesta B,2,Low,7.7,N,N,N
+F,1,Z4,Q4,Heteropogon contortus,3,Moderate,6.6,NA,NA,NA
+F,1,Z4,Q4,Eragrostis rigidior,NA,Moderate,7.9,NA,NA,NA
+F,1,Z4,Q4,Eragrostis gummiflua,1,Low,7.8,NA,NA,NA
+F,1,Z4,Q4,Eragrostis superba,NA,Moderate,NA,NA,NA,NA
+F,1,Z4,Q5,Eragrostis gummiflua,1,Low,3.6,N,N,N
+F,1,Z4,Q5,Urochloa panicoides,2,Low,3.5,NA,NA,NA
+F,1,Z4,Q5,Aristida diffusa,3,Low,3.6,NA,NA,NA
+F,1,Z4,Q5,NA,NA,NA,3.6,NA,NA,NA
+F,2,Z1,Q1,Aristida congesta B,NA,Low,5.3,N,Y,Y
+F,2,Z1,Q1,Heteropogon contortus,2,Moderate,5.1,NA,NA,NA
+F,2,Z1,Q1,Eragrostis rigidior,3,Moderate,5,NA,NA,NA
+F,2,Z1,Q1,Digitaria eriantha,1,High,4.8,NA,NA,NA
+F,2,Z1,Q2,Panicum maximum,1,High,5.6,Y,Y,N
+F,2,Z1,Q2,NA,NA,NA,5.6,NA,NA,NA
+F,2,Z1,Q2,NA,NA,NA,5.6,NA,NA,NA
+F,2,Z1,Q2,NA,NA,NA,5.7,NA,NA,NA
+F,2,Z1,Q3,Cynodon dactylon,1,High,8.4,Y,N,N
+F,2,Z1,Q3,Aristida congesta C,2,Low,5.6,NA,NA,NA
+F,2,Z1,Q3,Eragrostis rigidior,3,Moderate,6.4,NA,NA,NA
+F,2,Z1,Q3,NA,NA,NA,5.1,NA,NA,NA
+F,2,Z1,Q4,Cynodon dactylon,3,High,9.7,N,N,N
+F,2,Z1,Q4,Aristida congesta C,2,Moderate,13.2,NA,NA,NA
+F,2,Z1,Q4,Digitaria eriantha,1,High,19.7,NA,NA,NA
+F,2,Z1,Q4,NA,NA,NA,22.1,NA,NA,NA
+F,2,Z1,Q5,Panicum maximum,1,High,13.1,Y,Y,N
+F,2,Z1,Q5,Eragrostis rigidior,2,Moderate,7,NA,NA,NA
+F,2,Z1,Q5,NA,NA,NA,6.5,NA,NA,NA
+F,2,Z1,Q5,NA,NA,NA,7.4,NA,NA,NA
+F,2,Z2,Q1,Eragrostis rigidior,2,Moderate,6.9,Y,Y,N
+F,2,Z2,Q1,Digitaria eriantha,1,High,6.3,NA,NA,NA
+F,2,Z2,Q1,NA,NA,NA,6.7,NA,NA,NA
+F,2,Z2,Q1,NA,NA,NA,6.4,NA,NA,NA
+F,2,Z2,Q2,Digitaria eriantha,1,High,4.7,N,N,Y
+F,2,Z2,Q2,Eragrostis rigidior,2,Moderate,4.2,NA,NA,NA
+F,2,Z2,Q2,Eragrostis gummiflua,3,Low,5.9,NA,NA,NA
+F,2,Z2,Q2,NA,NA,NA,4.6,NA,NA,NA
+F,2,Z2,Q3,Eragrostis rigidior,3,Moderate,7.4,N,Y,N
+F,2,Z2,Q3,Digitaria eriantha,1,High,7,NA,NA,NA
+F,2,Z2,Q3,Eragrostis gummiflua,2,Low,11.8,NA,NA,NA
+F,2,Z2,Q3,Pogonarthria squarrosa,NA,Low,8.9,NA,NA,NA
+F,2,Z2,Q4,Eragrostis gummiflua,2,Low,1.9,N,Y,N
+F,2,Z2,Q4,Digitaria eriantha,3,High,3.5,NA,NA,NA
+F,2,Z2,Q4,Cynodon dactylon,1,High,4,NA,NA,NA
+F,2,Z2,Q4,NA,NA,NA,3.8,NA,NA,NA
+F,2,Z2,Q5,Eragrostis gummiflua,1,Low,3.9,N,N,N
+F,2,Z2,Q5,Eragrostis rigidior,2,Moderate,5.1,NA,NA,NA
+F,2,Z2,Q5,Urochloa panicoides,3,Low,6.7,NA,NA,NA
+F,2,Z2,Q5,NA,NA,NA,8.9,NA,NA,NA
+F,2,Z3,Q1,Digitaria eriantha,1,High,2.7,N,N,N
+F,2,Z3,Q1,Cynodon dactylon,2,High,2.3,NA,NA,NA
+F,2,Z3,Q1,Perotis patens,3,Low,2.4,NA,NA,NA
+F,2,Z3,Q1,NA,NA,NA,2.4,NA,NA,NA
+F,2,Z3,Q2,NA,NA,NA,0,N,Y,Y
+F,2,Z3,Q3,Digitaria eriantha,1,High,17,N,N,N
+F,2,Z3,Q3,Cynodon dactylon,2,High,13.7,NA,NA,NA
+F,2,Z3,Q3,Eragrostis rigidior,3,Moderate,11.9,NA,NA,NA
+F,2,Z3,Q3,NA,NA,NA,11.9,NA,NA,NA
+F,2,Z3,Q4,Digitaria eriantha,1,High,5.2,N,N,N
+F,2,Z3,Q4,Eragrostis rigidior,2,Moderate,5.5,NA,NA,NA
+F,2,Z3,Q4,NA,NA,NA,6.1,NA,NA,NA
+F,2,Z3,Q4,NA,NA,NA,6.9,NA,NA,NA
+F,2,Z3,Q5,Aristida  canescens,1,Low,4.6,N,N,N
+F,2,Z3,Q5,Digitaria eriantha,2,High,4,NA,NA,NA
+F,2,Z3,Q5,Setaria incrassata,3,High,3.9,NA,NA,NA
+F,2,Z3,Q5,NA,NA,NA,4.5,NA,NA,NA
+F,2,Z4,Q1,Digitaria eriantha,2,High,12.4,N,Y,N
+F,2,Z4,Q1,Cynodon dactylon,1,High,11.8,NA,NA,NA
+F,2,Z4,Q1,Eragrostis rigidior,3,Moderate,12,NA,NA,NA
+F,2,Z4,Q1,NA,NA,NA,12,NA,NA,NA
+F,2,Z4,Q2,Heteropogon contortus,1,Moderate,5.6,Y,N,N
+F,2,Z4,Q2,Cynodon dactylon,2,High,6.4,NA,NA,NA
+F,2,Z4,Q2,Eragrostis rigidior,3,Moderate,6.7,NA,NA,NA
+F,2,Z4,Q2,Aristida  canescens,NA,Low,6.8,NA,NA,NA
+F,2,Z4,Q3,Enteropogon macrostachyus,1,High,6.6,Y,Y,N
+F,2,Z4,Q3,Panicum maximum,2,High,6.9,NA,NA,NA
+F,2,Z4,Q3,NA,NA,NA,8.5,NA,NA,NA
+F,2,Z4,Q3,NA,NA,NA,8.3,NA,NA,NA
+F,2,Z4,Q4,Heteropogon contortus,1,Moderate,13.7,Y,Y,N
+F,2,Z4,Q4,Cynodon dactylon,2,High,13.9,NA,NA,NA
+F,2,Z4,Q4,Eragrostis rigidior,3,Moderate,14.5,NA,NA,NA
+F,2,Z4,Q4,Aristida  canescens,NA,Low,13.9,NA,NA,NA
+F,2,Z4,Q5,Digitaria eriantha,2,High,13.1,Y,N,N
+F,2,Z4,Q5,Cynodon dactylon,1,High,12.9,NA,NA,NA
+F,2,Z4,Q5,Eragrostis rigidior,3,Moderate,12.6,NA,NA,NA
+F,2,Z4,Q5,NA,NA,NA,12.1,NA,NA,NA
+F,3,Z1,Q1,Digitaria eriantha,1,High,2.7,N,N,N
+F,3,Z1,Q1,Cynodon dactylon,2,High,2.3,NA,NA,NA
+F,3,Z1,Q1,Perotis patens,3,Low,2.4,NA,NA,NA
+F,3,Z1,Q1,NA,NA,NA,2.4,NA,NA,NA
+F,3,Z1,Q2,NA,NA,NA,0,N,Y,Y
+F,3,Z1,Q3,Digitaria eriantha,1,High,17,N,N,N
+F,3,Z1,Q3,Cynodon dactylon,2,High,13.7,NA,NA,NA
+F,3,Z1,Q3,Eragrostis rigidior,3,Moderate,11.9,NA,NA,NA
+F,3,Z1,Q3,NA,NA,NA,11.9,NA,NA,NA
+F,3,Z1,Q4,Digitaria eriantha,1,High,5.2,N,N,N
+F,3,Z1,Q4,Eragrostis rigidior,2,Moderate,5.5,NA,NA,NA
+F,3,Z1,Q4,NA,NA,NA,6.1,NA,NA,NA
+F,3,Z1,Q4,NA,NA,NA,6.9,NA,NA,NA
+F,3,Z1,Q5,Aristida  canescens,1,Low,4.6,N,N,N
+F,3,Z1,Q5,Digitaria eriantha,2,High,4,NA,NA,NA
+F,3,Z1,Q5,Setaria incrassata,3,High,3.9,NA,NA,NA
+F,3,Z1,Q5,NA,NA,NA,4.5,NA,NA,NA
+F,3,Z2,Q1,Eragrostis rigidior,1,Moderate,9.1,N,Y,N
+F,3,Z2,Q1,NA,NA,NA,7,NA,NA,NA
+F,3,Z2,Q1,NA,NA,NA,9,NA,NA,NA
+F,3,Z2,Q1,NA,NA,NA,8,NA,NA,NA
+F,3,Z2,Q2,Eragrostis rigidior,1,Moderate,2.6,N,Y,N
+F,3,Z2,Q2,NA,NA,NA,1.9,NA,NA,NA
+F,3,Z2,Q2,NA,NA,NA,2,NA,NA,NA
+F,3,Z2,Q2,NA,NA,NA,2.1,NA,NA,NA
+F,3,Z2,Q3,Aristida  canescens,NA,Low,4.9,N,N,N
+F,3,Z2,Q3,Digitaria eriantha,3,High,3.8,NA,NA,NA
+F,3,Z2,Q3,Eragrostis gummiflua,1,Low,3.4,NA,NA,NA
+F,3,Z2,Q3,Eragrostis rigidior,2,Moderate,3.5,NA,NA,NA
+F,3,Z2,Q4,NA,NA,NA,0,N,Y,N
+F,3,Z2,Q5,Aristida  canescens,2,Low,1.9,N,N,N
+F,3,Z2,Q5,Eragrostis rigidior,1,Moderate,3.6,NA,NA,NA
+F,3,Z2,Q5,NA,NA,NA,2.9,NA,NA,NA
+F,3,Z2,Q5,NA,NA,NA,3,NA,NA,NA
+F,3,Z3,Q1,Cynodon dactylon,1,High,4.8,N,N,N
+F,3,Z3,Q1,Pogonarthria squarrosa,2,Low,6.6,NA,NA,NA
+F,3,Z3,Q1,NA,NA,NA,6.8,NA,NA,NA
+F,3,Z3,Q1,NA,NA,NA,7,NA,NA,NA
+F,3,Z3,Q2,Digitaria eriantha,2,High,18.3,N,N,N
+F,3,Z3,Q2,Eragrostis rigidior,1,Moderate,16.2,NA,NA,NA
+F,3,Z3,Q2,NA,NA,NA,12.4,NA,NA,NA
+F,3,Z3,Q2,NA,NA,NA,12.2,NA,NA,NA
+F,3,Z3,Q3,Cynodon dactylon,1,High,12.2,N,N,N
+F,3,Z3,Q3,Digitaria eriantha,2,High,11.4,NA,NA,NA
+F,3,Z3,Q3,Eragrostis rigidior,3,Moderate,10.7,NA,NA,NA
+F,3,Z3,Q3,NA,NA,NA,9.4,NA,NA,NA
+F,3,Z3,Q4,Cynodon dactylon,1,High,12.1,N,Y,N
+F,3,Z3,Q4,Digitaria eriantha,2,High,11.2,NA,NA,NA
+F,3,Z3,Q4,NA,NA,NA,12.5,NA,NA,NA
+F,3,Z3,Q4,NA,NA,NA,12.5,NA,NA,NA
+F,3,Z3,Q5,Cynodon dactylon,1,High,7.9,N,Y,N
+F,3,Z3,Q5,Digitaria eriantha,2,High,6.2,NA,NA,NA
+F,3,Z3,Q5,Chloris virgata,3,Moderate,5.6,NA,NA,NA
+F,3,Z3,Q5,NA,NA,NA,5.4,NA,NA,NA
+F,3,Z4,Q1,Cynodon dactylon,1,High,5.2,N,N,N
+F,3,Z4,Q1,Digitaria eriantha,2,High,5.1,NA,NA,NA
+F,3,Z4,Q1,Eragrostis rigidior,3,Moderate,5.1,NA,NA,NA
+F,3,Z4,Q1,NA,NA,NA,5,NA,NA,NA
+F,3,Z4,Q2,Aristida  canescens,1,Low,6.6,N,Y,N
+F,3,Z4,Q2,Digitaria eriantha,2,High,7.4,NA,NA,NA
+F,3,Z4,Q2,NA,NA,NA,7.2,NA,NA,NA
+F,3,Z4,Q2,NA,NA,NA,7.1,NA,NA,NA
+F,3,Z4,Q3,Cynodon dactylon,1,High,7.2,N,N,N
+F,3,Z4,Q3,Digitaria eriantha,2,High,7.6,NA,NA,NA
+F,3,Z4,Q3,NA,NA,NA,7.6,NA,NA,NA
+F,3,Z4,Q3,NA,NA,NA,7.4,NA,NA,NA
+F,3,Z4,Q4,Cynodon dactylon,1,High,7.9,Y,N,N
+F,3,Z4,Q4,Digitaria eriantha,2,High,8.2,NA,NA,NA
+F,3,Z4,Q4,Eragrostis rigidior,3,Moderate,9.1,NA,NA,NA
+F,3,Z4,Q4,Pogonarthria squarrosa,NA,Low,9,NA,NA,NA
+F,3,Z4,Q5,Cynodon dactylon,1,High,9.2,Y,N,N
+F,3,Z4,Q5,Digitaria eriantha,2,High,9.5,NA,NA,NA
+F,3,Z4,Q5,Eragrostis rigidior,3,Moderate,9.9,NA,NA,NA
+F,3,Z4,Q5,Chloris virgata,NA,Moderate,10.3,NA,NA,NA
+F,4,Z1,Q1,Heteropogon contortus,2,Moderate,6.3,N,Y,N
+F,4,Z1,Q1,Digitaria eriantha,3,High,6.8,NA,NA,NA
+F,4,Z1,Q1,Eragrostis rigidior,1,Moderate,7.8,NA,NA,NA
+F,4,Z1,Q1,NA,NA,NA,7.8,NA,NA,NA
+F,4,Z1,Q2,Eragrostis gummiflua,1,Low,6.5,N,Y,N
+F,4,Z1,Q2,NA,NA,NA,6,NA,NA,NA
+F,4,Z1,Q2,NA,NA,NA,5.3,NA,NA,NA
+F,4,Z1,Q2,NA,NA,NA,5.1,NA,NA,NA
+F,4,Z1,Q3,Cynodon dactylon,1,High,7.7,Y,Y,N
+F,4,Z1,Q3,Digitaria eriantha,2,High,7.5,NA,NA,NA
+F,4,Z1,Q3,NA,NA,NA,7.3,NA,NA,NA
+F,4,Z1,Q3,NA,NA,NA,7.1,NA,NA,NA
+F,4,Z1,Q4,Digitaria eriantha,1,High,9.2,Y,Y,N
+F,4,Z1,Q4,Aristida  canescens,2,Low,9.7,NA,NA,NA
+F,4,Z1,Q4,NA,NA,NA,7.6,NA,NA,NA
+F,4,Z1,Q4,NA,NA,NA,8.5,NA,NA,NA
+F,4,Z1,Q5,Pogonarthria squarrosa,1,Low,7.3,N,N,N
+F,4,Z1,Q5,NA,NA,NA,7.3,NA,NA,NA
+F,4,Z1,Q5,NA,NA,NA,8.1,NA,NA,NA
+F,4,Z1,Q5,NA,NA,NA,7.8,NA,NA,NA
+F,4,Z2,Q1,Eragrostis rigidior,1,Moderate,11.4,N,N,N
+F,4,Z2,Q1,NA,NA,NA,10.8,NA,NA,NA
+F,4,Z2,Q1,NA,NA,NA,13,NA,NA,NA
+F,4,Z2,Q1,NA,NA,NA,13.1,NA,NA,NA
+F,4,Z2,Q2,Aristida  canescens,1,Low,4.5,N,N,Y
+F,4,Z2,Q2,Cynodon dactylon,2,High,4.8,NA,NA,NA
+F,4,Z2,Q2,Eragrostis gummiflua,3,Low,6,NA,NA,NA
+F,4,Z2,Q2,Brachiaria brizantha,NA,Moderate,5.8,NA,NA,NA
+F,4,Z2,Q3,Eragrostis rigidior,2,Moderate,12.4,N,N,N
+F,4,Z2,Q3,Panicum maximum,1,High,7.7,NA,NA,NA
+F,4,Z2,Q3,NA,NA,NA,6.2,NA,NA,NA
+F,4,Z2,Q3,NA,NA,NA,6.9,NA,NA,NA
+F,4,Z2,Q4,Heteropogon contortus,1,Moderate,2.1,N,N,N
+F,4,Z2,Q4,NA,NA,NA,2,NA,NA,NA
+F,4,Z2,Q4,NA,NA,NA,2.1,NA,NA,NA
+F,4,Z2,Q4,NA,NA,NA,1.9,NA,NA,NA
+F,4,Z2,Q5,Aristida  canescens,1,Low,2,Y,N,N
+F,4,Z2,Q5,Eragrostis rigidior,2,Moderate,3.3,NA,NA,NA
+F,4,Z2,Q5,Pogonarthria squarrosa,3,Low,3,NA,NA,NA
+F,4,Z2,Q5,NA,NA,NA,2.8,NA,NA,NA
+F,4,Z3,Q1,Cynodon dactylon,1,High,6.2,N,N,N
+F,4,Z3,Q1,Eragrostis rigidior,2,Moderate,3.6,NA,NA,NA
+F,4,Z3,Q1,Pogonarthria squarrosa,3,Low,4,NA,NA,NA
+F,4,Z3,Q1,NA,NA,NA,15.3,NA,NA,NA
+F,4,Z3,Q2,Cynodon dactylon,1,High,1.8,N,N,N
+F,4,Z3,Q2,Digitaria eriantha,2,High,1.9,NA,NA,NA
+F,4,Z3,Q2,NA,NA,NA,3.8,NA,NA,NA
+F,4,Z3,Q2,NA,NA,NA,3.1,NA,NA,NA
+F,4,Z3,Q3,Digitaria eriantha,1,High,10.8,N,Y,N
+F,4,Z3,Q3,Heteropogon contortus,2,Moderate,5.6,NA,NA,NA
+F,4,Z3,Q3,NA,NA,NA,10.2,NA,NA,NA
+F,4,Z3,Q3,NA,NA,NA,9.3,NA,NA,NA
+F,4,Z3,Q4,Eragrostis viscosa,2,Low,3.5,N,N,Y
+F,4,Z3,Q4,Digitaria eriantha,1,High,5.3,NA,NA,NA
+F,4,Z3,Q4,NA,NA,NA,4.5,NA,NA,NA
+F,4,Z3,Q4,NA,NA,NA,2.5,NA,NA,NA
+F,4,Z3,Q5,Cynodon dactylon,1,High,6.7,Y,N,N
+F,4,Z3,Q5,Digitaria eriantha,2,High,6.9,NA,NA,NA
+F,4,Z3,Q5,Eragrostis rigidior,3,Moderate,7.2,NA,NA,NA
+F,4,Z3,Q5,Aristida  canescens,NA,Low,9.8,NA,NA,NA
+F,4,Z4,Q1,Aristida  canescens,3,Low,3.1,N,N,Y
+F,4,Z4,Q1,Cynodon dactylon,2,High,2.9,NA,NA,NA
+F,4,Z4,Q1,Eragrostis rigidior,1,Low,2.5,NA,NA,NA
+F,4,Z4,Q1,NA,NA,NA,3,NA,NA,NA
+F,4,Z4,Q2,Aristida  canescens,3,Low,4,Y,Y,Y
+F,4,Z4,Q2,Panicum maximum,1,High,4.8,NA,NA,NA
+F,4,Z4,Q2,Cymbopogon excavatus,2,Low,5.5,NA,NA,NA
+F,4,Z4,Q2,NA,NA,NA,6.5,NA,NA,NA
+F,4,Z4,Q3,Aristida  canescens,3,Low,3.6,N,N,N
+F,4,Z4,Q3,Digitaria eriantha,1,High,5.6,NA,NA,NA
+F,4,Z4,Q3,Eragrostis gummiflua,2,Low,7.9,NA,NA,NA
+F,4,Z4,Q3,NA,NA,NA,5.6,NA,NA,NA
+F,4,Z4,Q4,Cynodon dactylon,1,High,13.7,N,N,N
+F,4,Z4,Q4,Heteropogon contortus,3,Moderate,10.2,NA,NA,NA
+F,4,Z4,Q4,Pogonarthria squarrosa,2,Low,6.4,NA,NA,NA
+F,4,Z4,Q4,NA,NA,NA,15.3,NA,NA,NA
+F,4,Z4,Q5,Cynodon dactylon,1,High,4.5,N,N,Y
+F,4,Z4,Q5,Eragrostis rigidior,2,Moderate,5.9,NA,NA,NA
+F,4,Z4,Q5,NA,NA,NA,5.5,NA,NA,NA
+F,4,Z4,Q5,NA,NA,NA,5,NA,NA,NA
+F,5,Z1,Q1,Cynodon dactylon,2,High,7.4,Y,N,N
+F,5,Z1,Q1,Digitaria eriantha,1,High,6.5,NA,NA,NA
+F,5,Z1,Q1,NA,NA,NA,6.3,NA,NA,NA
+F,5,Z1,Q1,NA,NA,NA,7.9,NA,NA,NA
+F,5,Z1,Q2,Cynodon dactylon,2,High,3.8,N,N,N
+F,5,Z1,Q2,Digitaria eriantha,1,High,3.8,NA,NA,NA
+F,5,Z1,Q2,Eragrostis rigidior,3,Moderate,6.3,NA,NA,NA
+F,5,Z1,Q2,NA,NA,NA,5.8,NA,NA,NA
+F,5,Z1,Q3,Cynodon dactylon,2,High,9.4,N,N,N
+F,5,Z1,Q3,Digitaria eriantha,1,Moderate,12.3,NA,NA,NA
+F,5,Z1,Q3,Eragrostis rigidior,3,Moderate,10.9,NA,NA,NA
+F,5,Z1,Q3,NA,NA,NA,11.2,NA,NA,NA
+F,5,Z1,Q4,Cynodon dactylon,1,High,8.6,N,N,N
+F,5,Z1,Q4,Digitaria eriantha,2,High,7.7,NA,NA,NA
+F,5,Z1,Q4,NA,NA,NA,10.2,NA,NA,NA
+F,5,Z1,Q4,NA,NA,NA,9.7,NA,NA,NA
+F,5,Z1,Q5,Cynodon dactylon,2,High,7.5,Y,N,N
+F,5,Z1,Q5,Digitaria eriantha,1,Moderate,8.2,NA,NA,NA
+F,5,Z1,Q5,NA,NA,NA,7.4,NA,NA,NA
+F,5,Z1,Q5,NA,NA,NA,7.2,NA,NA,NA
+F,5,Z2,Q1,Urochloa mosambicensis,1,Moderate,5.2,Y,N,N
+F,5,Z2,Q1,Digitaria eriantha,2,High,5,NA,NA,NA
+F,5,Z2,Q1,NA,NA,NA,5.1,NA,NA,NA
+F,5,Z2,Q1,NA,NA,NA,5.1,NA,NA,NA
+F,5,Z2,Q2,Cynodon dactylon,2,High,11.5,N,N,N
+F,5,Z2,Q2,Digitaria eriantha,1,High,9.4,NA,NA,NA
+F,5,Z2,Q2,Eragrostis rigidior,3,Moderate,7.1,NA,NA,NA
+F,5,Z2,Q2,Pogonarthria squarrosa,NA,Low,9.4,NA,NA,NA
+F,5,Z2,Q3,Cynodon dactylon,2,High,10.6,N,N,Y
+F,5,Z2,Q3,Digitaria eriantha,1,High,9.3,NA,NA,NA
+F,5,Z2,Q3,NA,NA,NA,8.4,NA,NA,NA
+F,5,Z2,Q3,NA,NA,NA,8.6,NA,NA,NA
+F,5,Z2,Q4,Cynodon dactylon,3,High,4.2,Y,N,N
+F,5,Z2,Q4,Digitaria eriantha,1,High,4.1,NA,NA,NA
+F,5,Z2,Q4,Eragrostis rigidior,2,Moderate,4.2,NA,NA,NA
+F,5,Z2,Q4,Aristida  canescens,NA,Low,4.6,NA,NA,NA
+F,5,Z2,Q5,Digitaria eriantha,1,High,5.5,N,N,N
+F,5,Z2,Q5,Eragrostis rigidior,2,Moderate,5,NA,NA,NA
+F,5,Z2,Q5,NA,NA,NA,5.3,NA,NA,NA
+F,5,Z2,Q5,NA,NA,NA,5.2,NA,NA,NA
+F,5,Z3,Q1,Cynodon dactylon,2,High,9.4,Y,N,Y
+F,5,Z3,Q1,Digitaria eriantha,3,High,8.7,NA,NA,NA
+F,5,Z3,Q1,Eragrostis rigidior,1,Moderate,8.6,NA,NA,NA
+F,5,Z3,Q1,NA,NA,NA,9.7,NA,NA,NA
+F,5,Z3,Q2,Cynodon dactylon,1,High,10.6,Y,N,Y
+F,5,Z3,Q2,Digitaria eriantha,2,High,8.2,NA,NA,NA
+F,5,Z3,Q2,NA,NA,NA,8.8,NA,NA,NA
+F,5,Z3,Q2,NA,NA,NA,8.4,NA,NA,NA
+F,5,Z3,Q3,Cynodon dactylon,2,High,8.8,N,N,Y
+F,5,Z3,Q3,Digitaria eriantha,1,High,9,NA,NA,NA
+F,5,Z3,Q3,Eragrostis rigidior,3,Moderate,9.8,NA,NA,NA
+F,5,Z3,Q3,Setaria incrassata,NA,High,8,NA,NA,NA
+F,5,Z3,Q3,Heteropogon contortus,NA,Moderate,NA,NA,NA,NA
+F,5,Z3,Q4,Cynodon dactylon,1,High,6.8,N,N,N
+F,5,Z3,Q4,Digitaria eriantha,2,High,7.2,NA,NA,NA
+F,5,Z3,Q4,Eragrostis rigidior,3,Moderate,8.6,NA,NA,NA
+F,5,Z3,Q4,NA,NA,NA,8.9,NA,NA,NA
+F,5,Z3,Q5,Cynodon dactylon,1,High,9.2,N,N,N
+F,5,Z3,Q5,Digitaria eriantha,2,High,11.1,NA,NA,NA
+F,5,Z3,Q5,Eragrostis rigidior,3,Moderate,12.4,NA,NA,NA
+F,5,Z3,Q5,NA,NA,NA,12.4,NA,NA,NA
+F,5,Z4,Q1,Cynodon dactylon,3,High,3.4,Y,Y,N
+F,5,Z4,Q1,Digitaria eriantha,2,High,3.1,NA,NA,NA
+F,5,Z4,Q1,Eragrostis rigidior,1,Moderate,2.2,NA,NA,NA
+F,5,Z4,Q1,NA,NA,NA,2.6,NA,NA,NA
+F,5,Z4,Q2,Cynodon dactylon,2,High,11,Y,Y,N
+F,5,Z4,Q2,Digitaria eriantha,1,High,9.7,NA,NA,NA
+F,5,Z4,Q2,NA,NA,NA,7.1,NA,NA,NA
+F,5,Z4,Q2,NA,NA,NA,9.2,NA,NA,NA
+F,5,Z4,Q3,Cynodon dactylon,1,High,3.9,N,N,N
+F,5,Z4,Q3,Digitaria eriantha,2,High,7.9,NA,NA,NA
+F,5,Z4,Q3,NA,NA,NA,5.1,NA,NA,NA
+F,5,Z4,Q3,NA,NA,NA,4,NA,NA,NA
+F,5,Z4,Q4,Cynodon dactylon,2,High,10.5,N,Y,N
+F,5,Z4,Q4,Digitaria eriantha,1,High,10.1,NA,NA,NA
+F,5,Z4,Q4,Heteropogon contortus,3,Moderate,10,NA,NA,NA
+F,5,Z4,Q4,NA,NA,NA,14.3,NA,NA,NA
+F,5,Z4,Q5,Digitaria eriantha,1,High,10.5,N,Y,N
+F,5,Z4,Q5,Eragrostis rigidior,2,Moderate,8.5,NA,NA,NA
+F,5,Z4,Q5,Aristida  canescens,3,Low,8.3,NA,NA,NA
+F,5,Z4,Q5,Eragrostis viscosa,NA,Low,8.4,NA,NA,NA
+F,5,Z4,Q5,Brachiaria brizantha,NA,Moderate,NA,NA,NA,NA
