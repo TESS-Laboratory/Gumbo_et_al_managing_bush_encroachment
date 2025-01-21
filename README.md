@@ -4,7 +4,7 @@ This repository contains preliminary data from initial vegetation surveys, R cod
 
 1. 'Data' contains the project data that has been used for analysis.  
 
-2. 'R Scripts' contains the scripts used in analysis.
+2. 'Scripts' contains the scripts used in analysis.
 
-3. 'Plots-R' contains the plots generated from analysis.
+3. 'Plots' contains the plots generated from analysis.
 
