@@ -4,7 +4,7 @@ library(tidyverse)
 library(vegan)
 library(multcompView)
 
-woody_species <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project development - Taps/R DATA/Woody species.csv")
+woody_species <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project development - Taps/R DATA/Woody species.csv")
 head(woody_species)
 
 # Summarize species composition
@@ -111,7 +111,7 @@ write_csv(as.data.frame(bray_curtis_matrix), "bray_curtis_dissimilarity.csv", ro
 
 
 
-#################### DETERMINING NUMBER OF SPECIES PER SITE, PLOT, SUBPLOT
+#################### DETERMINING NUMBER OF WOODY SPECIES PER SITE, PLOT, SUBPLOT
 
 # 
 woody_species <- woody_species %>%
@@ -239,6 +239,7 @@ ggplot(height_summary, aes(x = interaction(Plot, Subplot), y = Mean_Height, fill
     x = "Plot_Subplot",
     y = "Mean Height"
   )
+
 
 ### Boxplot for height distribution
 #ggplot(woody_species, aes(x = interaction(Site, Plot, Subplot), y = Max_Height, fill = Site)) +

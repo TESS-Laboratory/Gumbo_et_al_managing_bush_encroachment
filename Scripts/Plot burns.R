@@ -56,6 +56,10 @@ data_long <- data %>%
     values_to = "Value"
   )
 
+# Reorder Fuel_type
+data_long <- data_long %>%
+  mutate(Fuel_Type = factor(Fuel_Type, levels = c("Fine", "Coarse", "Woody")))
+
 # Summarize the data
 site_summary <- data_long %>%
   group_by(SITE, Fuel_Type) %>%
@@ -70,7 +74,88 @@ ggplot(site_summary, aes(x = SITE, y = Mean_Value, fill = Fuel_Type)) +
     y = "Mean ordinal value",
     fill = "Fuel classes"
   ) +
-  theme_beautiful()+  theme(legend.position = "right")
-)
+  theme_beautiful()+theme(legend.position = "right")
 
+##Saving plot in folder Plots
+output_folder <- "C:/workspace/gumbo_dev/Plots"  
 
+# Define the file path
+output_file <- file.path(output_folder, "Fuel classes per site.jpeg")
+
+# Save the last plot
+ggsave(output_file)
+
+############################################################################################
+######
+##### AT PLOT AND SITE LEVEL
+
+# Aggregate data at the plot level
+plot_data <- data_long %>%
+  group_by(SITE, PLOT, Fuel_Type) %>%
+  summarize(Value = mean(Value, na.rm = TRUE), .groups = "drop")
+
+#
+ggplot(plot_data, aes(x = PLOT, y = Value, fill = Fuel_Type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  #scale_fill_manual(values = c("Fine fuel" = "green", 
+                               #"Coarse fuel" = "blue", 
+                              #"Wood fuel" = "brown")) +
+  facet_wrap(~ SITE, scales = "free_x") +
+  labs(
+       x = "Plot", 
+       y = "Mean ordinal value", 
+       fill = "Fuel classes") +
+  theme_beautiful()+ theme(legend.position = "right")
+
+##Saving plot in folder Plots
+output_folder <- "C:/workspace/gumbo_dev/Plots"  
+
+# Define the file path
+output_file <- file.path(output_folder, "Fuel_classes per site & plot.jpeg")
+
+# Save the last plot
+ggsave(output_file)
+
+########################################################################
+
+#USING A VIOLIN PLOT FOR VISUALIZATION
+
+# Ensure numeric columns and handle non-numeric values
+data <- Fire %>%
+  mutate(
+    Fine = as.numeric(Fine),
+    Coarse = as.numeric(Coarse),
+    Woody = as.numeric(Woody)
+  )
+
+# Pivot longer
+data_long <- data %>%
+  pivot_longer(
+    cols = c(Fine, Coarse, Woody),
+    names_to = "Fuel_Type",
+    values_to = "Value"
+  )
+
+# Summarize the data
+site_summary <- data_long %>%
+  group_by(SITE, Fuel_Type) %>%
+  summarize(Mean_Value = mean(Value, na.rm = TRUE), .groups = "drop")
+
+ #Aggregate data at the plot level
+plot_data <- data_long %>%
+  group_by(SITE, PLOT, Fuel_Type) %>%
+  summarize(Value = mean(Value, na.rm = TRUE), .groups = "drop")
+
+ggplot(plot_data, aes(x = Fuel_Type, y = Value, fill = Fuel_Type)) +
+  geom_violin(trim = FALSE, alpha = 0.7) +
+  geom_jitter(width = 0.2, alpha = 0.5, color = "black") +
+  facet_wrap(~ SITE, scales = "free_x") +
+  #scale_fill_manual(values = c("Fine fuel" = "blue", 
+   #                            "Coarse fuel" = "green", 
+    #                           "Wood fuel" = "brown")) +
+  labs(
+       x = "Fuel Type", 
+      y = "Value", 
+       fill = "Fuel Type") +
+  theme_beautiful()+theme(legend.position = "right")
+##########################################################################.
