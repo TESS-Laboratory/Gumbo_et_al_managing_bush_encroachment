@@ -78,6 +78,21 @@ ggsave(GHeight,
 
 ####################### Create the violin plot at site level
 
+# Create the violin plot at Site and Plot level
+Gheight_SP <- ggplot(Grass_H, aes(x = interaction(Site, Plot), y = DPM.Height)) +
+  geom_violin(fill = "lightblue", color = "darkblue") +
+  labs(
+    x = "Site and Plot",
+    y = "DPM height (cm)"
+  ) +
+  theme_beautiful() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 0.8))
+
+ggsave(Gheight_SP,
+       filename = "C:/workspace/gumbo_dev/Plots/Violin GRASS height SP.png",
+       width = 16, height = 14, units = "cm" )
+
+
 # Gheight creates object that can be saved
 Gheight <- ggplot(Grass_H, aes(x = Site, y = DPM.Height)) +
   geom_violin(fill = "lightblue", color = "darkblue") +
@@ -88,7 +103,7 @@ Gheight <- ggplot(Grass_H, aes(x = Site, y = DPM.Height)) +
   theme_beautiful()
 
 # Saving as png
-ggsave(GHeight,
+ggsave(Gheight,
        filename = "C:/workspace/gumbo_dev/Plots/Violin - Grass Height Site.png",
        width = 16, height = 14, units = "cm" )
   

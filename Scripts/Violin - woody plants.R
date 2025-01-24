@@ -150,7 +150,7 @@ Woody_species_unique <- data %>%
 # 
 WSpp <- ggplot(Woody_species_unique) + 
   geom_col(aes(x = Site, y = n_species), fill = "grey", colour = "grey", width = 0.75) +
-  labs(y = "Woody species") + theme_beautiful()
+  labs(x = "Site", y = "No. of woody species") + theme_beautiful()
 
 # Saving as png
 ggsave(WSpp,
@@ -326,40 +326,3 @@ Woodydensity2 <- Woodydensity %>%
     Saplings_Density_Ha = (Saplings * 10000) / 12000,
     Trees_Density_Ha = (Trees * 10000) / 12000
   )
-
-density_data <- Woodydensity %>%
-  dplyr::select(Site, Seedlings_Density_Ha, Saplings_Density_Ha, Trees_Density_Ha)
-
-
-
-# Convert the data to long format for ggplot
-
-density_data_long <- density_data %>%
-  pivot_longer(
-    #cols = c(Seedlings_Density_Ha, Saplings_Density_Ha, Trees_Density_Ha),
-    cols = c(Seedlings_Density_Ha, Saplings_Density_Ha, Trees_Density_Ha),
-    names_to = "Category",
-    values_to = "Density"
-  )
-
-# Plot the data
-ggplot(density_data_long, aes(x = Site, y = Density, fill = Category)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  labs(
-    x = "Site",
-    y = "Density per hectare",
-    fill = "Legend"
-  ) +
-  theme_beautiful() 
-
-
-################BOX PLOT
-
-ggplot(density_data_long, aes(x = Site, y = Density, fill = Category)) +
-  geom_boxplot(outlier.colour = "red", outlier.shape = 4, outlier.size = 2) +
-  labs(
-    x = "Plant Category",
-    y = "Density (plants per hectare)"
-  ) +
-  theme_minimal() +
-  scale_fill_brewer(palette = "Set3")
