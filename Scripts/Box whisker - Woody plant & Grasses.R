@@ -46,7 +46,7 @@ b <- ggplot(data, aes(x = Site, y = Max_Height)) +
     x = "Site",
     y = "Mean tree height (m)") + theme_beautiful() +
   plot_annotation("(b)")
-b
+
 
 ##################
 #### Counting woody species

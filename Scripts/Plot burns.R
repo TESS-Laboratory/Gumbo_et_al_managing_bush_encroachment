@@ -67,23 +67,29 @@ site_summary <- data_long %>%
 
 
 # Create the bar plot
-ggplot(site_summary, aes(x = SITE, y = Mean_Value, fill = Fuel_Type)) +
+FCS <- ggplot(site_summary, aes(x = SITE, y = Mean_Value, fill = Fuel_Type)) +
   geom_bar(stat = "identity", position = "dodge") +
   labs(
     x = "Site",
-    y = "Mean ordinal value",
+    y = "Oordinal value",
     fill = "Fuel classes"
   ) +
   theme_beautiful()+theme(legend.position = "right")
 
+# Saving as png
+ggsave(FCS,
+       filename = "C:/workspace/gumbo_dev/Plots/FUEL Classes Site.png",
+       width = 16, height = 14, units = "cm" )
+
+
 ##Saving plot in folder Plots
-output_folder <- "C:/workspace/gumbo_dev/Plots"  
+#output_folder <- "C:/workspace/gumbo_dev/Plots"  
 
 # Define the file path
-output_file <- file.path(output_folder, "Fuel classes per site.jpeg")
+#output_file <- file.path(output_folder, "Fuel classes per site.jpeg")
 
 # Save the last plot
-ggsave(output_file)
+#ggsave(output_file)
 
 ############################################################################################
 ######
@@ -95,7 +101,7 @@ plot_data <- data_long %>%
   summarize(Value = mean(Value, na.rm = TRUE), .groups = "drop")
 
 #
-ggplot(plot_data, aes(x = PLOT, y = Value, fill = Fuel_Type)) +
+FC <- ggplot(plot_data, aes(x = PLOT, y = Value, fill = Fuel_Type)) +
   geom_bar(stat = "identity", position = "dodge") +
   #scale_fill_manual(values = c("Fine fuel" = "green", 
                                #"Coarse fuel" = "blue", 
@@ -103,18 +109,25 @@ ggplot(plot_data, aes(x = PLOT, y = Value, fill = Fuel_Type)) +
   facet_wrap(~ SITE, scales = "free_x") +
   labs(
        x = "Plot", 
-       y = "Mean ordinal value", 
+       y = "Ordinal value", 
        fill = "Fuel classes") +
   theme_beautiful()+ theme(legend.position = "right")
 
+# Saving as png
+ggsave(FC,
+       filename = "C:/workspace/gumbo_dev/Plots/Violin - Fuel class Site & P.png",
+       width = 16, height = 14, units = "cm" )
+
+
+
 ##Saving plot in folder Plots
-output_folder <- "C:/workspace/gumbo_dev/Plots"  
+#output_folder <- "C:/workspace/gumbo_dev/Plots"  
 
 # Define the file path
-output_file <- file.path(output_folder, "Fuel_classes per site & plot.jpeg")
+#output_file <- file.path(output_folder, "Fuel_classes per site & plot.jpeg")
 
 # Save the last plot
-ggsave(output_file)
+#ggsave(output_file)
 
 ########################################################################
 
@@ -146,7 +159,7 @@ plot_data <- data_long %>%
   group_by(SITE, PLOT, Fuel_Type) %>%
   summarize(Value = mean(Value, na.rm = TRUE), .groups = "drop")
 
-ggplot(plot_data, aes(x = Fuel_Type, y = Value, fill = Fuel_Type)) +
+Burn <- ggplot(plot_data, aes(x = Fuel_Type, y = Value, fill = Fuel_Type)) +
   geom_violin(trim = FALSE, alpha = 0.7) +
   geom_jitter(width = 0.2, alpha = 0.5, color = "black") +
   facet_wrap(~ SITE, scales = "free_x") +
@@ -158,4 +171,10 @@ ggplot(plot_data, aes(x = Fuel_Type, y = Value, fill = Fuel_Type)) +
       y = "Value", 
        fill = "Fuel Type") +
   theme_beautiful()+theme(legend.position = "right")
+
+# Saving as png
+ggsave(Burn,
+       filename = "C:/workspace/gumbo_dev/Plots/Violin - Fuel classes Site.png",
+       width = 16, height = 14, units = "cm" )
+
 ##########################################################################.

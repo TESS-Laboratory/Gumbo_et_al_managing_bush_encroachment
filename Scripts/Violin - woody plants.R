@@ -2,6 +2,7 @@
 library(tidyverse)
 library(vegan)
 library(multcompView)
+library(patchwork)
 
 woody_species <- read.csv("C:/workspace/gumbo_dev/DATA/WoodyPlants_C.csv")
 
@@ -68,10 +69,11 @@ WHeight <- ggplot(woody_species, aes(x = interaction(Site, Plot), y = Max_Height
   geom_boxplot() +
   labs(
     x = "Site and Plot",
-    y = "Woody plants height"
+    y = "Woody plants height (m)"
   ) +
   theme_beautiful() +
   theme(axis.text.x = element_text(angle = 45, hjust = 0.8))
+
 
 # Saving as png
 ggsave(WHeight,
@@ -85,7 +87,7 @@ Wheight <- ggplot(woody_species, aes(x = Site, y = Max_Height)) +
   geom_violin(fill = "lightblue", color = "darkblue") +
   labs(
     x = "Site",
-    y = "Woody plants height"
+    y = "Woody plants height (m)"
   ) +
   theme_beautiful()
   
@@ -116,6 +118,34 @@ ggsave(Wheight_SP,
        filename = "C:/workspace/gumbo_dev/Plots/Violin woody height SP.png",
        width = 16, height = 14, units = "cm" )
 
+
+##Create plot annotations and combine the plots
+
+ b <- ggplot(woody_species, aes(x = interaction(Site, Plot), y = Max_Height)) +
+  geom_violin(fill = "lightblue", color = "darkblue") +
+  labs(
+    x = "Site and Plot",
+    y = "Woody plants height"
+  ) +
+  theme_beautiful() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 0.8)) +
+  plot_annotation("(b)")
+
+a <- ggplot(woody_species, aes(x = Site, y = Max_Height)) +
+  geom_violin(fill = "lightblue", color = "darkblue") +
+  labs(
+    x = "Site",
+    y = "Woody plants height"
+  ) +
+  theme_beautiful()+
+  plot_annotation("(a)")
+
+# Combining plots
+Ab <- (a|b)
+
+ggsave(Ab,
+       filename = "C:/workspace/gumbo_dev/Plots/Fig 2 Violin woody height SP.png",
+       width = 16, height = 14, units = "cm" )
 ##########################################
 
 ### Violin - with jitter
@@ -133,7 +163,7 @@ ggsave(Wheight_SP,
 ################################################################################
 ########################################################
 
-###### Counting woody species
+###### COUNTING WOODY SPECIES
 
 data <- read.csv("C:/workspace/gumbo_dev/DATA/WoodyPlants_C.csv")
   
@@ -158,7 +188,7 @@ ggsave(WSpp,
        width = 16, height = 14, units = "cm" )
 
 
-# To analyse at site and plot level
+### To analyse at site and plot level
 # Count unique woody species at each site
 
 site_summary <- data %>%
@@ -192,9 +222,37 @@ WSpp2 <- ggplot(plot_summary, aes(x = Plot, y = species_count, fill = Site)) +
   labs(x = "Plot", y = "No. of woody species") +
   theme_beautiful() + theme(legend.position = "right")
 
+
+
 # Saving as png
 ggsave(WSpp2,
        filename = "C:/workspace/gumbo_dev/Plots/ Woody Species Site & Plot.png",
+       width = 16, height = 14, units = "cm" )
+
+
+
+###Creating plot annotations and combined plots
+a <- ggplot(Woody_species_unique) + 
+  geom_col(aes(x = Site, y = n_species), fill = "grey", colour = "grey", width = 0.75) +
+  labs(x = "Site", y = "No. of woody species") + theme_beautiful() + plot_annotation("(a)")
+
+print(a)
+
+
+b <- ggplot(plot_summary, aes(x = Plot, y = species_count, fill = Site)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Plot", y = "No. of woody species") +
+  theme_beautiful() + theme(legend.position = "right") +
+  plot_annotation("(b)")
+
+
+#combining the plots
+
+Fig1 <- (a|b)
+
+# Saving as png
+ggsave(Fig1,
+       filename = "C:/workspace/gumbo_dev/Plots/ Fig1 Woody Species.png",
        width = 16, height = 14, units = "cm" )
 
 
@@ -308,6 +366,27 @@ Simp <- ggplot(plot_diversity_simpson, aes(x = interaction(Site, Plot), y = simp
  ggsave(Simp,
        filename = "C:/workspace/gumbo_dev/Plots/ Woody SIMP Diversity Index PLOT.png",
        width = 16, height = 14, units = "cm" )
+ 
+ 
+ ######################### Combing plots
+ a <- ggplot(site_diversity_simpson, aes(x = Site, y = site_simpson_index)) +
+   geom_bar(stat = "identity", show.legend = FALSE) +
+   theme_beautiful() +
+   labs( y = "Simpson Diversity Index") +
+   theme(axis.text.x = element_text(angle = 0, hjust = 1)) + plot_annotation("(a)")
+ 
+ b <-  ggplot(plot_diversity_simpson, aes(x = interaction(Site, Plot), y = simpson_index, fill = Site)) +
+   geom_bar(stat = "identity", show.legend = FALSE) +
+   theme_beautiful() +
+   labs(x = "Site - Plot", y = "Simpson Diversity Index") +
+   theme(axis.text.x = element_text(angle = 45, hjust = 1))+ plot_annotation("(b)")
+ 
+ #combine a and b
+ Simps <- (a|b)
+ ggsave(Simps,
+        filename = "C:/workspace/gumbo_dev/Plots/Simpson Diversity WoodyP .png",
+        width = 16, height = 14, units = "cm" )
+ 
 ###################################################################################
 
 
@@ -319,6 +398,25 @@ Woodydensity <- data.frame(Site = c("A", "B", "C", "D", "E", "F"),
                            Saplings = c(2896, 1287, 971, 2190, 1544, 1361),
                            Trees = c(2223, 1617, 3298, 2986, 3126, 2043))
 
+ 
+ # Convert the data to long format for ggplot
+ data_long <- reshape2::melt(Woodydensity, id.vars = "Site")
+ 
+ ### Plot the data
+# dens <- ggplot(data_long, aes(x = Site, y = value, fill = variable)) +
+ #  geom_bar(stat = "identity", position = "dodge") +
+  # labs(
+   #  x = "Site",
+    # y = "Density per hectare",
+    # fill = "Legend"
+#   ) +
+ #  theme_beautiful() +theme(legend.position = "right")
+ 
+# ggsave(dens,
+  #      filename = "C:/workspace/gumbo_dev/Plots/Density WoodyP .png",
+ #       width = 16, height = 14, units = "cm" )
+ 
+ 
 # Calculate density per site
 Woodydensity2 <- Woodydensity %>%
   mutate(
@@ -326,3 +424,5 @@ Woodydensity2 <- Woodydensity %>%
     Saplings_Density_Ha = (Saplings * 10000) / 12000,
     Trees_Density_Ha = (Trees * 10000) / 12000
   )
+
+
