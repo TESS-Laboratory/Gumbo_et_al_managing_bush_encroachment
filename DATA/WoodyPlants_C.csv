@@ -6904,7 +6904,7 @@ B,1,Z1,Euclea divinorum,0.3
 B,1,Z1,Dichrostachys cinerea,4
 B,1,Z1,Ximenia caffra,3.8
 B,1,Z1,Diospyros lycioides,2.5
-B,1,Z1,Carissa spinarum,1.5
+B,1,Z1,Dichrostachys cinerea,1.5
 B,1,Z1,Canthium inerme,2.5
 B,1,Z1,Grewia decomovulata,3
 B,1,Z1,Ziziphus mucronata,6
@@ -19402,7 +19402,7 @@ D,2,Z1,Clerodendrum glabrum,2.3
 D,2,Z1,Allophylus africanus,1.3
 D,2,Z1,Zanthoxylum capense,3
 D,2,Z1,Zanthoxylum capense,1.3
-D,2,Z1,Gardenia volkensii,2.3
+D,2,Z1,Gardenia spathulifolia,2.3
 D,2,Z1,Fluegga virosa,3.4
 D,2,Z1,Euclea divinorum,2
 D,2,Z1,Warburgia salutaris,1.3
@@ -24565,8 +24565,7 @@ D,5,Z4,Combretum hereroense,4
 D,5,Z4,Ziziphus mucronata,2
 D,5,Z4,Ziziphus mucronata,2
 D,5,Z4,Dichrostachys cinerea,2
-D,5,Z4,Gymnosporia buxifolia,3
-D,5,Z4,Boscia mossambicensis,3
+D,5,Z4,Dichrostachys cinerea,3
 D,5,Z4,Allophylus africanus,2.6
 D,5,Z4,Allophylus africanus,3.2
 D,5,Z4,Euclea divinorum,3

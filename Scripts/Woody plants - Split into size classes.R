@@ -37,7 +37,7 @@ theme_beautiful <- function() {
 }
 
 
-Woody_split <- read.csv("C:/workspace/gumbo_dev/DATA/WoodyPlants_C.csv")
+Woody_split <- read_csv("C:/workspace/gumbo_dev/DATA/WoodyPlants_C.csv")
 
 ## CREATING NEW DATASET BY SPILTTING WOODY PLANTS INTO SIZE CLASSES
 
@@ -73,7 +73,7 @@ tail(Woody_split)
 ################  DETERMINING METRICS FOR TREES
 ###### TREEE HEIGHT
 
-data <- read.csv("C:/workspace/gumbo_dev/DATA/Woody_sizeclasses.csv")
+data <- read_csv ("C:/workspace/gumbo_dev/DATA/Woody_sizeclasses.csv")
 
 # Filter for trees and calculate height statistics at the site level
 trees_height_summary <- data %>%
@@ -124,9 +124,14 @@ trees_comp2 <- data %>%
   summarise(Trees_count = length(unique(Spp_name)))
 
 # 
-Tcomp <- ggplot(trees_comp2) + 
+Tcompa <- ggplot(trees_comp2) + 
   geom_col(aes(x = Site, y = Trees_count), fill = "grey", colour = "grey", width = 0.75) +
-  labs(x = "Site", y = "No. of tree species") + theme_beautiful()
+  labs(x = "Site", y = "No. of tree species", tag = "(a)") + theme_beautiful() +
+  #plot_annotation("(a)")
+  theme(
+    legend.position = "right",
+    plot.tag.position = c(0, 0.95)) # Adjust tag position (x, y)
+
 
 # Saving as png
 ggsave(Tcomp,
@@ -144,16 +149,35 @@ Tplot_summary <- data %>%
     .groups = "drop" )
 
 # Plot species richness by plot within each site
-Tpp2 <- ggplot(Tplot_summary, aes(x = Plot, y = species_count, fill = Site)) +
+Tpp2b <- ggplot(Tplot_summary, aes(x = Plot, y = species_count, fill = Site)) +
   geom_bar(stat = "identity", position = "dodge") +
   labs(x = "Plot", y = "No. of tree species") +
-  theme_beautiful() + theme(legend.position = "right")
+  theme_beautiful() + 
+  theme(legend.position = "right") +
+  plot_annotation("(b)") 
+  
+
+# ggplot(Tplot_summary, aes(x = Plot, y = species_count, fill = Site)) +
+#  geom_bar(stat = "identity", position = "dodge") +
+#  labs(x = "Plot", y = "No. of tree species", tag = "(b)") + # optional to add tag = . Remove it when not necessary
+#  theme_beautiful() + 
+#   theme(                                  ## when adjusting tag 'a'
+#    legend.position = "right",
+#    plot.tag.position = c(0, 0.95)) # Adjust tag position (x, y)  
+
 
 ggsave(Tpp2,
        filename = "C:/workspace/gumbo_dev/Plots/ TREESpecies SiteandPlot.png",
        width = 16, height = 14, units = "cm" )
 
+## COMBINING SPECIES COMPOSITION PLOTS INTO A SINGLE MULTI PANEL FOR SITE AND SP
 
+# Combining plots
+ Aab <- (Tcompa|Tpp2b)
+
+ggsave(Aab,
+    filename = "C:/workspace/gumbo_dev/Plots/SPP COMPO Combinedplots -Trees.png",
+  width = 16, height = 10, units = "cm" )
 
 
 
@@ -162,7 +186,7 @@ ggsave(Tpp2,
 ### REDOING DIVERSITY CALCULATIONS SO THAT THEY SHOW PER SITE
 
 # Load the dataset
-data <- read.csv("C:/workspace/gumbo_dev/DATA/Woody_sizeclasses.csv")
+data <- read_csv("C:/workspace/gumbo_dev/DATA/Woody_sizeclasses.csv")
 
 # Filter data for trees and group by Site, Plot, and Spp_name
 # Filter data for trees and calculate species abundance
@@ -184,9 +208,20 @@ Tsdv <- ggplot(diversity_data, aes(x = Site, y = Shannon_Diversity)) +
   geom_bar(stat = "identity", position = "dodge", fill = "grey", colour = "grey") +
   labs(
     x = "Site",
-    y = "Shannon-Wiener Diversity Index"
+    y = "Shannon-Weiner Diversity Index"
   ) +
   theme_beautiful() 
+
+#### USING ANNOTATIONS
+# Tsdv <- ggplot(diversity_data, aes(x = Site, y = Shannon_Diversity)) +
+#  geom_bar(stat = "identity", position = "dodge", fill = "grey", colour = "grey") +
+#  labs(
+#    x = "Site",
+#    y = "Shannon-Weiner Diversity Index", tag = "(a)") + # optional to add tag = . Remove it when not necessary
+#   theme_beautiful() + 
+#   theme(                                    ## when adjusting tag 'a'
+#    legend.position = "right",
+#    plot.tag.position = c(0, 0.999)) # Adjust tag position (x, y)  
 
 #Saving data
 ggsave(Tsdv,
@@ -198,13 +233,33 @@ ggsave(Tsdv,
 Treep <- ggplot(diversity_data, aes(x = interaction(Site, Plot), y = Shannon_Diversity, fill = Site)) +
   geom_bar(stat = "identity", show.legend = FALSE) +
   theme_beautiful() +
-  labs(x = "Site-Plot", y = "Shannon Diversity Index") +
+  labs(x = "Site-Plot", y = "Shannon-Weiner Diversity Index") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+## using PLOT ANNOTATIONS
+#Treep <- ggplot(diversity_data, aes(x = interaction(Site, Plot), y = Shannon_Diversity, fill = Site)) +
+#  geom_bar(stat = "identity", show.legend = FALSE) +
+# labs(
+#  x = "Site-Plot",
+#  y = "Shannon-Weiner Diversity Index", tag = "(b)") + # optional to add tag = . Remove it when not necessary
+#  theme_beautiful() + 
+#  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+#  theme(                                    ## when adjusting tag 'a'
+#    legend.position = "right",
+#    plot.tag.position = c(0, 0.999)) # Adjust tag position (x, y)  
 
 ##Saving as png
 ggsave(Treep,
        filename = "C:/workspace/gumbo_dev/Plots/ Tree Shannon Diversity Index SP.png",
-       width = 16, height = 14, units = "cm" )
+       width = 16, height = 10, units = "cm" )
+
+## COMBINING SHANNON WEINER DIVERSITY PLOTS INTO A SINGLE MULTI PANEL FOR SITE AND SP
+# Combining plots
+ Ac <- (Tsdv|Treep)
+
+ggsave(Ac,
+     filename = "C:/workspace/gumbo_dev/Plots/SHANNON Combinedplots -Trees .png",
+    width = 16, height = 10, units = "cm" )
 
 ############################################################################################
 ##########################################################################################
@@ -222,7 +277,7 @@ Tplot_diversity_simpson <- Tplot_data %>%
   summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
 
 
-write.csv(Tplot_diversity_simpson, "Trees Simpsons Diversity.csv")
+#write.csv(Tplot_diversity_simpson, "Trees Simpsons Diversity.csv")
 
 # Calculate site-level Simpson diversity (mean across plots)
 Tsite_diversity_simpson <- Tplot_diversity_simpson %>%
@@ -234,7 +289,18 @@ TSIMP <- ggplot(Tsite_diversity_simpson, aes(x = Site, y = site_simpson_index)) 
   geom_bar(stat = "identity", show.legend = FALSE) +
   theme_beautiful() +
   labs( y = "Simpson Diversity Index") +
-  theme(axis.text.x = element_text(angle = 0, hjust = 1))
+  theme(axis.text.x = element_text(angle = 0, hjust = 1))  +
+  plot_annotation("(a)")
+
+## USING pLOT TAG ANNOTATION
+#TSIMP <- ggplot(Tsite_diversity_simpson, aes(x = Site, y = site_simpson_index)) +
+#  geom_bar(stat = "identity", show.legend = FALSE) +
+#  theme_beautiful() +
+#  labs( y = "Simpson Diversity Index", tag = "(a)") + # optional to add tag = . Remove it when not necessary
+#    theme_beautiful() + 
+#     theme(                                    ## when adjusting tag 'a'
+#      legend.position = "right",
+#      plot.tag.position = c(0, 0.999)) # Adjust tag position (x, y)  
 
 # Saving as png
 ggsave(TSIMP,
@@ -246,14 +312,35 @@ ggsave(TSIMP,
 TPSimp <- ggplot(Tplot_diversity_simpson, aes(x = interaction(Site, Plot), y = simpson_index, fill = Site)) +
   geom_bar(stat = "identity", show.legend = FALSE) +
   theme_beautiful() +
-  labs(x = "Site and Plot", y = "Simpson Diversity Index") +
+  labs(x = "Site - Plot", y = "Simpson Diversity Index") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
 
+
+###using plot tag annotations
+TPSimp <- ggplot(Tplot_diversity_simpson, aes(x = interaction(Site, Plot), y = simpson_index, fill = Site)) +
+  geom_bar(stat = "identity", show.legend = FALSE) +
+  theme_beautiful() +
+  labs(x = "Site - Plot", y = "Simpson Diversity Index", tag = "(b)") + # optional to add tag = . Remove it when not necessary
+      theme_beautiful() + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +     
+  theme(                                    ## when adjusting tag 'a'
+        legend.position = "right",
+        plot.tag.position = c(0, 0.999)) # Adjust tag position (x, y)  
 
 # Saving as png
 ggsave(TPSimp,
        filename = "C:/workspace/gumbo_dev/Plots/ TreeSIMPSON Diversity Index PLOT.png",
        width = 16, height = 14, units = "cm" )
+
+
+#### COMBINING SIMPSON PLOTS INTO A SINGLE MULTI PANEL FOR SITE AND SP
+
+# Combining plots
+Ab <- (TSIMP|TPSimp)
+
+ ggsave(Ab,
+       filename = "C:/workspace/gumbo_dev/Plots/SIMPCombinedplots -Trees .png",
+       width = 16, height = 10, units = "cm" )
 
 ############################################################################################
 
@@ -277,7 +364,114 @@ bc_dist_trees
 # Save the new data set
 write.csv(bc_dist_trees, "Trees Beta diversity.csv", row.names = FALSE)
 
+#######################################################################################
+#######################################################################################
+
+# CALCULATING SORENSEN INDEX
+
+data <- read_csv("C:/workspace/gumbo_dev/DATA/Woody_sizeclasses.csv")
+
+# Step 1: Filter data for trees and calculate species presence/absence per site
+trees_data <- data %>%
+  filter(!is.na(Trees)) %>%
+  group_by(Site, Spp_name) %>%
+  summarise(Trees_Count = n(), .groups = "drop") %>%
+  mutate(Presence = as.integer(Trees_Count > 0))  # Convert to 1 if present
+
+# Step 2: Convert data into a species-site matrix
+species_matrix <- trees_data %>%
+  select(Site, Spp_name, Presence) %>%
+  pivot_wider(names_from = Spp_name, values_from = Presence, values_fill = list(Presence = 0))  # Ensure correct format
 
 
+# Compute Sorensen similarity index
+sorensen_matrix <- vegdist(species_matrix[,-1], method = "bray")  # Bray-Curtis is 1 - Sorensen
+
+sorensen_matrix
 
 
+# Convert dissimilarity to similarity (Sorensen = 1 - Bray-Curtis)
+sorensen_similarity <- 1 - sorensen_matrix
+sorensen_similarity
+
+###SAVING AS A TABLE
+# Convert the Sorensen similarity matrix into a data frame
+sorensen_df <- as.data.frame(as.matrix(sorensen_similarity))
+
+# Add site names as a column (for better interpretation)
+sorensen_df <- tibble::rownames_to_column(sorensen_df, var = "Site")
+
+# Save the results to a CSV file
+write.csv(sorensen_df, "Tree sorensen_similarity.csv", row.names = FALSE)
+
+#######################################################################################
+
+##CALCULATING JACCARD DIVERSITY INDEX FOR TREES
+
+# Step 1: Filter data for trees and calculate species presence/absence per site
+trees_data <- data %>%
+  filter(!is.na(Trees)) %>%
+  group_by(Site, Spp_name) %>%
+  summarise(Trees_Count = n(), .groups = "drop") %>%
+  mutate(Presence = as.integer(Trees_Count > 0))  # Convert to 1 if present
+
+# Step 2: Convert data into a species-site matrix
+species_matrix <- trees_data %>%
+  select(Site, Spp_name, Presence) %>%
+  pivot_wider(names_from = Spp_name, values_from = Presence, values_fill = list(Presence = 0))  # Ensure correct format
+
+# Step 2: Compute Jaccard similarity index
+jaccard_matrix <- vegdist(species_matrix[,-1], method = "jaccard", binary = TRUE)  # Binary = TRUE for presence/absence
+
+# Convert dissimilarity to similarity (Jaccard similarity = 1 - Jaccard dissimilarity)
+jaccard_similarity <- 1 - jaccard_matrix
+jaccard_similarity
+
+# Step 3: Convert results into a data frame
+jaccard_df <- as.data.frame(as.matrix(jaccard_similarity))
+jaccard_df <- tibble::rownames_to_column(jaccard_df, var = "Site")
+
+# Save the results as a CSV file
+write.csv(jaccard_df, "jaccard_similarity_results.csv", row.names = FALSE)
+
+#########################################################################################################
+
+############### woody plants density per site
+
+# Load the data
+df <- read_csv("C:/workspace/gumbo_dev/DATA/Woody_sizeclasses.csv")
+
+# Group by Site and sum Seedlings, Saplings, and Trees
+# Count the number of non-NA entries for Seedlings, Saplings, and Trees per site
+site_counts <- df %>%
+  group_by(Site) %>%
+  summarise(
+    Seedlings = sum(!is.na(Seedlings)),
+    Saplings = sum(!is.na(Saplings)),
+    Trees = sum(!is.na(Trees))
+  )%>%
+  # Apply the density formula
+  mutate(across(c(Total_Seedlings, Total_Saplings, Total_Trees), ~ . * 10000 / 12000))
+
+
+# Reshape data for plotting
+site_density_long <- site_counts %>%
+  pivot_longer(cols = c(Seedlings,Saplings,Trees), 
+               names_to = "Woody_class", values_to = "Density")
+
+
+## Reorder woody classes
+Site_data_long <- site_density_long %>%
+  mutate(Woody_class = factor(Woody_class, levels = c("Seedlings", "Saplings", "Trees")))
+
+# Plot the bar graph
+WC <- ggplot(Site_data_long, aes(x = Site, y = Density, fill = `Woody_class`)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Site", y = "Density per hectare", fill = "Legend") +
+  theme_beautiful() + theme(legend.position = "right")+
+  theme(axis.text.x = element_text(angle = 0, hjust = 1))
+
+#Saving as png
+ggsave(WC,
+       filename = "C:/workspace/gumbo_dev/Plots/ WOODY DENSITY SITE.png",
+       width = 16, height = 14, units = "cm" )
