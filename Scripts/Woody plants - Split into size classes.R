@@ -156,7 +156,7 @@ Tpp2b <- ggplot(Tplot_summary, aes(x = Plot, y = species_count, fill = Site)) +
   theme(legend.position = "right") +
   plot_annotation("(b)") 
   
-
+######USING TAG ANNOTATIONS
 # ggplot(Tplot_summary, aes(x = Plot, y = species_count, fill = Site)) +
 #  geom_bar(stat = "identity", position = "dodge") +
 #  labs(x = "Plot", y = "No. of tree species", tag = "(b)") + # optional to add tag = . Remove it when not necessary
@@ -342,6 +342,23 @@ Ab <- (TSIMP|TPSimp)
        filename = "C:/workspace/gumbo_dev/Plots/SIMPCombinedplots -Trees .png",
        width = 16, height = 10, units = "cm" )
 
+ 
+ 
+ 
+ ##CREATING MULTI PANEL PLOT
+ ## Combine all six plots in a 3-row × 2-column layout. MULTIPANEL PLOT
+ Tmulti_panel_plot <- (Tcompa + Tpp2b) / (Tsdv + Treep) / (TSIMP + TPSimp) +
+   plot_annotation(tag_levels = 'a',
+                   tag_prefix = "(",       # Add opening bracket
+                   tag_suffix = ")" )&     # Add closing bracket)  
+   theme(plot.tag.position = c(-0.05, 1)) 
+ 
+ Tmulti_panel_plot
+ 
+ ggsave(Tmulti_panel_plot, 
+        filename = "C:/workspace/gumbo_dev/Plots/TREE CCCombined SP.png",
+        width = 16, height = 14, units = "cm" )
+ 
 ############################################################################################
 
 ######################### DETERMINING BETA DIVERSITY
@@ -475,3 +492,106 @@ WC <- ggplot(Site_data_long, aes(x = Site, y = Density, fill = `Woody_class`)) +
 ggsave(WC,
        filename = "C:/workspace/gumbo_dev/Plots/ WOODY DENSITY SITE.png",
        width = 16, height = 14, units = "cm" )
+
+##############################################################################
+######### CREATING TABLES FOR DIVERSITY METRICS (SORENSON, JACCARD, AND BRAY-CURTIS)
+
+library(tidyverse)
+library(officer)
+
+# Define the SORENSON similarity matrix
+similarity_matrix <- matrix(
+  c(1, 0.75, 0.7, 0.62, 0.6, 0.64,
+    0.75, 1, 0.72, 0.58, 0.61, 0.59,
+    0.7, 0.72, 1, 0.58, 0.64, 0.68,
+    0.62, 0.58, 0.58, 1, 0.63, 0.67,
+    0.6, 0.61, 0.64, 0.63, 1, 0.61,
+    0.64, 0.59, 0.68, 0.67, 0.61, 1),
+  nrow = 6, ncol = 6, byrow = TRUE
+)
+## JACCARD DIVERSITY INDEX... replaced rows on the with with J   
+# Jsimilarity_matrix <- matrix(
+#  c(1.00,	0.60,	0.54,	0.44,	0.43,	0.47,
+ 0.60,	1.00,	0.57,	0.41,	0.44,	0.41,
+ 0.54,	0.57,	1.00,	0.41,	0.47,	0.52,
+ 0.44,	0.41,	0.41,	1.00,	0.46,	0.50,
+ 0.43,	0.44,	0.47,	0.46,	1.00,	0.44,
+ 0.47,	0.41,	0.52,	0.50,	0.44,	1.00),
+# nrow = 6, ncol = 6, byrow = TRUE)
+
+
+
+# Assign row and column names
+rownames(Jsimilarity_matrix) <- colnames(Jsimilarity_matrix) <- c("A", "B", "C", "D", "E", "F")
+
+# Convert to a matrix table
+Jsimilarity_matrix <- as.matrix(Jsimilarity_matrix)
+
+# Print the matrix
+print(Jsimilarity_matrix)
+######################################
+
+# Install and load necessary package
+install.packages("flextable")  # Run this only if you haven't installed flextable
+library(flextable)
+
+# Convert matrix to dataframe
+similarity_Jdf <- as.data.frame(Jsimilarity_matrix)
+
+# Add row names as a new column
+similarity_Jdf <- cbind(Site = rownames(similarity_Jdf), similarity_Jdf)
+
+# Create a flextable
+table_word <- flextable(similarity_Jdf)
+
+# Save as a Word document
+
+doc <- read_docx()
+doc <- body_add_flextable(doc, table_word)
+
+##Saving as doc.
+print(doc, target = "C:/workspace/gumbo_dev/Plots/Jaccard similarity_matrix.docx")
+
+#########################################################################
+
+### CREATING BRAY CURTIS 
+### Define the lower triangular matrix values (21 elements)
+# Create the matrix with the given data
+similarity_matrix <- matrix(c(
+  0,   0.67, 0.65, 0.55, 0.61, 0.65,  # Row A
+  0.67, 0,   0.76, 0.67, 0.73, 0.86,  # Row B
+  0.65, 0.76, 0,   0.44, 0.51, 0.55,  # Row C
+  0.55, 0.67, 0.44, 0,   0.33, 0.51,  # Row D
+  0.61, 0.73, 0.51, 0.33, 0,   0.62,  # Row E
+  0.65, 0.86, 0.55, 0.51, 0.62, 0    # Row F
+), nrow = 6, ncol = 6, byrow = TRUE)
+
+# Assign row and column names
+rownames(similarity_matrix) <- colnames(similarity_matrix) <- c("A", "B", "C", "D", "E", "F")
+
+# Convert to a data frame for better readability
+similarity_df <- as.data.frame(similarity_matrix)
+
+# Print the table
+print(similarity_df)
+
+## SAVE AS DOC FILE     BRAY CURTIS 
+# Convert matrix to dataframe
+similarity_df <- as.data.frame(similarity_matrix)
+
+# Add row names as a new column
+similarity_df <- cbind(Site = rownames(similarity_df), similarity_df)
+
+# Create a flextable
+table_word <- flextable(similarity_df)
+
+# Save as a Word document
+
+doc <- read_docx()
+doc <- body_add_flextable(doc, table_word)
+
+##Saving as doc.
+print(doc, target = "C:/workspace/gumbo_dev/Plots/Bray Curtis dissimilarity_matrix.docx")
+
+# Save as CSV for compatibility with Word/Excel
+write.csv(similarity_df, "similarity_matrix.csv", row.names = TRUE)

@@ -1,4 +1,4 @@
-Site,Plot,Subplot,Quadrat,Spp_name,Rank_dominant_grass,Grazing_value,DPM Height,Grazing_activity,Quadrat_under_canopy,Dung_presence
+Site,Plot,Subplot,Quadrat,Spp_name,Rank_dominant_grass,Grazing_value,DPM_Height,Grazing_activity,Quadrat_under_canopy,Dung_presence
 A,1,Z1,Q1,Digitaria eriantha,1,High,19,N,N,N
 A,1,Z1,Q1,Urochloa mosambicensis,3,Moderate,18.9,NA,NA,NA
 A,1,Z1,Q1,Hyperrhenia filipendula,2,Moderate,11.6,NA,NA,NA
