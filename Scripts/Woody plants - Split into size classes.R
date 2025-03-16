@@ -153,6 +153,12 @@ trees_comp <- data %>%
 
 
 
+
+
+
+
+
+
 ##### Create a formatted table
 ft <- flextable(trees_comp) %>%
   theme_vanilla() %>%  # Apply a simple theme
@@ -176,11 +182,11 @@ trees_comp <- data %>%
   slice_max(order_by = Count, n = 5)  # Get the top 5 species per Subplot
 
 # Pivot the data to make species names as columns
-trees_pivot <- trees_comp %>%
-  pivot_wider(names_from = Spp_name, values_from = Count, values_fill = 0)
+#trees_pivot <- trees_comp %>%
+ # pivot_wider(names_from = Spp_name, values_from = Count, values_fill = 0)
 
 # Save to Excel
-write.xlsx(trees_pivot, file = "C:/workspace/gumbo_dev/Plots/Dominant Tree_Species_SubPlot.xlsx")
+#write.xlsx(trees_pivot, file = "C:/workspace/gumbo_dev/Plots/Dominant Tree_Species_SubPlot.xlsx")
 
 
 ##### Create a formatted table

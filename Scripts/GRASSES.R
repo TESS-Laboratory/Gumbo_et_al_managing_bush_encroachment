@@ -174,7 +174,7 @@ ggsave(Ac,
 
 ######################################################################################
 #################################################################################################
-library(vegan)
+
 
 
 ##calculate species abundance per plot
@@ -351,11 +351,18 @@ GrassH <- read_csv("C:/workspace/gumbo_dev/DATA/Grasses_C.csv")
 
 # Filter for Grasses 
 
-Grass_comp <- Grass_H %>%
+Grass_comp <- GrassH %>%
   filter(!is.na(Spp_name)) %>%  # Keep only rows where grass spp are recorded
   group_by(Site, Plot, Spp_name) %>%
   summarise(Count = n(), 
             .groups = "drop"  )
+
+#unique_spp <- GrassH %>%
+ # filter(!is.na(Spp_name)) %>%  # Remove rows with missing species names
+  #distinct(Spp_name)  # Select only unique species names
+
+#write.csv(unique_spp, "UniqSpp.csv")
+
 
 #Number of grass species per site
 GrassC <- Grass_comp %>%
