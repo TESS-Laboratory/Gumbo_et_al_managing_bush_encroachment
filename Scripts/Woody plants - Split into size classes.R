@@ -1,6 +1,9 @@
 library(tidyverse)
 library(vegan)
 library(patchwork)
+library(flextable)
+library(officer)
+library(openxlsx)
 
 theme_beautiful <- function() {
   theme_bw() +
@@ -113,11 +116,88 @@ ggsave(THgt,
 
 trees_comp <- data %>%
   filter(!is.na(Trees)) %>%  # Keep only rows where Trees are recorded
-  group_by(Site, Plot, Spp_name) %>%
+  group_by(Site, Plot, Subplot, Spp_name) %>%
   summarise(Count = n(), 
     .groups = "drop"  )
 
-#Number of tree species per site
+### creating a table for tree species per subplot level
+# Create a formatted table
+ft <- flextable(trees_comp) %>%
+  theme_vanilla() %>%  # Apply a simple theme
+  autofit()            # Auto-adjust column widths
+
+# Create a Word document and add the table
+doc <- read_docx() %>%
+  body_add_par("Table 1: Tree Species Count by Site, Plot, and Subplot", style = "heading 2") %>%
+  body_add_flextable(ft)
+
+# Save the document
+print(doc, target = "C:/workspace/gumbo_dev/Plots/Tree species comp Plotlevel.docx")
+
+
+####grouping the 3 most dominant species to Plot level
+trees_comp <- data %>%
+  filter(!is.na(Trees)) %>%  # Keep only rows where Trees are recorded
+  group_by(Site, Plot,Spp_name) %>%
+  summarise(Count = n(), .groups = "drop") %>%
+  group_by(Site, Plot) %>%
+  slice_max(order_by = Count, n = 5)  # Get the top 3 species per Subplot
+
+####
+# Pivot the data to make species names as columns
+#trees_pivot <- trees_comp %>%
+#  pivot_wider(names_from = Spp_name, values_from = Count, values_fill = 0)
+
+# Save to Excel
+# write.xlsx(trees_pivot, file = "C:/workspace/gumbo_dev/Plots/Dominant Tree_Species_Plot.xlsx")
+
+
+
+##### Create a formatted table
+ft <- flextable(trees_comp) %>%
+  theme_vanilla() %>%  # Apply a simple theme
+  autofit()            # Auto-adjust column widths
+
+# Create a Word document and add the table
+doc <- read_docx() %>%
+  body_add_par("Table 1: Tree Species Count by Site and Plot", style = "heading 2") %>%
+  body_add_flextable(ft)
+
+# Save the document 
+print(doc, target = "C:/workspace/gumbo_dev/Plots/Dominant Tree speciesPlot.docx")
+
+
+###### grouping the 5 most dominant species to Subplot level
+trees_comp <- data %>%
+  filter(!is.na(Trees)) %>%  # Keep only rows where Trees are recorded
+  group_by(Site, Plot, Subplot, Spp_name) %>%
+  summarise(Count = n(), .groups = "drop") %>%
+  group_by(Site, Plot, Subplot) %>%
+  slice_max(order_by = Count, n = 5)  # Get the top 5 species per Subplot
+
+# Pivot the data to make species names as columns
+trees_pivot <- trees_comp %>%
+  pivot_wider(names_from = Spp_name, values_from = Count, values_fill = 0)
+
+# Save to Excel
+write.xlsx(trees_pivot, file = "C:/workspace/gumbo_dev/Plots/Dominant Tree_Species_SubPlot.xlsx")
+
+
+##### Create a formatted table
+ ft <- flextable(trees_comp) %>%
+  theme_vanilla() %>%  # Apply a simple theme
+  autofit()            # Auto-adjust column widths
+
+# Create a Word document and add the table
+ doc <- read_docx() %>%
+  body_add_par("Table 1: Tree Species Count by Site, Plot, and Subplot", style = "heading 2") %>%
+  body_add_flextable(ft)
+
+# Save the document 
+print(doc, target = "C:/workspace/gumbo_dev/Plots/Dominant Tree speciesSubplot.docx")
+
+
+###############Number of tree species per site
 trees_comp2 <- data %>%
   filter(!is.na(Trees)) %>% 
   group_by(Site) %>%
@@ -468,7 +548,7 @@ site_counts <- df %>%
     Trees = sum(!is.na(Trees))
   )%>%
   # Apply the density formula
-  mutate(across(c(Total_Seedlings, Total_Saplings, Total_Trees), ~ . * 10000 / 12000))
+  mutate(across(c(Seedlings, Saplings, Trees), ~ . * 10000 / 12000))
 
 
 # Reshape data for plotting
@@ -519,7 +599,7 @@ similarity_matrix <- matrix(
  0.47,	0.41,	0.52,	0.50,	0.44,	1.00),
 # nrow = 6, ncol = 6, byrow = TRUE)
 
-
+Jsimilarity_matrix <- matrix(
 
 # Assign row and column names
 rownames(Jsimilarity_matrix) <- colnames(Jsimilarity_matrix) <- c("A", "B", "C", "D", "E", "F")
