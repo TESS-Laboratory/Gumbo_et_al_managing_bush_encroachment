@@ -1,0 +1,5075 @@
+Year,Site,Plot,Subplot,Spp_name,Grazing_value,DPM_Height,Treatment
+2024,A,1,Z1,Digitaria eriantha,High,19,C
+2024,A,1,Z1,Urochloa mosambicensis,Moderate,18.9,C
+2024,A,1,Z1,Hyperrhenia filipendula,Moderate,11.6,C
+2024,A,1,Z1,,,11.3,C
+2024,A,1,Z1,Aristida adscensionis,Low,18.7,C
+2024,A,1,Z1,Urochloa mosambicensis,Moderate,18.5,C
+2024,A,1,Z1,Heteropogon contortus,Moderate,19.2,C
+2024,A,1,Z1,Digitaria eriantha,High,19.5,C
+2024,A,1,Z1,Sporobolus africanus,Low,NA,C
+2024,A,1,Z1,Setaria sphacelata,High,19.3,C
+2024,A,1,Z1,Heteropogon contortus,Moderate,18.3,C
+2024,A,1,Z1,Cymbopogon excavatus,Low,18.9,C
+2024,A,1,Z1,,,19.6,C
+2024,A,1,Z1,Aristida adscensionis,Low,9.1,C
+2024,A,1,Z1,Urochloa mosambicensis,Moderate,9,C
+2024,A,1,Z1,Heteropogon contortus,Moderate,9.1,C
+2024,A,1,Z1,Hyperrhenia filipendula,Moderate,8.1,C
+2024,A,1,Z1,Digitaria eriantha,High,NA,C
+2024,A,1,Z1,Setaria sphacelata,High,NA,C
+2024,A,1,Z1,Eragrostis superba,Moderate,NA,C
+2024,A,1,Z1,Themeda triandra ,High,14.2,C
+2024,A,1,Z1,Urochloa mosambicensis,Moderate,20,C
+2024,A,1,Z1,Digitaria eriantha,High,19.7,C
+2024,A,1,Z1,Setaria sphacelata,High,19.6,C
+2024,A,1,Z2,Digitaria eriantha,High,19,C
+2024,A,1,Z2,Urochloa mosambicensis,Moderate,18.9,C
+2024,A,1,Z2,Hyperrhenia filipendula,Moderate,11.6,C
+2024,A,1,Z2,,,11.3,C
+2024,A,1,Z2,Hyperrhenia filipendula,Moderate,44.6,C
+2024,A,1,Z2,Setaria sphacelata,High,39.6,C
+2024,A,1,Z2,,,38.2,C
+2024,A,1,Z2,,,32.5,C
+2024,A,1,Z2,Bothriochloa insculpta,Moderate,18.2,C
+2024,A,1,Z2,Urochloa mosambicensis,Moderate,20.2,C
+2024,A,1,Z2,Hyperrhenia filipendula,Moderate,26.8,C
+2024,A,1,Z2,,,29.9,C
+2024,A,1,Z2,Urochloa mosambicensis,Moderate,18,C
+2024,A,1,Z2,Hyperrhenia filipendula,Moderate,19.9,C
+2024,A,1,Z2,Setaria sphacelata,High,19.9,C
+2024,A,1,Z2,Heteropogon contortus,Moderate,21,C
+2024,A,1,Z2,Eragrostis gummiflua,Low,NA,C
+2024,A,1,Z2,Hyperrhenia filipendula,Moderate,21.1,C
+2024,A,1,Z2,Setaria sphacelata,High,21.1,C
+2024,A,1,Z2,,,20.4,C
+2024,A,1,Z2,,,20.2,C
+2024,A,1,Z3,Setaria sphacelata,High,23.7,C
+2024,A,1,Z3,Aristida adscensionis,Low,23,C
+2024,A,1,Z3,Digitaria eriantha,High,22.4,C
+2024,A,1,Z3,,,21.7,C
+2024,A,1,Z3,,,0,C
+2024,A,1,Z3,,,0,C
+2024,A,1,Z3,,,0,C
+2024,A,1,Z3,,,0,C
+2024,A,1,Z3,Heteropogon contortus,Moderate,28.9,C
+2024,A,1,Z3,Digitaria eriantha,High,30.7,C
+2024,A,1,Z3,Hyperrhenia filipendula,Moderate,31.7,C
+2024,A,1,Z3,,,30.9,C
+2024,A,1,Z3,Pogonarthria squarrosa ,Low,16.3,C
+2024,A,1,Z3,Cymbopogon excavatus,Low,18.7,C
+2024,A,1,Z3,Urochloa mosambicensis,Moderate,18.1,C
+2024,A,1,Z3,Hyperrhenia filipendula,Moderate,19.9,C
+2024,A,1,Z3,Panicum maximum,High,27.1,C
+2024,A,1,Z3,Heteropogon contortus,Moderate,27.8,C
+2024,A,1,Z3,,,28.6,C
+2024,A,1,Z3,,,30,C
+2024,A,1,Z4,Bothriochloa insculpta,Moderate,17.4,C
+2024,A,1,Z4,Cymbopogon excavatus,Low,12.9,C
+2024,A,1,Z4,Urochloa mosambicensis,Moderate,16.6,C
+2024,A,1,Z4,Aristida adscensionis,Low,18.5,C
+2024,A,1,Z4,Aristida diffusa,Low,NA,C
+2024,A,1,Z4,Hyperrhenia filipendula,Moderate,21.7,C
+2024,A,1,Z4,Urochloa mosambicensis,Moderate,20.8,C
+2024,A,1,Z4,Heteropogon contortus,Moderate,13.5,C
+2024,A,1,Z4,Digitaria eriantha,High,13.3,C
+2024,A,1,Z4,Setaria sphacelata,High,17.6,C
+2024,A,1,Z4,Bothriochloa insculpta,Moderate,17.4,C
+2024,A,1,Z4,Urochloa mosambicensis,Moderate,15.4,C
+2024,A,1,Z4,Hyperrhenia filipendula,Moderate,17.2,C
+2024,A,1,Z4,Heteropogon contortus,Moderate,30.6,C
+2024,A,1,Z4,Urochloa mosambicensis,Moderate,29.7,C
+2024,A,1,Z4,Hyperrhenia filipendula,Moderate,29.4,C
+2024,A,1,Z4,,,28.4,C
+2024,A,1,Z4,Heteropogon contortus,Moderate,28.1,C
+2024,A,1,Z4,Urochloa mosambicensis,Moderate,26.8,C
+2024,A,1,Z4,Hyperrhenia hirta,Moderate,26.2,C
+2024,A,1,Z4,,,25.1,C
+2024,A,2,Z1,Heteropogon contortus,Moderate,21.7,F
+2024,A,2,Z1,Andropogon eucomus,Low,18.7,F
+2024,A,2,Z1,Bothriochloa insculpta,Moderate,15.9,F
+2024,A,2,Z1,,,17.6,F
+2024,A,2,Z1,Bothriochloa insculpta,Moderate,23.3,F
+2024,A,2,Z1,Aristida adscensionis,Low,18.9,F
+2024,A,2,Z1,Cymbopogon excavatus,Low,21.1,F
+2024,A,2,Z1,Loudetia simplex,Moderate,22.4,F
+2024,A,2,Z1,Cymbopogon plurinodis,Low,NA,F
+2024,A,2,Z1,Bothriochloa insculpta,Moderate,29.3,F
+2024,A,2,Z1,Urochloa mosambicensis,Moderate,32.5,F
+2024,A,2,Z1,Eragrostis gummiflua,Low,32.4,F
+2024,A,2,Z1,,,31.1,F
+2024,A,2,Z1,Loudetia simplex,Moderate,14.6,F
+2024,A,2,Z1,Bothriochloa insculpta,Moderate,14.2,F
+2024,A,2,Z1,Eragrostis gummiflua,Low,15.3,F
+2024,A,2,Z1,Hyperrhenia filipendula,Moderate,16.7,F
+2024,A,2,Z1,Bothriochloa insculpta,Moderate,20.2,F
+2024,A,2,Z1,Hyperrhenia filipendula,Moderate,22.4,F
+2024,A,2,Z1,Setaria pumila ,Moderate,23.3,F
+2024,A,2,Z1,,,21.5,F
+2024,A,2,Z2,Heteropogon contortus,Moderate,17.6,F
+2024,A,2,Z2,Bothriochloa insculpta,Moderate,18.6,F
+2024,A,2,Z2,Loudetia simplex,Moderate,17.2,F
+2024,A,2,Z2,Eragrostis gummiflua,Low,19.4,F
+2024,A,2,Z2,Hyperrhenia filipendula,Moderate,NA,F
+2024,A,2,Z2,Hyperrhenia filipendula,Moderate,41.4,F
+2024,A,2,Z2,,,41.4,F
+2024,A,2,Z2,,,33.5,F
+2024,A,2,Z2,,,25.5,F
+2024,A,2,Z2,Heteropogon contortus,Moderate,23.3,F
+2024,A,2,Z2,Hyperrhenia filipendula,Moderate,18.8,F
+2024,A,2,Z2,Urochloa mosambicensis,Moderate,23.7,F
+2024,A,2,Z2,,,27.4,F
+2024,A,2,Z2,Heteropogon contortus,Moderate,14.1,F
+2024,A,2,Z2,Hyperrhenia filipendula,Moderate,20.5,F
+2024,A,2,Z2,,,15.5,F
+2024,A,2,Z2,,,13.9,F
+2024,A,2,Z2,Hyperrhenia filipendula,Moderate,11.8,F
+2024,A,2,Z2,Urochloa mosambicensis,Moderate,17.9,F
+2024,A,2,Z2,,,23.4,F
+2024,A,2,Z2,,,22.1,F
+2024,A,2,Z3,Bothriochloa insculpta,Moderate,21.1,F
+2024,A,2,Z3,Eragrostis gummiflua,Low,22.1,F
+2024,A,2,Z3,Hyperrhenia filipendula,Moderate,23.6,F
+2024,A,2,Z3,,,22.3,F
+2024,A,2,Z3,Heteropogon contortus,Moderate,13.7,F
+2024,A,2,Z3,Bothriochloa insculpta,Moderate,10.5,F
+2024,A,2,Z3,,,10.3,F
+2024,A,2,Z3,,,10.7,F
+2024,A,2,Z3,Bothriochloa insculpta,Moderate,29.3,F
+2024,A,2,Z3,Eragrostis gummiflua,Low,32.5,F
+2024,A,2,Z3,Urochloa mosambicensis,Moderate,32.4,F
+2024,A,2,Z3,,,31.1,F
+2024,A,2,Z3,Bothriochloa insculpta,Moderate,23.4,F
+2024,A,2,Z3,Urochloa mosambicensis,Moderate,23.8,F
+2024,A,2,Z3,Heteropogon contortus,Moderate,22.7,F
+2024,A,2,Z3,,,23.7,F
+2024,A,2,Z3,Eragrostis gummiflua,Low,10.2,F
+2024,A,2,Z3,Bothriochloa insculpta,Moderate,13.9,F
+2024,A,2,Z3,Cymbopogon excavatus,Low,11,F
+2024,A,2,Z3,Eragrostis superba,Moderate,10.9,F
+2024,A,2,Z4,Aristida adscensionis,Low,12.5,F
+2024,A,2,Z4,Hyperrhenia filipendula,Moderate,12.3,F
+2024,A,2,Z4,Setaria pumila ,Moderate,17,F
+2024,A,2,Z4,,,16.3,F
+2024,A,2,Z4,Hyperrhenia filipendula,Moderate,17.2,F
+2024,A,2,Z4,Urochloa mosambicensis,Moderate,9.6,F
+2024,A,2,Z4,,,27.7,F
+2024,A,2,Z4,,,34.9,F
+2024,A,2,Z4,Heteropogon contortus,Moderate,13.1,F
+2024,A,2,Z4,Cymbopogon excavatus,Low,16.9,F
+2024,A,2,Z4,Urochloa mosambicensis,Moderate,18.2,F
+2024,A,2,Z4,Hyperrhenia filipendula,Moderate,21.2,F
+2024,A,2,Z4,Urochloa mosambicensis,Moderate,39.1,F
+2024,A,2,Z4,Hyperrhenia filipendula,Moderate,43,F
+2024,A,2,Z4,,,34.6,F
+2024,A,2,Z4,,,30.8,F
+2024,A,2,Z4,Urochloa mosambicensis,Moderate,29,F
+2024,A,2,Z4,Hyperrhenia filipendula,Moderate,31.6,F
+2024,A,2,Z4,,,32.6,F
+2024,A,2,Z4,,,33.3,F
+2024,A,3,Z1,Aristida diffusa,Low,38,TFB
+2024,A,3,Z1,Aristida congesta C,Low,29.8,TFB
+2024,A,3,Z1,Melinis repens,Low,22,TFB
+2024,A,3,Z1,Urochloa mosambicensis,Moderate,23.9,TFB
+2024,A,3,Z1,Hyperrhenia filipendula,Moderate,11.8,TFB
+2024,A,3,Z1,,,17.1,TFB
+2024,A,3,Z1,,,15.3,TFB
+2024,A,3,Z1,,,15.7,TFB
+2024,A,3,Z1,Bothriochloa insculpta,Moderate,15.4,TFB
+2024,A,3,Z1,Urochloa mosambicensis,Moderate,16.8,TFB
+2024,A,3,Z1,Cymbopogon excavatus,Low,16.7,TFB
+2024,A,3,Z1,,,16.7,TFB
+2024,A,3,Z1,Hyperrhenia filipendula,Moderate,21.9,TFB
+2024,A,3,Z1,Bothriochloa insculpta,Moderate,21.8,TFB
+2024,A,3,Z1,Urochloa mosambicensis,Moderate,20.9,TFB
+2024,A,3,Z1,,,18.4,TFB
+2024,A,3,Z1,Urochloa mosambicensis,Moderate,17.6,TFB
+2024,A,3,Z1,Hyperrhenia filipendula,Moderate,15.9,TFB
+2024,A,3,Z1,Heteropogon contortus,Moderate,15.3,TFB
+2024,A,3,Z1,Aristida adscensionis,Low,15.4,TFB
+2024,A,3,Z2,Urochloa mosambicensis,Moderate,31.7,TFB
+2024,A,3,Z2,Loudetia simplex,Low,31.7,TFB
+2024,A,3,Z2,Bothriochloa insculpta,Moderate,28.7,TFB
+2024,A,3,Z2,,,25.3,TFB
+2024,A,3,Z2,Bothriochloa insculpta,Moderate,3.6,TFB
+2024,A,3,Z2,Cymbopogon excavatus,Low,11.2,TFB
+2024,A,3,Z2,Aristida adscensionis,Low,12.5,TFB
+2024,A,3,Z2,,,12.7,TFB
+2024,A,3,Z2,Bothriochloa insculpta,Moderate,51.3,TFB
+2024,A,3,Z2,Hyperrhenia hirta,Moderate,36,TFB
+2024,A,3,Z2,,,43.7,TFB
+2024,A,3,Z2,,,46.1,TFB
+2024,A,3,Z2,Bothriochloa insculpta,Moderate,5.9,TFB
+2024,A,3,Z2,Hyperrhenia hirta,Moderate,8.7,TFB
+2024,A,3,Z2,Digitaria eriantha,High,12.6,TFB
+2024,A,3,Z2,Eragrostis gummiflua,Low,12.7,TFB
+2024,A,3,Z2,Urochloa mosambicensis,Moderate,11.8,TFB
+2024,A,3,Z2,Bothriochloa insculpta,Moderate,15.7,TFB
+2024,A,3,Z2,Eragrostis gummiflua,Low,18.6,TFB
+2024,A,3,Z2,,,20.6,TFB
+2024,A,3,Z3,Heteropogon contortus,Moderate,10.7,TFB
+2024,A,3,Z3,Aristida adscensionis,Low,16.9,TFB
+2024,A,3,Z3,Melinis repens,Low,13.6,TFB
+2024,A,3,Z3,Eragrostis rigidior,Moderate,13.5,TFB
+2024,A,3,Z3,Cynodon dactylon,High,31.8,TFB
+2024,A,3,Z3,Urochloa mosambicensis,Moderate,29,TFB
+2024,A,3,Z3,Setaria pumila ,Moderate,26.4,TFB
+2024,A,3,Z3,,,25.9,TFB
+2024,A,3,Z3,Heteropogon contortus,Moderate,26.8,TFB
+2024,A,3,Z3,Aristida adscensionis,Low,19.2,TFB
+2024,A,3,Z3,Urochloa mosambicensis,Moderate,17.8,TFB
+2024,A,3,Z3,Cymbopogon excavatus,Low,16.9,TFB
+2024,A,3,Z3,Digitaria eriantha,High,NA,TFB
+2024,A,3,Z3,Aristida adscensionis,Low,6.8,TFB
+2024,A,3,Z3,Urochloa mosambicensis,Moderate,11.5,TFB
+2024,A,3,Z3,Hyperrhenia filipendula,Moderate,17.8,TFB
+2024,A,3,Z3,Setaria incrassata,High,14.2,TFB
+2024,A,3,Z3,Eragrostis superba,Moderate,NA,TFB
+2024,A,3,Z3,Urochloa mosambicensis,Moderate,31.7,TFB
+2024,A,3,Z3,Hyperrhenia filipendula,Moderate,19.9,TFB
+2024,A,3,Z3,Hyperrhenia hirta,Moderate,18.7,TFB
+2024,A,3,Z3,Pogonarthria squarrosa ,Low,18.5,TFB
+2024,A,3,Z4,Heteropogon contortus,Moderate,14.9,TFB
+2024,A,3,Z4,Aristida adscensionis,Low,17.3,TFB
+2024,A,3,Z4,,,19.4,TFB
+2024,A,3,Z4,,,16.1,TFB
+2024,A,3,Z4,Heteropogon contortus,Moderate,8.5,TFB
+2024,A,3,Z4,Melinis repens,Low,9.7,TFB
+2024,A,3,Z4,Digitaria eriantha,High,11.6,TFB
+2024,A,3,Z4,Setaria incrassata,High,10.6,TFB
+2024,A,3,Z4,Heteropogon contortus,Moderate,6,TFB
+2024,A,3,Z4,Urochloa mosambicensis,Moderate,10.9,TFB
+2024,A,3,Z4,Themeda triandra,High,11.4,TFB
+2024,A,3,Z4,,,13.2,TFB
+2024,A,3,Z4,Urochloa mosambicensis,Moderate,42.7,TFB
+2024,A,3,Z4,Melinis repens,Low,41.3,TFB
+2024,A,3,Z4,Cymbopogon excavatus,Low,37.6,TFB
+2024,A,3,Z4,,,36.9,TFB
+2024,A,3,Z4,Heteropogon contortus,Moderate,6.4,TFB
+2024,A,3,Z4,Aristida adscensionis,Low,18,TFB
+2024,A,3,Z4,Urochloa mosambicensis,Moderate,21,TFB
+2024,A,3,Z4,Hyperrhenia filipendula,Moderate,23.8,TFB
+2024,A,3,Z4,Pogonarthria squarrosa ,Low,NA,TFB
+2024,A,4,Z1,Bothriochloa insculpta,Moderate,19.7,TF
+2024,A,4,Z1,,,22.4,TF
+2024,A,4,Z1,,,22.6,TF
+2024,A,4,Z1,,,25,TF
+2024,A,4,Z1,Brachiaria serrata,Moderate,21,TF
+2024,A,4,Z1,Eragrostis gummiflua,Low,20.5,TF
+2024,A,4,Z1,Bothriochloa insculpta,Moderate,20.4,TF
+2024,A,4,Z1,,,20.5,TF
+2024,A,4,Z1,Heteropogon contortus,Moderate,22.5,TF
+2024,A,4,Z1,Themeda triandra,High,22.5,TF
+2024,A,4,Z1,,,22.5,TF
+2024,A,4,Z1,,,22.5,TF
+2024,A,4,Z1,Bothriochloa insculpta,Moderate,24.1,TF
+2024,A,4,Z1,Cymbopogon excavatus,Low,32,TF
+2024,A,4,Z1,,,34.3,TF
+2024,A,4,Z1,,,32.5,TF
+2024,A,4,Z1,Bothriochloa insculpta,Moderate,35.6,TF
+2024,A,4,Z1,Urochloa mosambicensis,Moderate,27.9,TF
+2024,A,4,Z1,,,33.3,TF
+2024,A,4,Z1,,,37,TF
+2024,A,4,Z2,Bothriochloa insculpta,Moderate,20.5,TF
+2024,A,4,Z2,Digitaria eriantha,High,21.7,TF
+2024,A,4,Z2,,,22,TF
+2024,A,4,Z1,,,21.4,TF
+2024,A,4,Z2,Aristida adscensionis,Low,18.7,TF
+2024,A,4,Z2,Cymbopogon excavatus,Low,19.2,TF
+2024,A,4,Z2,Heteropogon contortus,Moderate,18.9,TF
+2024,A,4,Z2,Digitaria eriantha,High,18.5,TF
+2024,A,4,Z2,Aristida adscensionis,Low,20.5,TF
+2024,A,4,Z2,Heteropogon contortus,Moderate,20.7,TF
+2024,A,4,Z2,,,20.5,TF
+2024,A,4,Z2,,,21.4,TF
+2024,A,4,Z2,Cymbopogon excavatus,Low,36.4,TF
+2024,A,4,Z2,Heteropogon contortus,Moderate,36.6,TF
+2024,A,4,Z2,Andropogon eucomus,Low,32.1,TF
+2024,A,4,Z2,,,30.6,TF
+2024,A,4,Z2,Aristida adscensionis,Low,23,TF
+2024,A,4,Z2,Themeda triandra,High,23.1,TF
+2024,A,4,Z2,,,21.7,TF
+2024,A,4,Z2,,,21.1,TF
+2024,A,4,Z3,Loudetia simplex,Low,20.2,TF
+2024,A,4,Z3,Bothriochloa insculpta,Moderate,20.1,TF
+2024,A,4,Z3,,,20.1,TF
+2024,A,4,Z3,,,20.4,TF
+2024,A,4,Z3,Bothriochloa insculpta,Moderate,20.2,TF
+2024,A,4,Z3,Aristida adscensionis,Low,20.3,TF
+2024,A,4,Z3,,,20.6,TF
+2024,A,4,Z3,,,20,TF
+2024,A,4,Z3,Bothriochloa insculpta,Moderate,12.7,TF
+2024,A,4,Z3,Andropogon eucomus,Low,17.2,TF
+2024,A,4,Z3,,,16.1,TF
+2024,A,4,Z3,,,17.3,TF
+2024,A,4,Z3,Urochloa mosambicensis,Moderate,3.7,TF
+2024,A,4,Z3,Digitaria eriantha,High,9.5,TF
+2024,A,4,Z3,Andropogon eucomus,Low,13,TF
+2024,A,4,Z3,Bothriochloa insculpta,Moderate,11.4,TF
+2024,A,4,Z3,Bothriochloa insculpta,Moderate,19.6,TF
+2024,A,4,Z3,Aristida adscensionis,Low,20,TF
+2024,A,4,Z3,,,20.1,TF
+2024,A,4,Z3,,,20.1,TF
+2024,A,4,Z4,Bothriochloa insculpta,Moderate,18.3,TF
+2024,A,4,Z4,Heteropogon contortus,Moderate,18.9,TF
+2024,A,4,Z4,Melinis repens,Low,19,TF
+2024,A,4,Z4,,,18.9,TF
+2024,A,4,Z4,Andropogon eucomus,Low,17.9,TF
+2024,A,4,Z4,Urochloa mosambicensis,Moderate,19.1,TF
+2024,A,4,Z4,Cymbopogon excavatus,Low,19.4,TF
+2024,A,4,Z4,,,19.4,TF
+2024,A,4,Z4,Heteropogon contortus,Moderate,23,TF
+2024,A,4,Z4,Themeda triandra,High,22.2,TF
+2024,A,4,Z4,Eragrostis superba,Moderate,21.3,TF
+2024,A,4,Z4,,,20.8,TF
+2024,A,4,Z4,Bothriochloa insculpta,Moderate,19.9,TF
+2024,A,4,Z4,Heteropogon contortus,Moderate,19.9,TF
+2024,A,4,Z4,Digitaria eriantha,High,19.5,TF
+2024,A,4,Z4,,,19.2,TF
+2024,A,4,Z4,Heteropogon contortus,Moderate,25.7,TF
+2024,A,4,Z4,Themeda triandra,High,17.1,TF
+2024,A,4,Z4,Eragrostis superba,Moderate,17.8,TF
+2024,A,4,Z4,Digitaria eriantha,High,22.1,TF
+2024,A,5,Z1,Hyperrhenia hirta,Moderate,12.1,THF
+2024,A,5,Z1,Urochloa mosambicensis,Moderate,13.8,THF
+2024,A,5,Z1,Hyperrhenia filipendula,Moderate,13.7,THF
+2024,A,5,Z1,Bothriochloa insculpta,Moderate,14.2,THF
+2024,A,5,Z1,Heteropogon contortus,Moderate,NA,THF
+2024,A,5,Z1,Aristida adscensionis,Low,NA,THF
+2024,A,5,Z1,Urochloa mosambicensis,Moderate,25.6,THF
+2024,A,5,Z1,Aristida adscensionis,Low,20.8,THF
+2024,A,5,Z1,,,22.3,THF
+2024,A,5,Z1,,,22.7,THF
+2024,A,5,Z1,Cymbopogon excavatus,Low,28.2,THF
+2024,A,5,Z1,Bothriochloa insculpta,Moderate,28.8,THF
+2024,A,5,Z1,Urochloa mosambicensis,Moderate,31.2,THF
+2024,A,5,Z1,,,28.8,THF
+2024,A,5,Z1,Hyperrhenia hirta,Moderate,21,THF
+2024,A,5,Z1,Heteropogon contortus,Moderate,17.1,THF
+2024,A,5,Z1,Urochloa mosambicensis,Moderate,21.7,THF
+2024,A,5,Z1,,,23,THF
+2024,A,5,Z1,Urochloa mosambicensis,Moderate,17.1,THF
+2024,A,5,Z1,Hyperrhenia filipendula,Moderate,14.7,THF
+2024,A,5,Z1,Bothriochloa insculpta,Moderate,21.1,THF
+2024,A,5,Z1,,,21.4,THF
+2024,A,5,Z2,Urochloa mosambicensis,Moderate,22.6,THF
+2024,A,5,Z2,Heteropogon contortus,Moderate,16.8,THF
+2024,A,5,Z2,Aristida adscensionis,Low,14.9,THF
+2024,A,5,Z2,Setaria sphacelata ,High,13.6,THF
+2024,A,5,Z2,Urochloa mosambicensis,Moderate,10.6,THF
+2024,A,5,Z2,Bothriochloa insculpta,Moderate,14.8,THF
+2024,A,5,Z2,Heteropogon contortus,Moderate,17,THF
+2024,A,5,Z2,Aristida adscensionis,Low,19.8,THF
+2024,A,5,Z2,Melinis repens ,Low,NA,THF
+2024,A,5,Z2,Panicum maximum,High,10.8,THF
+2024,A,5,Z2,Hyperrhenia filipendula,Moderate,9.2,THF
+2024,A,5,Z2,,,11.4,THF
+2024,A,5,Z2,,,10.3,THF
+2024,A,5,Z2,Heteropogon contortus,Moderate,17.7,THF
+2024,A,5,Z2,Hyperrhenia filipendula,Moderate,17.5,THF
+2024,A,5,Z2,Cymbopogon excavatus,Low,17.4,THF
+2024,A,5,Z2,,,16.4,THF
+2024,A,5,Z2,Urochloa mosambicensis,Moderate,15.1,THF
+2024,A,5,Z2,Cymbopogon excavatus,Low,17.3,THF
+2024,A,5,Z2,,,20.1,THF
+2024,A,5,Z2,,,22.7,THF
+2024,A,5,Z3,Bothriochloa insculpta,Moderate,29.8,THF
+2024,A,5,Z3,Urochloa mosambicensis,Moderate,26.7,THF
+2024,A,5,Z3,,,22.3,THF
+2024,A,5,Z3,,,22.3,THF
+2024,A,5,Z3,Bothriochloa insculpta,Moderate,36.3,THF
+2024,A,5,Z3,Heteropogon contortus,Moderate,34.5,THF
+2024,A,5,Z3,Eragrostis gummiflua,Low,34.2,THF
+2024,A,5,Z3,Andropogon eucomus,Low,34.5,THF
+2024,A,5,Z3,Aristida adscensionis,Low,20.4,THF
+2024,A,5,Z3,Bothriochloa insculpta,Moderate,17.1,THF
+2024,A,5,Z3,,,19.3,THF
+2024,A,5,Z3,,,18.6,THF
+2024,A,5,Z3,Bothriochloa insculpta,Moderate,17.1,THF
+2024,A,5,Z3,Aristida adscensionis,Low,17,THF
+2024,A,5,Z3,Cymbopogon excavatus,Low,20.2,THF
+2024,A,5,Z3,Eragrostis superba,Moderate,22.5,THF
+2024,A,5,Z3,Heteropogon contortus,Moderate,8.7,THF
+2024,A,5,Z3,Bothriochloa insculpta,Moderate,11.6,THF
+2024,A,5,Z3,Hyperrhenia hirta,Moderate,11.3,THF
+2024,A,5,Z3,,,10.3,THF
+2024,A,5,Z4,Bothriochloa insculpta,Moderate,13.2,THF
+2024,A,5,Z4,Heteropogon contortus,Moderate,17.8,THF
+2024,A,5,Z4,Aristida adscensionis,Low,18.3,THF
+2024,A,5,Z4,Cymbopogon excavatus,Low,17.6,THF
+2024,A,5,Z4,Eragrostis gummiflua,Low,19.1,THF
+2024,A,5,Z4,Bothriochloa insculpta,Moderate,16,THF
+2024,A,5,Z4,Cymbopogon excavatus,Low,17.5,THF
+2024,A,5,Z4,,,18.1,THF
+2024,A,5,Z4,Bothriochloa insculpta,Moderate,20.8,THF
+2024,A,5,Z4,Aristida adscensionis,Low,18.1,THF
+2024,A,5,Z4,Urochloa mosambicensis,Moderate,23.3,THF
+2024,A,5,Z4,Hyperrhenia filipendula,Moderate,24.5,THF
+2024,A,5,Z4,Bothriochloa insculpta,Moderate,35.3,THF
+2024,A,5,Z4,Cymbopogon excavatus,Low,24.2,THF
+2024,A,5,Z4,,,19,THF
+2024,A,5,Z4,,,23.6,THF
+2024,A,5,Z4,Heteropogon contortus,Moderate,18.8,THF
+2024,A,5,Z4,Bothriochloa insculpta,Moderate,15.6,THF
+2024,A,5,Z4,Urochloa mosambicensis,Moderate,18.3,THF
+2024,A,5,Z4,,,18.6,THF
+2024,A,1,Z1,Eragrostis superba,Moderate,6.4,C
+2024,A,1,Z1,Heteropogon contortus,Moderate,2.8,C
+2024,A,1,Z1,Cymbopogon excavatus,Low,5.8,C
+2024,B,1,Z1,,,2.6,C
+2024,B,1,Z1,Eragrostis gummiflua,Low,5.1,C
+2024,B,1,Z1,Heteropogon contortus,Moderate,4.2,C
+2024,B,1,Z1,Cymbopogon excavatus,Low,6.7,C
+2024,B,1,Z1,,,6.2,C
+2024,B,1,Z1,Cymbopogon excavatus,Low,6.1,C
+2024,B,1,Z1,Heteropogon contortus,Moderate,3.7,C
+2024,B,1,Z1,Melinis repens,Low,3.2,C
+2024,B,1,Z1,Aristida congesta C,Low,2.4,C
+2024,B,1,Z1,Eragrostis gummiflua,Low,8.5,C
+2024,B,1,Z1,Eragrostis rigidior,Moderate,3.1,C
+2024,B,1,Z1,Melinis repens,Low,4.4,C
+2024,B,1,Z1,Heteropogon contortus,Moderate,4.2,C
+2024,B,1,Z1,Aristida congesta C,Low,6.7,C
+2024,B,1,Z1,Heteropogon contortus,Moderate,6,C
+2024,B,1,Z1,,,6.7,C
+2024,B,1,Z1,,,5.3,C
+2024,B,1,Z2,Cymbopogon excavatus,Low,2.2,C
+2024,B,1,Z2,Eragrostis rigidior,Moderate,8,C
+2024,B,1,Z2,Heteropogon contortus,Moderate,14,C
+2024,B,1,Z2,Aristida  canescens,Low,20,C
+2024,B,1,Z2,Aristida congesta C,Low,7,C
+2024,B,1,Z2,Eragrostis rigidior,Moderate,8.2,C
+2024,B,1,Z2,Heteropogon contortus,Moderate,5.9,C
+2024,B,1,Z2,Aristida  canescens,Low,6.6,C
+2024,B,1,Z2,Bothriochloa insculpta,Moderate,2.6,C
+2024,B,1,Z2,Melinis repens,Low,6,C
+2024,B,1,Z2,Heteropogon contortus,Moderate,7.6,C
+2024,B,1,Z2,,,6.6,C
+2024,B,1,Z2,Cymbopogon excavatus,Low,11.4,C
+2024,B,1,Z2,Bothriochloa insculpta,Moderate,22.9,C
+2024,B,1,Z2,,,6.3,C
+2024,B,1,Z2,,,31,C
+2024,B,1,Z2,Heteropogon contortus,Moderate,5.6,C
+2024,B,1,Z2,Melinis repens,Low,7.2,C
+2024,B,1,Z2,Bothriochloa insculpta,Moderate,5.2,C
+2024,B,1,Z2,,,7.5,C
+2024,B,1,Z3,Aristida congesta B,Low,4,C
+2024,B,1,Z3,Eragrostis rigidior,Moderate,4.7,C
+2024,B,1,Z3,Eragrostis superba,Moderate,4.7,C
+2024,B,1,Z3,Cymbopogon excavatus,Low,10.5,C
+2024,B,1,Z3,Hyperrhenia filipendula,Moderate,NA,C
+2024,B,1,Z3,Heteropogon contortus,Moderate,NA,C
+2024,B,1,Z3,Eragrostis gummiflua,Low,10.7,C
+2024,B,1,Z3,Heteropogon contortus,Moderate,11.9,C
+2024,B,1,Z3,Eragrostis superba,Moderate,10.6,C
+2024,B,1,Z3,,,9.7,C
+2024,B,1,Z3,Aristida congesta B,Low,7.3,C
+2024,B,1,Z3,Eragrostis superba,Moderate,8.8,C
+2024,B,1,Z3,Heteropogon contortus,Moderate,12.3,C
+2024,B,1,Z3,Eragrostis gummiflua,Low,5.6,C
+2024,B,1,Z3,Aristida adscensionis,Moderate,NA,C
+2024,B,1,Z3,Bothriochloa insculpta,Moderate,NA,C
+2024,B,1,Z3,Aristida congesta B,Low,5.3,C
+2024,B,1,Z3,Heteropogon contortus,Moderate,5.9,C
+2024,B,1,Z3,Eragrostis gummiflua,Low,5.3,C
+2024,B,1,Z3,Aristida adscensionis,Low,5.2,C
+2024,B,1,Z3,Melinis repens,Low,NA,C
+2024,B,1,Z3,Themeda triandra,High,NA,C
+2024,B,1,Z3,Setaria sphacelata,High,NA,C
+2024,B,1,Z3,Heteropogon contortus,Moderate,5.1,C
+2024,B,1,Z3,Cymbopogon excavatus,Low,5.5,C
+2024,B,1,Z3,,,5.9,C
+2024,B,1,Z3,,,6.5,C
+2024,B,1,Z4,Eragrostis gummiflua,Low,2.8,C
+2024,B,1,Z4,Heteropogon contortus,Moderate,5.7,C
+2024,B,1,Z4,Cymbopogon excavatus,Low,8.2,C
+2024,B,1,Z4,Melinis repens,Low,7.1,C
+2024,B,1,Z4,Bothriochloa insculpta,Moderate,NA,C
+2024,B,1,Z4,Heteropogon contortus,Moderate,3.8,C
+2024,B,1,Z4,Cymbopogon excavatus,Low,7,C
+2024,B,1,Z4,,,5.8,C
+2024,B,1,Z4,,,5.8,C
+2024,B,1,Z4,Cymbopogon excavatus,Low,16.4,C
+2024,B,1,Z4,Eragrostis superba,Moderate,17.6,C
+2024,B,1,Z4,Eragrostis gummiflua,Low,14.9,C
+2024,B,1,Z4,Aristida congesta B,Low,13.4,C
+2024,B,1,Z4,Heteropogon contortus,Moderate,NA,C
+2024,B,1,Z4,Heteropogon contortus,Moderate,4,C
+2024,B,1,Z4,Cymbopogon excavatus,Low,3.4,C
+2024,B,1,Z4,Melinis repens,Low,4.8,C
+2024,B,1,Z4,Bothriochloa insculpta,Moderate,4.9,C
+2024,B,1,Z4,Heteropogon contortus,Moderate,1.9,C
+2024,B,1,Z4,Eragrostis gummiflua,Low,4.2,C
+2024,B,1,Z4,Eragrostis superba,Moderate,6.7,C
+2024,B,1,Z4,,,7,C
+2024,B,2,Z1,Brachiaria serrata,Moderate,7.9,F
+2024,B,2,Z1,Heteropogon contortus,Moderate,8.2,F
+2024,B,2,Z1,Aristida adscensionis,Low,8.9,F
+2024,B,2,Z1,Bothriochloa insculpta,Moderate,9.8,F
+2024,B,2,Z1,Heteropogon contortus,Moderate,18.5,F
+2024,B,2,Z1,Cymbopogon excavatus,Low,18.5,F
+2024,B,2,Z1,Aristida adscensionis,Low,16.1,F
+2024,B,2,Z1,Themeda triandra,High,17.4,F
+2024,B,2,Z1,Heteropogon contortus,Moderate,10.7,F
+2024,B,2,Z1,Cymbopogon excavatus,Low,11,F
+2024,B,2,Z1,,,14.8,F
+2024,B,2,Z1,,,14.9,F
+2024,B,2,Z1,Heteropogon contortus,Moderate,9.5,F
+2024,B,2,Z1,Cymbopogon excavatus,Low,10.4,F
+2024,B,2,Z1,Aristida adscensionis,Low,13.2,F
+2024,B,2,Z1,Eragrostis rigidior,Moderate,12.3,F
+2024,B,2,Z1,Cymbopogon excavatus,Low,17.1,F
+2024,B,2,Z1,Aristida adscensionis,Low,17.2,F
+2024,B,2,Z1,Melinis repens,Low,18.8,F
+2024,B,2,Z1,,,15.6,F
+2024,B,2,Z2,Cymbopogon excavatus,Low,16.8,F
+2024,B,2,Z2,Hyperrhenia filipendula,Moderate,13.3,F
+2024,B,2,Z2,Heteropogon contortus,Moderate,11,F
+2024,B,2,Z2,Melinis repens,Low,22.9,F
+2024,B,2,Z2,Bothriochloa insculpta,Moderate,NA,F
+2024,B,2,Z2,Heteropogon contortus,Moderate,3.4,F
+2024,B,2,Z2,Melinis repens,Low,5.7,F
+2024,B,2,Z2,Panicum maximum,High,7.4,F
+2024,B,2,Z2,,,12,F
+2024,B,2,Z2,Eragrostis gummiflua,Low,9.6,F
+2024,B,2,Z2,Heteropogon contortus,Moderate,9.4,F
+2024,B,2,Z2,Cymbopogon excavatus,Low,9.7,F
+2024,B,2,Z2,Bothriochloa insculpta,Moderate,9.4,F
+2024,B,2,Z2,Eragrostis gummiflua,Low,9.3,F
+2024,B,2,Z2,Heteropogon contortus,Moderate,8.3,F
+2024,B,2,Z2,Cymbopogon excavatus,Low,7.8,F
+2024,B,2,Z2,Bothriochloa insculpta,Moderate,7.5,F
+2024,B,2,Z2,Eragrostis rigidior,Moderate,NA,F
+2024,B,2,Z2,Melinis repens,Low,NA,F
+2024,B,2,Z2,Cymbopogon excavatus,Low,9.3,F
+2024,B,2,Z2,Eragrostis gummiflua,Low,15.3,F
+2024,B,2,Z2,Heteropogon contortus,Moderate,11,F
+2024,B,2,Z2,Urochloa mosambicensis,Moderate,6.1,F
+2024,B,2,Z3,Heteropogon contortus,Moderate,6.3,F
+2024,B,2,Z3,Aristida adscensionis,Low,5.7,F
+2024,B,2,Z3,Bothriochloa insculpta,Moderate,10.9,F
+2024,B,2,Z3,,,11.1,F
+2024,B,2,Z3,Heteropogon contortus,Moderate,2.1,F
+2024,B,2,Z3,Cymbopogon excavatus,Low,4.6,F
+2024,B,2,Z3,,,6.9,F
+2024,B,2,Z3,,,10.6,F
+2024,B,2,Z3,Eragrostis gummiflua,Low,25.2,F
+2024,B,2,Z3,Heteropogon contortus,Moderate,24.3,F
+2024,B,2,Z3,Cymbopogon excavatus,Moderate,24,F
+2024,B,2,Z3,Aristida adscensionis,Low,28.7,F
+2024,B,2,Z3,Melinis repens,Low,NA,F
+2024,B,2,Z3,Digitaria eriantha,High,NA,F
+2024,B,2,Z3,Heteropogon contortus,Moderate,6,F
+2024,B,2,Z3,Cymbopogon excavatus,Low,4.5,F
+2024,B,2,Z3,Setaria pumila ,Moderate,4.7,F
+2024,B,2,Z3,,,3.8,F
+2024,B,2,Z3,Aristida adscensionis,Low,10.6,F
+2024,B,2,Z3,Heteropogon contortus,Moderate,13,F
+2024,B,2,Z3,Digitaria eriantha,High,12.3,F
+2024,B,2,Z3,,,NA,F
+2024,B,2,Z4,Heteropogon contortus,Moderate,16.8,F
+2024,B,2,Z4,Cymbopogon excavatus,,19.1,F
+2024,B,2,Z4,,,16.8,F
+2024,B,2,Z4,,,17.2,F
+2024,B,2,Z4,Heteropogon contortus,Moderate,12.2,F
+2024,B,2,Z4,Cymbopogon excavatus,Low,19.4,F
+2024,B,2,Z4,,,14.9,F
+2024,B,2,Z4,,,13.2,F
+2024,B,2,Z4,Heteropogon contortus,Moderate,9.3,F
+2024,B,2,Z4,Cymbopogon excavatus,Low,10.1,F
+2024,B,2,Z4,Eragrostis rigidior,Moderate,10.8,F
+2024,B,2,Z4,Aristida  canescens,Low,10,F
+2024,B,2,Z4,Setaria incrassata,High,NA,F
+2024,B,2,Z4,Eragrostis gummiflua,Low,NA,F
+2024,B,2,Z4,Heteropogon contortus,Moderate,9.8,F
+2024,B,2,Z4,Aristida congesta B,Low,7.6,F
+2024,B,2,Z4,,,10,F
+2024,B,2,Z4,,,9,F
+2024,B,2,Z4,Heteropogon contortus,Moderate,9.8,F
+2024,B,2,Z4,Aristida congesta B,Low,7.6,F
+2024,B,2,Z4,,,10,F
+2024,B,2,Z4,,,9,F
+2024,B,2,Z4,Heteropogon contortus,Moderate,8.6,F
+2024,B,2,Z4,Eragrostis gummiflua,Low,5.2,F
+2024,B,2,Z4,,,5.4,F
+2024,B,2,Z4,,,4,F
+2024,B,3,Z1,Cymbopogon excavatus,Low,6.8,TF
+2024,B,3,Z1,Cynodon dactylon,High,8.1,TF
+2024,B,3,Z1,Eragrostis superba,Moderate,8.7,TF
+2024,B,3,Z1,Themeda triandra,High,10.5,TF
+2024,B,3,Z1,Bothriochloa insculpta,Moderate,NA,TF
+2024,B,3,Z1,Cymbopogon plurinodis,Low,9.5,TF
+2024,B,3,Z1,Cymbopogon excavatus,Low,9.9,TF
+2024,B,3,Z1,Setaria incrassata,High,9.1,TF
+2024,B,3,Z1,Eragrostis superba,Moderate,10.2,TF
+2024,B,3,Z1,Digitaria eriantha,High,NA,TF
+2024,B,3,Z1,Heteropogon contortus,Moderate,NA,TF
+2024,B,3,Z1,Melinis repens,Low,NA,TF
+2024,B,3,Z1,Heteropogon contortus,Moderate,7.5,TF
+2024,B,3,Z1,Melinis repens,Low,6.8,TF
+2024,B,3,Z1,Aristida adscensionis,Low,7.3,TF
+2024,B,3,Z1,Bothriochloa insculpta,Moderate,8.6,TF
+2024,B,3,Z1,Cynodon dactylon,High,14.1,TF
+2024,B,3,Z1,Melinis repens,Low,10.9,TF
+2024,B,3,Z1,Aristida adscensionis,Low,10.1,TF
+2024,B,3,Z1,Cymbopogon excavatus,Low,10.4,TF
+2024,B,3,Z1,Cymbopogon plurinodis,Low,NA,TF
+2024,B,3,Z1,Heteropogon contortus,Moderate,15.4,TF
+2024,B,3,Z1,Melinis repens,Low,16.2,TF
+2024,B,3,Z1,Aristida adscensionis,Low,17.1,TF
+2024,B,3,Z1,Bothriochloa insculpta,Moderate,16.9,TF
+2024,B,3,Z1,Cymbopogon plurinodis,Low,NA,TF
+2024,B,3,Z2,Cynodon dactylon,High,10.2,TF
+2024,B,3,Z2,Themeda triandra,High,15.3,TF
+2024,B,3,Z2,Melinis repens,Low,16.6,TF
+2024,B,3,Z2,Eragrostis gummiflua,Low,17.2,TF
+2024,B,3,Z2,Themeda triandra,High,16.9,TF
+2024,B,3,Z2,Hyperrhenia filipendula,Moderate,17.3,TF
+2024,B,3,Z2,Cymbopogon excavatus,Low,15,TF
+2024,B,3,Z2,Setaria pumila ,Moderate,13.6,TF
+2024,B,3,Z2,Sporobolus africanus,Low,NA,TF
+2024,B,3,Z2,Heteropogon contortus,Moderate,17.3,TF
+2024,B,3,Z2,Melinis repens,Low,15.8,TF
+2024,B,3,Z2,Aristida adscensionis,Low,14.8,TF
+2024,B,3,Z2,Cymbopogon plurinodis,Low,14.6,TF
+2024,B,3,Z2,Cymbopogon excavatus,Low,24.7,TF
+2024,B,3,Z2,Heteropogon contortus,Moderate,26.3,TF
+2024,B,3,Z2,Melinis repens,Low,19.7,TF
+2024,B,3,Z2,Eragrostis gummiflua,Low,21.3,TF
+2024,B,3,Z2,Heteropogon contortus,Moderate,7.5,TF
+2024,B,3,Z2,Cymbopogon excavatus,Low,8.5,TF
+2024,B,3,Z2,Eragrostis gummiflua,Low,12.4,TF
+2024,B,3,Z2,,,13.5,TF
+2024,B,3,Z3,Eragrostis superba,Moderate,7.9,TF
+2024,B,3,Z3,Heteropogon contortus,Moderate,10.7,TF
+2024,B,3,Z3,Melinis repens,Low,10.2,TF
+2024,B,3,Z3,Eragrostis gummiflua,Low,9.6,TF
+2024,B,3,Z3,Digitaria eriantha,High,3.2,TF
+2024,B,3,Z3,Heteropogon contortus,Moderate,2.8,TF
+2024,B,3,Z3,Melinis repens,Low,5.7,TF
+2024,B,3,Z3,Eragrostis gummiflua,Low,10.1,TF
+2024,B,3,Z3,Heteropogon contortus,Moderate,7.3,TF
+2024,B,3,Z3,Setaria sphacelata,High,9.7,TF
+2024,B,3,Z3,Themeda triandra,High,11.3,TF
+2024,B,3,Z3,Digitaria eriantha,high,11.9,TF
+2024,B,3,Z3,Heteropogon contortus,Moderate,13,TF
+2024,B,3,Z3,Cymbopogon plurinodis,Low,16.9,TF
+2024,B,3,Z3,Cymbopogon excavatus,Low,16.7,TF
+2024,B,3,Z3,,,16.2,TF
+2024,B,3,Z3,Heteropogon contortus,Moderate,5.9,TF
+2024,B,3,Z3,Aristida adscensionis,Low,9.5,TF
+2024,B,3,Z3,Eragrostis superba,Moderate,10.8,TF
+2024,B,3,Z3,Eragrostis gummiflua,Low,10.1,TF
+2024,B,3,Z4,Heteropogon contortus,Moderate,8.4,TF
+2024,B,3,Z4,Aristida adscensionis,Low,7.2,TF
+2024,B,3,Z4,Digitaria eriantha,High,10.7,TF
+2024,B,3,Z4,Eragrostis gummiflua,Low,10.1,TF
+2024,B,3,Z4,Cymbopogon plurinodis,Low,NA,TF
+2024,B,3,Z4,Heteropogon contortus,Moderate,13.1,TF
+2024,B,3,Z4,Aristida adscensionis,Low,12.6,TF
+2024,B,3,Z4,Digitaria eriantha,High,14.6,TF
+2024,B,3,Z4,,,13.1,TF
+2024,B,3,Z4,Heteropogon contortus,Moderate,15,TF
+2024,B,3,Z4,Aristida adscensionis,Low,14.5,TF
+2024,B,3,Z4,Setaria pumila ,Moderate,14.1,TF
+2024,B,3,Z4,,,15,TF
+2024,B,3,Z4,Heteropogon contortus,Moderate,7.9,TF
+2024,B,3,Z4,Melinis repens,Low,10,TF
+2024,B,3,Z4,Eragrostis gummiflua,Low,10.3,TF
+2024,B,3,Z4,,,10.1,TF
+2024,B,3,Z4,Heteropogon contortus,Moderate,6,TF
+2024,B,3,Z4,Digitaria eriantha,High,7.8,TF
+2024,B,3,Z4,Eragrostis gummiflua,Low,6.6,TF
+2024,B,3,Z4,,,8.1,TF
+2024,B,4,Z1,Cymbopogon excavatus,Low,17.7,TFB
+2024,B,4,Z1,Eragrostis superba,Moderate,17.6,TFB
+2024,B,4,Z1,Heteropogon contortus,Moderate,20,TFB
+2024,B,4,Z1,,,15.4,TFB
+2024,B,4,Z1,Eragrostis gummiflua,Low,11.8,TFB
+2024,B,4,Z1,Heteropogon contortus,Moderate,13,TFB
+2024,B,4,Z1,Aristida adscensionis,Low,11.2,TFB
+2024,B,4,Z1,Digitaria eriantha,High,13.4,TFB
+2024,B,4,Z1,Eragrostis superba,Moderate,NA,TFB
+2024,B,4,Z1,Cymbopogon plurinodis,Low,NA,TFB
+2024,B,4,Z1,Heteropogon contortus,Moderate,10.2,TFB
+2024,B,4,Z1,Eragrostis rigidior,Low,9,TFB
+2024,B,4,Z1,Melinis repens,Low,9,TFB
+2024,B,4,Z1,Bothriochloa insculpta,Moderate,10.2,TFB
+2024,B,4,Z1,Heteropogon contortus,Moderate,7.8,TFB
+2024,B,4,Z1,Eragrostis superba,Moderate,7.4,TFB
+2024,B,4,Z1,Aristida congesta C,Low,8,TFB
+2024,B,4,Z1,Themeda triandra,High,10,TFB
+2024,B,4,Z1,Heteropogon contortus,Moderate,17.3,TFB
+2024,B,4,Z1,Aristida adscensionis,Low,12.7,TFB
+2024,B,4,Z1,Melinis repens,Low,13.3,TFB
+2024,B,4,Z1,Aristida diffusa,Low,12.7,TFB
+2024,B,4,Z1,Hyperrhenia filipendula,Moderate,NA,TFB
+2024,B,4,Z1,Setaria pumila ,Moderate,NA,TFB
+2024,B,4,Z2,Cymbopogon excavatus,Low,3.7,TFB
+2024,B,4,Z2,Heteropogon contortus,Moderate,3.3,TFB
+2024,B,4,Z2,Melinis repens,Low,8.4,TFB
+2024,B,4,Z2,,,12.3,TFB
+2024,B,4,Z2,Cymbopogon excavatus,Low,17.7,TFB
+2024,B,4,Z2,Heteropogon contortus,Moderate,17.1,TFB
+2024,B,4,Z2,Eragrostis gummiflua,Low,13.3,TFB
+2024,B,4,Z2,Setaria pumila ,Moderate,12.7,TFB
+2024,B,4,Z2,Cymbopogon excavatus,Low,4.1,TFB
+2024,B,4,Z2,Heteropogon contortus,Moderate,10.4,TFB
+2024,B,4,Z2,Aristida diffusa,Low,8.8,TFB
+2024,B,4,Z2,,,6.9,TFB
+2024,B,4,Z2,Eragrostis gummiflua,Low,6.4,TFB
+2024,B,4,Z2,Cymbopogon excavatus,Low,6.6,TFB
+2024,B,4,Z2,Heteropogon contortus,Moderate,7.3,TFB
+2024,B,4,Z2,Melinis repens,Low,7.6,TFB
+2024,B,4,Z2,Eragrostis rigidior,Moderate,NA,TFB
+2024,B,4,Z2,Aristida  canescens,Low,NA,TFB
+2024,B,4,Z2,Cymbopogon excavatus,Low,21.1,TFB
+2024,B,4,Z2,Heteropogon contortus,Moderate,15.1,TFB
+2024,B,4,Z2,Eragrostis superba,Moderate,12.2,TFB
+2024,B,4,Z2,,,14.9,TFB
+2024,B,4,Z3,Heteropogon contortus,Moderate,18.3,TFB
+2024,B,4,Z3,Melinis repens,Low,26,TFB
+2024,B,4,Z3,Hyperrhenia filipendula,Moderate,24.6,TFB
+2024,B,4,Z3,Themeda triandra,High,21,TFB
+2024,B,4,Z3,Heteropogon contortus,Moderate,18.8,TFB
+2024,B,4,Z3,Melinis repens,Low,11.2,TFB
+2024,B,4,Z3,Eragrostis rigidior,Moderate,2,TFB
+2024,B,4,Z3,,,3.3,TFB
+2024,B,4,Z3,Heteropogon contortus,Moderate,4.4,TFB
+2024,B,4,Z3,Digitaria eriantha,High,4.2,TFB
+2024,B,4,Z3,,,4.1,TFB
+2024,B,4,Z3,,,5,TFB
+2024,B,4,Z3,Heteropogon contortus,Moderate,14.1,TFB
+2024,B,4,Z3,Melinis repens,Low,23.2,TFB
+2024,B,4,Z3,Hyperrhenia filipendula,Moderate,19.2,TFB
+2024,B,4,Z3,Themeda triandra,High,11.4,TFB
+2024,B,4,Z3,Eragrostis superba,Moderate,NA,TFB
+2024,B,4,Z3,Digitaria eriantha,High,7.3,TFB
+2024,B,4,Z3,Heteropogon contortus,Moderate,7.7,TFB
+2024,B,4,Z3,Melinis repens,Low,7.8,TFB
+2024,B,4,Z3,Aristida adscensionis,Low,9.4,TFB
+2024,B,4,Z4,Eragrostis rigidior,Moderate,10.7,TFB
+2024,B,4,Z4,Heteropogon contortus,Moderate,33.7,TFB
+2024,B,4,Z4,Digitaria eriantha,High,29.4,TFB
+2024,B,4,Z4,Cymbopogon excavatus,Low,20.7,TFB
+2024,B,4,Z4,Eragrostis superba,Moderate,NA,TFB
+2024,B,4,Z4,Heteropogon contortus,Moderate,17.1,TFB
+2024,B,4,Z4,Melinis repens,Low,17.2,TFB
+2024,B,4,Z4,Aristida adscensionis,Low,16.3,TFB
+2024,B,4,Z4,Setaria pumila ,Moderate,14.7,TFB
+2024,B,4,Z4,Heteropogon contortus,Moderate,16,TFB
+2024,B,4,Z4,Aristida adscensionis,Low,15,TFB
+2024,B,4,Z4,Setaria pumila ,Moderate,18.1,TFB
+2024,B,4,Z4,Eragrostis superba,Moderate,19.4,TFB
+2024,B,4,Z4,Cymbopogon excavatus,Low,7.8,TFB
+2024,B,4,Z4,Melinis repens,Low,7.6,TFB
+2024,B,4,Z4,Heteropogon contortus,Moderate,7.5,TFB
+2024,B,4,Z4,Eragrostis gummiflua,Low,7.6,TFB
+2024,B,4,Z4,Cymbopogon excavatus,Low,33.7,TFB
+2024,B,4,Z4,Melinis repens,Low,31.6,TFB
+2024,B,4,Z4,Heteropogon contortus,Moderate,31,TFB
+2024,B,4,Z4,Eragrostis gummiflua,Low,26.4,TFB
+2024,B,5,Z1,Cynodon dactylon,High,13.2,THF
+2024,B,5,Z1,Heteropogon contortus,Moderate,10.8,THF
+2024,B,5,Z1,Setaria pumila ,Moderate,11.6,THF
+2024,B,5,Z1,Aristida congesta B,Low,11,THF
+2024,B,5,Z1,Heteropogon contortus,Moderate,14.5,THF
+2024,B,5,Z1,Melinis repens,Low,14.6,THF
+2024,B,5,Z1,Hyperrhenia filipendula,Moderate,14,THF
+2024,B,5,Z1,Themeda triandra,High,14.9,THF
+2024,B,5,Z1,Setaria pumila ,Moderate,NA,THF
+2024,B,5,Z1,Cynodon dactylon,High,4.3,THF
+2024,B,5,Z1,Heteropogon contortus,Moderate,5.5,THF
+2024,B,5,Z1,Cymbopogon excavatus,Low,10.1,THF
+2024,B,5,Z1,,,9.7,THF
+2024,B,5,Z1,Cynodon dactylon,High,13.9,THF
+2024,B,5,Z1,Cymbopogon excavatus,Low,8.2,THF
+2024,B,5,Z1,Setaria pumila ,Moderate,8.5,THF
+2024,B,5,Z1,,,9.1,THF
+2024,B,5,Z1,Bothriochloa insculpta,Moderate,9.7,THF
+2024,B,5,Z1,Heteropogon contortus,Moderate,8.6,THF
+2024,B,5,Z1,,,7.1,THF
+2024,B,5,Z1,,,7.5,THF
+2024,B,5,Z2,Cynodon dactylon,High,12.5,THF
+2024,B,5,Z2,Heteropogon contortus,Moderate,10,THF
+2024,B,5,Z2,Aristida congesta B,Low,10.1,THF
+2024,B,5,Z2,Melinis repens,Low,9.9,THF
+2024,B,5,Z2,Eragrostis gummiflua,Low,NA,THF
+2024,B,5,Z2,Eragrostis superba,Moderate,NA,THF
+2024,B,5,Z2,Cynodon dactylon,High,5,THF
+2024,B,5,Z2,Heteropogon contortus,Moderate,3.4,THF
+2024,B,5,Z2,Setaria pumila ,Moderate,4.1,THF
+2024,B,5,Z2,,,4.2,THF
+2024,B,5,Z2,Heteropogon contortus,Moderate,6,THF
+2024,B,5,Z2,Eragrostis superba,Moderate,7.1,THF
+2024,B,5,Z2,Bothriochloa insculpta,Moderate,6.4,THF
+2024,B,5,Z2,Themeda triandra,High,5.8,THF
+2024,B,5,Z2,Setaria pumila ,Moderate,20.4,THF
+2024,B,5,Z2,Heteropogon contortus,Moderate,11.8,THF
+2024,B,5,Z2,Brachiaria serrata,Moderate,8.8,THF
+2024,B,5,Z2,Aristida congesta B,Low,9.7,THF
+2024,B,5,Z2,Eragrostis superba,Moderate,6.9,THF
+2024,B,5,Z2,Setaria pumila ,Moderate,10.1,THF
+2024,B,5,Z2,Heteropogon contortus,Moderate,10.4,THF
+2024,B,5,Z2,Cymbopogon excavatus,Low,10.4,THF
+2024,B,5,Z3,Heteropogon contortus,Moderate,8.6,THF
+2024,B,5,Z3,Setaria pumila ,Moderate,6.3,THF
+2024,B,5,Z3,,,6,THF
+2024,B,5,Z3,,,6.1,THF
+2024,B,5,Z3,Cynodon dactylon,High,6.3,THF
+2024,B,5,Z3,Heteropogon contortus,Moderate,17.1,THF
+2024,B,5,Z3,Eragrostis superba,Moderate,16.8,THF
+2024,B,5,Z3,Setaria pumila ,Moderate,8.5,THF
+2024,B,5,Z3,Sporobolus africanus,Low,NA,THF
+2024,B,5,Z3,Aristida congesta B,Low,NA,THF
+2024,B,5,Z3,Cymbopogon plurinodis,Low,12.1,THF
+2024,B,5,Z3,Cynodon dactylon,High,9.5,THF
+2024,B,5,Z3,Heteropogon contortus,Moderate,9.7,THF
+2024,B,5,Z3,Eragrostis superba,Moderate,9.6,THF
+2024,B,5,Z3,Aristida congesta B,Low,NA,THF
+2024,B,5,Z3,Eragrostis gummiflua,Low,NA,THF
+2024,B,5,Z3,Heteropogon contortus,Moderate,7.5,THF
+2024,B,5,Z3,Setaria pumila ,Moderate,6,THF
+2024,B,5,Z3,,,2,THF
+2024,B,5,Z3,,,3.9,THF
+2024,B,5,Z3,Aristida congesta B,Low,5.7,THF
+2024,B,5,Z3,Heteropogon contortus,Moderate,5.3,THF
+2024,B,5,Z3,Eragrostis gummiflua,Low,8.4,THF
+2024,B,5,Z3,,,6.5,THF
+2024,B,5,Z4,Cynodon dactylon,High,8.6,THF
+2024,B,5,Z4,Heteropogon contortus,Moderate,9.2,THF
+2024,B,5,Z4,Setaria pumila ,Moderate,13.2,THF
+2024,B,5,Z4,Aristida congesta B,Low,13.2,THF
+2024,B,5,Z4,Melinis repens,Low,NA,THF
+2024,B,5,Z4,Bothriochloa insculpta,Moderate,10.7,THF
+2024,B,5,Z4,Heteropogon contortus,Moderate,3.1,THF
+2024,B,5,Z4,Eragrostis superba,Moderate,8.5,THF
+2024,B,5,Z4,,,6.5,THF
+2024,B,5,Z4,Cynodon dactylon,Moderate,13.6,THF
+2024,B,5,Z4,Eragrostis rigidior,Moderate,12.1,THF
+2024,B,5,Z4,Digitaria eriantha,High,9.4,THF
+2024,B,5,Z4,Sporobolus africanus,Low,10.1,THF
+2024,B,5,Z4,Heteropogon contortus,Moderate,9.3,THF
+2024,B,5,Z4,Eragrostis superba,Moderate,10,THF
+2024,B,5,Z4,Bothriochloa insculpta,Moderate,12,THF
+2024,B,5,Z4,Themeda triandra,High,12.5,THF
+2024,B,5,Z4,Setaria pumila ,Moderate,NA,THF
+2024,B,5,Z4,Cynodon dactylon,High,NA,THF
+2024,B,5,Z4,Heteropogon contortus,Moderate,8.8,THF
+2024,B,5,Z4,Eragrostis superba,Moderate,7.7,THF
+2024,B,5,Z4,Bothriochloa insculpta,Moderate,6.4,THF
+2024,B,5,Z4,Aristida adscensionis,Low,7,THF
+2024,B,5,Z4,Aristida congesta B,Low,NA,THF
+2024,C,1,Z1,,,0,C
+2024,C,1,Z1,,,0,C
+2024,C,1,Z1,,,0,C
+2024,C,1,Z1,,,0,C
+2024,C,1,Z1,Cynodon dactylon,High,5.8,C
+2024,C,1,Z1,Aristida adscensionis,Low,6.8,C
+2024,C,1,Z1,,,6.8,C
+2024,C,1,Z1,,,6.1,C
+2024,C,1,Z1,Heteropogon contortus,Moderate,2.5,C
+2024,C,1,Z1,Brachiaria brizantha,Moderate,2.4,C
+2024,C,1,Z1,,,2.7,C
+2024,C,1,Z1,,,2.5,C
+2024,C,1,Z1,Setaria incrassata,High,4.6,C
+2024,C,1,Z1,Heteropogon contortus,Moderate,4.2,C
+2024,C,1,Z1,,,4.4,C
+2024,C,1,Z1,,,4.6,C
+2024,C,1,Z1,Heteropogon contortus,Moderate,2,C
+2024,C,1,Z1,,,2.4,C
+2024,C,1,Z1,,,2.4,C
+2024,C,1,Z1,,,2.3,C
+2024,C,1,Z2,Setaria incrassata,High,4.1,C
+2024,C,1,Z2,Heteropogon contortus,Moderate,2.9,C
+2024,C,1,Z2,,,3.3,C
+2024,C,1,Z2,,,4.8,C
+2024,C,1,Z2,Eragrostis gummiflua,Low,2.2,C
+2024,C,1,Z2,Heteropogon contortus,Moderate,4,C
+2024,C,1,Z2,,,2.4,C
+2024,C,1,Z2,,,4.1,C
+2024,C,1,Z2,Sporobolus africanus,Low,3.3,C
+2024,C,1,Z2,Aristida  canescens,Low,3.9,C
+2024,C,1,Z2,Brachiaria brizantha,Moderate,3.6,C
+2024,C,1,Z2,Eragrostis gummiflua,Low,3.5,C
+2024,C,1,Z2,Heteropogon contortus,Moderate,NA,C
+2024,C,1,Z2,Heteropogon contortus,Moderate,5.3,C
+2024,C,1,Z2,Panicum maximum,High,5,C
+2024,C,1,Z2,,,5,C
+2024,C,1,Z2,,,4.7,C
+2024,C,1,Z2,Hyperrhenia filipendula,Moderate,1.9,C
+2024,C,1,Z2,,,2.1,C
+2024,C,1,Z2,,,2.8,C
+2024,C,1,Z2,,,2,C
+2024,C,1,Z3,Setaria incrassata,High,3.9,C
+2024,C,1,Z3,Melinis repens,Low,3.9,C
+2024,C,1,Z3,,,4,C
+2024,C,1,Z3,,,4.1,C
+2024,C,1,Z3,Heteropogon contortus,Moderate,2.2,C
+2024,C,1,Z3,,,3,C
+2024,C,1,Z3,,,2.6,C
+2024,C,1,Z3,,,2.8,C
+2024,C,1,Z3,Heteropogon contortus,Moderate,3.5,C
+2024,C,1,Z3,Melinis repens,Low,3.8,C
+2024,C,1,Z3,,,3.2,C
+2024,C,1,Z3,,,3.1,C
+2024,C,1,Z3,Eragrostis gummiflua,Low,4.4,C
+2024,C,1,Z3,Panicum maximum,High,4.1,C
+2024,C,1,Z3,Digitaria eriantha,High,3.2,C
+2024,C,1,Z3,,,2.1,C
+2024,C,1,Z3,Eragrostis gummiflua,Low,3.6,C
+2024,C,1,Z3,Heteropogon contortus,Moderate,3.1,C
+2024,C,1,Z3,Setaria incrassata,High,3.1,C
+2024,C,1,Z3,,,3.3,C
+2024,C,1,Z4,Heteropogon contortus,Moderate,2.6,C
+2024,C,1,Z4,Melinis repens,Low,3.5,C
+2024,C,1,Z4,,,3,C
+2024,C,1,Z4,,,2.8,C
+2024,C,1,Z4,Heteropogon contortus,Moderate,4.9,C
+2024,C,1,Z4,Setaria incrassata,High,5,C
+2024,C,1,Z4,,,4.4,C
+2024,C,1,Z4,,,4.4,C
+2024,C,1,Z4,Heteropogon contortus,Moderate,3.7,C
+2024,C,1,Z4,Digitaria eriantha,High,3.7,C
+2024,C,1,Z4,,,3.5,C
+2024,C,1,Z4,,,3.4,C
+2024,C,1,Z4,Heteropogon contortus,Moderate,4.4,C
+2024,C,1,Z4,,,3.8,C
+2024,C,1,Z4,,,3.3,C
+2024,C,1,Z4,,,3.6,C
+2024,C,1,Z4,Eragrostis gummiflua,Low,2.5,C
+2024,C,1,Z4,,,2.3,C
+2024,C,1,Z4,,,2.3,C
+2024,C,1,Z4,,,2.2,C
+2024,C,2,Z1,Panicum maximum,High,4.4,TFB
+2024,C,2,Z1,,,3.9,TFB
+2024,C,2,Z1,,,6.2,TFB
+2024,C,2,Z1,,,3.5,TFB
+2024,C,2,Z1,Panicum maximum,High,8.1,TFB
+2024,C,2,Z1,Eragrostis superba,Moderate,7.3,TFB
+2024,C,2,Z1,Heteropogon contortus,Moderate,6.9,TFB
+2024,C,2,Z1,,,6.2,TFB
+2024,C,2,Z1,Panicum maximum,High,4,TFB
+2024,C,2,Z1,,,4.3,TFB
+2024,C,2,Z1,,,4,TFB
+2024,C,2,Z1,,,4.1,TFB
+2024,C,2,Z1,Panicum maximum,High,1.9,TFB
+2024,C,2,Z1,,,2.5,TFB
+2024,C,2,Z1,,,2.5,TFB
+2024,C,2,Z1,,,2.6,TFB
+2024,C,2,Z1,Eragrostis rigidior,Moderate,2.2,TFB
+2024,C,2,Z1,Eragrostis gummiflua,Low,2.3,TFB
+2024,C,2,Z1,,,2,TFB
+2024,C,2,Z1,,,3,TFB
+2024,C,2,Z2,Panicum maximum,High,4.3,TFB
+2024,C,2,Z2,,,5,TFB
+2024,C,2,Z2,,,5.3,TFB
+2024,C,2,Z2,,,5,TFB
+2024,C,2,Z2,Panicum maximum,High,4.3,TFB
+2024,C,2,Z2,,,5,TFB
+2024,C,2,Z2,,,5.3,TFB
+2024,C,2,Z2,,,5,TFB
+2024,C,2,Z2,Panicum maximum,High,4.2,TFB
+2024,C,2,Z2,,,3.6,TFB
+2024,C,2,Z2,,,4,TFB
+2024,C,2,Z2,,,3.7,TFB
+2024,C,2,Z2,,,0,TFB
+2024,C,2,Z2,,,0,TFB
+2024,C,2,Z2,,,0,TFB
+2024,C,2,Z2,,,0,TFB
+2024,C,2,Z2,Panicum maximum,High,6.7,TFB
+2024,C,2,Z2,,,6.9,TFB
+2024,C,2,Z2,,,6.4,TFB
+2024,C,2,Z2,,,6.4,TFB
+2024,C,2,Z3,Digitaria eriantha,High,5.3,TFB
+2024,C,2,Z3,Heteropogon contortus,Moderate,5.1,TFB
+2024,C,2,Z3,Eragrostis rigidior,Moderate,6.1,TFB
+2024,C,2,Z3,,,6.2,TFB
+2024,C,2,Z3,Eragrostis rigidior,Moderate,1.7,TFB
+2024,C,2,Z3,,,2.8,TFB
+2024,C,2,Z3,,,2.8,TFB
+2024,C,2,Z3,,,2.8,TFB
+2024,C,2,Z3,Panicum maximum,High,20.7,TFB
+2024,C,2,Z3,,,19.4,TFB
+2024,C,2,Z3,,,26.5,TFB
+2024,C,2,Z3,,,24,TFB
+2024,C,2,Z3,Panicum maximum,High,10.3,TFB
+2024,C,2,Z3,,,7.8,TFB
+2024,C,2,Z3,,,6.8,TFB
+2024,C,2,Z3,,,7.8,TFB
+2024,C,2,Z3,Eragrostis viscosa,Low,1.9,TFB
+2024,C,2,Z3,Eragrostis gummiflua,Low,1.8,TFB
+2024,C,2,Z3,,,1.7,TFB
+2024,C,2,Z3,,,2,TFB
+2024,C,2,Z4,Panicum maximum,High,3,TFB
+2024,C,2,Z4,,,3.1,TFB
+2024,C,2,Z4,,,2.8,TFB
+2024,C,2,Z4,,,3.3,TFB
+2024,C,2,Z4,Brachiaria brizantha,Moderate,8,TFB
+2024,C,2,Z4,Eragrostis rigidior,Moderate,7.2,TFB
+2024,C,2,Z4,,,8.4,TFB
+2024,C,2,Z4,,,9.1,TFB
+2024,C,2,Z4,Panicum maximum,High,4.7,TFB
+2024,C,2,Z4,,,4.9,TFB
+2024,C,2,Z4,,,5.3,TFB
+2024,C,2,Z4,,,6.1,TFB
+2024,C,2,Z4,Panicum maximum,High,3.8,TFB
+2024,C,2,Z4,,,4,TFB
+2024,C,2,Z4,,,3.9,TFB
+2024,C,2,Z4,,,3.3,TFB
+2024,C,2,Z4,,,0,TFB
+2024,C,2,Z4,,,0,TFB
+2024,C,2,Z4,,,0,TFB
+2024,C,2,Z4,,,0,TFB
+2024,C,3,Z1,Heteropogon contortus,Moderate,12.2,TF
+2024,C,3,Z1,Eragrostis rigidior,Moderate,11.8,TF
+2024,C,3,Z1,Pogonarthria squarrosa ,Low,11.2,TF
+2024,C,3,Z1,,,10.6,TF
+2024,C,3,Z1,Heteropogon contortus,Moderate,8.8,TF
+2024,C,3,Z1,Digitaria eriantha,High,8.6,TF
+2024,C,3,Z1,Brachiaria brizantha,Moderate,8.4,TF
+2024,C,3,Z1,,,8.3,TF
+2024,C,3,Z1,Heteropogon contortus,Moderate,4.9,TF
+2024,C,3,Z1,Panicum maximum,High,4.3,TF
+2024,C,3,Z1,Digitaria eriantha,High,4,TF
+2024,C,3,Z1,Melinis repens,Low,5.9,TF
+2024,C,3,Z1,Heteropogon contortus,Moderate,4.2,TF
+2024,C,3,Z1,,,4,TF
+2024,C,3,Z1,,,4.3,TF
+2024,C,3,Z1,,,5.1,TF
+2024,C,3,Z1,Heteropogon contortus,Moderate,2.2,TF
+2024,C,3,Z1,Panicum maximum,High,3.6,TF
+2024,C,3,Z1,,,3.8,TF
+2024,C,3,Z1,,,3.5,TF
+2024,C,3,Z2,Digitaria eriantha,High,2.4,TF
+2024,C,3,Z2,Pogonarthria squarrosa ,Low,3.2,TF
+2024,C,3,Z2,Brachiaria brizantha,Moderate,3.2,TF
+2024,C,3,Z2,Setaria incrassata,High,3.3,TF
+2024,C,3,Z2,Digitaria eriantha,High,4.1,TF
+2024,C,3,Z2,Pogonarthria squarrosa ,Low,4.4,TF
+2024,C,3,Z2,Brachiaria brizantha,Moderate,5.1,TF
+2024,C,3,Z2,,,5.1,TF
+2024,C,3,Z2,Panicum maximum,High,12.8,TF
+2024,C,3,Z2,,,8.3,TF
+2024,C,3,Z2,,,7.2,TF
+2024,C,3,Z2,,,6.6,TF
+2024,C,3,Z2,Heteropogon contortus,Moderate,4.4,TF
+2024,C,3,Z2,,,4.6,TF
+2024,C,3,Z2,,,4,TF
+2024,C,3,Z2,,,3.7,TF
+2024,C,3,Z2,Pogonarthria squarrosa ,Low,5.3,TF
+2024,C,3,Z2,Brachiaria brizantha,Moderate,5.2,TF
+2024,C,3,Z2,Heteropogon contortus,Moderate,4.4,TF
+2024,C,3,Z2,,,4.4,TF
+2024,C,3,Z3,Pogonarthria squarrosa ,Low,2.2,TF
+2024,C,3,Z3,Setaria incrassata,High,2.4,TF
+2024,C,3,Z3,Heteropogon contortus,Moderate,3.8,TF
+2024,C,3,Z3,,,4.7,TF
+2024,C,3,Z3,Pogonarthria squarrosa ,Low,5.9,TF
+2024,C,3,Z3,Heteropogon contortus,Moderate,5.4,TF
+2024,C,3,Z3,Eragrostis rigidior,Moderate,4.9,TF
+2024,C,3,Z3,,,4.7,TF
+2024,C,3,Z3,Pogonarthria squarrosa ,Low,2,TF
+2024,C,3,Z3,Eragrostis rigidior,Moderate,2.5,TF
+2024,C,3,Z3,Digitaria eriantha,High,3.5,TF
+2024,C,3,Z3,,,4.9,TF
+2024,C,3,Z3,Heteropogon contortus,Moderate,3.4,TF
+2024,C,3,Z3,Pogonarthria squarrosa ,Low,2.9,TF
+2024,C,3,Z3,Melinis repens,Low,3,TF
+2024,C,3,Z3,,,2.2,TF
+2024,C,3,Z3,Cynodon dactylon,High,2.9,TF
+2024,C,3,Z3,Hyperrhenia filipendula,Moderate,2,TF
+2024,C,3,Z3,,,4.1,TF
+2024,C,3,Z3,,,2.9,TF
+2024,C,3,Z4,Pogonarthria squarrosa ,Low,2.4,TF
+2024,C,3,Z4,Heteropogon contortus,Moderate,3.5,TF
+2024,C,3,Z4,Hyperrhenia filipendula,Moderate,4.2,TF
+2024,C,3,Z4,,,4,TF
+2024,C,3,Z4,Melinis repens,Low,4.4,TF
+2024,C,3,Z4,Eragrostis rigidior,Moderate,5.2,TF
+2024,C,3,Z4,Digitaria eriantha,High,6.5,TF
+2024,C,3,Z4,Brachiaria brizantha,Moderate,5.5,TF
+2024,C,3,Z4,Pogonarthria squarrosa ,Low,4.9,TF
+2024,C,3,Z4,Eragrostis rigidior,Moderate,6.9,TF
+2024,C,3,Z4,Digitaria eriantha,High,4.9,TF
+2024,C,3,Z4,,,4.5,TF
+2024,C,3,Z4,Heteropogon contortus,Moderate,5.3,TF
+2024,C,3,Z4,Digitaria eriantha,High,5.5,TF
+2024,C,3,Z4,Brachiaria brizantha,Moderate,5.3,TF
+2024,C,3,Z4,,,4.6,TF
+2024,C,3,Z4,Eragrostis rigidior,Moderate,4,TF
+2024,C,3,Z4,Digitaria eriantha,High,5.5,TF
+2024,C,3,Z4,Brachiaria brizantha,Moderate,4.4,TF
+2024,C,3,Z4,Pogonarthria squarrosa ,Low,4.1,TF
+2024,C,3,Z4,Eragrostis gummiflua,Low,NA,TF
+2024,C,4,Z1,Heteropogon contortus,Moderate,3.4,F
+2024,C,4,Z1,Eragrostis rigidior,Moderate,5.8,F
+2024,C,4,Z1,,,4.8,F
+2024,C,4,Z1,,,4.4,F
+2024,C,4,Z1,Pogonarthria squarrosa ,Low,3.2,F
+2024,C,4,Z1,Heteropogon contortus,Moderate,3.8,F
+2024,C,4,Z1,Panicum maximum,High,3.7,F
+2024,C,4,Z1,,,4.3,F
+2024,C,4,Z1,Eragrostis rigidior,Moderate,2.7,F
+2024,C,4,Z1,Digitaria eriantha,High,4.8,F
+2024,C,4,Z1,,,4.6,F
+2024,C,4,Z1,,,4.7,F
+2024,C,4,Z1,Pogonarthria squarrosa ,Low,2.9,F
+2024,C,4,Z1,Heteropogon contortus,Moderate,3.8,F
+2024,C,4,Z1,,,3.7,F
+2024,C,4,Z1,,,3.6,F
+2024,C,4,Z1,Heteropogon contortus,Moderate,4.2,F
+2024,C,4,Z1,Panicum maximum,High,6.4,F
+2024,C,4,Z1,Digitaria eriantha,High,7.1,F
+2024,C,4,Z1,,,6.8,F
+2024,C,4,Z2,Heteropogon contortus,Moderate,3,F
+2024,C,4,Z2,Aristida congesta C,Low,3.1,F
+2024,C,4,Z2,,,2.9,F
+2024,C,4,Z2,,,2.8,F
+2024,C,4,Z2,Pogonarthria squarrosa ,Low,8,F
+2024,C,4,Z2,Heteropogon contortus,Moderate,7.1,F
+2024,C,4,Z2,Panicum maximum,High,6.6,F
+2024,C,4,Z2,Digitaria eriantha,High,5.8,F
+2024,C,4,Z2,Eragrostis gummiflua,Low,NA,F
+2024,C,4,Z2,Eragrostis superba,Moderate,NA,F
+2024,C,4,Z2,Heteropogon contortus,Moderate,6.6,F
+2024,C,4,Z2,Digitaria eriantha,Moderate,6.2,F
+2024,C,4,Z2,Eragrostis rigidior,Moderate,6.3,F
+2024,C,4,Z2,Setaria incrassata,High,6.5,F
+2024,C,4,Z2,Pogonarthria squarrosa ,Low,3.6,F
+2024,C,4,Z2,Heteropogon contortus,Moderate,3.7,F
+2024,C,4,Z2,Panicum maximum,High,5.3,F
+2024,C,4,Z2,Aristida congesta B,Low,4.5,F
+2024,C,4,Z2,Pogonarthria squarrosa ,Low,6.6,F
+2024,C,4,Z2,Heteropogon contortus,Moderate,5.8,F
+2024,C,4,Z2,,,5,F
+2024,C,4,Z2,,,5,F
+2024,C,4,Z3,Heteropogon contortus,Moderate,5.4,F
+2024,C,4,Z3,Eragrostis gummiflua,Low,5,F
+2024,C,4,Z3,Digitaria eriantha,High,4.8,F
+2024,C,4,Z3,Eragrostis rigidior,Moderate,5,F
+2024,C,4,Z3,Heteropogon contortus,Moderate,5.4,F
+2024,C,4,Z3,Eragrostis gummiflua,Low,5.4,F
+2024,C,4,Z3,Pogonarthria squarrosa ,Low,5.5,F
+2024,C,4,Z3,Panicum maximum,High,5.4,F
+2024,C,4,Z3,Heteropogon contortus,Moderate,4,F
+2024,C,4,Z3,Melinis repens,Low,7.8,F
+2024,C,4,Z3,Aristida adscensionis,Low,4.7,F
+2024,C,4,Z3,Panicum maximum,High,2.3,F
+2024,C,4,Z3,Digitaria eriantha,High,2.7,F
+2024,C,4,Z3,Eragrostis gummiflua,Low,2.8,F
+2024,C,4,Z3,,,2.5,F
+2024,C,4,Z3,Heteropogon contortus,Moderate,6.7,F
+2024,C,4,Z3,Panicum maximum,High,5.5,F
+2024,C,4,Z3,,,5.4,F
+2024,C,4,Z3,,,5.3,F
+2024,C,4,Z4,Hyperrhenia filipendula,Moderate,22,F
+2024,C,4,Z4,Eragrostis gummiflua,Low,19,F
+2024,C,4,Z4,Pogonarthria squarrosa ,Low,14.3,F
+2024,C,4,Z4,Panicum maximum,High,14.1,F
+2024,C,4,Z4,Heteropogon contortus,Moderate,NA,F
+2024,C,4,Z4,Aristida adscensionis,Low,NA,F
+2024,C,4,Z4,Eragrostis superba,Moderate,NA,F
+2024,C,4,Z4,Setaria incrassata,High,18.3,F
+2024,C,4,Z4,Hyperrhenia filipendula,Moderate,20.9,F
+2024,C,4,Z4,,,30,F
+2024,C,4,Z4,,,18.8,F
+2024,C,4,Z4,Eragrostis gummiflua,Low,8.7,F
+2024,C,4,Z4,Heteropogon contortus,Moderate,7.6,F
+2024,C,4,Z4,Aristida adscensionis,Low,5.8,F
+2024,C,4,Z4,,,5.4,F
+2024,C,4,Z4,Heteropogon contortus,Moderate,1.7,F
+2024,C,4,Z4,Aristida adscensionis,Low,1.4,F
+2024,C,4,Z4,,,1.6,F
+2024,C,4,Z4,,,2.1,F
+2024,C,4,Z4,Aristida adscensionis,Low,3.9,F
+2024,C,4,Z4,Brachiaria brizantha,Moderate,2.9,F
+2024,C,4,Z4,Chloris virgata,Moderate,2.9,F
+2024,C,4,Z4,,,3.2,F
+2024,C,5,Z1,Eragrostis gummiflua,Low,6.7,THF
+2024,C,5,Z1,Digitaria eriantha,High,6,THF
+2024,C,5,Z1,,,5.5,THF
+2024,C,5,Z1,,,5.1,THF
+2024,C,5,Z1,Digitaria eriantha,High,5,THF
+2024,C,5,Z1,Heteropogon contortus,Moderate,5.3,THF
+2024,C,5,Z1,,,5.2,THF
+2024,C,5,Z1,,,5,THF
+2024,C,5,Z1,Pogonarthria squarrosa ,Low,4.9,THF
+2024,C,5,Z1,Heteropogon contortus,Moderate,5.2,THF
+2024,C,5,Z1,Digitaria eriantha,High,5.2,THF
+2024,C,5,Z1,Eragrostis rigidior,Moderate,4.2,THF
+2024,C,5,Z1,Pogonarthria squarrosa ,Low,9.8,THF
+2024,C,5,Z1,Digitaria eriantha,High,8.4,THF
+2024,C,5,Z1,,,7.1,THF
+2024,C,5,Z1,,,7.5,THF
+2024,C,5,Z1,Panicum maximum,High,12.5,THF
+2024,C,5,Z1,Melinis repens,Low,5.5,THF
+2024,C,5,Z1,,,8.4,THF
+2024,C,5,Z1,,,5.9,THF
+2024,C,5,Z2,Heteropogon contortus,Moderate,7.5,THF
+2024,C,5,Z2,,,7.4,THF
+2024,C,5,Z2,,,7.3,THF
+2024,C,5,Z2,,,7.1,THF
+2024,C,5,Z2,Heteropogon contortus,Moderate,2.3,THF
+2024,C,5,Z2,Brachiaria brizantha,,1.9,THF
+2024,C,5,Z2,,,2.3,THF
+2024,C,5,Z2,,,2.6,THF
+2024,C,5,Z2,Pogonarthria squarrosa ,Low,5.6,THF
+2024,C,5,Z2,Perotis patens,Low,5.3,THF
+2024,C,5,Z2,Digitaria eriantha,High,5.1,THF
+2024,C,5,Z2,,,5,THF
+2024,C,5,Z2,Heteropogon contortus,Moderate,5.6,THF
+2024,C,5,Z2,Pogonarthria squarrosa ,Low,6,THF
+2024,C,5,Z2,Diheteropogon amplectens,Moderate,6,THF
+2024,C,5,Z2,Perotis patens,Low,5.8,THF
+2024,C,5,Z2,Panicum maximum,High,6.7,THF
+2024,C,5,Z2,Digitaria eriantha,High,6.6,THF
+2024,C,5,Z2,,,6.5,THF
+2024,C,5,Z2,,,6.3,THF
+2024,C,5,Z3,Eragrostis gummiflua,Low,3.1,THF
+2024,C,5,Z3,Panicum maximum,High,3.1,THF
+2024,C,5,Z3,Heteropogon contortus,Moderate,3.1,THF
+2024,C,5,Z3,Aristida adscensionis,Low,2.4,THF
+2024,C,5,Z3,Digitaria eriantha,High,NA,THF
+2024,C,5,Z3,Eragrostis gummiflua,Low,5.9,THF
+2024,C,5,Z3,Aristida adscensionis,Low,5.5,THF
+2024,C,5,Z3,Digitaria eriantha,High,5.2,THF
+2024,C,5,Z3,Eragrostis viscosa,Low,4.9,THF
+2024,C,5,Z3,Brachiaria brizantha,Moderate,NA,THF
+2024,C,5,Z3,Pogonarthria squarrosa ,Low,NA,THF
+2024,C,5,Z3,,,0,THF
+2024,C,5,Z3,,,0,THF
+2024,C,5,Z3,,,0,THF
+2024,C,5,Z3,,,0,THF
+2024,C,5,Z3,Panicum maximum,High,8.8,THF
+2024,C,5,Z3,Digitaria eriantha,High,5.4,THF
+2024,C,5,Z3,,,4.2,THF
+2024,C,5,Z3,,,5.7,THF
+2024,C,5,Z3,Panicum maximum,High,4.2,THF
+2024,C,5,Z3,,,5.3,THF
+2024,C,5,Z3,,,7.7,THF
+2024,C,5,Z3,,,7.4,THF
+2024,C,5,Z4,Eragrostis gummiflua,Low,3.3,THF
+2024,C,5,Z4,Pogonarthria squarrosa ,Low,2.9,THF
+2024,C,5,Z4,Eragrostis superba,Moderate,3.5,THF
+2024,C,5,Z4,,,3.1,THF
+2024,C,5,Z4,Digitaria eriantha,High,7.8,THF
+2024,C,5,Z4,Heteropogon contortus,Moderate,7.1,THF
+2024,C,5,Z4,Eragrostis rigidior,Moderate,6.6,THF
+2024,C,5,Z4,,,6.2,THF
+2024,C,5,Z4,Eragrostis gummiflua,Low,3.3,THF
+2024,C,5,Z4,Digitaria eriantha,High,3.2,THF
+2024,C,5,Z4,Heteropogon contortus,Moderate,3.2,THF
+2024,C,5,Z4,Brachiaria brizantha,Moderate,3.1,THF
+2024,C,5,Z4,Panicum maximum,High,4,THF
+2024,C,5,Z4,,,4.7,THF
+2024,C,5,Z4,,,4.6,THF
+2024,C,5,Z4,,,5,THF
+2024,C,5,Z4,Heteropogon contortus,Moderate,6.6,THF
+2024,C,5,Z4,Pogonarthria squarrosa ,Low,4.8,THF
+2024,C,5,Z4,Aristida adscensionis,Low,3.8,THF
+2024,C,5,Z4,Brachiaria brizantha,Moderate,4,THF
+2024,D,1,Z1,Brachiaria nigropedata,High,1.8,C
+2024,D,1,Z1,Eragrostis rigidior,Moderate,2.9,C
+2024,D,1,Z1,Heteropogon contortus,Moderate,2.9,C
+2024,D,1,Z1,,,2.7,C
+2024,D,1,Z1,,,0,C
+2024,D,1,Z1,,,0,C
+2024,D,1,Z1,,,0,C
+2024,D,1,Z1,,,0,C
+2024,D,1,Z1,Eragrostis rigidior,Moderate,6.8,C
+2024,D,1,Z1,Heteropogon contortus,Moderate,6.6,C
+2024,D,1,Z1,,,5.5,C
+2024,D,1,Z1,,,5,C
+2024,D,1,Z1,Brachiaria nigropedata,High,2.6,C
+2024,D,1,Z1,Chloris virgata,Moderate,2.6,C
+2024,D,1,Z1,,,2.6,C
+2024,D,1,Z1,,,2.6,C
+2024,D,1,Z1,Eragrostis rigidior,Moderate,17.3,C
+2024,D,1,Z1,Sporobolus ioclados,Moderate,12.7,C
+2024,D,1,Z1,,,12.8,C
+2024,D,1,Z1,,,12.3,C
+2024,D,1,Z2,Chloris virgata,Moderate,7.5,C
+2024,D,1,Z2,Aristida adscensionis,Low,5.8,C
+2024,D,1,Z2,,,5.8,C
+2024,D,1,Z2,,,6.6,C
+2024,D,1,Z2,Eragrostis rigidior,Moderate,8,C
+2024,D,1,Z2,Sporobolus ioclados,Moderate,11.5,C
+2024,D,1,Z2,,,17.2,C
+2024,D,1,Z2,,,15.6,C
+2024,D,1,Z2,Chloris virgata,Moderate,6.2,C
+2024,D,1,Z2,Brachiaria nigropedata,High,5.8,C
+2024,D,1,Z2,,,5.6,C
+2024,D,1,Z2,,,5.8,C
+2024,D,1,Z2,Enteropogon macrostachyus,High,6.9,C
+2024,D,1,Z2,Aristida adscensionis,Low,7,C
+2024,D,1,Z2,Digitaria eriantha,High,6.6,C
+2024,D,1,Z2,,,6.5,C
+2024,D,1,Z2,Heteropogon contortus,Moderate,3.2,C
+2024,D,1,Z2,Themeda triandra,High,8.9,C
+2024,D,1,Z2,,,8.4,C
+2024,D,1,Z2,,,8.5,C
+2024,D,1,Z3,Aristida diffusa,Low,11.7,C
+2024,D,1,Z3,Chloris virgata,Moderate,9,C
+2024,D,1,Z3,,,11.4,C
+2024,D,1,Z3,,,10.9,C
+2024,D,1,Z3,Aristida adscensionis,Low,6.6,C
+2024,D,1,Z3,Panicum maximum,High,5.6,C
+2024,D,1,Z3,,,5.6,C
+2024,D,1,Z3,,,6.1,C
+2024,D,1,Z3,Heteropogon contortus,Moderate,2.2,C
+2024,D,1,Z3,Aristida adscensionis,Low,2.3,C
+2024,D,1,Z3,Digitaria eriantha,High,2.1,C
+2024,D,1,Z3,,,3.3,C
+2024,D,1,Z3,,,0,C
+2024,D,1,Z3,,,0,C
+2024,D,1,Z3,,,0,C
+2024,D,1,Z3,,,0,C
+2024,D,1,Z3,Aristida diffusa,Low,2.3,C
+2024,D,1,Z3,Aristida adscensionis,Low,2.3,C
+2024,D,1,Z3,,,2.3,C
+2024,D,1,Z3,,,2.3,C
+2024,D,1,Z4,Heteropogon contortus,Moderate,3,C
+2024,D,1,Z4,Setaria pumila ,Moderate,3,C
+2024,D,1,Z4,,,3,C
+2024,D,1,Z4,,,3,C
+2024,D,1,Z4,Enteropogon macrostachyus,High,9.9,C
+2024,D,1,Z4,Andropogon eucomus,Low,10.5,C
+2024,D,1,Z4,Aristida adscensionis,Low,11.1,C
+2024,D,1,Z4,,,11.6,C
+2024,D,1,Z4,Andropogon eucomus,Low,10,C
+2024,D,1,Z4,Heteropogon contortus,Moderate,13.2,C
+2024,D,1,Z4,Eragrostis rigidior,Moderate,11.8,C
+2024,D,1,Z4,,,12.4,C
+2024,D,1,Z4,Chloris virgata,Moderate,7.2,C
+2024,D,1,Z4,,,7.5,C
+2024,D,1,Z4,,,7.5,C
+2024,D,1,Z4,,,5.4,C
+2024,D,1,Z4,Chloris virgata,Moderate,4.6,C
+2024,D,1,Z4,Eragrostis rigidior,Moderate,4.1,C
+2024,D,1,Z4,Brachiaria nigropedata,High,3.8,C
+2024,D,1,Z4,,,3.8,C
+2024,D,2,Z1,Panicum maximum,High,3.2,F
+2024,D,2,Z1,,,3.3,F
+2024,D,2,Z1,,,3,F
+2024,D,2,Z1,,,3,F
+2024,D,2,Z1,Andropogon eucomus,Low,18.5,F
+2024,D,2,Z1,Enteropogon macrostachyus,High,17.5,F
+2024,D,2,Z1,,,19.2,F
+2024,D,2,Z1,,,15,F
+2024,D,2,Z1,Heteropogon contortus,Moderate,8,F
+2024,D,2,Z1,Aristida adscensionis,Low,6.4,F
+2024,D,2,Z1,Enteropogon macrostachyus,High,9.8,F
+2024,D,2,Z1,,,10.3,F
+2024,D,2,Z1,Brachiaria nigropedata,High,3.4,F
+2024,D,2,Z1,Heteropogon contortus,Moderate,5.5,F
+2024,D,2,Z1,Aristida adscensionis,Low,6.1,F
+2024,D,2,Z1,Enteropogon macrostachyus,High,6.6,F
+2024,D,2,Z1,Eragrostis rigidior,Moderate,11.7,F
+2024,D,2,Z1,Chloris virgata,Moderate,6.5,F
+2024,D,2,Z1,Setaria incrassata,High,8.6,F
+2024,D,2,Z1,,,8.7,F
+2024,D,2,Z2,Heteropogon contortus,Moderate,5,F
+2024,D,2,Z2,Aristida adscensionis,Low,5.1,F
+2024,D,2,Z2,Aristida diffusa,Low,5.1,F
+2024,D,2,Z2,,,5.7,F
+2024,D,2,Z2,Enteropogon macrostachyus,High,14.1,F
+2024,D,2,Z2,Aristida adscensionis,Low,9.2,F
+2024,D,2,Z2,,,9.2,F
+2024,D,2,Z2,,,9.2,F
+2024,D,2,Z2,Panicum maximum,High,7.5,F
+2024,D,2,Z2,Brachiaria nigropedata,High,9.6,F
+2024,D,2,Z2,Eragrostis rigidior,Moderate,11.4,F
+2024,D,2,Z2,Chloris virgata,Moderate,8.9,F
+2024,D,2,Z2,Heteropogon contortus,Moderate,20.4,F
+2024,D,2,Z2,Brachiaria nigropedata,High,15.5,F
+2024,D,2,Z2,,,13.4,F
+2024,D,2,Z2,,,13.2,F
+2024,D,2,Z2,Enteropogon macrostachyus,High,8.5,F
+2024,D,2,Z2,Brachiaria nigropedata,High,8.5,F
+2024,D,2,Z2,,,6.6,F
+2024,D,2,Z2,,,6.5,F
+2024,D,2,Z3,Heteropogon contortus,Moderate,9.1,F
+2024,D,2,Z3,Andropogon eucomus,Low,6.6,F
+2024,D,2,Z3,Aristida adscensionis,Low,5.2,F
+2024,D,2,Z3,Eragrostis rigidior,Moderate,5.2,F
+2024,D,2,Z3,Eragrostis gummiflua,Low,NA,F
+2024,D,2,Z3,Heteropogon contortus,Moderate,7.2,F
+2024,D,2,Z3,Andropogon eucomus,Low,6.8,F
+2024,D,2,Z3,Eragrostis rigidior,Moderate,6.8,F
+2024,D,2,Z3,,,20.5,F
+2024,D,2,Z3,Andropogon eucomus,Low,11.9,F
+2024,D,2,Z3,Setaria incrassata,High,17.2,F
+2024,D,2,Z3,,,13.9,F
+2024,D,2,Z3,,,12.9,F
+2024,D,2,Z3,Heteropogon contortus,Moderate,7.5,F
+2024,D,2,Z3,Enteropogon macrostachyus,High,6,F
+2024,D,2,Z3,,,5.9,F
+2024,D,2,Z3,,,7.7,F
+2024,D,2,Z3,Heteropogon contortus,Moderate,2.4,F
+2024,D,2,Z3,,,2.4,F
+2024,D,2,Z3,,,5.9,F
+2024,D,2,Z3,,,4.9,F
+2024,D,2,Z4,Enteropogon macrostachyus,High,7.1,F
+2024,D,2,Z4,Panicum maximum,High,6.6,F
+2024,D,2,Z4,Heteropogon contortus,Moderate,7.3,F
+2024,D,2,Z4,,,8.4,F
+2024,D,2,Z4,Andropogon eucomus,Low,17.8,F
+2024,D,2,Z4,Heteropogon contortus,Moderate,16.8,F
+2024,D,2,Z4,Aristida adscensionis,Low,17.4,F
+2024,D,2,Z4,,,18.8,F
+2024,D,2,Z4,Heteropogon contortus,Moderate,14.8,F
+2024,D,2,Z4,Aristida adscensionis,Low,16.1,F
+2024,D,2,Z4,Chloris virgata,Moderate,16.9,F
+2024,D,2,Z4,,,16.8,F
+2024,D,2,Z4,Panicum maximum,High,21.3,F
+2024,D,2,Z4,Heteropogon contortus,Moderate,18.3,F
+2024,D,2,Z4,,,11.9,F
+2024,D,2,Z4,,,12.8,F
+2024,D,2,Z4,Heteropogon contortus,Moderate,20.4,F
+2024,D,2,Z4,Chloris virgata,Moderate,17.1,F
+2024,D,2,Z4,,,17.9,F
+2024,D,2,Z4,,,16.2,F
+2024,D,3,Z1,Heteropogon contortus,Moderate,33.5,TF
+2024,D,3,Z1,Chloris virgata,Moderate,33.6,TF
+2024,D,3,Z1,Sporobolus ioclados,Moderate,26.4,TF
+2024,D,3,Z1,,,24.4,TF
+2024,D,3,Z1,Aristida adscensionis,Low,14.9,TF
+2024,D,3,Z1,,,14.5,TF
+2024,D,3,Z1,,,14.5,TF
+2024,D,3,Z1,,,14.6,TF
+2024,D,3,Z1,Heteropogon contortus,Low,8.3,TF
+2024,D,3,Z1,Setaria incrassata,High,7.3,TF
+2024,D,3,Z1,,,6,TF
+2024,D,3,Z1,,,6,TF
+2024,D,3,Z1,Heteropogon contortus,Moderate,3.7,TF
+2024,D,3,Z1,Aristida adscensionis,Low,3.6,TF
+2024,D,3,Z1,Chloris virgata,Moderate,3.8,TF
+2024,D,3,Z1,Brachiaria nigropedata,High,3.8,TF
+2024,D,3,Z1,Aristida diffusa,Low,NA,TF
+2024,D,3,Z1,Enteropogon macrostachyus,High,5,TF
+2024,D,3,Z1,Heteropogon contortus,Moderate,4.8,TF
+2024,D,3,Z1,Setaria incrassata,High,8.1,TF
+2024,D,3,Z1,,,8.7,TF
+2024,D,3,Z2,Andropogon eucomus,Low,13.1,TF
+2024,D,3,Z2,Heteropogon contortus,Moderate,14.4,TF
+2024,D,3,Z2,,,11.9,TF
+2024,D,3,Z2,,,11.5,TF
+2024,D,3,Z2,Heteropogon contortus,Moderate,30.2,TF
+2024,D,3,Z2,Enteropogon macrostachyus,High,21.3,TF
+2024,D,3,Z2,,,21.3,TF
+2024,D,3,Z2,,,20.4,TF
+2024,D,3,Z2,Panicum maximum,High,6.1,TF
+2024,D,3,Z2,,,6.1,TF
+2024,D,3,Z2,,,6.1,TF
+2024,D,3,Z2,,,6.1,TF
+2024,D,3,Z2,Enteropogon macrostachyus,High,5.5,TF
+2024,D,3,Z2,Aristida adscensionis,Low,5.9,TF
+2024,D,3,Z2,Heteropogon contortus,Moderate,5.6,TF
+2024,D,3,Z2,Chloris virgata,Moderate,4.8,TF
+2024,D,3,Z2,Enteropogon macrostachyus,High,5.8,TF
+2024,D,3,Z2,Aristida adscensionis,Low,8.5,TF
+2024,D,3,Z2,Heteropogon contortus,Moderate,8.7,TF
+2024,D,3,Z2,,,8.3,TF
+2024,D,3,Z3,Aristida diffusa,Low,16.5,TF
+2024,D,3,Z3,,,16.4,TF
+2024,D,3,Z3,,,15.6,TF
+2024,D,3,Z3,,,15.7,TF
+2024,D,3,Z3,Aristida diffusa,Low,17.5,TF
+2024,D,3,Z3,Heteropogon contortus,Moderate,16.3,TF
+2024,D,3,Z3,Aristida adscensionis,Low,15.7,TF
+2024,D,3,Z3,,,15.6,TF
+2024,D,3,Z3,Andropogon eucomus,Low,7.5,TF
+2024,D,3,Z3,Heteropogon contortus,Moderate,5.5,TF
+2024,D,3,Z3,Brachiaria nigropedata,High,10.6,TF
+2024,D,3,Z3,Eragrostis gummiflua ,Low,9.5,TF
+2024,D,3,Z3,Enteropogon macrostachyus,High,11.7,TF
+2024,D,3,Z3,Setaria pumila ,Moderate,11,TF
+2024,D,3,Z3,,,10.7,TF
+2024,D,3,Z3,,,9.7,TF
+2024,D,3,Z3,,,0,TF
+2024,D,3,Z3,,,0,TF
+2024,D,3,Z3,,,0,TF
+2024,D,3,Z3,,,0,TF
+2024,D,3,Z4,Panicum maximum,High,7.8,TF
+2024,D,3,Z4,Enteropogon macrostachyus,High,7.5,TF
+2024,D,3,Z4,Aristida adscensionis,Low,7.5,TF
+2024,D,3,Z4,,,9.1,TF
+2024,D,3,Z4,Heteropogon contortus,Moderate,1.9,TF
+2024,D,3,Z4,Aristida adscensionis,Low,4.4,TF
+2024,D,3,Z4,Brachiaria nigropedata,High,4.8,TF
+2024,D,3,Z4,,,4.1,TF
+2024,D,3,Z4,Themeda triandra,High,10,TF
+2024,D,3,Z4,Heteropogon contortus,Moderate,4.3,TF
+2024,D,3,Z4,Andropogon eucomus,Low,7.7,TF
+2024,D,3,Z4,,,7.7,TF
+2024,D,3,Z4,Heteropogon contortus,Moderate,8.3,TF
+2024,D,3,Z4,Digitaria eriantha,High,7.6,TF
+2024,D,3,Z4,,,6.7,TF
+2024,D,3,Z4,,,7.3,TF
+2024,D,3,Z4,,,0,TF
+2024,D,3,Z4,,,0,TF
+2024,D,3,Z4,,,0,TF
+2024,D,3,Z4,,,0,TF
+2024,D,4,Z1,Enteropogon macrostachyus,High,12.5,TFB
+2024,D,4,Z1,Heteropogon contortus,Moderate,11.2,TFB
+2024,D,4,Z1,,,11,TFB
+2024,D,4,Z1,,,10,TFB
+2024,D,4,Z1,Sporobolus ioclados,Moderate,2.5,TFB
+2024,D,4,Z1,Setaria incrassata,High,5.2,TFB
+2024,D,4,Z1,Heteropogon contortus,Moderate,6.3,TFB
+2024,D,4,Z1,Brachiaria nigropedata,High,5.9,TFB
+2024,D,4,Z1,Melinis repens,Low,NA,TFB
+2024,D,4,Z1,Enteropogon macrostachyus,High,2.6,TFB
+2024,D,4,Z1,Sporobolus ioclados,Moderate,2.6,TFB
+2024,D,4,Z1,Heteropogon contortus,Moderate,2.6,TFB
+2024,D,4,Z1,Aristida adscensionis,Low,5.1,TFB
+2024,D,4,Z1,Enteropogon macrostachyus,High,2.4,TFB
+2024,D,4,Z1,Heteropogon contortus,Moderate,2,TFB
+2024,D,4,Z1,,,5.1,TFB
+2024,D,4,Z1,,,4.2,TFB
+2024,D,4,Z1,Themeda triandra ,High,11.9,TFB
+2024,D,4,Z1,Aristida adscensionis,Low,11.1,TFB
+2024,D,4,Z1,Enteropogon macrostachyus,High,10.7,TFB
+2024,D,4,Z1,Melinis repens,Low,10.2,TFB
+2024,D,4,Z1,Eragrostis gummiflua ,Low,NA,TFB
+2024,D,4,Z2,Enteropogon macrostachyus,High,7,TFB
+2024,D,4,Z2,Aristida adscensionis,Low,7.5,TFB
+2024,D,4,Z2,,,7.7,TFB
+2024,D,4,Z2,,,7.8,TFB
+2024,D,4,Z2,Enteropogon macrostachyus,High,3.8,TFB
+2024,D,4,Z2,Aristida adscensionis,Low,4.4,TFB
+2024,D,4,Z2,Heteropogon contortus,Moderate,4.2,TFB
+2024,D,4,Z2,,,4.6,TFB
+2024,D,4,Z2,Enteropogon macrostachyus,High,8.2,TFB
+2024,D,4,Z2,Digitaria eriantha,High,8.2,TFB
+2024,D,4,Z2,Setaria incrassata,High,6.7,TFB
+2024,D,4,Z2,Sporobolus ioclados,Moderate,6,TFB
+2024,D,4,Z2,Heteropogon contortus,Moderate,9.5,TFB
+2024,D,4,Z2,Aristida diffusa ,Low,8.8,TFB
+2024,D,4,Z2,,,8.6,TFB
+2024,D,4,Z2,,,8.4,TFB
+2024,D,4,Z2,Heteropogon contortus,Moderate,5.6,TFB
+2024,D,4,Z2,Sporobolus ioclados,Moderate,7,TFB
+2024,D,4,Z2,Aristida diffusa ,Low,6.8,TFB
+2024,D,4,Z2,Eragrostis rigidior,Moderate,6.4,TFB
+2024,D,4,Z2,Andropogon eucomus,Low,NA,TFB
+2024,D,4,Z3,Heteropogon contortus,Moderate,10.5,TFB
+2024,D,4,Z3,Setaria incrassata,High,8.1,TFB
+2024,D,4,Z3,Andropogon eucomus,Low,8.1,TFB
+2024,D,4,Z3,,,7.8,TFB
+2024,D,4,Z3,Enteropogon macrostachyus,High,11.5,TFB
+2024,D,4,Z3,Heteropogon contortus,Moderate,11.5,TFB
+2024,D,4,Z3,Andropogon eucomus,Low,13.8,TFB
+2024,D,4,Z3,,,14.9,TFB
+2024,D,4,Z3,Enteropogon macrostachyus,High,11.9,TFB
+2024,D,4,Z3,Eragrostis superba,Moderate,18.5,TFB
+2024,D,4,Z3,Aristida adscensionis,Low,17.7,TFB
+2024,D,4,Z3,,,18.4,TFB
+2024,D,4,Z3,Heteropogon contortus,Moderate,4.6,TFB
+2024,D,4,Z3,Aristida adscensionis,Low,3.2,TFB
+2024,D,4,Z3,Pogonarthria squarrosa ,Low,3.6,TFB
+2024,D,4,Z3,,,4,TFB
+2024,D,4,Z3,Digitaria eriantha,High,11.7,TFB
+2024,D,4,Z3,Enteropogon macrostachyus,High,12.9,TFB
+2024,D,4,Z3,Panicum maximum,High,13,TFB
+2024,D,4,Z3,Aristida adscensionis,Low,14.1,TFB
+2024,D,4,Z3,Heteropogon contortus,Moderate,NA,TFB
+2024,D,4,Z4,Pogonarthria squarrosa ,Low,11.4,TFB
+2024,D,4,Z4,Digitaria eriantha,High,10,TFB
+2024,D,4,Z4,Heteropogon contortus,Moderate,10.6,TFB
+2024,D,4,Z4,Sporobolus ioclados,Moderate,10.1,TFB
+2024,D,4,Z4,Heteropogon contortus,Moderate,23,TFB
+2024,D,4,Z4,Eragrostis superba,Moderate,28.2,TFB
+2024,D,4,Z4,Eragrostis gummiflua,Low,29.2,TFB
+2024,D,4,Z4,Enteropogon macrostachyus,High,29,TFB
+2024,D,4,Z4,Enteropogon macrostachyus,High,6.2,TFB
+2024,D,4,Z4,Heteropogon contortus,Moderate,6.2,TFB
+2024,D,4,Z4,Sporobolus ioclados,Moderate,6.2,TFB
+2024,D,4,Z4,Brachiaria nigropedata,High,6,TFB
+2024,D,4,Z4,Heteropogon contortus,Moderate,6.8,TFB
+2024,D,4,Z4,Enteropogon macrostachyus,High,6.6,TFB
+2024,D,4,Z4,Sporobolus ioclados,Moderate,4.9,TFB
+2024,D,4,Z4,Aristida diffusa,Low,5.3,TFB
+2024,D,4,Z4,Themeda triandra ,High,7.5,TFB
+2024,D,4,Z4,Heteropogon contortus,Moderate,7.4,TFB
+2024,D,4,Z4,,,8.9,TFB
+2024,D,4,Z4,,,9.8,TFB
+2024,D,5,Z1,Andropogon eucomus,Low,17.2,THF
+2024,D,5,Z1,Enteropogon macrostachyus,High,16.6,THF
+2024,D,5,Z1,Heteropogon contortus,Moderate,16.7,THF
+2024,D,5,Z1,,,16,THF
+2024,D,5,Z1,Aristida diffusa,Low,10,THF
+2024,D,5,Z1,Heteropogon contortus,Moderate,9.3,THF
+2024,D,5,Z1,,,10.9,THF
+2024,D,5,Z1,,,10.7,THF
+2024,D,5,Z1,Enteropogon macrostachyus,High,16,THF
+2024,D,5,Z1,Hyperrhenia hirta,Low,15.2,THF
+2024,D,5,Z1,,,13.4,THF
+2024,D,5,Z1,,,17.2,THF
+2024,D,5,Z1,Enteropogon macrostachyus,High,9.5,THF
+2024,D,5,Z1,Heteropogon contortus,Moderate,13.8,THF
+2024,D,5,Z1,,,14.5,THF
+2024,D,5,Z1,,,17.8,THF
+2024,D,5,Z1,Enteropogon macrostachyus,High,13.3,THF
+2024,D,5,Z1,Heteropogon contortus,Moderate,13.9,THF
+2024,D,5,Z1,Setaria incrassata,High,17.1,THF
+2024,D,5,Z1,,,17.3,THF
+2024,D,5,Z2,Heteropogon contortus,Moderate,7.7,THF
+2024,D,5,Z2,Aristida congesta B,Low,7.6,THF
+2024,D,5,Z2,Eragrostis rigidior,Moderate,7.8,THF
+2024,D,5,Z2,Eragrostis gummiflua,Low,7.8,THF
+2024,D,5,Z2,Aristida diffusa ,Low,4.5,THF
+2024,D,5,Z2,Enteropogon macrostachyus,High,4.2,THF
+2024,D,5,Z2,Heteropogon contortus,Moderate,4.6,THF
+2024,D,5,Z2,Brachiaria nigropedata,High,4.9,THF
+2024,D,5,Z2,Enteropogon macrostachyus,High,2.9,THF
+2024,D,5,Z2,Brachiaria nigropedata,High,2.7,THF
+2024,D,5,Z2,Sporobolus ioclados,Moderate,2.7,THF
+2024,D,5,Z2,Aristida diffusa,Low,2.7,THF
+2024,D,5,Z2,Perotis patens,Low,NA,THF
+2024,D,5,Z2,Brachiaria nigropedata,High,6.5,THF
+2024,D,5,Z2,Enteropogon macrostachyus,Moderate,6.4,THF
+2024,D,5,Z2,Aristida diffusa,Low,7.5,THF
+2024,D,5,Z2,Aristida adscensionis,Low,7.9,THF
+2024,D,5,Z2,Brachiaria nigropedata,High,8.2,THF
+2024,D,5,Z2,Eragrostis rigidior,Moderate,7.7,THF
+2024,D,5,Z2,,,7.3,THF
+2024,D,5,Z2,,,6,THF
+2024,D,5,Z3,Heteropogon contortus,Moderate,5.7,THF
+2024,D,5,Z3,Enteropogon macrostachyus,High,6.8,THF
+2024,D,5,Z3,Sporobolus ioclados,Moderate,7.4,THF
+2024,D,5,Z3,Aristida adscensionis,Low,7.7,THF
+2024,D,5,Z3,Themeda triandra,High,NA,THF
+2024,D,5,Z3,Heteropogon contortus,Moderate,1.8,THF
+2024,D,5,Z3,Aristida diffusa,Low,1.8,THF
+2024,D,5,Z3,,,1.8,THF
+2024,D,5,Z3,,,1.8,THF
+2024,D,5,Z3,Cymbopogon excavatus,Low,8.1,THF
+2024,D,5,Z3,Cynodon dactylon,High,9.6,THF
+2024,D,5,Z3,,,10,THF
+2024,D,5,Z3,,,11.4,THF
+2024,D,5,Z3,Enteropogon macrostachyus,High,7,THF
+2024,D,5,Z3,Heteropogon contortus,Moderate,9.9,THF
+2024,D,5,Z3,Hyperrhenia hirta,Moderate,10.9,THF
+2024,D,5,Z3,,,11.4,THF
+2024,D,5,Z3,Enteropogon macrostachyus,High,6.3,THF
+2024,D,5,Z3,Eragrostis rigidior,Moderate,7.4,THF
+2024,D,5,Z3,Heteropogon contortus,Moderate,8,THF
+2024,D,5,Z3,,,8.8,THF
+2024,D,5,Z4,Sporobolus ioclados,Moderate,1.5,THF
+2024,D,5,Z4,Aristida diffusa,Low,1.5,THF
+2024,D,5,Z4,Cymbopogon excavatus,Low,6,THF
+2024,D,5,Z4,,,6,THF
+2024,D,5,Z4,Aristida diffusa,Low,11,THF
+2024,D,5,Z4,Heteropogon contortus,Moderate,11.4,THF
+2024,D,5,Z4,Panicum maximum,High,10.9,THF
+2024,D,5,Z4,,,11,THF
+2024,D,5,Z4,Cymbopogon excavatus,Low,11.6,THF
+2024,D,5,Z4,,,11.6,THF
+2024,D,5,Z4,,,17.8,THF
+2024,D,5,Z4,,,20,THF
+2024,D,5,Z4,Enteropogon macrostachyus,High,14,THF
+2024,D,5,Z4,Eragrostis gummiflua,Low,14.6,THF
+2024,D,5,Z4,Aristida diffusa,Low,10.5,THF
+2024,D,5,Z4,,,12,THF
+2024,D,5,Z4,Heteropogon contortus,Moderate,10.3,THF
+2024,D,5,Z4,Enteropogon macrostachyus,High,9.7,THF
+2024,D,5,Z4,Eragrostis cylindriflora,Moderate,9.1,THF
+2024,D,5,Z4,,,8.4,THF
+2024,E,1,Z1,Heteropogon contortus,Moderate,3.9,C
+2024,E,1,Z1,Aristida adscensionis,Low,4.2,C
+2024,E,1,Z1,,,9.5,C
+2024,E,1,Z1,,,7.8,C
+2024,E,1,Z1,Heteropogon contortus,Moderate,22,C
+2024,E,1,Z1,Brachiaria nigropedata,High,17,C
+2024,E,1,Z1,,,14.3,C
+2024,E,1,Z1,,,13.6,C
+2024,E,1,Z1,Brachiaria nigropedata,High,6.6,C
+2024,E,1,Z1,Heteropogon contortus,Moderate,5.8,C
+2024,E,1,Z1,Eragrostis superba,Moderate,6.2,C
+2024,E,1,Z1,Eragrostis gummiflua,Low,6.2,C
+2024,E,1,Z1,Heteropogon contortus,Moderate,3.2,C
+2024,E,1,Z1,Panicum maximum,High,3.2,C
+2024,E,1,Z1,,,3.2,C
+2024,E,1,Z1,,,3.2,C
+2024,E,1,Z1,Brachiaria nigropedata,High,2.5,C
+2024,E,1,Z1,Aristida adscensionis,Low,3.9,C
+2024,E,1,Z1,Eragrostis gummiflua,Low,3.6,C
+2024,E,1,Z1,Heteropogon contortus,Moderate,3.9,C
+2024,E,1,Z1,Eragrostis rigidior,Moderate,NA,C
+2024,E,1,Z2,Panicum maximum,High,10.3,C
+2024,E,1,Z2,Eragrostis gummiflua,Low,10.1,C
+2024,E,1,Z2,Aristida adscensionis,Low,9.5,C
+2024,E,1,Z2,Pogonarthria squarrosa ,Low,9,C
+2024,E,1,Z2,Digitaria eriantha,High,10.2,C
+2024,E,1,Z2,Eragrostis rigidior,Moderate,12.4,C
+2024,E,1,Z2,,,19.2,C
+2024,E,1,Z2,,,18.7,C
+2024,E,1,Z2,Digitaria eriantha,High,11.2,C
+2024,E,1,Z2,Heteropogon contortus,Moderate,10.4,C
+2024,E,1,Z2,,,10.7,C
+2024,E,1,Z2,,,9.9,C
+2024,E,1,Z2,Andropogon eucomus,Low,8.6,C
+2024,E,1,Z2,Aristida adscensionis,Low,9.2,C
+2024,E,1,Z2,Pogonarthria squarrosa ,Low,10.2,C
+2024,E,1,Z2,,,10.5,C
+2024,E,1,Z2,Digitaria eriantha,High,2.5,C
+2024,E,1,Z2,,,4.1,C
+2024,E,1,Z2,,,4.6,C
+2024,E,1,Z2,,,4.8,C
+2024,E,1,Z3,Panicum maximum,High,6.7,C
+2024,E,1,Z3,,,10.6,C
+2024,E,1,Z3,,,9.9,C
+2024,E,1,Z3,,,9.1,C
+2024,E,1,Z3,Panicum maximum,High,3.2,C
+2024,E,1,Z3,Heteropogon contortus,Moderate,9.7,C
+2024,E,1,Z3,Eragrostis rigidior,Moderate,9,C
+2024,E,1,Z3,,,7.6,C
+2024,E,1,Z3,Digitaria eriantha,High,8.9,C
+2024,E,1,Z3,Eragrostis rigidior,Moderate,12.6,C
+2024,E,1,Z3,Brachiaria nigropedata,High,12.7,C
+2024,E,1,Z3,,,11.1,C
+2024,E,1,Z3,Heteropogon contortus,Moderate,13.5,C
+2024,E,1,Z3,Digitaria eriantha,High,12,C
+2024,E,1,Z3,Eragrostis gummiflua,Low,11.1,C
+2024,E,1,Z3,Aristida adscensionis,Low,10.7,C
+2024,E,1,Z3,Brachiaria nigropedata,High,2.1,C
+2024,E,1,Z3,Aristida adscensionis,Low,5.6,C
+2024,E,1,Z3,Enteropogon macrostachyus,High,5.7,C
+2024,E,1,Z3,,,0,C
+2024,E,1,Z4,Digitaria eriantha,High,6.2,C
+2024,E,1,Z4,,,4.9,C
+2024,E,1,Z4,,,5.1,C
+2024,E,1,Z4,,,8.3,C
+2024,E,1,Z4,Digitaria eriantha,High,6.8,C
+2024,E,1,Z4,Aristida adscensionis,Low,5.7,C
+2024,E,1,Z4,Pogonarthria squarrosa ,Low,3.9,C
+2024,E,1,Z4,Chloris virgata,Moderate,3.8,C
+2024,E,1,Z4,Digitaria eriantha,High,11.9,C
+2024,E,1,Z4,Aristida adscensionis,Low,14.2,C
+2024,E,1,Z4,,,12.1,C
+2024,E,1,Z4,,,12,C
+2024,E,1,Z4,Digitaria eriantha,High,10.9,C
+2024,E,1,Z4,Eragrostis gummiflua,Low,6,C
+2024,E,1,Z4,Andropogon eucomus,Low,12.4,C
+2024,E,1,Z4,Eragrostis superba,Moderate,11.5,C
+2024,E,1,Z4,Digitaria eriantha,High,7.3,C
+2024,E,1,Z4,Panicum maximum,High,17.7,C
+2024,E,1,Z4,,,18,C
+2024,E,1,Z4,,,16.5,C
+2024,E,1,Z4,,,0,C
+2024,E,2,Z1,Panicum maximum,High,8.3,F
+2024,E,2,Z1,,,8.7,F
+2024,E,2,Z1,,,8.1,F
+2024,E,2,Z1,,,8.1,F
+2024,E,2,Z1,Heteropogon contortus,Moderate,4.1,F
+2024,E,2,Z1,Enteropogon macrostachyus,High,3.4,F
+2024,E,2,Z1,,,3.4,F
+2024,E,2,Z1,,,5.1,F
+2024,E,2,Z1,Urochloa mosambicensis,Moderate,5.6,F
+2024,E,2,Z1,Eragrostis gummiflua,Low,4.6,F
+2024,E,2,Z1,Aristida adscensionis,Low,0,F
+2024,E,2,Z1,,,7.3,F
+2024,E,2,Z1,,,0,F
+2024,E,2,Z1,,,0,F
+2024,E,2,Z1,,,0,F
+2024,E,2,Z1,,,0,F
+2024,E,2,Z1,Panicum maximum,High,4.7,F
+2024,E,2,Z1,Heteropogon contortus,Moderate,4.6,F
+2024,E,2,Z1,Enteropogon macrostachyus,High,4.4,F
+2024,E,2,Z1,,,4.7,F
+2024,E,2,Z2,Urochloa mosambicensis,Moderate,11.3,F
+2024,E,2,Z2,Enteropogon macrostachyus,High,11.1,F
+2024,E,2,Z2,Eragrostis gummiflua,Low,10.9,F
+2024,E,2,Z2,Heteropogon contortus,Moderate,10.7,F
+2024,E,2,Z2,Enteropogon macrostachyus,High,11.3,F
+2024,E,2,Z2,Eragrostis gummiflua,Low,12.9,F
+2024,E,2,Z2,Eragrostis rigidior,Moderate,12.5,F
+2024,E,2,Z2,,,12.7,F
+2024,E,2,Z2,Heteropogon contortus,Moderate,10.9,F
+2024,E,2,Z2,Enteropogon macrostachyus,High,10.7,F
+2024,E,2,Z2,,,11.3,F
+2024,E,2,Z2,,,12.7,F
+2024,E,2,Z2,Enteropogon macrostachyus,High,12.3,F
+2024,E,2,Z2,Panicum maximum,High,11.9,F
+2024,E,2,Z2,Aristida adscensionis,Low,11.4,F
+2024,E,2,Z2,,,11.2,F
+2024,E,2,Z2,Heteropogon contortus,Moderate,10.8,F
+2024,E,2,Z2,Urochloa mosambicensis,Moderate,10.6,F
+2024,E,2,Z2,,,4.6,F
+2024,E,2,Z2,,,4.7,F
+2024,E,2,Z3,Panicum maximum,High,4.2,F
+2024,E,2,Z3,Heteropogon contortus,Moderate,4,F
+2024,E,2,Z3,,,5.8,F
+2024,E,2,Z3,,,5.5,F
+2024,E,2,Z3,Heteropogon contortus,High,2.5,F
+2024,E,2,Z3,Eragrostis rigidior,Moderate,3.5,F
+2024,E,2,Z3,,,0,F
+2024,E,2,Z3,,,0,F
+2024,E,2,Z3,Panicum maximum,High,7.6,F
+2024,E,2,Z3,Enteropogon macrostachyus,High,8.3,F
+2024,E,2,Z3,,,7.6,F
+2024,E,2,Z3,,,9.2,F
+2024,E,2,Z3,Panicum maximum,High,8.7,F
+2024,E,2,Z3,,,4,F
+2024,E,2,Z3,,,15.1,F
+2024,E,2,Z3,,,15.3,F
+2024,E,2,Z3,Enteropogon macrostachyus,High,6.3,F
+2024,E,2,Z3,Panicum maximum,High,6.1,F
+2024,E,2,Z3,,,5.7,F
+2024,E,2,Z3,,,6.7,F
+2024,E,2,Z4,Enteropogon macrostachyus,High,10.2,F
+2024,E,2,Z4,Panicum maximum,High,11.2,F
+2024,E,2,Z4,,,10.7,F
+2024,E,2,Z4,,,12.6,F
+2024,E,2,Z4,Enteropogon macrostachyus,High,5.3,F
+2024,E,2,Z4,Panicum maximum,High,6.1,F
+2024,E,2,Z4,,,9.3,F
+2024,E,2,Z4,,,10.8,F
+2024,E,2,Z4,Heteropogon contortus,Moderate,23.3,F
+2024,E,2,Z4,Panicum maximum,High,19,F
+2024,E,2,Z4,,,16.7,F
+2024,E,2,Z4,,,19.9,F
+2024,E,2,Z4,Pogonarthria squarrosa ,Low,17,F
+2024,E,2,Z4,Aristida adscensionis,Low,15.1,F
+2024,E,2,Z4,Heteropogon contortus,Moderate,13.7,F
+2024,E,2,Z4,Eragrostis rigidior,Moderate,17.9,F
+2024,E,2,Z4,Aristida adscensionis,Low,12,F
+2024,E,2,Z4,Heteropogon contortus,Moderate,11.4,F
+2024,E,2,Z4,Eragrostis rigidior,Moderate,10.9,F
+2024,E,2,Z4,Setaria incrassata,High,10.3,F
+2024,E,2,Z4,Eragrostis gummiflua,Low,NA,F
+2024,E,3,Z1,Heteropogon contortus,Moderate,3.3,F
+2024,E,3,Z1,Urochloa mosambicensis,Moderate,9.5,F
+2024,E,3,Z1,,,10,F
+2024,E,3,Z1,,,15.9,F
+2024,E,3,Z1,Panicum maximum,High,4.4,F
+2024,E,3,Z1,Aristida adscensionis,Low,3.6,F
+2024,E,3,Z1,Heteropogon contortus,Moderate,3.3,F
+2024,E,3,Z1,Eragrostis rigidior,Moderate,5.2,F
+2024,E,3,Z1,Panicum maximum,High,11.4,F
+2024,E,3,Z1,Heteropogon contortus,Moderate,9,F
+2024,E,3,Z1,,,8.5,F
+2024,E,3,Z1,,,8.5,F
+2024,E,3,Z1,Panicum maximum,High,6.7,F
+2024,E,3,Z1,Digitaria eriantha,High,8.5,F
+2024,E,3,Z1,,,9.4,F
+2024,E,3,Z1,,,7,F
+2024,E,3,Z1,Urochloa mosambicensis,Moderate,3,F
+2024,E,3,Z1,Aristida adscensionis,Low,4.2,F
+2024,E,3,Z1,Heteropogon contortus,Moderate,4.2,F
+2024,E,3,Z1,Cymbopogon excavatus,Low,4.6,F
+2024,E,3,Z1,Eragrostis gummiflua,Low,NA,F
+2024,E,3,Z2,Urochloa mosambicensis,,2,F
+2024,E,3,Z2,,,2,F
+2024,E,3,Z2,,,2,F
+2024,E,3,Z2,,,2,F
+2024,E,3,Z2,Aristida diffusa,,9.7,F
+2024,E,3,Z2,Panicum maximum,,8.9,F
+2024,E,3,Z2,Aristida adscensionis,,8.4,F
+2024,E,3,Z2,Eragrostis rigidior,,7.8,F
+2024,E,3,Z2,Panicum maximum,,11.5,F
+2024,E,3,Z2,,,11.9,F
+2024,E,3,Z2,,,11.5,F
+2024,E,3,Z2,,,11.2,F
+2024,E,3,Z2,Panicum maximum,,24.4,F
+2024,E,3,Z2,Enteropogon macrostachyus,,15,F
+2024,E,3,Z2,,,12,F
+2024,E,3,Z2,,,14.6,F
+2024,E,3,Z2,Panicum maximum,,5.8,F
+2024,E,3,Z2,,,3.7,F
+2024,E,3,Z2,,,5.6,F
+2024,E,3,Z2,,,5.5,F
+2024,E,3,Z3,Eragrostis rigidior,Moderate,3,F
+2024,E,3,Z3,Heteropogon contortus,Moderate,4.4,F
+2024,E,3,Z3,Cymbopogon excavatus,Low,9.6,F
+2024,E,3,Z3,,,10.4,F
+2024,E,3,Z3,Heteropogon contortus,Moderate,12,F
+2024,E,3,Z3,Urochloa mosambicensis,Moderate,12.1,F
+2024,E,3,Z3,Panicum maximum,High,12.7,F
+2024,E,3,Z3,,,10.5,F
+2024,E,3,Z3,Eragrostis rigidior,Moderate,0,F
+2024,E,3,Z3,Heteropogon contortus,Moderate,1.7,F
+2024,E,3,Z3,Panicum maximum,High,1.8,F
+2024,E,3,Z3,Eragrostis superba,Moderate,5.2,F
+2024,E,3,Z3,Eragrostis gummiflua,Low,NA,F
+2024,E,3,Z3,Aristida adscensionis,Low,NA,F
+2024,E,3,Z3,Pogonarthria squarrosa ,Low,NA,F
+2024,E,3,Z3,Eragrostis rigidior,Moderate,6.5,F
+2024,E,3,Z3,Heteropogon contortus,Moderate,4.3,F
+2024,E,3,Z3,Eragrostis gummiflua,Low,7.1,F
+2024,E,3,Z3,Aristida adscensionis,Low,8.3,F
+2024,E,3,Z3,Heteropogon contortus,Moderate,5.3,F
+2024,E,3,Z3,Eragrostis gummiflua,Low,4.6,F
+2024,E,3,Z3,,,4.1,F
+2024,E,3,Z3,,,4.5,F
+2024,E,3,Z4,Cymbopogon excavatus,Low,4.5,F
+2024,E,3,Z4,Heteropogon contortus,Moderate,4.5,F
+2024,E,3,Z4,Urochloa mosambicensis,Moderate,9.9,F
+2024,E,3,Z4,,,12.9,F
+2024,E,3,Z4,Panicum maximum,High,11.7,F
+2024,E,3,Z4,,,10.8,F
+2024,E,3,Z4,,,8.4,F
+2024,E,3,Z4,,,9.9,F
+2024,E,3,Z4,Heteropogon contortus,Moderate,18.2,F
+2024,E,3,Z4,,,22.3,F
+2024,E,3,Z4,,,17.6,F
+2024,E,3,Z4,,,17.5,F
+2024,E,3,Z4,Panicum maximum,High,4.3,F
+2024,E,3,Z4,Eragrostis rigidior,Moderate,4.5,F
+2024,E,3,Z4,Eragrostis gummiflua,Low,6.8,F
+2024,E,3,Z4,,,6.2,F
+2024,E,3,Z4,Panicum maximum,High,8.5,F
+2024,E,3,Z4,Eragrostis rigidior,Moderate,8.3,F
+2024,E,3,Z4,,,7.4,F
+2024,E,3,Z4,,,7.9,F
+2024,E,4,Z1,Heteropogon contortus,High,5.4,TFB
+2024,E,4,Z1,,,6.1,TFB
+2024,E,4,Z1,,,6.7,TFB
+2024,E,4,Z1,,,6.6,TFB
+2024,E,4,Z1,Panicum maximum,High,7,TFB
+2024,E,4,Z1,,,7.6,TFB
+2024,E,4,Z1,,,5.7,TFB
+2024,E,4,Z1,,,5.6,TFB
+2024,E,4,Z1,Digitaria eriantha,High,2.7,TFB
+2024,E,4,Z1,Heteropogon contortus,Moderate,2.6,TFB
+2024,E,4,Z1,Eragrostis gummiflua,Low,2.6,TFB
+2024,E,4,Z1,Aristida adscensionis,Low,2.6,TFB
+2024,E,4,Z1,Heteropogon contortus,Moderate,8.3,TFB
+2024,E,4,Z1,,,8.1,TFB
+2024,E,4,Z1,,,8,TFB
+2024,E,4,Z1,,,7.7,TFB
+2024,E,4,Z1,Enteropogon macrostachyus,High,13.3,TFB
+2024,E,4,Z1,,,15.4,TFB
+2024,E,4,Z1,,,13.9,TFB
+2024,E,4,Z1,,,13.6,TFB
+2024,E,4,Z2,Heteropogon contortus,Moderate,5.2,TFB
+2024,E,4,Z2,Aristida adscensionis,Low,14.8,TFB
+2024,E,4,Z2,,,14.6,TFB
+2024,E,4,Z2,,,14.4,TFB
+2024,E,4,Z2,Heteropogon contortus,Moderate,3,TFB
+2024,E,4,Z2,Eragrostis gummiflua,Low,3.6,TFB
+2024,E,4,Z2,Aristida adscensionis,Low,3.8,TFB
+2024,E,4,Z2,Eragrostis rigidior,Moderate,5.6,TFB
+2024,E,4,Z2,Heteropogon contortus,Moderate,8.1,TFB
+2024,E,4,Z2,,,6.5,TFB
+2024,E,4,Z2,,,6.3,TFB
+2024,E,4,Z2,,,6.1,TFB
+2024,E,4,Z2,Heteropogon contortus,Moderate,6.5,TFB
+2024,E,4,Z2,,,6.6,TFB
+2024,E,4,Z2,,,9.4,TFB
+2024,E,4,Z2,,,10.3,TFB
+2024,E,4,Z2,Heteropogon contortus,Moderate,10.4,TFB
+2024,E,4,Z2,Cymbopogon excavatus,Low,7.4,TFB
+2024,E,4,Z2,,,7.6,TFB
+2024,E,4,Z2,,,6.8,TFB
+2024,E,4,Z3,Panicum maximum,High,9.8,TFB
+2024,E,4,Z3,,,11.7,TFB
+2024,E,4,Z3,,,11.3,TFB
+2024,E,4,Z3,,,12.3,TFB
+2024,E,4,Z3,Pogonarthria squarrosa ,Low,13.2,TFB
+2024,E,4,Z3,Panicum maximum,High,5.6,TFB
+2024,E,4,Z3,Aristida adscensionis,Low,2.8,TFB
+2024,E,4,Z3,,,5,TFB
+2024,E,4,Z3,Heteropogon contortus,Moderate,20.3,TFB
+2024,E,4,Z3,,,16,TFB
+2024,E,4,Z3,,,16.9,TFB
+2024,E,4,Z3,,,14.9,TFB
+2024,E,4,Z3,Heteropogon contortus,Moderate,7.1,TFB
+2024,E,4,Z3,Eragrostis gummiflua,Low,6.9,TFB
+2024,E,4,Z3,Eragrostis rigidior,Moderate,7.1,TFB
+2024,E,4,Z3,,,7.2,TFB
+2024,E,4,Z3,Panicum maximum,High,6.6,TFB
+2024,E,4,Z3,,,3.5,TFB
+2024,E,4,Z3,,,6.3,TFB
+2024,E,4,Z3,,,12.9,TFB
+2024,E,4,Z4,Heteropogon contortus,Moderate,8.1,TFB
+2024,E,4,Z4,Enteropogon macrostachyus,High,7.5,TFB
+2024,E,4,Z4,Urochloa mosambicensis,Moderate,6.8,TFB
+2024,E,4,Z4,,,6.3,TFB
+2024,E,4,Z4,Eragrostis rigidior,Moderate,3.1,TFB
+2024,E,4,Z4,,,2.4,TFB
+2024,E,4,Z4,,,0,TFB
+2024,E,4,Z4,,,0,TFB
+2024,E,4,Z4,Panicum maximum,High,6.1,TFB
+2024,E,4,Z4,Heteropogon contortus,Moderate,5.3,TFB
+2024,E,4,Z4,Eragrostis rigidior,Moderate,7.3,TFB
+2024,E,4,Z4,,,10.2,TFB
+2024,E,4,Z4,Heteropogon contortus,Moderate,13.5,TFB
+2024,E,4,Z4,,,15.7,TFB
+2024,E,4,Z4,,,18.8,TFB
+2024,E,4,Z4,,,19,TFB
+2024,E,4,Z4,Enteropogon macrostachyus,High,7,TFB
+2024,E,4,Z4,Urochloa mosambicensis,Moderate,5.3,TFB
+2024,E,4,Z4,Heteropogon contortus,Moderate,5.5,TFB
+2024,E,4,Z4,,,6,TFB
+2024,E,5,Z1,Eragrostis rigidior,Moderate,5.8,THF
+2024,E,5,Z1,Brachiaria nigropedata,High,5.8,THF
+2024,E,5,Z1,Heteropogon contortus,Moderate,9.8,THF
+2024,E,5,Z1,Enteropogon macrostachyus,High,8.5,THF
+2024,E,5,Z1,Pogonarthria squarrosa ,Low,NA,THF
+2024,E,5,Z1,Digitaria eriantha,High,15.3,THF
+2024,E,5,Z1,Panicum maximum,High,15.8,THF
+2024,E,5,Z1,Heteropogon contortus,Moderate,13.8,THF
+2024,E,5,Z1,Eragrostis gummiflua,Low,14.5,THF
+2024,E,5,Z1,Enteropogon macrostachyus,High,8.7,THF
+2024,E,5,Z1,Panicum maximum,High,11.4,THF
+2024,E,5,Z1,,,13.4,THF
+2024,E,5,Z1,,,11.4,THF
+2024,E,5,Z1,Aristida adscensionis,Low,8.7,THF
+2024,E,5,Z1,Heteropogon contortus,Moderate,8.5,THF
+2024,E,5,Z1,Cymbopogon excavatus,Low,8.5,THF
+2024,E,5,Z1,,,8.3,THF
+2024,E,5,Z1,Heteropogon contortus,Moderate,10,THF
+2024,E,5,Z1,Eragrostis rigidior,Moderate,10.6,THF
+2024,E,5,Z1,,,10.4,THF
+2024,E,5,Z1,,,10.5,THF
+2024,E,5,Z2,Panicum maximum,High,8.9,THF
+2024,E,5,Z2,,,9.1,THF
+2024,E,5,Z2,,,9.7,THF
+2024,E,5,Z2,,,10.3,THF
+2024,E,5,Z2,Panicum maximum,High,10.8,THF
+2024,E,5,Z2,Enteropogon macrostachyus,High,10.8,THF
+2024,E,5,Z2,Heteropogon contortus,Moderate,8.9,THF
+2024,E,5,Z2,,,7.7,THF
+2024,E,5,Z2,Brachiaria nigropedata,High,12.2,THF
+2024,E,5,Z2,Heteropogon contortus,Moderate,11.3,THF
+2024,E,5,Z2,Digitaria eriantha,High,10.5,THF
+2024,E,5,Z2,,,10.5,THF
+2024,E,5,Z2,Eragrostis rigidior,Moderate,12.9,THF
+2024,E,5,Z2,Heteropogon contortus,Moderate,15,THF
+2024,E,5,Z2,Pogonarthria squarrosa ,Low,14.3,THF
+2024,E,5,Z2,Aristida adscensionis,Low,5.6,THF
+2024,E,5,Z2,Enteropogon macrostachyus,High,10.7,THF
+2024,E,5,Z2,Heteropogon contortus,Moderate,10.6,THF
+2024,E,5,Z2,Aristida adscensionis,Low,10.4,THF
+2024,E,5,Z2,,,10.1,THF
+2024,E,5,Z3,Aristida adscensionis,Low,10.6,THF
+2024,E,5,Z3,Digitaria eriantha,High,10.2,THF
+2024,E,5,Z3,Eragrostis gummiflua,Low,10.5,THF
+2024,E,5,Z3,,,10.4,THF
+2024,E,5,Z3,Eragrostis gummiflua,Low,5.1,THF
+2024,E,5,Z3,Eragrostis rigidior,Moderate,13.2,THF
+2024,E,5,Z3,Heteropogon contortus,Moderate,11.4,THF
+2024,E,5,Z3,Digitaria eriantha,High,19.9,THF
+2024,E,5,Z3,Pogonarthria squarrosa ,Low,NA,THF
+2024,E,5,Z3,Heteropogon contortus,Moderate,6.8,THF
+2024,E,5,Z3,Digitaria eriantha,High,8.1,THF
+2024,E,5,Z3,Panicum maximum,High,8.1,THF
+2024,E,5,Z3,,,8.8,THF
+2024,E,5,Z3,Aristida adscensionis,Low,6.3,THF
+2024,E,5,Z3,Eragrostis gummiflua,Low,6,THF
+2024,E,5,Z3,Eragrostis rigidior,Moderate,8.3,THF
+2024,E,5,Z3,Heteropogon contortus,Moderate,7.2,THF
+2024,E,5,Z3,Enteropogon macrostachyus,High,NA,THF
+2024,E,5,Z3,Aristida adscensionis,Low,2.8,THF
+2024,E,5,Z3,Heteropogon contortus,Moderate,2.8,THF
+2024,E,5,Z3,,,2.8,THF
+2024,E,5,Z3,,,2.8,THF
+2024,E,5,Z4,Heteropogon contortus,Moderate,13.2,THF
+2024,E,5,Z4,Enteropogon macrostachyus,High,12,THF
+2024,E,5,Z4,,,11.4,THF
+2024,E,5,Z4,,,11.6,THF
+2024,E,5,Z4,Pogonarthria squarrosa ,Low,8.3,THF
+2024,E,5,Z4,Brachiaria nigropedata,High,8.4,THF
+2024,E,5,Z4,,,9.1,THF
+2024,E,5,Z4,,,10,THF
+2024,E,5,Z4,Brachiaria nigropedata,High,13.2,THF
+2024,E,5,Z4,Digitaria eriantha,High,12.7,THF
+2024,E,5,Z4,Panicum maximum,High,12.2,THF
+2024,E,5,Z4,,,12.3,THF
+2024,E,5,Z4,Enteropogon macrostachyus,High,11.6,THF
+2024,E,5,Z4,Digitaria eriantha,High,12.2,THF
+2024,E,5,Z4,Sporobolus africanus,Low,12.3,THF
+2024,E,5,Z4,,,13.1,THF
+2024,E,5,Z4,Enteropogon macrostachyus,High,5.1,THF
+2024,E,5,Z4,Aristida adscensionis,Low,12.8,THF
+2024,E,5,Z4,Sporobolus ioclados,Moderate,12.5,THF
+2024,E,5,Z4,,,12.1,THF
+2024,F,1,Z1,Heteropogon contortus,Moderate,4,C
+2024,F,1,Z1,Eragrostis rigidior,Moderate,5.6,C
+2024,F,1,Z1,,,3.8,C
+2024,F,1,Z1,,,13.6,C
+2024,F,1,Z1,Heteropogon contortus,Moderate,3.4,C
+2024,F,1,Z1,Eragrostis rigidior,Moderate,20.7,C
+2024,F,1,Z1,Eragrostis gummiflua,Low,7.8,C
+2024,F,1,Z1,,,3.6,C
+2024,F,1,Z1,Aristida congesta C,Low,3.5,C
+2024,F,1,Z1,Heteropogon contortus,Moderate,4.7,C
+2024,F,1,Z1,Eragrostis rigidior,Moderate,4.8,C
+2024,F,1,Z1,Eragrostis gummiflua,Low,5.2,C
+2024,F,1,Z1,Aristida adscensionis,Low,9,C
+2024,F,1,Z1,Eragrostis rigidior,Low,12.7,C
+2024,F,1,Z1,Eragrostis gummiflua,Low,12.8,C
+2024,F,1,Z1,Eragrostis superba,Moderate,12.7,C
+2024,F,1,Z1,Eragrostis rigidior,Moderate,5.5,C
+2024,F,1,Z1,Eragrostis gummiflua,Low,5.9,C
+2024,F,1,Z1,Eragrostis superba,Moderate,7.9,C
+2024,F,1,Z1,,,7.5,C
+2024,F,1,Z2,Heteropogon contortus,Moderate,4.9,C
+2024,F,1,Z2,Eragrostis rigidior,Moderate,7.8,C
+2024,F,1,Z2,Eragrostis gummiflua,Low,7.5,C
+2024,F,1,Z2,Digitaria eriantha,High,13.3,C
+2024,F,1,Z2,Heteropogon contortus,Moderate,19.7,C
+2024,F,1,Z2,Eragrostis rigidior,Moderate,10.5,C
+2024,F,1,Z2,Eragrostis gummiflua,Low,20,C
+2024,F,1,Z2,Panicum maximum,High,22.5,C
+2024,F,1,Z2,Aristida junciformis,Low,9.8,C
+2024,F,1,Z2,Digitaria eriantha,High,8.7,C
+2024,F,1,Z2,Heteropogon contortus,Moderate,8.9,C
+2024,F,1,Z2,,,8.2,C
+2024,F,1,Z2,Heteropogon contortus,Moderate,8.6,C
+2024,F,1,Z2,Eragrostis rigidior,Moderate,8.6,C
+2024,F,1,Z2,Eragrostis superba,Moderate,8.3,C
+2024,F,1,Z2,Panicum maximum,High,7.7,C
+2024,F,1,Z2,Eragrostis rigidior,Moderate,15.3,C
+2024,F,1,Z2,Eragrostis gummiflua,Low,14.7,C
+2024,F,1,Z2,,,13.6,C
+2024,F,1,Z2,,,13.8,C
+2024,F,1,Z3,Heteropogon contortus,Moderate,5.4,C
+2024,F,1,Z3,Eragrostis rigidior,Moderate,5.1,C
+2024,F,1,Z3,Eragrostis gummiflua,Low,4.6,C
+2024,F,1,Z3,Loudetia simplex,Moderate,12.8,C
+2024,F,1,Z3,Eragrostis gummiflua,Low,3.4,C
+2024,F,1,Z3,Aristida  canescens,Low,4.8,C
+2024,F,1,Z3,,,5.4,C
+2024,F,1,Z3,,,7.8,C
+2024,F,1,Z3,Eragrostis gummiflua,Low,2.2,C
+2024,F,1,Z3,,,2.1,C
+2024,F,1,Z3,,,2,C
+2024,F,1,Z3,,,2.4,C
+2024,F,1,Z3,Digitaria eriantha,High,2.4,C
+2024,F,1,Z3,Brachiaria brizantha,Moderate,4,C
+2024,F,1,Z3,Eragrostis rigidior,Moderate,4.5,C
+2024,F,1,Z3,Heteropogon contortus,Moderate,4.5,C
+2024,F,1,Z3,Eragrostis rigidior,Moderate,3.4,C
+2024,F,1,Z3,Eragrostis gummiflua,Low,4.3,C
+2024,F,1,Z3,,,4.8,C
+2024,F,1,Z3,,,5,C
+2024,F,1,Z4,Eragrostis gummiflua,Low,1.6,C
+2024,F,1,Z4,Digitaria eriantha,High,3.3,C
+2024,F,1,Z4,Heteropogon contortus,Moderate,3.7,C
+2024,F,1,Z4,,,4.4,C
+2024,F,1,Z4,Eragrostis gummiflua,Low,4.6,C
+2024,F,1,Z4,Eragrostis rigidior,Moderate,4.7,C
+2024,F,1,Z4,Heteropogon contortus,Moderate,5.1,C
+2024,F,1,Z4,Aristida congesta C,Low,5.2,C
+2024,F,1,Z4,Eragrostis gummiflua,Low,8.7,C
+2024,F,1,Z4,Aristida diffusa,Low,6.6,C
+2024,F,1,Z4,,,4.8,C
+2024,F,1,Z4,,,5.1,C
+2024,F,1,Z4,Aristida congesta B,Low,7.7,C
+2024,F,1,Z4,Heteropogon contortus,Moderate,6.6,C
+2024,F,1,Z4,Eragrostis rigidior,Moderate,7.9,C
+2024,F,1,Z4,Eragrostis gummiflua,Low,7.8,C
+2024,F,1,Z4,Eragrostis superba,Moderate,NA,C
+2024,F,1,Z4,Eragrostis gummiflua,Low,3.6,C
+2024,F,1,Z4,Urochloa panicoides,Low,3.5,C
+2024,F,1,Z4,Aristida diffusa,Low,3.6,C
+2024,F,1,Z4,,,3.6,C
+2024,F,2,Z1,Aristida congesta B,Low,5.3,F
+2024,F,2,Z1,Heteropogon contortus,Moderate,5.1,F
+2024,F,2,Z1,Eragrostis rigidior,Moderate,5,F
+2024,F,2,Z1,Digitaria eriantha,High,4.8,F
+2024,F,2,Z1,Panicum maximum,High,5.6,F
+2024,F,2,Z1,,,5.6,F
+2024,F,2,Z1,,,5.6,F
+2024,F,2,Z1,,,5.7,F
+2024,F,2,Z1,Cynodon dactylon ,High,8.4,F
+2024,F,2,Z1,Aristida congesta C,Low,5.6,F
+2024,F,2,Z1,Eragrostis rigidior,Moderate,6.4,F
+2024,F,2,Z1,,,5.1,F
+2024,F,2,Z1,Cynodon dactylon ,High,9.7,F
+2024,F,2,Z1,Aristida congesta C,Moderate,13.2,F
+2024,F,2,Z1,Digitaria eriantha,High,19.7,F
+2024,F,2,Z1,,,22.1,F
+2024,F,2,Z1,Panicum maximum,High,13.1,F
+2024,F,2,Z1,Eragrostis rigidior,Moderate,7,F
+2024,F,2,Z1,,,6.5,F
+2024,F,2,Z1,,,7.4,F
+2024,F,2,Z2,Eragrostis rigidior,Moderate,6.9,F
+2024,F,2,Z2,Digitaria eriantha,High,6.3,F
+2024,F,2,Z2,,,6.7,F
+2024,F,2,Z2,,,6.4,F
+2024,F,2,Z2,Digitaria eriantha,High,4.7,F
+2024,F,2,Z2,Eragrostis rigidior,Moderate,4.2,F
+2024,F,2,Z2,Eragrostis gummiflua,Low,5.9,F
+2024,F,2,Z2,,,4.6,F
+2024,F,2,Z2,Eragrostis rigidior,Moderate,7.4,F
+2024,F,2,Z2,Digitaria eriantha,High,7,F
+2024,F,2,Z2,Eragrostis gummiflua,Low,11.8,F
+2024,F,2,Z2,Pogonarthria squarrosa ,Low,8.9,F
+2024,F,2,Z2,Eragrostis gummiflua,Low,1.9,F
+2024,F,2,Z2,Digitaria eriantha,High,3.5,F
+2024,F,2,Z2,Cynodon dactylon,High,4,F
+2024,F,2,Z2,,,3.8,F
+2024,F,2,Z2,Eragrostis gummiflua,Low,3.9,F
+2024,F,2,Z2,Eragrostis rigidior,Moderate,5.1,F
+2024,F,2,Z2,Urochloa panicoides,Low,6.7,F
+2024,F,2,Z2,,,8.9,F
+2024,F,2,Z3,Digitaria eriantha,High,2.7,F
+2024,F,2,Z3,Cynodon dactylon,High,2.3,F
+2024,F,2,Z3,Perotis patens,Low,2.4,F
+2024,F,2,Z3,,,2.4,F
+2024,F,2,Z3,,,0,F
+2024,F,2,Z3,,,0,F
+2024,F,2,Z3,,,0,F
+2024,F,2,Z3,,,0,F
+2024,F,2,Z3,Digitaria eriantha,High,17,F
+2024,F,2,Z3,Cynodon dactylon,High,13.7,F
+2024,F,2,Z3,Eragrostis rigidior,Moderate,11.9,F
+2024,F,2,Z3,,,11.9,F
+2024,F,2,Z3,Digitaria eriantha,High,5.2,F
+2024,F,2,Z3,Eragrostis rigidior,Moderate,5.5,F
+2024,F,2,Z3,,,6.1,F
+2024,F,2,Z3,,,6.9,F
+2024,F,2,Z3,Aristida  canescens,Low,4.6,F
+2024,F,2,Z3,Digitaria eriantha,High,4,F
+2024,F,2,Z3,Setaria incrassata,High,3.9,F
+2024,F,2,Z3,,,4.5,F
+2024,F,2,Z4,Digitaria eriantha,High,12.4,F
+2024,F,2,Z4,Cynodon dactylon,High,11.8,F
+2024,F,2,Z4,Eragrostis rigidior,Moderate,12,F
+2024,F,2,Z4,,,12,F
+2024,F,2,Z4,Heteropogon contortus,Moderate,5.6,F
+2024,F,2,Z4,Cynodon dactylon,High,6.4,F
+2024,F,2,Z4,Eragrostis rigidior,Moderate,6.7,F
+2024,F,2,Z4,Aristida  canescens,Low,6.8,F
+2024,F,2,Z4,Enteropogon macrostachyus,High,6.6,F
+2024,F,2,Z4,Panicum maximum,High,6.9,F
+2024,F,2,Z4,,,8.5,F
+2024,F,2,Z4,,,8.3,F
+2024,F,2,Z4,Heteropogon contortus,Moderate,13.7,F
+2024,F,2,Z4,Cynodon dactylon,High,13.9,F
+2024,F,2,Z4,Eragrostis rigidior,Moderate,14.5,F
+2024,F,2,Z4,Aristida  canescens,Low,13.9,F
+2024,F,2,Z4,Digitaria eriantha,High,13.1,F
+2024,F,2,Z4,Cynodon dactylon,High,12.9,F
+2024,F,2,Z4,Eragrostis rigidior,Moderate,12.6,F
+2024,F,2,Z4,,,12.1,F
+2024,F,3,Z1,Digitaria eriantha,High,2.7,TF
+2024,F,3,Z1,Cynodon dactylon,High,2.3,TF
+2024,F,3,Z1,Perotis patens,Low,2.4,TF
+2024,F,3,Z1,,,2.4,TF
+2024,F,3,Z1,,,0,TF
+2024,F,3,Z1,,,0,TF
+2024,F,3,Z1,,,0,TF
+2024,F,3,Z1,,,0,TF
+2024,F,3,Z1,Digitaria eriantha,High,17,TF
+2024,F,3,Z1,Cynodon dactylon,High,13.7,TF
+2024,F,3,Z1,Eragrostis rigidior,Moderate,11.9,TF
+2024,F,3,Z1,,,11.9,TF
+2024,F,3,Z1,Digitaria eriantha,High,5.2,TF
+2024,F,3,Z1,Eragrostis rigidior,Moderate,5.5,TF
+2024,F,3,Z1,,,6.1,TF
+2024,F,3,Z1,,,6.9,TF
+2024,F,3,Z1,Aristida  canescens,Low,4.6,TF
+2024,F,3,Z1,Digitaria eriantha,High,4,TF
+2024,F,3,Z1,Setaria incrassata,High,3.9,TF
+2024,F,3,Z1,,,4.5,TF
+2024,F,3,Z2,Eragrostis rigidior,Moderate,9.1,TF
+2024,F,3,Z2,,,7,TF
+2024,F,3,Z2,,,9,TF
+2024,F,3,Z2,,,8,TF
+2024,F,3,Z2,Eragrostis rigidior,Moderate,2.6,TF
+2024,F,3,Z2,,,1.9,TF
+2024,F,3,Z2,,,2,TF
+2024,F,3,Z2,,,2.1,TF
+2024,F,3,Z2,Aristida  canescens,Low,4.9,TF
+2024,F,3,Z2,Digitaria eriantha,High,3.8,TF
+2024,F,3,Z2,Eragrostis gummiflua,Low,3.4,TF
+2024,F,3,Z2,Eragrostis rigidior,Moderate,3.5,TF
+2024,F,3,Z2,,,0,TF
+2024,F,3,Z2,,,0,TF
+2024,F,3,Z2,,,0,TF
+2024,F,3,Z2,,,0,TF
+2024,F,3,Z2,Aristida  canescens,Low,1.9,TF
+2024,F,3,Z2,Eragrostis rigidior,Moderate,3.6,TF
+2024,F,3,Z2,,,2.9,TF
+2024,F,3,Z2,,,3,TF
+2024,F,3,Z3,Cynodon dactylon,High,4.8,TF
+2024,F,3,Z3,Pogonarthria squarrosa ,Low,6.6,TF
+2024,F,3,Z3,,,6.8,TF
+2024,F,3,Z3,,,7,TF
+2024,F,3,Z3,Digitaria eriantha,High,18.3,TF
+2024,F,3,Z3,Eragrostis rigidior,Moderate,16.2,TF
+2024,F,3,Z3,,,12.4,TF
+2024,F,3,Z3,,,12.2,TF
+2024,F,3,Z3,Cynodon dactylon,High,12.2,TF
+2024,F,3,Z3,Digitaria eriantha,High,11.4,TF
+2024,F,3,Z3,Eragrostis rigidior,Moderate,10.7,TF
+2024,F,3,Z3,,,9.4,TF
+2024,F,3,Z3,Cynodon dactylon,High,12.1,TF
+2024,F,3,Z3,Digitaria eriantha,High,11.2,TF
+2024,F,3,Z3,,,12.5,TF
+2024,F,3,Z3,,,12.5,TF
+2024,F,3,Z3,Cynodon dactylon,High,7.9,TF
+2024,F,3,Z3,Digitaria eriantha,High,6.2,TF
+2024,F,3,Z3,Chloris virgata,Moderate,5.6,TF
+2024,F,3,Z3,,,5.4,TF
+2024,F,3,Z4,Cynodon dactylon,High,5.2,TF
+2024,F,3,Z4,Digitaria eriantha,High,5.1,TF
+2024,F,3,Z4,Eragrostis rigidior,Moderate,5.1,TF
+2024,F,3,Z4,,,5,TF
+2024,F,3,Z4,Aristida  canescens,Low,6.6,TF
+2024,F,3,Z4,Digitaria eriantha,High,7.4,TF
+2024,F,3,Z4,,,7.2,TF
+2024,F,3,Z4,,,7.1,TF
+2024,F,3,Z4,Cynodon dactylon,High,7.2,TF
+2024,F,3,Z4,Digitaria eriantha,High,7.6,TF
+2024,F,3,Z4,,,7.6,TF
+2024,F,3,Z4,,,7.4,TF
+2024,F,3,Z4,Cynodon dactylon,High,7.9,TF
+2024,F,3,Z4,Digitaria eriantha,High,8.2,TF
+2024,F,3,Z4,Eragrostis rigidior,Moderate,9.1,TF
+2024,F,3,Z4,Pogonarthria squarrosa ,Low,9,TF
+2024,F,3,Z4,Cynodon dactylon,High,9.2,TF
+2024,F,3,Z4,Digitaria eriantha,High,9.5,TF
+2024,F,3,Z4,Eragrostis rigidior,Moderate,9.9,TF
+2024,F,3,Z4,Chloris virgata,Moderate,10.3,TF
+2024,F,4,Z1,Heteropogon contortus,Moderate,6.3,TFB
+2024,F,4,Z1,Digitaria eriantha,High,6.8,TFB
+2024,F,4,Z1,Eragrostis rigidior,Moderate,7.8,TFB
+2024,F,4,Z1,,,7.8,TFB
+2024,F,4,Z1,Eragrostis gummiflua,Low,6.5,TFB
+2024,F,4,Z1,,,6,TFB
+2024,F,4,Z1,,,5.3,TFB
+2024,F,4,Z1,,,5.1,TFB
+2024,F,4,Z1,Cynodon dactylon,High,7.7,TFB
+2024,F,4,Z1,Digitaria eriantha,High,7.5,TFB
+2024,F,4,Z1,,,7.3,TFB
+2024,F,4,Z1,,,7.1,TFB
+2024,F,4,Z1,Digitaria eriantha,High,9.2,TFB
+2024,F,4,Z1,Aristida  canescens,Low,9.7,TFB
+2024,F,4,Z1,,,7.6,TFB
+2024,F,4,Z1,,,8.5,TFB
+2024,F,4,Z1,Pogonarthria squarrosa ,Low,7.3,TFB
+2024,F,4,Z1,,,7.3,TFB
+2024,F,4,Z1,,,8.1,TFB
+2024,F,4,Z1,,,7.8,TFB
+2024,F,4,Z2,Eragrostis rigidior,Moderate,11.4,TFB
+2024,F,4,Z2,,,10.8,TFB
+2024,F,4,Z2,,,13,TFB
+2024,F,4,Z2,,,13.1,TFB
+2024,F,4,Z2,Aristida  canescens,Low,4.5,TFB
+2024,F,4,Z2,Cynodon dactylon,High,4.8,TFB
+2024,F,4,Z2,Eragrostis gummiflua,Low,6,TFB
+2024,F,4,Z2,Brachiaria brizantha,Moderate,5.8,TFB
+2024,F,4,Z2,Eragrostis rigidior,Moderate,12.4,TFB
+2024,F,4,Z2,Panicum maximum,High,7.7,TFB
+2024,F,4,Z2,,,6.2,TFB
+2024,F,4,Z2,,,6.9,TFB
+2024,F,4,Z2,Heteropogon contortus,Moderate,2.1,TFB
+2024,F,4,Z2,,,2,TFB
+2024,F,4,Z2,,,2.1,TFB
+2024,F,4,Z2,,,1.9,TFB
+2024,F,4,Z2,Aristida  canescens,Low,2,TFB
+2024,F,4,Z2,Eragrostis rigidior,Moderate,3.3,TFB
+2024,F,4,Z2,Pogonarthria squarrosa ,Low,3,TFB
+2024,F,4,Z2,,,2.8,TFB
+2024,F,4,Z3,Cynodon dactylon,High,6.2,TFB
+2024,F,4,Z3,Eragrostis rigidior,Moderate,3.6,TFB
+2024,F,4,Z3,Pogonarthria squarrosa ,Low,4,TFB
+2024,F,4,Z3,,,15.3,TFB
+2024,F,4,Z3,Cynodon dactylon,High,1.8,TFB
+2024,F,4,Z3,Digitaria eriantha,High,1.9,TFB
+2024,F,4,Z3,,,3.8,TFB
+2024,F,4,Z3,,,3.1,TFB
+2024,F,4,Z3,Digitaria eriantha,High,10.8,TFB
+2024,F,4,Z3,Heteropogon contortus,Moderate,5.6,TFB
+2024,F,4,Z3,,,10.2,TFB
+2024,F,4,Z3,,,9.3,TFB
+2024,F,4,Z3,Eragrostis viscosa,Low,3.5,TFB
+2024,F,4,Z3,Digitaria eriantha,High,5.3,TFB
+2024,F,4,Z3,,,4.5,TFB
+2024,F,4,Z3,,,2.5,TFB
+2024,F,4,Z3,Cynodon dactylon,High,6.7,TFB
+2024,F,4,Z3,Digitaria eriantha,High,6.9,TFB
+2024,F,4,Z3,Eragrostis rigidior,Moderate,7.2,TFB
+2024,F,4,Z3,Aristida  canescens,Low,9.8,TFB
+2024,F,4,Z4,Aristida  canescens,Low,3.1,TFB
+2024,F,4,Z4,Cynodon dactylon,High,2.9,TFB
+2024,F,4,Z4,Eragrostis rigidior,Low,2.5,TFB
+2024,F,4,Z4,,,3,TFB
+2024,F,4,Z4,Aristida  canescens,Low,4,TFB
+2024,F,4,Z4,Panicum maximum,High,4.8,TFB
+2024,F,4,Z4,Cymbopogon excavatus,Low,5.5,TFB
+2024,F,4,Z4,,,6.5,TFB
+2024,F,4,Z4,Aristida  canescens,Low,3.6,TFB
+2024,F,4,Z4,Digitaria eriantha,High,5.6,TFB
+2024,F,4,Z4,Eragrostis gummiflua,Low,7.9,TFB
+2024,F,4,Z4,,,5.6,TFB
+2024,F,4,Z4,Cynodon dactylon,High,13.7,TFB
+2024,F,4,Z4,Heteropogon contortus,Moderate,10.2,TFB
+2024,F,4,Z4,Pogonarthria squarrosa ,Low,6.4,TFB
+2024,F,4,Z4,,,15.3,TFB
+2024,F,4,Z4,Cynodon dactylon,High,4.5,TFB
+2024,F,4,Z4,Eragrostis rigidior,Moderate,5.9,TFB
+2024,F,4,Z4,,,5.5,TFB
+2024,F,4,Z4,,,5,TFB
+2024,F,5,Z1,Cynodon dactylon,High,7.4,THF
+2024,F,5,Z1,Digitaria eriantha,High,6.5,THF
+2024,F,5,Z1,,,6.3,THF
+2024,F,5,Z1,,,7.9,THF
+2024,F,5,Z1,Cynodon dactylon,High,3.8,THF
+2024,F,5,Z1,Digitaria eriantha,High,3.8,THF
+2024,F,5,Z1,Eragrostis rigidior,Moderate,6.3,THF
+2024,F,5,Z1,,,5.8,THF
+2024,F,5,Z1,Cynodon dactylon,High,9.4,THF
+2024,F,5,Z1,Digitaria eriantha,Moderate,12.3,THF
+2024,F,5,Z1,Eragrostis rigidior,Moderate,10.9,THF
+2024,F,5,Z1,,,11.2,THF
+2024,F,5,Z1,Cynodon dactylon,High,8.6,THF
+2024,F,5,Z1,Digitaria eriantha,High,7.7,THF
+2024,F,5,Z1,,,10.2,THF
+2024,F,5,Z1,,,9.7,THF
+2024,F,5,Z1,Cynodon dactylon,High,7.5,THF
+2024,F,5,Z1,Digitaria eriantha,Moderate,8.2,THF
+2024,F,5,Z1,,,7.4,THF
+2024,F,5,Z1,,,7.2,THF
+2024,F,5,Z2,Urochloa mosambicensis,Moderate,5.2,THF
+2024,F,5,Z2,Digitaria eriantha,High,5,THF
+2024,F,5,Z2,,,5.1,THF
+2024,F,5,Z2,,,5.1,THF
+2024,F,5,Z2,Cynodon dactylon,High,11.5,THF
+2024,F,5,Z2,Digitaria eriantha,High,9.4,THF
+2024,F,5,Z2,Eragrostis rigidior,Moderate,7.1,THF
+2024,F,5,Z2,Pogonarthria squarrosa ,Low,9.4,THF
+2024,F,5,Z2,Cynodon dactylon,High,10.6,THF
+2024,F,5,Z2,Digitaria eriantha,High,9.3,THF
+2024,F,5,Z2,,,8.4,THF
+2024,F,5,Z2,,,8.6,THF
+2024,F,5,Z2,Cynodon dactylon,High,4.2,THF
+2024,F,5,Z2,Digitaria eriantha,High,4.1,THF
+2024,F,5,Z2,Eragrostis rigidior,Moderate,4.2,THF
+2024,F,5,Z2,Aristida  canescens,Low,4.6,THF
+2024,F,5,Z2,Digitaria eriantha,High,5.5,THF
+2024,F,5,Z2,Eragrostis rigidior,Moderate,5,THF
+2024,F,5,Z2,,,5.3,THF
+2024,F,5,Z2,,,5.2,THF
+2024,F,5,Z3,Cynodon dactylon,High,9.4,THF
+2024,F,5,Z3,Digitaria eriantha,High,8.7,THF
+2024,F,5,Z3,Eragrostis rigidior,Moderate,8.6,THF
+2024,F,5,Z3,,,9.7,THF
+2024,F,5,Z3,Cynodon dactylon,High,10.6,THF
+2024,F,5,Z3,Digitaria eriantha,High,8.2,THF
+2024,F,5,Z3,,,8.8,THF
+2024,F,5,Z3,,,8.4,THF
+2024,F,5,Z3,Cynodon dactylon,High,8.8,THF
+2024,F,5,Z3,Digitaria eriantha,High,9,THF
+2024,F,5,Z3,Eragrostis rigidior,Moderate,9.8,THF
+2024,F,5,Z3,Setaria incrassata,High,8,THF
+2024,F,5,Z3,Heteropogon contortus,Moderate,NA,THF
+2024,F,5,Z3,Cynodon dactylon,High,6.8,THF
+2024,F,5,Z3,Digitaria eriantha,High,7.2,THF
+2024,F,5,Z3,Eragrostis rigidior,Moderate,8.6,THF
+2024,F,5,Z3,,,8.9,THF
+2024,F,5,Z3,Cynodon dactylon,High,9.2,THF
+2024,F,5,Z3,Digitaria eriantha,High,11.1,THF
+2024,F,5,Z3,Eragrostis rigidior,Moderate,12.4,THF
+2024,F,5,Z3,,,12.4,THF
+2024,F,5,Z4,Cynodon dactylon,High,3.4,THF
+2024,F,5,Z4,Digitaria eriantha,High,3.1,THF
+2024,F,5,Z4,Eragrostis rigidior,Moderate,2.2,THF
+2024,F,5,Z4,,,2.6,THF
+2024,F,5,Z4,Cynodon dactylon,High,11,THF
+2024,F,5,Z4,Digitaria eriantha,High,9.7,THF
+2024,F,5,Z4,,,7.1,THF
+2024,F,5,Z4,,,9.2,THF
+2024,F,5,Z4,Cynodon dactylon,High,3.9,THF
+2024,F,5,Z4,Digitaria eriantha,High,7.9,THF
+2024,F,5,Z4,,,5.1,THF
+2024,F,5,Z4,,,4,THF
+2024,F,5,Z4,Cynodon dactylon,High,10.5,THF
+2024,F,5,Z4,Digitaria eriantha,High,10.1,THF
+2024,F,5,Z4,Heteropogon contortus,Moderate,10,THF
+2024,F,5,Z4,,,14.3,THF
+2024,F,5,Z4,Digitaria eriantha,High,10.5,THF
+2024,F,5,Z4,Eragrostis rigidior,Moderate,8.5,THF
+2024,F,5,Z4,Aristida  canescens,Low,8.3,THF
+2024,F,5,Z4,Eragrostis viscosa,Low,8.4,THF
+2024,F,5,Z4,Brachiaria brizantha,Moderate,NA,THF
+2025,A,5,Z3,A. adscensions,,9.4,THF
+2025,A,5,Z3,Pinhole,,9.7,THF
+2025,A,5,Z3,Eragrostsis gummiflua,,11.1,THF
+2025,A,5,Z3,,,12.1,THF
+2025,A,5,Z3,Pinhole,,17,THF
+2025,A,5,Z3,,,2.7,THF
+2025,A,5,Z3,,,2.8,THF
+2025,A,5,Z3,,,2.8,THF
+2025,A,5,Z3,Urochloa mosambicensis,,26.8,THF
+2025,A,5,Z3,Hyperrhenia filipendula,,19.4,THF
+2025,A,5,Z3,Pinhole,,17.3,THF
+2025,A,5,Z3,E.gummiflua,,16.8,THF
+2025,A,5,Z3,Urochloa mosambicensis,,7.4,THF
+2025,A,5,Z3,A.excavatus,,9.8,THF
+2025,A,5,Z3,Pinhole,,13,THF
+2025,A,5,Z3,,,14.3,THF
+2025,A,5,Z3,,,NA,THF
+2025,A,5,Z3,,,NA,THF
+2025,A,5,Z3,,,NA,THF
+2025,A,5,Z1,Urochloa mosambicensis,,22.3,THF
+2025,A,5,Z1,Pinhole,,20.3,THF
+2025,A,5,Z1,,,20.6,THF
+2025,A,5,Z1,,,19.7,THF
+2025,A,5,Z1,Hyperrhenia filipendula,,18.7,THF
+2025,A,5,Z1,Urochloa mosambicensis,,16.1,THF
+2025,A,5,Z1,,,19.2,THF
+2025,A,5,Z1,,,14.8,THF
+2025,A,5,Z1,Hyperrhenia filipendula,,16,THF
+2025,A,5,Z1,Themeda triandra,,12,THF
+2025,A,5,Z1,Urochloa mosambicensis,,15,THF
+2025,A,5,Z1,Pinhole,,17.8,THF
+2025,A,5,Z1,Hyperrhenia filipendula,,NA,THF
+2025,A,5,Z1,Urochloa mosambicensis,,2.8,THF
+2025,A,5,Z1,,,6.9,THF
+2025,A,5,Z1,,,6.3,THF
+2025,A,5,Z1,,,6.4,THF
+2025,A,5,Z1,Heteropogon  contortus,,24,THF
+2025,A,5,Z1,Urochloa mosambicensis,,16,THF
+2025,A,5,Z1,,,14.7,THF
+2025,A,5,Z1,,,14.8,THF
+2025,F,5,Z2,Aristida ads,,6.8,THF
+2025,F,5,Z2,Mopane grass,,3.4,THF
+2025,F,5,Z2,Setaria incressata,,5.7,THF
+2025,F,5,Z2,,,7.3,THF
+2025,F,5,Z2,Digitaria erianthra,,8.5,THF
+2025,F,5,Z2,Pogonarthria squarrosa,,7.3,THF
+2025,F,5,Z2,Cynadon dactylon,,7.2,THF
+2025,F,5,Z2,,,7,THF
+2025,F,5,Z2,Digitaria erianthra,,6.6,THF
+2025,F,5,Z2,Heteropogon  contortus,,6.9,THF
+2025,F,5,Z2,Cynadon dactylon,,6.9,THF
+2025,F,5,Z2,,,6.7,THF
+2025,F,5,Z2,Chloris virgata,,8.6,THF
+2025,F,5,Z2,Eragrostsis gummiflua,,7.4,THF
+2025,F,5,Z2,Setaria incressata,,7.9,THF
+2025,F,5,Z2,Cynadon dactylon,,4.7,THF
+2025,F,5,Z2,Digitaria erianthra,,7.6,THF
+2025,F,5,Z2,Pogonarthria squarrosa,,5.8,THF
+2025,F,5,Z2,,,6.4,THF
+2025,F,5,Z2,,,7.1,THF
+2025,F,5,Z1,Eragrostis rigidior,,10.5,THF
+2025,F,5,Z1,Digitaria erianthra,,8.7,THF
+2025,F,5,Z1,Cynadon dactylon,,8.8,THF
+2025,F,5,Z1,Setaria incressata,,8.9,THF
+2025,F,5,Z1,Egyptium gigantum,,NA,THF
+2025,F,5,Z1,Eragrostis rigidior,,4.9,THF
+2025,F,5,Z1,Eragrostis gummiflua,,4.7,THF
+2025,F,5,Z1,Setaria incressata,,5.2,THF
+2025,F,5,Z1,Cynadon dactylon,,5.3,THF
+2025,F,5,Z1,Digitaria erianthra,,NA,THF
+2025,F,5,Z1,Egyptium gigantum,,NA,THF
+2025,F,5,Z1,Eragrostis rigidior,,7,THF
+2025,F,5,Z1,Setaria incressata,,6.7,THF
+2025,F,5,Z1,Cynadon dactylon,,6.9,THF
+2025,F,5,Z1,Digitaria erianthra,,7.2,THF
+2025,F,5,Z1,Cynadon dactylon,,5.6,THF
+2025,F,5,Z1,Digitaria erianthra,,5,THF
+2025,F,5,Z1,,,6.7,THF
+2025,F,5,Z1,,,7.2,THF
+2025,F,5,Z1,Cynadon dactylon,,6.9,THF
+2025,F,5,Z1,Digitaria erianthra,,7,THF
+2025,F,5,Z1,Setaria incressata,,7.1,THF
+2025,F,5,Z1,,,7.2,THF
+2025,F,5,Z3,Setaria incressata,,8,THF
+2025,F,5,Z3,Mopane grass,,8.3,THF
+2025,F,5,Z3,Cynadon dactylon,,8,THF
+2025,F,5,Z3,,,7.7,THF
+2025,F,5,Z3,Cynadon dactylon,,6.7,THF
+2025,F,5,Z3,Digitaria erianthra,,5.6,THF
+2025,F,5,Z3,Setaria incressata,,5.5,THF
+2025,F,5,Z3,Chloris virgata,,5.9,THF
+2025,F,5,Z3,Cynadon dactylon,,10.5,THF
+2025,F,5,Z3,Eragrostis rigidior,,9.6,THF
+2025,F,5,Z3,Digitaria erianthra,,9,THF
+2025,F,5,Z3,,,10.2,THF
+2025,F,5,Z3,Digitaria erianthra,,9.3,THF
+2025,F,5,Z3,Cynadon dactylon,,9.4,THF
+2025,F,5,Z3,Eragrostis rigidior,,9,THF
+2025,F,5,Z3,,,8.4,THF
+2025,F,5,Z3,Cynadon dactylon,,11.3,THF
+2025,F,5,Z3,Digitaria erianthra,,17,THF
+2025,F,5,Z3,Setaria incressata,,17.5,THF
+2025,F,5,Z3,,,17.5,THF
+2025,F,5,Z4,Digitaria erianthra,,13.1,THF
+2025,F,5,Z4,Cynadon dactylon,,12.6,THF
+2025,F,5,Z4,Setaria incressata,,12.4,THF
+2025,F,5,Z4,,,13.9,THF
+2025,F,5,Z4,Digitaria erianthra,,7,THF
+2025,F,5,Z4,Eragrostis rigidior,,5.7,THF
+2025,F,5,Z4,Cynadon dactylon,,4.8,THF
+2025,F,5,Z4,,,4.4,THF
+2025,F,5,Z4,Setaria incressata,,10.3,THF
+2025,F,5,Z4,Eragrostis rigidior,,9.8,THF
+2025,F,5,Z4,Cynadon dactylon,,9.5,THF
+2025,F,5,Z4,,,11.2,THF
+2025,F,5,Z4,Cynadon dactylon,,4.4,THF
+2025,F,5,Z4,Digitaria erianthra,,4.7,THF
+2025,F,5,Z4,,,4.8,THF
+2025,F,5,Z4,,,4.6,THF
+2025,F,5,Z4,Digitaria erianthra,,5.3,THF
+2025,F,5,Z4,Eragrostis rigidior,,5.3,THF
+2025,F,5,Z4,Setaria incressata,,5.4,THF
+2025,F,5,Z4,Aristida ads,,6.6,THF
+2025,F,4,Z2,Eragrostis rigidior,,9.8,TFB
+2025,F,4,Z2,,,10.2,TFB
+2025,F,4,Z2,,,8.8,TFB
+2025,F,4,Z2,,,7.8,TFB
+2025,F,4,Z2,Pogonarthria squarrosa,,3.6,TFB
+2025,F,4,Z2,Setaria incressata,,3.4,TFB
+2025,F,4,Z2,,,4.5,TFB
+2025,F,4,Z2,,,5.1,TFB
+2025,F,4,Z2,Chloris virgata,,4.7,TFB
+2025,F,4,Z2,,,4.3,TFB
+2025,F,4,Z2,,,4.1,TFB
+2025,F,4,Z2,,,4.2,TFB
+2025,F,4,Z2,Bracharia negropedata,,6.4,TFB
+2025,F,4,Z2,Eragrostis rigidior,,5.6,TFB
+2025,F,4,Z2,Cynadon dactylon,,5.3,TFB
+2025,F,4,Z2,Eragrostis gummiflua,,5.7,TFB
+2025,F,4,Z2,Bracharia negropedata,,5.4,TFB
+2025,F,4,Z2,Eragrostis rigidior,,4.3,TFB
+2025,F,4,Z2,Digitaria erianthra,,8.1,TFB
+2025,F,4,Z2,,,8.5,TFB
+2025,F,4,Z3,Cynadon dactylon,,4.5,TFB
+2025,F,4,Z3,Setaria incressata,,4.1,TFB
+2025,F,4,Z3,Aristida ads,,4,TFB
+2025,F,4,Z3,,,3.7,TFB
+2025,F,4,Z3,Digitaria erianthra,,4.7,TFB
+2025,F,4,Z3,Eragrostis viscosa,,5.3,TFB
+2025,F,4,Z3,Eragrostis rigidior,,5.4,TFB
+2025,F,4,Z3,Cynadon dactylon,,5.4,TFB
+2025,F,4,Z3,Digitaria erianthra,,6,TFB
+2025,F,4,Z3,Heteropogon  contortus,,5.1,TFB
+2025,F,4,Z3,,,5,TFB
+2025,F,4,Z3,,,4.9,TFB
+2025,F,4,Z3,Aristida ads,,6,TFB
+2025,F,4,Z3,Digitaria erianthra,,6.1,TFB
+2025,F,4,Z3,Eragrostis viscosa,,5.9,TFB
+2025,F,4,Z3,,,6.2,TFB
+2025,F,4,Z3,Eragrostis rigidior,,9.3,TFB
+2025,F,4,Z3,Digitaria erianthra,,7.1,TFB
+2025,F,4,Z3,Eragrostis viscosa,,6,TFB
+2025,F,4,Z3,Cynadon dactylon,,5.7,TFB
+2025,F,4,Z1,Setaria incressata,,5.5,TFB
+2025,F,4,Z1,Eragrostis viscosa,,5.2,TFB
+2025,F,4,Z1,,,4.8,TFB
+2025,F,4,Z1,,,4.4,TFB
+2025,F,4,Z1,Bracharia negropedata,,8.5,TFB
+2025,F,4,Z1,Heteropogon  contortus,,10.8,TFB
+2025,F,4,Z1,,,8.7,TFB
+2025,F,4,Z1,,,9.5,TFB
+2025,F,4,Z1,Aristida ads,,8.5,TFB
+2025,F,4,Z1,Setaria incressata,,10.8,TFB
+2025,F,4,Z1,,,10.2,TFB
+2025,F,4,Z1,,,10,TFB
+2025,F,4,Z1,Setaria incressata,,8,TFB
+2025,F,4,Z1,Digitaria erianthra,,9.2,TFB
+2025,F,4,Z1,,,10,TFB
+2025,F,4,Z1,,,8.9,TFB
+2025,F,4,Z1,Pogonarthria squarrosa,,1.9,TFB
+2025,F,4,Z1,Eragrostis viscosa,,3.3,TFB
+2025,F,4,Z1,,,3.3,TFB
+2025,F,4,Z1,,,3.9,TFB
+2025,F,4,Z4,Panicum maximum,,12,TFB
+2025,F,4,Z4,Mopane grass,,15.3,TFB
+2025,F,4,Z4,,,14,TFB
+2025,F,4,Z4,,,16.5,TFB
+2025,F,4,Z4,Heteropogon  contortus,,6.3,TFB
+2025,F,4,Z4,Digitaria erianthra,,6.9,TFB
+2025,F,4,Z4,Aristida ads,,7.9,TFB
+2025,F,4,Z4,Setaria incressata,,7.7,TFB
+2025,F,4,Z4,Cynadon dactylon,,NA,TFB
+2025,F,4,Z4,Digitaria erianthra,,2.6,TFB
+2025,F,4,Z4,Eragrostis viscosa,,2.7,TFB
+2025,F,4,Z4,Pogonarthria squarrosa,,3.3,TFB
+2025,F,4,Z4,,,4.1,TFB
+2025,F,4,Z4,Digitaria erianthra,,3.4,TFB
+2025,F,4,Z4,Cynadon dactylon,,4.8,TFB
+2025,F,4,Z4,Pogonarthria squarrosa,,6.9,TFB
+2025,F,4,Z4,Heteropogon  contortus,,7.2,TFB
+2025,F,4,Z4,Setaria incressata,,NA,TFB
+2025,F,4,Z4,Setaria incressata,,5.8,TFB
+2025,F,4,Z4,Aristida ads,,5.6,TFB
+2025,F,4,Z4,,,7.7,TFB
+2025,F,4,Z4,,,9,TFB
+2025,F,3,Z1,Digitaria erianthra,,6.3,TF
+2025,F,3,Z1,,,1.7,TF
+2025,F,3,Z1,,,1.7,TF
+2025,F,3,Z1,,,3.7,TF
+2025,F,3,Z1,Eragrostis viscosa,,6.4,TF
+2025,F,3,Z1,Pogonarthria squarrosa,,5.2,TF
+2025,F,3,Z1,,,4.2,TF
+2025,F,3,Z1,,,4.2,TF
+2025,F,3,Z1,Eragrostis viscosa,,10.6,TF
+2025,F,3,Z1,Eragrostis rigidior,,7.2,TF
+2025,F,3,Z1,Digitaria erianthra,,7.2,TF
+2025,F,3,Z1,Cynadon dactylon,,7.1,TF
+2025,F,3,Z1,Cynadon dactylon,,5.1,TF
+2025,F,3,Z1,Digitaria erianthra,,5.5,TF
+2025,F,3,Z1,Eragrostis viscosa,,5.6,TF
+2025,F,3,Z1,,,8.9,TF
+2025,F,3,Z1,Setaria incressata,,5.4,TF
+2025,F,3,Z1,Digitaria erianthra,,5.8,TF
+2025,F,3,Z1,,,6.1,TF
+2025,F,3,Z1,,,6.5,TF
+2025,F,3,Z2,Eragrostis viscosa,,7.2,TF
+2025,F,3,Z2,Pogonarthria squarrosa,,7.9,TF
+2025,F,3,Z2,Eragrostis rigidior,,7.8,TF
+2025,F,3,Z2,,,7.5,TF
+2025,F,3,Z2,Eragrostis viscosa,,8.3,TF
+2025,F,3,Z2,Setaria incressata,,6.4,TF
+2025,F,3,Z2,Eragrostis rigidior,,6.8,TF
+2025,F,3,Z2,,,7.1,TF
+2025,F,3,Z2,Eragrostis viscosa,,6.5,TF
+2025,F,3,Z2,Eragrostis rigidior,,6.2,TF
+2025,F,3,Z2,Perotis petens,,5.9,TF
+2025,F,3,Z2,,,6.2,TF
+2025,F,3,Z2,Eragrostis viscosa,,6.9,TF
+2025,F,3,Z2,Digitaria erianthra,,6.4,TF
+2025,F,3,Z2,Eragrostis rigidior,,7,TF
+2025,F,3,Z2,Eragrostis gummiflua,,6.8,TF
+2025,F,3,Z2,Setaria incressata,,6.8,TF
+2025,F,3,Z2,Eragrostis rigidior,,6.5,TF
+2025,F,3,Z2,,,6.3,TF
+2025,F,3,Z2,,,6,TF
+2025,F,3,Z4,Eragrostis rigidior,,6.4,TF
+2025,F,3,Z4,Cynadon dactylon,,6.6,TF
+2025,F,3,Z4,Digitaria erianthra,,6.4,TF
+2025,F,3,Z4,,,6.6,TF
+2025,F,3,Z4,Cynadon dactylon,,7.4,TF
+2025,F,3,Z4,Eragrostis rigidior,,8.7,TF
+2025,F,3,Z4,Digitaria erianthra,,8.9,TF
+2025,F,3,Z4,,,9.6,TF
+2025,F,3,Z4,Cynadon dactylon,,4.7,TF
+2025,F,3,Z4,Digitaria erianthra,,6.8,TF
+2025,F,3,Z4,Setaria incressata,,8.6,TF
+2025,F,3,Z4,,,9.1,TF
+2025,F,3,Z4,Cynadon dactylon,,11.6,TF
+2025,F,3,Z4,Eragrostis rigidior,,9.7,TF
+2025,F,3,Z4,Pogonarthria squarrosa,,8.3,TF
+2025,F,3,Z4,Digitaria erianthra,,8.1,TF
+2025,F,3,Z4,Mopane grass,,5.1,TF
+2025,F,3,Z4,Digitaria erianthra,,5.3,TF
+2025,F,3,Z4,Setaria incressata,,9.4,TF
+2025,F,3,Z4,,,9,TF
+2025,F,3,Z3,Cynadon dactylon,,7.2,TF
+2025,F,3,Z3,Pogonarthria squarrosa,,7.1,TF
+2025,F,3,Z3,Eragrostis viscosa,,7.2,TF
+2025,F,3,Z3,Setaria incressata,,7.5,TF
+2025,F,3,Z3,Eragrostis rigidior,,7,TF
+2025,F,3,Z3,Digitaria erianthra,,5.5,TF
+2025,F,3,Z3,,,3.9,TF
+2025,F,3,Z3,,,3.4,TF
+2025,F,3,Z3,Cynadon dactylon,,3.6,TF
+2025,F,3,Z3,Digitaria erianthra,,3.6,TF
+2025,F,3,Z3,,,4.6,TF
+2025,F,3,Z3,,,4.5,TF
+2025,F,3,Z3,Cynadon dactylon,,6.8,TF
+2025,F,3,Z3,Digitaria erianthra,,9.6,TF
+2025,F,3,Z3,Setaria incressata,,9.6,TF
+2025,F,3,Z3,Eragrostis viscosa,,9.8,TF
+2025,F,3,Z3,Cynadon dactylon,,19.4,TF
+2025,F,3,Z3,Digitaria erianthra,,8.5,TF
+2025,F,3,Z3,,,10.7,TF
+2025,F,3,Z3,,,11.7,TF
+2025,F,2,Z4,Cynadon dactylon,,8.5,F
+2025,F,2,Z4,Eragrostis rigidior,,7.9,F
+2025,F,2,Z4,Digitaria erianthra,,8,F
+2025,F,2,Z4,Setaria incressata,,8.1,F
+2025,F,2,Z4,Aristida ads,,3.9,F
+2025,F,2,Z4,Digitaria erianthra,,4.2,F
+2025,F,2,Z4,Cynadon dactylon,,4.6,F
+2025,F,2,Z4,Heteropogon  contortus,,4.3,F
+2025,F,2,Z4,Cynadon dactylon,,2.2,F
+2025,F,2,Z4,Eragrostis viscosa,,2,F
+2025,F,2,Z4,Pogonarthria squarrosa,,2.1,F
+2025,F,2,Z4,,,2,F
+2025,F,2,Z4,Cynadon dactylon,,6.9,F
+2025,F,2,Z4,Eragrostis viscosa,,6.1,F
+2025,F,2,Z4,,,6.4,F
+2025,F,2,Z4,,,6.3,F
+2025,F,2,Z4,Mopane grass,,2.9,F
+2025,F,2,Z4,,,2.6,F
+2025,F,2,Z4,,,2.8,F
+2025,F,2,Z4,,,2.9,F
+2025,F,2,Z3,Cynadon dactylon,,2.3,F
+2025,F,2,Z3,Digitaria erianthra,,2.3,F
+2025,F,2,Z3,Heteropogon  contortus,,3.7,F
+2025,F,2,Z3,Mopane grass,,4,F
+2025,F,2,Z3,Digitaria erianthra,,4.7,F
+2025,F,2,Z3,Cynadon dactylon,,3.9,F
+2025,F,2,Z3,Eragrostis rigidior,,4.4,F
+2025,F,2,Z3,,,4.5,F
+2025,F,2,Z3,Mopane grass,,4.3,F
+2025,F,2,Z3,Eragrostis rigidior,,4.6,F
+2025,F,2,Z3,Cynadon dactylon,,4.7,F
+2025,F,2,Z3,,,5,F
+2025,F,2,Z3,Chloris virgata,,6.1,F
+2025,F,2,Z3,Digitaria erianthra,,6.3,F
+2025,F,2,Z3,Mopane grass,,7.8,F
+2025,F,2,Z3,Heteropogon  contortus,,9.4,F
+2025,F,2,Z3,Cynadon dactylon,,NA,F
+2025,F,2,Z3,Cynadon dactylon,,4.2,F
+2025,F,2,Z3,Eragrostis rigidior,,4.1,F
+2025,F,2,Z3,Egyptium gigantum,,5,F
+2025,F,2,Z3,Digitaria erianthra,,5.4,F
+2025,F,2,Z1,Cynadon dactylon,,6.3,F
+2025,F,2,Z1,Eragrostis curvula,,11.5,F
+2025,F,2,Z1,Eragrostis rigidior,,9.2,F
+2025,F,2,Z1,,,8.8,F
+2025,F,2,Z1,Chloris virgata,,12,F
+2025,F,2,Z1,Eragrostis rigidior,,10.7,F
+2025,F,2,Z1,Cynadon dactylon,,10.7,F
+2025,F,2,Z1,Eragrostis viscosa,,10.4,F
+2025,F,2,Z1,Setaria incressata,,NA,F
+2025,F,2,Z1,Eragrostis rigidior,,8.1,F
+2025,F,2,Z1,Chloris virgata,,14.1,F
+2025,F,2,Z1,Cynadon dactylon,,13.4,F
+2025,F,2,Z1,Setaria incressata,,13.3,F
+2025,F,2,Z1,Mopane grass,,NA,F
+2025,F,2,Z1,Mopane grass,,11,F
+2025,F,2,Z1,Eragrostis rigidior,,12.4,F
+2025,F,2,Z1,Panicum maximum,,11.7,F
+2025,F,2,Z1,,,10.9,F
+2025,F,2,Z1,Mopane grass,,3.8,F
+2025,F,2,Z1,Eragrostis rigidior,,3.9,F
+2025,F,2,Z1,Digitaria erianthra,,4,F
+2025,F,2,Z1,Setaria incressata,,4,F
+2025,F,2,Z2,Digitaria erianthra,,7.5,F
+2025,F,2,Z2,Setaria incressata,,7.1,F
+2025,F,2,Z2,Mopane grass,,7.2,F
+2025,F,2,Z2,,,7.2,F
+2025,F,2,Z2,Eragrostis rigidior,,7.5,F
+2025,F,2,Z2,Egyptium gigantum,,7.9,F
+2025,F,2,Z2,Mopane grass,,7.1,F
+2025,F,2,Z2,Digitaria erianthra,,8.8,F
+2025,F,2,Z2,Chloris virgata,,17.5,F
+2025,F,2,Z2,Aristida ads,,20.7,F
+2025,F,2,Z2,Cynadon dactylon,,20.5,F
+2025,F,2,Z2,Eragrostis rigidior,,19.7,F
+2025,F,2,Z2,Heteropogon  contortus,,NA,F
+2025,F,2,Z2,Perotis petens,,NA,F
+2025,F,2,Z2,Egyptium gigantum,,10.9,F
+2025,F,2,Z2,Pogonarthria squarrosa,,7.6,F
+2025,F,2,Z2,Digitaria erianthra,,7.3,F
+2025,F,2,Z2,,,8,F
+2025,F,2,Z2,Digitaria erianthra,,9.1,F
+2025,F,2,Z2,Setaria incressata,,7.7,F
+2025,F,2,Z2,Aristida ads,,7.4,F
+2025,F,2,Z2,,,8,F
+2025,A,1,Z3,Panicum maximum,,4.9,C
+2025,A,1,Z3,Chloris virgata,,6.8,C
+2025,A,1,Z3,E.cylindriflora,,6.2,C
+2025,A,1,Z3,,,1.6,C
+2025,A,1,Z3,CEx,,17.3,C
+2025,A,1,Z3,Digitaria erianthra,,16.7,C
+2025,A,1,Z3,,,16.9,C
+2025,A,1,Z3,,,14.2,C
+2025,A,1,Z3,U.mossambicensis,,13,C
+2025,A,1,Z3,Heteropogon contortus,,20.7,C
+2025,A,1,Z3,CEx,,20.8,C
+2025,A,1,Z3,,,22.3,C
+2025,A,1,Z3,SSp,,28.9,C
+2025,A,1,Z3,Themeda triandra,,23.2,C
+2025,A,1,Z3,Digitaria erianthra,,19,C
+2025,A,1,Z3,Aristida ads,,16.1,C
+2025,A,1,Z3,Bracharia serrata,,NA,C
+2025,A,1,Z3,Heteropogon contortus,,15.5,C
+2025,A,1,Z3,Digitaria erianthra,,19.8,C
+2025,A,1,Z3,Setaria incressata,,20,C
+2025,A,1,Z3,,,20.5,C
+2025,A,1,Z4,Heteropogon contortus,,55.3,C
+2025,A,1,Z4,U.mossambicensis,,38.3,C
+2025,A,1,Z4,,,34.7,C
+2025,A,1,Z4,,,30.5,C
+2025,A,1,Z4,H.hirta,,24.6,C
+2025,A,1,Z4,Pinhole,,16.7,C
+2025,A,1,Z4,Digitaria erianthra,,15.2,C
+2025,A,1,Z4,U.mossambicensis,,18.5,C
+2025,A,1,Z4,U.mossambicensis,,20.4,C
+2025,A,1,Z4,Heteropogon contortus,,16.5,C
+2025,A,1,Z4,Wireleaf,,16.8,C
+2025,A,1,Z4,SSp,,13.9,C
+2025,A,1,Z4,H.hirta,,24.5,C
+2025,A,1,Z4,U.mossambicensis,,28.6,C
+2025,A,1,Z4,Mopane grass,,28,C
+2025,A,1,Z4,,,26.5,C
+2025,A,1,Z4,U.mossambicensis,,41.7,C
+2025,A,1,Z4,Heteropogon contortus,,34.5,C
+2025,A,1,Z4,Pinhole,,26.7,C
+2025,A,1,Z4,Bracharia serrata,,25.3,C
+2025,A,1,Z4,Diheteropogon anplactence,,NA,C
+2025,A,1,Z4,Themeda triandra,,NA,C
+2025,A,1,Z2,U.mossambicensis,,29.9,C
+2025,A,1,Z2,Pinhole,,31.3,C
+2025,A,1,Z2,Heteropogon contortus,,28.1,C
+2025,A,1,Z2,,,28,C
+2025,A,1,Z2,Andropogon eucomas,,21.3,C
+2025,A,1,Z2,Hfili,,21.6,C
+2025,A,1,Z2,SSp,,19.1,C
+2025,A,1,Z2,Heteropogon contortus,,20,C
+2025,A,1,Z2,Bracharia serrata,,NA,C
+2025,A,1,Z2,U.mossambicensis,,20.7,C
+2025,A,1,Z2,CEx,,19,C
+2025,A,1,Z2,SSp,,17.5,C
+2025,A,1,Z2,,,3.5,C
+2025,A,1,Z2,H.Dissoluta,,28.2,C
+2025,A,1,Z2,Hfili,,24.9,C
+2025,A,1,Z2,SSp,,28,C
+2025,A,1,Z2,,,32.1,C
+2025,A,1,Z2,Diheteropogon anplactence,,10.2,C
+2025,A,1,Z2,Heteropogon contortus,,12.2,C
+2025,A,1,Z2,,,13.7,C
+2025,A,1,Z2,,,11.8,C
+2025,A,1,Z1,Heteropogon contortus,,7.4,C
+2025,A,1,Z1,Aristida ads,,6.2,C
+2025,A,1,Z1,U.mossambicensis,,6.9,C
+2025,A,1,Z1,Digitaria erianthra,,12.8,C
+2025,A,1,Z1,Setaria incressata,,NA,C
+2025,A,1,Z1,Hfili,,26.5,C
+2025,A,1,Z1,U.mossambicensis,,28.1,C
+2025,A,1,Z1,CEx,,25.9,C
+2025,A,1,Z1,SSp,,25.2,C
+2025,A,1,Z1,Cymbopogon plari,,0,C
+2025,A,1,Z1,,,0,C
+2025,A,1,Z1,,,13.5,C
+2025,A,1,Z1,,,15,C
+2025,A,1,Z1,Diheteropogon anplactence,,20,C
+2025,A,1,Z1,Digitaria erianthra,,17.6,C
+2025,A,1,Z1,Heteropogon contortus,,14.1,C
+2025,A,1,Z1,,,12.8,C
+2025,A,1,Z1,Diheteropogon anplactence,,77.2,C
+2025,A,1,Z1,H.Dissoluta,,24.2,C
+2025,A,1,Z1,Digitaria erianthra,,18.8,C
+2025,A,1,Z1,U.mossambicensis,,16.5,C
+2025,B,1,Z1,CEx,,7.6,C
+2025,D,5,Z3,Aristida ads,,2.4,THF
+2025,D,5,Z3,,,2.4,THF
+2025,D,5,Z3,,,2.4,THF
+2025,D,5,Z3,,,2.4,THF
+2025,D,5,Z3,Aristida ads,,4.9,THF
+2025,D,5,Z3,Eragrostis gummiflua,,4,THF
+2025,D,5,Z3,Setaria incressata,,4.3,THF
+2025,D,5,Z3,Mopane grass,,4.8,THF
+2025,D,5,Z3,Heteropogon  contortus,,NA,THF
+2025,D,5,Z3,Heteropogon  contortus,,4,THF
+2025,D,5,Z3,Cymbopogon excavatus,,6.1,THF
+2025,D,5,Z3,,,5.3,THF
+2025,D,5,Z3,,,8.3,THF
+2025,D,5,Z3,Heteropogon  contortus,,10.5,THF
+2025,D,5,Z3,Eragrostis rigidior,,10.8,THF
+2025,D,5,Z3,,,10.9,THF
+2025,D,5,Z3,,,11.5,THF
+2025,D,5,Z3,Eragrostis rigidior,,26.6,THF
+2025,D,5,Z3,Mopane grass,,20.2,THF
+2025,D,5,Z3,Heteropogon  contortus,,15.2,THF
+2025,D,5,Z3,Eragrostis viscosa,,13.5,THF
+2025,D,5,Z3,Aristida ads,,NA,THF
+2025,D,5,Z1,Setaria incressata,,3.7,THF
+2025,D,5,Z1,Heteropogon  contortus,,3.4,THF
+2025,D,5,Z1,Bracharia brizantha,,4.2,THF
+2025,D,5,Z1,Aristida ads,,4.6,THF
+2025,D,5,Z1,D. gigantum,,NA,THF
+2025,D,5,Z1,Heteropogon  contortus,,10.7,THF
+2025,D,5,Z1,Bracharia negropedata,,16.6,THF
+2025,D,5,Z1,Aristida ads,,21.6,THF
+2025,D,5,Z1,,,21.9,THF
+2025,D,5,Z1,Heteropogon  contortus,,10.7,THF
+2025,D,5,Z1,Eragrostis viscosa,,16.6,THF
+2025,D,5,Z1,Mopane grass,,21.6,THF
+2025,D,5,Z1,,,21.9,THF
+2025,D,5,Z1,Pogonarthria squarrosa,,7.5,THF
+2025,D,5,Z1,Setaria incressata,,9.5,THF
+2025,D,5,Z1,Eragrostis viscosa,,10.6,THF
+2025,D,5,Z1,Diheteropogon anplactence,,9.6,THF
+2025,D,5,Z1,Enteropogon macrostachyus,,14.9,THF
+2025,D,5,Z1,Heteropogon contortus,,15.5,THF
+2025,D,5,Z1,Cymbopogon nardus,,15.5,THF
+2025,D,5,Z1,Aristida ads,,16.5,THF
+2025,D,5,Z1,Panicum maximum,,NA,THF
+2025,D,5,Z1,Bracharia brizantha,,NA,THF
+2025,D,5,Z2,Heteropogon contortus,,11.7,THF
+2025,D,5,Z2,Bracharia brizantha,,11.4,THF
+2025,D,5,Z2,Eragrostis viscosa,,8,THF
+2025,D,5,Z2,Eragrostis rigidior,,8,THF
+2025,D,5,Z2,Eragrostis gummiflua,,NA,THF
+2025,D,5,Z2,Setaria incressata,,NA,THF
+2025,D,5,Z2,Digitaria erianthra,,NA,THF
+2025,D,5,Z2,Bracharia brizantha,,5.4,THF
+2025,D,5,Z2,Eragrostis viscosa,,5,THF
+2025,D,5,Z2,Aristida diffusa,,7.5,THF
+2025,D,5,Z2,Mopane grass,,5,THF
+2025,D,5,Z2,Eragrostis rigidior,,6.6,THF
+2025,D,5,Z2,Bracharia brizantha,,6.1,THF
+2025,D,5,Z2,Mopane grass,,5.9,THF
+2025,D,5,Z2,,,5.9,THF
+2025,D,5,Z2,Mopane grass,,10.5,THF
+2025,D,5,Z2,Setaria incressata,,7.9,THF
+2025,D,5,Z2,Bracharia brizantha,,8.7,THF
+2025,D,5,Z2,Aristida ads,,8.3,THF
+2025,D,5,Z2,Eragrostis cylindiflora,,NA,THF
+2025,D,5,Z2,Eragrostis cylindiflora,,2.3,THF
+2025,D,5,Z2,Eragrostis viscosa,,2.3,THF
+2025,D,5,Z2,Aristida diffusa,,3.9,THF
+2025,D,5,Z2,Perotis petens,,4.7,THF
+2025,D,5,Z2,Mopane grass,,NA,THF
+2025,D,5,Z4,Mopane grass,,4.7,THF
+2025,D,5,Z4,Setaria incressata,,6.4,THF
+2025,D,5,Z4,Eragrostis rigidior,,8.8,THF
+2025,D,5,Z4,,,9.3,THF
+2025,D,5,Z4,Mopane grass,,14.1,THF
+2025,D,5,Z4,Diheteropogon anplactence,,14.5,THF
+2025,D,5,Z4,,,13.3,THF
+2025,D,5,Z4,,,13.8,THF
+2025,D,5,Z4,Mopane grass,,5.6,THF
+2025,D,5,Z4,Heteropogon contortus,,9.6,THF
+2025,D,5,Z4,Eragrostis gummiflua,,10.8,THF
+2025,D,5,Z4,Eragrostis viscosa,,9.2,THF
+2025,D,5,Z4,Eragrostis viscosa,,6.8,THF
+2025,D,5,Z4,Cymbopogon nardus,,5.8,THF
+2025,D,5,Z4,Aristida ads,,5,THF
+2025,D,5,Z4,Bracharia brizantha,,7.8,THF
+2025,D,5,Z4,Mopane grass,,7.8,THF
+2025,D,5,Z4,Eragrostis gummiflua,,NA,THF
+2025,D,5,Z4,Eragrostis superba,,7.8,THF
+2025,D,5,Z4,Eragrostis viscosa,,5.7,THF
+2025,D,5,Z4,Heteropogon contortus,,6.5,THF
+2025,D,5,Z4,Aristida congesta B,,7.7,THF
+2025,D,5,Z4,Aristida diffusa,,NA,THF
+2025,D,5,Z4,Mopane grass,,NA,THF
+2025,D,4,Z1,Heteropogon contortus,,2,TFB
+2025,D,4,Z1,Aristida ads,,2,TFB
+2025,D,4,Z1,Pogonarthria squarrosa,,2,TFB
+2025,D,4,Z1,Setaria incressata,,2,TFB
+2025,D,4,Z1,Perotis petens,,2,TFB
+2025,D,4,Z1,Heteropogon contortus,,10.1,TFB
+2025,D,4,Z1,Setaria incressata,,7.5,TFB
+2025,D,4,Z1,Eragrostis gummiflua,,8,TFB
+2025,D,4,Z1,Eragrostis viscosa,,7,TFB
+2025,D,4,Z1,Aristida ads,,NA,TFB
+2025,D,4,Z1,Bracharia brizantha,,2.9,TFB
+2025,D,4,Z1,Aristida ads,,4,TFB
+2025,D,4,Z1,Eragrostis gummiflua,,5.1,TFB
+2025,D,4,Z1,Setaria incressata,,5.2,TFB
+2025,D,4,Z1,Mopane grass,,NA,TFB
+2025,D,4,Z1,Setaria incressata,,3.2,TFB
+2025,D,4,Z1,Panicum maximum,,4.6,TFB
+2025,D,4,Z1,Aristida ads,,5.6,TFB
+2025,D,4,Z1,,,6.1,TFB
+2025,D,4,Z1,Panicum maximum,,35.9,TFB
+2025,D,4,Z1,Bracharia negropedata,,27.1,TFB
+2025,D,4,Z1,Cymbopogon nardus,,24.3,TFB
+2025,D,4,Z1,Heteropogon contortus,,24.6,TFB
+2025,D,4,Z1,Setaria incressata,,NA,TFB
+2025,D,4,Z3,Pogonarthria squarrosa,,1.7,TFB
+2025,D,4,Z3,Setaria incressata,,1.7,TFB
+2025,D,4,Z3,Mopane grass,,1.8,TFB
+2025,D,4,Z3,Eragrostis gummiflua,,2.8,TFB
+2025,D,4,Z3,Eragrostis superba,,27.9,TFB
+2025,D,4,Z3,Sporobolus africanus,,18.9,TFB
+2025,D,4,Z3,Mopane grass,,17.6,TFB
+2025,D,4,Z3,Eragrostis gummiflua,,13.8,TFB
+2025,D,4,Z3,Chloris virgata,,NA,TFB
+2025,D,4,Z3,Setaria incressata,,18.5,TFB
+2025,D,4,Z3,Heteropogon contortus,,17.4,TFB
+2025,D,4,Z3,Diheteropogon anplactence,,17,TFB
+2025,D,4,Z3,Mopane grass,,19.6,TFB
+2025,D,4,Z3,Eragrostis gummiflua,,5.1,TFB
+2025,D,4,Z3,Mopane grass,,16.1,TFB
+2025,D,4,Z3,Diheteropogon anplactence,,25.4,TFB
+2025,D,4,Z3,Heteropogon contortus,,28.9,TFB
+2025,D,4,Z3,Heteropogon contortus,,9.6,TFB
+2025,D,4,Z3,Diheteropogon anplactence,,8.9,TFB
+2025,D,4,Z3,Setaria incressata,,8.9,TFB
+2025,D,4,Z3,Aristida ads,,10.2,TFB
+2025,D,4,Z4,Heteropogon contortus,,5.1,TFB
+2025,D,4,Z4,Eragrostis gummiflua,,6.9,TFB
+2025,D,4,Z4,Setaria incressata,,12,TFB
+2025,D,4,Z4,Eragrostis superba,,13.5,TFB
+2025,D,4,Z4,Mopane grass,,17.3,TFB
+2025,D,4,Z4,Bracharia brizantha,,17.4,TFB
+2025,D,4,Z4,Aristida ads,,18.3,TFB
+2025,D,4,Z4,Panicum maximum,,19.5,TFB
+2025,D,4,Z4,Heteropogon contortus,,NA,TFB
+2025,D,4,Z4,Aristida diffusa,,6.3,TFB
+2025,D,4,Z4,Bracharia brizantha,,5.3,TFB
+2025,D,4,Z4,Setaria incressata,,4.9,TFB
+2025,D,4,Z4,Pogonarthria squarrosa,,8.3,TFB
+2025,D,4,Z4,Mopane grass,,NA,TFB
+2025,D,4,Z4,Heteropogon contortus,,NA,TFB
+2025,D,4,Z4,Melenis repens,,8.9,TFB
+2025,D,4,Z4,Bracharia brizantha,,12,TFB
+2025,D,4,Z4,Cymbopogon nardus,,11.6,TFB
+2025,D,4,Z4,Heteropogon contortus,,11.9,TFB
+2025,D,4,Z4,Panicum maximum,,NA,TFB
+2025,D,4,Z4,Digitaria erianthra,,4.6,TFB
+2025,D,4,Z4,Heteropogon contortus,,5.8,TFB
+2025,D,4,Z4,Mopane grass,,7.7,TFB
+2025,D,4,Z4,Pogonarthria squarrosa,,7.3,TFB
+2025,D,4,Z4,Eragrostis gummiflua,,NA,TFB
+2025,D,4,Z4,Aristida diffusa,,NA,TFB
+2025,D,4,Z4,Panicum maximum,,NA,TFB
+2025,D,4,Z2,Heteropogon contortus,,6.8,TFB
+2025,D,4,Z2,Setaria incressata,,6.4,TFB
+2025,D,4,Z2,Aristida ads,,5.9,TFB
+2025,D,4,Z2,Bracharia negropedata,,6.3,TFB
+2025,D,4,Z2,Pogonarthria squarrosa,,NA,TFB
+2025,D,4,Z2,Mopane grass,,NA,TFB
+2025,D,4,Z2,Mopane grass,,4.1,TFB
+2025,D,4,Z2,Panicum maximum,,15.3,TFB
+2025,D,4,Z2,Aristida ads,,17.8,TFB
+2025,D,4,Z2,Heteropogon contortus,,13.9,TFB
+2025,D,4,Z2,Setaria incressata,,6,TFB
+2025,D,4,Z2,Aristida diffusa,,5.1,TFB
+2025,D,4,Z2,Mopane grass,,4.6,TFB
+2025,D,4,Z2,Aristida ads,,4.6,TFB
+2025,D,4,Z2,Eragrostis gummiflua,,NA,TFB
+2025,D,4,Z2,Eragrostis viscosa,,2.8,TFB
+2025,D,4,Z2,Aristida ads,,7.1,TFB
+2025,D,4,Z2,Heteropogon contortus,,7.3,TFB
+2025,D,4,Z2,Eragrostis cylindiflora,,7.6,TFB
+2025,D,4,Z2,Panicum maximum,,NA,TFB
+2025,D,4,Z2,Heteropogon contortus,,34.5,TFB
+2025,D,4,Z2,Setaria incressata,,21,TFB
+2025,D,4,Z2,Eragrostis viscosa,,15.4,TFB
+2025,D,4,Z2,Aristida diffusa,,12.8,TFB
+2025,D,4,Z2,Aristida ads,,NA,TFB
+2025,D,4,Z2,Diheteropogon anplactence,,NA,TFB
+2025,D,4,Z2,Eragrostis gummiflua,,NA,TFB
+2025,D,4,Z2,Mopane grass,,NA,TFB
+2025,D,3,Z3,Bracharia serrata,,9.8,TF
+2025,D,3,Z3,Eragrostis rigidior,,9.7,TF
+2025,D,3,Z3,Aristida ads,,9.5,TF
+2025,D,3,Z3,Setaria incressata,,9.2,TF
+2025,D,3,Z3,Heteropogon contortus,,NA,TF
+2025,D,3,Z3,Heteropogon contortus,,14.9,TF
+2025,D,3,Z3,Mopane grass,,14.8,TF
+2025,D,3,Z3,Eragrostis cylindiflora,,14.4,TF
+2025,D,3,Z3,Panicum maximum,,15.6,TF
+2025,D,3,Z3,Diheteropogon anplactence,,NA,TF
+2025,D,3,Z3,Eragrostis viscosa,,NA,TF
+2025,D,3,Z3,Eragrostis cylindiflora,,12.8,TF
+2025,D,3,Z3,Mopane grass,,8.6,TF
+2025,D,3,Z3,Heteropogon contortus,,10.8,TF
+2025,D,3,Z3,,,9.4,TF
+2025,D,3,Z3,Bracharia serrata,,14.2,TF
+2025,D,3,Z3,Setaria incressata,,16.1,TF
+2025,D,3,Z3,Aristida ads,,15.9,TF
+2025,D,3,Z3,Eragrostis cylindiflora,,15.7,TF
+2025,D,3,Z3,Heteropogon contortus,,NA,TF
+2025,D,3,Z3,Mopane grass,,NA,TF
+2025,D,3,Z3,Bracharia negropedata,,NA,TF
+2025,D,3,Z3,Bracharia serrata,,4.3,TF
+2025,D,3,Z3,Unkown1,,4,TF
+2025,D,3,Z3,Setaria incressata,,3.8,TF
+2025,D,3,Z3,,,4.2,TF
+2025,D,3,Z1,Unkown1,,5.6,TF
+2025,D,3,Z1,Bracharia serrata,,5.1,TF
+2025,D,3,Z1,Eragrostis gummiflua,,6.8,TF
+2025,D,3,Z1,Chloris virgata,,9.1,TF
+2025,D,3,Z1,Eragrostis cylindiflora,,NA,TF
+2025,D,3,Z1,Aristida ads,,NA,TF
+2025,D,3,Z1,Bracharia serrata,,25.6,TF
+2025,D,3,Z1,Heteropogon contortus,,26.8,TF
+2025,D,3,Z1,Chloris virgata,,19.2,TF
+2025,D,3,Z1,Setaria incressata,,14.5,TF
+2025,D,3,Z1,Bracharia brizantha,,NA,TF
+2025,D,3,Z1,Panicum maximum,,4.7,TF
+2025,D,3,Z1,Setaria incressata,,5.4,TF
+2025,D,3,Z1,Bracharia brizantha,,5.1,TF
+2025,D,3,Z1,Eragrostis cylindiflora,,6.4,TF
+2025,D,3,Z1,Mopane grass,,NA,TF
+2025,D,3,Z1,Heteropogon contortus,,NA,TF
+2025,D,3,Z1,Setaria incressata,,3.8,TF
+2025,D,3,Z1,Mopane grass,,3,TF
+2025,D,3,Z1,Bracharia brizantha,,3,TF
+2025,D,3,Z1,Eragrostis gummiflua,,5.4,TF
+2025,D,3,Z1,Heteropogon contortus,,20,TF
+2025,D,3,Z1,Aristida ads,,13.3,TF
+2025,D,3,Z1,Setaria incressata,,11.8,TF
+2025,D,3,Z1,Mopane grass,,NA,TF
+2025,D,3,Z1,Bracharia brizantha,,NA,TF
+2025,D,3,Z2,Bracharia brizantha,,10.2,TF
+2025,D,3,Z2,Setaria incressata,,10,TF
+2025,D,3,Z2,Heteropogon contortus,,10,TF
+2025,D,3,Z2,Mopane grass,,10.2,TF
+2025,D,3,Z2,Heteropogon contortus,,11.1,TF
+2025,D,3,Z2,Eragrostis rigidior,,11.7,TF
+2025,D,3,Z2,Eragrostis viscosa,,7.3,TF
+2025,D,3,Z2,Diheteropogon anplactence,,8,TF
+2025,D,3,Z2,Mopane grass,,7.6,TF
+2025,D,3,Z2,Bracharia serrata,,8.2,TF
+2025,D,3,Z2,Setaria incressata,,7.8,TF
+2025,D,3,Z2,Aristida diffusa,,7.1,TF
+2025,D,3,Z2,Heteropogon contortus,,NA,TF
+2025,D,3,Z2,,,0,TF
+2025,D,3,Z2,,,0,TF
+2025,D,3,Z2,,,0,TF
+2025,D,3,Z2,,,0,TF
+2025,D,3,Z2,Aristida ads,,8.7,TF
+2025,D,3,Z2,Mopane grass,,6.7,TF
+2025,D,3,Z2,Setaria incressata,,8.5,TF
+2025,D,3,Z2,Heteropogon contortus,,8.1,TF
+2025,D,3,Z2,Aristida diffusa,,NA,TF
+2025,D,3,Z4,Bracharia brizantha,,7.6,TF
+2025,D,3,Z4,Heteropogon contortus,,7.3,TF
+2025,D,3,Z4,Setaria incressata,,7.1,TF
+2025,D,3,Z4,Aristida diffusa,,7.3,TF
+2025,D,3,Z4,Heteropogon contortus,,7.2,TF
+2025,D,3,Z4,Eragrostis gummiflua,,9.8,TF
+2025,D,3,Z4,Bracharia brizantha,,8.9,TF
+2025,D,3,Z4,Eragrostis viscosa,,8.5,TF
+2025,D,3,Z4,Setaria incressata,,NA,TF
+2025,D,3,Z4,Aristida ads,,NA,TF
+2025,D,3,Z4,Mopane grass,,3,TF
+2025,D,3,Z4,Panicum maximum,,3,TF
+2025,D,3,Z4,Aristida ads,,3.8,TF
+2025,D,3,Z4,Setaria incressata,,3.9,TF
+2025,D,3,Z4,Eragrostis gummiflua,,NA,TF
+2025,D,3,Z4,Heteropogon contortus,,8,TF
+2025,D,3,Z4,Setaria incressata,,6.5,TF
+2025,D,3,Z4,Mopane grass,,9,TF
+2025,D,3,Z4,Panicum maximum,,9.4,TF
+2025,D,3,Z4,Aristida ads,,NA,TF
+2025,D,3,Z4,Bracharia brizantha,,NA,TF
+2025,D,3,Z4,Eragrostis cylindiflora,,7.8,TF
+2025,D,3,Z4,Heteropogon contortus,,8.8,TF
+2025,D,3,Z4,Aristida ads,,26.7,TF
+2025,D,3,Z4,Setaria incressata,,22,TF
+2025,D,3,Z4,Chloris virgata,,NA,TF
+2025,D,2,Z1,Bracharia brizantha,,3.9,F
+2025,D,2,Z1,Setaria incressata,,5.2,F
+2025,D,2,Z1,,,6.6,F
+2025,D,2,Z1,,,5.8,F
+2025,D,2,Z1,Bracharia serrata,,18.2,F
+2025,D,2,Z1,Heteropogon contortus,,15.4,F
+2025,D,2,Z1,Digitaria erianthra,,14.1,F
+2025,D,2,Z1,Bracharia brizantha,,14.8,F
+2025,D,2,Z1,Aristida ads,,NA,F
+2025,D,2,Z1,Heteropogon contortus,,22.5,F
+2025,D,2,Z1,Setaria incressata,,20.6,F
+2025,D,2,Z1,Eragrostis viscosa,,19.3,F
+2025,D,2,Z1,Eragrostis rigidior,,18.5,F
+2025,D,2,Z1,Aristida ads,,NA,F
+2025,D,2,Z1,Diheteropogon anplactence,,16.7,F
+2025,D,2,Z1,Bracharia brizantha,,16,F
+2025,D,2,Z1,Setaria incressata,,13.7,F
+2025,D,2,Z1,Aristida ads,,12.1,F
+2025,D,2,Z1,Setaria incressata,,10.5,F
+2025,D,2,Z1,Bracharia brizantha,,15.3,F
+2025,D,2,Z1,Aristida ads,,13.6,F
+2025,D,2,Z1,,,14.9,F
+2025,D,2,Z3,Mopane grass,,1.6,F
+2025,D,2,Z3,Eragrostis viscosa,,2.2,F
+2025,D,2,Z3,Heteropogon contortus,,1.6,F
+2025,D,2,Z3,Setaria incressata,,4.5,F
+2025,D,2,Z3,Digitaria erianthra,,NA,F
+2025,D,2,Z3,Eragrostis rigidior,,NA,F
+2025,D,2,Z3,Diheteropogon anplactence,,3.7,F
+2025,D,2,Z3,Panicum maximum,,3.4,F
+2025,D,2,Z3,,,3.4,F
+2025,D,2,Z3,,,3.2,F
+2025,D,2,Z3,Heteropogon contortus,,2.7,F
+2025,D,2,Z3,Bracharia brizantha,,4.4,F
+2025,D,2,Z3,Mopane grass,,4.6,F
+2025,D,2,Z3,,,5.2,F
+2025,D,2,Z3,Bracharia brizantha,,4.6,F
+2025,D,2,Z3,Heteropogon contortus,,4.8,F
+2025,D,2,Z3,Setaria incressata,,4.6,F
+2025,D,2,Z3,,,4.9,F
+2025,D,2,Z3,Setaria incressata,,5.9,F
+2025,D,2,Z3,Bracharia brizantha,,5.1,F
+2025,D,2,Z3,,,6,F
+2025,D,2,Z3,,,6.9,F
+2025,D,2,Z4,Eragrostis cylindiflora,,13.9,F
+2025,D,2,Z4,Bracharia brizantha,,13.7,F
+2025,D,2,Z4,Diheteropogon anplactence,,13.6,F
+2025,D,2,Z4,Aristida ads,,24.5,F
+2025,D,2,Z4,Setaria incressata,,NA,F
+2025,D,2,Z4,Heteropogon contortus,,NA,F
+2025,D,2,Z4,Panicum maximum,,NA,F
+2025,D,2,Z4,Heteropogon contortus,,2.8,F
+2025,D,2,Z4,Bracharia brizantha,,3.4,F
+2025,D,2,Z4,Panicum maximum,,4.4,F
+2025,D,2,Z4,,,3.7,F
+2025,D,2,Z4,Eragrostis rigidior,,7.5,F
+2025,D,2,Z4,Heteropogon contortus,,8.6,F
+2025,D,2,Z4,Bracharia brizantha,,8.7,F
+2025,D,2,Z4,Eragrostis cylindiflora,,8.5,F
+2025,D,2,Z4,Aristida ads,,NA,F
+2025,D,2,Z4,Diheteropogon anplactence,,NA,F
+2025,D,2,Z4,Setaria incressata,,NA,F
+2025,D,2,Z4,Panicum maximum,,NA,F
+2025,D,2,Z4,Heteropogon contortus,,12.5,F
+2025,D,2,Z4,Chloris virgata,,11.7,F
+2025,D,2,Z4,Setaria incressata,,9.8,F
+2025,D,2,Z4,Bracharia brizantha,,11,F
+2025,D,2,Z4,Panicum maximum,,NA,F
+2025,D,2,Z4,Eragrostis cylindiflora,,NA,F
+2025,D,2,Z4,Mopane grass,,NA,F
+2025,D,2,Z4,Aristida ads,,NA,F
+2025,D,2,Z4,Bracharia brizantha,,13.6,F
+2025,D,2,Z4,Setaria incressata,,13.4,F
+2025,D,2,Z4,Eragrostis rigidior,,11.2,F
+2025,D,2,Z4,Eragrostis cylindiflora,,11.6,F
+2025,D,2,Z2,Heteropogon contortus,,8.4,F
+2025,D,2,Z2,Bracharia brizantha,,7.5,F
+2025,D,2,Z2,Eragrostis rigidior,,6.9,F
+2025,D,2,Z2,Setaria incressata,,4,F
+2025,D,2,Z2,Eragrostis cylindiflora,,NA,F
+2025,D,2,Z2,Aristida ads,,NA,F
+2025,D,2,Z2,Bracharia brizantha,,14.5,F
+2025,D,2,Z2,Eragrostis rigidior,,18.8,F
+2025,D,2,Z2,Setaria incressata,,17.6,F
+2025,D,2,Z2,Digitaria erianthra,,15.9,F
+2025,D,2,Z2,Chloris virgata,,NA,F
+2025,D,2,Z2,Heteropogon contortus,,6.1,F
+2025,D,2,Z2,Chloris virgata,,9.4,F
+2025,D,2,Z2,Setaria incressata,,10.3,F
+2025,D,2,Z2,Bracharia serrata,,9.2,F
+2025,D,2,Z2,Aristida ads,,NA,F
+2025,D,2,Z2,Eragrostis cylindiflora,,NA,F
+2025,D,2,Z2,Eragrostis rigidior,,NA,F
+2025,D,2,Z2,Heteropogon contortus,,6.4,F
+2025,D,2,Z2,Mopane grass,,6.1,F
+2025,D,2,Z2,Setaria incressata,,5.7,F
+2025,D,2,Z2,Bracharia serrata,,6.3,F
+2025,D,2,Z2,Bracharia brizantha,,NA,F
+2025,D,2,Z2,Eragrostis cylindiflora,,NA,F
+2025,D,2,Z2,Aristida ads,,NA,F
+2025,D,2,Z2,Eragrostis cylindiflora,,6.9,F
+2025,D,2,Z2,Bracharia brizantha,,6.3,F
+2025,D,2,Z2,Eragrostis rigidior,,7.3,F
+2025,D,2,Z2,Setaria incressata,,7,F
+2025,D,2,Z2,Panicum maximum,,NA,F
+2025,B,1,Z1,Heteropogon contortus,,16.4,C
+2025,B,1,Z1,,,19.5,C
+2025,B,1,Z1,,,16.7,C
+2025,B,1,Z1,Heteropogon contortus,,19.2,C
+2025,B,1,Z1,Digitaria erianthra,,21.1,C
+2025,B,1,Z1,,,21.9,C
+2025,B,1,Z1,,,21.4,C
+2025,B,1,Z1,Heteropogon contortus,,21.1,C
+2025,B,1,Z1,E.R,,20.8,C
+2025,B,1,Z1,,,20.6,C
+2025,B,1,Z1,,,20.3,C
+2025,B,1,Z1,Heteropogon contortus,,12.1,C
+2025,B,1,Z1,,,16.4,C
+2025,B,1,Z1,,,20.9,C
+2025,B,1,Z1,,,21.7,C
+2025,B,1,Z1,Heteropogon contortus,,6.5,C
+2025,B,1,Z1,Digitaria erianthra,,4.9,C
+2025,B,1,Z1,E.S,,5.9,C
+2025,B,1,Z1,Pinhole,,7.5,C
+2025,B,1,Z1,CEx,,NA,C
+2025,B,1,Z3,CEx,,23.3,C
+2025,B,1,Z3,Hfili,,19.4,C
+2025,B,1,Z3,E.S,,23.7,C
+2025,B,1,Z3,E.G,,0,C
+2025,B,1,Z3,Heteropogon contortus,,13.9,C
+2025,B,1,Z3,CEx,,15.1,C
+2025,B,1,Z3,SSp,,16,C
+2025,B,1,Z3,,,15.9,C
+2025,B,1,Z3,Heteropogon contortus,,21.8,C
+2025,B,1,Z3,E.S,,23.2,C
+2025,B,1,Z3,,,17.8,C
+2025,B,1,Z3,,,16.6,C
+2025,B,1,Z3,Heteropogon contortus,,10.5,C
+2025,B,1,Z3,CEx,,8.7,C
+2025,B,1,Z3,,,9.5,C
+2025,B,1,Z3,,,11.9,C
+2025,B,1,Z3,Heteropogon contortus,,23.7,C
+2025,B,1,Z3,Themeda triandra,,20.3,C
+2025,B,1,Z3,,,21.6,C
+2025,B,1,Z3,,,21,C
+2025,B,1,Z4,CEx,,1.9,C
+2025,B,1,Z4,Heteropogon contortus,,15.3,C
+2025,B,1,Z4,E.V,,11.6,C
+2025,B,1,Z4,SSp,,10,C
+2025,B,1,Z4,,,NA,C
+2025,B,1,Z4,Pinhole,,6.4,C
+2025,B,1,Z4,Melenis repens,,9.1,C
+2025,B,1,Z4,E.cylindriflora,,8.6,C
+2025,B,1,Z4,Heteropogon contortus,,8.9,C
+2025,B,1,Z4,Pinhole,,3.8,C
+2025,B,1,Z4,Heteropogon contortus,,6.2,C
+2025,B,1,Z4,Themeda triandra,,7.7,C
+2025,B,1,Z4,,,8,C
+2025,B,1,Z4,Heteropogon contortus,,9.2,C
+2025,B,1,Z4,Aristida ads,,10.8,C
+2025,B,1,Z4,E.R,,14.9,C
+2025,B,1,Z4,E.G,,14.7,C
+2025,B,1,Z4,E.S,,NA,C
+2025,B,1,Z4,Heteropogon contortus,,17.1,C
+2025,B,1,Z4,E.R,,16.3,C
+2025,B,1,Z4,E.S,,15.4,C
+2025,B,1,Z4,,,13.3,C
+2025,B,1,Z2,CEx,,9.6,C
+2025,B,1,Z2,Heteropogon contortus,,11,C
+2025,B,1,Z2,Digitaria erianthra,,10.7,C
+2025,B,1,Z2,E.G,,11.7,C
+2025,B,1,Z2,Themeda triandra,,8.9,C
+2025,B,1,Z2,Pinhole,,21.1,C
+2025,B,1,Z2,Aristida ads,,22.2,C
+2025,B,1,Z2,,,19.9,C
+2025,B,1,Z2,Heteropogon contortus,,11.8,C
+2025,B,1,Z2,Pinhole,,11.3,C
+2025,B,1,Z2,Melenis repens,,10.5,C
+2025,B,1,Z2,,,10,C
+2025,B,1,Z2,Heteropogon contortus,,11.9,C
+2025,B,1,Z2,E.R,,18.1,C
+2025,B,1,Z2,E.S,,13.9,C
+2025,B,1,Z2,CEx,,0,C
+2025,B,1,Z2,Aristida diffusa,,NA,C
+2025,B,1,Z2,Melenis repens,,5.9,C
+2025,B,1,Z2,E.R,,6.5,C
+2025,B,1,Z2,Pinhole,,5.6,C
+2025,B,1,Z2,Cynodon dactylon,,5.5,C
+2025,C,1,Z2,Pogonarthria squarrosa,,30.6,C
+2025,C,1,Z2,Heteropogon contortus,,21.3,C
+2025,C,1,Z2,,,17.2,C
+2025,C,1,Z2,,,15.3,C
+2025,C,1,Z2,Hfili,,5.2,C
+2025,C,1,Z2,Pogonarthria squarrosa,,4.8,C
+2025,C,1,Z2,,,5.3,C
+2025,C,1,Z2,,,5.2,C
+2025,C,1,Z2,Pogonarthria squarrosa,,4.1,C
+2025,C,1,Z2,E.G,,2.9,C
+2025,C,1,Z2,Setaria incressata,,2.8,C
+2025,C,1,Z2,,,4.1,C
+2025,C,1,Z2,Setaria incressata,,11.2,C
+2025,C,1,Z2,Heteropogon contortus,,12.4,C
+2025,C,1,Z2,Digitaria erianthra,,12.1,C
+2025,C,1,Z2,,,8.4,C
+2025,C,1,Z2,Setaria incressata,,4,C
+2025,B,5,Z1,Heteropogon contortus,,21.1,THF
+2025,B,5,Z1,CD,,22.9,THF
+2025,B,5,Z1,E.S,,17.7,THF
+2025,B,5,Z1,E.G,,21.5,THF
+2025,B,5,Z1,E.R,,NA,THF
+2025,B,5,Z1,ACB,,NA,THF
+2025,B,5,Z1,Heteropogon contortus,,27.3,THF
+2025,B,5,Z1,CD,,36.8,THF
+2025,B,5,Z1,Digitaria erianthra,,36.1,THF
+2025,B,5,Z1,PH,,26.9,THF
+2025,B,5,Z1,CEx,,14.2,THF
+2025,B,5,Z1,Digitaria erianthra,,9.1,THF
+2025,B,5,Z1,,,6.6,THF
+2025,B,5,Z1,,,19.7,THF
+2025,B,5,Z1,Heteropogon contortus,,28.3,THF
+2025,B,5,Z1,PH,,21.5,THF
+2025,B,5,Z1,CEx,,24.7,THF
+2025,B,5,Z1,,,28,THF
+2025,B,5,Z1,Heteropogon contortus,,14.6,THF
+2025,B,5,Z1,E.S,,13.8,THF
+2025,B,5,Z1,Digitaria erianthra,,18.7,THF
+2025,B,5,Z1,Hyperthelia dissoluta,,4.1,THF
+2025,B,5,Z3,Heteropogon contortus,,5.9,THF
+2025,B,5,Z3,Sporobolus africanus,,8.2,THF
+2025,B,5,Z3,,,6.2,THF
+2025,B,5,Z3,,,2.5,THF
+2025,B,5,Z3,Heteropogon contortus,,32.3,THF
+2025,B,5,Z3,CD,,35.6,THF
+2025,B,5,Z3,Bracharia serrata,,41.5,THF
+2025,B,5,Z3,ACB,,26.4,THF
+2025,B,5,Z3,SSp,,NA,THF
+2025,B,5,Z3,CEx,,15.4,THF
+2025,B,5,Z3,CD,,25.1,THF
+2025,B,5,Z3,Heteropogon contortus,,31.4,THF
+2025,B,5,Z3,,,17.7,THF
+2025,B,5,Z3,Heteropogon contortus,,2.9,THF
+2025,B,5,Z3,Digitaria erianthra,,6.6,THF
+2025,B,5,Z3,,,3.4,THF
+2025,B,5,Z3,,,2.4,THF
+2025,B,5,Z3,Heteropogon contortus,,29.9,THF
+2025,B,5,Z3,Digitaria erianthra,,26.6,THF
+2025,B,5,Z3,ACB,,26.8,THF
+2025,B,5,Z3,,,28.4,THF
+2025,B,5,Z4,E.S,,10.9,THF
+2025,B,5,Z4,PH,,9.2,THF
+2025,B,5,Z4,,,11.9,THF
+2025,B,5,Z4,,,11.8,THF
+2025,B,5,Z4,Heteropogon contortus,,7.5,THF
+2025,B,5,Z4,CD,,15.5,THF
+2025,B,5,Z4,ACB,,9,THF
+2025,B,5,Z4,Digitaria erianthra,,11.8,THF
+2025,B,5,Z4,Heteropogon contortus,,10.4,THF
+2025,B,5,Z4,ACB,,10.7,THF
+2025,B,5,Z4,Digitaria erianthra,,17.4,THF
+2025,B,5,Z4,PH,,11.5,THF
+2025,B,5,Z4,E.S,,NA,THF
+2025,B,5,Z4,Sporobolus africanus,,6,THF
+2025,B,5,Z4,CD,,8.8,THF
+2025,B,5,Z4,Digitaria erianthra,,11.4,THF
+2025,B,5,Z4,,,8.7,THF
+2025,B,5,Z4,Heteropogon contortus,,6.9,THF
+2025,B,5,Z4,Digitaria erianthra,,9.2,THF
+2025,B,5,Z4,CD,,15.1,THF
+2025,B,5,Z4,PH,,10.9,THF
+2025,B,5,Z2,Heteropogon contortus,,6,THF
+2025,B,5,Z2,PH,,6.7,THF
+2025,B,5,Z2,Digitaria erianthra,,1.9,THF
+2025,B,5,Z2,,,5.9,THF
+2025,B,5,Z2,CEx,,5.4,THF
+2025,B,5,Z2,Heteropogon contortus,,8.6,THF
+2025,B,5,Z2,Digitaria erianthra,,2.1,THF
+2025,B,5,Z2,E.R,,21.7,THF
+2025,B,5,Z2,Bracharia serrata,,NA,THF
+2025,B,5,Z2,CEx,,12.9,THF
+2025,B,5,Z2,E.S,,19.8,THF
+2025,B,5,Z2,Heteropogon contortus,,10.9,THF
+2025,B,5,Z2,,,15.6,THF
+2025,B,5,Z2,Heteropogon contortus,,18.6,THF
+2025,B,5,Z2,SSp,,10.2,THF
+2025,B,5,Z2,CD,,13.1,THF
+2025,B,5,Z2,,,44.3,THF
+2025,B,5,Z2,Heteropogon contortus,,6.2,THF
+2025,B,5,Z2,Digitaria erianthra,,9.8,THF
+2025,B,5,Z2,CD,,6.8,THF
+2025,B,5,Z2,PH,,6.3,THF
+2025,B,5,Z2,ACB,,NA,THF
+2025,B,4,Z3,CNs,,3.6,TFB
+2025,B,4,Z3,Hfili,,9.2,TFB
+2025,B,4,Z3,Heteropogon contortus,,5.3,TFB
+2025,B,4,Z3,,,26.4,TFB
+2025,B,4,Z3,Hyperthelia dissoluta,,7.3,TFB
+2025,B,4,Z3,Digitaria erianthra,,5.5,TFB
+2025,B,4,Z3,Heteropogon contortus,,26.9,TFB
+2025,B,4,Z3,,,7.7,TFB
+2025,B,4,Z3,Heteropogon contortus,,6.6,TFB
+2025,B,4,Z3,Digitaria erianthra,,3.8,TFB
+2025,B,4,Z3,CEx,,2.9,TFB
+2025,B,4,Z3,,,27.8,TFB
+2025,B,4,Z3,CEx,,35.2,TFB
+2025,B,4,Z3,ACB,,31.2,TFB
+2025,B,4,Z3,Heteropogon contortus,,43,TFB
+2025,B,4,Z3,E.S,,14.2,TFB
+2025,B,4,Z3,ACB,,NA,TFB
+2025,B,4,Z3,Heteropogon contortus,,7.1,TFB
+2025,B,4,Z3,CEx,,6.8,TFB
+2025,B,4,Z3,Digitaria erianthra,,5.2,TFB
+2025,B,4,Z3,Aristida ads,,2.8,TFB
+2025,B,4,Z3,Melenis repens,,NA,TFB
+2025,B,4,Z4,E.S,,2.7,TFB
+2025,B,4,Z4,Heteropogon contortus,,2.2,TFB
+2025,B,4,Z4,Bracharia serrata,,4.8,TFB
+2025,B,4,Z4,,,32.6,TFB
+2025,B,4,Z4,Heteropogon contortus,,23.9,TFB
+2025,B,4,Z4,ACB,,23.6,TFB
+2025,B,4,Z4,CEx,,12.4,TFB
+2025,B,4,Z4,CEx,,29.1,TFB
+2025,B,4,Z4,Heteropogon contortus,,9.1,TFB
+2025,B,4,Z4,Digitaria erianthra,,26.1,TFB
+2025,B,4,Z4,,,22.8,TFB
+2025,B,4,Z4,,,29.3,TFB
+2025,B,4,Z4,Heteropogon contortus,,6.2,TFB
+2025,B,4,Z4,CEx,,8.2,TFB
+2025,B,4,Z4,Aristida ads,,14,TFB
+2025,B,4,Z4,,,20.1,TFB
+2025,B,4,Z4,Heteropogon contortus,,6.6,TFB
+2025,B,4,Z4,ACB,,6.9,TFB
+2025,B,4,Z4,Melenis repens,,11,TFB
+2025,B,4,Z4,Digitaria erianthra,,6.1,TFB
+2025,B,4,Z1,CEx,,19.2,TFB
+2025,B,4,Z1,Heteropogon contortus,,20.4,TFB
+2025,B,4,Z1,Aristida ads,,23.2,TFB
+2025,B,4,Z1,Melenis repens,,19.5,TFB
+2025,B,4,Z1,Heteropogon contortus,,21.8,TFB
+2025,B,4,Z1,Digitaria erianthra,,14.2,TFB
+2025,B,4,Z1,Aristida ads,,22.1,TFB
+2025,B,4,Z1,,,20.6,TFB
+2025,B,4,Z1,Heteropogon contortus,,25.6,TFB
+2025,B,4,Z1,CEx,,26.6,TFB
+2025,B,4,Z1,SSp,,22.8,TFB
+2025,B,4,Z1,E.S,,34,TFB
+2025,B,4,Z1,CEx,,13,TFB
+2025,B,4,Z1,Heteropogon contortus,,16.7,TFB
+2025,B,4,Z1,E.S,,15.1,TFB
+2025,B,4,Z1,E.R,,27.3,TFB
+2025,B,4,Z1,Bracharia serrata,,NA,TFB
+2025,B,4,Z1,Themeda triandra,,18.4,TFB
+2025,B,4,Z1,Heteropogon contortus,,19,TFB
+2025,B,4,Z1,Digitaria erianthra,,14.8,TFB
+2025,B,4,Z1,,,16,TFB
+2025,B,4,Z2,Heteropogon contortus,,10.8,TFB
+2025,B,4,Z2,Perotis petens,,2.4,TFB
+2025,B,4,Z2,Bracharia serrata,,2.4,TFB
+2025,B,4,Z2,E.R,,2.9,TFB
+2025,B,4,Z2,E.S,,38.2,TFB
+2025,B,4,Z2,CEx,,26.4,TFB
+2025,B,4,Z2,Heteropogon contortus,,21.2,TFB
+2025,B,4,Z2,,,14.2,TFB
+2025,B,4,Z2,Heteropogon contortus,,3.2,TFB
+2025,B,4,Z2,Digitaria erianthra,,4.5,TFB
+2025,B,4,Z2,Aristida ads,,8.2,TFB
+2025,B,4,Z2,Bracharia serrata,,6.5,TFB
+2025,B,4,Z2,Bracharia serrata,,30.6,TFB
+2025,B,4,Z2,CEx,,18.5,TFB
+2025,B,4,Z2,,,14.6,TFB
+2025,B,4,Z2,,,25.8,TFB
+2025,B,4,Z2,Aristida ads,,22.4,TFB
+2025,B,4,Z2,Heteropogon contortus,,24.1,TFB
+2025,B,4,Z2,CEx,,22.2,TFB
+2025,B,4,Z2,U.mossambicensis,,27.5,TFB
+2025,B,3,Z4,Heteropogon contortus,,11.2,TF
+2025,B,3,Z4,Aristida ads,,8.2,TF
+2025,B,3,Z4,CEx,,11.8,TF
+2025,B,3,Z4,,,7.5,TF
+2025,B,3,Z4,Aristida ads,,10.4,TF
+2025,B,3,Z4,Heteropogon contortus,,18.6,TF
+2025,B,3,Z4,CNs,,18,TF
+2025,B,3,Z4,,,22.8,TF
+2025,B,3,Z4,Digitaria erianthra,,13.8,TF
+2025,B,3,Z4,CNs,,8.4,TF
+2025,B,3,Z4,Heteropogon contortus,,6.2,TF
+2025,B,3,Z4,,,5.2,TF
+2025,B,3,Z4,Heteropogon contortus,,11.4,TF
+2025,B,3,Z4,E.R,,15.4,TF
+2025,B,3,Z4,PH,,11.9,TF
+2025,B,3,Z4,,,22,TF
+2025,B,3,Z4,Aristida ads,,8,TF
+2025,B,3,Z4,Heteropogon contortus,,2.8,TF
+2025,B,3,Z4,E.R,,12,TF
+2025,B,3,Z4,,,10.3,TF
+2025,B,3,Z3,Heteropogon contortus,,23.3,TF
+2025,B,3,Z3,CNs,,13,TF
+2025,B,3,Z3,E.R,,12.8,TF
+2025,B,3,Z3,,,14.1,TF
+2025,B,3,Z3,Hfili,,8.5,TF
+2025,B,3,Z3,Heteropogon contortus,,6.7,TF
+2025,B,3,Z3,Aristida ads,,6.5,TF
+2025,B,3,Z3,,,6.1,TF
+2025,B,3,Z3,A.D,,8.3,TF
+2025,B,3,Z3,Aristida ads,,4.2,TF
+2025,B,3,Z3,Themeda triandra,,9.6,TF
+2025,B,3,Z3,Bracharia serrata,,3.4,TF
+2025,B,3,Z3,Heteropogon contortus,,7.8,TF
+2025,B,3,Z3,E.R,,14.1,TF
+2025,B,3,Z3,Aristida ads,,9.8,TF
+2025,B,3,Z3,Heteropogon contortus,,7.3,TF
+2025,B,3,Z3,CNs,,NA,TF
+2025,B,3,Z3,Heteropogon contortus,,6.8,TF
+2025,B,3,Z3,Digitaria erianthra,,8.2,TF
+2025,B,3,Z3,E.S,,7.9,TF
+2025,B,3,Z3,Aristida ads,,4.9,TF
+2025,B,3,Z1,Melenis repens,,26.1,TF
+2025,B,3,Z1,CEx,,20.2,TF
+2025,B,3,Z1,,,10.2,TF
+2025,B,3,Z1,,,25,TF
+2025,B,3,Z1,CNs,,14.6,TF
+2025,B,3,Z1,Heteropogon contortus,,20,TF
+2025,B,3,Z1,CEx,,29.3,TF
+2025,B,3,Z1,Aristida ads,,44.2,TF
+2025,B,3,Z1,,,NA,TF
+2025,B,3,Z1,CD,,41.9,TF
+2025,B,3,Z1,Themeda triandra,,26.1,TF
+2025,B,3,Z1,Heteropogon contortus,,27.8,TF
+2025,B,3,Z1,E.S,,46,TF
+2025,B,3,Z1,ACB,,25.8,TF
+2025,B,3,Z1,Digitaria erianthra,,10.9,TF
+2025,B,3,Z1,Heteropogon contortus,,6.3,TF
+2025,B,3,Z1,,,25.1,TF
+2025,B,3,Z1,Melenis repens,,12,TF
+2025,B,3,Z1,Aristida ads,,15.7,TF
+2025,B,3,Z1,PH,,11.8,TF
+2025,B,3,Z1,,,16.2,TF
+2025,B,3,Z2,Aristida ads,,15.6,TF
+2025,B,3,Z2,CEx,,22.2,TF
+2025,B,3,Z2,Melenis repens,,26.8,TF
+2025,B,3,Z2,E.S,,17.3,TF
+2025,B,3,Z2,ECurv,,NA,TF
+2025,B,3,Z2,SSp,,39,TF
+2025,B,3,Z2,Themeda triandra,,28.8,TF
+2025,B,3,Z2,Heteropogon contortus,,17.1,TF
+2025,B,3,Z2,CEx,,41.5,TF
+2025,B,3,Z2,CEx,,33.2,TF
+2025,B,3,Z2,Melenis repens,,28,TF
+2025,B,3,Z2,Heteropogon contortus,,14.9,TF
+2025,B,3,Z2,,,42.7,TF
+2025,B,3,Z2,Heteropogon contortus,,47.7,TF
+2025,B,3,Z2,CNs,,35.5,TF
+2025,B,3,Z2,,,25.2,TF
+2025,B,3,Z2,,,51,TF
+2025,B,3,Z2,ACB,,15.7,TF
+2025,B,3,Z2,Digitaria erianthra,,32.3,TF
+2025,B,3,Z2,Heteropogon contortus,,15.6,TF
+2025,B,3,Z2,CNs,,22.7,TF
+2025,A,5,Z4,PH,,19,THF
+2025,A,5,Z4,CD,,16.8,THF
+2025,A,5,Z4,E.G,,16.7,THF
+2025,A,5,Z4,,,16.6,THF
+2025,A,5,Z4,U.mossambicensis,,0,THF
+2025,A,5,Z4,CEx,,14.3,THF
+2025,A,5,Z4,PH,,14.7,THF
+2025,A,5,Z4,Heteropogon contortus,,13.7,THF
+2025,A,5,Z4,PH,,21.8,THF
+2025,A,5,Z4,CEx,,16.5,THF
+2025,A,5,Z4,U.mossambicensis,,20.7,THF
+2025,A,5,Z4,,,21.2,THF
+2025,A,5,Z4,U.mossambicensis,,13.5,THF
+2025,A,5,Z4,Aristida ads,,13.2,THF
+2025,A,5,Z4,PH,,13.9,THF
+2025,A,5,Z4,,,11.7,THF
+2025,A,5,Z4,U.mossambicensis,,0,THF
+2025,A,5,Z4,PH,,23.6,THF
+2025,A,5,Z4,Aristida diffusa,,17.3,THF
+2025,A,5,Z4,Setaria incressata,,16.5,THF
+2025,A,5,Z2,Aristida ads,,22.7,THF
+2025,A,5,Z2,U.mossambicensis,,17.4,THF
+2025,A,5,Z2,PH,,18.4,THF
+2025,A,5,Z2,Heteropogon contortus,,20.6,THF
+2025,A,5,Z2,Hfili,,19.6,THF
+2025,A,5,Z2,Panicum maximum,,37.9,THF
+2025,A,5,Z2,U.mossambicensis,,36.2,THF
+2025,A,5,Z2,Heteropogon contortus,,33.7,THF
+2025,A,5,Z2,CEx,,32.9,THF
+2025,A,5,Z2,Aristida ads,,18.7,THF
+2025,A,5,Z2,U.mossambicensis,,18.4,THF
+2025,A,5,Z2,Hfili,,17.7,THF
+2025,A,5,Z2,Panicum maximum,,23.9,THF
+2025,A,5,Z2,U.mossambicensis,,12.9,THF
+2025,A,5,Z2,,,16.8,THF
+2025,A,5,Z2,,,14.9,THF
+2025,A,5,Z2,CEx,,27.1,THF
+2025,A,5,Z2,Wireleaf,,23.6,THF
+2025,A,5,Z2,U.mossambicensis,,24.1,THF
+2025,A,5,Z2,,,21.8,THF
+2025,A,2,Z1,CEx,,23.4,F
+2025,A,2,Z1,PH,,20.2,F
+2025,A,2,Z1,Aristida ads,,13.6,F
+2025,A,2,Z1,E.G,,17.2,F
+2025,A,2,Z1,E.S,,NA,F
+2025,A,2,Z1,Andropogon eucomas,,29.8,F
+2025,A,2,Z1,PH,,22.7,F
+2025,A,2,Z1,Heteropogon contortus,,19.6,F
+2025,A,2,Z1,E.G,,19.5,F
+2025,A,2,Z1,Andropogon eucomas,,15.1,F
+2025,A,2,Z1,PH,,14.2,F
+2025,A,2,Z1,,,13.8,F
+2025,A,2,Z1,,,13.8,F
+2025,A,2,Z1,Digitaria erianthra,,19.1,F
+2025,A,2,Z1,Bracharia serrata,,16.6,F
+2025,A,2,Z1,PH,,18.1,F
+2025,A,2,Z1,Andropogon eucomas,,6.1,F
+2025,A,2,Z1,Setaria incressata,,NA,F
+2025,A,2,Z1,U.mossambicensis,,29.6,F
+2025,A,2,Z1,PH,,25.5,F
+2025,A,2,Z1,,,23.9,F
+2025,A,2,Z1,,,23,F
+2025,A,2,Z2,H.Dissoluta,,17.1,F
+2025,A,2,Z2,Hfili,,48.1,F
+2025,A,2,Z2,Andropogon eucomas,,43.6,F
+2025,A,2,Z2,,,40.2,F
+2025,A,2,Z2,U.mossambicensis,,21.1,F
+2025,A,2,Z2,H.hirta,,28.1,F
+2025,A,2,Z2,H.Dissoluta,,26.6,F
+2025,A,2,Z2,Heteropogon contortus,,11.6,F
+2025,A,2,Z2,H.hirta,,23.3,F
+2025,A,2,Z2,Heteropogon contortus,,5.5,F
+2025,A,2,Z2,Setaria incressata,,14.1,F
+2025,A,2,Z2,Bracharia serrata,,13.4,F
+2025,A,2,Z2,H.Dissoluta,,66.7,F
+2025,A,2,Z2,H.hirta,,29.4,F
+2025,A,2,Z2,U.mossambicensis,,20.7,F
+2025,A,2,Z2,,,21.9,F
+2025,A,2,Z2,Andropogon eucomas,,25.3,F
+2025,A,2,Z2,PH,,18.8,F
+2025,A,2,Z2,Wireleaf,,18.5,F
+2025,A,2,Z2,,,16.5,F
+2025,A,2,Z3,H.Dissoluta,,16.9,F
+2025,A,2,Z3,PH,,22.6,F
+2025,A,2,Z3,E.G,,20,F
+2025,A,2,Z3,,,19.2,F
+2025,A,2,Z3,Heteropogon contortus,,15.8,F
+2025,A,2,Z3,E.S,,11.1,F
+2025,A,2,Z3,Aristida diffusa,,10.6,F
+2025,A,2,Z3,PH,,13.3,F
+2025,A,2,Z3,U.mossambicensis,,28.6,F
+2025,A,2,Z3,Andropogon eucomas,,24,F
+2025,A,2,Z3,PH,,20.4,F
+2025,A,2,Z3,,,14.9,F
+2025,A,2,Z3,CEx,,18.4,F
+2025,A,2,Z3,E.S,,14.1,F
+2025,A,2,Z3,PH,,16.9,F
+2025,A,2,Z3,,,16.2,F
+2025,A,2,Z3,U.mossambicensis,,30.1,F
+2025,A,2,Z3,Hfili,,23.6,F
+2025,A,2,Z3,Andropogon eucomas,,21.6,F
+2025,A,2,Z3,PH,,17.6,F
+2025,A,2,Z4,H.Dissoluta,,17.5,F
+2025,A,2,Z4,U.mossambicensis,,34.7,F
+2025,A,2,Z4,,,44.3,F
+2025,A,2,Z4,,,40.8,F
+2025,A,2,Z4,Aristida ads,,17.3,F
+2025,A,2,Z4,H.Dissoluta,,17.5,F
+2025,A,2,Z4,Hfili,,25,F
+2025,A,2,Z4,,,20.5,F
+2025,A,2,Z4,U.mossambicensis,,65.6,F
+2025,A,2,Z4,H.Dissoluta,,43.3,F
+2025,A,2,Z4,Hfili,,35.5,F
+2025,A,2,Z4,Andropogon eucomas,,28.8,F
+2025,A,2,Z4,H.Dissoluta,,47,F
+2025,A,2,Z4,Hfili,,45.1,F
+2025,A,2,Z4,U.mossambicensis,,37.2,F
+2025,A,2,Z4,Heteropogon contortus,,44.5,F
+2025,A,2,Z4,Cymbopogon nardus,,53.7,F
+2025,A,2,Z4,Andropogon eucomas,,39.4,F
+2025,A,2,Z4,U.mossambicensis,,28.3,F
+2025,A,2,Z4,Heteropogon contortus,,30.7,F
+2025,A,2,Z4,H.Dissoluta,,NA,F
+2025,A,2,Z4,SSp,,NA,F
+2025,A,3,Z3,SSp,,26.6,TFB
+2025,A,3,Z3,Digitaria erianthra,,17.5,TFB
+2025,A,3,Z3,U.mossambicensis,,19,TFB
+2025,A,3,Z3,C.D,,18.7,TFB
+2025,A,3,Z3,Heteropogon contortus,,27.5,TFB
+2025,A,3,Z3,Melenis repens,,24.8,TFB
+2025,A,3,Z3,Aristida diffusa,,26.7,TFB
+2025,A,3,Z3,Panicum maximum,,22.2,TFB
+2025,A,3,Z3,H.Dissoluta,,19,TFB
+2025,A,3,Z3,Hfili,,24.7,TFB
+2025,A,3,Z3,Heteropogon contortus,,21.9,TFB
+2025,A,3,Z3,U.mossambicensis,,24.9,TFB
+2025,A,3,Z3,Heteropogon contortus,,24.9,TFB
+2025,A,3,Z3,Themeda triandra,,22.3,TFB
+2025,A,3,Z3,CEx,,25.6,TFB
+2025,A,3,Z3,Digitaria erianthra,,21.5,TFB
+2025,A,3,Z3,Panicum maximum,,NA,TFB
+2025,A,3,Z3,H.Dissoluta,,33.7,TFB
+2025,A,3,Z3,Aristida ads,,26.8,TFB
+2025,A,3,Z3,Hfili,,33.4,TFB
+2025,A,3,Z3,CEx,,32,TFB
+2025,A,3,Z1,H.hirta,,46.7,TFB
+2025,A,3,Z1,,,0,TFB
+2025,A,3,Z1,,,0,TFB
+2025,A,3,Z1,,,0,TFB
+2025,A,3,Z1,PH,,20.6,TFB
+2025,A,3,Z1,CEx,,16.1,TFB
+2025,A,3,Z1,,,15.6,TFB
+2025,A,3,Z1,,,14.4,TFB
+2025,A,3,Z1,Andropogon eucomas,,18.1,TFB
+2025,A,3,Z1,PF,,14.3,TFB
+2025,A,3,Z1,U.mossambicensis,,12.7,TFB
+2025,A,3,Z1,,,12.4,TFB
+2025,A,3,Z1,U.mossambicensis,,20.9,TFB
+2025,A,3,Z1,Aristida congesta C,,25.5,TFB
+2025,A,3,Z1,Themeda triandra,,28.6,TFB
+2025,A,3,Z1,,,1.3,TFB
+2025,A,3,Z1,H.Dissoluta,,56.5,TFB
+2025,A,3,Z1,Hfili,,11.2,TFB
+2025,A,3,Z1,Heteropogon contortus,,61.9,TFB
+2025,A,3,Z1,,,9.7,TFB
+2025,A,3,Z2,CEx,,32.7,TFB
+2025,A,3,Z2,U.mossambicensis,,3.8,TFB
+2025,A,3,Z2,,,3.8,TFB
+2025,A,3,Z2,,,8.1,TFB
+2025,A,3,Z2,PH,,17.3,TFB
+2025,A,3,Z2,Wireleaf,,11.5,TFB
+2025,A,3,Z2,Setaria incressata,,14.4,TFB
+2025,A,3,Z2,,,14.2,TFB
+2025,A,3,Z2,PH,,12.3,TFB
+2025,A,3,Z2,Digitaria erianthra,,10.5,TFB
+2025,A,3,Z2,E.G,,14.3,TFB
+2025,A,3,Z2,,,13.2,TFB
+2025,A,3,Z2,H.hirta,,26.2,TFB
+2025,A,3,Z2,Wireleaf,,6.4,TFB
+2025,A,3,Z2,,,4.3,TFB
+2025,A,3,Z2,,,18.6,TFB
+2025,A,3,Z2,Aristida congesta C,,15.2,TFB
+2025,A,3,Z2,PH,,14.4,TFB
+2025,A,3,Z2,,,11.7,TFB
+2025,A,3,Z2,,,12.7,TFB
+2025,A,3,Z4,U.mossambicensis,,23,TFB
+2025,A,3,Z4,CEx,,25.7,TFB
+2025,A,3,Z4,Bracharia serrata,,29.4,TFB
+2025,A,3,Z4,,,5.4,TFB
+2025,A,3,Z4,U.mossambicensis,,17.3,TFB
+2025,A,3,Z4,Aristida congesta C,,5.1,TFB
+2025,A,3,Z4,H.Dissoluta,,5.1,TFB
+2025,A,3,Z4,,,0,TFB
+2025,A,3,Z4,SSp,,12.9,TFB
+2025,A,3,Z4,Heteropogon contortus,,10.3,TFB
+2025,A,3,Z4,Bracharia serrata,,17.4,TFB
+2025,A,3,Z4,,,11.4,TFB
+2025,A,3,Z4,U.mossambicensis,,11.5,TFB
+2025,A,3,Z4,Heteropogon contortus,,19.3,TFB
+2025,A,3,Z4,,,20.4,TFB
+2025,A,3,Z4,,,49.9,TFB
+2025,A,3,Z4,H.Dissoluta,,50.3,TFB
+2025,A,3,Z4,Aristida congesta C,,29.9,TFB
+2025,A,3,Z4,U.mossambicensis,,24.7,TFB
+2025,A,3,Z4,,,23.8,TFB
+2025,A,4,Z3,Hfili,,18,TF
+2025,A,4,Z3,PH,,23.6,TF
+2025,A,4,Z3,Setaria incressata,,20.9,TF
+2025,A,4,Z3,,,21.1,TF
+2025,A,4,Z3,H.Dissoluta,,16,TF
+2025,A,4,Z3,PH,,17.4,TF
+2025,A,4,Z3,,,19.1,TF
+2025,A,4,Z3,,,18.2,TF
+2025,A,4,Z3,PH,,12.1,TF
+2025,A,4,Z3,Heteropogon contortus,,13.4,TF
+2025,A,4,Z3,Andropogon eucomas,,13.9,TF
+2025,A,4,Z3,,,16.7,TF
+2025,A,4,Z3,CEx,,26.4,TF
+2025,A,4,Z3,PH,,22.7,TF
+2025,A,4,Z3,,,23.9,TF
+2025,A,4,Z3,,,12.2,TF
+2025,A,4,Z3,Digitaria erianthra,,14.3,TF
+2025,A,4,Z3,PH,,17.2,TF
+2025,A,4,Z3,,,15.8,TF
+2025,A,4,Z3,,,15.9,TF
+2025,A,4,Z1,U.mossambicensis,,13.3,TF
+2025,A,4,Z1,Diheteropogon anplactence,,12.8,TF
+2025,A,4,Z1,PH,,13.8,TF
+2025,A,4,Z1,Heteropogon contortus,,12.2,TF
+2025,A,4,Z1,E.G,,NA,TF
+2025,A,4,Z1,PH,,36,TF
+2025,A,4,Z1,,,37.4,TF
+2025,A,4,Z1,,,37.2,TF
+2025,A,4,Z1,,,31.4,TF
+2025,A,4,Z1,Heteropogon contortus,,28.7,TF
+2025,A,4,Z1,U.mossambicensis,,16.6,TF
+2025,A,4,Z1,PH,,24.4,TF
+2025,A,4,Z1,,,23.4,TF
+2025,A,4,Z1,U.mossambicensis,,18.1,TF
+2025,A,4,Z1,Andropogon eucomas,,21.1,TF
+2025,A,4,Z1,PH,,24.2,TF
+2025,A,4,Z1,,,18.2,TF
+2025,A,4,Z2,Digitaria erianthra,,13.3,TF
+2025,A,4,Z2,Aristida ads,,18.5,TF
+2025,A,4,Z2,PH,,15.1,TF
+2025,A,4,Z2,,,15.2,TF
+2025,A,4,Z2,Hfili,,16.6,TF
+2025,A,4,Z2,CEx,,15.2,TF
+2025,A,4,Z2,Wireleaf,,13.3,TF
+2025,A,4,Z2,Heteropogon contortus,,13.6,TF
+2025,A,4,Z2,U.mossambicensis,,NA,TF
+2025,A,4,Z2,Setaria incressata,,13.4,TF
+2025,A,4,Z2,CEx,,14,TF
+2025,A,4,Z2,H.hirta,,15.1,TF
+2025,A,4,Z2,Heteropogon contortus,,15.9,TF
+2025,A,4,Z2,Diheteropogon anplactence,,NA,TF
+2025,A,4,Z2,Heteropogon contortus,,26.8,TF
+2025,A,4,Z2,Digitaria erianthra,,17.6,TF
+2025,A,4,Z2,,,16.8,TF
+2025,A,4,Z2,,,15.1,TF
+2025,A,4,Z2,Heteropogon contortus,,15.8,TF
+2025,A,4,Z2,Digitaria erianthra,,12.2,TF
+2025,A,4,Z2,Diheteropogon anplactence,,17.4,TF
+2025,A,4,Z2,Panicum maximum,,17.7,TF
+2025,A,4,Z4,U.mossambicensis,,20.3,TF
+2025,A,4,Z4,Digitaria erianthra,,16.9,TF
+2025,A,4,Z4,PH,,18.4,TF
+2025,A,4,Z4,Heteropogon contortus,,18,TF
+2025,A,4,Z4,Melenis repens,,NA,TF
+2025,A,4,Z4,PH,,24.8,TF
+2025,A,4,Z4,Heteropogon contortus,,23.7,TF
+2025,A,4,Z4,Digitaria erianthra,,21.8,TF
+2025,A,4,Z4,,,20.4,TF
+2025,A,4,Z4,Heteropogon contortus,,11.6,TF
+2025,A,4,Z4,E.S,,15.9,TF
+2025,A,4,Z4,ACC,,19.6,TF
+2025,A,4,Z4,,,8.4,TF
+2025,A,4,Z4,Heteropogon contortus,,11.5,TF
+2025,A,4,Z4,Digitaria erianthra,,14.9,TF
+2025,A,4,Z4,E.S,,15.4,TF
+2025,A,4,Z4,,,16.3,TF
+2025,A,4,Z4,U.mossambicensis,,22.1,TF
+2025,A,4,Z4,Digitaria erianthra,,19.4,TF
+2025,A,4,Z4,Heteropogon contortus,,18.3,TF
+2025,A,4,Z4,,,16.7,TF
+2025,E,4,Z3,E.curvula,,9.6,TFB
+2025,E,4,Z3,Panicum maximum,,13.7,TFB
+2025,E,4,Z3,Chloris virgata,,13.3,TFB
+2025,E,4,Z3,D.gigantum,,13.4,TFB
+2025,E,4,Z3,Setaria incressata,,NA,TFB
+2025,E,4,Z3,Sporobolus africanus,,0,TFB
+2025,E,4,Z3,,,0,TFB
+2025,E,4,Z3,,,0,TFB
+2025,E,4,Z3,,,1.6,TFB
+2025,E,4,Z3,Heteropogon contortus,,11.4,TFB
+2025,E,4,Z3,,,8.8,TFB
+2025,E,4,Z3,,,0,TFB
+2025,E,4,Z3,,,0,TFB
+2025,E,4,Z3,Heteropogon contortus,,8.4,TFB
+2025,E,4,Z3,Mopane grass,,6.2,TFB
+2025,E,4,Z3,Setaria incressata,,7.8,TFB
+2025,E,4,Z3,E.V,,0,TFB
+2025,E,4,Z3,BB,,NA,TFB
+2025,E,4,Z3,Heteropogon contortus,,3.3,TFB
+2025,E,4,Z3,BB,,4.1,TFB
+2025,E,4,Z3,E.G,,3.4,TFB
+2025,E,4,Z3,E.V,,3.2,TFB
+2025,E,4,Z1,Digitaria erianthra,,1.7,TFB
+2025,E,4,Z1,Panicum maximum,,1.7,TFB
+2025,E,4,Z1,E.V,,3.7,TFB
+2025,E,4,Z1,E.G,,3.5,TFB
+2025,E,4,Z1,Aristida ads,,2.5,TFB
+2025,E,4,Z1,E.cylindriflora,,0,TFB
+2025,E,4,Z1,Heteropogon contortus,,0,TFB
+2025,E,4,Z1,,,2.3,TFB
+2025,E,4,Z1,Heteropogon contortus,,4.4,TFB
+2025,E,4,Z1,B.N,,7.5,TFB
+2025,E,4,Z1,Panicum maximum,,6.9,TFB
+2025,E,4,Z1,Setaria incressata,,7.6,TFB
+2025,E,4,Z1,B.N,,11.7,TFB
+2025,E,4,Z1,E.curvula,,8.2,TFB
+2025,E,4,Z1,Panicum maximum,,13.1,TFB
+2025,E,4,Z1,Setaria incressata,,37.2,TFB
+2025,E,4,Z1,CEx,,15.5,TFB
+2025,E,4,Z1,,,0,TFB
+2025,E,4,Z1,,,0,TFB
+2025,E,4,Z1,,,0,TFB
+2025,E,4,Z2,E.V,,0,TFB
+2025,E,4,Z2,Panicum maximum,,2.1,TFB
+2025,E,4,Z2,E.G,,6.8,TFB
+2025,E,4,Z2,,,5.3,TFB
+2025,E,4,Z2,Heteropogon contortus,,2.9,TFB
+2025,E,4,Z2,,,2.9,TFB
+2025,E,4,Z2,,,0,TFB
+2025,E,4,Z2,,,0,TFB
+2025,E,4,Z2,Heteropogon contortus,,2.5,TFB
+2025,E,4,Z2,E.V,,2.2,TFB
+2025,E,4,Z2,Mopane grass,,0,TFB
+2025,E,4,Z2,,,4.5,TFB
+2025,E,4,Z2,Mopane grass,,4,TFB
+2025,E,4,Z2,,,4,TFB
+2025,E,4,Z2,,,0,TFB
+2025,E,4,Z2,,,0,TFB
+2025,E,4,Z2,Heteropogon contortus,,0,TFB
+2025,E,4,Z2,Setaria incressata,,0,TFB
+2025,E,4,Z2,Panicum maximum,,0,TFB
+2025,E,4,Z2,,,1.6,TFB
+2025,E,4,Z4,Heteropogon contortus,,8.6,TFB
+2025,E,4,Z4,CEx,,8,TFB
+2025,E,4,Z4,,,13.5,TFB
+2025,E,4,Z4,,,15.9,TFB
+2025,E,4,Z4,Panicum maximum,,13.7,TFB
+2025,E,4,Z4,Heteropogon contortus,,3.3,TFB
+2025,E,4,Z4,,,3.2,TFB
+2025,E,4,Z4,,,3.7,TFB
+2025,E,4,Z4,E.curvula,,2.1,TFB
+2025,E,4,Z4,Panicum maximum,,2.2,TFB
+2025,E,4,Z4,B.N,,2.7,TFB
+2025,E,4,Z4,Chloris virgata,,2.1,TFB
+2025,E,4,Z4,B.N,,5,TFB
+2025,E,4,Z4,Panicum maximum,,12.6,TFB
+2025,E,4,Z4,E.V,,12.5,TFB
+2025,E,4,Z4,Mopane grass,,12.5,TFB
+2025,E,4,Z4,Heteropogon contortus,,5.1,TFB
+2025,E,4,Z4,,,5.6,TFB
+2025,E,4,Z4,,,4.3,TFB
+2025,E,4,Z4,,,5,TFB
+2025,E,3,Z1,E.curvula,,2.1,F
+2025,E,3,Z1,,,0,F
+2025,E,3,Z1,,,0,F
+2025,E,3,Z1,,,0,F
+2025,E,3,Z1,Heteropogon contortus,,2.3,F
+2025,E,3,Z1,E.V,,2.6,F
+2025,E,3,Z1,B.N,,2.8,F
+2025,E,3,Z1,Setaria incressata,,5.3,F
+2025,E,3,Z1,Heteropogon contortus,,14.8,F
+2025,E,3,Z1,Digitaria erianthra,,10.6,F
+2025,E,3,Z1,,,9.8,F
+2025,E,3,Z1,,,8.5,F
+2025,E,3,Z1,Heteropogon contortus,,2.7,F
+2025,E,3,Z1,Panicum maximum,,3.4,F
+2025,E,3,Z1,E.G,,2.9,F
+2025,E,3,Z1,,,4.1,F
+2025,E,3,Z1,E.cylindriflora,,2,F
+2025,E,3,Z1,Heteropogon contortus,,2,F
+2025,E,3,Z1,Chloris virgata,,0,F
+2025,E,3,Z1,,,0,F
+2025,E,3,Z3,Heteropogon contortus,,2.9,F
+2025,E,3,Z3,CEx,,3.6,F
+2025,E,3,Z3,,,0,F
+2025,E,3,Z3,,,4.2,F
+2025,E,3,Z3,Aristida congesta B,,10.1,F
+2025,E,3,Z3,Heteropogon contortus,,6.3,F
+2025,E,3,Z3,E.R,,4.5,F
+2025,E,3,Z3,E.V,,5.6,F
+2025,E,3,Z3,E.cylindriflora,,NA,F
+2025,E,3,Z3,E.G,,NA,F
+2025,E,3,Z3,Mopane grass,,NA,F
+2025,E,3,Z3,Heteropogon contortus,,3.7,F
+2025,E,3,Z3,E.G,,9.1,F
+2025,E,3,Z3,,,5.2,F
+2025,E,3,Z3,,,0,F
+2025,E,3,Z3,B.N,,13.5,F
+2025,E,3,Z3,Heteropogon contortus,,10.5,F
+2025,E,3,Z3,,,11,F
+2025,E,3,Z3,,,0,F
+2025,E,3,Z3,E.S,,10.4,F
+2025,E,3,Z3,E.V,,6.1,F
+2025,E,3,Z3,ECurv,,0,F
+2025,E,3,Z3,Chloris virgata,,9.2,F
+2025,E,3,Z3,E.G,,NA,F
+2025,E,3,Z4,B.N,,9.2,F
+2025,E,3,Z4,E.R,,7.1,F
+2025,E,3,Z4,,,0,F
+2025,E,3,Z4,,,0,F
+2025,E,3,Z4,Mopane grass,,1.7,F
+2025,E,3,Z4,Heteropogon contortus,,2.7,F
+2025,E,3,Z4,E.R,,10.2,F
+2025,E,3,Z4,,,1.9,F
+2025,E,3,Z4,Heteropogon contortus,,2.5,F
+2025,E,3,Z4,Aristida ads,,0,F
+2025,E,3,Z4,,,0,F
+2025,E,3,Z4,,,0,F
+2025,E,3,Z4,Heteropogon contortus,,2.2,F
+2025,E,3,Z4,E.V,,2.4,F
+2025,E,3,Z4,E.G,,2.1,F
+2025,E,3,Z4,,,2.8,F
+2025,E,3,Z4,Panicum maximum,,3.1,F
+2025,E,3,Z4,Cymbopogon nardus,,3,F
+2025,E,3,Z4,B.N,,4.4,F
+2025,E,3,Z4,,,4.5,F
+2025,E,3,Z2,,,0,F
+2025,E,3,Z2,,,0,F
+2025,E,3,Z2,,,0,F
+2025,E,3,Z2,,,0,F
+2025,E,3,Z2,Diheteropogon anplactence,,3.1,F
+2025,E,3,Z2,Panicum maximum,,3.5,F
+2025,E,3,Z2,,,4.8,F
+2025,E,3,Z2,,,3.1,F
+2025,E,3,Z2,Heteropogon contortus,,8.1,F
+2025,E,3,Z2,B.N,,4.9,F
+2025,E,3,Z2,E.G,,4.2,F
+2025,E,3,Z2,E.V,,0,F
+2025,E,3,Z2,Mopane grass,,23,F
+2025,E,3,Z2,Digitaria erianthra,,13.5,F
+2025,E,3,Z2,Heteropogon contortus,,10.2,F
+2025,E,3,Z2,,,0,F
+2025,E,3,Z2,ECurv,,2.6,F
+2025,E,3,Z2,B.N,,2.1,F
+2025,E,3,Z2,,,2.1,F
+2025,E,3,Z2,,,2.1,F
+2025,E,2,Z3,Aristida diffusa,,7,TF
+2025,E,2,Z3,E.R,,1.4,TF
+2025,E,2,Z3,Panicum maximum,,1.5,TF
+2025,E,2,Z3,,,1.8,TF
+2025,E,2,Z3,Heteropogon contortus,,2.7,TF
+2025,E,2,Z3,Panicum maximum,,3.4,TF
+2025,E,2,Z3,,,0,TF
+2025,E,2,Z3,,,0,TF
+2025,E,2,Z3,E.V,,5.3,TF
+2025,E,2,Z3,Aristida ads,,8.3,TF
+2025,E,2,Z3,Panicum maximum,,10,TF
+2025,E,2,Z3,,,9.4,TF
+2025,E,2,Z3,Panicum maximum,,6.9,TF
+2025,E,2,Z3,,,2.5,TF
+2025,E,2,Z3,,,6.2,TF
+2025,E,2,Z3,,,2.5,TF
+2025,E,2,Z3,Mopane grass,,14.1,TF
+2025,E,2,Z3,Panicum maximum,,14.4,TF
+2025,E,2,Z3,,,18.1,TF
+2025,E,2,Z3,,,19.8,TF
+2025,E,2,Z1,Panicum maximum,,4.9,TF
+2025,E,2,Z1,Mopane grass,,3.5,TF
+2025,E,2,Z1,Heteropogon contortus,,7.1,TF
+2025,E,2,Z1,E.V,,5.4,TF
+2025,E,2,Z1,Panicum maximum,,4.6,TF
+2025,E,2,Z1,,,16.8,TF
+2025,E,2,Z1,,,12.4,TF
+2025,E,2,Z1,,,9.7,TF
+2025,E,2,Z1,Panicum maximum,,19.1,TF
+2025,E,2,Z1,Mopane grass,,14.7,TF
+2025,E,2,Z1,E.V,,11.6,TF
+2025,E,2,Z1,,,11.6,TF
+2025,E,2,Z1,Panicum maximum,,7.3,TF
+2025,E,2,Z1,ECurv,,5.6,TF
+2025,E,2,Z1,,,5.3,TF
+2025,E,2,Z1,,,6.1,TF
+2025,E,2,Z1,Panicum maximum,,5.4,TF
+2025,E,2,Z1,ECurv,,5.3,TF
+2025,E,2,Z1,Chloris virgata,,23.7,TF
+2025,E,2,Z1,,,18.9,TF
+2025,E,2,Z4,Mopane grass,,3.4,TF
+2025,E,2,Z4,E.R,,2.6,TF
+2025,E,2,Z4,B.N,,5,TF
+2025,E,2,Z4,,,4.5,TF
+2025,E,2,Z4,Heteropogon contortus,,2.3,TF
+2025,E,2,Z4,CEx,,5.2,TF
+2025,E,2,Z4,E.G,,4.2,TF
+2025,E,2,Z4,,,4.4,TF
+2025,E,2,Z4,Panicum maximum,,6,TF
+2025,E,2,Z4,Heteropogon contortus,,11.9,TF
+2025,E,2,Z4,Mopane grass,,10.3,TF
+2025,E,2,Z4,Setaria incressata,,11.9,TF
+2025,E,2,Z4,E.R,,4,TF
+2025,E,2,Z4,Heteropogon contortus,,3.5,TF
+2025,E,2,Z4,Panicum maximum,,3.4,TF
+2025,E,2,Z4,,,3.8,TF
+2025,E,2,Z4,Mopane grass,,13.3,TF
+2025,E,2,Z4,Heteropogon contortus,,10.7,TF
+2025,E,2,Z4,Panicum maximum,,10,TF
+2025,E,2,Z4,,,12.4,TF
+2025,E,2,Z2,Heteropogon contortus,,11.9,TF
+2025,E,2,Z2,Diheteropogon anplactence,,11.5,TF
+2025,E,2,Z2,,,8.5,TF
+2025,E,2,Z2,,,9.4,TF
+2025,E,2,Z2,Mopane grass,,23.3,TF
+2025,E,2,Z2,Heteropogon contortus,,17.2,TF
+2025,E,2,Z2,,,14.7,TF
+2025,E,2,Z2,,,13.7,TF
+2025,E,2,Z2,Heteropogon contortus,,3.3,TF
+2025,E,2,Z2,ECurv,,2.9,TF
+2025,E,2,Z2,,,2.4,TF
+2025,E,2,Z2,,,3.8,TF
+2025,E,2,Z2,Panicum maximum,,2,TF
+2025,E,2,Z2,Mopane grass,,2.8,TF
+2025,E,2,Z2,BB,,6.3,TF
+2025,E,2,Z2,,,7,TF
+2025,E,2,Z2,Panicum maximum,,2.6,TF
+2025,E,2,Z2,Aristida ads,,5.6,TF
+2025,E,2,Z2,Mopane grass,,2.9,TF
+2025,E,2,Z2,,,4.6,TF
+2025,C,1,Z2,,,4.5,C
+2025,C,1,Z2,,,3.6,C
+2025,C,1,Z2,,,3.6,C
+2025,C,1,Z1,B.N,,5.2,C
+2025,C,1,Z1,Panicum maximum,,5.2,C
+2025,C,1,Z1,,,4.8,C
+2025,C,1,Z1,,,5.2,C
+2025,C,1,Z1,Pogonarthria squarrosa,,1.7,C
+2025,C,1,Z1,,,1.7,C
+2025,C,1,Z1,,,1.7,C
+2025,C,1,Z1,,,1.7,C
+2025,C,1,Z1,Pogonarthria squarrosa,,16.3,C
+2025,C,1,Z1,Digitaria erianthra,,13.1,C
+2025,C,1,Z1,,,10.8,C
+2025,C,1,Z1,,,9.4,C
+2025,C,1,Z1,Setaria incressata,,6.8,C
+2025,C,1,Z1,Digitaria erianthra,,6,C
+2025,C,1,Z1,Pogonarthria squarrosa,,5,C
+2025,C,1,Z1,Heteropogon contortus,,4.7,C
+2025,C,1,Z1,Setaria incressata,,4,C
+2025,C,1,Z1,Melenis repens,,5.3,C
+2025,C,1,Z1,Heteropogon contortus,,4.5,C
+2025,C,1,Z1,,,5.2,C
+2025,C,1,Z3,Aristida ads,,4.3,C
+2025,C,1,Z3,Digitaria erianthra,,4.2,C
+2025,C,1,Z3,Pogonarthria squarrosa,,4.2,C
+2025,C,1,Z3,Heteropogon contortus,,4.7,C
+2025,C,1,Z3,Setaria incressata,,2.2,C
+2025,C,1,Z3,E.G,,2.2,C
+2025,C,1,Z3,,,2.2,C
+2025,C,1,Z3,,,0,C
+2025,C,1,Z3,Heteropogon contortus,,5.2,C
+2025,C,1,Z3,Setaria incressata,,6.5,C
+2025,C,1,Z3,D. velutina,,6.7,C
+2025,C,1,Z3,,,6.7,C
+2025,C,1,Z3,Digitaria erianthra,,2.7,C
+2025,C,1,Z3,Panicum maximum,,3.5,C
+2025,C,1,Z3,E.G,,3.5,C
+2025,C,1,Z3,Pogonarthria squarrosa,,3.3,C
+2025,C,1,Z3,Setaria incressata,,NA,C
+2025,C,1,Z1,Aristida ads,,1.8,C
+2025,C,1,Z1,Setaria incressata,,1.8,C
+2025,C,1,Z1,,,1.8,C
+2025,C,1,Z1,,,2.2,C
+2025,C,1,Z4,Setaria incressata,,3.8,C
+2025,C,1,Z4,Digitaria erianthra,,3.7,C
+2025,C,1,Z4,,,3.6,C
+2025,C,1,Z4,,,5.4,C
+2025,C,1,Z4,Aristida ads,,4.7,C
+2025,C,1,Z4,Setaria incressata,,4.4,C
+2025,C,1,Z4,E.G,,4,C
+2025,C,1,Z4,Pogonarthria squarrosa,,3.8,C
+2025,C,1,Z4,Heteropogon contortus,,5.8,C
+2025,C,1,Z4,Digitaria erianthra,,2.7,C
+2025,C,1,Z4,,,4.5,C
+2025,C,1,Z4,,,4.5,C
+2025,C,1,Z4,Panicum maximum,,8.6,C
+2025,C,1,Z4,Heteropogon contortus,,7.8,C
+2025,C,1,Z4,,,8,C
+2025,C,1,Z4,,,9.8,C
+2025,C,1,Z4,Panicum maximum,,2.4,C
+2025,C,1,Z4,Aristida ads,,2.5,C
+2025,C,1,Z4,Digitaria erianthra,,0,C
+2025,C,1,Z4,Setaria incressata,,2.5,C
+2025,D,1,Z2,E.V,,3.1,C
+2025,D,1,Z2,Chloris virgata,,4.8,C
+2025,D,1,Z2,E.R,,4.6,C
+2025,D,1,Z2,Digitaria erianthra,,4.8,C
+2025,D,1,Z2,E.S,,9.7,C
+2025,D,1,Z2,Mopane grass,,18.6,C
+2025,D,1,Z2,BB,,16.6,C
+2025,D,1,Z2,Setaria incressata,,14.3,C
+2025,D,1,Z2,Mopane grass,,11.8,C
+2025,D,1,Z2,BB,,10.9,C
+2025,D,1,Z2,Chloris virgata,,10.6,C
+2025,D,1,Z2,,,9.8,C
+2025,D,1,Z2,BB,,12.5,C
+2025,D,1,Z2,Setaria incressata,,9.3,C
+2025,D,1,Z2,Panicum maximum,,7.2,C
+2025,D,1,Z2,Chloris virgata,,9.4,C
+2025,D,1,Z2,Themeda triandra,,9,C
+2025,D,1,Z2,Heteropogon contortus,,9.8,C
+2025,E,5,Z3,E.R,,3.5,THF
+2025,E,5,Z3,Digitaria erianthra,,4.2,THF
+2025,E,5,Z3,Diheteropogon anplactence,,4.2,THF
+2025,E,5,Z3,E.V,,4.1,THF
+2025,E,5,Z3,Heteropogon contortus,,6.8,THF
+2025,E,5,Z3,BB,,4.7,THF
+2025,E,5,Z3,,,3.9,THF
+2025,E,5,Z3,,,3.5,THF
+2025,E,5,Z3,E.V,,0,THF
+2025,E,5,Z3,,,0,THF
+2025,E,5,Z3,,,2.3,THF
+2025,E,5,Z3,,,2.6,THF
+2025,E,5,Z3,Themeda triandra,,3.2,THF
+2025,E,5,Z3,Digitaria erianthra,,6.3,THF
+2025,E,5,Z3,BB,,8.7,THF
+2025,E,5,Z3,E.G,,9.6,THF
+2025,E,5,Z3,Mopane grass,,4.6,THF
+2025,E,5,Z3,Heteropogon contortus,,3.2,THF
+2025,E,5,Z3,E.V,,6.6,THF
+2025,E,5,Z3,Aristida ads,,5.6,THF
+2025,E,5,Z1,Digitaria erianthra,,6,THF
+2025,E,5,Z1,P. squarrossa ,,7.1,THF
+2025,E,5,Z1,Panicum maximum,,7.3,THF
+2025,E,5,Z1,Heteropogon contortus,,10.1,THF
+2025,E,5,Z1,E.G,,NA,THF
+2025,E,5,Z1,CEx,,26.2,THF
+2025,E,5,Z1,E.R,,23.9,THF
+2025,E,5,Z1,Heteropogon contortus,,19.8,THF
+2025,E,5,Z1,Panicum maximum,,17.3,THF
+2025,E,5,Z1,BB,,NA,THF
+2025,E,5,Z1,Heteropogon contortus,,4.4,THF
+2025,E,5,Z1,Digitaria erianthra,,6,THF
+2025,E,5,Z1,Aristida ads,,9.2,THF
+2025,E,5,Z1,E.G,,8,THF
+2025,E,5,Z1,Heteropogon contortus,,3.9,THF
+2025,E,5,Z1,E.R,,14.4,THF
+2025,E,5,Z1,Digitaria erianthra,,6.3,THF
+2025,E,5,Z1,,,9.6,THF
+2025,E,5,Z1,Mopane grass,,6.1,THF
+2025,E,5,Z1,,,6.7,THF
+2025,E,5,Z1,,,5.5,THF
+2025,E,5,Z1,,,5.3,THF
+2025,E,5,Z4,Heteropogon contortus,,6.1,THF
+2025,E,5,Z4,Themeda triandra,,5.5,THF
+2025,E,5,Z4,Mopane grass,,0,THF
+2025,E,5,Z4,,,6.4,THF
+2025,E,5,Z4,B.N,,7.6,THF
+2025,E,5,Z4,E.S,,8.4,THF
+2025,E,5,Z4,Pogonarthria squarrosa,,7.4,THF
+2025,E,5,Z4,,,6.5,THF
+2025,E,5,Z4,Mopane grass,,6.4,THF
+2025,E,5,Z4,B.N,,0,THF
+2025,E,5,Z4,Heteropogon contortus,,0,THF
+2025,E,5,Z4,,,13.7,THF
+2025,E,5,Z4,Mopane grass,,19.8,THF
+2025,E,5,Z4,Aristida ads,,13.9,THF
+2025,E,5,Z4,,,0,THF
+2025,E,5,Z4,,,2.7,THF
+2025,E,5,Z4,CEx,,2.7,THF
+2025,E,5,Z4,Heteropogon contortus,,8.7,THF
+2025,E,5,Z4,B.N,,10.7,THF
+2025,E,5,Z4,Sporobolus africanus,,10.3,THF
+2025,E,5,Z4,Digitaria erianthra,,NA,THF
+2025,E,5,Z2,Heteropogon contortus,,16.1,THF
+2025,E,5,Z2,BB,,10.4,THF
+2025,E,5,Z2,,,8.6,THF
+2025,E,5,Z2,,,10.1,THF
+2025,E,5,Z2,Themeda triandra,,12.3,THF
+2025,E,5,Z2,Heteropogon contortus,,26,THF
+2025,E,5,Z2,,,23.7,THF
+2025,E,5,Z2,,,21.9,THF
+2025,E,5,Z2,ACC,,5,THF
+2025,E,5,Z2,Heteropogon contortus,,6.7,THF
+2025,E,5,Z2,E.R,,9.6,THF
+2025,E,5,Z2,Mopane grass,,8.8,THF
+2025,E,5,Z2,BB,,39.2,THF
+2025,E,5,Z2,CEx,,35.1,THF
+2025,E,5,Z2,E.S,,8,THF
+2025,E,5,Z2,,,39,THF
+2025,E,5,Z2,Heteropogon contortus,,4.3,THF
+2025,E,5,Z2,Mopane grass,,3,THF
+2025,E,5,Z2,CEx,,3,THF
+2025,E,5,Z2,,,3.4,THF
+2025,D,1,Z2,Panicum maximum,,10.6,C
+2025,D,1,Z2,Aristida ads,,11.3,C
+2025,D,1,Z2,Setaria incressata,,NA,C
+2025,D,1,Z2,BB,,NA,C
+2025,D,1,Z4,Aristida ads,,11.8,C
+2025,D,1,Z4,E.R,,8.8,C
+2025,D,1,Z4,Mopane grass,,7.6,C
+2025,D,1,Z4,Panicum maximum,,7.6,C
+2025,D,1,Z4,E.C,,NA,C
+2025,D,1,Z4,Heteropogon contortus,,5,C
+2025,D,1,Z4,Diheteropogon anplactence,,11.8,C
+2025,D,1,Z4,E.V,,11.4,C
+2025,D,1,Z4,Pogonarthria squarrosa,,11.2,C
+2025,D,1,Z4,BB,,NA,C
+2025,D,1,Z4,Digitaria erianthra,,NA,C
+2025,D,1,Z4,Chloris virgata,,3.7,C
+2025,D,1,Z4,E.V,,4.9,C
+2025,D,1,Z4,Setaria incressata,,5.8,C
+2025,D,1,Z4,EG,,5.7,C
+2025,D,1,Z4,Panicum maximum,,NA,C
+2025,D,1,Z4,Heteropogon contortus,,33.9,C
+2025,D,1,Z4,Setaria incressata,,25,C
+2025,D,1,Z4,E.V,,19.9,C
+2025,D,1,Z4,BB,,16.3,C
+2025,D,1,Z4,Heteropogon contortus,,8.1,C
+2025,D,1,Z4,E.R,,8.1,C
+2025,D,1,Z4,Setaria incressata,,7,C
+2025,D,1,Z4,E.V,,7.7,C
+2025,D,1,Z4,E.C,,NA,C
+2025,D,1,Z4,Panicum maximum,,NA,C
+2025,D,1,Z4,BB,,NA,C
+2025,D,1,Z3,Mopane grass,,3,C
+2025,D,1,Z3,E.C,,3.3,C
+2025,D,1,Z3,Setaria incressata,,4.9,C
+2025,D,1,Z3,Aristida ads,,7.2,C
+2025,D,1,Z3,Heteropogon contortus,,6.8,C
+2025,D,1,Z3,Chloris virgata,,6.8,C
+2025,D,1,Z3,BS,,4.5,C
+2025,D,1,Z3,,,4.5,C
+2025,D,1,Z3,AD,,10.9,C
+2025,D,1,Z3,Aristida ads,,8.5,C
+2025,D,1,Z3,Setaria incressata,,9.2,C
+2025,D,1,Z3,BB,,10.3,C
+2025,D,1,Z3,Heteropogon contortus,,NA,C
+2025,D,1,Z3,Aristida ads,,6,C
+2025,D,1,Z3,Chloris virgata,,5.1,C
+2025,D,1,Z3,AD,,0,C
+2025,D,1,Z3,BB,,4.5,C
+2025,D,1,Z3,Mopane grass,,4.4,C
+2025,D,1,Z3,Chloris virgata,,4.2,C
+2025,D,1,Z3,Setaria incressata,,4.3,C
+2025,D,1,Z3,Panicum maximum,,5.2,C
+2025,D,1,Z3,ECurv,,NA,C
+2025,D,1,Z1,Setaria incressata,,8.7,C
+2025,D,1,Z1,BB,,8,C
+2025,D,1,Z1,E.R,,9.6,C
+2025,D,1,Z1,E.V,,9.4,C
+2025,D,1,Z1,E.C,,NA,C
+2025,D,1,Z1,Chloris virgata,,NA,C
+2025,D,1,Z1,ECurv,,6.6,C
+2025,D,1,Z1,E.R,,6.8,C
+2025,D,1,Z1,E.V,,6.2,C
+2025,D,1,Z1,Chloris virgata,,7,C
+2025,D,1,Z1,Perotis petens,,NA,C
+2025,D,1,Z1,E.V,,6.8,C
+2025,D,1,Z1,Chloris virgata,,5.3,C
+2025,D,1,Z1,Panicum maximum,,5.2,C
+2025,D,1,Z1,Pogonarthria squarrosa,,5.7,C
+2025,D,1,Z1,BB,,NA,C
+2025,D,1,Z1,Heteropogon contortus,,NA,C
+2025,D,1,Z1,Aristida ads,,NA,C
+2025,D,1,Z1,BB,,4.1,C
+2025,D,1,Z1,Panicum maximum,,4.1,C
+2025,D,1,Z1,D.E,,6.1,C
+2025,D,1,Z1,Mopane grass,,6.2,C
+2025,D,1,Z1,Mopane grass,,34.7,C
+2025,D,1,Z1,E.R,,25.4,C
+2025,D,1,Z1,Setaria incressata,,20.3,C
+2025,D,1,Z1,Diheteropogon anplactence,,15,C
+2025,D,1,Z1,Aristida ads,,15,C
+2025,D,1,Z1,Chloris virgata,,NA,C
+2025,D,1,Z3,BB,,NA,C
+2025,E,1,Z1,Panicum maximum,,6.4,C
+2025,E,1,Z1,Heteropogon contortus,,4.8,C
+2025,E,1,Z1,BB,,4.7,C
+2025,E,1,Z1,Digitaria erianthra,,5.3,C
+2025,E,1,Z1,Mopane grass,,NA,C
+2025,E,1,Z1,Aristida ads,,0,C
+2025,E,1,Z1,E.cylindriflora,,3.5,C
+2025,E,1,Z1,Heteropogon contortus,,0,C
+2025,E,1,Z1,,,2.9,C
+2025,E,1,Z1,Heteropogon contortus,,1.6,C
+2025,E,1,Z1,E.R,,4.1,C
+2025,E,1,Z1,,,4.7,C
+2025,E,1,Z1,,,5.4,C
+2025,E,1,Z1,E.V,,6,C
+2025,E,1,Z1,E.G,,5.4,C
+2025,E,1,Z1,Bracharia serrata,,5,C
+2025,E,1,Z1,,,4.6,C
+2025,E,1,Z1,Heteropogon contortus,,4.3,C
+2025,E,1,Z1,Mopane grass,,0,C
+2025,E,1,Z1,,,4.6,C
+2025,E,1,Z1,,,4.9,C
+2025,E,1,Z3,Panicum maximum,,0,C
+2025,E,1,Z3,,,5.4,C
+2025,E,1,Z3,,,4.2,C
+2025,E,1,Z3,,,3.4,C
+2025,E,1,Z3,Heteropogon contortus,,10.1,C
+2025,E,1,Z3,Digitaria erianthra,,8.9,C
+2025,E,1,Z3,,,8.1,C
+2025,E,1,Z3,,,7,C
+2025,E,1,Z3,Heteropogon contortus,,6.3,C
+2025,E,1,Z3,ECurv,,4.9,C
+2025,E,1,Z3,,,0,C
+2025,E,1,Z3,,,5.6,C
+2025,E,1,Z3,Mopane grass,,9.2,C
+2025,E,1,Z3,ECurv,,5.4,C
+2025,E,1,Z3,,,11.8,C
+2025,E,1,Z3,,,9.8,C
+2025,E,1,Z3,Heteropogon contortus,,3.5,C
+2025,E,1,Z3,,,0,C
+2025,E,1,Z3,,,0,C
+2025,E,1,Z3,,,0,C
+2025,E,1,Z4,Aristida ads,,3.1,C
+2025,E,1,Z4,Heteropogon contortus,,0,C
+2025,E,1,Z4,Setaria incressata,,2.7,C
+2025,E,1,Z4,,,2.7,C
+2025,E,1,Z4,Digitaria erianthra,,3.6,C
+2025,E,1,Z4,,,3.4,C
+2025,E,1,Z4,,,2.8,C
+2025,E,1,Z4,,,0,C
+2025,E,1,Z4,Panicum maximum,,3.4,C
+2025,E,1,Z4,Setaria incressata,,2.7,C
+2025,E,1,Z4,,,2.8,C
+2025,E,1,Z4,,,0,C
+2025,E,1,Z4,Digitaria erianthra,,2.5,C
+2025,E,1,Z4,Mopane grass,,4,C
+2025,E,1,Z4,ACC,,4.2,C
+2025,E,1,Z4,E.G,,3.6,C
+2025,E,1,Z4,Digitaria erianthra,,8.2,C
+2025,E,1,Z4,E.S,,8.6,C
+2025,E,1,Z4,E.G,,9.2,C
+2025,E,1,Z4,,,9.6,C
+2025,E,1,Z2,E.S,,2.6,C
+2025,E,1,Z2,Heteropogon contortus,,3.1,C
+2025,E,1,Z2,,,3.2,C
+2025,E,1,Z2,,,3.2,C
+2025,E,1,Z2,Heteropogon contortus,,2.4,C
+2025,E,1,Z2,Digitaria erianthra,,6.6,C
+2025,E,1,Z2,Setaria incressata,,0,C
+2025,E,1,Z2,,,2.4,C
+2025,E,1,Z2,Digitaria erianthra,,4.1,C
+2025,E,1,Z2,Heteropogon contortus,,3.3,C
+2025,E,1,Z2,,,3.2,C
+2025,E,1,Z2,,,4.8,C
+2025,E,1,Z2,BB,,3.8,C
+2025,E,1,Z2,Heteropogon contortus,,4.8,C
+2025,E,1,Z2,Mopane grass,,4.4,C
+2025,E,1,Z2,E.G,,3.9,C
+2025,E,1,Z2,E.R,,NA,C
+2025,E,1,Z2,Aristida ads,,3.2,C
+2025,E,1,Z2,CEx,,4.2,C
+2025,E,1,Z2,Heteropogon contortus,,4.3,C
+2025,E,1,Z2,Digitaria erianthra,,3.6,C
+2025,F,1,Z1,Digitaria erianthra,,4.9,C
+2025,F,1,Z1,Aristida ads,,4.5,C
+2025,F,1,Z1,,,5.4,C
+2025,F,1,Z1,,,4.7,C
+2025,F,1,Z1,Heteropogon  contortus,,6.9,C
+2025,B,2,Z1,ACB,,7.4,F
+2025,B,2,Z1,Melenis repens,,8,F
+2025,B,2,Z1,Bracharia serrata,,9.3,F
+2025,B,2,Z1,Cymbopogon plari,,10.3,F
+2025,B,2,Z1,Heteropogon contortus,,NA,F
+2025,B,2,Z1,Pinhole,,NA,F
+2025,B,2,Z1,ACB,,19.7,F
+2025,B,2,Z1,CEx,,20.2,F
+2025,B,2,Z1,Heteropogon contortus,,20.8,F
+2025,B,2,Z1,Sporobolus africanus,,22.5,F
+2025,B,2,Z1,ACB,,12.6,F
+2025,B,2,Z1,CEx,,22.1,F
+2025,B,2,Z1,Cymbopogon plari,,20.2,F
+2025,B,2,Z1,Melenis repens,,20.8,F
+2025,B,2,Z1,ACB,,18.5,F
+2025,B,2,Z1,Heteropogon contortus,,21.7,F
+2025,B,2,Z1,Cymbopogon plari,,19.8,F
+2025,B,2,Z1,Digitaria erianthra,,20.1,F
+2025,B,2,Z1,CEx,,6,F
+2025,B,2,Z1,Heteropogon contortus,,12,F
+2025,B,2,Z1,Digitaria erianthra,,11.4,F
+2025,B,2,Z1,E.G,,12.3,F
+2025,B,2,Z3,ACB,,21.3,F
+2025,B,2,Z1,Heteropogon contortus,,17.8,F
+2025,B,2,Z1,Pinhole,,14,F
+2025,B,2,Z1,Melenis repens,,11.2,F
+2025,B,2,Z1,ECurv,,NA,F
+2025,B,2,Z1,Cymbopogon plari,,8.2,F
+2025,B,2,Z1,CEx,,12.8,F
+2025,B,2,Z1,SSp,,14.5,F
+2025,B,2,Z1,,,18.4,F
+2025,B,2,Z1,CEx,,28.4,F
+2025,B,2,Z1,E.S,,28.2,F
+2025,B,2,Z1,Heteropogon contortus,,30,F
+2025,B,2,Z1,E.G,,27.6,F
+2025,B,2,Z1,CEx,,NA,F
+2025,B,2,Z1,Melenis repens,,26.5,F
+2025,B,2,Z1,ACB,,21.8,F
+2025,B,2,Z1,Heteropogon contortus,,22,F
+2025,B,2,Z1,Digitaria erianthra,,22.7,F
+2025,B,2,Z1,Pinhole,,NA,F
+2025,B,2,Z1,Diheteropogon anplactence,,6.8,F
+2025,B,2,Z1,Heteropogon contortus,,11.6,F
+2025,B,2,Z1,CEx,,12.5,F
+2025,B,2,Z1,,,0,F
+2025,B,2,Z4,CEx,,10.5,F
+2025,B,2,Z4,Heteropogon contortus,,15.6,F
+2025,B,2,Z4,,,12.9,F
+2025,B,2,Z4,,,13.7,F
+2025,B,2,Z4,Heteropogon contortus,,0,F
+2025,B,2,Z4,,,0,F
+2025,B,2,Z4,,,0,F
+2025,B,2,Z4,,,0,F
+2025,B,2,Z4,CEx,,16.7,F
+2025,B,2,Z4,Setaria pumila,,16.2,F
+2025,B,2,Z4,Aristida ads,,13.6,F
+2025,B,2,Z4,E.S,,11.6,F
+2025,B,2,Z4,Heteropogon contortus,,NA,F
+2025,B,2,Z4,Pinhole,,NA,F
+2025,B,2,Z4,E.G,,NA,F
+2025,B,2,Z4,Heteropogon contortus,,15.1,F
+2025,B,2,Z4,ACB,,11.6,F
+2025,B,2,Z4,,,12.1,F
+2025,B,2,Z4,,,11.6,F
+2025,B,2,Z4,CEx,,16.9,F
+2025,B,2,Z4,Setaria incressata,,18.3,F
+2025,B,2,Z4,Heteropogon contortus,,18.2,F
+2025,B,2,Z4,,,16.1,F
+2025,B,2,Z2,Pinhole,,9.8,F
+2025,B,2,Z2,Heteropogon contortus,,8,F
+2025,B,2,Z2,E.G,,9.5,F
+2025,B,2,Z2,,,10.1,F
+2025,B,2,Z2,Heteropogon contortus,,4.6,F
+2025,B,2,Z2,E.S,,5.4,F
+2025,B,2,Z2,E.G,,6.6,F
+2025,B,2,Z2,,,7,F
+2025,B,2,Z2,Hfili,,23.2,F
+2025,B,2,Z2,Digitaria erianthra,,4.6,F
+2025,B,2,Z2,CEx,,5,F
+2025,B,2,Z2,Pogonarthria squarrosa,,4.3,F
+2025,B,2,Z2,Heteropogon contortus,,0,F
+2025,B,2,Z2,,,5.6,F
+2025,B,2,Z2,,,4.8,F
+2025,B,2,Z2,,,12.1,F
+2025,B,2,Z2,CEx,,18.4,F
+2025,B,2,Z2,Heteropogon contortus,,20.5,F
+2025,B,2,Z2,B.N,,14.4,F
+2025,B,2,Z2,E.G,,15.9,F
+2025,C,2,Z3,Panicum maximum,,19.7,TFB
+2025,C,2,Z3,,,80.8,TFB
+2025,C,2,Z3,,,67.4,TFB
+2025,C,2,Z3,,,40.2,TFB
+2025,C,2,Z3,Panicum maximum,,21.9,TFB
+2025,C,2,Z3,,,22.6,TFB
+2025,C,2,Z3,,,14.8,TFB
+2025,C,2,Z3,,,17,TFB
+2025,C,2,Z3,Digitaria erianthra,,11.1,TFB
+2025,C,2,Z3,Heteropogon contortus,,7.4,TFB
+2025,C,2,Z3,,,6.8,TFB
+2025,C,2,Z3,,,7.4,TFB
+2025,C,2,Z3,E.R,,4.1,TFB
+2025,C,2,Z3,E.G,,6.1,TFB
+2025,C,2,Z3,Digitaria erianthra,,4.9,TFB
+2025,C,2,Z3,,,4.2,TFB
+2025,C,2,Z3,E.R,,4.5,TFB
+2025,C,2,Z3,E.G,,4.9,TFB
+2025,C,2,Z3,D. velutina,,4.6,TFB
+2025,C,2,Z3,,,4.5,TFB
+2025,C,2,Z1,Setaria incressata,,4.5,TFB
+2025,C,2,Z1,Panicum maximum,,6.1,TFB
+2025,C,2,Z1,,,5.1,TFB
+2025,C,2,Z1,,,5.1,TFB
+2025,C,2,Z1,E.curvula,,12,TFB
+2025,C,2,Z1,Panicum maximum,,7.3,TFB
+2025,C,2,Z1,,,5.4,TFB
+2025,C,2,Z1,,,4.9,TFB
+2025,C,2,Z1,E.V,,8,TFB
+2025,C,2,Z1,Digitaria erianthra,,9.3,TFB
+2025,C,2,Z1,E.G,,7.7,TFB
+2025,C,2,Z1,,,7.2,TFB
+2025,C,2,Z1,Panicum maximum,,6.3,TFB
+2025,C,2,Z1,,,6.1,TFB
+2025,C,2,Z1,,,7.9,TFB
+2025,C,2,Z1,,,8.2,TFB
+2025,C,2,Z1,Panicum maximum,,7,TFB
+2025,C,2,Z1,D. velutina,,6.3,TFB
+2025,C,2,Z1,,,5.8,TFB
+2025,C,2,Z1,,,5.4,TFB
+2025,C,2,Z2,Panicum maximum,,20,TFB
+2025,C,2,Z2,Setaria incressata,,18.8,TFB
+2025,C,2,Z2,,,17.1,TFB
+2025,C,2,Z2,,,22.5,TFB
+2025,C,2,Z2,E.R,,7,TFB
+2025,C,2,Z2,BB,,6.2,TFB
+2025,C,2,Z2,,,6.2,TFB
+2025,C,2,Z2,,,6.2,TFB
+2025,C,2,Z2,Panicum maximum,,14,TFB
+2025,C,2,Z2,D. velutina,,12.8,TFB
+2025,C,2,Z2,Aristida ads,,11.7,TFB
+2025,C,2,Z2,,,10,TFB
+2025,C,2,Z2,Heteropogon contortus,,9.8,TFB
+2025,C,2,Z2,Panicum maximum,,6.5,TFB
+2025,C,2,Z2,D. velutina,,5.2,TFB
+2025,C,2,Z2,E.G,,6.2,TFB
+2025,C,2,Z2,Panicum maximum,,6.5,TFB
+2025,C,2,Z2,E.G,,6,TFB
+2025,C,2,Z2,,,6.4,TFB
+2025,C,2,Z2,,,6.7,TFB
+2025,C,2,Z4,Panicum maximum,,17.5,TFB
+2025,C,2,Z4,,,15.7,TFB
+2025,C,2,Z4,,,13.8,TFB
+2025,C,2,Z4,,,13.3,TFB
+2025,C,2,Z4,E.R,,15.2,TFB
+2025,C,2,Z4,BB,,8.9,TFB
+2025,C,2,Z4,,,14.3,TFB
+2025,C,2,Z4,,,11.3,TFB
+2025,C,2,Z4,Panicum maximum,,9.9,TFB
+2025,C,2,Z4,D.egyptium,,9.2,TFB
+2025,C,2,Z4,,,12,TFB
+2025,C,2,Z4,,,12.1,TFB
+2025,C,2,Z4,B.N,,2.7,TFB
+2025,C,2,Z4,Panicum maximum,,3.9,TFB
+2025,C,2,Z4,,,5.5,TFB
+2025,C,2,Z4,,,5.3,TFB
+2025,C,2,Z4,Setaria incressata,,9.3,TFB
+2025,C,2,Z4,D. velutina,,18.7,TFB
+2025,C,2,Z4,,,13.4,TFB
+2025,C,2,Z4,,,11.9,TFB
+2025,C,4,Z3,Pogonarthria squarrosa,,5.8,F
+2025,C,4,Z3,E.R,,10.6,F
+2025,C,4,Z3,Heteropogon contortus,,8.5,F
+2025,C,4,Z3,Hfili,,8.6,F
+2025,C,4,Z3,E.G,,NA,F
+2025,C,4,Z3,Setaria incressata,,NA,F
+2025,C,4,Z3,Digitaria erianthra,,NA,F
+2025,C,4,Z3,Panicum maximum,,5.7,F
+2025,C,4,Z3,D. velutina,,5.8,F
+2025,C,4,Z3,,,5.7,F
+2025,C,4,Z3,,,5.2,F
+2025,C,4,Z3,Heteropogon contortus,,10.5,F
+2025,C,4,Z3,Pogonarthria squarrosa,,12,F
+2025,C,4,Z3,E.G,,11.4,F
+2025,C,4,Z3,Melenis repens,,10.4,F
+2025,C,4,Z3,Aristida ads,,5,F
+2025,C,4,Z3,E.G,,3.9,F
+2025,C,4,Z3,,,3.3,F
+2025,C,4,Z3,,,3.3,F
+2025,C,4,Z3,BB,,10.9,F
+2025,C,4,Z3,Setaria incressata,,11.2,F
+2025,C,4,Z3,D. velutina,,9.1,F
+2025,C,4,Z3,,,7.6,F
+2025,C,4,Z4,Pogonarthria squarrosa,,8.4,F
+2025,C,4,Z4,Hfili,,11,F
+2025,C,4,Z4,E.S,,11.1,F
+2025,C,4,Z4,E.G,,11.5,F
+2025,C,4,Z4,Aristida ads,,NA,F
+2025,C,4,Z4,H.Dissoluta,,5,F
+2025,C,4,Z4,Pogonarthria squarrosa,,6.1,F
+2025,C,4,Z4,Aristida ads,,24.3,F
+2025,C,4,Z4,Heteropogon contortus,,21.4,F
+2025,C,4,Z4,Setaria incressata,,NA,F
+2025,C,4,Z4,Aristida ads,,15,F
+2025,C,4,Z4,Pogonarthria squarrosa,,0,F
+2025,C,4,Z4,Diheteropogon anplactence,,8.9,F
+2025,C,4,Z4,B.N,,9.2,F
+2025,C,4,Z4,Aristida ads,,2.3,F
+2025,C,4,Z4,Panicum maximum,,4.3,F
+2025,C,4,Z4,Heteropogon contortus,,5,F
+2025,C,4,Z4,E.G,,5.5,F
+2025,C,4,Z4,Melenis repens,,5.5,F
+2025,C,4,Z4,Setaria incressata,,NA,F
+2025,C,4,Z4,BB,,1.6,F
+2025,C,4,Z4,B.N,,8.5,F
+2025,C,4,Z4,,,7.2,F
+2025,C,4,Z4,,,6.6,F
+2025,C,4,Z2,BB,,11,F
+2025,C,4,Z2,Pogonarthria squarrosa,,6.6,F
+2025,C,4,Z2,E.G,,8.2,F
+2025,C,4,Z2,Melenis repens,,9.8,F
+2025,C,4,Z2,Heteropogon contortus,,NA,F
+2025,C,4,Z2,E.S,,NA,F
+2025,C,4,Z2,Digitaria erianthra,,NA,F
+2025,C,4,Z2,Pogonarthria squarrosa,,2.1,F
+2025,C,4,Z2,Heteropogon contortus,,8.6,F
+2025,C,4,Z2,E.R,,10.8,F
+2025,C,4,Z2,BB,,13.2,F
+2025,C,4,Z2,Aristida ads,,12.6,F
+2025,C,4,Z2,Heteropogon contortus,,12.2,F
+2025,C,4,Z2,BB,,6.7,F
+2025,C,4,Z2,,,6.6,F
+2025,C,4,Z2,Heteropogon contortus,,18.6,F
+2025,C,4,Z2,Panicum maximum,,15.1,F
+2025,C,4,Z2,B.S,,14.1,F
+2025,C,4,Z2,Digitaria erianthra,,14.4,F
+2025,C,4,Z2,Heteropogon contortus,,17.7,F
+2025,C,4,Z2,Setaria incressata,,19.4,F
+2025,C,4,Z2,Panicum maximum,,17.8,F
+2025,C,4,Z2,D. velutina,,15.6,F
+2025,C,4,Z1,Heteropogon contortus,,14.6,F
+2025,C,4,Z1,Pogonarthria squarrosa,,19.7,F
+2025,C,4,Z1,Melenis repens,,20,F
+2025,C,4,Z1,E.G,,17.6,F
+2025,C,4,Z1,Heteropogon contortus,,2.5,F
+2025,C,4,Z1,Aristida ads,,2.5,F
+2025,C,4,Z1,,,2.5,F
+2025,C,4,Z1,,,2.5,F
+2025,C,4,Z1,BB,,30.9,F
+2025,C,4,Z1,E.R,,32.4,F
+2025,C,4,Z1,Pogonarthria squarrosa,,27.8,F
+2025,C,4,Z1,E.G,,25.1,F
+2025,C,4,Z1,Pogonarthria squarrosa,,4.1,F
+2025,C,4,Z1,Heteropogon contortus,,4.4,F
+2025,C,4,Z1,Bracharia serrata,,6.5,F
+2025,C,4,Z1,,,6.6,F
+2025,C,4,Z1,Digitaria erianthra,,8.3,F
+2025,C,4,Z1,E.R,,4.3,F
+2025,C,4,Z1,,,3.9,F
+2025,C,4,Z1,,,20.3,F
+2025,F,1,Z1,Digitaria erianthra,,7.5,C
+2025,F,1,Z1,Eragrostis rigidior,,7.8,C
+2025,F,1,Z1,,,8.4,C
+2025,F,1,Z1,Digitaria erianthra,,5.2,C
+2025,F,1,Z1,Eragrostis rigidior,,6.1,C
+2025,F,1,Z1,Pogonarthria squarrosa,,5.4,C
+2025,F,1,Z1,,,5.4,C
+2025,F,1,Z1,Eragrostis superba,,4.6,C
+2025,F,1,Z1,Pogonarthria squarrosa,,4.8,C
+2025,F,1,Z1,Eragrostis rigidior,,7.5,C
+2025,F,1,Z1,Digitaria erianthra,,7.2,C
+2025,F,1,Z1,Heteropogon  contortus,,7.5,C
+2025,F,1,Z1,Eragrostis rigidior,,7.4,C
+2025,F,1,Z1,Eragrostis superba,,7,C
+2025,F,1,Z1,Eragrostis viscosa,,6.8,C
+2025,F,1,Z1,Digitaria erianthra,,NA,C
+2025,F,1,Z2,Digitaria erianthra,,10.4,C
+2025,F,1,Z2,Heteropogon  contortus,,10.3,C
+2025,F,1,Z2,Aristida ads,,9.4,C
+2025,F,1,Z2,,,9.1,C
+2025,F,1,Z2,Digitaria erianthra,,5.2,C
+2025,F,1,Z2,Heteropogon  contortus,,7.1,C
+2025,F,1,Z2,Pogonarthria squarrosa,,7.7,C
+2025,F,1,Z2,Eragrostis rigidior,,12,C
+2025,F,1,Z2,Eragrostis rigidior,,4.2,C
+2025,F,1,Z2,Eragrostis superba,,4.6,C
+2025,F,1,Z2,,,5.9,C
+2025,F,1,Z2,,,6.4,C
+2025,F,1,Z2,Bracharia negropedata,,2.4,C
+2025,F,1,Z2,Digitaria erianthra,,4.5,C
+2025,F,1,Z2,Eragrostis viscosa,,5.1,C
+2025,F,1,Z2,Eragrostis rigidior,,5.2,C
+2025,F,1,Z2,Aristida congesta B,,NA,C
+2025,F,1,Z2,Aristida ads,,NA,C
+2025,F,1,Z2,Digitaria erianthra,,11.2,C
+2025,F,1,Z2,Heteropogon  contortus,,9,C
+2025,F,1,Z2,Eragrostis superba,,9.1,C
+2025,F,1,Z2,Eragrostis rigidior,,9.2,C
+2025,F,1,Z2,Aristida ads,,NA,C
+2025,F,1,Z3,Eragrostis superba,,8.3,C
+2025,F,1,Z3,Eragrostis gummiflua,,7.4,C
+2025,F,1,Z3,,,7.2,C
+2025,F,1,Z3,,,7,C
+2025,F,1,Z3,Eragrostis gummiflua,,2.1,C
+2025,F,1,Z3,,,2.6,C
+2025,F,1,Z3,,,3.2,C
+2025,F,1,Z3,,,3.1,C
+2025,F,1,Z3,Eragrostis rigidior,,4.3,C
+2025,F,1,Z3,Aristida ads,,4,C
+2025,F,1,Z3,Bracharia negropedata,,3.5,C
+2025,F,1,Z3,Digitaria erianthra,,3.5,C
+2025,F,1,Z3,Eragrostis viscosa,,6.1,C
+2025,F,1,Z3,Eragrostis superba,,5.9,C
+2025,F,1,Z3,Eragrostis rigidior,,5.3,C
+2025,F,1,Z3,,,4.9,C
+2025,F,1,Z3,Aristida diffusa,,0,C
+2025,F,1,Z3,Aristida ads,,1.7,C
+2025,F,1,Z3,Mopane grass,,1.8,C
+2025,F,1,Z3,Heteropogon  contortus,,3.4,C
+2025,F,1,Z3,Eragrostis superba,,NA,C
+2025,F,1,Z4,Eragrostis superba,,2.2,C
+2025,F,1,Z4,Pogonarthria squarrosa,,2.1,C
+2025,F,1,Z4,Heteropogon  contortus,,2.3,C
+2025,F,1,Z4,,,4.4,C
+2025,F,1,Z4,Digitaria erianthra,,11.4,C
+2025,F,1,Z4,Eragrostis gummiflua,,9.8,C
+2025,F,1,Z4,Eragrostis viscosa,,9.3,C
+2025,F,1,Z4,,,9,C
+2025,F,1,Z4,Eragrostis viscosa,,3.6,C
+2025,F,1,Z4,Eragrostis gummiflua,,4.4,C
+2025,F,1,Z4,,,4.7,C
+2025,F,1,Z4,,,4.8,C
+2025,F,1,Z4,Eragrostis gummiflua,,3.4,C
+2025,F,1,Z4,Eragrostis viscosa,,3.2,C
+2025,F,1,Z4,,,4.4,C
+2025,F,1,Z4,,,5.2,C
+2025,F,1,Z4,Eragrostis superba,,5.1,C
+2025,F,1,Z4,Eragrostis rigidior,,4.8,C
+2025,F,1,Z4,Eragrostis viscosa,,5,C
+2025,F,1,Z4,Eragrostis gummiflua,,4.2,C
+2025,F,1,Z4,Aristida diffusa,,NA,C
+2025,C,5,Z1,Pogonarthria squarrosa,,13.4,THF
+2025,C,5,Z1,Digitaria erianthra,,15,THF
+2025,C,5,Z1,Heteropogon contortus,,15.1,THF
+2025,C,5,Z1,,,15.1,THF
+2025,C,5,Z1,Heteropogon contortus,,19,THF
+2025,C,5,Z1,Digitaria erianthra,,17.3,THF
+2025,C,5,Z1,Melenis repens,,17.8,THF
+2025,C,5,Z1,E.R,,17.7,THF
+2025,C,5,Z1,Pogonarthria squarrosa,,NA,THF
+2025,C,5,Z1,Digitaria erianthra,,10.1,THF
+2025,C,5,Z1,E.V,,11.2,THF
+2025,C,5,Z1,E.G,,10,THF
+2025,C,5,Z1,,,9.8,THF
+2025,C,5,Z1,Panicum maximum,,5.4,THF
+2025,C,5,Z1,D. velutina,,4.6,THF
+2025,C,5,Z1,,,6.5,THF
+2025,C,5,Z1,,,2.3,THF
+2025,C,5,Z1,Panicum maximum,,10,THF
+2025,C,5,Z1,Melenis repens,,11.2,THF
+2025,C,5,Z1,D. velutina,,12.6,THF
+2025,C,5,Z1,BB,,12.9,THF
+2025,C,5,Z1,Digitaria erianthra,,NA,THF
+2025,C,5,Z1,Heteropogon contortus,,NA,THF
+2025,C,5,Z1,,,NA,THF
+2025,C,5,Z2,Pogonarthria squarrosa,,24.6,THF
+2025,C,5,Z2,Melenis repens,,26.2,THF
+2025,C,5,Z2,Andropogon eucomas,,24.7,THF
+2025,C,5,Z2,Heteropogon contortus,,23.2,THF
+2025,C,5,Z2,Pogonarthria squarrosa,,10,THF
+2025,C,5,Z2,E.R,,14.6,THF
+2025,C,5,Z2,Heteropogon contortus,,18.1,THF
+2025,C,5,Z2,Digitaria erianthra,,14.7,THF
+2025,C,5,Z2,Panicum maximum,,6.5,THF
+2025,C,5,Z2,D. velutina,,6,THF
+2025,C,5,Z2,,,5.5,THF
+2025,C,5,Z2,,,4.8,THF
+2025,C,5,Z2,Panicum maximum,,2.5,THF
+2025,C,5,Z2,D. velutina,,2.5,THF
+2025,C,5,Z2,Heteropogon contortus,,8.1,THF
+2025,C,5,Z2,,,7.1,THF
+2025,C,5,Z2,Panicum maximum,,15.3,THF
+2025,C,5,Z2,D. velutina,,15.4,THF
+2025,C,5,Z2,,,13.3,THF
+2025,C,5,Z2,,,0,THF
+2025,C,5,Z4,Digitaria erianthra,,10.1,THF
+2025,C,5,Z4,BB,,12,THF
+2025,C,5,Z4,E.G,,9.6,THF
+2025,C,5,Z4,,,9,THF
+2025,C,5,Z4,Heteropogon contortus,,2.6,THF
+2025,C,5,Z4,Aristida ads,,5.4,THF
+2025,C,5,Z4,E.G,,4.8,THF
+2025,C,5,Z4,B.N,,6.4,THF
+2025,C,5,Z4,BB,,NA,THF
+2025,C,5,Z4,Aristida ads,,7.3,THF
+2025,C,5,Z4,Digitaria erianthra,,10.5,THF
+2025,C,5,Z4,Heteropogon contortus,,10,THF
+2025,C,5,Z4,,,10.5,THF
+2025,C,5,Z4,E.S,,8.9,THF
+2025,C,5,Z4,Aristida ads,,9.8,THF
+2025,C,5,Z4,Pogonarthria squarrosa,,10.9,THF
+2025,C,5,Z4,Heteropogon contortus,,12.3,THF
+2025,C,5,Z4,Panicum maximum,,4.5,THF
+2025,C,5,Z4,D. velutina,,4.6,THF
+2025,C,5,Z4,,,5.9,THF
+2025,C,5,Z4,,,5.7,THF
+2025,C,5,Z3,B.N,,17.7,THF
+2025,C,5,Z3,Pogonarthria squarrosa,,15.5,THF
+2025,C,5,Z3,E.G,,23.5,THF
+2025,C,5,Z3,E.V,,22.4,THF
+2025,C,5,Z3,Heteropogon contortus,,9.1,THF
+2025,C,5,Z3,D. velutina,,7.4,THF
+2025,C,5,Z3,B.N,,8.5,THF
+2025,C,5,Z3,E.R,,10.9,THF
+2025,C,5,Z3,E.G,,NA,THF
+2025,C,5,Z3,Panicum maximum,,8.7,THF
+2025,C,5,Z3,D. velutina,,6.3,THF
+2025,C,5,Z3,,,7.3,THF
+2025,C,5,Z3,,,7.3,THF
+2025,C,5,Z3,Panicum maximum,,13.7,THF
+2025,C,5,Z3,D. velutina,,11.9,THF
+2025,C,5,Z3,,,12.1,THF
+2025,C,5,Z3,,,13.7,THF
+2025,C,5,Z3,BB,,0,THF
+2025,C,5,Z3,D. velutina,,0,THF
+2025,C,5,Z3,,,4.4,THF
+2025,C,5,Z3,,,10.3,THF
+2025,C,3,Z3,H.Dissoluta,,8.7,TF
+2025,C,3,Z3,Heteropogon contortus,,11.1,TF
+2025,C,3,Z3,Melenis repens,,14.2,TF
+2025,C,3,Z3,E.V,,10.2,TF
+2025,C,3,Z3,Pogonarthria squarrosa,,NA,TF
+2025,C,3,Z3,Digitaria erianthra,,NA,TF
+2025,C,3,Z3,Heteropogon contortus,,4.7,TF
+2025,C,3,Z3,Pogonarthria squarrosa,,6.7,TF
+2025,C,3,Z3,Digitaria erianthra,,4.9,TF
+2025,C,3,Z3,,,0,TF
+2025,C,3,Z3,Aristida ads,,3,TF
+2025,C,3,Z3,Cynodon dactylon,,4.1,TF
+2025,C,3,Z3,Setaria incressata,,5.6,TF
+2025,C,3,Z3,Pogonarthria squarrosa,,4.3,TF
+2025,C,3,Z3,Heteropogon contortus,,4.3,TF
+2025,C,3,Z3,Pogonarthria squarrosa,,4.2,TF
+2025,C,3,Z3,Aristida ads,,4.2,TF
+2025,C,3,Z3,E.R,,7.1,TF
+2025,C,3,Z3,Setaria incressata,,NA,TF
+2025,C,3,Z3,Pogonarthria squarrosa,,4.5,TF
+2025,C,3,Z3,E.R,,7.1,TF
+2025,C,3,Z3,E.G,,6.8,TF
+2025,C,3,Z3,Digitaria erianthra,,6.9,TF
+2025,C,3,Z4,H.Dissoluta,,6.8,TF
+2025,C,3,Z4,E.G,,4.7,TF
+2025,C,3,Z4,Pogonarthria squarrosa,,6.5,TF
+2025,C,3,Z4,E.R,,6.3,TF
+2025,C,3,Z4,E.V,,NA,TF
+2025,C,3,Z4,Digitaria erianthra,,5.6,TF
+2025,C,3,Z4,Pogonarthria squarrosa,,5.6,TF
+2025,C,3,Z4,,,5.4,TF
+2025,C,3,Z4,,,5.1,TF
+2025,C,3,Z4,Pogonarthria squarrosa,,10.3,TF
+2025,C,3,Z4,BB,,8.4,TF
+2025,C,3,Z4,Digitaria erianthra,,8.1,TF
+2025,C,3,Z4,E.R,,7.7,TF
+2025,C,3,Z4,E.R,,6.6,TF
+2025,C,3,Z4,Pogonarthria squarrosa,,6.4,TF
+2025,C,3,Z4,Digitaria erianthra,,6.8,TF
+2025,C,3,Z4,,,7.2,TF
+2025,C,3,Z4,Heteropogon contortus,,15.9,TF
+2025,C,3,Z4,Aristida ads,,14.4,TF
+2025,C,3,Z4,Digitaria erianthra,,22.6,TF
+2025,C,3,Z4,Pogonarthria squarrosa,,20.1,TF
+2025,C,3,Z1,E.G,,6.3,TF
+2025,C,3,Z1,E.S,,7.1,TF
+2025,C,3,Z1,Pogonarthria squarrosa,,9.2,TF
+2025,C,3,Z1,Panicum maximum,,10.7,TF
+2025,C,3,Z1,E.V,,NA,TF
+2025,C,3,Z1,Digitaria erianthra,,NA,TF
+2025,C,3,Z1,Digitaria erianthra,,9.1,TF
+2025,C,3,Z1,,,7.9,TF
+2025,C,3,Z1,,,6.8,TF
+2025,C,3,Z1,,,7.3,TF
+2025,C,3,Z1,Heteropogon contortus,,12.8,TF
+2025,C,3,Z1,Panicum maximum,,9.5,TF
+2025,C,3,Z1,,,13.1,TF
+2025,C,3,Z1,,,31,TF
+2025,C,3,Z1,D. velutina,,20.7,TF
+2025,C,3,Z1,Heteropogon contortus,,17.1,TF
+2025,C,3,Z1,Panicum maximum,,14.7,TF
+2025,C,3,Z1,,,13.3,TF
+2025,C,3,Z1,BB,,12.8,TF
+2025,C,3,Z1,Heteropogon contortus,,19,TF
+2025,C,3,Z1,E.V,,15.8,TF
+2025,C,3,Z1,Bracharia serrata,,14.5,TF
+2025,C,3,Z2,Digitaria erianthra,,18.1,TF
+2025,C,3,Z2,Melenis repens,,21.1,TF
+2025,C,3,Z2,,,17.3,TF
+2025,C,3,Z2,,,15,TF
+2025,C,3,Z2,Heteropogon contortus,,16,TF
+2025,C,3,Z2,Pogonarthria squarrosa,,14.4,TF
+2025,C,3,Z2,D. velutina,,16.2,TF
+2025,C,3,Z2,,,17.2,TF
+2025,C,3,Z2,BB,,5.5,TF
+2025,C,3,Z2,Bracharia serrata,,4.3,TF
+2025,C,3,Z2,,,0,TF
+2025,C,3,Z2,,,0,TF
+2025,C,3,Z2,Heteropogon contortus,,13.6,TF
+2025,C,3,Z2,Pogonarthria squarrosa,,22.9,TF
+2025,C,3,Z2,BB,,20.4,TF
+2025,C,3,Z2,Aristida ads,,20.8,TF
+2025,C,3,Z2,Panicum maximum,,4.5,TF
+2025,C,3,Z2,Heteropogon contortus,,4.7,TF
+2025,C,3,Z2,,,4,TF
+2025,C,3,Z2,,,4.2,F
