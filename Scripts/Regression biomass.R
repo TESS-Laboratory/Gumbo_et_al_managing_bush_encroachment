@@ -6,6 +6,7 @@ library(Matrix)
 library(lme4)
 library(emmeans)
 
+
 theme_beautiful <- function() {
   theme_bw() +
     theme(
@@ -175,7 +176,7 @@ ggplot(data_long, aes(x = log_DH, y = LogBiomass, color = Model)) +
 ###############################################################################
 ## REDOING BIOMASS MODELS USING ACTUAL DATA POINTS
 
-WGdata <- read_csv("DATA/DPM .csv")
+WGdata <- read_csv("DATA/DPM.csv")
 
 ################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
 # 2. Convert weight from grams to kg/ha
