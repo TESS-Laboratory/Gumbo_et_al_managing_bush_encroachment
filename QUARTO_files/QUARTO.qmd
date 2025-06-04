@@ -12,7 +12,7 @@ format:
 
 ## Introduction
 
-The plots below show the relationship between DPM heights and standing biomass (kg/ha).
+The plots below show the relationship between DPM heights (cm) and standing grass biomass (kg/ha). A comparison of the study model (SHR) and other existing models e.g. Trollope and Potgieter (1986) is done on the plots.
 
 ## Standing grass biomass at Shangani Holistic Ranch
 
@@ -102,7 +102,7 @@ tab_model(modelWG)
 
 ```
 
-```{r, warning=FALSE, message=FALSE, fig.cap="Figure 2. Comparing the Trollope model and SHR model using square root DPM height"}
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 2. Comparing the Trollope and Potgieter (1986) model and SHR model using square root DPM height"}
 
 library(tidyverse)
 library(lmerTest)
@@ -158,46 +158,49 @@ WGdata <- read_csv(here("DATA/DPM.csv"))
 frame_area <- pi * (0.17^2)  # = 0.0908 m²
 WGdata$Biomass_kg_ha <- WGdata$Weight * 10 / frame_area
 
-# 3. Linear regression: Biomass ~ DPH
-modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
+#####Creating annotations for Trollope 
+# If the height column exists, create square root
+WGdata$sqrtDPH_Height <- sqrt(WGdata$DPH_Height)  # adjust if column name differs
 
-
-### USING THE TROLLOPE EQUATION TO COMPARE IT WITH MY MODEL
-# Step 1: Prepare WGdata
-
-WGdata$sqrtDPH_Height <- sqrt(WGdata$DPH_Height)
-
-# Step 2: Create theoretical model predictions using the equation
-WGdata$TR_model <- -3019 + 2260 * WGdata$sqrtDPH_Height
-
-# Step 3: Theoretical model: y = -3019 + 2260 * sqrt(DP)
-TR_model_data <- data.frame(
-  sqrtDPH_Height = WGdata$sqrtDPH_Height,
-  Biomass_kg_ha = -3019 + 2260 * WGdata$sqrtDPH_Height,
-  Source = "Trollope and Potgieter 1986")
-
-# Step 4: Add source to WGdata
+# Create actual data for SHR model
 WG_actual_data <- data.frame(
   sqrtDPH_Height = WGdata$sqrtDPH_Height,
   Biomass_kg_ha = WGdata$Biomass_kg_ha,
   Source = "SHR")
 
-# Step 5: Combine both for plotting
+# Data from the Trollope equation
+TR_model_data <- data.frame(
+  sqrtDPH_Height = WGdata$sqrtDPH_Height,
+  Biomass_kg_ha = -3019 + 2260 * WGdata$sqrtDPH_Height,
+  Source = "Trollope and Potgieter 1986"
+)
+
+# Combine 
 combined <- rbind(WG_actual_data, TR_model_data)
 
-# Step 6: Plot with legend
+#Fit model SHR model and define annotation equations
+model_SHR <- lm(Biomass_kg_ha ~ sqrtDPH_Height, data = WG_actual_data)
+coefs_SHR <- round(coef(model_SHR), 2)
+
+eq_SHR <- paste0("Biomass == ", coefs_SHR[1], " + ", coefs_SHR[2], " * sqrt(DPM)")
+eq_Trollope <- "Biomass == -3019 + 2260 * sqrt(DPM)"
+
+
+##PLTOTTING
+
 ggplot(combined, aes(x = sqrtDPH_Height, y = Biomass_kg_ha, color = Source)) +
   geom_point(data = subset(combined, Source == "SHR"), size = 2) +
-  geom_smooth(data = subset(combined, Source == "SHR"),
-              method = "lm", se = FALSE) +
+  geom_smooth(data = subset(combined, Source == "SHR"), method = "lm", se = FALSE) +
   geom_line(data = subset(combined, Source == "Trollope and Potgieter 1986"),
             linetype = "dashed", size = 1) +
+  annotate("text", x = 3, y = 9500, label = eq_SHR, parse = TRUE, color = "red", size = 4) +
+  annotate("text", x = 3, y = 8500, label = eq_Trollope, parse = TRUE, color = "lightblue", size = 4) +
   labs(
     x = "Square root DPM height (cm)",
-    y = "Standing Biomass (kg/ha)",
+    y = "Standing grass biomass (kg/ha)",
     color = "Model"
   ) +
-  theme_beautiful() + theme(legend.position = "right") + 
+  theme_beautiful()+ 
   theme(
     legend.position = c(0.1, 1),
     legend.justification = c(0, 1),
@@ -205,10 +208,9 @@ ggplot(combined, aes(x = sqrtDPH_Height, y = Biomass_kg_ha, color = Source)) +
     legend.title = element_text(face = "bold"),
     legend.background = element_rect(fill = "white", color = "gray90"))
 
-
 ```
 
-```{r, warning=FALSE, message=FALSE, fig.cap="Figure 3. Comparing the Trollope model and SHR model using untransformed DPM height"}
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 3. Comparing the Trollope and Potgieter (1986) model and SHR model using untransformed DPM height"}
 
 library(tidyverse)
 library(lmerTest)
@@ -410,7 +412,7 @@ ggplot(df_combined, aes(x = Dpm, y = Biomass, color = Year)) +
 
 ```
 
-```{r, warning=FALSE, message=FALSE, fig.cap="Figure 5. Comparing SHR model to three models, two of them have been previously used at Shangani Holistic Ranch and the third is the Trollope model widely used in literature."}
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 5. Comparing SHR model to three models, two of them have been previously used at Shangani Holistic Ranch and the third is the Trollope and Potgieter (1986) model widely used in literature."}
 library(tidyverse)
 library(lmerTest)
 library(ggplot2)
