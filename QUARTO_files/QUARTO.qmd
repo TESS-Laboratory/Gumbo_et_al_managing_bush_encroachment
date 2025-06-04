@@ -16,7 +16,7 @@ The plots below show the relationship between DPM heights and standing biomass (
 
 ## Standing grass biomass at Shangani Holistic Ranch
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 1. Strong relationship between DPM height and standing grass biomass at Shangani Holistic Ranch"}
 
 library(tidyverse)
 library(lmerTest)
@@ -76,14 +76,91 @@ modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
 #summary(modelWG)
 tab_model(modelWG)
 
-# Create scatter plot with regression line
-ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
-  geom_point() +  # scatter plot
-  geom_smooth(method = "lm", se = TRUE, color = "blue") +  # regression line
-  labs(
-    x = "DPM Height (cm)",
-    y = "Standing Biomass (kg/ha)") +
-  theme_beautiful()
+### EQUATION FOR THE MODEL AND ANNOTATION
+# Extract coefficients
+    coefs <- coef(modelWG)
+   intercept <- round(coefs[1], 2)
+    slope <- round(coefs[2], 2)
+ 
+ # Create equation string for annotation
+ # Build the equation string (biomass = intercept + slope * x)
+     eq <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
+ 
+ # Plot with regression and equation
+ ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
+   geom_point() +
+   geom_smooth(method = "lm", se = TRUE, color = "red") +
+   annotate("text", x = min(WGdata$DPH_Height, na.rm = TRUE), 
+            y = max(WGdata$Biomass_kg_ha, na.rm = TRUE), 
+          label = eq, parse = TRUE, hjust = 0, size = 3, color = "red") +
+   labs(
+     x = "Dpm height (cm)",
+     y = "Standing grass biomass (kg/ha)"
+   ) +
+   theme_beautiful()
+ 
+
+```
+
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 2. Comparing the Trollope model and SHR model using square root DPM height"}
+
+library(tidyverse)
+library(lmerTest)
+library(ggplot2)
+library(dplyr)
+library(Matrix)
+library(lme4)
+library(emmeans)
+library(here) ## MOST IMPORTANT NOT TO FORGET THIS ONE
+library(robustbase)
+library(sjPlot)
+
+theme_beautiful <- function() {
+  theme_bw() +
+    theme(
+      text = element_text(family = "Helvetica"),
+      axis.text = element_text(size = 8, color = "black"),
+      axis.title = element_text(size = 8, color = "black"),
+      axis.line.x = element_line(size = 0.3, color = "black"),
+      axis.line.y = element_line(size = 0.3, color = "black"),
+      axis.ticks = element_line(size = 0.3, color = "black"),
+      panel.border = element_blank(),
+      panel.grid.major.x = element_blank(),
+      panel.grid.minor.x = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      panel.grid.major.y = element_blank(),
+      plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), units = , "cm"),
+      plot.title = element_text(
+        size = 8,
+        vjust = 1,
+        hjust = 0.5,
+        color = "black"
+      ),
+      legend.text = element_text(size = 8, color = "black"),
+      legend.title = element_text(size = 8, color = "black"),
+      legend.position = c(0.9, 0.9),
+      legend.key.size = unit(0.9, "line"),
+      legend.background = element_rect(
+        color = "black",
+        fill = "transparent",
+        size = 2,
+        linetype = "blank"
+      )
+    )
+}
+
+WGdata <- read_csv(here("DATA/DPM.csv"))
+
+
+################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
+# 2. Convert weight from grams to kg/ha
+#    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
+frame_area <- pi * (0.17^2)  # = 0.0908 m²
+WGdata$Biomass_kg_ha <- WGdata$Weight * 10 / frame_area
+
+# 3. Linear regression: Biomass ~ DPH
+modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
+
 
 ### USING THE TROLLOPE EQUATION TO COMPARE IT WITH MY MODEL
 # Step 1: Prepare WGdata
@@ -129,13 +206,10 @@ ggplot(combined, aes(x = sqrtDPH_Height, y = Biomass_kg_ha, color = Source)) +
     legend.background = element_rect(fill = "white", color = "gray90"))
 
 
-
-
 ```
 
-THIS FIGURE SHOWS .......................
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 3. Comparing the Trollope model and SHR model using untransformed DPM height"}
 
-```{r, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(lmerTest)
 library(ggplot2)
@@ -224,93 +298,251 @@ ggplot(combined, aes(x = DPH_Height, y = Biomass_kg_ha, color = Source)) +
     legend.background = element_rect(fill = "white", color = "gray90"))
 
 
+```
 
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 4. Comparing SHR model to two existing models previously used at Shangani Holistic Ranch"}
+library(tidyverse)
+library(lmerTest)
+library(ggplot2)
+library(dplyr)
+library(Matrix)
+library(lme4)
+library(emmeans)
+library(here) ## MOST IMPORTANT NOT TO FORGET THIS ONE
+library(robustbase)
+library(sjPlot)
 
-###################### FITTING THE CALCULATED OVEN DRIED BIOMASS  TO THE TWO PREEXISTING MODELS ######
+theme_beautiful <- function() {
+  theme_bw() +
+    theme(
+      text = element_text(family = "Helvetica"),
+      axis.text = element_text(size = 8, color = "black"),
+      axis.title = element_text(size = 8, color = "black"),
+      axis.line.x = element_line(size = 0.3, color = "black"),
+      axis.line.y = element_line(size = 0.3, color = "black"),
+      axis.ticks = element_line(size = 0.3, color = "black"),
+      panel.border = element_blank(),
+      panel.grid.major.x = element_blank(),
+      panel.grid.minor.x = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      panel.grid.major.y = element_blank(),
+      plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), units = , "cm"),
+      plot.title = element_text(
+        size = 8,
+        vjust = 1,
+        hjust = 0.5,
+        color = "black"
+      ),
+      legend.text = element_text(size = 8, color = "black"),
+      legend.title = element_text(size = 8, color = "black"),
+      legend.position = c(0.9, 0.9),
+      legend.key.size = unit(0.9, "line"),
+      legend.background = element_rect(
+        color = "black",
+        fill = "transparent",
+        size = 2,
+        linetype = "blank"
+      )
+    )
+}
+
+#FITTING THE DRIED BIOMASS  TO THE OTHER TWO EXISTING MODELS  AND INCLUDING        #ANNOTATTIONS######
+
+# Load and prepare data 
 
 df <- read_csv(here("DATA/March2025/SHR_modelYear.csv"))
 
-# Read and prepare data
 df$Year <- as.factor(df$Year)
 df$Dpm <- as.numeric(as.character(df$Dpm))
 df <- df[is.finite(df$Dpm), ]
 
+# Define the range for Dpm values (based on your actual data)
 dpm_range <- range(df$Dpm, na.rm = TRUE)
 
-## Create custom line data (PRT)
+# Create a sequence of Dpm values across the range
 dpm_vals <- seq(dpm_range[1], dpm_range[2], length.out = 100)
+
+# Define the custom line (TER model)
 custom_line <- data.frame(
   Dpm = dpm_vals,
   Biomass = 107.06 + 171.69 * dpm_vals,
   Year = "SHR")
 
-
-# Combine data to control legend together
 df_combined <- rbind(
   df[, c("Dpm", "Biomass", "Year")],
   custom_line)
 
-# Plot all at once using combined data
+# Fit models for 2014 and 2015
+model_2024 <- lm(Biomass ~ Dpm, data = subset(df, Year == "2024"))
+model_2025 <- lm(Biomass ~ Dpm, data = subset(df, Year == "2025"))
+#tab_model(model_2024)
+#tab_model(model_2025)
+
+
+# Extract and round coefficients
+coef_2024 <- round(coef(model_2024), 2)
+coef_2025 <- round(coef(model_2025), 2)
+coef_SHR  <- c(171.69, 107.06)  # slope, intercept as per your earlier custom line
+
+# Format equations as: biomass = slope + intercept * dpm
+eq_2024 <- paste0("Biomass = ", coef_2024[2], " + ", coef_2024[1], " * Dpm")
+eq_2025 <- paste0("Biomass = ", coef_2025[2], " + ", coef_2025[1], " * Dpm")
+eq_SHR  <- paste0("Biomass = ", coef_SHR[1], " + ", coef_SHR[2], " * Dpm")
+
+# Plot
+
 ggplot(df_combined, aes(x = Dpm, y = Biomass, color = Year)) +
-  geom_point(data = df) +  # Only original data points
-  geom_smooth(data = df, method = "lm", se = FALSE) +  # Regression lines for 2009 & 2013
-  geom_line(data = custom_line, linetype = "solid", size = 1) +  # Custom model
-  labs(
-    x = "DPM Height (cm)",
-    y = "Biomass (kg/ha)",
-    color = "Model"
-  ) +
-  theme_beautiful() + 
+  geom_point(data = df) +
+  geom_smooth(data = df, method = "lm", se = FALSE) +
+  geom_line(data = custom_line, linetype = "solid", size = 1) +
+  scale_color_manual(values = c("2024" = "green", "2025" = "purple", "SHR" = "red")) +
+  labs(x = "DPM height (cm)", y = "Standing grass biomass (kg/ha)", color = "Model") +
+  
+  # Annotations to far left, stacked vertically
+  annotate("text", x = 25, y = 2800, label = eq_2024, hjust = 0, color = "green", size = 4) +
+  annotate("text", x = 25, y = 2200, label = eq_2025, hjust = 0, color = "purple", size = 4) +
+  annotate("text", x = 25, y = 1600, label = eq_SHR, hjust = 0, color = "red", size = 4) +
+  theme_beautiful()+ 
   theme(
     legend.position = c(0, 1),
-    legend.justification = c(0, 1),
+    legend.justification = c(0, 0.8),
     legend.box.just = "left")
 
+```
 
-########################### FIT 4 MODELS IN ONE PLOT ######################
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 5. Comparing SHR model to three models, two of them have been previously used at Shangani Holistic Ranch and the third is the Trollope model widely used in literature."}
+library(tidyverse)
+library(lmerTest)
+library(ggplot2)
+library(dplyr)
+library(Matrix)
+library(lme4)
+library(emmeans)
+library(here) ## MOST IMPORTANT NOT TO FORGET THIS ONE
+library(robustbase)
+library(sjPlot)
 
-####### Ensure df is clean and structured properly
-df$Year <- as.factor(df$Year)
+theme_beautiful <- function() {
+  theme_bw() +
+    theme(
+      text = element_text(family = "Helvetica"),
+      axis.text = element_text(size = 8, color = "black"),
+      axis.title = element_text(size = 8, color = "black"),
+      axis.line.x = element_line(size = 0.3, color = "black"),
+      axis.line.y = element_line(size = 0.3, color = "black"),
+      axis.ticks = element_line(size = 0.3, color = "black"),
+      panel.border = element_blank(),
+      panel.grid.major.x = element_blank(),
+      panel.grid.minor.x = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      panel.grid.major.y = element_blank(),
+      plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), units = , "cm"),
+      plot.title = element_text(
+        size = 8,
+        vjust = 1,
+        hjust = 0.5,
+        color = "black"
+      ),
+      legend.text = element_text(size = 8, color = "black"),
+      legend.title = element_text(size = 8, color = "black"),
+      legend.position = c(0.9, 0.9),
+      legend.key.size = unit(0.9, "line"),
+      legend.background = element_rect(
+        color = "black",
+        fill = "transparent",
+        size = 2,
+        linetype = "blank"
+      )
+    )
+}
+
+#FITTING THE DRIED BIOMASS  TO THE OTHER THREE MODELS  AND INCLUDING        #ANNOTATTIONS######
+
+# Load and prepare data 
+
+df <- read_csv(here("DATA/March2025/SHR_modelYear.csv"))
+
+
+#### FOUR MODELS INCLUDING ANNOTATIONS
+#df$Year <- as.factor(df$Year)
 df$Dpm <- as.numeric(as.character(df$Dpm))
-df$Biomass <- as.numeric(as.character(df$Biomass))
-#df$DPH_Height <- as.numeric(as.character(df$DPH_Height))
 df <- df[is.finite(df$Dpm), ]
 
-# --- Model 1 & 2: Linear regressions for 2009 and 2013 (in df)
+df$Year <- as.factor(df$Year)
+df$Dpm <- as.numeric(as.character(df$Dpm))
+df <- df[is.finite(df$Dpm), ]
 
-# --- Model 3: PRT model (y = 17.06 + 17.69 * dpm)
-dpm_vals <- seq(min(df$Dpm), max(df$Dpm), length.out = 100)
-prt_model <- data.frame(
-  x = dpm_vals,
-  y = 107.06 + 171.69 * dpm_vals,
-  year = "SHR")
+# Define the range for Dpm values (based on your actual data)
+dpm_range <- range(df$Dpm, na.rm = TRUE)
 
-# --- Model 4: Tr model (y = -3019 + 2260 * sqrt(DPH_Height))
-dph_vals <- seq(min(df$Dpm), max(df$Dpm), length.out = 100)
-tr_model <- data.frame(
-  x = dph_vals,
-  y = -3019 + 2260 * sqrt(dph_vals),
-  year = "Trollope and Potgieter 1986")
+# Create a sequence of Dpm values across the range
+dpm_vals <- seq(dpm_range[1], dpm_range[2], length.out = 100)
 
-# --- Main df: Rename to match format
-df_main <- df[, c("Dpm", "Biomass", "Year")]
-colnames(df_main) <- c("x", "y", "year")
+# Define the custom line (SHR model)
+custom_line <- data.frame(
+  Dpm = dpm_vals,
+  Biomass = 107.06 + 171.69 * dpm_vals,
+  Year = "SHR")
 
-# --- Combine everything
-combined_df <- rbind(df_main, prt_model, tr_model)
+# Ddefine Trollope line
+trollope_line <- data.frame(
+  Dpm = dpm_vals,
+  Biomass = -3019 + 2260 * sqrt(dpm_vals),
+  Year = "Trollope and Potgieter 1986")
 
-# --- Plot
-ggplot(combined_df, aes(x = x, y = y, color = year)) +
-  geom_point(data = df_main) +
-  geom_smooth(data = df_main, method = "lm", se = FALSE) +
-  geom_line(data = prt_model, linetype = "solid", size = 1) +
-  geom_line(data = tr_model, linetype = "solid", size = 1.1) +
-  labs(
-    x = "DPM height (cm)",
-    y = "Standing Biomass (kg/ha) ",
-    color = "Model"
-  ) +
-  theme_beautiful() + 
+#df_combined <- rbind(
+# df[, c("Dpm", "Biomass", "Year")],
+#custom_line, trollope_line)
+
+df_combined <- rbind(
+  df_combined,
+  trollope_line)
+
+# Fit models for 2014 and 2015
+model_2024 <- lm(Biomass ~ Dpm, data = subset(df, Year == "2024"))
+model_2025 <- lm(Biomass ~ Dpm, data = subset(df, Year == "2025"))
+#tab_model(model_2024)
+#tab_model(model_2025)
+
+
+# Extract and round coefficients
+coef_2024 <- round(coef(model_2024), 2)
+coef_2025 <- round(coef(model_2025), 2)
+coef_SHR  <- c(171.69, 107.06)  # slope, intercept as per your earlier custom line
+coef_Trollope <- c(-3019, 2260)
+
+# Format equations as: biomass = slope + intercept * dpm
+eq_2024 <- paste0("Biomass = ", coef_2024[2], " + ", coef_2024[1], " * Dpm")
+eq_2025 <- paste0("Biomass = ", coef_2025[2], " + ", coef_2025[1], " * Dpm")
+eq_SHR  <- paste0("Biomass = ", coef_SHR[1], " + ", coef_SHR[2], " * Dpm")
+eq_Trollope <- paste0("Biomass = ", round(coef_Trollope[1], 2), 
+                      " + ", round(coef_Trollope[2], 2), " * sqrt(Dpm)")
+
+##PLOT AND ANNOTATION
+
+ggplot(df_combined, aes(x = Dpm, y = Biomass, color = Year)) +
+  geom_point(data = df) +
+  geom_smooth(data = df, method = "lm", se = FALSE) +
+  geom_line(data = custom_line, linetype = "solid", size = 1) +
+  geom_line(data = trollope_line, aes(x = Dpm, y = Biomass, color = "Trollope"),
+            linetype = "dashed", size = 1) +  # <--- ADD THIS
+  
+  scale_color_manual(values = c(
+    "2024" = "green",
+    "2025" = "purple",
+    "Trollope" = "blue",
+    "SHR" = "red"
+  )) +
+  
+  labs(x = "DPM height (cm)", y = "Standing grass biomass (kg/ha)", color = "Model") +
+  
+  # Annotations (including Trollope)
+  annotate("text", x = 25, y = 2800, label = eq_2024, hjust = 0, color = "green", size = 4) +
+  annotate("text", x = 25, y = 2000, label = eq_2025, hjust = 0, color = "purple", size = 4) +
+  annotate("text", x = 25, y = 1200, label = eq_SHR, hjust = 0, color = "red", size = 4) +
+  annotate("text", x = 25, y = 500, label = eq_Trollope, hjust = 0, color = "blue", size = 4) +
+  
+  theme_beautiful()+ 
   theme(
     legend.position = c(0, 1),
     legend.justification = c(0, 0.8),
