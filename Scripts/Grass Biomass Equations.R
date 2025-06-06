@@ -337,3 +337,402 @@ ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
   ) +
   scale_color_manual(values = c("Power Model" = "green", "Trollope Model" = "blue")) +
   theme_minimal()
+
+
+
+###################################################################################################################
+##### ANOTHER ATTEMPT TO USE POWER FUNCTION 
+
+#Fit the models (as before)
+WGdata$sqrtDPH <- sqrt(WGdata$DPH_Height)
+
+
+# Power model: y = a * sqrtDPH^b
+power_mod <- nls(Biomass_kg_ha ~ a * sqrtDPH^b,
+                 data = WGdata,
+                 start = list(a = 100, b = 1),
+                 control = nls.control(maxiter = 200, warnOnly = TRUE))
+
+# Trollope model: y = a * sqrtDPH (constrained to pass through 0)
+trollope_mod <- nls(Biomass_kg_ha ~ a * sqrtDPH,
+                    data = WGdata,
+                    start = list(a = 100),
+                    control = nls.control(maxiter = 200, warnOnly = TRUE))
+
+## Extract model coefficients for labels
+# Get parameters
+coef_power <- coef(power_mod)
+coef_trollope <- coef(trollope_mod)
+
+# Create equation labels
+eq_power <- sprintf("Power: y == %.2f %.2f^sqrt(x)", coef_power["a"], coef_power["b"])
+eq_power_pretty <- sprintf("y == %.2f * sqrt(x)^%.2f", coef_power["a"], coef_power["b"])
+
+eq_trollope <- sprintf("Trollope: y == %.2f * sqrt(x)", coef_trollope["a"])
+eq_trollope_pretty <- sprintf("y == %.2f * sqrt(x)", coef_trollope["a"])
+
+
+##Predict and Plot with Equations
+# Prediction data
+x_vals <- seq(min(WGdata$DPH_Height), max(WGdata$DPH_Height), length.out = 100)
+pred_df <- data.frame(DPH_Height = x_vals, sqrtDPH = sqrt(x_vals))
+pred_df$Power <- predict(power_mod, newdata = pred_df)
+pred_df$Trollope <- predict(trollope_mod, newdata = pred_df)
+
+# Plot
+ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
+  geom_point(color = "black", size = 2, alpha = 0.6) +
+  geom_line(data = pred_df, aes(x = DPH_Height, y = Power, color = "Power Model"), size = 1.2) +
+  geom_line(data = pred_df, aes(x = DPH_Height, y = Trollope, color = "Trollope Model"), linetype = "dashed", size = 1.2) +
+  labs(
+    title = "Biomass vs DPH Height (Constrained Models)",
+    x = "DPH Height (cm)",
+    y = "Biomass (kg/ha)",
+    color = "Model"
+  ) +
+  scale_color_manual(values = c("Power Model" = "green", "Trollope Model" = "blue")) +
+  annotate("text", x = max(WGdata$DPH_Height)*0.6, y = max(WGdata$Biomass_kg_ha)*0.95,
+           label = eq_power_pretty, parse = TRUE, color = "green", size = 5, hjust = 0) +
+  annotate("text", x = max(WGdata$DPH_Height)*0.6, y = max(WGdata$Biomass_kg_ha)*0.85,
+           label = eq_trollope_pretty, parse = TRUE, color = "blue", size = 5, hjust = 0) +
+  theme_minimal()
+
+
+
+
+############# POWER FUNCTION FOR BOTH MODELS, BOTH WITH SQUARE ROOTS
+# Clean data
+WGdata <- WGdata[is.finite(WGdata$DPH_Height) & is.finite(WGdata$Biomass_kg_ha), ]
+WGdata <- WGdata[WGdata$DPH_Height > 0 & WGdata$Biomass_kg_ha > 0, ]
+WGdata$sqrtDPH <- sqrt(WGdata$DPH_Height)
+
+################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
+# 2. Convert weight from grams to kg/ha
+#    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
+frame_area <- pi * (0.17^2)  # = 0.0908 m²
+WGdata$Biomass_kg_ha <- WGdata$Weight * 10 / frame_area
+
+# Fit power model (nonlinear, allows exponent)
+SHR_mod <- nls(Biomass_kg_ha ~ a * sqrtDPH^b,
+                 data = WGdata,
+                 start = list(a = 100, b = 1),
+                 control = nls.control(maxiter = 200, warnOnly = TRUE))
+
+# Fit Trollope-constrained model: y = a * sqrt(x)
+trollope_mod <- nls(Biomass_kg_ha ~ a * sqrtDPH,
+                    data = WGdata,
+                    start = list(a = 100),
+                    control = nls.control(maxiter = 200, warnOnly = TRUE))
+
+
+#Predictions
+x_vals <- seq(min(WGdata$DPH_Height), max(WGdata$DPH_Height), length.out = 100)
+pred_df <- data.frame(DPH_Height = x_vals, sqrtDPH = sqrt(x_vals))
+pred_df$SHR <- predict(SHR_mod, newdata = pred_df)
+pred_df$Trollope <- predict(trollope_mod, newdata = pred_df)
+
+# Extract coefficients
+coef_SHR <- coef(SHR_mod)
+coef_trollope <- coef(trollope_mod)
+
+# Build labels for the plot
+eq_SHR <- sprintf("y == %.2f * sqrt(x)^%.2f", coef_SHR["a"], coef_SHR["b"])
+eq_trollope <- sprintf("y == %.2f * sqrt(x)", coef_trollope["a"])
+
+##PLOT
+
+ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
+  geom_point(color = "black", size = 2, alpha = 0.6) +
+  geom_line(data = pred_df, aes(x = DPH_Height, y = SHR, color = "SHR"), size = 1.2) +
+  geom_line(data = pred_df, aes(x = DPH_Height, y = Trollope, color = "Trollope"), linetype = "dashed", size = 1.2) +
+  annotate("text", x = max(WGdata$DPH_Height)*0.1, y = max(WGdata$Biomass_kg_ha)*0.95,
+           label = eq_SHR, parse = TRUE, color = "green", size = 5, hjust = 0) +
+  annotate("text", x = max(WGdata$DPH_Height)*0.1, y = max(WGdata$Biomass_kg_ha)*0.85,
+           label = eq_trollope, parse = TRUE, color = "blue", size = 5, hjust = 0) +
+  labs(
+    x = "DPH Height (cm)",
+    y = "Biomass (kg/ha)",
+    color = "Model"
+  ) +
+  scale_color_manual(values = c("SHR" = "green", "Trollope" = "blue")) +
+  theme_beautiful()+ theme(
+    legend.position = c(0.1, 1),
+    legend.justification = c(0, 1),
+    legend.box.just = "left",
+    legend.title = element_text(face = "bold"),
+    legend.background = element_rect(fill = "white", color = "gray90"))
+
+
+
+
+
+
+
+
+####################################################################
+########## POWER FUNCTION WITH NO SQUARE ROOT FOR MY MODEL
+
+# Clean data
+WGdata <- WGdata[is.finite(WGdata$DPH_Height) & is.finite(WGdata$Biomass_kg_ha), ]
+WGdata <- WGdata[WGdata$DPH_Height > 0 & WGdata$Biomass_kg_ha > 0, ]
+WGdata$sqrtDPH <- sqrt(WGdata$DPH_Height)
+
+# Remove rows with NA or infinite values
+WGdata <- WGdata[is.finite(WGdata$DPH_Height) & is.finite(WGdata$Biomass_kg_ha), ]
+
+# Remove rows where DPH or biomass is zero or negative (important for power models)
+WGdata <- WGdata[WGdata$DPH_Height > 0 & WGdata$Biomass_kg_ha > 0, ]
+
+# Create square root column (no sqrt of 0 or negative because of filter above)
+WGdata$sqrtDPH <- sqrt(WGdata$DPH_Height)
+
+# 1. Your model (x = DPH)
+model_yours <- nls(Biomass_kg_ha ~ a * DPH_Height^b,
+                   data = WGdata,
+                   start = list(a = 1, b = 1),
+                   control = nls.control(maxiter = 200, warnOnly = TRUE))
+
+# 2. Trollope model (x = sqrt(DPH))
+model_trollope <- nls(Biomass_kg_ha ~ a * DPH^b,
+                      data = WGdata,
+                      start = list(a = 1, b = 1),
+                      control = nls.control(maxiter = 200, warnOnly = TRUE))
+
+##################################### EXPECTED GRASS BIOMASS FENCED
+
+# Load required libraries
+library(ggplot2)
+
+# Simulate example data
+set.seed(123)
+treatments <- c("Control", "F", "TF", "TFB", "THF")
+fence_status <- c("Fenced", "Unfenced")
+
+# Create synthetic dataset
+data <- expand.grid(Treatment = treatments,
+                    Fence = fence_status,
+                    Replicate = 1:15)
+
+# Simulate values with an increasing trend across treatments
+data$BiomassChange <- with(data, ifelse(
+  Treatment == "Control", rnorm(nrow(data), mean = 200, sd = 50),
+  ifelse(Treatment == "F", rnorm(nrow(data), mean = 400, sd = 60),
+         ifelse(Treatment == "TF", rnorm(nrow(data), mean = 600, sd = 70),
+                ifelse(Treatment == "TFB", rnorm(nrow(data), mean = 1000, sd = 80),
+                       rnorm(nrow(data), mean = 1100, sd = 90))))) +
+    ifelse(Fence == "Fenced", 100, 0)  # Add boost for fencing
+)
+
+# Plot
+ BF <- ggplot(data, aes(x = Treatment, y = BiomassChange, fill = Fence)) +
+  geom_boxplot(color = "black") +
+  scale_fill_manual(values = c("Fenced" = "cornsilk3", "Unfenced" = "white")) +
+  labs(
+    y = "Change in grass biomass (kg/ha)",
+    Fill = "null"
+  ) +
+  theme_beautiful() +
+  theme(
+    legend.position = "top",
+    axis.title.x = element_blank()
+  )
+
+ggsave(BF,filename ="Plots/Change Grass BiomassFenced.png",
+      width = 16, height = 14, units = "cm" )
+
+ 
+ ############################################EXPECTED CHANGE IN GRASS BIOMASS
+ 
+ # Define treatments
+ treatments <- c("Control", "F", "TF", "TFB", "TFH")
+ 
+ # Simulate example data
+ set.seed(123)
+ n <- 15  # number of replicates
+ means <- c(1000, 1200, 1800, 3000, 3500)
+ 
+ # Generate dataset
+ data <- data.frame(
+   Treatment = rep(treatments, each = n),
+   BiomassChange = unlist(lapply(means, function(m) rnorm(n, mean = m, sd = 300)))
+ )
+ # Create the plot
+  ggplot(data, aes(x = Treatment, y = BiomassChange)) +
+   geom_boxplot(fill = "grey90", color = "black") +
+   labs(
+     y = "Change in standing grass biomass (kg/ha)",
+     x = "Treatments"
+   ) +
+   theme_beautiful() +
+   theme(
+     axis.text.x = element_text(angle = 0, hjust = 0.5),
+     panel.grid.major.x = element_blank()
+   )
+ 
+ #ggsave(CB,filename ="Plots/Change Grass Biomass.png",
+  #           width = 16, height = 14, units = "cm" )
+  
+  ##################### GRAASS BIOMASS ENCROACHED 
+ 
+  # Sample structure (replace this with your real data)
+  set.seed(123)
+  data <- data.frame(
+    Treatment = rep(c("Control", "F", "TF", "TFB", "TFH"), each = 20),
+    Encroachment = rep(rep(c("Highly encroached", "Moderately encroached"), each = 10), times = 5),
+    BiomassChange = c(
+      rnorm(10, 400, 80), rnorm(10, 450, 80),
+      rnorm(10, 500, 90), rnorm(10, 700, 100),
+      rnorm(10, 1000, 120), rnorm(10, 1200, 130),
+      rnorm(10, 1300, 150), rnorm(10, 1700, 160),
+      rnorm(10, 1600, 170), rnorm(10, 2000, 180)
+    )
+  )
+  
+  # Ensure correct factor order
+  data$Treatment <- factor(data$Treatment, 
+                           levels = c("Control", "F", "TF", "TFB", "TFH"))
+  
+  # Create the boxplot
+ ggplot(data, aes(x = Treatment, y = BiomassChange, fill = Encroachment)) +
+    geom_boxplot(position = position_dodge(width = 0.75), width = 0.6) +
+    scale_fill_manual(values = c("Highly encroached" = "#00557F", "Moderately encroached" = "#FFC000")) +
+    labs(y = "Change in grass biomass (kg/ha)", x = "Treatments", fill = NULL) +
+    theme_beautiful() +theme(
+      legend.position = c(0.1, 1),
+      legend.justification = c(0, 1),
+      legend.box.just = "left",
+      legend.title = element_text(face = "bold"),
+      legend.background = element_rect(fill = "white", color = "gray90"))
+  
+   
+  #ggsave(HE, filename = "Plots/Encroched Grass Biomass change.png",
+   #                 width = 16, height = 14, units = "cm")
+ 
+ ####################################################SEEDLINGS AND SAPLINGS
+ data <- data.frame(
+   Treatment = rep(c("Control", "F", "TF", "TFB", "TFH"), each = 20),
+   Encroachment = rep(rep(c("Highly encroached", "Moderately encroached"), each = 10), times = 5),
+   ChangeSeedlings = c(
+     rnorm(20, 28000, 30), rnorm(20, 24000, 30),
+     rnorm(20, 24000, 40), rnorm(20, 20000, 40),
+     rnorm(20, 19000, 30), rnorm(20, 15000, 30),
+     rnorm(20, 8000, 50), rnorm(20, 5000, 60),
+     rnorm(20, 11600, 70), rnorm(20, 8500, 80)
+   )
+ )
+ 
+ # Ensure correct factor order
+ data$Treatment <- factor(data$Treatment, 
+                          levels = c("Control", "F", "TF", "TFB", "TFH"))
+ 
+ # Create the boxplot
+ ggplot(data, aes(x = Treatment, y = ChangeSeedlings, fill = Encroachment)) +
+   geom_boxplot(position = position_dodge(width = 0.75), width = 0.6) +
+   scale_fill_manual(values = c("Highly encroached" = "#00557F", "Moderately encroached" = "#FFC000")) +
+   labs(y = "Change in seedlings and saplings (/ha)", x = "Treatments", fill = NULL) +
+   theme_beautiful() +theme(
+     legend.position = c(0.1, 1),
+     legend.justification = c(0, 1),
+     legend.box.just = "left",
+     legend.title = element_text(face = "bold"),
+     legend.background = element_rect(fill = "white", color = "gray90"))
+ 
+ 
+ #ggsave(HE, filename = "Plots/Encroched Grass Biomass change.png",
+ #                 width = 16, height = 14, units = "cm")
+ 
+ 
+ 
+ 
+ ################################ COMPARING TREATMENT HEIGHTS
+ 
+ #Gdata <- read.csv("DATA/March2025/GrassesCombined.csv",stringsAsFactors = TRUE)
+ 
+ Grdata <- read_csv("DATA/March2025/GrassesCombined.csv")
+ 
+ # Standardize column names
+ names(Grdata) <- tolower(names(Grdata))
+ # Rename all column names to lowercase and replace spaces with underscores
+ names(Grdata) <- gsub(" ", "_", tolower(names(Grdata)))
+ 
+ 
+ # Clean and format, FILTERING NAs
+ 
+ Grdata <- Grdata %>%
+   filter(!is.na(dpm_height)) %>%  # Exclude NAs in dpm_height
+   mutate(
+     year = as.factor(year),
+     site = as.factor(site),
+     plot = as.factor(plot),
+     subplot = as.factor(subplot),
+     treatment = as.factor(treatment),
+     dpm_height = as.numeric(dpm_height) # Ensure numeric
+   )
+ 
+ # Check missing values
+ #summary(Grdata$dpm_height)
+ 
+ ###2. Create Pre/Post Variable
+ 
+ Grdata <- Grdata %>%
+   mutate(period = ifelse(as.numeric(as.character(year)) < 2025, "PRE", "POST")) %>%
+   mutate(period = factor(period, levels = c("PRE", "POST")))
+ 
+ ### Summarize by Subplot or Plot..Average height per subplot and period:
+ 
+ summary_Grdata <- Grdata %>%
+   group_by(site, plot, subplot, treatment, period) %>%
+   summarise(mean_height = mean(dpm_height, na.rm = TRUE)) %>%
+   ungroup()
+ 
+ ####4. Calculate Change in Height (Post - Pre)
+ height_change <- summary_Grdata %>%
+   pivot_wider(names_from = period, values_from = mean_height) %>%
+   mutate(delta = POST - PRE)
+ 
+ ### Compare Treatment Effects (ANOVA on Delta)
+# anova_model <- aov(delta ~ treatment, data = height_change)
+# summary(anova_model)
+ # the results show that the treatment groups do not differ significantly in their effect on the response variable.
+ 
+ ## Optional: Tukey post-hoc test
+# TukeyHSD(anova_model)
+ 
+ 
+ ## USE OF Mixed-Effects Model (Handles Repeated Measures)
+ #This is more robust as it uses the original data, accounts for plot/subplot as random effects, and tests interaction between time and treatment:
+ 
+# lmm <- lmer(dpm_height ~ period * treatment + (1 | site/plot/subplot), data = Grdata)
+ #summary(lmm)
+ # Look at the interaction terms (periodPOST:treatmentX) to assess whether any treatment caused a significant change post-treatment.
+ 
+ 
+ #Filtering NAs only when modeling Height
+ 
+ model <- lmer(dpm_height ~ period * treatment + (1 | site/plot/subplot),
+               data = Grdata[!is.na(Grdata$dpm_height), ])
+ 
+ 
+ 
+ ##Plotting boxplot for before and after treatment
+ #ggplot(Grdata[!is.na(Grdata$dpm_height), ],
+  #      aes(x = treatment, y = dpm_height, fill = period)) +
+   #geom_boxplot() +
+   #theme_beautiful()
+ 
+ ### Violin plot
+ ggplot(Grdata[!is.na(Grdata$dpm_height), ],
+        aes(x = treatment, y = dpm_height, fill = period)) +
+   geom_violin(trim = FALSE) +
+   labs(y = "Dpm height (cm)", x = "Treatments") +
+   theme_beautiful()
+ 
+ 
+ #7. Visualization (Optional)
+ 
+ ggplot(Grdata, aes(x = period, y = dpm_height, color = treatment)) +
+   stat_summary(fun = mean, geom = "point", position = position_dodge(width = 0.3)) +
+   stat_summary(fun = mean, geom = "line", aes(group = treatment), position = position_dodge(width = 0.3)) +
+   labs(title = "Change in Height by Treatment", y = "Mean Height", x = "Period")
+ 
+ 

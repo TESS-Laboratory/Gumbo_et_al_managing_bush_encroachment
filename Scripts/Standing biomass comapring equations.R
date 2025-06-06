@@ -103,10 +103,11 @@ ggplot(UGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
     y = "Standing Biomass (kg/ha)") +
   theme_beautiful()
 
-### USING THE TROLLOPE EQUATION TO COMPARE IT WITH MY MODEL
+############# USING THE TROLLOPE EQUATION TO COMPARE IT WITH MY MODEL#########
 # Step 1: Prepare WGdata
 
 WGdata$sqrtDPH_Height <- sqrt(WGdata$DPH_Height)
+
 
 # Step 2: Create theoretical model predictions using the equation
 WGdata$TR_model <- -3019 + 2260 * WGdata$sqrtDPH_Height
@@ -146,6 +147,59 @@ ggplot(combined, aes(x = sqrtDPH_Height, y = Biomass_kg_ha, color = Source)) +
     legend.background = element_rect(fill = "white", color = "gray90"))
 
 
+
+#####Creating annotations for Trollope 
+# If the height column exists, create square root
+WGdata$sqrtDPH_Height <- sqrt(WGdata$DPH_Height)  # adjust if column name differs
+
+# Create actual data for SHR model
+WG_actual_data <- data.frame(
+  sqrtDPH_Height = WGdata$sqrtDPH_Height,
+  Biomass_kg_ha = WGdata$Biomass_kg_ha,
+  Source = "SHR")
+
+# Data from the Trollope equation
+TR_model_data <- data.frame(
+  sqrtDPH_Height = WGdata$sqrtDPH_Height,
+  Biomass_kg_ha = -3019 + 2260 * WGdata$sqrtDPH_Height,
+  Source = "Trollope and Potgieter 1986"
+)
+
+# Combine 
+combined <- rbind(WG_actual_data, TR_model_data)
+
+#Fit model SHR model and define annotation equations
+model_SHR <- lm(Biomass_kg_ha ~ sqrtDPH_Height, data = WG_actual_data)
+coefs_SHR <- round(coef(model_SHR), 2)
+
+eq_SHR <- paste0("Biomass == ", coefs_SHR[1], " + ", coefs_SHR[2], " * sqrt(DPM)")
+eq_Trollope <- "Biomass == -3019 + 2260 * sqrt(DPM)"
+
+
+##PLTOTTING
+
+ggplot(combined, aes(x = sqrtDPH_Height, y = Biomass_kg_ha, color = Source)) +
+  geom_point(data = subset(combined, Source == "SHR"), size = 2) +
+  geom_smooth(data = subset(combined, Source == "SHR"), method = "lm", se = FALSE) +
+  geom_line(data = subset(combined, Source == "Trollope and Potgieter 1986"),
+            linetype = "dashed", size = 1) +
+  annotate("text", x = 3, y = 9500, label = eq_SHR, parse = TRUE, color = "red", size = 4) +
+  annotate("text", x = 3, y = 8500, label = eq_Trollope, parse = TRUE, color = "lightblue", size = 4) +
+  labs(
+    x = "sqrt(DPM height) (cm)",
+    y = "Biomass (kg/ha)",
+    color = "Model"
+  ) +
+  theme_beautiful()+ 
+  theme(
+    legend.position = c(0.1, 1),
+    legend.justification = c(0, 1),
+    legend.box.just = "left",
+    legend.title = element_text(face = "bold"),
+    legend.background = element_rect(fill = "white", color = "gray90"))
+
+
+
 ######################## COMPARE EQUATIONS FOR UNTRANSFORMED DPM HEIGHTS #####
 
 UGdata <- read_csv("DATA/DPM.csv")
@@ -169,26 +223,58 @@ TR_model_data <- data.frame(
   Source = "Trollope and Potgieter 1986",
   stringsAsFactors = FALSE)
 
-# Step 4: Combine datasets
+
+
+## Step 4: Fit SHR model
+model_shr <- lm(Biomass_kg_ha ~ DPH_Height, data = UG_actual_data)
+coefs_shr <- round(coef(model_shr), 2)
+eq_shr <- paste0("Biomass == ", coefs_shr[1], " + ", coefs_shr[2], " %*% DPM")
+
+# Step 5: Trollope equation (fixed known values)
+eq_trollope <- "Biomass == -3019 + 2260 * sqrt(DPM)"
+
+## Step : Combine datasets
 combined <- rbind(UG_actual_data, TR_model_data)
 
-# Step 5: Plot both datasets without filtering (no subset!)
+# Step 6: Plot
 ggplot(combined, aes(x = DPH_Height, y = Biomass_kg_ha, color = Source)) +
-  geom_point(data = UG_actual_data, size = 2) +  # scatter for UG
-  geom_smooth(data = UG_actual_data, method = "lm", se = FALSE) +  # fit for UG
-  geom_line(data = TR_model_data, linetype = "dashed", size = 1) +  # line for TR
+  geom_point(data = subset(combined, Source == "SHR"), size = 2) +
+  geom_smooth(data = subset(combined, Source == "SHR"),
+              method = "lm", se = FALSE) +
+  geom_line(data = subset(combined, Source == "Trollope and Potgieter 1986"),
+            linetype = "dashed", size = 1) +
+  annotate("text", x = 60, y = 4000, label = eq_shr, parse = TRUE, color = "red", size = 4) +
+  annotate("text", x = 60, y = 3000, label = eq_trollope, parse = TRUE, color = "lightblue", size = 4) +
   labs(
     x = "DPM height (cm)",
-    y = "Standing Biomass (kg/ha)",
+    y = "Standing grass biomass (kg/ha)",
     color = "Model"
-  ) +
-  theme_beautiful() + 
+  ) + theme_beautiful() + 
   theme(
-    legend.position = c(0.1, 1),
-    legend.justification = c(0, 1),
-    legend.box.just = "left",
-    legend.title = element_text(face = "bold"),
-    legend.background = element_rect(fill = "white", color = "gray90"))
+   legend.position = c(0.1, 1),
+  legend.justification = c(0, 1),
+  legend.box.just = "left",
+  legend.title = element_text(face = "bold"),
+  legend.background = element_rect(fill = "white", color = "gray90"))
+  
+
+# Step 5: Plot both datasets without filtering (no subset!)
+#ggplot(combined, aes(x = DPH_Height, y = Biomass_kg_ha, color = Source)) +
+  # geom_point(data = UG_actual_data, size = 2) +  # scatter for UG
+   #geom_smooth(data = UG_actual_data, method = "lm", se = FALSE) +  # fit for UG
+   #geom_line(data = TR_model_data, linetype = "dashed", size = 1) +  # line for TR
+   #labs(
+  #  x = "DPM height (cm)",
+   # y = "Standing Biomass (kg/ha)",
+    #color = "Model"
+  #) +
+  #theme_beautiful() + 
+  #theme(
+   # legend.position = c(0.1, 1),
+    #legend.justification = c(0, 1),
+    #legend.box.just = "left",
+    #legend.title = element_text(face = "bold"),
+    #legend.background = element_rect(fill = "white", color = "gray90"))
 
 
 ##################
@@ -419,8 +505,6 @@ AAN <- ggplot(df_combined, aes(x = Dpm, y = Biomass, color = Year)) +
 
 ggsave(AAN,filename ="Plots/Biomass-4MODELS& ANNOTATION.png",
        width = 16, height = 14, units = "cm" )
-
-
 
 
 
@@ -694,108 +778,8 @@ all_models <- bind_rows(pred_2024, pred_2025, SHR_model, tr_model)
   #ggsave(ff3,filename ="Plots/4 MODELS ONLY.png",
    #width = 16, height = 14, units = "cm" )
     
-###########################################################
 
     
-    library(tidyverse)
-    library(lmerTest)
-    library(ggplot2)
-    library(dplyr)
-    library(Matrix)
-    library(lme4)
-    library(emmeans)
-    library(here) ## MOST IMPORTANT NOT TO FORGET THIS ONE
-    library(robustbase)
-    library(sjPlot)
-    
-    theme_beautiful <- function() {
-      theme_bw() +
-        theme(
-          text = element_text(family = "Helvetica"),
-          axis.text = element_text(size = 8, color = "black"),
-          axis.title = element_text(size = 8, color = "black"),
-          axis.line.x = element_line(size = 0.3, color = "black"),
-          axis.line.y = element_line(size = 0.3, color = "black"),
-          axis.ticks = element_line(size = 0.3, color = "black"),
-          panel.border = element_blank(),
-          panel.grid.major.x = element_blank(),
-          panel.grid.minor.x = element_blank(),
-          panel.grid.minor.y = element_blank(),
-          panel.grid.major.y = element_blank(),
-          plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), units = , "cm"),
-          plot.title = element_text(
-            size = 8,
-            vjust = 1,
-            hjust = 0.5,
-            color = "black"
-          ),
-          legend.text = element_text(size = 8, color = "black"),
-          legend.title = element_text(size = 8, color = "black"),
-          legend.position = c(0.9, 0.9),
-          legend.key.size = unit(0.9, "line"),
-          legend.background = element_rect(
-            color = "black",
-            fill = "transparent",
-            size = 2,
-            linetype = "blank"
-          )
-        )
-    }
-    
-    
-    df3 <- read_csv(here("DATA/March2025/SHR_modelYear.csv"))
-    
-    #Prepare data 
-    df3 <- df3 %>% 
-      mutate(
-        sqrt_dpm = sqrt(Dpm),
-        year = as.factor(Year))
-    # Fit models for 2024 and 2025
-    model_2024 <- lm(Biomass ~ sqrt_dpm, data = df3 %>% filter(year == "2024"))
-    #tab_model(model_2024)
-    model_2025 <- lm(Biomass ~ sqrt_dpm, data = df3 %>% filter(year == "2025"))
-    #tab_model(model_2025)
-    
-    # Generate prediction range
-    dpm_range <- seq(min(df3$Dpm, na.rm = TRUE), max(df3$Dpm, na.rm = TRUE), length.out = 100)
-    sqrt_dpm_range <- sqrt(dpm_range)  
-    
-    # Create prediction data frames
-    pred_2024 <- data.frame(sqrt_dpm = sqrt_dpm_range)
-    pred_2024$Biomass <- predict(model_2024, newdata = pred_2024)
-    pred_2024$model <- "2024"
-    
-    
-    pred_2025 <- data.frame(sqrt_dpm = sqrt_dpm_range)
-    pred_2025$biomass <- predict(model_2025, newdata = pred_2025)
-    pred_2025$model <- "2025"
-    
-    
-    # SHR model (uses raw dpm)
-    SHR_model <- data.frame(
-      sqrt_dpm = sqrt_dpm_range,
-      biomass = -2990 + 1574.02 * sqrt_dpm_range,
-      model = "SHR")
-    
-    # Tr model
-    tr_model <- data.frame(
-      sqrt_dpm = sqrt_dpm_range,
-      biomass = -3019 + 2260 * sqrt_dpm_range,
-      model = "Trollope and Potgieter 1986")
-    # Combine all models
-    all_models <- bind_rows(pred_2024, pred_2025, SHR_model, tr_model)
-    
-    # Plot
-    ggplot() + geom_point(data = df3, aes(x = sqrt_Dpm, y = Biomass, color = Year), alpha = 0.5) +
-      geom_line(data = all_models, aes(x = sqrt_dpm, y = biomass, color = model), size = 1.2) +
-      labs(
-        x = "Square root DPM (cm)",
-        y = "Standing Biomass (kg/ha)",
-        color = "Model"
-      ) +
-      theme_beautiful()
-    
-    )
 ###################################################################################
 
 
@@ -879,6 +863,7 @@ ggplot(df, aes(x = sqrt_dpm, y = Biomass)) +
   ) +
   theme_minimal()
 
+####################################################################################
 
 
     
