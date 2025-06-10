@@ -6,6 +6,7 @@ library(lme4)
 library(emmeans)
 library(robustbase)
 library(sjPlot)
+library(pracma)
 
 
 theme_beautiful <- function() {
@@ -52,10 +53,31 @@ WGdata <- read_csv("DATA/DPM.csv")
 frame_area <- pi * (0.17^2)  # = 0.0908 m²
 WGdata$Biomass_kg_ha <- WGdata$Weight * 10 / frame_area
 
+   #LOG TRANSFORMING BOTH VARIABLE
+    #Log-transform both variables (natural log)
+     WGdata$log_Biomass_kg_ha <- log(WGdata$Biomass_kg_ha)
+     WGdata$log_DPH_Height <- log(WGdata$DPH_Height)
+
+  # Fit a linear model using log-transformed variables
+    modelG <- lm(log_Biomass_kg_ha ~ log_DPH_Height, data = WGdata)
+    tab_model(modelG)
+
+  ## Plot log-log regression
+    ggplot(WGdata, aes(y = log_Biomass_kg_ha, x = log_DPH_Height)) +
+      geom_point() +
+      geom_smooth(method = "lm", se = FALSE, color = "red") +
+      labs(
+        x = "Log Dpm height (cm)",
+        y = "Log Standing grass biomass (kg/ha)"
+      ) +
+      theme_beautiful()
+    ###############################################    
+    
 # 3. Linear regression: Biomass ~ DPH
 modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
 #summary(modelWG)
  tab_model(modelWG)
+
 
  ###adding annotation to the plot
  # Fit the model

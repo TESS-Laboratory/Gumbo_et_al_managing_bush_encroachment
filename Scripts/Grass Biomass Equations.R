@@ -8,6 +8,7 @@ library(emmeans)
 library(here) ## MOST IMPORTANT NOT TO FORGET THIS ONE
 library(robustbase)
 library(sjPlot)
+##library(ggpmisc)
 
 theme_beautiful <- function() {
   theme_bw() +
@@ -735,4 +736,81 @@ ggsave(BF,filename ="Plots/Change Grass BiomassFenced.png",
    stat_summary(fun = mean, geom = "line", aes(group = treatment), position = position_dodge(width = 0.3)) +
    labs(title = "Change in Height by Treatment", y = "Mean Height", x = "Period")
  
+ #######################################################################################################
  
+  #####TRANSFORMING DATA  
+ 
+ WGdata <- read_csv("DATA/DPM.csv")
+ 
+ ################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
+ # 2. Convert weight from grams to kg/ha
+ #    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
+ frame_area <- pi * (0.17^2)  # = 0.0908 m²
+ WGdata$Biomass_kg_ha <- WGdata$Weight * 10 / frame_area
+ 
+ #LOG TRANSFORMING BOTH VARIABLE
+ #Log-transform both variables (natural log)
+ WGdata$log_Biomass_kg_ha <- log(WGdata$Biomass_kg_ha)
+ WGdata$log_DPH_Height <- log(WGdata$DPH_Height)
+ 
+ # Fit a linear model using log-transformed variables
+ modelG <- lm(log_Biomass_kg_ha ~ log_DPH_Height, data = WGdata)
+ tab_model(modelG)
+ 
+ coef <- coefficients(modelG)
+ r2 <- summary(modelG)$r.squared
+ n <- nobs(modelG)
+ eq <- paste0(
+   "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+   "R² = ", round(r2, 3), ", n = ", n)
+
+  ## Plot log-log regression
+ LG <- ggplot(WGdata, aes(y = log_Biomass_kg_ha, x = log_DPH_Height)) +
+   geom_point() +  
+   geom_smooth(method = "lm", se = FALSE, color = "red") +
+   annotate("text", x = Inf, y = -Inf, label = eq, hjust = 1.1, vjust = -0.5, size = 4, color = "black") +
+   labs(
+     x = "Log DPM Height (cm)",
+     y = "Log Standing grass biomass (kg/ha)") +
+   theme_beautiful()
+ 
+ ggsave(LG,filename ="Plots/LOG Biomass.png",
+          width = 16, height = 14, units = "cm" )
+        
+ 
+ 
+ #### SQUARE ROOTING BIOMASS AND DPM HEIGHT
+ 
+ # Step 1: Square root transform both variables
+ WGdata$sqrt_Biomass_kg_ha <- sqrt(WGdata$Biomass_kg_ha)
+ WGdata$sqrt_DPH_Height <- sqrt(WGdata$DPH_Height)
+ 
+ # Step 2: Fit a linear model
+ model_sqrt <- lm(sqrt_Biomass_kg_ha ~ sqrt_DPH_Height, data = WGdata)
+ tab_model(model_sqrt)
+ 
+ # Step 3: Extract equation and R²
+ # Step 3: Extract equation, R², and number of observations
+ coef <- coefficients(model_sqrt)
+ r2 <- summary(model_sqrt)$r.squared
+ n <- nobs(model_sqrt)
+ eq <- paste0(
+   "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+   "R² = ", round(r2, 3), ", n = ", n)
+ 
+ 
+ ###plotting 
+  SQT <-ggplot(WGdata, aes(x = sqrt_DPH_Height, y = sqrt_Biomass_kg_ha)) +
+   geom_point()  +
+   geom_smooth(method = "lm", se = FALSE, color = "red") +
+   annotate("text", x = Inf, y = -Inf, label = eq, hjust = 1.1, vjust = -0.5, size = 4, color = "black") +
+   labs(
+     x = "√DPM Height (cm)",
+     y = "√Standing grass biomass (kg/ha)") +
+   theme_beautiful()
+ 
+  ggsave(SQT,filename ="Plots/SQRT biomass.png",
+       width = 16, height = 14, units = "cm" )
+
+ ################################################  
+  

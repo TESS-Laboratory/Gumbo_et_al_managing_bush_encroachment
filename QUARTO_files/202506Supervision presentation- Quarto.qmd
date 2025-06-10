@@ -440,3 +440,7 @@ Grdata <- read_csv(here("DATA/March2025/GrassesCombined.csv"))
    theme_beautiful()
  
 ```
+
+![](images/clipboard-3570095190.png)
+
+Figure 14. Comparison of two treatments on their impact on resprout density on cut stumps. THF treatment significantly reduced the resprouts population on cut stumps.
