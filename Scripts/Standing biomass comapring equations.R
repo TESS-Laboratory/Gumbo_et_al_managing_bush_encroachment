@@ -61,22 +61,42 @@ WGdata$Biomass_kg_ha <- WGdata$Weight * 10 / frame_area
   # Fit a linear model using log-transformed variables
     modelG <- lm(log_Biomass_kg_ha ~ log_DPH_Height, data = WGdata)
     tab_model(modelG)
+    
+    # Extract coefficients
+    coefs <- coef(modelG)
+    intercept <- round(coefs[1], 2)
+    slope <- round(coefs[2], 2)
+    
+   # Create equation string for annotation
+    # Build the equation string (biomass = intercept + slope * x)
+    eq1 <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
+    
+    coef <- coefficients(modelG)
+    r2 <- summary(modelG)$r.squared
+    n <- nobs(modelG)
+    eq1 <- paste0(
+      "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+      "R² = ", round(r2, 3), ", n = ", n)
+    
+    
 
   ## Plot log-log regression
     ggplot(WGdata, aes(y = log_Biomass_kg_ha, x = log_DPH_Height)) +
       geom_point() +
       geom_smooth(method = "lm", se = FALSE, color = "red") +
-      labs(
-        x = "Log Dpm height (cm)",
-        y = "Log Standing grass biomass (kg/ha)"
+      annotate("text", x = Inf, y = -Inf, label = eq1, hjust = 1.1, vjust = -0.5, size = 4, color = "black") +
+      labs( x = "Log Dpm height (cm)",
+            y = "Log Standing grass biomass (kg/ha)"
       ) +
       theme_beautiful()
-    ###############################################    
-    
+      
+##########################################################    
+ 
+       
 # 3. Linear regression: Biomass ~ DPH
 modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
 #summary(modelWG)
- tab_model(modelWG)
+ #tab_model(modelWG)
 
 
  ###adding annotation to the plot
@@ -91,24 +111,49 @@ modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
  # Create equation string for annotation
  # Build the equation string (biomass = intercept + slope * x)
     eq <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
- 
+    
+    coef <- coefficients(modelWG)
+    r2 <- summary(modelWG)$r.squared
+    n <- nobs(modelWG)
+    eq <- paste0(
+      "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+      "R² = ", round(r2, 3), ", n = ", n)
+    
  
  # Plot with regression and equation
- ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
-   geom_point() +
-   geom_smooth(method = "lm", se = TRUE, color = "red") +
+ 
+ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
+  geom_point() +  
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  annotate("text", x = Inf, y = -Inf, label = eq, hjust = 1.1, vjust = -0.5, size = 4, color = "black") +
+  labs( x = "Dpm height (cm)",
+        y = "Standing grass biomass (kg/ha)"
+  ) +
+  theme_beautiful()
+
+
+####Using same data to fit INTERCEPT PASSING THROUGH ORIGIN   
+ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
+     geom_point() +
+     geom_smooth(method = "lm", se = TRUE, color = "red") +
+     geom_smooth(method="lm", formula = y ~ x - 1, color = "blue") ##intercept to pass through ZERO
    annotate("text", x = min(WGdata$DPH_Height, na.rm = TRUE), 
             y = max(WGdata$Biomass_kg_ha, na.rm = TRUE), 
-          label = eq, parse = TRUE, hjust = 0, size = 3, color = "red") +
-   labs(
-     x = "Dpm height (cm)",
-     y = "Standing grass biomass (kg/ha)"
-   ) +
-   theme_beautiful()
+            label = eq, parse = TRUE, hjust = 0, size = 3, color = "red") +
+     labs(
+       x = "Dpm height (cm)",
+       y = "Standing grass biomass (kg/ha)"
+     ) +
+     theme_beautiful()
+   
+   
  
-
- 
- ##### SQAURE ROOT OF DPH * BIOMASS MODEL
+   
+   
+   
+   
+   
+ ############ SQAURE ROOT OF DPH * BIOMASS MODEL
 # WGdata <- WGdata %>% 
       #mutate(sqrt_dpm = sqrt(DPH_Height))
  

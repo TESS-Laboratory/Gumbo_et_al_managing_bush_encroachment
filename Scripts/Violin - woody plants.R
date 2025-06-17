@@ -4,8 +4,6 @@ library(vegan)
 library(multcompView)
 library(patchwork)
 
-woody_species <- read.csv("C:/workspace/gumbo_dev/DATA/WoodyPlants_C.csv")
-
 theme_beautiful <- function() {
   theme_bw() +
     theme(
@@ -40,6 +38,8 @@ theme_beautiful <- function() {
     )
 }
 
+
+woody_species <- read.csv("C:/workspace/gumbo_dev/DATA/WoodyPlants_C.csv")
 
 # Data types
 woody_species <- woody_species%>%
@@ -260,8 +260,6 @@ ggsave(Fig1,
 
 data <- read.csv("C:/workspace/gumbo_dev/DATA/WoodyPlants_C.csv")
 
-library(tidyverse)
-library(vegan)
 
 
 ##calculate species abundance per plot

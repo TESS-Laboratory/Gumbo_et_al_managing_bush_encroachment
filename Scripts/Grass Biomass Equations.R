@@ -194,67 +194,7 @@ ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
 
 
 
-################ FOURTH ATTEMPT TO CONSTRAIN THE MODELS
 
-# --- Clean and prepare data ---
-# Ensure numeric and clean
-WGdata$DPH_Height <- as.numeric(WGdata$DPH_Height)
-WGdata$Biomass_kg_ha <- as.numeric(WGdata$Biomass_kg_ha)
-
-# Remove rows with missing or non-finite values
-WGdata <- na.omit(WGdata)
-WGdata <- WGdata[is.finite(WGdata$DPH_Height) & is.finite(WGdata$Biomass_kg_ha), ]
-
-# Filter strictly positive values (necessary for power/sqrt models)
-WGdata <- WGdata[WGdata$DPH_Height > 0 & WGdata$Biomass_kg_ha > 0, ]
-
-
-
-# --- Fit power model: Biomass = a * DPH^b ---
-
-power_mod <- nls(Biomass_kg_ha ~ a *DPH_Height^b,
-                 data = WGdata,
-                 start = list(a = 1, b = 0.5),
-                 control = nls.control(maxiter = 100, warnOnly = TRUE))
-
-
-# --- Fit constrained Trollope model: Biomass = a * sqrt(DPH) ---
-WGdata$sqrtDPH <- sqrt(WGdata$DPH_Height)
-trollope_mod <- nls(Biomass_kg_ha ~ a * sqrtDPH,
-                    data = WGdata,
-                    start = list(a = 1))
-
-# --- Coefficients ---
-a_power <- coef(power_mod)["a"]
-b_power <- coef(power_mod)["b"]
-a_trollope <- coef(trollope_mod)["a"]
-
-# --- Prediction data ---
-x_vals <- seq(0, max(WGdata$DPH_Height), length.out = 100)
-pred_df <- data.frame(
-  DPH_Height = x_vals,
-  Power_Model = a_power * (x_vals^b_power),
-  Trollope_Model = a_trollope * sqrt(x_vals)
-)
-
-# --- Reshape for plotting ---
-library(tidyr)
-plot_df <- pivot_longer(pred_df, cols = c(Power_Model, Trollope_Model),
-                        names_to = "Model", values_to = "Biomass")
-
-# --- Plot ---
-library(ggplot2)
-ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
-  geom_point(alpha = 0.5, size = 2) +
-  geom_line(data = plot_df, aes(x = DPH_Height, y = Biomass, color = Model), size = 1.2) +
-  scale_color_manual(values = c("Power_Model" = "blue", "Trollope_Model" = "green")) +
-  labs(
-    title = "Biomass vs DPH: Power vs Trollope Model (Both Constrained to 0)",
-    x = "DPH Height (cm)",
-    y = "Biomass (kg/ha)",
-    color = "Model"
-  ) +
-  theme_minimal()
 
 
 ######################## this code gave better results further analysis being done to sqrt DPH for model 1
@@ -800,7 +740,7 @@ ggsave(BF,filename ="Plots/Change Grass BiomassFenced.png",
  
  
  ###plotting 
-  SQT <-ggplot(WGdata, aes(x = sqrt_DPH_Height, y = sqrt_Biomass_kg_ha)) +
+  SQT <- ggplot(WGdata, aes(x = sqrt_DPH_Height, y = sqrt_Biomass_kg_ha)) +
    geom_point()  +
    geom_smooth(method = "lm", se = FALSE, color = "red") +
    annotate("text", x = Inf, y = -Inf, label = eq, hjust = 1.1, vjust = -0.5, size = 4, color = "black") +

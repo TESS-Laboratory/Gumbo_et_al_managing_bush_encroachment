@@ -10,44 +10,46 @@ library(dataMaid)
 df <- read.csv("your_dataset.csv", stringsAsFactors = FALSE)
 TC <- read_csv("DATA/March2025/Woodyplants25.csv")
 
+WC <- read_csv("DATA/March2025/WoodyPC.csv")
+
 # ----------------------------
 # QUALITY CHECK (QC)
 # ----------------------------
 
 cat("---- BASIC STRUCTURE ----\n")
-str(TC)
-summary(TC)
+str(WC)
+summary(WC)
 
 cat("\n---- HEAD OF DATA ----\n")
 print(head(df))
 
 # Check for missing values
 cat("\n---- MISSING VALUES ----\n")
-print(colSums(is.na(TC)))
+print(colSums(is.na(WC)))
 
 # Check for duplicate rows
 cat("\n---- DUPLICATES ----\n")
-duplicated_rows <- TC[duplicated(TC), ]
+duplicated_rows <- WC[duplicated(WC), ]
 cat("Number of duplicated rows: ", nrow(duplicated_rows), "\n")
 
 # Data types of each column
 cat("\n---- DATA TYPES ----\n")
-print(sapply(TC, class))
+print(sapply(WC, class))
 
 # Range and summary of numeric variables
 cat("\n---- HEIGHT SUMMARY ----\n")
-print(summary(TC$Max_Height(m))
+print(summary(WC$Max_Height(m)))
 
 cat("\n---- Fencing ----\n")
-print(summary(TC$Fenced_Unfenced))
+print(summary(WC$Fenced))
 
 # Unique values for categorical variables
 cat("\n---- UNIQUE TREATMENTS ----\n")
-print(unique(TC$Treatment))
+print(unique(WC$Treatment))
 
 cat("\n---- UNIQUE SPECIES ----\n")
-print(length(unique(TC$Species_name)))
-print(head(unique(TC$Species_name), 20))  # show first 10 species
+print(length(unique(WC$Species_name)))
+print(head(unique(WC$Species_name), 50))  # show first 10 species
 
 # Outlier detection (boxplot)
 boxplot(TC$Height, main = "Boxplot of Height", ylab = "Max_Height(m)", col = "lightblue")
@@ -58,23 +60,23 @@ boxplot(TC$Height, main = "Boxplot of Height", ylab = "Max_Height(m)", col = "li
 
 # Cross-tabulations to check data consistency
 cat("\n---- PLOT vs SUBPLOT COMBINATION ----\n")
-print(table(TC$Plot, TC$Subplot))
+print(table(WC$Plot, WC$Subplot))
 
 cat("\n---- YEAR vs SUBPLOT COMBINATION ----\n")
-print(table(TC$Year, TC$Subplot))
+print(table(WC$Year, WC$Subplot))
 
 # Controlled vocabulary check
 expected_treatments <- c("C", "F", "TF",
                          "TFB", "THF")
-invalid_treatments <- setdiff(unique(TC$Treatment), expected_treatments)
+invalid_treatments <- setdiff(unique(WC$Treatment), expected_treatments)
 cat("\n---- INVALID TREATMENT VALUES ----\n")
 print(invalid_treatments)
 
 # Logical check: Height = 0 but Value != 0
-cat("\n---- LOGICAL CHECK: Max_Height(m) = 0 but Value != 0 ----\n")
-inconsistent <- subset(TC$ Max_Height(m)== 0 & Value != 0)
+cat("\n---- LOGICAL CHECK:Max_Height(m) = 0 but Value != 0 ----\n")
+inconsistent <- subset(WC$ Max_Height(m)== 0 & Value != 0)
 print(nrow(inconsistent))
-print(head(inconsistent))
+print(head(inconsistent)) 
 
 # ----------------------------
 # OPTIONAL: Automated QA/QC Report
