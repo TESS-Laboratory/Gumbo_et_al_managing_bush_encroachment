@@ -359,7 +359,7 @@ woody_split25$Trees <- ifelse(woody_split25$Size_Class == "Trees", woody_split25
 ################  DETERMINING METRICS FOR TREES
 ###### TREEE HEIGHT
 
-Tdata <- read_csv ("DATA/March2025/woody_with_separate_columns25.csv")
+Tdata <- read_csv("DATA/March2025/woody_with_separate_columns25.csv")
 
 THdata_filtered <- Tdata  %>%
   filter(Year %in% c(2024, 2025)) %>%
@@ -406,3 +406,230 @@ ggplot(THdata_filtered, aes(x = interaction(Site), y = Count)) +
   ) +
   theme_beautiful() +
   theme(axis.text.x = element_text(angle = 45, hjust = 0.8))
+
+#########################################################################################################
+
+## LOAD DATA
+Tdata <- read_csv ("DATA/March2025/woody_with_separate_columns25.csv")
+
+
+# Clean and format, FILTERING NAs
+
+Tdata <- Tdata %>%
+  filter(!is.na(`Max_height(m)`)) %>%  # Exclude NAs in dpm_height
+  mutate(
+    Year = as.factor(Year),
+    Site = as.factor(Site),
+    Plot = as.factor(Plot),
+    Subplot = as.factor(Subplot),
+    Treatment = as.factor(Treatment),
+    `Max_height(m)` = as.numeric(`Max_height(m)`) # Ensure numeric
+  )
+
+# Check missing values
+summary(Tdata$`Max_height(m)`)
+
+###2. Create Pre/Post Variable
+
+Tdata <- Tdata %>%
+  mutate(period = ifelse(as.numeric(as.character(Year)) < 2025, "PRE", "POST")) %>%
+  mutate(period = factor(period, levels = c("PRE", "POST")))
+
+### Summarize by Subplot or Plot..Average height per subplot and period:
+
+summary_Hdata <- Tdata %>%
+  group_by(Site, Plot, Subplot, Treatment, period) %>%
+  summarise(mean_height = mean(`Max_height(m)`, na.rm = TRUE)) %>%
+  ungroup()
+
+####4. Calculate Change in Height (Post - Pre)
+height_change <- summary_Hdata %>%
+  pivot_wider(names_from = period, values_from = mean_height) %>%
+  mutate(delta = POST - PRE)
+
+### Compare Treatment Effects (ANOVA on Delta)
+Tanova_model <- aov(delta ~ Treatment, data = height_change)
+summary(Tanova_model)
+# the results show that the treatment groups do not differ significantly in their effect on the response variable.
+
+## Optional: Tukey post-hoc test
+TukeyHSD(Tanova_model)
+
+#### USE OF Mixed-Effects Model (Handles Repeated Measures)
+#This is more robust as it uses the original data, accounts for plot/subplot as random effects, and tests interaction between time and treatment:
+
+Tlmm <- lmer(`Max_height(m)` ~ period * Treatment + (1 | Site/Plot/Subplot), data = Tdata)
+summary(Tlmm)
+
+#Tlmm2 <- lmer(`Max_height(m)` ~ period * Treatment + (1 | Site), data = Tdata)
+#summary(Tlmm2)
+# Look at the interaction terms (periodPOST:treatmentX) to assess whether any treatment caused a significant change post-treatment.
+
+##Plotting boxplot for before and after treatment
+ggplot(Tdata[!is.na(Tdata$`Max_height(m)`), ],
+       aes(x = Treatment, y = `Max_height(m)`, fill = period)) +
+  geom_boxplot() +
+  theme_beautiful()
+
+# ### Violin plot for  height
+### Violin plot
+ ggplot(Tdata[!is.na(Tdata$`Max_height(m)`), ],
+       aes(x = Treatment, y = `Max_height(m)`, fill = period)) +
+  geom_violin(trim = FALSE) +
+  labs(y = "Max. height (m)", x = "Treatments") +
+  theme_beautiful() 
+
+#ggsave(HF,filename ="Plots/Violin Height WoodyPlants.png",
+ #     width = 16, height = 14, units = "cm" )
+############################################################################################
+#####################################################
+ 
+ #SEEDLINGS
+ # Clean and format, FILTERING NAs
+ 
+ Tdata <- Tdata %>%
+   filter(!is.na(Seedlings) %>%  # Exclude NAs in dpm_height
+   mutate(
+     Year = as.factor(Year),
+     Site = as.factor(Site),
+     Plot = as.factor(Plot),
+     Subplot = as.factor(Subplot),
+     Treatment = as.factor(Treatment),
+     Seedlings = as.numeric(Seedlings) # Ensure numeric
+   )
+ 
+ # Check missing values
+ summary(Tdata$Seedlings)
+ 
+ ###2. Create Pre/Post Variable
+ 
+ Tdata <- Tdata %>%
+   mutate(period = ifelse(as.numeric(as.character(Year)) < 2025, "PRE", "POST")) %>%
+   mutate(period = factor(period, levels = c("PRE", "POST")))
+ 
+ ### Summarize by Subplot or Plot..Average height per subplot and period:
+ 
+ summary_Hdata <- Tdata %>%
+   group_by(Site, Plot, Subplot, Treatment, period) %>%
+   summarise(mean_height = mean(Seedlings, na.rm = TRUE)) %>%
+   ungroup()
+ 
+ ####4. Calculate Change in Height (Post - Pre)
+ height_change <- summary_Hdata %>%
+   pivot_wider(names_from = period, values_from = mean_height) %>%
+   mutate(delta = POST - PRE)
+ 
+ ### Compare Treatment Effects (ANOVA on Delta)
+ Sanova_model <- aov(delta ~ Treatment, data = height_change)
+ summary(Sanova_model)
+ # the results show that the treatment groups differ significantly in their effect on the response variable.
+ 
+ ## Optional: Tukey post-hoc test
+ TukeyHSD(Sanova_model)
+ 
+ #### USE OF Mixed-Effects Model (Handles Repeated Measures)
+ #This is more robust as it uses the original data, accounts for plot/subplot as random effects, and tests interaction between time and treatment:
+ 
+ Slmm <- lmer(Seedlings ~ period * Treatment + (1 | Site/Plot/Subplot), data = Tdata)
+ summary(Slmm)
+ 
+ #Tlmm2 <- lmer(`Max_height(m)` ~ period * Treatment + (1 | Site), data = Tdata)
+ #summary(Tlmm2)
+ # Look at the interaction terms (periodPOST:treatmentX) to assess whether any treatment caused a significant change post-treatment.
+ 
+ ##Plotting boxplot for seedlings before and after treatment
+ SD <- ggplot(Tdata[!is.na(Tdata$Seedlings), ],
+        aes(x = Treatment, y = Seedlings, fill = period)) +
+   geom_boxplot() +
+   theme_beautiful()
+ 
+ #ggsave(SD,filename ="Plots/Height Seedlings Boxplot.png",
+  #          width = 16, height = 14, units = "cm")
+ 
+ # ### Violin plot for  height
+ ### Violin plot
+ SDV <-ggplot(Tdata[!is.na(Tdata$Seedlings), ],
+        aes(x = Treatment, y = Seedlings, fill = period)) +
+   geom_violin(trim = FALSE) +
+   labs(y = "Seedlings max.height (m)", x = "Treatments") +
+   theme_beautiful() 
+ 
+ #ggsave(SDV,filename ="Plots/Height Seedlings Violin.png",
+  #      width = 16, height = 14, units = "cm")
+ 
+ 
+ ####################################################################################################
+ ####################################################################################################
+ 
+ ### SAPLINGS SAPLINGS SAPLINGS SAPLINGS SAPLINGS
+ 
+ Tdata <- Tdata %>%
+   filter(!is.na(Saplings) %>%  # Exclude NAs in dpm_height
+            mutate(
+              Year = as.factor(Year),
+              Site = as.factor(Site),
+              Plot = as.factor(Plot),
+              Subplot = as.factor(Subplot),
+              Treatment = as.factor(Treatment),
+              Saplings = as.numeric(Saplings) # Ensure numeric
+            )
+          
+  # Check missing values
+    summary(Tdata$Saplings)
+          
+  ###2. Create Pre/Post Variable
+          
+Tdata <- Tdata %>%
+mutate(period = ifelse(as.numeric(as.character(Year)) < 2025, "PRE", "POST")) %>%
+mutate(period = factor(period, levels = c("PRE", "POST")))
+          
+### Summarize by Subplot or Plot..Average height per subplot and period:
+          
+ summary_Hdata <- Tdata %>%
+ group_by(Site, Plot, Subplot, Treatment, period) %>%
+summarise(mean_height = mean(Saplings, na.rm = TRUE)) %>%
+ ungroup()
+          
+  ####4. Calculate Change in Height (Post - Pre)
+  height_change <- summary_Hdata %>%
+  pivot_wider(names_from = period, values_from = mean_height) %>%
+ mutate(delta = POST - PRE)
+          
+ ### Compare Treatment Effects (ANOVA on Delta)
+Spanova_model <- aov(delta ~ Treatment, data = height_change)
+summary(Spanova_model)
+ # the results show that treatment has a statistically significant effect on the response variable (saplings).
+          
+ ## Optional: Tukey post-hoc test
+ TukeyHSD(Spanova_model)
+          
+#### USE OF Mixed-Effects Model (Handles Repeated Measures)
+ #This is more robust as it uses the original data, accounts for plot/subplot as random effects, and tests interaction between time and treatment:
+          
+ Splmm <- lmer(Saplings ~ period * Treatment + (1 | Site/Plot/Subplot), data = Tdata)
+ summary(Splmm)
+          
+          #Tlmm2 <- lmer(`Max_height(m)` ~ period * Treatment + (1 | Site), data = Tdata)
+          #summary(Tlmm2)
+          # Look at the interaction terms (periodPOST:treatmentX) to assess whether any treatment caused a significant change post-treatment.
+          
+ ##Plotting boxplot for seedlings before and after treatment
+SP <- ggplot(Tdata[!is.na(Tdata$Saplings),],
+aes(x = Treatment, y = Saplings, fill = period)) +
+ geom_boxplot() +
+ theme_beautiful()
+          
+  ggsave(SP,filename ="Plots/Saplings Height Boxplot.png",
+   width = 16, height = 14, units = "cm")
+          
+ # ### Violin plot for  height
+ ### Violin plot
+  SPV <-ggplot(Tdata[!is.na(Tdata$Saplings), ],
+ aes(x = Treatment, y = Saplings, fill = period)) +
+   geom_violin(trim = FALSE) +
+   labs(y = "Saplings max.height (m)", x = "Treatments") +
+    theme_beautiful() 
+          
+   #ggsave(SPV,filename ="Plots/Height Saplings Violin.png",
+    # width = 16, height = 14, units = "cm")
+          
