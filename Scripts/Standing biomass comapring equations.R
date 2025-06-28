@@ -807,130 +807,87 @@ all_models <- bind_rows(pred_2024, pred_2025, SHR_model, tr_model)
   
  #####################################################################
   
-  #### trying another way to establish a plot using already existing models
+  ############# USING TOTAL LEAST SQUARES REGRESSION
   
-  # DPM height from 1 to 90 cm
-  dpm <- seq(1, 90, by = 1)
-  sqrt_dpm <- sqrt(dpm)
+  WGdata <- read_csv(here("DATA/DPM.csv"))
   
-  # Compute biomass for each model
-  biomass_a <- -730.42 + 874.59 * sqrt_dpm
-  biomass_b <- -1013.69 + 971.25 * sqrt_dpm
-  biomass_c <- -2990.95 + 1574.02 * sqrt_dpm
-  biomass_d <- -3019 + 2260 * sqrt_dpm
+  ################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
+  # 2. Convert weight from grams to kg/ha
+  #    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
+  frame_area <- pi * (0.17^2)  # = 0.0908 m²
+  WGdata$Biomass_kg_ha <- WGdata$Weight * 10 / frame_area
   
-  # Combine into a tidy data frame
-  tf <- data.frame(
-    dpm = rep(dpm, 4),
-    biomass = c(biomass_a, biomass_b, biomass_c, biomass_d),
-    model = factor(rep(c("2024", "2025", "SHR", "Trollope and Potgieter,1986"), each = length(dpm)))
+  
+  # 3. Linear regression: Biomass ~ DPH
+  modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
+  #summary(modelWG)
+  # tab_model(modelWG)
+  
+  
+  ###adding annotation to the plot
+  
+  # Extract coefficients
+  coefs <- coef(modelWG)
+  intercept <- round(coefs[1], 2)
+  slope <- round(coefs[2], 2)
+  
+  # Create equation string for annotation
+  # Build the equation string (biomass = intercept + slope * x)
+  eq <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
+  
+  coef <- coefficients(modelWG)
+  r2 <- summary(modelWG)$r.squared
+  n <- nobs(modelWG)
+  eq <- paste0(
+    "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+    "R² = ", round(r2, 3), ", n = ", n)
+  
+  
+   # 3. Linear regression: Biomass ~ DPH
+  modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
+  
+  #  Extract the same data used in modelW
+  x <- modelWG$model$DPH_Height
+  y <- modelWG$model$Biomass_kg_ha
+  
+  # Center the data
+  x_c <- x - mean(x)
+  y_c <- y - mean(y)
+  
+  # Create matrix and perform SVD
+  A <- cbind(x_c, y_c)
+  svd_res <- svd(A)
+  
+  # TLS slope and intercept
+  v <- svd_res$v[, 2]  # last right singular vector
+  tls_slope <- -v[1] / v[2]
+  tls_intercept <- mean(y) - tls_slope * mean(x)
+  
+  # Step 5: Build formatted equation
+  n <- length(x)
+  
+  # Calculate TLS R² (optional but not standard; here we approximate via correlation)
+  r2_tls <- cor(x, y)^2  # Not strictly correct for TLS, but usable for display
+  
+  eq_tls <- paste0(
+    "y = ", round(tls_intercept, 2), " + ", round(tls_slope, 2), "x\n",
+    "TLS R² ≈ ", round(r2_tls, 3), ", n = ", n
   )
   
-  # Plot
-   #ff3 <- 
-    ggplot(tf, aes(x = dpm, y = biomass, color = model)) +
-    geom_line(size = 1.2) +
-    labs(
-      x = "DPM Height (cm)",
-      y = "Standing Biomass (kg)"
+  # Step 6: Print
+  cat(eq_tls) ##y = -1244.91 + 243.33x,  TLS R² ≈ 0.796, n = 120
+  
+  
+  # --- Build the ggplot with TLS line ---
+  ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
+    geom_point(color = "black") +
+    geom_abline(intercept = tls_intercept, slope = tls_slope, color = "blue", linetype = "dashed", size = 1.2) +
+    geom_smooth(method = "lm", se = FALSE, color = "red", size = 1, linetype = "solid") +
+    labs(subtitle = "Blue dashed = TLS | Red = OLS",
+         x = "Dpm", y = "Biomass_kg_ha"
     ) +
-    theme_beautiful() +
-    scale_color_manual(values = c("2024" = "blue", "2025" = "green", 
-                                  "SHR" = "orange", "Trollope and Potgieter,1986" = "red"))+
-  theme(
-    legend.position = c(0, 1),
-    legend.justification = c(0, 0.8),
-    legend.box.just = "left")
- 
-  #ggsave(ff3,filename ="Plots/4 MODELS ONLY.png",
-   #width = 16, height = 14, units = "cm" )
-    
-
-    
-###################################################################################
-
-
-## USING POWER FUNCTION TO THE FOUR MODELS
-library(janitor)
-
-# --- Step 1: Read and clean data
-#df <- read_csv("DATA/March2025/SHR_modelYear.csv")
-df <- read_csv("DATA/March2025/SHR_modelYear.csv", na = c("", "NA"))
-df <- clean_names(df)
-
-raw <- read.csv("DATA/March2025/SHR_modelYear.csv", header = FALSE, stringsAsFactors = FALSE)
-
-vNms <- as.character(unlist(raw[1, ]))
-vNms[is.na(vNms) | vNms == ""] <- paste0("V", seq_along(vNms))[is.na(vNms) | vNms == ""]
-vNms <- make.names(vNms, unique = TRUE)
-
-df <- raw[-1, ]
-names(df) <- vNms
-
-
-
-df$year <- as.factor(df$year)
-df$dpm <- as.numeric(as.character(df$dpm))
-df$biomass <- as.numeric(as.character(df$biomass))
-df <- df[is.finite(df$dpm) & is.finite(df$biomass), ]
-df$sqrt_dpm <- sqrt(df$dpm)
-
-
-
-# Sequence of Dpm values for prediction
-dpm_vals <- seq(0, max(df$dpm), length.out = 100)
-sqrt_dpm_vals <- sqrt(dpm_vals)
-
-# --- Step 2: Hardcoded Models (REW and Tro)
-rew_model <- data.frame(
-  x = sqrt_dpm_vals,
-  y = -2990.95+1574.02* sqrt_dpm_vals,
-  year = "SHR")
-
-tro_model <- data.frame(
-  x = sqrt_dpm_vals,
-  y = -3019+2260* sqrt_dpm_vals,
-  year = "Trollope")
-
-# --- Step 3: Fit two models from data
-# Example: subset data by Year, Treatment, etc., if needed
-# Hypothetical split for models 3 and 4 (adjust as needed)
-df_hyp1 <- subset(df, Year == "2023")
-df_hyp2 <- subset(df, Year == "2024")
-
-
-# Model 3: Fit power model with no intercept
-fit_hyp1 <- nls(biomass ~ a * sqrt_dpm, data = df_hyp1, start = list(a = 1))
-coef_hyp1 <- coef(fit_hyp1)["a"]
-hyp1_model <- data.frame(
-  x = sqrt_dpm_vals,
-  y = coef_hyp1 * sqrt_dpm_vals,
-  year = "Hyp1")
-
-# Model 4: Fit another model similarly
-fit_hyp2 <- nls(Biomass ~ a * sqrt_dpm, data = df_hyp2, start = list(a = 1))
-coef_hyp2 <- coef(fit_hyp2)["a"]
-hyp2_model <- data.frame(
-  x = sqrt_dpm_vals,
-  y = coef_hyp2 * sqrt_dpm_vals,
-  year = "Hyp2"
-)
-
-# --- Step 4: Combine and Plot
-model_df <- rbind(rew_model, tro_model, hyp1_model, hyp2_model)
-
-ggplot(df, aes(x = sqrt_dpm, y = Biomass)) +
-  geom_point(alpha = 0.4) +
-  geom_line(data = model_df, aes(x = x, y = y, color = year), size = 1.2) +
-  labs(
-    title = "Power Model Fits (sqrt(DPM) vs Biomass)",
-    x = "sqrt(DPM)",
-    y = "Biomass",
-    color = "Model"
-  ) +
-  theme_minimal()
-
-####################################################################################
+    theme_beautiful()
+  
 
 
     

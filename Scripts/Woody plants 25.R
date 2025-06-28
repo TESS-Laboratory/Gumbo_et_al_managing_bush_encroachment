@@ -13,6 +13,7 @@ library(robustbase)
 library(sjPlot)
 library(flextable)
 library(officer)
+library(glmmTMB)
 
 
 theme_beautiful <- function() {
@@ -484,7 +485,79 @@ ggplot(Tdata[!is.na(Tdata$`Max_height(m)`), ],
 ############################################################################################
 #####################################################
  
- #SEEDLINGS
+  #### TREES
+ # Clean and format, FILTERING NAs
+ 
+ Tdata <- Tdata %>%
+   filter(!is.na(Trees) %>%  # Exclude NAs in dpm_height
+            mutate(
+              Year = as.factor(Year),
+              Site = as.factor(Site),
+              Plot = as.factor(Plot),
+              Subplot = as.factor(Subplot),
+              Treatment = as.factor(Treatment),
+              Seedlings = as.numeric(Trees) # Ensure numeric
+            )
+          
+# Check missing values
+ summary(Tdata$Trees)
+          
+  ###2. Create Pre/Post Variable
+  Tdata <- Tdata %>%
+            mutate(period = ifelse(as.numeric(as.character(Year)) < 2025, "PRE", "POST")) %>%
+            mutate(period = factor(period, levels = c("PRE", "POST")))
+          
+          ### Summarize by Subplot or Plot..Average height per subplot and period:
+          
+          summary_Trdata <- Tdata %>%
+            group_by(Site, Plot, Subplot, Treatment, period) %>%
+            summarise(mean_height = mean(Trees, na.rm = TRUE)) %>%
+            ungroup()
+          
+  ####4. Calculate Change in Height (Post - Pre)
+ Theight_change <- summary_Trdata %>%
+ pivot_wider(names_from = period, values_from = mean_height) %>%
+  mutate(delta = POST - PRE)
+ 
+ ### Compare Treatment Effects (ANOVA on Delta)
+ Tanova_model <- aov(delta ~ Treatment, data = Theight_change)
+ summary(Tanova_model)
+ # the results show that the treatment groups do not differ significantly in their effect on the response variable.
+ 
+ ## Optional: Tukey post-hoc test
+ TukeyHSD(Tanova_model)
+ 
+ #### USE OF Mixed-Effects Model (Handles Repeated Measures)
+ #This is more robust as it uses the original data, accounts for plot/subplot as random effects, and tests interaction between time and treatment:
+ 
+ Tlmm <- lmer(Trees ~ period * Treatment + (1 | Site/Plot/Subplot), data = Tdata)
+ summary(Tlmm)
+ 
+ ##Plotting boxplot for seedlings before and after treatment
+TD <- ggplot(Tdata[!is.na(Tdata$Trees), ],
+              aes(x = Treatment, y = Trees, fill = period)) +
+   geom_boxplot() +
+  labs(x = "Treatments", y = "Trees max.height (m)") +
+   theme_beautiful()
+ 
+ #ggsave(TD,filename ="Plots/Height TREES Boxplot.png",
+  #         width = 16, height = 14, units = "cm")
+ 
+
+ # ### Violin plot for  height
+ ### Violin plot
+TDV <-ggplot(Tdata[!is.na(Tdata$Trees), ],
+              aes(x = Treatment, y = Trees, fill = period)) +
+   geom_violin(trim = FALSE) +
+   labs(y = "Trees max.height (m)", x = "Treatments") +
+   theme_beautiful() 
+
+#saving violin plot
+ #ggsave(TDV,filename ="Plots/Height TREES Violinplot.png",
+  #     width = 16, height = 14, units = "cm")
+
+ 
+  ################################# SEEDLINGS SEEDLINGS SEEDLINGS
  # Clean and format, FILTERING NAs
  
  Tdata <- Tdata %>%
@@ -563,6 +636,7 @@ ggplot(Tdata[!is.na(Tdata$`Max_height(m)`), ],
  
  ### SAPLINGS SAPLINGS SAPLINGS SAPLINGS SAPLINGS
  
+ #  SAPLINGS Height 
  Tdata <- Tdata %>%
    filter(!is.na(Saplings) %>%  # Exclude NAs in dpm_height
             mutate(
@@ -619,8 +693,8 @@ aes(x = Treatment, y = Saplings, fill = period)) +
  geom_boxplot() +
  theme_beautiful()
           
-  ggsave(SP,filename ="Plots/Saplings Height Boxplot.png",
-   width = 16, height = 14, units = "cm")
+ # ggsave(SP,filename ="Plots/Saplings Height Boxplot.png",
+  # width = 16, height = 14, units = "cm")
           
  # ### Violin plot for  height
  ### Violin plot
@@ -632,4 +706,187 @@ aes(x = Treatment, y = Saplings, fill = period)) +
           
    #ggsave(SPV,filename ="Plots/Height Saplings Violin.png",
     # width = 16, height = 14, units = "cm")
-          
+#############################################################################################
+  
+  ##Saplings number
+ # Tdata <- Tdata %>%
+    # Data prep (if not already done)
+    saplings_clean <- Tdata %>%
+    filter(!is.na(Saplings)) %>%
+    mutate(
+      Year = as.factor(Year),
+      Site = as.factor(Site),
+      Plot = as.factor(Plot),        # Fixed from Pot
+      Subplot = as.factor(Subplot),  # Fixed from Slot
+      Treatment = as.factor(Treatment),  # Fixed from Ttt
+      Saplings = as.numeric(Saplings),
+      period = ifelse(as.numeric(as.character(Year)) < 2025, "PRE", "POST"),
+      period = factor(period, levels = c("PRE", "POST"))
+    )
+
+## Calculate Delta (POST - PRE) for each Subplot within each Treatment using total saplings
+  sapling_delta <- saplings_clean %>%
+    group_by(Site, Plot, Subplot, Treatment, period) %>%
+    summarise(total_saplings = sum(Saplings, na.rm = TRUE), .groups = "drop") %>%
+    pivot_wider(names_from = period, values_from = total_saplings) %>%
+    mutate(Delta = POST - PRE)
+  
+  # Plot Delta per Treatment
+  SPP <- ggplot(sapling_delta, aes(x = Treatment, y = Delta, fill = Treatment)) +
+    geom_boxplot(outlier.shape = NA) +
+    labs(
+      x = "Treatment",
+      y = expression(Delta~"Saplings")
+    ) +
+    theme_beautiful() +
+    theme(axis.text.x = element_text(angle = 0, hjust = 1))
+  
+  
+  # ggsave(SPP,filename ="Plots/Saplings Delta Total NO.Boxplot.png",
+        # width = 16, height = 14, units = "cm")
+  
+    
+
+## Include random effect for Site/Plot/Subplot if repeated
+Sp_model <- lmer(Saplings ~ Treatment * period + (1|Site/Plot/Subplot), data = Tdata)
+summary(Sp_model)
+
+
+
+#########################################################################################################
+  ######################################################################################
+  
+# COMPARING SEEDLINGS richness, diversity
+  
+  ## LOAD DATA
+  Sdata <- read_csv ("DATA/March2025/woody_with_separate_columns25.csv")
+  
+
+  # Make sure Year and Treatment are factors
+  Sdata$Year <- as.factor(Sdata$Year)
+  Sdata$Treatment <- as.factor(Sdata$Treatment)
+  
+  # Summarise species richness per Subplot
+  richness_data <- Sdata %>%
+    group_by(Year, Treatment, Site, Plot, Subplot) %>%
+    summarise(richness = n_distinct(Species_name), .groups = "drop")
+
+  #If Subplot is nested in Plot, include random effects:
+  glmm_model <- glmer(
+    richness ~ Year * Treatment + (1 | Site/Plot/Subplot),
+    data = richness_data,
+    family = poisson
+  )
+  summary(glmm_model)
+  
+  #Visualisation using boxplot
+ Se <- ggplot(richness_data, aes(x = Treatment, y = richness, fill = Year)) +
+    geom_boxplot() +
+    labs(
+         y = "No. of species") +
+    theme_beautiful()
+  
+  #ggsave(Se,filename ="Plots/Boxplot SEEDLINGS species richness.png",
+              #width = 16, height = 14, units = "cm")
+ 
+  ## Visualistaion using VIOLIN plot
+  
+   ggplot(richness_data, aes(x = Treatment, y = richness, fill = Year)) +
+    geom_violin(trim = FALSE, scale = "width", alpha = 0.7)  +
+    labs(
+      x = "Treatment",
+      y = "No. of species"
+    ) +
+    theme_beautiful() + 
+    theme(
+      axis.text.x = element_text(angle = 0, hjust = 0),
+      plot.title = element_text(face = "bold")
+    )
+  #ggsave(Sv,filename ="Plots/Violin SEEDLINGS species richness.png",
+                     # width = 16, height = 14, units = "cm")
+  
+  
+#Check model assumptions
+  # Check for overdispersion
+  overdisp_fun <- function(model) {
+    rdf <- df.residual(model)
+    rp <- residuals(model, type = "pearson")
+    sum(rp^2) / rdf
+  }
+  overdisp_fun(glmm_model)  # ~1 is good; >>1 = overdispersion
+  
+
+##Post-hoc pairwise comparisons to examine which Treatment-Year combinations differ:
+  # Estimated marginal means
+  emm <- emmeans(glmm_model, ~ Year | Treatment)
+  pairs(emm)
+  
+
+###########################################################################################################
+  ##################################################################################################
+  
+# DETERMINING NO. OF RESPROUTS ON CUT STUMPS
+  
+ Resdata <- read_csv("DATA/March2025/WoodyPC.csv")
+  
+  colnames(Resdata)
+
+  # Convert NA to 0
+  Resdata <- Resdata %>%
+    mutate(No_of_resprouts = ifelse(is.na(No_of_resprouts), 0, No_of_resprouts))
+  
+# Filtrer data to only include year 2025
+  Resdata_2025 <- Resdata %>%
+    filter( Treatment %in% c("THF", "TF", "TFB"),Year == "2025", Woody_class == "Cut stump")
+  
+# Visualising comparisons
+  ResP<- ggplot(Resdata_2025 , aes(x = Treatment, y = No_of_resprouts, fill = Treatment)) +
+    geom_violin(trim = FALSE) +
+    scale_fill_manual(values = c("yellow", "brown","green")) +
+    labs(x = "Treatments", y = "No. of resprouts") +
+    theme_beautiful()
+  
+  ggsave(ResP,filename ="Plots/Violin Resprouts Cut Stumps.png",
+   width = 16, height = 14, units = "cm")
+  
+  
+  #If Subplot is nested in Plot, include random effects:
+  Rglmm_model <- glmer(
+    No_of_resprouts ~  Treatment + (1 | Site/Plot/Subplot),
+    data = Resdata_2025,
+    family = poisson
+  )
+  summary(Rglmm_model)
+  
+  #Check model assumptions
+  # Check for overdispersion
+  overdisp_fun <- function(model) {
+    rdf <- df.residual(model)
+    rp <- residuals(model, type = "pearson")
+    sum(rp^2) / rdf
+  }
+  #check for dispersion
+  overdisp_fun(Rglmm_model)  # ~1 is good; >>1 = overdispersion
+  
+  # switch to Negative binomial GLMM since there is overdispersion
+  Rglmm_nb <- glmmTMB(
+    No_of_resprouts ~  Treatment + (1 | Site/Plot/Subplot),
+    data = Resdata_2025,
+    family = nbinom2
+  )
+  
+  # recheck dispersion
+  overdisp_fun(Rglmm_nb)    # dispersion value is 1.2 
+  
+  #Check summary model
+  summary(Rglmm_nb)
+  
+#Post hoc comparisons (if Treatment has multiple levels):
+  emmeans(Rglmm_nb, pairwise ~ Treatment)  
+ 
+# Plot model predictions or residuals:
+  plot(residuals(Rglmm_nb))
+  
+# Visualize fitted values vs. observed:
+  plot(fitted(Rglmm_nb), Resdata_2025$No_of_resprouts)
+  

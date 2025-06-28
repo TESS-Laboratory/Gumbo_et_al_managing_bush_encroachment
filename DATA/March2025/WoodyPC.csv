@@ -1,4 +1,4 @@
-Year,Site,Plot,Subplot,Fenced,Treatment,Species_name,Max_height(m),No_ of_resprouts ,Length_of_ longest_ resprout_(cm),Mode_of_resprouting ,Stem_diameter_(cm),Woody_class,Dead (m)
+Year,Site,Plot,Subplot,Fenced,Treatment,Species_name,Max_height(m),No_of_resprouts ,Length_of_ longest_ resprout_(cm),Mode_of_resprouting ,Stem_diameter_(cm),Woody_class,Dead (m)
 2024,A,1,Z1,Fenced,C,Vachellia karroo,3.2,,,,,,
 2024,A,1,Z1,Fenced,C,Fluegga virosa,1,,,,,,
 2024,A,1,Z1,Fenced,C,Peltophorum africanum,0.8,,,,,,

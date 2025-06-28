@@ -71,34 +71,45 @@ WGdata <- read_csv(here("DATA/DPM.csv"))
 frame_area <- pi * (0.17^2)  # = 0.0908 m²
 WGdata$Biomass_kg_ha <- WGdata$Weight * 10 / frame_area
 
-# 3. Linear regression: Biomass ~ DPH
+ 
+ # 3. Linear regression: Biomass ~ DPH
 modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
 #summary(modelWG)
-tab_model(modelWG)
+ tab_model(modelWG)
 
-### EQUATION FOR THE MODEL AND ANNOTATION
-# Extract coefficients
+
+ ###adding annotation to the plot
+ # Fit the model
+ modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
+ 
+ # Extract coefficients
     coefs <- coef(modelWG)
    intercept <- round(coefs[1], 2)
     slope <- round(coefs[2], 2)
  
  # Create equation string for annotation
  # Build the equation string (biomass = intercept + slope * x)
-     eq <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
+    eq <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
+    
+    coef <- coefficients(modelWG)
+    r2 <- summary(modelWG)$r.squared
+    n <- nobs(modelWG)
+    eq <- paste0(
+      "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+      "R² = ", round(r2, 3), ", n = ", n)
+    
  
  # Plot with regression and equation
- ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
-   geom_point() +
-   geom_smooth(method = "lm", se = TRUE, color = "red") +
-   annotate("text", x = min(WGdata$DPH_Height, na.rm = TRUE), 
-            y = max(WGdata$Biomass_kg_ha, na.rm = TRUE), 
-          label = eq, parse = TRUE, hjust = 0, size = 3, color = "red") +
-   labs(
-     x = "Dpm height (cm)",
-     y = "Standing grass biomass (kg/ha)"
-   ) +
-   theme_beautiful()
  
+ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
+  geom_point() +  
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  annotate("text", x = Inf, y = -Inf, label = eq, hjust = 1.1, vjust = -0.5, size = 4, color = "black") +
+  labs( x = "Dpm height (cm)",
+        y = "Standing grass biomass (kg/ha)"
+  ) +
+  theme_beautiful()
+
 
 ```
 
