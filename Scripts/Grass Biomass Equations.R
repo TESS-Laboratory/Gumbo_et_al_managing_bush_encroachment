@@ -752,5 +752,109 @@ ggsave(BF,filename ="Plots/Change Grass BiomassFenced.png",
   ggsave(SQT,filename ="Plots/SQRT biomass.png",
        width = 16, height = 14, units = "cm" )
 
- ################################################  
+ ################################################ ######
+  
+  ####### GRASS SPECIES COMPOSITION
+  
+  GrassComp <- read_csv("DATA/March2025/GrassesCombined.csv")
+  
+  # 1. Prepare data: richness per Site x Treatment x Year
+  Grass_year <- GrassComp %>%
+    filter(!is.na(Spp_name),
+           Year %in% c(2024, 2025)) %>%   # keep only pre/post years
+    group_by(Site, Plot, Subplot, Treatment, Year) %>%
+    summarise(spp_richness = n_distinct(Spp_name), .groups = "drop")
+  
+  # Quick look
+  summary(Grass_year)
+  
+  # 2. Fit GLMM ----
+  # Start fit gaussian
+ 
+  Gr_pois2 <- glmmTMB(spp_richness ~ Treatment * Year + (1|Site/Plot/Subplot),
+                   data = trees_year, 
+                   family = gaussian)   #gaussian family
+  summary(Gr_pois2)
+  
+  # 3. Post‑hoc comparisons ----  # Estimated marginal means for Year within each Treatment
+  gemm <- emmeans(Gr_pois2, ~ Year | Treatment, type = "response")
+  pairs(gemm)
+  
+  
+  # 4. Plot results # Convert Year to factor so axis shows integers without decimals
+  gemm_df <- as.data.frame(gemm) %>%
+    mutate(Year = factor(Year))
+  
+  #  custom ggplot:
+   ggplot(as.data.frame(gemm_df), aes(Year, rate, group = Treatment, colour = Treatment)) +
+    geom_line() +
+    geom_point(size = 3) +
+    labs(y = "Grass species richness") +
+    theme_beautiful()
+  
+  
+  #####  Δ‑change (2025 – 2024) analysis --------------------------------------
+  # Pivot wider to compute site‑level change
+  grass_delta <- Grass_year %>%
+    pivot_wider(names_from = Year, values_from = spp_richness, names_prefix = "Y") %>%
+    mutate(delta = Y2025 - Y2024)
+  
+  # Fit linear mixed model for delta (can go negative, so Gaussian assumption)
+  gmod_delta <- lmer(delta ~ Treatment + (1|Site), data = grass_delta)
+  summary(gmod_delta)
+  
+  
+  # Post‑hoc comparisons on delta
+  emm_delta <- emmeans(gmod_delta, ~ Treatment)
+  contrast(emm_delta, method = "pairwise")
+  
+  # 5. Box plot of Δ‑change --------------------------------------------------
+  GrDELTA <- ggplot(grass_delta, aes(x = Treatment, y = delta, fill = Treatment)) +
+    geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+    #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    labs(x = "Treatment", y = "Δ Grass spp richness") +
+    theme_beautiful() +
+    theme(legend.position = "none")
+  
+  ggsave(GrDELTA,filename ="Plots/Delta Grass species richness Box plot.png",
+         width = 16, height = 14, units = "cm")
+  
+  ##########
+  
+
+  ##### GRASS HEIGHT IN FENCED AND UNFENCED PLOTS
+  #### fenced or unfenced grass data
+  
+  GrassF <- read_csv("DATA/March2025/Grasses25.csv")
+  
+  table(GrassF$Subplot,GrassF$Fencing)
+  x <- paste(GrassF$Site, GrassF$Plot, GrassF$Subplot)
+  
+  Grassnew <- read_csv("DATA/March2025/GrassesCombined.csv")
+  y <- paste(Grassnew$Site,  Grassnew$Plot, Grassnew$Subplot)  
+  
+  p <- match(y, x)
+  
+  Grassnew$Fencing <- GrassF$Fencing[p]
+  
+  #write.csv(Grassnew, "DATA/March2025/GrassesCombined_withFencing.csv")
+  
+  summary_Gr <- Grassnew %>%
+    filter(!is.na(DPM_Height),
+           Year %in% c(2024, 2025))
+    group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
+    summarise(mean_DPM_Height = mean(DPM_Height, na.rm = TRUE)) %>%
+    ungroup() ####check this code again
+  
+ 
+  
+ 
+   ggplot(Grassnew, aes(x = Fencing, y = DPM_Height, fill = Fencing)) + facet_wrap(~Treatment)+
+    geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+    #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    labs(x = "Treatment", y = " Grass height (cm)") +
+    theme_beautiful() +
+    theme(legend.position = "none")
   

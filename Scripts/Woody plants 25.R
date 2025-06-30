@@ -14,6 +14,8 @@ library(sjPlot)
 library(flextable)
 library(officer)
 library(glmmTMB)
+library(performance)  # model diagnostics
+
 
 
 theme_beautiful <- function() {
@@ -687,7 +689,7 @@ summary(Spanova_model)
           #summary(Tlmm2)
           # Look at the interaction terms (periodPOST:treatmentX) to assess whether any treatment caused a significant change post-treatment.
           
- ##Plotting boxplot for seedlings before and after treatment
+ ##Plotting boxplot for saplings before and after treatment
 SP <- ggplot(Tdata[!is.na(Tdata$Saplings),],
 aes(x = Treatment, y = Saplings, fill = period)) +
  geom_boxplot() +
@@ -708,9 +710,9 @@ aes(x = Treatment, y = Saplings, fill = period)) +
     # width = 16, height = 14, units = "cm")
 #############################################################################################
   
-  ##Saplings number
+  ##Saplings population i.e saplings count per treatment 
  # Tdata <- Tdata %>%
-    # Data prep (if not already done)
+    # Data prep 
     saplings_clean <- Tdata %>%
     filter(!is.na(Saplings)) %>%
     mutate(
@@ -821,7 +823,188 @@ summary(Sp_model)
   emm <- emmeans(glmm_model, ~ Year | Treatment)
   pairs(emm)
   
+  
 
+  ###################### SAPLINGS SPECIES COMPOSITION PER TREATMENT
+
+  ## LOAD DATA
+  Spdata <- read_csv ("DATA/March2025/woody_with_separate_columns25.csv")
+  
+  # 1. Prepare data: richness per Site x Treatment x Year
+  saplings_year <- Spdata %>%
+    filter(!is.na(Saplings),
+           Year %in% c(2024, 2025)) %>%   # keep only pre/post years
+    group_by(Site, Plot, Subplot, Treatment, Year) %>%
+    summarise(spp_richness = n_distinct(Species_name), .groups = "drop")
+  
+  # Quick look
+  summary(saplings_year)
+  
+  # 2. Fit GLMM ----
+  # Start with Poisson; switch to negative binomial if overdispersed
+  m_pois <- glmmTMB(spp_richness ~ Year * Treatment + (1|Site/Plot/Subplot),
+                    data = saplings_year,
+                    family = poisson)
+    
+  # Check dispersion
+  performance::check_overdispersion(m_pois)  #no overdispersion 
+  
+  
+  # If overdispersed, refit with negative binomial:
+     # m_nb <- update(m_pois, family = nbinom2)
+  
+  # Compare AIC
+     #AIC(m_pois, m_nb)
+  
+  # Choose the best model (say m_nb) and inspect summary
+     #  summary(m_nb)
+  
+
+  # 3. Post‑hoc comparisons ----
+  # Estimated marginal means for Year within each Treatment
+  emm <- emmeans(m_pois, ~ Year | Treatment, type = "response")
+  pairs(emm)
+  
+  # 4. Plot results # Convert Year to factor so axis shows integers without decimals
+  emm <- as.data.frame(emm) %>%
+    mutate(Year = factor(Year))
+
+  
+  #  custom ggplot:
+  ggplot(as.data.frame(emm), aes(Year, rate, group = Treatment, colour = Treatment)) +
+    geom_line() +
+    geom_point(size = 3) +
+    labs(y = "Sapling species richness") +
+    theme_beautiful()
+  
+  ### 4. Visualisation: Violin plot of observed sapling richness by Year within each Treatment
+   saplings_year %>%
+    mutate(Year = factor(Year)) %>%
+    ggplot(aes(x = Year, y = spp_richness, fill = Year)) +
+    geom_violin(trim = FALSE, alpha = 0.6, colour = NA) +
+    geom_jitter(width = 0.1, height = 0, size = 1, alpha = 0.7) +
+    stat_summary(fun = median, geom = "point", size = 3, colour = "black") +
+    facet_wrap(~ Treatment) +
+    labs(x = "Year", y = "Sapling species richness") +
+    theme_beautiful() +
+    theme(legend.position = "none")
+
+  #ggsave(Spviolin,filename ="Plots/Violin Saplings species richness.png",
+   #width = 16, height = 14, units = "cm")
+
+#################################################################   
+  ###  Δ‑change (2025 – 2024) analysis --------------------------------------
+   # Pivot wider to compute site‑level change
+   saplings_delta <- saplings_year %>%
+     pivot_wider(names_from = Year, values_from = spp_richness, names_prefix = "Y") %>%
+     mutate(delta = Y2025 - Y2024)
+   
+   # Fit linear mixed model for delta (can go negative, so Gaussian assumption)
+   mod_delta <- lmer(delta ~ Treatment + (1|Site), data = saplings_delta)
+   summary(mod_delta)
+   
+   # Post‑hoc comparisons on delta
+   emm_delta <- emmeans(mod_delta, ~ Treatment)
+   contrast(emm_delta, method = "pairwise")
+   
+   # 5. Box plot of Δ‑change --------------------------------------------------
+   SpDELTA <- ggplot(saplings_delta, aes(x = Treatment, y = delta, fill = Treatment)) +
+     geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+     #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+     geom_hline(yintercept = 0, linetype = "dashed") +
+     labs(x = "Treatment", y = "Δ sapling richness (2025 – 2024)") +
+     theme_beautiful() +
+     theme(legend.position = "none")
+   
+   ggsave(SpDELTA,filename ="Plots/Delta Saplings species richness Box plot.png",
+   width = 16, height = 14, units = "cm")
+   
+   
+##############################################################################################
+   ################## SPECIES RICHNESS    TREES  TREES TREES TREES TREES
+   
+   ## LOAD DATA
+   TRdata <- read_csv ("DATA/March2025/woody_with_separate_columns25.csv")
+   
+   # 1. Prepare data: richness per Site x Treatment x Year
+   trees_year <- TRdata %>%
+     filter(!is.na(Trees),
+            Year %in% c(2024, 2025)) %>%   # keep only pre/post years
+     group_by(Site, Plot, Subplot, Treatment, Year) %>%
+     summarise(spp_richness = n_distinct(Species_name), .groups = "drop")
+   
+   # Quick look
+   summary(trees_year)
+   
+   # 2. Fit GLMM ----
+   # Start with poisson and then fit gaussian
+   t_pois <- glmmTMB(spp_richness ~ Treatment * Year + (1|Site/Plot/Subplot),
+                     data = trees_year)  # no family fitted
+   summary(t_pois)
+   
+ #t_pois2 <- glmmTMB(spp_richness ~ Treatment * Year + (1|Site/Plot/Subplot),
+  #                 data = trees_year, 
+   #                 family = gaussian)   #gaussian family
+   #summary(t_pois2)
+   
+   # Check dispersion
+      # performance::check_overdispersion(t_pois2)  #no overdispersion 
+   
+   # 3. Post‑hoc comparisons ----  # Estimated marginal means for Year within each Treatment
+  temm <- emmeans(m_pois, ~ Year | Treatment, type = "response")
+  pairs(temm)
+  
+  # 4. Plot results # Convert Year to factor so axis shows integers without decimals
+   temm <- as.data.frame(temm) %>%
+     mutate(Year = factor(Year))
+      
+   #  custom ggplot:
+   ggplot(as.data.frame(temm), aes(Year, rate, group = Treatment, colour = Treatment)) +
+     geom_line() +
+     geom_point(size = 3) +
+     labs(y = "Trees species richness") +
+     theme_beautiful()
+   
+   ###  Visualisation: Violin plot of observed sapling richness by Year within each Treatment
+   trees_year %>%
+     mutate(Year = factor(Year)) %>%
+     ggplot(aes(x = Year, y = spp_richness, fill = Year)) +
+     geom_violin(trim = FALSE, alpha = 0.6, colour = NA) +
+    # geom_jitter(width = 0.1, height = 0, size = 1, alpha = 0.7) +
+     stat_summary(fun = median, geom = "point", size = 2, colour = "black") +
+     facet_wrap(~ Treatment) +
+     labs(x = "Year", y = "Trees species richness") +
+     theme_beautiful() +
+     theme(legend.position = "none")
+    
+   
+  ###  Δ‑change (2025 – 2024) analysis --------------------------------------
+   # Pivot wider to compute site‑level change
+   trees_delta <- trees_year %>%
+     pivot_wider(names_from = Year, values_from = spp_richness, names_prefix = "Y") %>%
+     mutate(delta = Y2025 - Y2024)
+   
+   # Fit linear mixed model for delta (can go negative, so Gaussian assumption)
+   tmod_delta <- lmer(delta ~ Treatment + (1|Site), data = trees_delta)
+   summary(tmod_delta)
+   
+   
+   # Post‑hoc comparisons on delta
+   emm_delta <- emmeans(tmod_delta, ~ Treatment)
+   contrast(emm_delta, method = "pairwise")
+   
+   # 5. Box plot of Δ‑change --------------------------------------------------
+   TrDELTA <- ggplot(trees_delta, aes(x = Treatment, y = delta, fill = Treatment)) +
+     geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+     #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+     geom_hline(yintercept = 0, linetype = "dashed") +
+     labs(x = "Treatment", y = "Δ Trees spp richness") +
+     theme_beautiful() +
+     theme(legend.position = "none")
+   
+   ggsave(TrDELTA,filename ="Plots/Delta Trees species richness Box plot.png",
+          width = 16, height = 14, units = "cm")
+   
 ###########################################################################################################
   ##################################################################################################
   
