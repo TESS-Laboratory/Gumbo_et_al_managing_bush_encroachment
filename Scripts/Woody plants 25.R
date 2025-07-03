@@ -192,82 +192,6 @@ ggplot(plot_summaryT, aes(x = Treatment, y = species_count, fill = Site)) +
 
 
 
-###########################CALCULATING SPECIES DIVERSITY
-
-##calculate species abundance per plot
-plot_data2 <- woody_species25 %>%
-  group_by(Site, Plot, Species_name) %>%
-  summarise(abundance = n(), .groups = 'drop')
-
-## calculate shannon diversity per plot
-plot_diversity2 <- plot_data2 %>%
-  group_by(Site, Plot) %>%
-  summarise(shannon_index = -sum((abundance / sum(abundance)) * log(abundance / sum(abundance))), .groups = 'drop')
-
-# Calculate site-level Shannon diversity (mean across plots)
-site_diversity <- plot_diversity2 %>%
-  group_by(Site) %>%
-  summarise(Site_shannon_index = mean(shannon_index), .groups = 'drop')
-
-
-# Visualisation site-level diversity
-
-ggplot(site_diversity, aes(x = Site, y = Site_shannon_index)) +
-  geom_bar(stat = "identity") +
-  theme_beautiful() +
-  labs(x = "Site", y = "Diversity index")
-
-
-
-##AT PLOT LEVEL
-# Plot plot-level Shannon diversity
-ggplot(plot_diversity2, aes(x = interaction(Site, Plot), y = shannon_index, fill = Site)) +
-  geom_bar(stat = "identity", show.legend = FALSE) +
-  theme_beautiful() +
-  labs(x = "Site-Plot", y = "Diversity index") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
-
-
-###################### CALCULATING SIMPSONS DIVERSITY INDEX
-# Calculate species abundance per plot
-plot_data <- woody_species25 %>%
-  group_by(Site, Plot, Species_name) %>% 
-  summarise(abundance = n(), .groups = 'drop')
-
-# Calculate Simpson's Index for each plot
-plot_diversity_simpson <- plot_data %>%
-  group_by(Site, Plot) %>%
-  summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
-View(plot_diversity_simpson)
-
-# Calculate site-level Simpson diversity (mean across plots)
-site_diversity_simpson <- plot_diversity_simpson %>%
-  group_by(Site) %>%
-  summarise(site_simpson_index = mean(simpson_index), .groups = 'drop')
-
-
-# SITE - level Simpson diversity index
-ggplot(site_diversity_simpson, aes(x = Site, y = site_simpson_index)) +
-  geom_bar(stat = "identity", show.legend = FALSE) +
-  theme_beautiful() +
-  labs( y = "Simpson Diversity Index") +
-  theme(axis.text.x = element_text(angle = 0, hjust = 1))
-
-#PLOT -level Simpson diversity index
- ggplot(plot_diversity_simpson, aes(x = interaction(Site, Plot), y = simpson_index, fill = Site)) +
-  geom_bar(stat = "identity", show.legend = FALSE) +
-  theme_beautiful() +
-  labs(x = "Site - Plot", y = "Simpson Diversity Index") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
-#  +theme(legend.position = "right")
-
-# Saving as png
-ggsave(Simp,
-       filename = "Plots/ .png",
-       width = 16, height = 14, units = "cm" )
-
-
-
 ###############################################################################
 ##########################################################################################################
 ##################################################################################################################
@@ -965,7 +889,7 @@ summary(Sp_model)
      labs(y = "Trees species richness") +
      theme_beautiful()
    
-   ###  Visualisation: Violin plot of observed sapling richness by Year within each Treatment
+   ###  Visualisation: Violin plot of observed Tree richness by Year within each Treatment
    trees_year %>%
      mutate(Year = factor(Year)) %>%
      ggplot(aes(x = Year, y = spp_richness, fill = Year)) +

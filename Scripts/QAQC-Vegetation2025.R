@@ -3,7 +3,7 @@ library(stringi)
 library(dataMaid)
 
 # Load required packages
-if (!require("dataMaid")) install.packages("dataMaid", dependencies = TRUE)
+#if (!require("dataMaid")) install.packages("dataMaid", dependencies = TRUE)
 library(dataMaid)
 
 # Load your dataset

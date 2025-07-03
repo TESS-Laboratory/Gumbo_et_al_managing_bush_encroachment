@@ -12,7 +12,7 @@ This repository contains preliminary data from vegetation surveys, R codes for p
 
  d. 'Woody_sizeclasses.csv' - data for 2024 woody plants survey.
 
- e. 'Grasses25' - data for 2025 grass survey.
+ e. 'Grasses25.csv' - data for 2025 grass survey.
 
  f. 'GrassesCombined.csv' - data for 2024 and 2025 grasses survey combined.
 

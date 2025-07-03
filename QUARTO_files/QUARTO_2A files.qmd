@@ -171,6 +171,9 @@ WGdata$Biomass_kg_ha <- WGdata$Weight * 10 / frame_area
 
  # 3. Linear regression: Biomass ~ DPH
 modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
+
+modelWG0 <- lm(Biomass_kg_ha ~ 0 + DPH_Height, data = WGdata)   # intercept = 0
+
 #summary(modelWG)
 # tab_model(modelWG)
 
@@ -192,21 +195,33 @@ modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
       "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
       "R² = ", round(r2, 3), ", n = ", n)
     
+##2 -- zero‑intercept line (parallel construction) --
+coef0 <- coefficients(modelWG0)                # only the slope
+r2_0  <- summary(modelWG0)$r.squared
+eq0   <- paste0(
+  "y = ", round(coef0[1], 2), "x\n",
+  "R² = ", round(r2_0, 3), ", n = ", n)
+    
 ##Using same data to fit INTERCEPT PASSING THROUGH ORIGIN   
     
+   
+  
 ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha))+
      geom_point()+
      geom_smooth(method = "lm", se = TRUE, color = "red")+
-     geom_smooth(method="lm", formula = y ~ x - 1, color = "blue")+  ##intercept to pass 0
-   annotate("text", x = min(WGdata$DPH_Height, na.rm = TRUE), 
-            y = max(WGdata$Biomass_kg_ha, na.rm = TRUE), 
-            label = eq, parse = FALSE, hjust = 0, size = 3, color = "red")+
-     labs(
-       x = "Dpm height (cm)",
-       y = "Standing grass biomass (kg/ha)"
-     )+
-     theme_beautiful()    
-  
+geom_smooth(method = "lm", formula = y ~ x - 1, colour = "blue") + # zero‑intercept
+  annotate("text",
+           x = min(WGdata$DPH_Height, na.rm = TRUE),
+           y = max(WGdata$Biomass_kg_ha, na.rm = TRUE),
+           label = eq,   hjust = 0, size = 3, colour = "red") +
+  annotate("text",
+           x = min(WGdata$DPH_Height, na.rm = TRUE),
+           y = 0.90 * max(WGdata$Biomass_kg_ha, na.rm = TRUE),            
+           label = eq0,  hjust = 0, size = 3, colour = "blue") +
+  labs(x = "DPM Height (cm)",
+       y = "Standing grass biomass (kg/ha)") +
+  theme_classic()
+
 
 ```
 

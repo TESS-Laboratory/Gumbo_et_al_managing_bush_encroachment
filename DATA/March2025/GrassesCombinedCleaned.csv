@@ -104,7 +104,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,A,2,Z1,Hyperrhenia filipendula,16.7,Fenced,F
 2024,A,2,Z1,Bothriochloa insculpta,20.2,Fenced,F
 2024,A,2,Z1,Hyperrhenia filipendula,22.4,Fenced,F
-2024,A,2,Z1,Setaria pumila ,23.3,Fenced,F
+2024,A,2,Z1,Setaria pumila,23.3,Fenced,F
 2024,A,2,Z1,NA,21.5,Fenced,F
 2024,A,2,Z2,Heteropogon contortus,17.6,Fenced,F
 2024,A,2,Z2,Bothriochloa insculpta,18.6,Fenced,F
@@ -149,7 +149,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,A,2,Z3,Eragrostis superba,10.9,Unfenced,F
 2024,A,2,Z4,Aristida adscensionis,12.5,Unfenced,F
 2024,A,2,Z4,Hyperrhenia filipendula,12.3,Unfenced,F
-2024,A,2,Z4,Setaria pumila ,17,Unfenced,F
+2024,A,2,Z4,Setaria pumila,17,Unfenced,F
 2024,A,2,Z4,NA,16.3,Unfenced,F
 2024,A,2,Z4,Hyperrhenia filipendula,17.2,Unfenced,F
 2024,A,2,Z4,Urochloa mosambicensis,9.6,Unfenced,F
@@ -168,7 +168,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,A,2,Z4,NA,32.6,Unfenced,F
 2024,A,2,Z4,NA,33.3,Unfenced,F
 2024,A,3,Z1,Aristida diffusa,38,Fenced,TFB
-2024,A,3,Z1,Aristida congesta C,29.8,Fenced,TFB
+2024,A,3,Z1,Aristida congesta c,29.8,Fenced,TFB
 2024,A,3,Z1,Melinis repens,22,Fenced,TFB
 2024,A,3,Z1,Urochloa mosambicensis,23.9,Fenced,TFB
 2024,A,3,Z1,Hyperrhenia filipendula,11.8,Fenced,TFB
@@ -213,7 +213,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,A,3,Z3,Eragrostis rigidior,13.5,Fenced,TFB
 2024,A,3,Z3,Cynodon dactylon,31.8,Fenced,TFB
 2024,A,3,Z3,Urochloa mosambicensis,29,Fenced,TFB
-2024,A,3,Z3,Setaria pumila ,26.4,Fenced,TFB
+2024,A,3,Z3,Setaria pumila,26.4,Fenced,TFB
 2024,A,3,Z3,NA,25.9,Fenced,TFB
 2024,A,3,Z3,Heteropogon contortus,26.8,Fenced,TFB
 2024,A,3,Z3,Aristida adscensionis,19.2,Fenced,TFB
@@ -424,12 +424,12 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,1,Z1,Cymbopogon excavatus,6.1,Fenced,C
 2024,B,1,Z1,Heteropogon contortus,3.7,Fenced,C
 2024,B,1,Z1,Melinis repens,3.2,Fenced,C
-2024,B,1,Z1,Aristida congesta C,2.4,Fenced,C
+2024,B,1,Z1,Aristida congesta c,2.4,Fenced,C
 2024,B,1,Z1,Eragrostis gummiflua,8.5,Fenced,C
 2024,B,1,Z1,Eragrostis rigidior,3.1,Fenced,C
 2024,B,1,Z1,Melinis repens,4.4,Fenced,C
 2024,B,1,Z1,Heteropogon contortus,4.2,Fenced,C
-2024,B,1,Z1,Aristida congesta C,6.7,Fenced,C
+2024,B,1,Z1,Aristida congesta c,6.7,Fenced,C
 2024,B,1,Z1,Heteropogon contortus,6,Fenced,C
 2024,B,1,Z1,NA,6.7,Fenced,C
 2024,B,1,Z1,NA,5.3,Fenced,C
@@ -437,7 +437,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,1,Z2,Eragrostis rigidior,8,Unfenced,C
 2024,B,1,Z2,Heteropogon contortus,14,Unfenced,C
 2024,B,1,Z2,Aristida  canescens,20,Unfenced,C
-2024,B,1,Z2,Aristida congesta C,7,Unfenced,C
+2024,B,1,Z2,Aristida congesta c,7,Unfenced,C
 2024,B,1,Z2,Eragrostis rigidior,8.2,Unfenced,C
 2024,B,1,Z2,Heteropogon contortus,5.9,Unfenced,C
 2024,B,1,Z2,Aristida  canescens,6.6,Unfenced,C
@@ -453,7 +453,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,1,Z2,Melinis repens,7.2,Unfenced,C
 2024,B,1,Z2,Bothriochloa insculpta,5.2,Unfenced,C
 2024,B,1,Z2,NA,7.5,Unfenced,C
-2024,B,1,Z3,Aristida congesta B,4,Fenced,C
+2024,B,1,Z3,Aristida congesta b,4,Fenced,C
 2024,B,1,Z3,Eragrostis rigidior,4.7,Fenced,C
 2024,B,1,Z3,Eragrostis superba,4.7,Fenced,C
 2024,B,1,Z3,Cymbopogon excavatus,10.5,Fenced,C
@@ -463,13 +463,13 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,1,Z3,Heteropogon contortus,11.9,Fenced,C
 2024,B,1,Z3,Eragrostis superba,10.6,Fenced,C
 2024,B,1,Z3,NA,9.7,Fenced,C
-2024,B,1,Z3,Aristida congesta B,7.3,Fenced,C
+2024,B,1,Z3,Aristida congesta b,7.3,Fenced,C
 2024,B,1,Z3,Eragrostis superba,8.8,Fenced,C
 2024,B,1,Z3,Heteropogon contortus,12.3,Fenced,C
 2024,B,1,Z3,Eragrostis gummiflua,5.6,Fenced,C
 2024,B,1,Z3,Aristida adscensionis,NA,Fenced,C
 2024,B,1,Z3,Bothriochloa insculpta,NA,Fenced,C
-2024,B,1,Z3,Aristida congesta B,5.3,Fenced,C
+2024,B,1,Z3,Aristida congesta b,5.3,Fenced,C
 2024,B,1,Z3,Heteropogon contortus,5.9,Fenced,C
 2024,B,1,Z3,Eragrostis gummiflua,5.3,Fenced,C
 2024,B,1,Z3,Aristida adscensionis,5.2,Fenced,C
@@ -492,7 +492,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,1,Z4,Cymbopogon excavatus,16.4,Unfenced,C
 2024,B,1,Z4,Eragrostis superba,17.6,Unfenced,C
 2024,B,1,Z4,Eragrostis gummiflua,14.9,Unfenced,C
-2024,B,1,Z4,Aristida congesta B,13.4,Unfenced,C
+2024,B,1,Z4,Aristida congesta b,13.4,Unfenced,C
 2024,B,1,Z4,Heteropogon contortus,NA,Unfenced,C
 2024,B,1,Z4,Heteropogon contortus,4,Unfenced,C
 2024,B,1,Z4,Cymbopogon excavatus,3.4,Unfenced,C
@@ -561,7 +561,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,2,Z3,Digitaria eriantha,NA,Fenced,F
 2024,B,2,Z3,Heteropogon contortus,6,Fenced,F
 2024,B,2,Z3,Cymbopogon excavatus,4.5,Fenced,F
-2024,B,2,Z3,Setaria pumila ,4.7,Fenced,F
+2024,B,2,Z3,Setaria pumila,4.7,Fenced,F
 2024,B,2,Z3,NA,3.8,Fenced,F
 2024,B,2,Z3,Aristida adscensionis,10.6,Fenced,F
 2024,B,2,Z3,Heteropogon contortus,13,Fenced,F
@@ -582,11 +582,11 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,2,Z4,Setaria incrassata,NA,Unfenced,F
 2024,B,2,Z4,Eragrostis gummiflua,NA,Unfenced,F
 2024,B,2,Z4,Heteropogon contortus,9.8,Unfenced,F
-2024,B,2,Z4,Aristida congesta B,7.6,Unfenced,F
+2024,B,2,Z4,Aristida congesta b,7.6,Unfenced,F
 2024,B,2,Z4,NA,10,Unfenced,F
 2024,B,2,Z4,NA,9,Unfenced,F
 2024,B,2,Z4,Heteropogon contortus,9.8,Unfenced,F
-2024,B,2,Z4,Aristida congesta B,7.6,Unfenced,F
+2024,B,2,Z4,Aristida congesta b,7.6,Unfenced,F
 2024,B,2,Z4,NA,10,Unfenced,F
 2024,B,2,Z4,NA,9,Unfenced,F
 2024,B,2,Z4,Heteropogon contortus,8.6,Unfenced,F
@@ -626,7 +626,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,3,Z2,Themeda triandra,16.9,Fenced,TF
 2024,B,3,Z2,Hyperrhenia filipendula,17.3,Fenced,TF
 2024,B,3,Z2,Cymbopogon excavatus,15,Fenced,TF
-2024,B,3,Z2,Setaria pumila ,13.6,Fenced,TF
+2024,B,3,Z2,Setaria pumila,13.6,Fenced,TF
 2024,B,3,Z2,Sporobolus africanus,NA,Fenced,TF
 2024,B,3,Z2,Heteropogon contortus,17.3,Fenced,TF
 2024,B,3,Z2,Melinis repens,15.8,Fenced,TF
@@ -671,7 +671,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,3,Z4,NA,13.1,Unfenced,TF
 2024,B,3,Z4,Heteropogon contortus,15,Unfenced,TF
 2024,B,3,Z4,Aristida adscensionis,14.5,Unfenced,TF
-2024,B,3,Z4,Setaria pumila ,14.1,Unfenced,TF
+2024,B,3,Z4,Setaria pumila,14.1,Unfenced,TF
 2024,B,3,Z4,NA,15,Unfenced,TF
 2024,B,3,Z4,Heteropogon contortus,7.9,Unfenced,TF
 2024,B,3,Z4,Melinis repens,10,Unfenced,TF
@@ -697,14 +697,14 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,4,Z1,Bothriochloa insculpta,10.2,Fenced,TFB
 2024,B,4,Z1,Heteropogon contortus,7.8,Fenced,TFB
 2024,B,4,Z1,Eragrostis superba,7.4,Fenced,TFB
-2024,B,4,Z1,Aristida congesta C,8,Fenced,TFB
+2024,B,4,Z1,Aristida congesta c,8,Fenced,TFB
 2024,B,4,Z1,Themeda triandra,10,Fenced,TFB
 2024,B,4,Z1,Heteropogon contortus,17.3,Fenced,TFB
 2024,B,4,Z1,Aristida adscensionis,12.7,Fenced,TFB
 2024,B,4,Z1,Melinis repens,13.3,Fenced,TFB
 2024,B,4,Z1,Aristida diffusa,12.7,Fenced,TFB
 2024,B,4,Z1,Hyperrhenia filipendula,NA,Fenced,TFB
-2024,B,4,Z1,Setaria pumila ,NA,Fenced,TFB
+2024,B,4,Z1,Setaria pumila,NA,Fenced,TFB
 2024,B,4,Z2,Cymbopogon excavatus,3.7,Fenced,TFB
 2024,B,4,Z2,Heteropogon contortus,3.3,Fenced,TFB
 2024,B,4,Z2,Melinis repens,8.4,Fenced,TFB
@@ -712,7 +712,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,4,Z2,Cymbopogon excavatus,17.7,Fenced,TFB
 2024,B,4,Z2,Heteropogon contortus,17.1,Fenced,TFB
 2024,B,4,Z2,Eragrostis gummiflua,13.3,Fenced,TFB
-2024,B,4,Z2,Setaria pumila ,12.7,Fenced,TFB
+2024,B,4,Z2,Setaria pumila,12.7,Fenced,TFB
 2024,B,4,Z2,Cymbopogon excavatus,4.1,Fenced,TFB
 2024,B,4,Z2,Heteropogon contortus,10.4,Fenced,TFB
 2024,B,4,Z2,Aristida diffusa,8.8,Fenced,TFB
@@ -756,10 +756,10 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,4,Z4,Heteropogon contortus,17.1,Unfenced,TFB
 2024,B,4,Z4,Melinis repens,17.2,Unfenced,TFB
 2024,B,4,Z4,Aristida adscensionis,16.3,Unfenced,TFB
-2024,B,4,Z4,Setaria pumila ,14.7,Unfenced,TFB
+2024,B,4,Z4,Setaria pumila,14.7,Unfenced,TFB
 2024,B,4,Z4,Heteropogon contortus,16,Unfenced,TFB
 2024,B,4,Z4,Aristida adscensionis,15,Unfenced,TFB
-2024,B,4,Z4,Setaria pumila ,18.1,Unfenced,TFB
+2024,B,4,Z4,Setaria pumila,18.1,Unfenced,TFB
 2024,B,4,Z4,Eragrostis superba,19.4,Unfenced,TFB
 2024,B,4,Z4,Cymbopogon excavatus,7.8,Unfenced,TFB
 2024,B,4,Z4,Melinis repens,7.6,Unfenced,TFB
@@ -771,20 +771,20 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,4,Z4,Eragrostis gummiflua,26.4,Unfenced,TFB
 2024,B,5,Z1,Cynodon dactylon,13.2,Fenced,THF
 2024,B,5,Z1,Heteropogon contortus,10.8,Fenced,THF
-2024,B,5,Z1,Setaria pumila ,11.6,Fenced,THF
-2024,B,5,Z1,Aristida congesta B,11,Fenced,THF
+2024,B,5,Z1,Setaria pumila,11.6,Fenced,THF
+2024,B,5,Z1,Aristida congesta b,11,Fenced,THF
 2024,B,5,Z1,Heteropogon contortus,14.5,Fenced,THF
 2024,B,5,Z1,Melinis repens,14.6,Fenced,THF
 2024,B,5,Z1,Hyperrhenia filipendula,14,Fenced,THF
 2024,B,5,Z1,Themeda triandra,14.9,Fenced,THF
-2024,B,5,Z1,Setaria pumila ,NA,Fenced,THF
+2024,B,5,Z1,Setaria pumila,NA,Fenced,THF
 2024,B,5,Z1,Cynodon dactylon,4.3,Fenced,THF
 2024,B,5,Z1,Heteropogon contortus,5.5,Fenced,THF
 2024,B,5,Z1,Cymbopogon excavatus,10.1,Fenced,THF
 2024,B,5,Z1,NA,9.7,Fenced,THF
 2024,B,5,Z1,Cynodon dactylon,13.9,Fenced,THF
 2024,B,5,Z1,Cymbopogon excavatus,8.2,Fenced,THF
-2024,B,5,Z1,Setaria pumila ,8.5,Fenced,THF
+2024,B,5,Z1,Setaria pumila,8.5,Fenced,THF
 2024,B,5,Z1,NA,9.1,Fenced,THF
 2024,B,5,Z1,Bothriochloa insculpta,9.7,Fenced,THF
 2024,B,5,Z1,Heteropogon contortus,8.6,Fenced,THF
@@ -792,54 +792,54 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,5,Z1,NA,7.5,Fenced,THF
 2024,B,5,Z2,Cynodon dactylon,12.5,Unfenced,THF
 2024,B,5,Z2,Heteropogon contortus,10,Unfenced,THF
-2024,B,5,Z2,Aristida congesta B,10.1,Unfenced,THF
+2024,B,5,Z2,Aristida congesta b,10.1,Unfenced,THF
 2024,B,5,Z2,Melinis repens,9.9,Unfenced,THF
 2024,B,5,Z2,Eragrostis gummiflua,NA,Unfenced,THF
 2024,B,5,Z2,Eragrostis superba,NA,Unfenced,THF
 2024,B,5,Z2,Cynodon dactylon,5,Unfenced,THF
 2024,B,5,Z2,Heteropogon contortus,3.4,Unfenced,THF
-2024,B,5,Z2,Setaria pumila ,4.1,Unfenced,THF
+2024,B,5,Z2,Setaria pumila,4.1,Unfenced,THF
 2024,B,5,Z2,NA,4.2,Unfenced,THF
 2024,B,5,Z2,Heteropogon contortus,6,Unfenced,THF
 2024,B,5,Z2,Eragrostis superba,7.1,Unfenced,THF
 2024,B,5,Z2,Bothriochloa insculpta,6.4,Unfenced,THF
 2024,B,5,Z2,Themeda triandra,5.8,Unfenced,THF
-2024,B,5,Z2,Setaria pumila ,20.4,Unfenced,THF
+2024,B,5,Z2,Setaria pumila,20.4,Unfenced,THF
 2024,B,5,Z2,Heteropogon contortus,11.8,Unfenced,THF
 2024,B,5,Z2,Brachiaria serrata,8.8,Unfenced,THF
-2024,B,5,Z2,Aristida congesta B,9.7,Unfenced,THF
+2024,B,5,Z2,Aristida congesta b,9.7,Unfenced,THF
 2024,B,5,Z2,Eragrostis superba,6.9,Unfenced,THF
-2024,B,5,Z2,Setaria pumila ,10.1,Unfenced,THF
+2024,B,5,Z2,Setaria pumila,10.1,Unfenced,THF
 2024,B,5,Z2,Heteropogon contortus,10.4,Unfenced,THF
 2024,B,5,Z2,Cymbopogon excavatus,10.4,Unfenced,THF
 2024,B,5,Z3,Heteropogon contortus,8.6,Fenced,THF
-2024,B,5,Z3,Setaria pumila ,6.3,Fenced,THF
+2024,B,5,Z3,Setaria pumila,6.3,Fenced,THF
 2024,B,5,Z3,NA,6,Fenced,THF
 2024,B,5,Z3,NA,6.1,Fenced,THF
 2024,B,5,Z3,Cynodon dactylon,6.3,Fenced,THF
 2024,B,5,Z3,Heteropogon contortus,17.1,Fenced,THF
 2024,B,5,Z3,Eragrostis superba,16.8,Fenced,THF
-2024,B,5,Z3,Setaria pumila ,8.5,Fenced,THF
+2024,B,5,Z3,Setaria pumila,8.5,Fenced,THF
 2024,B,5,Z3,Sporobolus africanus,NA,Fenced,THF
-2024,B,5,Z3,Aristida congesta B,NA,Fenced,THF
+2024,B,5,Z3,Aristida congesta b,NA,Fenced,THF
 2024,B,5,Z3,Cymbopogon plurinodis,12.1,Fenced,THF
 2024,B,5,Z3,Cynodon dactylon,9.5,Fenced,THF
 2024,B,5,Z3,Heteropogon contortus,9.7,Fenced,THF
 2024,B,5,Z3,Eragrostis superba,9.6,Fenced,THF
-2024,B,5,Z3,Aristida congesta B,NA,Fenced,THF
+2024,B,5,Z3,Aristida congesta b,NA,Fenced,THF
 2024,B,5,Z3,Eragrostis gummiflua,NA,Fenced,THF
 2024,B,5,Z3,Heteropogon contortus,7.5,Fenced,THF
-2024,B,5,Z3,Setaria pumila ,6,Fenced,THF
+2024,B,5,Z3,Setaria pumila,6,Fenced,THF
 2024,B,5,Z3,NA,2,Fenced,THF
 2024,B,5,Z3,NA,3.9,Fenced,THF
-2024,B,5,Z3,Aristida congesta B,5.7,Fenced,THF
+2024,B,5,Z3,Aristida congesta b,5.7,Fenced,THF
 2024,B,5,Z3,Heteropogon contortus,5.3,Fenced,THF
 2024,B,5,Z3,Eragrostis gummiflua,8.4,Fenced,THF
 2024,B,5,Z3,NA,6.5,Fenced,THF
 2024,B,5,Z4,Cynodon dactylon,8.6,Unfenced,THF
 2024,B,5,Z4,Heteropogon contortus,9.2,Unfenced,THF
-2024,B,5,Z4,Setaria pumila ,13.2,Unfenced,THF
-2024,B,5,Z4,Aristida congesta B,13.2,Unfenced,THF
+2024,B,5,Z4,Setaria pumila,13.2,Unfenced,THF
+2024,B,5,Z4,Aristida congesta b,13.2,Unfenced,THF
 2024,B,5,Z4,Melinis repens,NA,Unfenced,THF
 2024,B,5,Z4,Bothriochloa insculpta,10.7,Unfenced,THF
 2024,B,5,Z4,Heteropogon contortus,3.1,Unfenced,THF
@@ -853,13 +853,13 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,B,5,Z4,Eragrostis superba,10,Unfenced,THF
 2024,B,5,Z4,Bothriochloa insculpta,12,Unfenced,THF
 2024,B,5,Z4,Themeda triandra,12.5,Unfenced,THF
-2024,B,5,Z4,Setaria pumila ,NA,Unfenced,THF
+2024,B,5,Z4,Setaria pumila,NA,Unfenced,THF
 2024,B,5,Z4,Cynodon dactylon,NA,Unfenced,THF
 2024,B,5,Z4,Heteropogon contortus,8.8,Unfenced,THF
 2024,B,5,Z4,Eragrostis superba,7.7,Unfenced,THF
 2024,B,5,Z4,Bothriochloa insculpta,6.4,Unfenced,THF
 2024,B,5,Z4,Aristida adscensionis,7,Unfenced,THF
-2024,B,5,Z4,Aristida congesta B,NA,Unfenced,THF
+2024,B,5,Z4,Aristida congesta b,NA,Unfenced,THF
 2024,C,1,Z1,NA,0,Fenced,C
 2024,C,1,Z1,NA,0,Fenced,C
 2024,C,1,Z1,NA,0,Fenced,C
@@ -1123,7 +1123,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,C,4,Z1,Digitaria eriantha,7.1,Fenced,F
 2024,C,4,Z1,NA,6.8,Fenced,F
 2024,C,4,Z2,Heteropogon contortus,3,Fenced,F
-2024,C,4,Z2,Aristida congesta C,3.1,Fenced,F
+2024,C,4,Z2,Aristida congesta c,3.1,Fenced,F
 2024,C,4,Z2,NA,2.9,Fenced,F
 2024,C,4,Z2,NA,2.8,Fenced,F
 2024,C,4,Z2,Pogonarthria squarrosa,8,Fenced,F
@@ -1139,7 +1139,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,C,4,Z2,Pogonarthria squarrosa,3.6,Fenced,F
 2024,C,4,Z2,Heteropogon contortus,3.7,Fenced,F
 2024,C,4,Z2,Panicum maximum,5.3,Fenced,F
-2024,C,4,Z2,Aristida congesta B,4.5,Fenced,F
+2024,C,4,Z2,Aristida congesta b,4.5,Fenced,F
 2024,C,4,Z2,Pogonarthria squarrosa,6.6,Fenced,F
 2024,C,4,Z2,Heteropogon contortus,5.8,Fenced,F
 2024,C,4,Z2,NA,5,Fenced,F
@@ -1330,7 +1330,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,D,1,Z3,NA,2.3,Fenced,C
 2024,D,1,Z3,NA,2.3,Fenced,C
 2024,D,1,Z4,Heteropogon contortus,3,Unfenced,C
-2024,D,1,Z4,Setaria pumila ,3,Unfenced,C
+2024,D,1,Z4,Setaria pumila,3,Unfenced,C
 2024,D,1,Z4,NA,3,Unfenced,C
 2024,D,1,Z4,NA,3,Unfenced,C
 2024,D,1,Z4,Enteropogon macrostachyus,9.9,Unfenced,C
@@ -1484,7 +1484,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,D,3,Z3,Brachiaria nigropedata,10.6,Fenced,TF
 2024,D,3,Z3,Eragrostis gummiflua,9.5,Fenced,TF
 2024,D,3,Z3,Enteropogon macrostachyus,11.7,Fenced,TF
-2024,D,3,Z3,Setaria pumila ,11,Fenced,TF
+2024,D,3,Z3,Setaria pumila,11,Fenced,TF
 2024,D,3,Z3,NA,10.7,Fenced,TF
 2024,D,3,Z3,NA,9.7,Fenced,TF
 2024,D,3,Z3,NA,0,Fenced,TF
@@ -1616,7 +1616,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,D,5,Z1,Setaria incrassata,17.1,Fenced,THF
 2024,D,5,Z1,NA,17.3,Fenced,THF
 2024,D,5,Z2,Heteropogon contortus,7.7,Unfenced,THF
-2024,D,5,Z2,Aristida congesta B,7.6,Unfenced,THF
+2024,D,5,Z2,Aristida congesta b,7.6,Unfenced,THF
 2024,D,5,Z2,Eragrostis rigidior,7.8,Unfenced,THF
 2024,D,5,Z2,Eragrostis gummiflua,7.8,Unfenced,THF
 2024,D,5,Z2,Aristida diffusa,4.5,Unfenced,THF
@@ -2095,7 +2095,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,F,1,Z1,Eragrostis rigidior,20.7,Fenced,C
 2024,F,1,Z1,Eragrostis gummiflua,7.8,Fenced,C
 2024,F,1,Z1,NA,3.6,Fenced,C
-2024,F,1,Z1,Aristida congesta C,3.5,Fenced,C
+2024,F,1,Z1,Aristida congesta c,3.5,Fenced,C
 2024,F,1,Z1,Heteropogon contortus,4.7,Fenced,C
 2024,F,1,Z1,Eragrostis rigidior,4.8,Fenced,C
 2024,F,1,Z1,Eragrostis gummiflua,5.2,Fenced,C
@@ -2154,12 +2154,12 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,F,1,Z4,Eragrostis gummiflua,4.6,Unfenced,C
 2024,F,1,Z4,Eragrostis rigidior,4.7,Unfenced,C
 2024,F,1,Z4,Heteropogon contortus,5.1,Unfenced,C
-2024,F,1,Z4,Aristida congesta C,5.2,Unfenced,C
+2024,F,1,Z4,Aristida congesta c,5.2,Unfenced,C
 2024,F,1,Z4,Eragrostis gummiflua,8.7,Unfenced,C
 2024,F,1,Z4,Aristida diffusa,6.6,Unfenced,C
 2024,F,1,Z4,NA,4.8,Unfenced,C
 2024,F,1,Z4,NA,5.1,Unfenced,C
-2024,F,1,Z4,Aristida congesta B,7.7,Unfenced,C
+2024,F,1,Z4,Aristida congesta b,7.7,Unfenced,C
 2024,F,1,Z4,Heteropogon contortus,6.6,Unfenced,C
 2024,F,1,Z4,Eragrostis rigidior,7.9,Unfenced,C
 2024,F,1,Z4,Eragrostis gummiflua,7.8,Unfenced,C
@@ -2168,7 +2168,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,F,1,Z4,Urochloa panicoides,3.5,Unfenced,C
 2024,F,1,Z4,Aristida diffusa,3.6,Unfenced,C
 2024,F,1,Z4,NA,3.6,Unfenced,C
-2024,F,2,Z1,Aristida congesta B,5.3,Fenced,F
+2024,F,2,Z1,Aristida congesta b,5.3,Fenced,F
 2024,F,2,Z1,Heteropogon contortus,5.1,Fenced,F
 2024,F,2,Z1,Eragrostis rigidior,5,Fenced,F
 2024,F,2,Z1,Digitaria eriantha,4.8,Fenced,F
@@ -2177,11 +2177,11 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,F,2,Z1,NA,5.6,Fenced,F
 2024,F,2,Z1,NA,5.7,Fenced,F
 2024,F,2,Z1,Cynodon dactylon,8.4,Fenced,F
-2024,F,2,Z1,Aristida congesta C,5.6,Fenced,F
+2024,F,2,Z1,Aristida congesta c,5.6,Fenced,F
 2024,F,2,Z1,Eragrostis rigidior,6.4,Fenced,F
 2024,F,2,Z1,NA,5.1,Fenced,F
 2024,F,2,Z1,Cynodon dactylon,9.7,Fenced,F
-2024,F,2,Z1,Aristida congesta C,13.2,Fenced,F
+2024,F,2,Z1,Aristida congesta c,13.2,Fenced,F
 2024,F,2,Z1,Digitaria eriantha,19.7,Fenced,F
 2024,F,2,Z1,NA,22.1,Fenced,F
 2024,F,2,Z1,Panicum maximum,13.1,Fenced,F
@@ -2535,7 +2535,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,5,Z2,Setaria incrassata,5.7,Fenced,THF
 2025,F,5,Z2,NA,7.3,Fenced,THF
 2025,F,5,Z2,Digitaria eriantha,8.5,Fenced,THF
-2025,F,5,Z2,Pogonarthria squarrosa ,7.3,Fenced,THF
+2025,F,5,Z2,Pogonarthria squarrosa,7.3,Fenced,THF
 2025,F,5,Z2,Cynodon dactylon,7.2,Fenced,THF
 2025,F,5,Z2,NA,7,Fenced,THF
 2025,F,5,Z2,Digitaria eriantha,6.6,Fenced,THF
@@ -2547,7 +2547,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,5,Z2,Setaria incrassata,7.9,Fenced,THF
 2025,F,5,Z2,Cynodon dactylon,4.7,Fenced,THF
 2025,F,5,Z2,Digitaria eriantha,7.6,Fenced,THF
-2025,F,5,Z2,Pogonarthria squarrosa ,5.8,Fenced,THF
+2025,F,5,Z2,Pogonarthria squarrosa,5.8,Fenced,THF
 2025,F,5,Z2,NA,6.4,Fenced,THF
 2025,F,5,Z2,NA,7.1,Fenced,THF
 2025,F,5,Z1,Eragrostis rigidior,10.5,Fenced,THF
@@ -2617,7 +2617,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,4,Z2,NA,10.2,Fenced,TFB
 2025,F,4,Z2,NA,8.8,Fenced,TFB
 2025,F,4,Z2,NA,7.8,Fenced,TFB
-2025,F,4,Z2,Pogonarthria squarrosa ,3.6,Fenced,TFB
+2025,F,4,Z2,Pogonarthria squarrosa,3.6,Fenced,TFB
 2025,F,4,Z2,Setaria incrassata,3.4,Fenced,TFB
 2025,F,4,Z2,NA,4.5,Fenced,TFB
 2025,F,4,Z2,NA,5.1,Fenced,TFB
@@ -2669,7 +2669,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,4,Z1,Digitaria eriantha,9.2,Fenced,TFB
 2025,F,4,Z1,NA,10,Fenced,TFB
 2025,F,4,Z1,NA,8.9,Fenced,TFB
-2025,F,4,Z1,Pogonarthria squarrosa ,1.9,Fenced,TFB
+2025,F,4,Z1,Pogonarthria squarrosa,1.9,Fenced,TFB
 2025,F,4,Z1,Eragrostis viscosa,3.3,Fenced,TFB
 2025,F,4,Z1,NA,3.3,Fenced,TFB
 2025,F,4,Z1,NA,3.9,Fenced,TFB
@@ -2684,11 +2684,11 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,4,Z4,Cynodon dactylon,NA,Unfenced,TFB
 2025,F,4,Z4,Digitaria eriantha,2.6,Unfenced,TFB
 2025,F,4,Z4,Eragrostis viscosa,2.7,Unfenced,TFB
-2025,F,4,Z4,Pogonarthria squarrosa ,3.3,Unfenced,TFB
+2025,F,4,Z4,Pogonarthria squarrosa,3.3,Unfenced,TFB
 2025,F,4,Z4,NA,4.1,Unfenced,TFB
 2025,F,4,Z4,Digitaria eriantha,3.4,Unfenced,TFB
 2025,F,4,Z4,Cynodon dactylon,4.8,Unfenced,TFB
-2025,F,4,Z4,Pogonarthria squarrosa ,6.9,Unfenced,TFB
+2025,F,4,Z4,Pogonarthria squarrosa,6.9,Unfenced,TFB
 2025,F,4,Z4,Heteropogon contortus,7.2,Unfenced,TFB
 2025,F,4,Z4,Setaria incrassata,NA,Unfenced,TFB
 2025,F,4,Z4,Setaria incrassata,5.8,Unfenced,TFB
@@ -2700,7 +2700,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,3,Z1,NA,1.7,Fenced,TF
 2025,F,3,Z1,NA,3.7,Fenced,TF
 2025,F,3,Z1,Eragrostis viscosa,6.4,Fenced,TF
-2025,F,3,Z1,Pogonarthria squarrosa ,5.2,Fenced,TF
+2025,F,3,Z1,Pogonarthria squarrosa,5.2,Fenced,TF
 2025,F,3,Z1,NA,4.2,Fenced,TF
 2025,F,3,Z1,NA,4.2,Fenced,TF
 2025,F,3,Z1,Eragrostis viscosa,10.6,Fenced,TF
@@ -2716,7 +2716,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,3,Z1,NA,6.1,Fenced,TF
 2025,F,3,Z1,NA,6.5,Fenced,TF
 2025,F,3,Z2,Eragrostis viscosa,7.2,Fenced,TF
-2025,F,3,Z2,Pogonarthria squarrosa ,7.9,Fenced,TF
+2025,F,3,Z2,Pogonarthria squarrosa,7.9,Fenced,TF
 2025,F,3,Z2,Eragrostis rigidior,7.8,Fenced,TF
 2025,F,3,Z2,NA,7.5,Fenced,TF
 2025,F,3,Z2,Eragrostis viscosa,8.3,Fenced,TF
@@ -2749,14 +2749,14 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,3,Z4,NA,9.1,Unfenced,TF
 2025,F,3,Z4,Cynodon dactylon,11.6,Unfenced,TF
 2025,F,3,Z4,Eragrostis rigidior,9.7,Unfenced,TF
-2025,F,3,Z4,Pogonarthria squarrosa ,8.3,Unfenced,TF
+2025,F,3,Z4,Pogonarthria squarrosa,8.3,Unfenced,TF
 2025,F,3,Z4,Digitaria eriantha,8.1,Unfenced,TF
 2025,F,3,Z4,Enteropogon macrostachyus,5.1,Unfenced,TF
 2025,F,3,Z4,Digitaria eriantha,5.3,Unfenced,TF
 2025,F,3,Z4,Setaria incrassata,9.4,Unfenced,TF
 2025,F,3,Z4,NA,9,Unfenced,TF
 2025,F,3,Z3,Cynodon dactylon,7.2,Unfenced,TF
-2025,F,3,Z3,Pogonarthria squarrosa ,7.1,Unfenced,TF
+2025,F,3,Z3,Pogonarthria squarrosa,7.1,Unfenced,TF
 2025,F,3,Z3,Eragrostis viscosa,7.2,Unfenced,TF
 2025,F,3,Z3,Setaria incrassata,7.5,Unfenced,TF
 2025,F,3,Z3,Eragrostis rigidior,7,Unfenced,TF
@@ -2785,7 +2785,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,2,Z4,Heteropogon contortus,4.3,Unfenced,F
 2025,F,2,Z4,Cynodon dactylon,2.2,Unfenced,F
 2025,F,2,Z4,Eragrostis viscosa,2,Unfenced,F
-2025,F,2,Z4,Pogonarthria squarrosa ,2.1,Unfenced,F
+2025,F,2,Z4,Pogonarthria squarrosa,2.1,Unfenced,F
 2025,F,2,Z4,NA,2,Unfenced,F
 2025,F,2,Z4,Cynodon dactylon,6.9,Unfenced,F
 2025,F,2,Z4,Eragrostis viscosa,6.1,Unfenced,F
@@ -2853,7 +2853,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,2,Z2,Heteropogon contortus,NA,Fenced,F
 2025,F,2,Z2,Perotis patens,NA,Fenced,F
 2025,F,2,Z2,Dactyloctenium giganteum,10.9,Fenced,F
-2025,F,2,Z2,Pogonarthria squarrosa ,7.6,Fenced,F
+2025,F,2,Z2,Pogonarthria squarrosa,7.6,Fenced,F
 2025,F,2,Z2,Digitaria eriantha,7.3,Fenced,F
 2025,F,2,Z2,NA,8,Fenced,F
 2025,F,2,Z2,Digitaria eriantha,9.1,Fenced,F
@@ -2870,10 +2870,10 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,1,Z1,NA,8.4,Fenced,C
 2025,F,1,Z1,Digitaria eriantha,5.2,Fenced,C
 2025,F,1,Z1,Eragrostis rigidior,6.1,Fenced,C
-2025,F,1,Z1,Pogonarthria squarrosa ,5.4,Fenced,C
+2025,F,1,Z1,Pogonarthria squarrosa,5.4,Fenced,C
 2025,F,1,Z1,NA,5.4,Fenced,C
 2025,F,1,Z1,Eragrostis superba,4.6,Fenced,C
-2025,F,1,Z1,Pogonarthria squarrosa ,4.8,Fenced,C
+2025,F,1,Z1,Pogonarthria squarrosa,4.8,Fenced,C
 2025,F,1,Z1,Eragrostis rigidior,7.5,Fenced,C
 2025,F,1,Z1,Digitaria eriantha,7.2,Fenced,C
 2025,F,1,Z1,Heteropogon contortus,7.5,Fenced,C
@@ -2887,7 +2887,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,1,Z2,NA,9.1,Fenced,C
 2025,F,1,Z2,Digitaria eriantha,5.2,Fenced,C
 2025,F,1,Z2,Heteropogon contortus,7.1,Fenced,C
-2025,F,1,Z2,Pogonarthria squarrosa ,7.7,Fenced,C
+2025,F,1,Z2,Pogonarthria squarrosa,7.7,Fenced,C
 2025,F,1,Z2,Eragrostis rigidior,12,Fenced,C
 2025,F,1,Z2,Eragrostis rigidior,4.2,Fenced,C
 2025,F,1,Z2,Eragrostis superba,4.6,Fenced,C
@@ -2897,7 +2897,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,1,Z2,Digitaria eriantha,4.5,Fenced,C
 2025,F,1,Z2,Eragrostis viscosa,5.1,Fenced,C
 2025,F,1,Z2,Eragrostis rigidior,5.2,Fenced,C
-2025,F,1,Z2,Aristida congesta B,NA,Fenced,C
+2025,F,1,Z2,Aristida congesta b,NA,Fenced,C
 2025,F,1,Z2,Aristida adscensionis,NA,Fenced,C
 2025,F,1,Z2,Digitaria eriantha,11.2,Fenced,C
 2025,F,1,Z2,Heteropogon contortus,9,Fenced,C
@@ -2926,7 +2926,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,F,1,Z3,Heteropogon contortus,3.4,Unfenced,C
 2025,F,1,Z3,Eragrostis superba,NA,Unfenced,C
 2025,F,1,Z4,Eragrostis superba,2.2,Unfenced,C
-2025,F,1,Z4,Pogonarthria squarrosa ,2.1,Unfenced,C
+2025,F,1,Z4,Pogonarthria squarrosa,2.1,Unfenced,C
 2025,F,1,Z4,Heteropogon contortus,2.3,Unfenced,C
 2025,F,1,Z4,NA,4.4,Unfenced,C
 2025,F,1,Z4,Digitaria eriantha,11.4,Unfenced,C
@@ -2981,7 +2981,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,D,5,Z1,Eragrostis viscosa,16.6,Fenced,THF
 2025,D,5,Z1,Enteropogon macrostachyus,21.6,Fenced,THF
 2025,D,5,Z1,NA,21.9,Fenced,THF
-2025,D,5,Z1,Pogonarthria squarrosa ,7.5,Fenced,THF
+2025,D,5,Z1,Pogonarthria squarrosa,7.5,Fenced,THF
 2025,D,5,Z1,Setaria incrassata,9.5,Fenced,THF
 2025,D,5,Z1,Eragrostis viscosa,10.6,Fenced,THF
 2025,D,5,Z1,Diheteropogon amplectens,9.6,Fenced,THF
@@ -3037,12 +3037,12 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,D,5,Z4,Eragrostis superba,7.8,Unfenced,THF
 2025,D,5,Z4,Eragrostis viscosa,5.7,Unfenced,THF
 2025,D,5,Z4,Heteropogon contortus,6.5,Unfenced,THF
-2025,D,5,Z4,Aristida congesta B,7.7,Unfenced,THF
+2025,D,5,Z4,Aristida congesta b,7.7,Unfenced,THF
 2025,D,5,Z4,Aristida diffusa,NA,Unfenced,THF
 2025,D,5,Z4,Enteropogon macrostachyus,NA,Unfenced,THF
 2025,D,4,Z1,Heteropogon contortus,2,Fenced,TFB
 2025,D,4,Z1,Aristida adscensionis,2,Fenced,TFB
-2025,D,4,Z1,Pogonarthria squarrosa ,2,Fenced,TFB
+2025,D,4,Z1,Pogonarthria squarrosa,2,Fenced,TFB
 2025,D,4,Z1,Setaria incrassata,2,Fenced,TFB
 2025,D,4,Z1,Perotis patens,2,Fenced,TFB
 2025,D,4,Z1,Heteropogon contortus,10.1,Fenced,TFB
@@ -3064,7 +3064,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,D,4,Z1,Cymbopogon nardus,24.3,Fenced,TFB
 2025,D,4,Z1,Heteropogon contortus,24.6,Fenced,TFB
 2025,D,4,Z1,Setaria incrassata,NA,Fenced,TFB
-2025,D,4,Z3,Pogonarthria squarrosa ,1.7,Fenced,TFB
+2025,D,4,Z3,Pogonarthria squarrosa,1.7,Fenced,TFB
 2025,D,4,Z3,Setaria incrassata,1.7,Fenced,TFB
 2025,D,4,Z3,Enteropogon macrostachyus,1.8,Fenced,TFB
 2025,D,4,Z3,Eragrostis gummiflua,2.8,Fenced,TFB
@@ -3097,7 +3097,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,D,4,Z4,Aristida diffusa,6.3,Unfenced,TFB
 2025,D,4,Z4,Brachiaria brizantha,5.3,Unfenced,TFB
 2025,D,4,Z4,Setaria incrassata,4.9,Unfenced,TFB
-2025,D,4,Z4,Pogonarthria squarrosa ,8.3,Unfenced,TFB
+2025,D,4,Z4,Pogonarthria squarrosa,8.3,Unfenced,TFB
 2025,D,4,Z4,Enteropogon macrostachyus,NA,Unfenced,TFB
 2025,D,4,Z4,Heteropogon contortus,NA,Unfenced,TFB
 2025,D,4,Z4,Melinis repens,8.9,Unfenced,TFB
@@ -3108,7 +3108,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,D,4,Z4,Digitaria eriantha,4.6,Unfenced,TFB
 2025,D,4,Z4,Heteropogon contortus,5.8,Unfenced,TFB
 2025,D,4,Z4,Enteropogon macrostachyus,7.7,Unfenced,TFB
-2025,D,4,Z4,Pogonarthria squarrosa ,7.3,Unfenced,TFB
+2025,D,4,Z4,Pogonarthria squarrosa,7.3,Unfenced,TFB
 2025,D,4,Z4,Eragrostis gummiflua,NA,Unfenced,TFB
 2025,D,4,Z4,Aristida diffusa,NA,Unfenced,TFB
 2025,D,4,Z4,Panicum maximum,NA,Unfenced,TFB
@@ -3116,7 +3116,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,D,4,Z2,Setaria incrassata,6.4,Unfenced,TFB
 2025,D,4,Z2,Aristida adscensionis,5.9,Unfenced,TFB
 2025,D,4,Z2,Brachiaria nigropedata,6.3,Unfenced,TFB
-2025,D,4,Z2,Pogonarthria squarrosa ,NA,Unfenced,TFB
+2025,D,4,Z2,Pogonarthria squarrosa,NA,Unfenced,TFB
 2025,D,4,Z2,Enteropogon macrostachyus,NA,Unfenced,TFB
 2025,D,4,Z2,Enteropogon macrostachyus,4.1,Unfenced,TFB
 2025,D,4,Z2,Panicum maximum,15.3,Unfenced,TFB
@@ -3375,7 +3375,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,D,1,Z4,Heteropogon contortus,5,Unfenced,C
 2025,D,1,Z4,Diheteropogon amplectens,11.8,Unfenced,C
 2025,D,1,Z4,Eragrostis viscosa,11.4,Unfenced,C
-2025,D,1,Z4,Pogonarthria squarrosa ,11.2,Unfenced,C
+2025,D,1,Z4,Pogonarthria squarrosa,11.2,Unfenced,C
 2025,D,1,Z4,Brachiaria brizantha,NA,Unfenced,C
 2025,D,1,Z4,Digitaria eriantha,NA,Unfenced,C
 2025,D,1,Z4,Chloris virgata,3.7,Unfenced,C
@@ -3430,7 +3430,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,D,1,Z1,Eragrostis viscosa,6.8,Fenced,C
 2025,D,1,Z1,Chloris virgata,5.3,Fenced,C
 2025,D,1,Z1,Panicum maximum,5.2,Fenced,C
-2025,D,1,Z1,Pogonarthria squarrosa ,5.7,Fenced,C
+2025,D,1,Z1,Pogonarthria squarrosa,5.7,Fenced,C
 2025,D,1,Z1,Brachiaria brizantha,NA,Fenced,C
 2025,D,1,Z1,Heteropogon contortus,NA,Fenced,C
 2025,D,1,Z1,Aristida adscensionis,NA,Fenced,C
@@ -3450,7 +3450,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,5,Z1,Eragrostis superba,17.7,Fenced,THF
 2025,B,5,Z1,Eragrostis gummiflua,21.5,Fenced,THF
 2025,B,5,Z1,Eragrostis rigidior,NA,Fenced,THF
-2025,B,5,Z1,Aristida congesta B,NA,Fenced,THF
+2025,B,5,Z1,Aristida congesta b,NA,Fenced,THF
 2025,B,5,Z1,Heteropogon contortus,27.3,Fenced,THF
 2025,B,5,Z1,Cynodon dactylon,36.8,Fenced,THF
 2025,B,5,Z1,Digitaria eriantha,36.1,Fenced,THF
@@ -3474,7 +3474,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,5,Z3,Heteropogon contortus,32.3,Fenced,THF
 2025,B,5,Z3,Cynodon dactylon,35.6,Fenced,THF
 2025,B,5,Z3,Brachiaria serrata,41.5,Fenced,THF
-2025,B,5,Z3,Aristida congesta B,26.4,Fenced,THF
+2025,B,5,Z3,Aristida congesta b,26.4,Fenced,THF
 2025,B,5,Z3,Setaria sphacelata,NA,Fenced,THF
 2025,B,5,Z3,Cymbopogon excavatus,15.4,Fenced,THF
 2025,B,5,Z3,Cynodon dactylon,25.1,Fenced,THF
@@ -3486,7 +3486,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,5,Z3,NA,2.4,Fenced,THF
 2025,B,5,Z3,Heteropogon contortus,29.9,Fenced,THF
 2025,B,5,Z3,Digitaria eriantha,26.6,Fenced,THF
-2025,B,5,Z3,Aristida congesta B,26.8,Fenced,THF
+2025,B,5,Z3,Aristida congesta b,26.8,Fenced,THF
 2025,B,5,Z3,NA,28.4,Fenced,THF
 2025,B,5,Z4,Eragrostis superba,10.9,Unfenced,THF
 2025,B,5,Z4,Bothriochloa insculpta,9.2,Unfenced,THF
@@ -3494,10 +3494,10 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,5,Z4,NA,11.8,Unfenced,THF
 2025,B,5,Z4,Heteropogon contortus,7.5,Unfenced,THF
 2025,B,5,Z4,Cynodon dactylon,15.5,Unfenced,THF
-2025,B,5,Z4,Aristida congesta B,9,Unfenced,THF
+2025,B,5,Z4,Aristida congesta b,9,Unfenced,THF
 2025,B,5,Z4,Digitaria eriantha,11.8,Unfenced,THF
 2025,B,5,Z4,Heteropogon contortus,10.4,Unfenced,THF
-2025,B,5,Z4,Aristida congesta B,10.7,Unfenced,THF
+2025,B,5,Z4,Aristida congesta b,10.7,Unfenced,THF
 2025,B,5,Z4,Digitaria eriantha,17.4,Unfenced,THF
 2025,B,5,Z4,Bothriochloa insculpta,11.5,Unfenced,THF
 2025,B,5,Z4,Eragrostis superba,NA,Unfenced,THF
@@ -3530,7 +3530,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,5,Z2,Digitaria eriantha,9.8,Unfenced,THF
 2025,B,5,Z2,Cynodon dactylon,6.8,Unfenced,THF
 2025,B,5,Z2,Bothriochloa insculpta,6.3,Unfenced,THF
-2025,B,5,Z2,Aristida congesta B,NA,Unfenced,THF
+2025,B,5,Z2,Aristida congesta b,NA,Unfenced,THF
 2025,B,4,Z3,Cymbopogon nardus,3.6,Unfenced,TFB
 2025,B,4,Z3,Hyperrhenia filipendula,9.2,Unfenced,TFB
 2025,B,4,Z3,Heteropogon contortus,5.3,Unfenced,TFB
@@ -3544,10 +3544,10 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,4,Z3,Cymbopogon excavatus,2.9,Unfenced,TFB
 2025,B,4,Z3,NA,27.8,Unfenced,TFB
 2025,B,4,Z3,Cymbopogon excavatus,35.2,Unfenced,TFB
-2025,B,4,Z3,Aristida congesta B,31.2,Unfenced,TFB
+2025,B,4,Z3,Aristida congesta b,31.2,Unfenced,TFB
 2025,B,4,Z3,Heteropogon contortus,43,Unfenced,TFB
 2025,B,4,Z3,Eragrostis superba,14.2,Unfenced,TFB
-2025,B,4,Z3,Aristida congesta B,NA,Unfenced,TFB
+2025,B,4,Z3,Aristida congesta b,NA,Unfenced,TFB
 2025,B,4,Z3,Heteropogon contortus,7.1,Unfenced,TFB
 2025,B,4,Z3,Cymbopogon excavatus,6.8,Unfenced,TFB
 2025,B,4,Z3,Digitaria eriantha,5.2,Unfenced,TFB
@@ -3558,7 +3558,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,4,Z4,Brachiaria serrata,4.8,Unfenced,TFB
 2025,B,4,Z4,NA,32.6,Unfenced,TFB
 2025,B,4,Z4,Heteropogon contortus,23.9,Unfenced,TFB
-2025,B,4,Z4,Aristida congesta B,23.6,Unfenced,TFB
+2025,B,4,Z4,Aristida congesta b,23.6,Unfenced,TFB
 2025,B,4,Z4,Cymbopogon excavatus,12.4,Unfenced,TFB
 2025,B,4,Z4,Cymbopogon excavatus,29.1,Unfenced,TFB
 2025,B,4,Z4,Heteropogon contortus,9.1,Unfenced,TFB
@@ -3570,7 +3570,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,4,Z4,Aristida adscensionis,14,Unfenced,TFB
 2025,B,4,Z4,NA,20.1,Unfenced,TFB
 2025,B,4,Z4,Heteropogon contortus,6.6,Unfenced,TFB
-2025,B,4,Z4,Aristida congesta B,6.9,Unfenced,TFB
+2025,B,4,Z4,Aristida congesta b,6.9,Unfenced,TFB
 2025,B,4,Z4,Melinis repens,11,Unfenced,TFB
 2025,B,4,Z4,Digitaria eriantha,6.1,Unfenced,TFB
 2025,B,4,Z1,Cymbopogon excavatus,19.2,Fenced,TFB
@@ -3668,7 +3668,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,3,Z1,Themeda triandra,26.1,Fenced,TF
 2025,B,3,Z1,Heteropogon contortus,27.8,Fenced,TF
 2025,B,3,Z1,Eragrostis superba,46,Fenced,TF
-2025,B,3,Z1,Aristida congesta B,25.8,Fenced,TF
+2025,B,3,Z1,Aristida congesta b,25.8,Fenced,TF
 2025,B,3,Z1,Digitaria eriantha,10.9,Fenced,TF
 2025,B,3,Z1,Heteropogon contortus,6.3,Fenced,TF
 2025,B,3,Z1,NA,25.1,Fenced,TF
@@ -3693,7 +3693,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,3,Z2,Cymbopogon nardus,35.5,Fenced,TF
 2025,B,3,Z2,NA,25.2,Fenced,TF
 2025,B,3,Z2,NA,51,Fenced,TF
-2025,B,3,Z2,Aristida congesta B,15.7,Fenced,TF
+2025,B,3,Z2,Aristida congesta b,15.7,Fenced,TF
 2025,B,3,Z2,Digitaria eriantha,32.3,Fenced,TF
 2025,B,3,Z2,Heteropogon contortus,15.6,Fenced,TF
 2025,B,3,Z2,Cymbopogon nardus,22.7,Fenced,TF
@@ -3855,7 +3855,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,A,3,Z1,Urochloa mosambicensis,12.7,Fenced,TFB
 2025,A,3,Z1,NA,12.4,Fenced,TFB
 2025,A,3,Z1,Urochloa mosambicensis,20.9,Fenced,TFB
-2025,A,3,Z1,Aristida congesta C,25.5,Fenced,TFB
+2025,A,3,Z1,Aristida congesta c,25.5,Fenced,TFB
 2025,A,3,Z1,Themeda triandra,28.6,Fenced,TFB
 2025,A,3,Z1,NA,1.3,Fenced,TFB
 2025,A,3,Z1,Hyperthelia dissoluta,56.5,Fenced,TFB
@@ -3878,7 +3878,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,A,3,Z2,Miscanthus junceus,6.4,Unfenced,TFB
 2025,A,3,Z2,NA,4.3,Unfenced,TFB
 2025,A,3,Z2,NA,18.6,Unfenced,TFB
-2025,A,3,Z2,Aristida congesta C,15.2,Unfenced,TFB
+2025,A,3,Z2,Aristida congesta c,15.2,Unfenced,TFB
 2025,A,3,Z2,Bothriochloa insculpta,14.4,Unfenced,TFB
 2025,A,3,Z2,NA,11.7,Unfenced,TFB
 2025,A,3,Z2,NA,12.7,Unfenced,TFB
@@ -3887,7 +3887,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,A,3,Z4,Brachiaria serrata,29.4,Unfenced,TFB
 2025,A,3,Z4,NA,5.4,Unfenced,TFB
 2025,A,3,Z4,Urochloa mosambicensis,17.3,Unfenced,TFB
-2025,A,3,Z4,Aristida congesta C,5.1,Unfenced,TFB
+2025,A,3,Z4,Aristida congesta c,5.1,Unfenced,TFB
 2025,A,3,Z4,Hyperthelia dissoluta,5.1,Unfenced,TFB
 2025,A,3,Z4,NA,0,Unfenced,TFB
 2025,A,3,Z4,Setaria sphacelata,12.9,Unfenced,TFB
@@ -3899,7 +3899,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,A,3,Z4,NA,20.4,Unfenced,TFB
 2025,A,3,Z4,NA,49.9,Unfenced,TFB
 2025,A,3,Z4,Hyperthelia dissoluta,50.3,Unfenced,TFB
-2025,A,3,Z4,Aristida congesta C,29.9,Unfenced,TFB
+2025,A,3,Z4,Aristida congesta c,29.9,Unfenced,TFB
 2025,A,3,Z4,Urochloa mosambicensis,24.7,Unfenced,TFB
 2025,A,3,Z4,NA,23.8,Unfenced,TFB
 2025,A,4,Z3,Hyperrhenia filipendula,18,Fenced,TF
@@ -3972,7 +3972,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,A,4,Z4,NA,20.4,Unfenced,TF
 2025,A,4,Z4,Heteropogon contortus,11.6,Unfenced,TF
 2025,A,4,Z4,Eragrostis superba,15.9,Unfenced,TF
-2025,A,4,Z4,Aristida congesta C,19.6,Unfenced,TF
+2025,A,4,Z4,Aristida congesta c,19.6,Unfenced,TF
 2025,A,4,Z4,NA,8.4,Unfenced,TF
 2025,A,4,Z4,Heteropogon contortus,11.5,Unfenced,TF
 2025,A,4,Z4,Digitaria eriantha,14.9,Unfenced,TF
@@ -4088,7 +4088,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,E,3,Z3,Cymbopogon excavatus,3.6,Fenced,TF
 2025,E,3,Z3,NA,0,Fenced,TF
 2025,E,3,Z3,NA,4.2,Fenced,TF
-2025,E,3,Z3,Aristida congesta B,10.1,Fenced,TF
+2025,E,3,Z3,Aristida congesta b,10.1,Fenced,TF
 2025,E,3,Z3,Heteropogon contortus,6.3,Fenced,TF
 2025,E,3,Z3,Eragrostis rigidior,4.5,Fenced,TF
 2025,E,3,Z3,Eragrostis viscosa,5.6,Fenced,TF
@@ -4334,7 +4334,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,E,5,Z3,Eragrostis viscosa,6.6,Fenced,THF
 2025,E,5,Z3,Aristida adscensionis,5.6,Fenced,THF
 2025,E,5,Z1,Digitaria eriantha,6,Fenced,THF
-2025,E,5,Z1,Pogonarthria squarrosa ,7.1,Fenced,THF
+2025,E,5,Z1,Pogonarthria squarrosa,7.1,Fenced,THF
 2025,E,5,Z1,Panicum maximum,7.3,Fenced,THF
 2025,E,5,Z1,Heteropogon contortus,10.1,Fenced,THF
 2025,E,5,Z1,Eragrostis gummiflua,NA,Fenced,THF
@@ -4361,7 +4361,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,E,5,Z4,NA,6.4,Unfenced,THF
 2025,E,5,Z4,Brachiaria nigropedata,7.6,Unfenced,THF
 2025,E,5,Z4,Eragrostis superba,8.4,Unfenced,THF
-2025,E,5,Z4,Pogonarthria squarrosa ,7.4,Unfenced,THF
+2025,E,5,Z4,Pogonarthria squarrosa,7.4,Unfenced,THF
 2025,E,5,Z4,NA,6.5,Unfenced,THF
 2025,E,5,Z4,Enteropogon macrostachyus,6.4,Unfenced,THF
 2025,E,5,Z4,Brachiaria nigropedata,0,Unfenced,THF
@@ -4384,7 +4384,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,E,5,Z2,Heteropogon contortus,26,Unfenced,THF
 2025,E,5,Z2,NA,23.7,Unfenced,THF
 2025,E,5,Z2,NA,21.9,Unfenced,THF
-2025,E,5,Z2,Aristida congesta C,5,Unfenced,THF
+2025,E,5,Z2,Aristida congesta c,5,Unfenced,THF
 2025,E,5,Z2,Heteropogon contortus,6.7,Unfenced,THF
 2025,E,5,Z2,Eragrostis rigidior,9.6,Unfenced,THF
 2025,E,5,Z2,Enteropogon macrostachyus,8.8,Unfenced,THF
@@ -4451,7 +4451,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,E,1,Z4,NA,0,Unfenced,C
 2025,E,1,Z4,Digitaria eriantha,2.5,Unfenced,C
 2025,E,1,Z4,Enteropogon macrostachyus,4,Unfenced,C
-2025,E,1,Z4,Aristida congesta C,4.2,Unfenced,C
+2025,E,1,Z4,Aristida congesta c,4.2,Unfenced,C
 2025,E,1,Z4,Eragrostis gummiflua,3.6,Unfenced,C
 2025,E,1,Z4,Digitaria eriantha,8.2,Unfenced,C
 2025,E,1,Z4,Eragrostis superba,8.6,Unfenced,C
@@ -4562,21 +4562,21 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,1,Z2,Eragrostis rigidior,6.5,Unfenced,C
 2025,B,1,Z2,Bothriochloa insculpta,5.6,Unfenced,C
 2025,B,1,Z2,Cynodon dactylon,5.5,Unfenced,C
-2025,B,2,Z1,Aristida congesta B,7.4,Fenced,F
+2025,B,2,Z1,Aristida congesta b,7.4,Fenced,F
 2025,B,2,Z1,Melinis repens,8,Fenced,F
 2025,B,2,Z1,Brachiaria serrata,9.3,Fenced,F
 2025,B,2,Z1,Cymbopogon plurinodis,10.3,Fenced,F
 2025,B,2,Z1,Heteropogon contortus,NA,Fenced,F
 2025,B,2,Z1,Bothriochloa insculpta,NA,Fenced,F
-2025,B,2,Z1,Aristida congesta B,19.7,Fenced,F
+2025,B,2,Z1,Aristida congesta b,19.7,Fenced,F
 2025,B,2,Z1,Cymbopogon excavatus,20.2,Fenced,F
 2025,B,2,Z1,Heteropogon contortus,20.8,Fenced,F
 2025,B,2,Z1,Sporobolus africanus,22.5,Fenced,F
-2025,B,2,Z1,Aristida congesta B,12.6,Fenced,F
+2025,B,2,Z1,Aristida congesta b,12.6,Fenced,F
 2025,B,2,Z1,Cymbopogon excavatus,22.1,Fenced,F
 2025,B,2,Z1,Cymbopogon plurinodis,20.2,Fenced,F
 2025,B,2,Z1,Melinis repens,20.8,Fenced,F
-2025,B,2,Z1,Aristida congesta B,18.5,Fenced,F
+2025,B,2,Z1,Aristida congesta b,18.5,Fenced,F
 2025,B,2,Z1,Heteropogon contortus,21.7,Fenced,F
 2025,B,2,Z1,Cymbopogon plurinodis,19.8,Fenced,F
 2025,B,2,Z1,Digitaria eriantha,20.1,Fenced,F
@@ -4584,7 +4584,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,2,Z1,Heteropogon contortus,12,Fenced,F
 2025,B,2,Z1,Digitaria eriantha,11.4,Fenced,F
 2025,B,2,Z1,Eragrostis gummiflua,12.3,Fenced,F
-2025,B,2,Z3,Aristida congesta B,21.3,Fenced,F
+2025,B,2,Z3,Aristida congesta b,21.3,Fenced,F
 2025,B,2,Z1,Heteropogon contortus,17.8,Fenced,F
 2025,B,2,Z1,Bothriochloa insculpta,14,Fenced,F
 2025,B,2,Z1,Melinis repens,11.2,Fenced,F
@@ -4599,7 +4599,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,2,Z1,Eragrostis gummiflua,27.6,Fenced,F
 2025,B,2,Z1,Cymbopogon excavatus,NA,Fenced,F
 2025,B,2,Z1,Melinis repens,26.5,Fenced,F
-2025,B,2,Z1,Aristida congesta B,21.8,Fenced,F
+2025,B,2,Z1,Aristida congesta b,21.8,Fenced,F
 2025,B,2,Z1,Heteropogon contortus,22,Fenced,F
 2025,B,2,Z1,Digitaria eriantha,22.7,Fenced,F
 2025,B,2,Z1,Bothriochloa insculpta,NA,Fenced,F
@@ -4616,14 +4616,14 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,2,Z4,NA,0,Unfenced,F
 2025,B,2,Z4,NA,0,Unfenced,F
 2025,B,2,Z4,Cymbopogon excavatus,16.7,Unfenced,F
-2025,B,2,Z4,Setaria pumila ,16.2,Unfenced,F
+2025,B,2,Z4,Setaria pumila,16.2,Unfenced,F
 2025,B,2,Z4,Aristida adscensionis,13.6,Unfenced,F
 2025,B,2,Z4,Eragrostis superba,11.6,Unfenced,F
 2025,B,2,Z4,Heteropogon contortus,NA,Unfenced,F
 2025,B,2,Z4,Bothriochloa insculpta,NA,Unfenced,F
 2025,B,2,Z4,Eragrostis gummiflua,NA,Unfenced,F
 2025,B,2,Z4,Heteropogon contortus,15.1,Unfenced,F
-2025,B,2,Z4,Aristida congesta B,11.6,Unfenced,F
+2025,B,2,Z4,Aristida congesta b,11.6,Unfenced,F
 2025,B,2,Z4,NA,12.1,Unfenced,F
 2025,B,2,Z4,NA,11.6,Unfenced,F
 2025,B,2,Z4,Cymbopogon excavatus,16.9,Unfenced,F
@@ -4641,7 +4641,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,2,Z2,Hyperrhenia filipendula,23.2,Unfenced,F
 2025,B,2,Z2,Digitaria eriantha,4.6,Unfenced,F
 2025,B,2,Z2,Cymbopogon excavatus,5,Unfenced,F
-2025,B,2,Z2,Pogonarthria squarrosa ,4.3,Unfenced,F
+2025,B,2,Z2,Pogonarthria squarrosa,4.3,Unfenced,F
 2025,B,2,Z2,Heteropogon contortus,0,Unfenced,F
 2025,B,2,Z2,NA,5.6,Unfenced,F
 2025,B,2,Z2,NA,4.8,Unfenced,F
@@ -4650,15 +4650,15 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,B,2,Z2,Heteropogon contortus,20.5,Unfenced,F
 2025,B,2,Z2,Brachiaria nigropedata,14.4,Unfenced,F
 2025,B,2,Z2,Eragrostis gummiflua,15.9,Unfenced,F
-2025,C,1,Z2,Pogonarthria squarrosa ,30.6,Fenced,C
+2025,C,1,Z2,Pogonarthria squarrosa,30.6,Fenced,C
 2025,C,1,Z2,Heteropogon contortus,21.3,Fenced,C
 2025,C,1,Z2,NA,17.2,Fenced,C
 2025,C,1,Z2,NA,15.3,Fenced,C
 2025,C,1,Z2,Hyperrhenia filipendula,5.2,Fenced,C
-2025,C,1,Z2,Pogonarthria squarrosa ,4.8,Fenced,C
+2025,C,1,Z2,Pogonarthria squarrosa,4.8,Fenced,C
 2025,C,1,Z2,NA,5.3,Fenced,C
 2025,C,1,Z2,NA,5.2,Fenced,C
-2025,C,1,Z2,Pogonarthria squarrosa ,4.1,Fenced,C
+2025,C,1,Z2,Pogonarthria squarrosa,4.1,Fenced,C
 2025,C,1,Z2,Eragrostis gummiflua,2.9,Fenced,C
 2025,C,1,Z2,Setaria incrassata,2.8,Fenced,C
 2025,C,1,Z2,NA,4.1,Fenced,C
@@ -4674,17 +4674,17 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,1,Z1,Panicum maximum,5.2,Fenced,C
 2025,C,1,Z1,NA,4.8,Fenced,C
 2025,C,1,Z1,NA,5.2,Fenced,C
-2025,C,1,Z1,Pogonarthria squarrosa ,1.7,Fenced,C
+2025,C,1,Z1,Pogonarthria squarrosa,1.7,Fenced,C
 2025,C,1,Z1,NA,1.7,Fenced,C
 2025,C,1,Z1,NA,1.7,Fenced,C
 2025,C,1,Z1,NA,1.7,Fenced,C
-2025,C,1,Z1,Pogonarthria squarrosa ,16.3,Fenced,C
+2025,C,1,Z1,Pogonarthria squarrosa,16.3,Fenced,C
 2025,C,1,Z1,Digitaria eriantha,13.1,Fenced,C
 2025,C,1,Z1,NA,10.8,Fenced,C
 2025,C,1,Z1,NA,9.4,Fenced,C
 2025,C,1,Z1,Setaria incrassata,6.8,Fenced,C
 2025,C,1,Z1,Digitaria eriantha,6,Fenced,C
-2025,C,1,Z1,Pogonarthria squarrosa ,5,Fenced,C
+2025,C,1,Z1,Pogonarthria squarrosa,5,Fenced,C
 2025,C,1,Z1,Heteropogon contortus,4.7,Fenced,C
 2025,C,1,Z1,Setaria incrassata,4,Fenced,C
 2025,C,1,Z1,Melinis repens,5.3,Fenced,C
@@ -4692,7 +4692,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,1,Z1,NA,5.2,Fenced,C
 2025,C,1,Z3,Aristida adscensionis,4.3,Unfenced,C
 2025,C,1,Z3,Digitaria eriantha,4.2,Unfenced,C
-2025,C,1,Z3,Pogonarthria squarrosa ,4.2,Unfenced,C
+2025,C,1,Z3,Pogonarthria squarrosa,4.2,Unfenced,C
 2025,C,1,Z3,Heteropogon contortus,4.7,Unfenced,C
 2025,C,1,Z3,Setaria incrassata,2.2,Unfenced,C
 2025,C,1,Z3,Eragrostis gummiflua,2.2,Unfenced,C
@@ -4705,7 +4705,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,1,Z3,Digitaria eriantha,2.7,Unfenced,C
 2025,C,1,Z3,Panicum maximum,3.5,Unfenced,C
 2025,C,1,Z3,Eragrostis gummiflua,3.5,Unfenced,C
-2025,C,1,Z3,Pogonarthria squarrosa ,3.3,Unfenced,C
+2025,C,1,Z3,Pogonarthria squarrosa,3.3,Unfenced,C
 2025,C,1,Z3,Setaria incrassata,NA,Unfenced,C
 2025,C,1,Z1,Aristida adscensionis,1.8,Unfenced,C
 2025,C,1,Z1,Setaria incrassata,1.8,Unfenced,C
@@ -4718,7 +4718,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,1,Z4,Aristida adscensionis,4.7,Unfenced,C
 2025,C,1,Z4,Setaria incrassata,4.4,Unfenced,C
 2025,C,1,Z4,Eragrostis gummiflua,4,Unfenced,C
-2025,C,1,Z4,Pogonarthria squarrosa ,3.8,Unfenced,C
+2025,C,1,Z4,Pogonarthria squarrosa,3.8,Unfenced,C
 2025,C,1,Z4,Heteropogon contortus,5.8,Unfenced,C
 2025,C,1,Z4,Digitaria eriantha,2.7,Unfenced,C
 2025,C,1,Z4,NA,4.5,Unfenced,C
@@ -4811,7 +4811,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,2,Z4,Digitaria velutina,18.7,Unfenced,TFB
 2025,C,2,Z4,NA,13.4,Unfenced,TFB
 2025,C,2,Z4,NA,11.9,Unfenced,TFB
-2025,C,4,Z3,Pogonarthria squarrosa ,5.8,Unfenced,F
+2025,C,4,Z3,Pogonarthria squarrosa,5.8,Unfenced,F
 2025,C,4,Z3,Eragrostis rigidior,10.6,Unfenced,F
 2025,C,4,Z3,Heteropogon contortus,8.5,Unfenced,F
 2025,C,4,Z3,Hyperrhenia filipendula,8.6,Unfenced,F
@@ -4823,7 +4823,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,4,Z3,NA,5.7,Unfenced,F
 2025,C,4,Z3,NA,5.2,Unfenced,F
 2025,C,4,Z3,Heteropogon contortus,10.5,Unfenced,F
-2025,C,4,Z3,Pogonarthria squarrosa ,12,Unfenced,F
+2025,C,4,Z3,Pogonarthria squarrosa,12,Unfenced,F
 2025,C,4,Z3,Eragrostis gummiflua,11.4,Unfenced,F
 2025,C,4,Z3,Melinis repens,10.4,Unfenced,F
 2025,C,4,Z3,Aristida adscensionis,5,Unfenced,F
@@ -4834,18 +4834,18 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,4,Z3,Setaria incrassata,11.2,Unfenced,F
 2025,C,4,Z3,Digitaria velutina,9.1,Unfenced,F
 2025,C,4,Z3,NA,7.6,Unfenced,F
-2025,C,4,Z4,Pogonarthria squarrosa ,8.4,Unfenced,F
+2025,C,4,Z4,Pogonarthria squarrosa,8.4,Unfenced,F
 2025,C,4,Z4,Hyperrhenia filipendula,11,Unfenced,F
 2025,C,4,Z4,Eragrostis superba,11.1,Unfenced,F
 2025,C,4,Z4,Eragrostis gummiflua,11.5,Unfenced,F
 2025,C,4,Z4,Aristida adscensionis,NA,Unfenced,F
 2025,C,4,Z4,Hyperthelia dissoluta,5,Unfenced,F
-2025,C,4,Z4,Pogonarthria squarrosa ,6.1,Unfenced,F
+2025,C,4,Z4,Pogonarthria squarrosa,6.1,Unfenced,F
 2025,C,4,Z4,Aristida adscensionis,24.3,Unfenced,F
 2025,C,4,Z4,Heteropogon contortus,21.4,Unfenced,F
 2025,C,4,Z4,Setaria incrassata,NA,Unfenced,F
 2025,C,4,Z4,Aristida adscensionis,15,Unfenced,F
-2025,C,4,Z4,Pogonarthria squarrosa ,0,Unfenced,F
+2025,C,4,Z4,Pogonarthria squarrosa,0,Unfenced,F
 2025,C,4,Z4,Diheteropogon amplectens,8.9,Unfenced,F
 2025,C,4,Z4,Brachiaria nigropedata,9.2,Unfenced,F
 2025,C,4,Z4,Aristida adscensionis,2.3,Unfenced,F
@@ -4859,13 +4859,13 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,4,Z4,NA,7.2,Unfenced,F
 2025,C,4,Z4,NA,6.6,Unfenced,F
 2025,C,4,Z2,Brachiaria brizantha,11,Fenced,F
-2025,C,4,Z2,Pogonarthria squarrosa ,6.6,Fenced,F
+2025,C,4,Z2,Pogonarthria squarrosa,6.6,Fenced,F
 2025,C,4,Z2,Eragrostis gummiflua,8.2,Fenced,F
 2025,C,4,Z2,Melinis repens,9.8,Fenced,F
 2025,C,4,Z2,Heteropogon contortus,NA,Fenced,F
 2025,C,4,Z2,Eragrostis superba,NA,Fenced,F
 2025,C,4,Z2,Digitaria eriantha,NA,Fenced,F
-2025,C,4,Z2,Pogonarthria squarrosa ,2.1,Fenced,F
+2025,C,4,Z2,Pogonarthria squarrosa,2.1,Fenced,F
 2025,C,4,Z2,Heteropogon contortus,8.6,Fenced,F
 2025,C,4,Z2,Eragrostis rigidior,10.8,Fenced,F
 2025,C,4,Z2,Brachiaria brizantha,13.2,Fenced,F
@@ -4882,7 +4882,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,4,Z2,Panicum maximum,17.8,Fenced,F
 2025,C,4,Z2,Digitaria velutina,15.6,Fenced,F
 2025,C,4,Z1,Heteropogon contortus,14.6,Fenced,F
-2025,C,4,Z1,Pogonarthria squarrosa ,19.7,Fenced,F
+2025,C,4,Z1,Pogonarthria squarrosa,19.7,Fenced,F
 2025,C,4,Z1,Melinis repens,20,Fenced,F
 2025,C,4,Z1,Eragrostis gummiflua,17.6,Fenced,F
 2025,C,4,Z1,Heteropogon contortus,2.5,Fenced,F
@@ -4891,9 +4891,9 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,4,Z1,NA,2.5,Fenced,F
 2025,C,4,Z1,Brachiaria brizantha,30.9,Fenced,F
 2025,C,4,Z1,Eragrostis rigidior,32.4,Fenced,F
-2025,C,4,Z1,Pogonarthria squarrosa ,27.8,Fenced,F
+2025,C,4,Z1,Pogonarthria squarrosa,27.8,Fenced,F
 2025,C,4,Z1,Eragrostis gummiflua,25.1,Fenced,F
-2025,C,4,Z1,Pogonarthria squarrosa ,4.1,Fenced,F
+2025,C,4,Z1,Pogonarthria squarrosa,4.1,Fenced,F
 2025,C,4,Z1,Heteropogon contortus,4.4,Fenced,F
 2025,C,4,Z1,Brachiaria serrata,6.5,Fenced,F
 2025,C,4,Z1,NA,6.6,Fenced,F
@@ -4901,7 +4901,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,4,Z1,Eragrostis rigidior,4.3,Fenced,F
 2025,C,4,Z1,NA,3.9,Fenced,F
 2025,C,4,Z1,NA,20.3,Fenced,F
-2025,C,5,Z1,Pogonarthria squarrosa ,13.4,Fenced,THF
+2025,C,5,Z1,Pogonarthria squarrosa,13.4,Fenced,THF
 2025,C,5,Z1,Digitaria eriantha,15,Fenced,THF
 2025,C,5,Z1,Heteropogon contortus,15.1,Fenced,THF
 2025,C,5,Z1,NA,15.1,Fenced,THF
@@ -4909,7 +4909,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,5,Z1,Digitaria eriantha,17.3,Fenced,THF
 2025,C,5,Z1,Melinis repens,17.8,Fenced,THF
 2025,C,5,Z1,Eragrostis rigidior,17.7,Fenced,THF
-2025,C,5,Z1,Pogonarthria squarrosa ,NA,Fenced,THF
+2025,C,5,Z1,Pogonarthria squarrosa,NA,Fenced,THF
 2025,C,5,Z1,Digitaria eriantha,10.1,Fenced,THF
 2025,C,5,Z1,Eragrostis viscosa,11.2,Fenced,THF
 2025,C,5,Z1,Eragrostis gummiflua,10,Fenced,THF
@@ -4925,11 +4925,11 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,5,Z1,Digitaria eriantha,NA,Fenced,THF
 2025,C,5,Z1,Heteropogon contortus,NA,Fenced,THF
 2025,C,5,Z1,NA,NA,Fenced,THF
-2025,C,5,Z2,Pogonarthria squarrosa ,24.6,Fenced,THF
+2025,C,5,Z2,Pogonarthria squarrosa,24.6,Fenced,THF
 2025,C,5,Z2,Melinis repens,26.2,Fenced,THF
 2025,C,5,Z2,Andropogon eucomus,24.7,Fenced,THF
 2025,C,5,Z2,Heteropogon contortus,23.2,Fenced,THF
-2025,C,5,Z2,Pogonarthria squarrosa ,10,Fenced,THF
+2025,C,5,Z2,Pogonarthria squarrosa,10,Fenced,THF
 2025,C,5,Z2,Eragrostis rigidior,14.6,Fenced,THF
 2025,C,5,Z2,Heteropogon contortus,18.1,Fenced,THF
 2025,C,5,Z2,Digitaria eriantha,14.7,Fenced,THF
@@ -4960,14 +4960,14 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,5,Z4,NA,10.5,Unfenced,THF
 2025,C,5,Z4,Eragrostis superba,8.9,Unfenced,THF
 2025,C,5,Z4,Aristida adscensionis,9.8,Unfenced,THF
-2025,C,5,Z4,Pogonarthria squarrosa ,10.9,Unfenced,THF
+2025,C,5,Z4,Pogonarthria squarrosa,10.9,Unfenced,THF
 2025,C,5,Z4,Heteropogon contortus,12.3,Unfenced,THF
 2025,C,5,Z4,Panicum maximum,4.5,Unfenced,THF
 2025,C,5,Z4,Digitaria velutina,4.6,Unfenced,THF
 2025,C,5,Z4,NA,5.9,Unfenced,THF
 2025,C,5,Z4,NA,5.7,Unfenced,THF
 2025,C,5,Z3,Brachiaria nigropedata,17.7,Unfenced,THF
-2025,C,5,Z3,Pogonarthria squarrosa ,15.5,Unfenced,THF
+2025,C,5,Z3,Pogonarthria squarrosa,15.5,Unfenced,THF
 2025,C,5,Z3,Eragrostis gummiflua,23.5,Unfenced,THF
 2025,C,5,Z3,Eragrostis viscosa,22.4,Unfenced,THF
 2025,C,5,Z3,Heteropogon contortus,9.1,Unfenced,THF
@@ -4991,49 +4991,49 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,3,Z3,Heteropogon contortus,11.1,Unfenced,TF
 2025,C,3,Z3,Melinis repens,14.2,Unfenced,TF
 2025,C,3,Z3,Eragrostis viscosa,10.2,Unfenced,TF
-2025,C,3,Z3,Pogonarthria squarrosa ,NA,Unfenced,TF
+2025,C,3,Z3,Pogonarthria squarrosa,NA,Unfenced,TF
 2025,C,3,Z3,Digitaria eriantha,NA,Unfenced,TF
 2025,C,3,Z3,Heteropogon contortus,4.7,Unfenced,TF
-2025,C,3,Z3,Pogonarthria squarrosa ,6.7,Unfenced,TF
+2025,C,3,Z3,Pogonarthria squarrosa,6.7,Unfenced,TF
 2025,C,3,Z3,Digitaria eriantha,4.9,Unfenced,TF
 2025,C,3,Z3,NA,0,Unfenced,TF
 2025,C,3,Z3,Aristida adscensionis,3,Unfenced,TF
 2025,C,3,Z3,Cynodon dactylon,4.1,Unfenced,TF
 2025,C,3,Z3,Setaria incrassata,5.6,Unfenced,TF
-2025,C,3,Z3,Pogonarthria squarrosa ,4.3,Unfenced,TF
+2025,C,3,Z3,Pogonarthria squarrosa,4.3,Unfenced,TF
 2025,C,3,Z3,Heteropogon contortus,4.3,Unfenced,TF
-2025,C,3,Z3,Pogonarthria squarrosa ,4.2,Unfenced,TF
+2025,C,3,Z3,Pogonarthria squarrosa,4.2,Unfenced,TF
 2025,C,3,Z3,Aristida adscensionis,4.2,Unfenced,TF
 2025,C,3,Z3,Eragrostis rigidior,7.1,Unfenced,TF
 2025,C,3,Z3,Setaria incrassata,NA,Unfenced,TF
-2025,C,3,Z3,Pogonarthria squarrosa ,4.5,Unfenced,TF
+2025,C,3,Z3,Pogonarthria squarrosa,4.5,Unfenced,TF
 2025,C,3,Z3,Eragrostis rigidior,7.1,Unfenced,TF
 2025,C,3,Z3,Eragrostis gummiflua,6.8,Unfenced,TF
 2025,C,3,Z3,Digitaria eriantha,6.9,Unfenced,TF
 2025,C,3,Z4,Hyperthelia dissoluta,6.8,Unfenced,TF
 2025,C,3,Z4,Eragrostis gummiflua,4.7,Unfenced,TF
-2025,C,3,Z4,Pogonarthria squarrosa ,6.5,Unfenced,TF
+2025,C,3,Z4,Pogonarthria squarrosa,6.5,Unfenced,TF
 2025,C,3,Z4,Eragrostis rigidior,6.3,Unfenced,TF
 2025,C,3,Z4,Eragrostis viscosa,NA,Unfenced,TF
 2025,C,3,Z4,Digitaria eriantha,5.6,Unfenced,TF
-2025,C,3,Z4,Pogonarthria squarrosa ,5.6,Unfenced,TF
+2025,C,3,Z4,Pogonarthria squarrosa,5.6,Unfenced,TF
 2025,C,3,Z4,NA,5.4,Unfenced,TF
 2025,C,3,Z4,NA,5.1,Unfenced,TF
-2025,C,3,Z4,Pogonarthria squarrosa ,10.3,Unfenced,TF
+2025,C,3,Z4,Pogonarthria squarrosa,10.3,Unfenced,TF
 2025,C,3,Z4,Brachiaria brizantha,8.4,Unfenced,TF
 2025,C,3,Z4,Digitaria eriantha,8.1,Unfenced,TF
 2025,C,3,Z4,Eragrostis rigidior,7.7,Unfenced,TF
 2025,C,3,Z4,Eragrostis rigidior,6.6,Unfenced,TF
-2025,C,3,Z4,Pogonarthria squarrosa ,6.4,Unfenced,TF
+2025,C,3,Z4,Pogonarthria squarrosa,6.4,Unfenced,TF
 2025,C,3,Z4,Digitaria eriantha,6.8,Unfenced,TF
 2025,C,3,Z4,NA,7.2,Unfenced,TF
 2025,C,3,Z4,Heteropogon contortus,15.9,Unfenced,TF
 2025,C,3,Z4,Aristida adscensionis,14.4,Unfenced,TF
 2025,C,3,Z4,Digitaria eriantha,22.6,Unfenced,TF
-2025,C,3,Z4,Pogonarthria squarrosa ,20.1,Unfenced,TF
+2025,C,3,Z4,Pogonarthria squarrosa,20.1,Unfenced,TF
 2025,C,3,Z1,Eragrostis gummiflua,6.3,Fenced,TF
 2025,C,3,Z1,Eragrostis superba,7.1,Fenced,TF
-2025,C,3,Z1,Pogonarthria squarrosa ,9.2,Fenced,TF
+2025,C,3,Z1,Pogonarthria squarrosa,9.2,Fenced,TF
 2025,C,3,Z1,Panicum maximum,10.7,Fenced,TF
 2025,C,3,Z1,Eragrostis viscosa,NA,Fenced,TF
 2025,C,3,Z1,Digitaria eriantha,NA,Fenced,TF
@@ -5058,7 +5058,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,3,Z2,NA,17.3,Fenced,TF
 2025,C,3,Z2,NA,15,Fenced,TF
 2025,C,3,Z2,Heteropogon contortus,16,Fenced,TF
-2025,C,3,Z2,Pogonarthria squarrosa ,14.4,Fenced,TF
+2025,C,3,Z2,Pogonarthria squarrosa,14.4,Fenced,TF
 2025,C,3,Z2,Digitaria velutina,16.2,Fenced,TF
 2025,C,3,Z2,NA,17.2,Fenced,TF
 2025,C,3,Z2,Brachiaria brizantha,5.5,Fenced,TF
@@ -5066,7 +5066,7 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,3,Z2,NA,0,Fenced,TF
 2025,C,3,Z2,NA,0,Fenced,TF
 2025,C,3,Z2,Heteropogon contortus,13.6,Fenced,TF
-2025,C,3,Z2,Pogonarthria squarrosa ,22.9,Fenced,TF
+2025,C,3,Z2,Pogonarthria squarrosa,22.9,Fenced,TF
 2025,C,3,Z2,Brachiaria brizantha,20.4,Fenced,TF
 2025,C,3,Z2,Aristida adscensionis,20.8,Fenced,TF
 2025,C,3,Z2,Panicum maximum,4.5,Fenced,TF

@@ -840,12 +840,13 @@ ggsave(BF,filename ="Plots/Change Grass BiomassFenced.png",
   
   #write.csv(Grassnew, "DATA/March2025/GrassesCombined_withFencing.csv")
   
+  Grassnew <- read_csv("DATA/March2025/GrassesCombined_withFencing.csv")
   summary_Gr <- Grassnew %>%
     filter(!is.na(DPM_Height),
            Year %in% c(2024, 2025))
     group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
     summarise(mean_DPM_Height = mean(DPM_Height, na.rm = TRUE)) %>%
-    ungroup() ####check this code again
+    ungroup() 
   
  
   
