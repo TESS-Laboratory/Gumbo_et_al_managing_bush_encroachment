@@ -455,7 +455,7 @@ Grdata <- read_csv(here("DATA/March2025/GrassesCombined.csv"))
  
 ```
 
-```{r, warning=FALSE, message=FALSE, fig.cap="Figure 9. Across all treatments grass DPM height (cm) in fenced plots were on average 0.84 taller than those in unfenced plots (p < 0.0001), indicating a strong overall effect of fencing on grass height at SHR."}
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 9. Across all treatments grass DPM height (cm) in fenced plots were on average 0.84 taller than those in unfenced plots (p < 0.001), indicating a strong overall effect of fencing on grass height at SHR."}
 
 library(tidyverse)
 library(vegan)
@@ -519,7 +519,7 @@ ggplot(Grassnew, aes(x = Fencing, y = DPM_Height, fill = Fencing)) + facet_wrap(
 
 -   All four treatments (F, TF, TFB, THF) increase grass DPM height (cm) relative to the Control treatment when fencing is in place.
 
--   Leaving plots unfenced reduces grass DPM height (cm), but the effect is highly significant for TF (\< 0.0001) and marginally for other treatments.
+-   Leaving plots unfenced reduces grass DPM height (cm), but the effect is highly significant for TF (\< 0.001) and marginally for other treatments.
 
 -   For the Control treatment, fencing the plots did not have an effect on grass DPM height (cm).
 

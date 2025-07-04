@@ -53,7 +53,6 @@ theme_beautiful <- function() {
     )
 }
 
-Grassnew <- read_csv("DATA/March2025/GrassesCombined_withFencing.csv")
 
 GC <- read_csv("DATA/March2025/GrassesCombined_withFencing.csv")
 
@@ -165,6 +164,7 @@ print(GC)
 ########################################################################################################
 ########################################################################################################
 
+#Load data (DPM HEIGHT)
 Grassnew <- read_csv("DATA/March2025/GrassesCombinedCleaned.csv")
 
 summary_Gr <- Grassnew %>%
@@ -178,10 +178,10 @@ Gr1 <- lmer(DPM_Height ~ Treatment * Fencing + (1 | Site),# random intercepts
             data = Grassnew, REML = FALSE                       # use ML for comparing models
              )
 
-Gr2 <- lmer(DPM_Height ~ Treatment * Fencing * Year +
-             (Treatment | Site),
-           data = Grassnew, REML = FALSE)
-summary(Gr1)
+#Gr2 <- lmer(DPM_Height ~ Treatment * Fencing * Year +
+    #         (Treatment | Site),
+     #      data = Grassnew, REML = FALSE)
+  #summary(Gr1)
 
 
 ### marginal means of fencing, averaging over Treatment and Year
@@ -301,12 +301,12 @@ ggsave(GF,filename ="Plots/Delta FENCE Grass species richness Box plot.png",
 ##############################################################################
 ######################### GRASS BIOMASS GRASS BIOMASS  USING TLS TLS TLS 
 
-
+#LOAD DATA
 WGtlsdata <- read_csv(here("DATA/DPM.csv"))
 
 
 ################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
-# 2. Convert weight from grams to kg/ha
+# 1. Convert weight from grams to kg/ha
 #    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
 frame_area <- pi * (0.17^2)  # = 0.0908 m²
 WGtlsdata$Biomass_kg_ha <- WGtlsdata$Weight * 10 / frame_area
@@ -349,7 +349,7 @@ tls_zero <- tls_fit(df_tls$DPH_Height, df_tls$Biomass_kg_ha, through_origin = TR
 n_obs    <- nrow(df_tls)
 r2_proxy <- cor(df_tls$DPH_Height, df_tls$Biomass_kg_ha)^2                  # correlation² as proxy
 
-# 4.  Build annotation strings (include n)
+# 4a.  Build annotation strings (include n)
 # ------------------------------------------------------------------
 eq_tls1 <- sprintf("y = %.2f + %.2fx\nTLS R² ≈ %.3f, n = %d", 
                    tls_free$intercept, tls_free$slope, r2_proxy, n_obs)
@@ -376,8 +376,8 @@ TLSBIOM <- ggplot(df_tls, aes(x = DPH_Height, y = Biomass_kg_ha)) +
   theme_classic()
 
 # ggsave
-ggsave(TLSBIOM,filename ="Plots/TLS Biomass & intercept.png",
-       width = 16, height = 14, units = "cm")
+ #ggsave(TLSBIOM,filename ="Plots/TLS Biomass & intercept.png",
+ #      width = 16, height = 14, units = "cm")
 
 
 
@@ -387,7 +387,7 @@ WGtdata <- read_csv(here("DATA/DPM.csv"))
 
 
 ################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
-# 2. Convert weight from grams to kg/ha
+# 1. Convert weight from grams to kg/ha
 #    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
 frame_area <- pi * (0.17^2)  # = 0.0908 m²
 WGtdata$Biomass_kg_ha <- WGtdata$Weight * 10 / frame_area
@@ -428,7 +428,7 @@ tlss_fit <- function(x, y, through_origin = FALSE) {
 
 
 #Log-transform both variables (natural log)
-# 3.  Fit TLS models on the *log‑scale* -----------------------------
+# 4.  Fit TLS models on the *log‑scale* -----------------------------
 # ------------------------------------------------------------------
 tlss_free  <- tlss_fit(df_tlss$log_DPH_Height, df_tlss$log_Biomass_kg_ha)                     # free intercept
 tlss_zero  <- tlss_fit(df_tlss$log_DPH_Height, df_tlss$log_Biomass_kg_ha, through_origin = TRUE) # through origin
@@ -436,7 +436,7 @@ tlss_zero  <- tlss_fit(df_tlss$log_DPH_Height, df_tlss$log_Biomass_kg_ha, throug
 n_obs     <- nrow(df_tlss)
 r2_proxy  <- cor(df_tlss$log_DPH_Height, df_tlss$log_Biomass_kg_ha)^2                        # proxy R² on log scale
 
-# 4.  Build annotation strings (include n) -------------------------
+# 4a.  Build annotation strings (include n) -------------------------
 # ------------------------------------------------------------------
 eq_tls1 <- sprintf("ln(y) = %.2f + %.2f·ln(x)\nTls R² ≈ %.3f, n = %d", 
                    tlss_free$intercept, tlss_free$slope, r2_proxy, n_obs)
@@ -464,8 +464,8 @@ tlsf <- ggplot(df_tlss, aes(x = log_DPH_Height, y = log_Biomass_kg_ha)) +
 
 
 # ggsave
-ggsave(tlsf,filename ="Plots/TLS LOG Biomass.png",
-       width = 16, height = 14, units = "cm")
+ # ggsave(tlsf,filename ="Plots/TLS LOG Biomass.png",
+   #    width = 16, height = 14, units = "cm")
 
 
 
@@ -476,7 +476,7 @@ WGsqtdata <- read_csv(here("DATA/DPM.csv"))
 
 
 ################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
-# 2. Convert weight from grams to kg/ha
+# 1. Convert weight from grams to kg/ha
 #    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
 frame_area <- pi * (0.17^2)  # = 0.0908 m²
 WGsqtdata$Biomass_kg_ha <- WGsqtdata$Weight * 10 / frame_area
@@ -517,7 +517,7 @@ tlsq_fit <- function(x, y, through_origin = FALSE) {
 
 
 #Log-transform both variables (natural log)
-# 3.  Fit TLS models on the *log‑scale* -----------------------------
+# 4.  Fit TLS models on the *log‑scale* -----------------------------
 # ------------------------------------------------------------------
 tlsq_free  <- tlsq_fit(df_tlsq$sqrt_DPH_Height, df_tlsq$sqrt_Biomass_kg_ha)                     # free intercept
 tlsq_zero  <- tlsq_fit(df_tlsq$sqrt_DPH_Height, df_tlsq$sqrt_Biomass_kg_ha, through_origin = TRUE) # through origin
@@ -525,7 +525,7 @@ tlsq_zero  <- tlsq_fit(df_tlsq$sqrt_DPH_Height, df_tlsq$sqrt_Biomass_kg_ha, thro
 n_obs     <- nrow(df_tlsq)
 r2_proxy  <- cor(df_tlsq$sqrt_DPH_Height, df_tlsq$sqrt_Biomass_kg_ha)^2                        # proxy R² on log scale
 
-# 4.  Build annotation strings (include n) -------------------------
+# 4a.  Build annotation strings (include n) -------------------------
 # ------------------------------------------------------------------
 eq_tlsq1 <- sprintf("y = %.2f + %.2f·sqrt(x)\n R² ≈ %.3f, n = %d", 
                    tlsq_free$intercept, tlsq_free$slope, r2_proxy, n_obs)
