@@ -22,53 +22,41 @@ ii\. To evaluate the effects of bush encroachment management strategies on above
 
 -   Updated on Expected results
 
--   Preliminary results - Standing grass biomass, grass height, species richness, seedlings count, seedlings height, saplings count, saplings height, number of resprouts on cut stumps
+-   Preliminary results - Standing grass biomass, grass height, species richness, seedlings density, saplings density, resprouts population on cut stumps.
 
-# **Insights**
+# **Updates**
 
--   Completed level LTHE course
+-   Completed level 1 LTHE course
 
 -   Completed level 1 REC outdoor training
 
--   
-
 # [Expected results]{.underline}
-
-![](images/clipboard-2755584817.png)
-
-Figure 1. Moderately encroached plots expected to significantly differ with highly encroached plots, although the THF treatment is expected to significantly differ with all treatments.
 
 ![](images/clipboard-2814301535.png)
 
-Figure 2. Standing grass biomass expected to significantly increase in fenced plots under the THF.
+Figure 1. Standing grass biomass is expected to significantly increase in fenced plots under the THF treatment.
 
-![](images/clipboard-1178339037.png)
+Thinning and burning in moderately encroached areas can increase grass biomass by reducing woody plant competition for resources like light, water, and nutrients (Ludwig et al., 2004), and by releasing nutrients into the soil (Huntley, 2023). This allows grasses to access more resources, photosynthesise effectively, and enhance above-ground biomass production. Applying herbicides to cut stumps can prevent resprouting (Monegi et al., 2023), this reduction in resprouts allows for increased grass production by lowering competition for light, moisture, and space, which in turn enhances photosynthesis and encourages grass tillering. Fire eliminates fire-sensitive woody plants and stimulates new grass growth (Huntley, 2023). Fencing the plots excludes herbivores and enables grasses to recover from grazing and fire, further promoting their growth and biomass production (Kesch et al.,2019).
 
-Figure 3. TFH will significantly increase above ground grass biomass in both moderately and highly encroached sites.
+![](images/clipboard-3610651646.png)
 
-![](images/clipboard-1206364212.png)
+Figure 2. Grass species richness expected to significantly increase in all treatments that involve thinning.
 
-Figure 4 . TFB will significantly reduce seedling and sapling density across the two encroachment levels.
+Fencing provides a layer of physical protection for grasses against external disturbances by preventing trampling and grazing. This safeguarding allows the grasses ample time to reproduce, ultimately leading to enhanced grass biomass (Deng et al., 2014). Additionally, thinning promotes an increase in grass biomass by improving light penetration and water availability for the grasses (Ludwig et al., 2004).
+
+.
 
 ![](images/clipboard-82438273.png)
 
-Figure 5. Across all sites fenced plots will have a significant high number of seedlings and saplings, although the TFB will significantly reduce the density of seedlings and saplings compared to other treatments.
+Figure 3. Across all sites fenced plots will have a significant high number of seedlings and saplings, although the TFB will significantly reduce the density of seedlings and saplings compared to other treatments.
 
-![](images/clipboard-3163254265.png)
-
-Figure 6. TFB will significantly reduce the density of seedlings and saplings compared to other treatments.
-
-![](images/clipboard-4091788197.png)
-
-Figure 7. Across all sites, bush encroachment levels the most significant reduction of resprouts on cut stumps will be by the THF treatment in moderately encroached and unfenced plots.
+The combined effects of thinning, fire, and browsing result in a significant reduction in seedling and sapling density. Thinning can increase grass competition (Hare et al., 2021), which in turn competes with seedlings for essential resources, leading to reduced photosynthetic activity and increased mortality among young woody plants. Furthermore, thinning exposes seedlings and saplings to browsers and fire, resulting in high mortality rates (Albrecht & McCarthy, 2006). Fire can directly destroy small woody plants, disrupt seedling establishment conditions, and facilitate follow-up herbivory, while browsers (e.g. goats) target tender shoots, leaves, and growing tips of seedlings and saplings (Elias & Tischew, 2016), depleting their starch reserves (Schutz et al., 2011). The loss of apical meristems stunts vertical growth, reduces leaf area, and interrupts photosynthetic activity. This greatly weakens and increases the susceptibility of young plants to stressors, ultimately leading to reduced photosynthetic activity and increased mortality (Staver et al., 2009) thus, browsers act as a filter for young woody plants (Archibald et al., 2021). The cumulative impact of these factors will be more pronounced in unfenced plots, where accessibility by wild animals and livestock exacerbates the negative effects on seedling and sapling density.
 
 ![](images/clipboard-409113701.png)
 
-Figure 8. Generally unfenced plots will exhibit a reduction in the number of resprouts on cut stumps. Although the THF treatment is expected to significantly reduce the density of resprouts on cut stumps.
+Figure 4. Generally unfenced plots will exhibit a reduction in the number of resprouts on cut stumps. Although the THF treatment is expected to significantly reduce the density of resprouts on cut stumps.
 
-![](images/clipboard-1585332991.png)
-
-Figure 9. THF will significantly reduce the number of resprouts on cut stumps
+The strategic combination of thinning, herbicide, and fire (THF) treatments effectively suppresses the resprouting of woody plants. Applying herbicide to cut stumps kills the regenerative tissues, which prevents or severely limits the plant's ability to produce new growth from the base or roots (Stritzke et al., 1991). Following this, prescribed fire further reduces resprouting by directly killing emerging shoots and imposing heat stress on the woody plants (Huntley, 2023). The cumulative effect of these combined stressors exhausts the plant's energy reserves, leading to a significant reduction in resprouting. Additionally, unfenced plots can have the lowest number of resprouts because herbivores constantly browse and trample woody plants, hindering their recovery, depleting their energy reserves (Schutz et al., 2011), and increasing stump mortality.
 
 ```         
 ```
@@ -77,106 +65,10 @@ Figure 9. THF will significantly reduce the number of resprouts on cut stumps
 
 ## 1. Standing grass biomass
 
-```{r, warning=FALSE, message=FALSE, fig.cap="Figure 10. Above-ground grass biomass is strongly predicted by DPM height (cm) at Shangani Holistic Ranch. There is a linear relationship."}
-
-library(tidyverse)
-library(lmerTest)
-library(ggplot2)
-library(dplyr)
-library(Matrix)
-library(lme4)
-library(emmeans)
-library(here) ## MOST IMPORTANT NOT TO FORGET THIS ONE
-library(robustbase)
-library(sjPlot)
-
-theme_beautiful <- function() {
-  theme_bw() +
-    theme(
-      text = element_text(family = "Helvetica"),
-      axis.text = element_text(size = 8, color = "black"),
-      axis.title = element_text(size = 8, color = "black"),
-      axis.line.x = element_line(size = 0.3, color = "black"),
-      axis.line.y = element_line(size = 0.3, color = "black"),
-      axis.ticks = element_line(size = 0.3, color = "black"),
-      panel.border = element_blank(),
-      panel.grid.major.x = element_blank(),
-      panel.grid.minor.x = element_blank(),
-      panel.grid.minor.y = element_blank(),
-      panel.grid.major.y = element_blank(),
-      plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), units = , "cm"),
-      plot.title = element_text(
-        size = 8,
-        vjust = 1,
-        hjust = 0.5,
-        color = "black"
-      ),
-      legend.text = element_text(size = 8, color = "black"),
-      legend.title = element_text(size = 8, color = "black"),
-      legend.position = c(0.9, 0.9),
-      legend.key.size = unit(0.9, "line"),
-      legend.background = element_rect(
-        color = "black",
-        fill = "transparent",
-        size = 2,
-        linetype = "blank"
-      )
-    )
-}
-
-################# GRASS BIOMASS
- 
-
- WGdata <- read_csv(here("DATA/DPM.csv"))
-
-################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
-# 2. Convert weight from grams to kg/ha
-#    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
-frame_area <- pi * (0.17^2)  # = 0.0908 m²
-WGdata$Biomass_kg_ha <- WGdata$Weight * 10 / frame_area
-
- 
- # 3. Linear regression: Biomass ~ DPH
-modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
-#summary(modelWG)
-# tab_model(modelWG)
-
-
- ###adding annotation to the plot
- 
- # Extract coefficients
-    coefs <- coef(modelWG)
-   intercept <- round(coefs[1], 2)
-    slope <- round(coefs[2], 2)
- 
- # Create equation string for annotation
- # Build the equation string (biomass = intercept + slope * x)
-    eq <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
-    
-    coef <- coefficients(modelWG)
-    r2 <- summary(modelWG)$r.squared
-    n <- nobs(modelWG)
-    eq <- paste0(
-      "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
-      "R² = ", round(r2, 3), ", n = ", n)
-    
- 
- # Plot with regression and equation
- 
-ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
-  geom_point() +  
-  geom_smooth(method = "lm", se = FALSE, color = "red") +
-  annotate("text", x = Inf, y = -Inf, label = eq, hjust = 1.1, vjust = -0.5, size = 4, color = "black") +
-  labs( x = "Dpm height (cm)",
-        y = "Standing grass biomass (kg/ha)"
-  ) +
-  theme_beautiful()
-
- 
-
+```{}
 ```
 
-```{r, warning=FALSE, message=FALSE, fig.cap="Figure 11.Comparing SHR model with the fitted intercept line passing through origin"}
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 5.Comparing SHR model with the fitted intercept line passing through origin"}
 
 library(tidyverse)
 library(lmerTest)
@@ -286,7 +178,7 @@ geom_smooth(method = "lm", formula = y ~ x - 1, colour = "blue") + # zero‑inte
 
 ```
 
-```{r, warning = FALSE, message=FALSE, fig.cap="Figure 12. Log transformed variables show a linear relationship between transformed DPM height (cm) and standing grass biomass (kg/ha) at SHR."}
+```{r, warning = FALSE, message=FALSE, fig.cap="Figure 6. Log transformed variables show a linear relationship between transformed DPM height (cm) and standing grass biomass (kg/ha) at SHR."}
 
 
 library(tidyverse)
@@ -386,7 +278,7 @@ WGdata$Biomass_kg_ha <- WGdata$Weight * 10 / frame_area
   
 ```
 
-```{r, warning=FALSE, message=FALSE, fig.cap="Figure 13. Square root transformed variables show a linear relationship between transformed DPM height (cm) and standing grass biomass (kg/ha) at SHR."}
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 7. Square root transformed variables show a linear relationship between transformed DPM height (cm) and standing grass biomass (kg/ha) at SHR."}
 
 library(tidyverse)
 library(lmerTest)
@@ -479,7 +371,7 @@ SQGdata$Biomass_kg_ha <- SQGdata$Weight * 10 / frame_area
       theme_beautiful()
 ```
 
-```{r, warning=FALSE, message=FALSE, fig.cap="Figure 14. Comparing DPM height across treatments reveals that the treatment groups do not differ significantly in their effect on the DPM height at SHR."}
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 8. Comparing DPM height across treatments reveals that the treatment groups do not differ significantly in their effect on the DPM height at SHR."}
 
 Grdata <- read_csv(here("DATA/March2025/GrassesCombined.csv"))
  
@@ -563,7 +455,7 @@ Grdata <- read_csv(here("DATA/March2025/GrassesCombined.csv"))
  
 ```
 
-```{r, warning=FALSE, message=FALSE, fig.cap="Figure 15. Across all treatments grass DPM height (cm) in fenced plots were on average 0.84 taller than those in unfenced plots (p < 0.0001), indicating a strong overall effect of fencing on grass height at SHR."}
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 9. Across all treatments grass DPM height (cm) in fenced plots were on average 0.84 taller than those in unfenced plots (p < 0.0001), indicating a strong overall effect of fencing on grass height at SHR."}
 
 library(tidyverse)
 library(vegan)
@@ -627,11 +519,11 @@ ggplot(Grassnew, aes(x = Fencing, y = DPM_Height, fill = Fencing)) + facet_wrap(
 
 -   All four treatments (F, TF, TFB, THF) increase grass DPM height (cm) relative to the Control treatment when fencing is in place.
 
--   Leaving plots unfenced generally reduces grass DPM height (cm), but the effect is highly significant for TF (\< 0.0001) and marginally for other treatments.
+-   Leaving plots unfenced reduces grass DPM height (cm), but the effect is highly significant for TF (\< 0.0001) and marginally for other treatments.
 
--   The non‑significant *Fencing-Unfenced* main effect reveal that, for the Control treatment, fencing the plots did not have an effect on grass DPM height (cm).
+-   For the Control treatment, fencing the plots did not have an effect on grass DPM height (cm).
 
-```{r, warning=FALSE, message=FALSE, fig.cap="Figure 16. Reveal that there is no statistical evidence that various treatments have an effect on Grass species richness at SHR."}
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 10. Reveal that there is no statistical evidence that various treatments have an effect on Grass species richness at SHR."}
 
 library(tidyverse)
 library(vegan)
@@ -696,7 +588,7 @@ grass_delta <- Grass_year %>%
 
 -   Grass species richness has not been affected by any treatment in the first grass survey five months post treatment.
 
-```{r, warning=FALSE, message=FALSE, fig.cap="Figure 17. Across all six sites there is no statistical evidence that fencing and treatments have an effect on grass species richness at SHR."}
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 11. Across all six sites there is no statistical evidence that fencing and treatments have an effect on grass species richness at SHR."}
 ### Grass spp richness according to fencing
 # sort data
 Grass_yearF <- GrassComp %>%
@@ -738,78 +630,39 @@ grass_deltaF <- Grass_yearF %>%
 
 -   Grass species richness has not been affected by fencing and treatment in the first grass survey, five months post treatment.
 
-```{r, warning=FALSE, message=FALSE, fig.cap="Figure 18. Across all six sites there is no statistical evidence that fencing and treatments have an effect on tree maximum height (m) at SHR."}
+2.  **WOODY PLANTS PRELIMINARY RESULTS**
 
-library(tidyverse)
-library(vegan)
-library(multcompView)
-library(patchwork)
-library(lmerTest)
-library(ggplot2)
-library(dplyr)
-library(Matrix)
-library(lme4)
-library(emmeans)
-library(here) ## MOST IMPORTANT NOT TO FORGET THIS ONE
-library(robustbase)
-library(sjPlot)
-library(flextable)
-library(officer)
-library(glmmTMB)
-library(performance)  # model diagnostics
-
-theme_beautiful <- function() {
-  theme_bw() +
-    theme(
-      text = element_text(family = "Helvetica"),
-      axis.text = element_text(size = 8, color = "black"),
-      axis.title = element_text(size = 8, color = "black"),
-      axis.line.x = element_line(size = 0.3, color = "black"),
-      axis.line.y = element_line(size = 0.3, color = "black"),
-      axis.ticks = element_line(size = 0.3, color = "black"),
-      panel.border = element_blank(),
-      panel.grid.major.x = element_blank(),
-      panel.grid.minor.x = element_blank(),
-      panel.grid.minor.y = element_blank(),
-      panel.grid.major.y = element_blank(),
-      plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), units = , "cm"),
-      plot.title = element_text(
-        size = 8,
-        vjust = 1,
-        hjust = 0.5,
-        color = "black"
-      ),
-      legend.text = element_text(size = 8, color = "black"),
-      legend.title = element_text(size = 8, color = "black"),
-      legend.position = c(0.9, 0.9),
-      legend.key.size = unit(0.9, "line"),
-      legend.background = element_rect(
-        color = "black",
-        fill = "transparent",
-        size = 2,
-        linetype = "blank"
-      )
-    )
-}
-
-#Loading data
-Ttdata <- read_csv(here("DATA/March2025/woody_with_separate_columns25.csv"))
-
-Ttdata <- Ttdata %>%
-  filter(!is.na(Trees) %>%  # Exclude NAs in dpm_height
-           mutate(
-             Year = as.factor(Year),
-             Site = as.factor(Site),
-             Plot = as.factor(Plot),
-             Subplot = as.factor(Subplot),
-             Treatment = as.factor(Treatment),
-             Fenced = as.factor(Fenced),
-             Trees = as.numeric(Trees) # Ensure numeric
-           )
-         
-## Create Pre/Post Variable
-Ttdata <- Ttdata %>%
-mutate(period = ifelse(as.numeric(as.character(Year)) < 2025, "PRE", "POST")) %>%
-mutate(period = factor(period, levels = c("PRE", "POST")))
-       
+```{}
 ```
+
+![](images/clipboard-253126582.png){width="639"}
+
+Figure 12. Change in seedling density at SHR across treatments.
+
+**Interpretation**
+
+-   Four treatments (F, TF, TFB, THF) significantly reduced seedling density in fenced plots, with THF causing the largest decline.
+
+-   In unfenced plots significant TF and THF had a significant decline in seedling density.
+
+-   Generally, treatments are more effective when plots are fenced.
+
+![](images/clipboard-2554409595.png){width="636"}
+
+Figure 13. Change in sapling density at SHR across treatments
+
+**Interpretation**
+
+-   Three treatments (TF, TFB, THF) caused large, significant (\<0.05) losses in sapling density compared with the control when plots are fenced.
+
+-    Unfenced plots tends to lower density in the control, though the evidence is only marginal (p ≈ 0.06).
+
+![](images/clipboard-4063084073.png){width="638"}
+
+Figure 14. Comparison of three treatments on their impact on resprout on cut stumps. THF treatment significantly reduced the resprouts population on cut stumps five months post treatment.
+
+**Interpretation**
+
+-   Treatment THF significantly lowers the number of resprouts on cut stumps whether the plot is fenced or not.
+
+-   Treatment TGM does not differ from the control in fenced plots.
