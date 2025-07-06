@@ -551,8 +551,467 @@ tlsq1 <- ggplot(df_tlsq, aes(x = sqrt_DPH_Height, y = sqrt_Biomass_kg_ha)) +
   labs(x = "Sqrt DPM height (cm)", y = " Sqrt Standing grass biomass (kg/ha)") +
   theme_beautiful()
 
-
 # ggsave
 #ggsave(tlsq1,filename ="Plots/TLS SQRT Biomass & intercept.png",
  #     width = 16, height = 14, units = "cm")
 
+
+
+########################################################################
+############# GRASS SPECIES DIVERSITY GRASS SPECIES DIVERSITY  DIVERSITY 
+
+Grassdiversity <- read_csv("DATA/March2025/GrassesCombinedCleaned.csv")
+
+# 1. Prepare data: richness per Site x Treatment x Year
+Gdiv <- Grassdiversity%>%
+  filter(!is.na(Species_name),
+         Year %in% c(2024, 2025))%>%   # keep only pre/post years
+  group_by(Site, Plot, Subplot, Treatment, Year, Fencing, Species_name)%>%
+  summarise(Spp_count = n(), .groups = "drop" )%>%    # species abundance inside each subplot
+          mutate(
+              Encroachment_level = case_when(
+                Site == "A" ~ "Moderate",
+                Site == "B" ~ "Moderate",
+                Site == "C" ~ "High",
+                Site == "D" ~ "High",
+                Site == "E" ~ "High",
+                Site == "F" ~ "Moderate",
+                TRUE        ~ NA_character_
+              )
+            ) 
+            
+            
+# Calculate Shannon-Wiener Diversity Index at Site and Plot level
+Sdiversity_data <- Gdiv %>%
+  group_by(Site, Plot, Subplot,Treatment, Year, Fencing, Encroachment_level) %>%                   # Group by Site and Plot
+  summarise(
+    Shannon_Diversity = -sum((Spp_count / sum(Spp_count)) * log(Spp_count / sum(Spp_count))),
+    .groups = "drop"
+  )
+
+#Visualisation
+SW <- ggplot(Sdiversity_data,
+       aes(x = Fencing, y =Shannon_Diversity, fill = Fencing)) + facet_wrap(~Treatment)+ 
+  geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Fencing", y = "Grass Shanon Weiner diversity indice") +
+  theme_beautiful() +
+  theme(legend.position = "none")
+
+##ggsave
+#ggsave(SW,filename ="Plots/Grass S-Weiner index FENCED boxplot.png",
+     #width = 16, height = 14, units = "cm")
+
+
+##########################################GRASSES DELTA SHANON -WEINER DIVERSITY 
+
+# 2. Calculate Shannon-Wiener Diversity Index 
+Sdiversity_data <- Gdiv %>%
+  group_by(Site, Plot, Subplot,Treatment, Year, Fencing, Encroachment_level) %>%                   # Group by Site and Plot
+  summarise(
+    Shannon_Diversity = -sum((Spp_count / sum(Spp_count)) * log(Spp_count / sum(Spp_count))),
+    .groups = "drop"
+  )
+
+# 3. Pivot the two years side‑by‑side and compute Δ‑ ─────────────
+SW_Delta <- Sdiversity_data %>% 
+  pivot_wider(names_from  = Year,
+              values_from = Shannon_Diversity,
+              names_glue  = "sw_{Year}") %>% 
+  mutate(delta_SW = sw_2025 - sw_2024)   
+
+### Removing non‑finite (NA, ±Inf) *and* (if on log scale) non‑positive ──
+sw_delta_clean <-  SW_Delta %>% 
+  filter(
+    is.finite(delta_SW ),   # drop NA / Inf / -Inf
+    delta_SW != 0          # <- only if you’re using a log scale; otherwise omit
+  )
+
+
+##Mixed models analysis
+sw_delta <- lmer(delta_SW~ Treatment * Fencing +(1|Site), data =sw_delta_clean)
+summary(sw_delta) 
+
+# ── 4. Boxplot of change in density by Treatment & Fencing ────────────────
+Swb <- ggplot(sw_delta_clean,
+              aes(x = Fencing, y = delta_SW, fill = Fencing)) + facet_wrap(~Treatment)+ 
+  geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+  #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Fencing", y = "Δ Grass S.Weiner diversity index") +
+  theme_beautiful() +
+  theme(legend.position = "none")
+
+#saving BOXPLOT plot
+  #ggsave(Swb,filename ="Plots/Grass S.Weiner Diversity FENCED Boxplot.png",
+   #    width = 16, height = 14, units = "cm")
+
+
+####### ### Violin plot for delta Weiner diversity index
+SWv <- ggplot(sw_delta_clean,
+              aes(x = Fencing, y = delta_SW, fill = Fencing)) + facet_wrap(~Treatment)+  
+  geom_violin(trim = FALSE)+
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Fencing", y = "Δ Grass Shannon-Weiner diversity indices") +
+  theme_beautiful() +
+  theme(legend.position = "none")
+
+#saving VIOLIN PLOT plot
+  #ggsave(SWv,filename ="Plots/Delta Grass S.Weiner Diversity FENCED Violinplot.png",
+   #    width = 16, height = 14, units = "cm")
+
+#########################################
+############################################ GRASSS SPECIECES EVENNESS
+
+# 1. Prepare data: richness per Site x Treatment x Year
+Gevenness <- Grassdiversity%>%
+  filter(!is.na(Species_name),
+         Year %in% c(2024, 2025))%>%   # keep only pre/post years
+  group_by(Site, Plot, Subplot, Treatment, Year, Fencing, Species_name)%>%
+  summarise(Spp_count = n(), .groups = "drop" )%>%    # species abundance inside each subplot
+  mutate(
+    Encroachment_level = case_when(
+      Site == "A" ~ "Moderate",
+      Site == "B" ~ "Moderate",
+      Site == "C" ~ "High",
+      Site == "D" ~ "High",
+      Site == "E" ~ "High",
+      Site == "F" ~ "Moderate",
+      TRUE        ~ NA_character_
+    )
+  ) 
+
+
+# Calculate Species Evenness 
+even_data <- Grassdiversity %>%                           # your raw table
+  filter(!is.na(Species_name)) %>%                # drop blank IDs
+  group_by(Site, Plot,Subplot,Treatment,Year, Fencing, Species_name) %>%          # 1 row = 1 species hit
+  summarise(abundance = n(), .groups = "drop") %>%
+  pivot_wider(                                    # make a wide matrix
+    names_from  = Species_name,
+    values_from = abundance,
+    values_fill = 0
+  )
+
+# Calculate richness (S), Shannon (H′) and evenness (J)
+even_data <- even_data %>% 
+  mutate(
+    S = specnumber(select(., where(is.numeric))),            # numeric only
+    H = diversity(select(., where(is.numeric)), "shannon"),
+    J = if_else(S > 1, H / log(S), NA_real_)
+  )
+
+#Visualisation; Boxplot
+SeB <- ggplot(even_data, aes(x = Fencing, y = J, fill = Fencing)) + facet_wrap(~Treatment) +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+  #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Fencing", y = "Grass Pielou Evenness (J)") +
+  theme_beautiful() +
+  theme(legend.position = "none")
+
+# ggsave(SeB,filename ="Plots/Grass Evenness FENCED Boxplot.png",
+      # width = 16, height = 14, units = "cm")
+
+#### Violin plot for Grass Pielou Evenness (J)
+ SeV <- ggplot(even_data, aes(x = Fencing, y = J, fill = Fencing)) + facet_wrap(~Treatment) +
+  geom_violin(trim = FALSE)+
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Fencing", y = "Grass species Pielou Evenness (J)") +
+  theme_beautiful() +
+  theme(legend.position = "none")
+
+#saving VIOLIN PLOT plot
+  #ggsave(SeV,filename ="Plots/Grass Evenness FENCED Violinplot.png",
+    # width = 16, height = 14, units = "cm")
+
+#########################################
+############################################ GRASSES DELTA SPECIES EVENNESS 
+ 
+ # Calculate Species Evenness 
+ even_data <- Grassdiversity %>%                           # your raw table
+   filter(!is.na(Species_name)) %>%                # drop blank IDs
+   group_by(Site, Plot,Subplot,Treatment,Year, Fencing, Species_name) %>%          # 1 row = 1 species hit
+   summarise(abundance = n(), .groups = "drop") %>%
+   pivot_wider(                                    # make a wide matrix
+     names_from  = Species_name,
+     values_from = abundance,
+     values_fill = 0
+   )
+ 
+ # Calculate richness (S), Shannon (H′) and evenness (J)
+ even_data <- even_data %>% 
+   mutate(
+     S = specnumber(select(., where(is.numeric))),            # numeric only
+     H = diversity(select(., where(is.numeric)), "shannon"),
+     J = if_else(S > 1, H / log(S), NA_real_)
+   )
+ 
+ # 3. Pivot the two years side‑by‑side and compute Δ‑SPECIES EVENNESS ─────────────
+SEV_delta_clean2 <- even_data %>% 
+   mutate(J = as.numeric(J)) %>%      # ensure J is numeric
+   filter(Year %in% c(2024, 2025)) %>% 
+   group_by(Site, Plot, Treatment, Fencing, Year) %>%  # keep metadata here
+   summarise(J = mean(J), .groups = "drop") %>%        # collapse duplicates
+   pivot_wider(
+     names_from   = Year,
+     values_from  = J,
+     names_prefix = "se_"
+   ) %>% 
+   filter(!is.na(se_2024) & !is.na(se_2025)) %>%       # keep complete sets
+   mutate(delta_E = se_2025 - se_2024)
+ 
+ ##Mixed models analysis
+  #sE_delta <- lmer(delta_E~ Treatment * Fencing +(1|Site), data = SEV_delta_clean2)
+   #summary(sE_delta) #Treatments did not shift evenness in a statistically detectable way. The estimated changes are all < 0.002 on a metric that ranges 0 – 1. 
+ 
+ # Boxplot of change in Evennness by Treatment & Fencing ────────────────
+ SEVB <- ggplot(SEV_delta_clean2,
+  aes(x = Fencing, y = delta_E, fill = Fencing)) + facet_wrap(~Treatment)+ 
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fencing", y = "Δ Grass species Pielou Evenness (J)") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+#ggsave Evenness Boxplot
+   #ggsave(SEVB, filename = "Plots/ Delta Grass Evenness Boxplot.png",
+      #     width = 16, height = 14, units = "cm")
+ 
+ #### Violin plot for Δ Grass Pielou Evenness (J)
+ SEVv <- ggplot(SEV_delta_clean2, aes(x = Fencing, y = delta_E, fill = Fencing)) + facet_wrap(~Treatment)+
+ geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fencing", y = "Δ Grass species Pielou Evenness (J)") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+
+#ggsave Evenness Boxplot
+   #ggsave(SEVv, filename = "Plots/ Delta Grass Evenness Violinplot.png",
+      #  width = 16, height = 14, units = "cm")
+ 
+
+ ######################################################################################################
+ ####### GRASS SPECIES SIMPSONS DIVERSITY  GRASS SPECIES SIMSPONS DIVERSITY
+ 
+ # Load data
+ Grassdiversity <- read_csv("DATA/March2025/GrassesCombinedCleaned.csv")
+
+ # Calculate species abundance per plot
+ GraSimp <- Grassdiversity %>%
+   filter(!is.na(Species_name)) %>%  
+   group_by(Site, Plot, Subplot, Fencing, Treatment, Year, Species_name) %>% 
+   summarise(abundance = n())%>%
+ summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
+ 
+##Mixed models
+ #simpler <- lmer(simpson_index~ Treatment * Fencing +(1|Site), data =GraSimp)
+  #summary(simpler) # no diffference in Simpsons diversity across treatments
+ 
+##Visualisation; Boxplot
+ Si <- ggplot(GraSimp, aes(x = Fencing, y = simpson_index, fill = Fencing)) + facet_wrap(~Treatment) +
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fencing", y = "Grass Simpsons diversity index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ #saving BOXPLOT plot
+  #ggsave(Si,filename ="Plots/Grass Simpsons Diversity FENCED Boxplot.png",
+    # width = 16, height = 14, units = "cm")
+
+ #### Violin plot for Simpson's diversity
+  SiV <- ggplot(GraSimp, aes(x = Fencing, y = simpson_index, fill = Fencing)) + facet_wrap(~Treatment) +
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fencing", y = "Grass Simpsons diversity index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+
+#saving VIOLINPLOT plot
+  #ggsave(SiV,filename ="Plots/Grass Simpsons Diversity FENCED Violinplot.png",
+   #width = 16, height = 14, units = "cm")
+
+##########################################################################
+################################################## DELTA SIMPSONS DIVERSITY 
+ 
+## Calculate species abundance per plot
+  GraSimp <- Grassdiversity %>%
+    filter(!is.na(Species_name)) %>%  
+    group_by(Site, Plot, Subplot, Fencing, Treatment, Year, Species_name) %>% 
+    summarise(abundance = n())%>%
+    summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
+  
+  # . Pivot the two years side‑by‑side and compute Δ SIMPSONS DIVERSITY
+ Simp_Delta <- GraSimp %>% 
+   pivot_wider(names_from  = Year,
+               values_from = simpson_index,
+               names_glue  = "sw_{Year}") %>% 
+   mutate(delta_Simp = sw_2025 - sw_2024)   
+ 
+ ### Removing non‑finite (NA, ±Inf) *and* (if on log scale) non‑positive ──
+ simp_delta_clean <- Simp_Delta %>% 
+   filter(
+     is.finite(delta_Simp ),   # drop NA / Inf / -Inf
+     delta_Simp != 0          # <- only if you’re using a log scale; otherwise omit
+   )
+ 
+ 
+ ##Mixed models analysis
+ sim_delta <- lmer(delta_Simp~ Treatment * Fencing +(1|Site), data =simp_delta_clean)
+ summary(sim_delta) 
+ 
+ # ── 4. Boxplot of change in density by Treatment & Fencing ────────────────
+Sib<- ggplot(simp_delta_clean,aes(x = Fencing, y = delta_Simp, fill = Fencing)) + facet_wrap(~Treatment)+ 
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fencing", y = "Δ Grass Simpsons diversity index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+##saving BOXPLOT plot
+  #ggsave(Sib,filename ="Plots/DELTA Grass Simpsons Diversity Boxplot.png",
+    # width = 16, height = 14, units = "cm")
+ 
+ 
+ ####### ### Violin plot for delta Weiner diversity index
+Siv <- ggplot(simp_delta_clean,
+ aes(x = Fencing, y = delta_Simp, fill = Fencing)) + facet_wrap(~Treatment)+  
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fencing", y = "Δ Grass Simpson's diversity index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+##saving VIOLIN PLOT plot
+  #ggsave(Siv,filename ="Plots/DELTA Grass Simpson's Diversity Violinplot.png",
+   # width = 16, height = 14, units = "cm")
+ 
+####################################################################################################
+###########################################################################################
+
+## SIMPSON'S EVENNES INDEX (E)
+
+Grassdiversity <- read_csv("DATA/March2025/GrassesCombinedCleaned.csv")
+
+# Calculate SIMPSON'S EVENNESS
+GraSimp <- Grassdiversity %>%
+  filter(!is.na(Species_name)) %>%  
+  group_by(Site, Plot, Subplot, Fencing, Treatment, Year, Species_name) %>% 
+  summarise(abundance = n())%>%
+  #summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
+  ## 2 ── diversity metrics for that sample (drop Spp) ───────────────────
+  #group_by(Site, Plot, Subplot, Fencing, Treatment, Year, Species_name) %>%            
+  summarise(
+    S    = n(),                                        # richness
+    D    = sum((abundance / sum(abundance))^2),        # Simpson dominance
+    invD = 1 / D,                                      # inverse Simpson
+    E    = invD / S,                                   # Simpson evenness
+    .groups = "drop"
+  )
+
+  
+#Boxplot Simpsons diversity ────────────────
+ Spvi <- ggplot( GraSimp, aes(x = Fencing, y = E, fill = Fencing)) + facet_wrap(~Treatment)+ 
+  geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+  #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Fencing", y = "Grass Simpsons evenness index") +
+  theme_beautiful() +
+  theme(legend.position = "none")
+
+####### Boxplot plot for Simpson's evenness index
+ #ggsave(Spvi,filename ="Plots/ Grass Simpson's Evenness Boxplot.png",
+      #  width = 16, height = 14, units = "cm")
+ 
+####### ### Violin plot for Simpsons Evenness index
+ Spv <- ggplot(GraSimp,
+               aes(x = Fencing, y = E, fill = Fencing)) + facet_wrap(~Treatment)+  
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fencing", y = " Grass Simpson's evenness index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+##saving VIOLIN PLOT plot
+  #ggsave(Spv,filename ="Plots/ Grass Simpson's Evenness Violinplot.png",
+   #width = 16, height = 14, units = "cm")
+
+ ###################################################################################
+ ##################################### GRASS SIMPSON'S EVENNESS INDEX
+ 
+ # Calculate SIMPSON'S EVENNESS
+ GraSimp <- Grassdiversity %>%
+   filter(!is.na(Species_name)) %>%  
+   group_by(Site, Plot, Subplot, Fencing, Treatment, Year, Species_name) %>% 
+   summarise(abundance = n())%>%
+   #summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
+   ## 2 ── diversity metrics for that sample (drop Spp) ───────────────────
+   #group_by(Site, Plot, Subplot, Fencing, Treatment, Year, Species_name) %>%            
+   summarise(
+     S    = n(),                                        # richness
+     D    = sum((abundance / sum(abundance))^2),        # Simpson dominance
+     invD = 1 / D,                                      # inverse Simpson
+     E    = invD / S,                                   # Simpson evenness
+     .groups = "drop"
+   )
+
+ 
+ # 3. Pivot the two years side‑by‑side and compute Δ‑SPECIES EVENNESS ─────────────
+ SimpE_delta <-  GraSimp %>% 
+   mutate(E = as.numeric(E)) %>%      # ensure J is numeric
+   filter(Year %in% c(2024, 2025)) %>% 
+   group_by(Site, Plot, Treatment, Fencing, Year) %>%  # keep metadata here
+   summarise(E = mean(E), .groups = "drop") %>%        # collapse duplicates
+   pivot_wider(
+     names_from   = Year,
+     values_from  = E,
+     names_prefix = "se_"
+   ) %>% 
+   filter(!is.na(se_2024) & !is.na(se_2025)) %>%       # keep complete sets
+   mutate(delta_SE = se_2025 - se_2024)
+ 
+##Mixed effects models analysis
+ #sEV_delta <- lmer(delta_SE~ Treatment * Fencing +(1|Site), data =SimpE_delta)
+ #summary(sEV_delta) #No evidence that any treatment or fencing altered Simpson‑evenness.
+ 
+ # Boxplot of change in Evennness by Treatment & Fencing ────────────────
+ SvB <- ggplot(SimpE_delta, aes(x = Fencing, y = delta_SE, fill = Fencing)) + facet_wrap(~Treatment)+ 
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fencing", y = "Δ Grass Simpson's evenness (E)") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+###ggsave Evenness Boxplot
+  #ggsave(SvB, filename = "Plots/ Delta Grass Simpsons Evenness Boxplot.png",
+   #   width = 16, height = 14, units = "cm")
+ 
+ 
+ ####### ### Violin plot for Δ Simpsons Evenness index
+ Spvi <- ggplot(GraSimp,
+               aes(x = Fencing, y = E, fill = Fencing)) + facet_wrap(~Treatment)+  
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fencing", y = " Δ Grass Simpson's evenness index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ ##saving VIOLIN PLOT plot
+  #ggsave(Spvi,filename ="Plots/ Δ Grass Simpson's Evenness Violinplot.png",
+  #width = 16, height = 14, units = "cm")
+ 
+##### Interpretation
+#  - None of the management treatments, the fencing status, nor their interactions 
+#     changed Simpson‑evenness to a statistically detectable level.
+# 2. Fence status did not modify treatment effects in a statistically significant way.
+
+# 3. Statistical power is low for small effects. With 56 subplots and residual SD ≈ 0.07, 
+#   you’d need an effect ≈ 0.10–0.12 to reach significance at α = 0.05.
+ 
+#################################################################################################
+################################################################################################# 

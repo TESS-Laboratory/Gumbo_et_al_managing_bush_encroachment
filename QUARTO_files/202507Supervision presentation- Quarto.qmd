@@ -36,7 +36,7 @@ ii\. To evaluate the effects of bush encroachment management strategies on above
 
 Figure 1. Standing grass biomass is expected to significantly increase in fenced plots under the THF treatment.
 
-Thinning and burning in moderately encroached areas can increase grass biomass by reducing woody plant competition for resources like light, water, and nutrients (Ludwig et al., 2004), and by releasing nutrients into the soil (Huntley, 2023). This allows grasses to access more resources, photosynthesise effectively, and enhance above-ground biomass production. Applying herbicides to cut stumps can prevent resprouting (Monegi et al., 2023), this reduction in resprouts allows for increased grass production by lowering competition for light, moisture, and space, which in turn enhances photosynthesis and encourages grass tillering. Fire eliminates fire-sensitive woody plants and stimulates new grass growth (Huntley, 2023). Fencing the plots excludes herbivores and enables grasses to recover from grazing and fire, further promoting their growth and biomass production (Kesch et al.,2019).
+Woody plant thinning and prescribed fires in moderately encroached areas can increase grass biomass by reducing woody plant competition for resources like light, water, and nutrients (Ludwig et al., 2004), and by releasing nutrients into the soil (Huntley, 2023). This allows grasses to access more resources, photosynthesise effectively, and enhance above-ground biomass production. Applying herbicides to cut stumps can prevent resprouting (Monegi et al., 2023), this reduction in resprouts allows for increased grass production by lowering competition for light, moisture, and space, which in turn enhances photosynthesis and encourages grass tillering. Fire eliminates fire-sensitive woody plants and stimulates new grass growth (Huntley, 2023). Fencing some of the treatment plots can exclude herbivores and enables grasses to recover from grazing and fire, further promoting their growth and biomass production (Kesch et al.,2019).
 
 ![](images/clipboard-3610651646.png)
 
@@ -65,7 +65,7 @@ The strategic combination of thinning, herbicide, and fire (THF) treatments effe
 
 ## 1. Standing grass biomass
 
-```{}
+```         
 ```
 
 ```{r, warning=FALSE, message=FALSE, fig.cap="Figure 5.Comparing SHR model with the fitted intercept line passing through origin"}
@@ -630,9 +630,74 @@ grass_deltaF <- Grass_yearF %>%
 
 -   Grass species richness has not been affected by fencing and treatment in the first grass survey, five months post treatment.
 
+    ```{r, warning=FALSE, message=FALSE, fig.cap="Figure 10. Reveal that there is no statistical evidence that various treatments have an effect on grass Shanon-Weiner diversity at SHR."}
+
+    Grassdiversity <- read_csv(here("DATA/March2025/GrassesCombinedCleaned.csv"))
+
+    # 1. Prepare data: richness per Site x Treatment x Year
+    Gdiv <- Grassdiversity%>%
+      filter(!is.na(Species_name),
+             Year %in% c(2024, 2025))%>%   # keep only pre/post years
+      group_by(Site, Plot, Subplot, Treatment, Year, Fencing, Species_name)%>%
+      summarise(Spp_count = n(), .groups = "drop" )%>%    # species abundance inside each subplot
+              mutate(
+                  Encroachment_level = case_when(
+                    Site == "A" ~ "Moderate",
+                    Site == "B" ~ "Moderate",
+                    Site == "C" ~ "High",
+                    Site == "D" ~ "High",
+                    Site == "E" ~ "High",
+                    Site == "F" ~ "Moderate",
+                    TRUE        ~ NA_character_
+                  )
+                ) 
+                
+    # 2. Calculate Delta Shannon-Wiener Diversity Index at Site and Plot level
+    Sdiversity_data <- Gdiv %>%
+      group_by(Site, Plot, Subplot,Treatment, Year, Fencing, Encroachment_level) %>%                   # Group by Site and Plot
+      summarise(
+        Shannon_Diversity = -sum((Spp_count / sum(Spp_count)) * log(Spp_count / sum(Spp_count))),
+        .groups = "drop"
+      )
+
+    # 3. Pivot the two years side‑by‑side and compute Δ‑Shannon-Weiner diversity
+    SW_Delta <- Sdiversity_data %>% 
+      pivot_wider(names_from  = Year,
+                  values_from = Shannon_Diversity,
+                  names_glue  = "sw_{Year}") %>% 
+      mutate(delta_SW = sw_2025 - sw_2024)   
+
+    ### Removing non‑finite (NA, ±Inf) *and* (if on log scale) non‑positive ──
+    sw_delta_clean <-  SW_Delta %>% 
+      filter(
+        is.finite(delta_SW ),   # drop NA / Inf / -Inf
+        delta_SW != 0          # <- only if you’re using a log scale; otherwise omit
+      )
+
+
+    ##Mixed models analysis
+    #sw_delta <- lmer(delta_SW~ Treatment * Fencing +(1|Site), data =sw_delta_clean)
+    #summary(sw_delta)
+
+    ####### ### Violin plot for delta Weiner diversity index
+    ggplot(sw_delta_clean,
+      aes(x = Fencing, y = delta_SW, fill = Fencing)) + facet_wrap(~Treatment)+  
+      geom_violin(trim = FALSE)+
+      geom_hline(yintercept = 0, linetype = "dashed") +
+      labs(x = "Fencing", y = "Δ Grass Shannon-Weiner diversity indices") +
+      theme_beautiful() +
+      theme(legend.position = "none")
+
+
+    ```
+
+    **Interpretation**
+
+-   The application of treatments (T, TF, TFG, THF) and fencing measures does not yield a significant difference in the Shannon-Wiener diversity index of grasses.
+
 2.  **WOODY PLANTS PRELIMINARY RESULTS**
 
-```{}
+```         
 ```
 
 ![](images/clipboard-253126582.png){width="639"}
@@ -655,7 +720,7 @@ Figure 13. Change in sapling density at SHR across treatments
 
 -   Three treatments (TF, TFB, THF) caused large, significant (\<0.05) losses in sapling density compared with the control when plots are fenced.
 
--    Unfenced plots tends to lower density in the control, though the evidence is only marginal (p ≈ 0.06).
+-   Unfenced plots tends to lower density in the control, though the evidence is only marginal (p ≈ 0.06).
 
 ![](images/clipboard-4063084073.png){width="638"}
 
@@ -665,4 +730,4 @@ Figure 14. Comparison of three treatments on their impact on resprout on cut stu
 
 -   Treatment THF significantly lowers the number of resprouts on cut stumps whether the plot is fenced or not.
 
--   Treatment TGM does not differ from the control in fenced plots.
+-   Treatment TFB does not differ from the control in fenced plots.

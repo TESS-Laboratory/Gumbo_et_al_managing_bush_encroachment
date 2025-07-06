@@ -245,7 +245,7 @@ ggsave(Ac,
        width = 16, height = 10, units = "cm" )
 
 ############################################################################################
-##########################################################################################
+################################################################
 ###########         CALCULATING SIMPSONS DIVERSITY INDEX FOR SEEDLINGS
 
 # Calculate species abundance per plot
@@ -258,6 +258,7 @@ Splot_data <- data %>%
 Splot_diversity_simpson <- Splot_data %>%
   group_by(Site, Plot) %>%
   summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
+
 
 
 #write.csv(Tplot_diversity_simpson, "Trees Simpsons Diversity.csv")
