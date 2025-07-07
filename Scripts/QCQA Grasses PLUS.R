@@ -357,6 +357,7 @@ eq_tls1 <- sprintf("y = %.2f + %.2fx\nTLS R² ≈ %.3f, n = %d",
 eq_tls0 <- sprintf("y = %.2fx\nTLS R² ≈ %.3f, n = %d", 
                    tls_zero$slope, r2_proxy, n_obs)
 
+
 # 5.  Plot
 # ------------------------------------------------------------------
 
@@ -373,7 +374,7 @@ TLSBIOM <- ggplot(df_tls, aes(x = DPH_Height, y = Biomass_kg_ha)) +
            y = 0.80 * max(df_tls$Biomass_kg_ha, na.rm = TRUE),
            label = eq_tls0, hjust = 0, size = 3, colour = "blue") +
   labs(x = "DPM Height (cm)", y = "Standing grass biomass (kg/ha)") +
-  theme_classic()
+  theme_beautiful()
 
 # ggsave
  #ggsave(TLSBIOM,filename ="Plots/TLS Biomass & intercept.png",
@@ -657,11 +658,11 @@ SWv <- ggplot(sw_delta_clean,
   theme(legend.position = "none")
 
 #saving VIOLIN PLOT plot
-  #ggsave(SWv,filename ="Plots/Delta Grass S.Weiner Diversity FENCED Violinplot.png",
-   #    width = 16, height = 14, units = "cm")
+  ggsave(SWv,filename ="Plots/Delta Grass S.Weiner Diversity FENCED Violinplot.png",
+       width = 16, height = 14, units = "cm")
 
 #########################################
-############################################ GRASSS SPECIECES EVENNESS
+############################################ GRASSS SPECIECES EVENNESS (J)
 
 # 1. Prepare data: richness per Site x Treatment x Year
 Gevenness <- Grassdiversity%>%
@@ -710,8 +711,8 @@ SeB <- ggplot(even_data, aes(x = Fencing, y = J, fill = Fencing)) + facet_wrap(~
   theme_beautiful() +
   theme(legend.position = "none")
 
-# ggsave(SeB,filename ="Plots/Grass Evenness FENCED Boxplot.png",
-      # width = 16, height = 14, units = "cm")
+ ggsave(SeB,filename ="Plots/Grass Evenness FENCED Boxplot.png",
+       width = 16, height = 14, units = "cm")
 
 #### Violin plot for Grass Pielou Evenness (J)
  SeV <- ggplot(even_data, aes(x = Fencing, y = J, fill = Fencing)) + facet_wrap(~Treatment) +
@@ -722,8 +723,8 @@ SeB <- ggplot(even_data, aes(x = Fencing, y = J, fill = Fencing)) + facet_wrap(~
   theme(legend.position = "none")
 
 #saving VIOLIN PLOT plot
-  #ggsave(SeV,filename ="Plots/Grass Evenness FENCED Violinplot.png",
-    # width = 16, height = 14, units = "cm")
+  ggsave(SeV,filename ="Plots/Grass Evenness FENCED Violinplot.png",
+     width = 16, height = 14, units = "cm")
 
 #########################################
 ############################################ GRASSES DELTA SPECIES EVENNESS 
@@ -751,7 +752,7 @@ SeB <- ggplot(even_data, aes(x = Fencing, y = J, fill = Fencing)) + facet_wrap(~
 SEV_delta_clean2 <- even_data %>% 
    mutate(J = as.numeric(J)) %>%      # ensure J is numeric
    filter(Year %in% c(2024, 2025)) %>% 
-   group_by(Site, Plot, Treatment, Fencing, Year) %>%  # keep metadata here
+   group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%  # keep metadata here
    summarise(J = mean(J), .groups = "drop") %>%        # collapse duplicates
    pivot_wider(
      names_from   = Year,
@@ -964,7 +965,7 @@ GraSimp <- Grassdiversity %>%
  SimpE_delta <-  GraSimp %>% 
    mutate(E = as.numeric(E)) %>%      # ensure J is numeric
    filter(Year %in% c(2024, 2025)) %>% 
-   group_by(Site, Plot, Treatment, Fencing, Year) %>%  # keep metadata here
+   group_by(Site, Plot,Subplot, Treatment, Fencing, Year) %>%  # keep metadata here
    summarise(E = mean(E), .groups = "drop") %>%        # collapse duplicates
    pivot_wider(
      names_from   = Year,
@@ -1002,8 +1003,8 @@ GraSimp <- Grassdiversity %>%
    theme(legend.position = "none")
  
  ##saving VIOLIN PLOT plot
-  #ggsave(Spvi,filename ="Plots/ Δ Grass Simpson's Evenness Violinplot.png",
-  #width = 16, height = 14, units = "cm")
+  ggsave(Spvi,filename ="Plots/ Δ Grass Simpson's Evenness Violinplot.png",
+  width = 16, height = 14, units = "cm")
  
 ##### Interpretation
 #  - None of the management treatments, the fencing status, nor their interactions 

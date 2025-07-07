@@ -1759,87 +1759,87 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2024,E,1,Z4,NA,18,Unfenced,C
 2024,E,1,Z4,NA,16.5,Unfenced,C
 2024,E,1,Z4,NA,0,Unfenced,C
-2024,E,2,Z1,Panicum maximum,8.3,Fenced,F
-2024,E,2,Z1,NA,8.7,Fenced,F
-2024,E,2,Z1,NA,8.1,Fenced,F
-2024,E,2,Z1,NA,8.1,Fenced,F
-2024,E,2,Z1,Heteropogon contortus,4.1,Fenced,F
-2024,E,2,Z1,Enteropogon macrostachyus,3.4,Fenced,F
-2024,E,2,Z1,NA,3.4,Fenced,F
-2024,E,2,Z1,NA,5.1,Fenced,F
-2024,E,2,Z1,Urochloa mosambicensis,5.6,Fenced,F
-2024,E,2,Z1,Eragrostis gummiflua,4.6,Fenced,F
-2024,E,2,Z1,Aristida adscensionis,0,Fenced,F
-2024,E,2,Z1,NA,7.3,Fenced,F
-2024,E,2,Z1,NA,0,Fenced,F
-2024,E,2,Z1,NA,0,Fenced,F
-2024,E,2,Z1,NA,0,Fenced,F
-2024,E,2,Z1,NA,0,Fenced,F
-2024,E,2,Z1,Panicum maximum,4.7,Fenced,F
-2024,E,2,Z1,Heteropogon contortus,4.6,Fenced,F
-2024,E,2,Z1,Enteropogon macrostachyus,4.4,Fenced,F
-2024,E,2,Z1,NA,4.7,Fenced,F
-2024,E,2,Z2,Urochloa mosambicensis,11.3,Unfenced,F
-2024,E,2,Z2,Enteropogon macrostachyus,11.1,Unfenced,F
-2024,E,2,Z2,Eragrostis gummiflua,10.9,Unfenced,F
-2024,E,2,Z2,Heteropogon contortus,10.7,Unfenced,F
-2024,E,2,Z2,Enteropogon macrostachyus,11.3,Unfenced,F
-2024,E,2,Z2,Eragrostis gummiflua,12.9,Unfenced,F
-2024,E,2,Z2,Eragrostis rigidior,12.5,Unfenced,F
-2024,E,2,Z2,NA,12.7,Unfenced,F
-2024,E,2,Z2,Heteropogon contortus,10.9,Unfenced,F
-2024,E,2,Z2,Enteropogon macrostachyus,10.7,Unfenced,F
-2024,E,2,Z2,NA,11.3,Unfenced,F
-2024,E,2,Z2,NA,12.7,Unfenced,F
-2024,E,2,Z2,Enteropogon macrostachyus,12.3,Unfenced,F
-2024,E,2,Z2,Panicum maximum,11.9,Unfenced,F
-2024,E,2,Z2,Aristida adscensionis,11.4,Unfenced,F
-2024,E,2,Z2,NA,11.2,Unfenced,F
-2024,E,2,Z2,Heteropogon contortus,10.8,Unfenced,F
-2024,E,2,Z2,Urochloa mosambicensis,10.6,Unfenced,F
-2024,E,2,Z2,NA,4.6,Unfenced,F
-2024,E,2,Z2,NA,4.7,Unfenced,F
-2024,E,2,Z3,Panicum maximum,4.2,Fenced,F
-2024,E,2,Z3,Heteropogon contortus,4,Fenced,F
-2024,E,2,Z3,NA,5.8,Fenced,F
-2024,E,2,Z3,NA,5.5,Fenced,F
-2024,E,2,Z3,Heteropogon contortus,2.5,Fenced,F
-2024,E,2,Z3,Eragrostis rigidior,3.5,Fenced,F
-2024,E,2,Z3,NA,0,Fenced,F
-2024,E,2,Z3,NA,0,Fenced,F
-2024,E,2,Z3,Panicum maximum,7.6,Fenced,F
-2024,E,2,Z3,Enteropogon macrostachyus,8.3,Fenced,F
-2024,E,2,Z3,NA,7.6,Fenced,F
-2024,E,2,Z3,NA,9.2,Fenced,F
-2024,E,2,Z3,Panicum maximum,8.7,Fenced,F
-2024,E,2,Z3,NA,4,Fenced,F
-2024,E,2,Z3,NA,15.1,Fenced,F
-2024,E,2,Z3,NA,15.3,Fenced,F
-2024,E,2,Z3,Enteropogon macrostachyus,6.3,Fenced,F
-2024,E,2,Z3,Panicum maximum,6.1,Fenced,F
-2024,E,2,Z3,NA,5.7,Fenced,F
-2024,E,2,Z3,NA,6.7,Fenced,F
-2024,E,2,Z4,Enteropogon macrostachyus,10.2,Unfenced,F
-2024,E,2,Z4,Panicum maximum,11.2,Unfenced,F
-2024,E,2,Z4,NA,10.7,Unfenced,F
-2024,E,2,Z4,NA,12.6,Unfenced,F
-2024,E,2,Z4,Enteropogon macrostachyus,5.3,Unfenced,F
-2024,E,2,Z4,Panicum maximum,6.1,Unfenced,F
-2024,E,2,Z4,NA,9.3,Unfenced,F
-2024,E,2,Z4,NA,10.8,Unfenced,F
-2024,E,2,Z4,Heteropogon contortus,23.3,Unfenced,F
-2024,E,2,Z4,Panicum maximum,19,Unfenced,F
-2024,E,2,Z4,NA,16.7,Unfenced,F
-2024,E,2,Z4,NA,19.9,Unfenced,F
-2024,E,2,Z4,Pogonarthria squarrosa,17,Unfenced,F
-2024,E,2,Z4,Aristida adscensionis,15.1,Unfenced,F
-2024,E,2,Z4,Heteropogon contortus,13.7,Unfenced,F
-2024,E,2,Z4,Eragrostis rigidior,17.9,Unfenced,F
-2024,E,2,Z4,Aristida adscensionis,12,Unfenced,F
-2024,E,2,Z4,Heteropogon contortus,11.4,Unfenced,F
-2024,E,2,Z4,Eragrostis rigidior,10.9,Unfenced,F
-2024,E,2,Z4,Setaria incrassata,10.3,Unfenced,F
-2024,E,2,Z4,Eragrostis gummiflua,NA,Unfenced,F
+2024,E,2,Z1,Panicum maximum,8.3,Fenced,TF
+2024,E,2,Z1,NA,8.7,Fenced,TF
+2024,E,2,Z1,NA,8.1,Fenced,TF
+2024,E,2,Z1,NA,8.1,Fenced,TF
+2024,E,2,Z1,Heteropogon contortus,4.1,Fenced,TF
+2024,E,2,Z1,Enteropogon macrostachyus,3.4,Fenced,TF
+2024,E,2,Z1,NA,3.4,Fenced,TF
+2024,E,2,Z1,NA,5.1,Fenced,TF
+2024,E,2,Z1,Urochloa mosambicensis,5.6,Fenced,TF
+2024,E,2,Z1,Eragrostis gummiflua,4.6,Fenced,TF
+2024,E,2,Z1,Aristida adscensionis,0,Fenced,TF
+2024,E,2,Z1,NA,7.3,Fenced,TF
+2024,E,2,Z1,NA,0,Fenced,TF
+2024,E,2,Z1,NA,0,Fenced,TF
+2024,E,2,Z1,NA,0,Fenced,TF
+2024,E,2,Z1,NA,0,Fenced,TF
+2024,E,2,Z1,Panicum maximum,4.7,Fenced,TF
+2024,E,2,Z1,Heteropogon contortus,4.6,Fenced,TF
+2024,E,2,Z1,Enteropogon macrostachyus,4.4,Fenced,TF
+2024,E,2,Z1,NA,4.7,Fenced,TF
+2024,E,2,Z2,Urochloa mosambicensis,11.3,Unfenced,TF
+2024,E,2,Z2,Enteropogon macrostachyus,11.1,Unfenced,TF
+2024,E,2,Z2,Eragrostis gummiflua,10.9,Unfenced,TF
+2024,E,2,Z2,Heteropogon contortus,10.7,Unfenced,TF
+2024,E,2,Z2,Enteropogon macrostachyus,11.3,Unfenced,TF
+2024,E,2,Z2,Eragrostis gummiflua,12.9,Unfenced,TF
+2024,E,2,Z2,Eragrostis rigidior,12.5,Unfenced,TF
+2024,E,2,Z2,NA,12.7,Unfenced,TF
+2024,E,2,Z2,Heteropogon contortus,10.9,Unfenced,TF
+2024,E,2,Z2,Enteropogon macrostachyus,10.7,Unfenced,TF
+2024,E,2,Z2,NA,11.3,Unfenced,TF
+2024,E,2,Z2,NA,12.7,Unfenced,TF
+2024,E,2,Z2,Enteropogon macrostachyus,12.3,Unfenced,TF
+2024,E,2,Z2,Panicum maximum,11.9,Unfenced,TF
+2024,E,2,Z2,Aristida adscensionis,11.4,Unfenced,TF
+2024,E,2,Z2,NA,11.2,Unfenced,TF
+2024,E,2,Z2,Heteropogon contortus,10.8,Unfenced,TF
+2024,E,2,Z2,Urochloa mosambicensis,10.6,Unfenced,TF
+2024,E,2,Z2,NA,4.6,Unfenced,TF
+2024,E,2,Z2,NA,4.7,Unfenced,TF
+2024,E,2,Z3,Panicum maximum,4.2,Fenced,TF
+2024,E,2,Z3,Heteropogon contortus,4,Fenced,TF
+2024,E,2,Z3,NA,5.8,Fenced,TF
+2024,E,2,Z3,NA,5.5,Fenced,TF
+2024,E,2,Z3,Heteropogon contortus,2.5,Fenced,TF
+2024,E,2,Z3,Eragrostis rigidior,3.5,Fenced,TF
+2024,E,2,Z3,NA,0,Fenced,TF
+2024,E,2,Z3,NA,0,Fenced,TF
+2024,E,2,Z3,Panicum maximum,7.6,Fenced,TF
+2024,E,2,Z3,Enteropogon macrostachyus,8.3,Fenced,TF
+2024,E,2,Z3,NA,7.6,Fenced,TF
+2024,E,2,Z3,NA,9.2,Fenced,TF
+2024,E,2,Z3,Panicum maximum,8.7,Fenced,TF
+2024,E,2,Z3,NA,4,Fenced,TF
+2024,E,2,Z3,NA,15.1,Fenced,TF
+2024,E,2,Z3,NA,15.3,Fenced,TF
+2024,E,2,Z3,Enteropogon macrostachyus,6.3,Fenced,TF
+2024,E,2,Z3,Panicum maximum,6.1,Fenced,TF
+2024,E,2,Z3,NA,5.7,Fenced,TF
+2024,E,2,Z3,NA,6.7,Fenced,TF
+2024,E,2,Z4,Enteropogon macrostachyus,10.2,Unfenced,TF
+2024,E,2,Z4,Panicum maximum,11.2,Unfenced,TF
+2024,E,2,Z4,NA,10.7,Unfenced,TF
+2024,E,2,Z4,NA,12.6,Unfenced,TF
+2024,E,2,Z4,Enteropogon macrostachyus,5.3,Unfenced,TF
+2024,E,2,Z4,Panicum maximum,6.1,Unfenced,TF
+2024,E,2,Z4,NA,9.3,Unfenced,TF
+2024,E,2,Z4,NA,10.8,Unfenced,TF
+2024,E,2,Z4,Heteropogon contortus,23.3,Unfenced,TF
+2024,E,2,Z4,Panicum maximum,19,Unfenced,TF
+2024,E,2,Z4,NA,16.7,Unfenced,TF
+2024,E,2,Z4,NA,19.9,Unfenced,TF
+2024,E,2,Z4,Pogonarthria squarrosa,17,Unfenced,TF
+2024,E,2,Z4,Aristida adscensionis,15.1,Unfenced,TF
+2024,E,2,Z4,Heteropogon contortus,13.7,Unfenced,TF
+2024,E,2,Z4,Eragrostis rigidior,17.9,Unfenced,TF
+2024,E,2,Z4,Aristida adscensionis,12,Unfenced,TF
+2024,E,2,Z4,Heteropogon contortus,11.4,Unfenced,TF
+2024,E,2,Z4,Eragrostis rigidior,10.9,Unfenced,TF
+2024,E,2,Z4,Setaria incrassata,10.3,Unfenced,TF
+2024,E,2,Z4,Eragrostis gummiflua,NA,Unfenced,TF
 2024,E,3,Z1,Heteropogon contortus,3.3,Fenced,F
 2024,E,3,Z1,Urochloa mosambicensis,9.5,Fenced,F
 2024,E,3,Z1,NA,10,Fenced,F
@@ -4064,90 +4064,90 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,E,4,Z4,NA,5.6,Unfenced,TFB
 2025,E,4,Z4,NA,4.3,Unfenced,TFB
 2025,E,4,Z4,NA,5,Unfenced,TFB
-2025,E,3,Z1,Eragrostis curvula,2.1,Fenced,TF
-2025,E,3,Z1,NA,0,Fenced,TF
-2025,E,3,Z1,NA,0,Fenced,TF
-2025,E,3,Z1,NA,0,Fenced,TF
-2025,E,3,Z1,Heteropogon contortus,2.3,Fenced,TF
-2025,E,3,Z1,Eragrostis viscosa,2.6,Fenced,TF
-2025,E,3,Z1,Brachiaria nigropedata,2.8,Fenced,TF
-2025,E,3,Z1,Setaria incrassata,5.3,Fenced,TF
-2025,E,3,Z1,Heteropogon contortus,14.8,Fenced,TF
-2025,E,3,Z1,Digitaria eriantha,10.6,Fenced,TF
-2025,E,3,Z1,NA,9.8,Fenced,TF
-2025,E,3,Z1,NA,8.5,Fenced,TF
-2025,E,3,Z1,Heteropogon contortus,2.7,Fenced,TF
-2025,E,3,Z1,Panicum maximum,3.4,Fenced,TF
-2025,E,3,Z1,Eragrostis gummiflua,2.9,Fenced,TF
-2025,E,3,Z1,NA,4.1,Fenced,TF
-2025,E,3,Z1,Eragrostis cylindriflora,2,Fenced,TF
-2025,E,3,Z1,Heteropogon contortus,2,Fenced,TF
-2025,E,3,Z1,Chloris virgata,0,Fenced,TF
-2025,E,3,Z1,NA,0,Fenced,TF
-2025,E,3,Z3,Heteropogon contortus,2.9,Fenced,TF
-2025,E,3,Z3,Cymbopogon excavatus,3.6,Fenced,TF
-2025,E,3,Z3,NA,0,Fenced,TF
-2025,E,3,Z3,NA,4.2,Fenced,TF
-2025,E,3,Z3,Aristida congesta b,10.1,Fenced,TF
-2025,E,3,Z3,Heteropogon contortus,6.3,Fenced,TF
-2025,E,3,Z3,Eragrostis rigidior,4.5,Fenced,TF
-2025,E,3,Z3,Eragrostis viscosa,5.6,Fenced,TF
-2025,E,3,Z3,Eragrostis cylindriflora,NA,Fenced,TF
-2025,E,3,Z3,Eragrostis gummiflua,NA,Fenced,TF
-2025,E,3,Z3,Enteropogon macrostachyus,NA,Fenced,TF
-2025,E,3,Z3,Heteropogon contortus,3.7,Fenced,TF
-2025,E,3,Z3,Eragrostis gummiflua,9.1,Fenced,TF
-2025,E,3,Z3,NA,5.2,Fenced,TF
-2025,E,3,Z3,NA,0,Fenced,TF
-2025,E,3,Z3,Brachiaria nigropedata,13.5,Fenced,TF
-2025,E,3,Z3,Heteropogon contortus,10.5,Fenced,TF
-2025,E,3,Z3,NA,11,Fenced,TF
-2025,E,3,Z3,NA,0,Fenced,TF
-2025,E,3,Z3,Eragrostis superba,10.4,Fenced,TF
-2025,E,3,Z3,Eragrostis viscosa,6.1,Fenced,TF
-2025,E,3,Z3,Eragrostis curvula,0,Fenced,TF
-2025,E,3,Z3,Chloris virgata,9.2,Fenced,TF
-2025,E,3,Z3,Eragrostis gummiflua,NA,Fenced,TF
-2025,E,3,Z4,Brachiaria nigropedata,9.2,Unfenced,TF
-2025,E,3,Z4,Eragrostis rigidior,7.1,Unfenced,TF
-2025,E,3,Z4,NA,0,Unfenced,TF
-2025,E,3,Z4,NA,0,Unfenced,TF
-2025,E,3,Z4,Enteropogon macrostachyus,1.7,Unfenced,TF
-2025,E,3,Z4,Heteropogon contortus,2.7,Unfenced,TF
-2025,E,3,Z4,Eragrostis rigidior,10.2,Unfenced,TF
-2025,E,3,Z4,NA,1.9,Unfenced,TF
-2025,E,3,Z4,Heteropogon contortus,2.5,Unfenced,TF
-2025,E,3,Z4,Aristida adscensionis,0,Unfenced,TF
-2025,E,3,Z4,NA,0,Unfenced,TF
-2025,E,3,Z4,NA,0,Unfenced,TF
-2025,E,3,Z4,Heteropogon contortus,2.2,Unfenced,TF
-2025,E,3,Z4,Eragrostis viscosa,2.4,Unfenced,TF
-2025,E,3,Z4,Eragrostis gummiflua,2.1,Unfenced,TF
-2025,E,3,Z4,NA,2.8,Unfenced,TF
-2025,E,3,Z4,Panicum maximum,3.1,Unfenced,TF
-2025,E,3,Z4,Cymbopogon nardus,3,Unfenced,TF
-2025,E,3,Z4,Brachiaria nigropedata,4.4,Unfenced,TF
-2025,E,3,Z4,NA,4.5,Unfenced,TF
-2025,E,3,Z2,NA,0,Unfenced,TF
-2025,E,3,Z2,NA,0,Unfenced,TF
-2025,E,3,Z2,NA,0,Unfenced,TF
-2025,E,3,Z2,NA,0,Unfenced,TF
-2025,E,3,Z2,Diheteropogon amplectens,3.1,Unfenced,TF
-2025,E,3,Z2,Panicum maximum,3.5,Unfenced,TF
-2025,E,3,Z2,NA,4.8,Unfenced,TF
-2025,E,3,Z2,NA,3.1,Unfenced,TF
-2025,E,3,Z2,Heteropogon contortus,8.1,Unfenced,TF
-2025,E,3,Z2,Brachiaria nigropedata,4.9,Unfenced,TF
-2025,E,3,Z2,Eragrostis gummiflua,4.2,Unfenced,TF
-2025,E,3,Z2,Eragrostis viscosa,0,Unfenced,TF
-2025,E,3,Z2,Enteropogon macrostachyus,23,Unfenced,TF
-2025,E,3,Z2,Digitaria eriantha,13.5,Unfenced,TF
-2025,E,3,Z2,Heteropogon contortus,10.2,Unfenced,TF
-2025,E,3,Z2,NA,0,Unfenced,TF
-2025,E,3,Z2,Eragrostis curvula,2.6,Unfenced,TF
-2025,E,3,Z2,Brachiaria nigropedata,2.1,Unfenced,TF
-2025,E,3,Z2,NA,2.1,Unfenced,TF
-2025,E,3,Z2,NA,2.1,Unfenced,TF
+2025,E,3,Z1,Eragrostis curvula,2.1,Fenced,F
+2025,E,3,Z1,NA,0,Fenced,F
+2025,E,3,Z1,NA,0,Fenced,F
+2025,E,3,Z1,NA,0,Fenced,F
+2025,E,3,Z1,Heteropogon contortus,2.3,Fenced,F
+2025,E,3,Z1,Eragrostis viscosa,2.6,Fenced,F
+2025,E,3,Z1,Brachiaria nigropedata,2.8,Fenced,F
+2025,E,3,Z1,Setaria incrassata,5.3,Fenced,F
+2025,E,3,Z1,Heteropogon contortus,14.8,Fenced,F
+2025,E,3,Z1,Digitaria eriantha,10.6,Fenced,F
+2025,E,3,Z1,NA,9.8,Fenced,F
+2025,E,3,Z1,NA,8.5,Fenced,F
+2025,E,3,Z1,Heteropogon contortus,2.7,Fenced,F
+2025,E,3,Z1,Panicum maximum,3.4,Fenced,F
+2025,E,3,Z1,Eragrostis gummiflua,2.9,Fenced,F
+2025,E,3,Z1,NA,4.1,Fenced,F
+2025,E,3,Z1,Eragrostis cylindriflora,2,Fenced,F
+2025,E,3,Z1,Heteropogon contortus,2,Fenced,F
+2025,E,3,Z1,Chloris virgata,0,Fenced,F
+2025,E,3,Z1,NA,0,Fenced,F
+2025,E,3,Z3,Heteropogon contortus,2.9,Fenced,F
+2025,E,3,Z3,Cymbopogon excavatus,3.6,Fenced,F
+2025,E,3,Z3,NA,0,Fenced,F
+2025,E,3,Z3,NA,4.2,Fenced,F
+2025,E,3,Z3,Aristida congesta b,10.1,Fenced,F
+2025,E,3,Z3,Heteropogon contortus,6.3,Fenced,F
+2025,E,3,Z3,Eragrostis rigidior,4.5,Fenced,F
+2025,E,3,Z3,Eragrostis viscosa,5.6,Fenced,F
+2025,E,3,Z3,Eragrostis cylindriflora,NA,Fenced,F
+2025,E,3,Z3,Eragrostis gummiflua,NA,Fenced,F
+2025,E,3,Z3,Enteropogon macrostachyus,NA,Fenced,F
+2025,E,3,Z3,Heteropogon contortus,3.7,Fenced,F
+2025,E,3,Z3,Eragrostis gummiflua,9.1,Fenced,F
+2025,E,3,Z3,NA,5.2,Fenced,F
+2025,E,3,Z3,NA,0,Fenced,F
+2025,E,3,Z3,Brachiaria nigropedata,13.5,Fenced,F
+2025,E,3,Z3,Heteropogon contortus,10.5,Fenced,F
+2025,E,3,Z3,NA,11,Fenced,F
+2025,E,3,Z3,NA,0,Fenced,F
+2025,E,3,Z3,Eragrostis superba,10.4,Fenced,F
+2025,E,3,Z3,Eragrostis viscosa,6.1,Fenced,F
+2025,E,3,Z3,Eragrostis curvula,0,Fenced,F
+2025,E,3,Z3,Chloris virgata,9.2,Fenced,F
+2025,E,3,Z3,Eragrostis gummiflua,NA,Fenced,F
+2025,E,3,Z4,Brachiaria nigropedata,9.2,Unfenced,F
+2025,E,3,Z4,Eragrostis rigidior,7.1,Unfenced,F
+2025,E,3,Z4,NA,0,Unfenced,F
+2025,E,3,Z4,NA,0,Unfenced,F
+2025,E,3,Z4,Enteropogon macrostachyus,1.7,Unfenced,F
+2025,E,3,Z4,Heteropogon contortus,2.7,Unfenced,F
+2025,E,3,Z4,Eragrostis rigidior,10.2,Unfenced,F
+2025,E,3,Z4,NA,1.9,Unfenced,F
+2025,E,3,Z4,Heteropogon contortus,2.5,Unfenced,F
+2025,E,3,Z4,Aristida adscensionis,0,Unfenced,F
+2025,E,3,Z4,NA,0,Unfenced,F
+2025,E,3,Z4,NA,0,Unfenced,F
+2025,E,3,Z4,Heteropogon contortus,2.2,Unfenced,F
+2025,E,3,Z4,Eragrostis viscosa,2.4,Unfenced,F
+2025,E,3,Z4,Eragrostis gummiflua,2.1,Unfenced,F
+2025,E,3,Z4,NA,2.8,Unfenced,F
+2025,E,3,Z4,Panicum maximum,3.1,Unfenced,F
+2025,E,3,Z4,Cymbopogon nardus,3,Unfenced,F
+2025,E,3,Z4,Brachiaria nigropedata,4.4,Unfenced,F
+2025,E,3,Z4,NA,4.5,Unfenced,F
+2025,E,3,Z2,NA,0,Unfenced,F
+2025,E,3,Z2,NA,0,Unfenced,F
+2025,E,3,Z2,NA,0,Unfenced,F
+2025,E,3,Z2,NA,0,Unfenced,F
+2025,E,3,Z2,Diheteropogon amplectens,3.1,Unfenced,F
+2025,E,3,Z2,Panicum maximum,3.5,Unfenced,F
+2025,E,3,Z2,NA,4.8,Unfenced,F
+2025,E,3,Z2,NA,3.1,Unfenced,F
+2025,E,3,Z2,Heteropogon contortus,8.1,Unfenced,F
+2025,E,3,Z2,Brachiaria nigropedata,4.9,Unfenced,F
+2025,E,3,Z2,Eragrostis gummiflua,4.2,Unfenced,F
+2025,E,3,Z2,Eragrostis viscosa,0,Unfenced,F
+2025,E,3,Z2,Enteropogon macrostachyus,23,Unfenced,F
+2025,E,3,Z2,Digitaria eriantha,13.5,Unfenced,F
+2025,E,3,Z2,Heteropogon contortus,10.2,Unfenced,F
+2025,E,3,Z2,NA,0,Unfenced,F
+2025,E,3,Z2,Eragrostis curvula,2.6,Unfenced,F
+2025,E,3,Z2,Brachiaria nigropedata,2.1,Unfenced,F
+2025,E,3,Z2,NA,2.1,Unfenced,F
+2025,E,3,Z2,NA,2.1,Unfenced,F
 2025,E,2,Z3,Aristida diffusa,7,Fenced,TF
 2025,E,2,Z3,Eragrostis rigidior,1.4,Fenced,TF
 2025,E,2,Z3,Panicum maximum,1.5,Fenced,TF
@@ -4707,10 +4707,10 @@ Year,Site,Plot,Subplot,Species_name,DPM_Height,Fencing,Treatment
 2025,C,1,Z3,Eragrostis gummiflua,3.5,Unfenced,C
 2025,C,1,Z3,Pogonarthria squarrosa,3.3,Unfenced,C
 2025,C,1,Z3,Setaria incrassata,NA,Unfenced,C
-2025,C,1,Z1,Aristida adscensionis,1.8,Unfenced,C
-2025,C,1,Z1,Setaria incrassata,1.8,Unfenced,C
-2025,C,1,Z1,NA,1.8,Unfenced,C
-2025,C,1,Z1,NA,2.2,Unfenced,C
+2025,C,1,Z1,Aristida adscensionis,1.8,Fenced,C
+2025,C,1,Z1,Setaria incrassata,1.8,Fenced,C
+2025,C,1,Z1,NA,1.8,Fenced,C
+2025,C,1,Z1,NA,2.2,Fenced,C
 2025,C,1,Z4,Setaria incrassata,3.8,Unfenced,C
 2025,C,1,Z4,Digitaria eriantha,3.7,Unfenced,C
 2025,C,1,Z4,NA,3.6,Unfenced,C

@@ -516,7 +516,7 @@ ggsave(Sdc,filename ="Plots/Delta Seedlings Height FENCED boxplotplot.png",
  #SIMPSONS DIVEERSITY INDEX FOR WOODY PLANTS
  SapF <- read_csv("DATA/March2025/WoodyPC.csv")
  
- # Converting heights to saplings and seedlings and excluding cut stump. 
+ # Converting heights to  seedlings, saplings and trees  and excluding cut stump. 
  SapF <- SapF %>% 
    mutate(
      woody_cat = case_when(
@@ -614,7 +614,7 @@ ggsave(Sdc,filename ="Plots/Delta Seedlings Height FENCED boxplotplot.png",
   #ggsave(Sed,filename ="Plots/Delta Seedlings Simpsons Boxplot.png",
   #width = 16, height = 14, units = "cm")
  
- #### Violin plot for Simpson's diversity
+##### Violin plot for Simpson's diversity
  SEVi <- ggplot(seed_delta_clean, aes(x = Fenced, y = delta_Seed, fill = Fenced)) + facet_wrap(~Treatment) +
    geom_violin(trim = FALSE)+
    geom_hline(yintercept = 0, linetype = "dashed") +
@@ -622,9 +622,242 @@ ggsave(Sdc,filename ="Plots/Delta Seedlings Height FENCED boxplotplot.png",
    theme_beautiful() +
    theme(legend.position = "none")
  
- #saving VIOLINPLOT plot
- ggsave(SEVi,filename ="Plots/ Delta Seedlings Simpsons Violinplot.png",
+##saving VIOLINPLOT plot
+ #ggsave(SEVi,filename ="Plots/ Delta Seedlings Simpsons Violinplot.png",
         width = 16, height = 14, units = "cm")
  
- 
+##################################################################################### 
 ############################### SAPLINGS SIMPSONS DIVERSITY
+ 
+ #####
+  SapF <- read_csv("DATA/March2025/WoodyPC.csv")
+  
+  # Converting heights to  seedlings, saplings and trees  and excluding cut stump. 
+  SapF <- SapF %>% 
+    mutate(
+      woody_cat = case_when(
+        Woody_class == "Cut stump"          ~ "Cut stump",
+        between(`Max_height(m)`, 0.05, 0.50)          ~ "Seedlings",
+        between(`Max_height(m)`, 0.51, 1.49)          ~ "Saplings",
+        between(`Max_height(m)`, 1.5, 21.0)           ~ "Trees",
+        TRUE                                 ~ NA_character_
+      )
+    )
+  
+## new 
+   sapli <- SapF %>%
+   filter(
+     woody_cat == "Saplings",
+     Year %in% c(2024, 2025)
+   )
+ 
+ #### Calculate species abundance per plot
+ SapSimp <- sapli %>%
+   filter(!is.na(Species_name)) %>%  
+   group_by(Site, Plot, Subplot, Fenced, Treatment, Year, Species_name) %>% 
+   summarise(abundance = n())%>%
+   summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
+ 
+###Mixed models
+ #sappler <- lmer(simpson_index~ Treatment * Fenced +(1|Site), data =SapSimp)
+ #summary(sappler) #TF shows significant difference with the control. It increases Simpsons diversity.
+  #Unfenced plots do not differ with fenced plots 
+ 
+ ##Visualisation; Boxplot
+ Sap <- ggplot(SapSimp, aes(x = Fenced, y = simpson_index, fill = Fenced)) + facet_wrap(~Treatment) +
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fenced", y = "Saplings Simpsons diversity index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+##saving BOXPLOT plot
+ ggsave(Sap,filename ="Plots/Saplings Simpsons Boxplot.png",
+ width = 16, height = 14, units = "cm")
+ 
+ #### Violin plot for Simpson's diversity
+ SPV <- ggplot(SapSimp, aes(x = Fenced, y = simpson_index, fill = Fenced)) + facet_wrap(~Treatment) +
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fenced", y = "Saplings Simpsons diversity index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ #saving VIOLINPLOT plot
+ ggsave(SPV,filename ="Plots/Saplings Simpsons Diversity Violinplot.png",
+        width = 16, height = 14, units = "cm")
+ 
+ ######################################################################################################
+ ############################################## DELTA SAPLINGS SIMPSONS DIVERSITY 
+ 
+ 
+ ## Calculate species abundance per plot
+ SapSimp <- sapli %>%
+   filter(!is.na(Species_name)) %>%  
+   group_by(Site, Plot, Subplot, Fenced, Treatment, Year, Species_name) %>% 
+   summarise(abundance = n())%>%
+   summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
+ 
+ # . Pivot the two years side‑by‑side and compute Δ SIMPSONS DIVERSITY
+ Sap_Delta <- SapSimp %>% 
+   pivot_wider(names_from  = Year,
+               values_from = simpson_index,
+               names_glue  = "sw_{Year}") %>% 
+   mutate(delta_Sap = sw_2025 - sw_2024)   
+ 
+ ### Removing non‑finite (NA, ±Inf) *and* (if on log scale) non‑positive ──
+ sap_delta_clean <- Sap_Delta %>% 
+   filter(
+     is.finite(delta_Sap),   # drop NA / Inf / -Inf
+     delta_Sap != 0          # <- only if you’re using a log scale; otherwise omit
+   )
+ 
+ 
+####Mixed models analysis
+ #sap_delta <- lmer(delta_Sap~ Treatment * Fenced +(1|Site), data =sap_delta_clean)
+ #summary(sap_delta) # No significant difference amongst treatments  
+ 
+ ##Visualisation; Boxplot
+ Spd <- ggplot(sap_delta_clean, aes(x = Fenced, y = delta_Sap, fill = Fenced)) + facet_wrap(~Treatment) +
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fenced", y = "Δ Saplings Simpsons diversity index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+###saving BOXPLOT plot
+ #ggsave(Spd,filename ="Plots/Delta Saplings Simpsons Boxplot.png",
+ #width = 16, height = 14, units = "cm")
+ 
+ #### Violin plot for Simpson's diversity
+ SPVi <- ggplot(sap_delta_clean, aes(x = Fenced, y = delta_Sap, fill = Fenced)) + facet_wrap(~Treatment) +
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fenced", y = "Δ Saplings Simpsons diversity index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+##saving VIOLINPLOT plot
+ #ggsave(SPVi,filename ="Plots/ Delta Saplings Simpsons Violinplot.png",
+    #    width = 16, height = 14, units = "cm")
+ 
+
+###############################################################################
+  # TREE SIMPSON'S DIVERSITY  TREE SIMPSON'S DIVERSITY
+ 
+ SapF <- read_csv("DATA/March2025/WoodyPC.csv")
+
+#Data   
+SapF <- SapF %>% 
+ mutate(
+   woody_cat = case_when(
+     Woody_class == "Cut stump"          ~ "Cut stump",
+     between(`Max_height(m)`, 0.05, 0.50)          ~ "Seedlings",
+     between(`Max_height(m)`, 0.51, 1.49)          ~ "Saplings",
+     between(`Max_height(m)`, 1.5, 21.0)           ~ "Trees",
+     TRUE                                 ~ NA_character_
+   )
+ ) 
+### new 
+ treeS <- SapF %>%
+   filter(
+     woody_cat == "Trees",
+     Year %in% c(2024, 2025)
+   )
+ 
+ #### Calculate species abundance per plot
+ TrSimp <- treeS %>%
+   filter(!is.na(Species_name)) %>%  
+   group_by(Site, Plot, Subplot, Fenced, Treatment, Year, Species_name) %>% 
+   summarise(abundance = n())%>%
+   summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
+ 
+ 
+ ####Mixed models
+   #trler <- lmer(simpson_index~ Treatment * Fenced +(1|Site), data =TrSimp)
+ #summary(trler) #TF and TF8 shows significant differ with the control. they increases Simpsons diversity.
+  # -Unfenced plots do not differ with fenced plots 
+ 
+ ##Visualisation; Boxplot
+ tr <- ggplot(TrSimp, aes(x = Fenced, y = simpson_index, fill = Fenced)) + facet_wrap(~Treatment) +
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fenced", y = "Trees Simpsons diversity index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ ##saving BOXPLOT plot
+ ggsave(tr,filename ="Plots/Trees Simpsons Boxplot.png",
+        width = 16, height = 14, units = "cm")
+ 
+ #### Violin plot for Simpson's diversity
+ TRV <- ggplot(TrSimp, aes(x = Fenced, y = simpson_index, fill = Fenced)) + facet_wrap(~Treatment) +
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fenced", y = "Trees Simpsons diversity index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ #saving VIOLINPLOT plot
+  #ggsave(SPV,filename ="Plots/Trees Simpsons Diversity Violinplot.png",
+   #     width = 16, height = 14, units = "cm")
+ 
+ ######################################################################################################
+ ############################################## DELTA TREES SIMPSONS DIVERSITY 
+ 
+ ## Calculate species abundance per plot
+ TrSimp <- treeS %>%
+   filter(!is.na(Species_name)) %>%  
+   group_by(Site, Plot, Subplot, Fenced, Treatment, Year, Species_name) %>% 
+   summarise(abundance = n())%>%
+   summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
+ 
+ # . Pivot the two years side‑by‑side and compute Δ SIMPSONS DIVERSITY
+ tr_Delta <- TrSimp %>% 
+   pivot_wider(names_from  = Year,
+               values_from = simpson_index,
+               names_glue  = "sw_{Year}") %>% 
+   mutate(delta_Tr = sw_2025 - sw_2024)   
+ 
+ ### Removing non‑finite (NA, ±Inf) *and* (if on log scale) non‑positive ──
+ tre_delta_clean <- tr_Delta %>% 
+   filter(
+     is.finite(delta_Tr),   # drop NA / Inf / -Inf
+     delta_Tr != 0          # <- only if you’re using a log scale; otherwise omit
+   )
+ 
+ ####Mixed models analysis
+ tre_delta <- lmer(delta_Tr~ Treatment * Fenced +(1|Site), data =tre_delta_clean)
+ summary(tre_delta) # No significant difference amongst treatments  
+ 
+ ##Visualisation; Boxplot
+ trd <- ggplot(tre_delta_clean, aes(x = Fenced, y = delta_Tr, fill = Fenced)) + facet_wrap(~Treatment) +
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fenced", y = "Δ Trees Simpsons diversity index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+####saving BOXPLOT plot
+  #ggsave(trd,filename ="Plots/Delta Trees Simpsons Boxplot.png",
+  #width = 16, height = 14, units = "cm")
+ 
+ #### Violin plot for Simpson's diversity
+ tvi <- ggplot(sap_delta_clean, aes(x = Fenced, y = delta_Sap, fill = Fenced)) + facet_wrap(~Treatment) +
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fenced", y = "Δ Trees Simpsons diversity index") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+##saving VIOLINPLOT plot
+ #ggsave(tvi,filename ="Plots/ Delta Trees Simpsons Violinplot.png",
+     #width = 16, height = 14, units = "cm")
+ 
+
+###############################################################
+ 
