@@ -161,7 +161,6 @@ theme_beautiful <- function() {
 
 WGdata <- read_csv(here("DATA/DPM.csv"))
 
-
 ################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
 # 2. Convert weight from grams to kg/ha
 #    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
@@ -204,8 +203,6 @@ eq0   <- paste0(
     
 ##Using same data to fit INTERCEPT PASSING THROUGH ORIGIN   
     
-   
-  
 ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha))+
      geom_point()+
      geom_smooth(method = "lm", se = TRUE, color = "red")+
@@ -220,7 +217,10 @@ geom_smooth(method = "lm", formula = y ~ x - 1, colour = "blue") + # zero‑inte
            label = eq0,  hjust = 0, size = 3, colour = "blue") +
   labs(x = "DPM Height (cm)",
        y = "Standing grass biomass (kg/ha)") +
-  theme_classic()
+  theme_beautiful()
+
+#ggsave (Oli, filename = "Plots/ OLS BIOMASS and Intercept.png",
+    # width = 16, height = 14, units = "cm") 
 
 
 ```

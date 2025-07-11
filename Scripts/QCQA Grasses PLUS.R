@@ -17,6 +17,10 @@ library(glmmTMB)
 library(performance)  # model diagnostics
 library(stringi)
 library(dataMaid)
+library(MASS)
+library(RobustLinearReg)
+library(cowplot)   # for draw_* helpers
+library(png)
 
 
 theme_beautiful <- function() {
@@ -301,11 +305,11 @@ ggsave(GF,filename ="Plots/Delta FENCE Grass species richness Box plot.png",
 ##############################################################################
 ######################### GRASS BIOMASS GRASS BIOMASS  USING TLS TLS TLS 
 
-#LOAD DATA
+#LOAD DATA for TLS BIOMASS and intercept line - UNTRANSFORMED VARIABLES
 WGtlsdata <- read_csv(here("DATA/DPM.csv"))
 
 
-################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
+################## DPM HEIGHT ~ OVEN DRIED WEIGHT. 
 # 1. Convert weight from grams to kg/ha
 #    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
 frame_area <- pi * (0.17^2)  # = 0.0908 m²
@@ -351,12 +355,14 @@ r2_proxy <- cor(df_tls$DPH_Height, df_tls$Biomass_kg_ha)^2                  # co
 
 # 4a.  Build annotation strings (include n)
 # ------------------------------------------------------------------
-eq_tls1 <- sprintf("y = %.2f + %.2fx\nTLS R² ≈ %.3f, n = %d", 
-                   tls_free$intercept, tls_free$slope, r2_proxy, n_obs)
 
-eq_tls0 <- sprintf("y = %.2fx\nTLS R² ≈ %.3f, n = %d", 
-                   tls_zero$slope, r2_proxy, n_obs)
+eq_tls1 <- sprintf("y = %.2f + %.2fx\nn = %d", 
+                   tls_free$intercept, tls_free$slope, as.integer (n_obs))
 
+
+
+eq_tls0 <- sprintf("y = %.2f + %.2fx\nn = %d", 
+                   tls_zero$intercept, tls_zero$slope, as.integer(n_obs))
 
 # 5.  Plot
 # ------------------------------------------------------------------
@@ -364,7 +370,7 @@ eq_tls0 <- sprintf("y = %.2fx\nTLS R² ≈ %.3f, n = %d",
 TLSBIOM <- ggplot(df_tls, aes(x = DPH_Height, y = Biomass_kg_ha)) +
   geom_point() +
   geom_abline(intercept = tls_free$intercept, slope = tls_free$slope, colour = "red",  size = 1) +
-  geom_abline(intercept = 0,                 slope = tls_zero$slope, colour = "blue", size = 1) +
+  geom_abline(intercept = 0,                slope = tls_zero$slope, colour = "blue", size = 1) +
   annotate("text",
            x = min(df_tls$DPH_Height, na.rm = TRUE),
            y = max(df_tls$Biomass_kg_ha, na.rm = TRUE),
@@ -374,11 +380,11 @@ TLSBIOM <- ggplot(df_tls, aes(x = DPH_Height, y = Biomass_kg_ha)) +
            y = 0.80 * max(df_tls$Biomass_kg_ha, na.rm = TRUE),
            label = eq_tls0, hjust = 0, size = 3, colour = "blue") +
   labs(x = "DPM Height (cm)", y = "Standing grass biomass (kg/ha)") +
-  theme_beautiful()
+  theme_classic()
 
 # ggsave
- #ggsave(TLSBIOM,filename ="Plots/TLS Biomass & intercept.png",
- #      width = 16, height = 14, units = "cm")
+ #ggsave(TLSBIOM,filename ="Plots/TLS2 Biomass & intercept.png",
+       #width = 16, height = 14, units = "cm")
 
 
 
@@ -439,11 +445,22 @@ r2_proxy  <- cor(df_tlss$log_DPH_Height, df_tlss$log_Biomass_kg_ha)^2           
 
 # 4a.  Build annotation strings (include n) -------------------------
 # ------------------------------------------------------------------
-eq_tls1 <- sprintf("ln(y) = %.2f + %.2f·ln(x)\nTls R² ≈ %.3f, n = %d", 
-                   tlss_free$intercept, tlss_free$slope, r2_proxy, n_obs)
+ #eq_tls1 <- sprintf("ln(y) = %.2f + %.2f·ln(x)\nTls R² ≈ %.3f, n = %d", 
+                #tlss_free$intercept, tlss_free$slope, r2_proxy, n_obs) #old equation
 
-eq_tls0 <- sprintf("ln(y) = %.2f·ln(x)\nTls R² ≈ %.3f, n = %d", 
-                   tlss_zero$slope, r2_proxy, n_obs)
+#eq_tls0 <- sprintf("ln(y) = %.2f·ln(x)\nTls R² ≈ %.3f, n = %d", 
+                   #tlss_zero$slope, r2_proxy, n_obs)
+
+#eq_tls0 <- sprintf("ln(y) = %.2f +%.2f·ln(x)\nTls R² ≈ %.3f, n = %d", 
+                  #tlss_zero$intercept, tlss_zero$slope, r2_proxy, n_obs) #old 
+
+
+eq_tls1 <- sprintf("ln(y) = %.2f + %.2f·ln(x)\nn = %d", 
+                    tlss_free$intercept, tlss_free$slope, as.integer (n_obs))
+
+
+eq_tls0 <- sprintf("ln(y) = %.2f + %.2f·ln(x)\nn = %d", 
+                    tlss_zero$intercept, tlss_zero$slope, as.integer(n_obs))
 
 ##5.  Plot on log‑log scale ----------------------------------------
   # ------------------------------------------------------------------
@@ -455,19 +472,18 @@ tlsf <- ggplot(df_tlss, aes(x = log_DPH_Height, y = log_Biomass_kg_ha)) +
   annotate("text",
            x = min(df_tlss$log_DPH_Height, na.rm = TRUE),
            y = max(df_tlss$log_Biomass_kg_ha, na.rm = TRUE),
-           label = eq_tls1, hjust = 0, size = 3, colour = "red") +
+           label = eq_tls1, hjust = 0, size = 4, colour = "red") +
   annotate("text",
            x = min(df_tlss$log_DPH_Height, na.rm = TRUE),
            y = 0.85 * max(df_tlss$log_Biomass_kg_ha, na.rm = TRUE),
-           label = eq_tls0, hjust = 0, size = 3, colour = "blue") +
-  labs(x = "ln(DPM height (cm)", y = "ln(Standing grass biomass (kg/ha)") +
+           label = eq_tls0, hjust = 0, size = 4, colour = "blue") +
+  labs(x = "ln DPM height (cm)", y = "ln Standing grass biomass (kg/ha)") +
   theme_beautiful()
 
 
 # ggsave
- # ggsave(tlsf,filename ="Plots/TLS LOG Biomass.png",
-   #    width = 16, height = 14, units = "cm")
-
+  ggsave(tlsf,filename ="Plots/2TLS LOG Biomass.png",
+       width = 16, height = 14, units = "cm")
 
 
 ################################################
@@ -528,11 +544,19 @@ r2_proxy  <- cor(df_tlsq$sqrt_DPH_Height, df_tlsq$sqrt_Biomass_kg_ha)^2         
 
 # 4a.  Build annotation strings (include n) -------------------------
 # ------------------------------------------------------------------
-eq_tlsq1 <- sprintf("y = %.2f + %.2f·sqrt(x)\n R² ≈ %.3f, n = %d", 
-                   tlsq_free$intercept, tlsq_free$slope, r2_proxy, n_obs)
+   #eq_tlsq1 <- sprintf("sqrt(y) = %.2f + %.2f·sqrt(x)\n R² ≈ %.3f, n = %d", 
+                 #  tlsq_free$intercept, tlsq_free$slope, r2_proxy, n_obs) #old equation
 
-eq_tlsq0 <- sprintf("y = %.2f·sqrt(x)\n R² ≈ %.3f, n = %d", 
-                   tlsq_zero$slope, r2_proxy, n_obs)
+   #eq_tlsq0 <- sprintf("sqrt(y) = %.2f·sqrt(x)\n R² ≈ %.3f, n = %d", 
+                  # tlsq_zero$slope, r2_proxy, n_obs) #old equation
+
+
+eq_tlsq1 <- sprintf("sqrt (y) = %.2f + %.2f·sqrt(x)\nn = %d", 
+                   tls_free$intercept, tls_free$slope, as.integer (n_obs))
+
+
+eq_tlsq0 <- sprintf("sqrt (y) = %.2f + %.2f·sqrt(x)\nn = %d", 
+                   tls_zero$intercept, tls_zero$slope, as.integer(n_obs))
 
 ##5.  Plot on log‑log scale ----------------------------------------
 # ------------------------------------------------------------------
@@ -544,17 +568,17 @@ tlsq1 <- ggplot(df_tlsq, aes(x = sqrt_DPH_Height, y = sqrt_Biomass_kg_ha)) +
   annotate("text",
            x = min(df_tlsq$sqrt_DPH_Height, na.rm = TRUE),
            y = max(df_tlsq$sqrt_Biomass_kg_ha, na.rm = TRUE),
-           label = eq_tlsq1, hjust = 0, size = 3, colour = "red") +
+           label = eq_tlsq1, hjust = 0, size = 4, colour = "red") +
   annotate("text",
            x = min(df_tlsq$sqrt_DPH_Height, na.rm = TRUE),
            y = 0.75 * max(df_tlsq$sqrt_Biomass_kg_ha, na.rm = TRUE),
-           label = eq_tlsq0, hjust = 0, size = 3, colour = "blue") +
+           label = eq_tlsq0, hjust = 0, size = 4, colour = "blue") +
   labs(x = "Sqrt DPM height (cm)", y = " Sqrt Standing grass biomass (kg/ha)") +
   theme_beautiful()
 
 # ggsave
-#ggsave(tlsq1,filename ="Plots/TLS SQRT Biomass & intercept.png",
- #     width = 16, height = 14, units = "cm")
+  ggsave(tlsq1,filename ="Plots/TLS2 SQRT Biomass & intercept.png",
+      width = 16, height = 14, units = "cm")
 
 
 
@@ -1014,5 +1038,529 @@ GraSimp <- Grassdiversity %>%
 # 3. Statistical power is low for small effects. With 56 subplots and residual SD ≈ 0.07, 
 #   you’d need an effect ≈ 0.10–0.12 to reach significance at α = 0.05.
  
-#################################################################################################
-################################################################################################# 
+###############################################################################################
+###############################################################################################
+  
+###ROBUST LINEAR REGRESSION  - ROBUST LINEAR REGRESSION - ROBUST  LINEAR REGRESSION
+  
+Robustdata <- read_csv(here("DATA/DPM.csv"))
+  
+  ################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
+  # 2. Convert weight from grams to kg/ha
+  #    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
+  frame_area <- pi * (0.17^2)  # = 0.0908 m²
+  Robustdata$Biomass_kg_ha <- Robustdata$Weight * 10 / frame_area
+  
+  
+  # 3. Robust Linear regression: Biomass ~ DPH
+  modelRG <- theil_sen_regression(Biomass_kg_ha ~ DPH_Height, data = Robustdata)
+  #summary(modelRG)
+   #tab_model(modelRG)
+  
+  
+  ###adding annotation to the plot
+  
+  # Extract coefficients
+  coefs <- coef(modelRG)
+  intercept <- round(coefs[1], 2)
+  slope <- round(coefs[2], 2)
+  
+  # Create equation string for annotation
+  # Build the equation string (biomass = intercept + slope * x)
+  eq <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
+  
+  coef <- coefficients(modelRG)
+  r2 <- summary(modelRG)$r.squared
+  n <- nobs(modelRG)
+  eq <- paste0(
+    "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+    "R² = ", round(r2, 3), ", n = ", n)
+  
+  
+  # Plot with regression and equation
+  
+  ggplot(Robustdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
+    geom_point() +  
+    geom_smooth(method = "lm", se = FALSE, color = "red") +
+    annotate("text", x = Inf, y = -Inf, label = eq, hjust = 1.1, vjust = -0.5, size = 4, color = "black") +
+    labs( x = "Dpm height (cm)",
+          y = "Standing grass biomass (kg/ha)"
+    ) +
+    theme_beautiful()
+
+  
+############################ SHR MODEL AND INTERCEPT LINE ######
+  
+  ################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
+  # 2. Convert weight from grams to kg/ha
+  #    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
+  frame_area <- pi * (0.17^2)  # = 0.0908 m²
+  Robustdata$Biomass_kg_ha <- Robustdata$Weight * 10 / frame_area
+  
+  
+  # 3. Robust Linear regression and intercept line: Biomass ~ DPH
+modelRG <- theil_sen_regression(Biomass_kg_ha ~ DPH_Height, data = Robustdata)
+modelRG1 <- RobustLinearReg::theil_sen_regression(Biomass_kg_ha ~  DPH_Height, data = Robustdata)   # intercept = 0
+
+  
+# Extract coefficients
+coefs <- coef(modelRG)
+intercept <- round(coefs[1], 2)
+slope <- round(coefs[2], 2)
+
+# Create equation string for annotation
+# Build the equation string (biomass = intercept + slope * x)
+eq <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
+
+coef <- coefficients(modelRG)
+r2 <- summary(modelRG)$r.squared
+n <- nobs(modelRG)
+eq <- paste0(
+  "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+  "R² = ", round(r2, 3), ", n = ", n)
+
+##2 -- zero‑intercept line (parallel construction) --
+# Robust line with intercept
+
+slope <- coef(modelRG1)[["DPH_Height"]]
+int   <- coef(modelRG1)[["(Intercept)"]]      # drop this line if you fitted 0 + x
+r2    <- summary(modelRG1)$r.squared
+n     <- nrow(Robustdata)
+
+sprintf("y = %.2f %+.2f x\nR² = %.3f, n = %d", int, slope, r2, n)
+
+# Build equation label
+eq0 <- sprintf("y = %.2f %+.2f x\nR² = %.3f, n = %d",  int, slope, r2, n)
+
+##Using same data to fit INTERCEPT PASSING THROUGH ORIGIN   
+
+rlb <- ggplot(Robustdata, aes(x = DPH_Height, y = Biomass_kg_ha))+
+  geom_point()+
+  geom_smooth(method = "lm", se = TRUE, color = "red")+
+  geom_smooth(method = "lm", formula = y ~ x - 1, colour = "blue") + # zero‑intercept
+  annotate("text",
+           x = min(Robustdata$DPH_Height, na.rm = TRUE),
+           y = max(Robustdata$Biomass_kg_ha, na.rm = TRUE),
+           label = eq,   hjust = 0, size = 3, colour = "red") +
+  annotate("text",
+           x = min(Robustdata$DPH_Height, na.rm = TRUE),
+           y = 0.90 * max(Robustdata$Biomass_kg_ha, na.rm = TRUE),            
+           label = eq0,  hjust = 0, size = 3, colour = "blue") +
+  labs(x = "DPM Height (cm)",
+       y = "Standing grass biomass (kg/ha)") +
+  theme_beautiful()
+
+
+#ggsave plot
+
+ggsave(rlb, filename = "Plots/ Robust regression-BIOMASS and Intercept.png",
+  width = 16, height = 14, units = "cm")  
+
+######################################################
+############################################## RLM LOG TRANSFORMED - DPM
+
+
+RGdata <- read_csv(here("DATA/DPM.csv"))
+
+################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
+# 2. Convert weight from grams to kg/ha
+#    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
+frame_area <- pi * (0.17^2)  # = 0.0908 m²
+RGdata$Biomass_kg_ha <- RGdata$Weight * 10 / frame_area
+
+#LOG TRANSFORMING BOTH VARIABLE
+#Log-transform both variables (natural log)
+RGdata$log_Biomass_kg_ha <- log(RGdata$Biomass_kg_ha)
+RGdata$log_DPH_Height <- log(RGdata$DPH_Height)
+
+# Fit a linear model using log-transformed variables
+# . Robust Linear regression and intercept line: Biomass ~ DPH
+modelLRG <-  RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ log_DPH_Height, data = RGdata)
+modelLRG1 <- RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ log_DPH_Height, data = RGdata)   # intercept = 0
+
+
+ #tab_model(modelLRG)
+
+# Extract coefficients
+coefs <- coef(modelLRG)
+intercept <- round(coefs[1], 2)
+slope <- round(coefs[2], 2)
+
+# Create equation string for annotation
+# Build the equation string (biomass = intercept + slope * x)
+eq <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
+
+coef <- coefficients(modelLRG)
+r2 <- summary(modelLRG)$r.squared
+n <- nobs(modelLRG)
+eq <- paste0(
+  "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+  "R² = ", round(r2, 3), ", n = ", n)
+
+##2 -- zero‑intercept line (parallel construction) --
+# Robust line with intercept
+
+slope <- coef(modelLRG1)[["log_DPH_Height"]]
+int   <- coef(modelLRG1)[["(Intercept)"]]      # drop this line if you fitted 0 + x
+r2    <- summary(modelLRG1)$r.squared
+n     <- nrow(RGdata)
+
+sprintf("y = %.2f %+.2fx\nR² = %.3f, n = %d", int, slope,  r2, n)
+
+# Build equation label
+ #eq0 <- sprintf("y = %.2f x %+.2f\nR² = %.3f, n = %d", slope, int, r2, n)
+
+eq0 <- sprintf("y = %.2f %+.2fx\nR² = %.3f, n = %d", int, slope,  r2, n)
+
+##Using same data to fit INTERCEPT PASSING THROUGH ORIGIN   
+
+rlbLO <- ggplot(RGdata, aes(x = log_DPH_Height, y = log_Biomass_kg_ha))+
+  geom_point()+
+  geom_smooth(method = "lm", se = TRUE, color = "red")+
+  geom_smooth(method = "lm", formula = y ~ x - 1, colour = "blue") + # zero‑intercept
+  annotate("text",
+           x = min(RGdata$log_DPH_Height, na.rm = TRUE),
+           y = max(RGdata$log_Biomass_kg_ha, na.rm = TRUE),
+           label = eq,   hjust = 0, size = 3, colour = "red") +
+  annotate("text",
+           x = min(RGdata$log_DPH_Height, na.rm = TRUE),
+           y = 0.90 * max(RGdata$log_Biomass_kg_ha, na.rm = TRUE),            
+           label = eq0,  hjust = 0, size = 3, colour = "blue") +
+  labs(x = "log DPM Height (cm)",
+       y = "log Standing grass biomass (kg/ha)") +
+  theme_beautiful()
+
+
+#ggsave plot
+ ggsave(rlbLO, filename = "Plots/ Robust regression-Log BIOMASS and Intercept.png",
+       width = 16, height = 14, units = "cm")  
+
+
+####################################################################
+################################## SQUARE ROOTED VARIABLES  SQRT
+
+RSQTGdata <- read_csv(here("DATA/DPM.csv"))
+
+################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
+# 2. Convert weight from grams to kg/ha
+#    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
+frame_area <- pi * (0.17^2)  # = 0.0908 m²
+RSQTGdata$Biomass_kg_ha <- RSQTGdata$Weight * 10 / frame_area
+
+#LOG TRANSFORMING BOTH VARIABLE
+#Log-transform both variables (natural log)
+RSQTGdata$sqrt_Biomass_kg_ha <- sqrt(RSQTGdata$Biomass_kg_ha)
+RSQTGdata$sqrt_DPH_Height <- sqrt(RSQTGdata$DPH_Height)
+
+# Fit a linear model using log-transformed variables
+# 3. Robust Linear regression and intercept line: Biomass ~ DPH
+modelLSRG <-  RobustLinearReg::theil_sen_regression(sqrt_Biomass_kg_ha ~ sqrt_DPH_Height, data = RSQTGdata)
+modelLSRG1 <- RobustLinearReg::theil_sen_regression(sqrt_Biomass_kg_ha ~ sqrt_DPH_Height, data = RSQTGdata)   # intercept = 0
+
+ #tab_model(modelLSRG)
+
+
+# Extract coefficients
+coefs <- coef(modelLSRG)
+intercept <- round(coefs[1], 2)
+slope <- round(coefs[2], 2)
+
+# Create equation string for annotation
+# Build the equation string (biomass = intercept + slope * x)
+eq <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
+
+coef <- coefficients(modelLSRG)
+r2 <- summary(modelLSRG)$r.squared
+n <- nobs(modelLSRG)
+eq <- paste0(
+  "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+  "R² = ", round(r2, 3), ", n = ", n)
+
+##2 -- zero‑intercept line (parallel construction) --
+# Robust line with intercept
+
+slope <- coef(modelLSRG1)[["sqrt_DPH_Height"]]
+int   <- coef(modelLSRG1)[["(Intercept)"]]      # drop this line if you fitted 0 + x
+r2    <- summary(modelLSRG1)$r.squared
+n     <- nrow(RSQTGdata)
+
+sprintf("y = %.2f % +.2fx\nR² = %.3f, n = %d",int,slope, r2, n)
+
+# Build equation label
+eq0 <- sprintf("y = %.2f % +.2fx\nR² = %.3f, n = %d", int, slope, r2, n)
+
+##Using same data to fit INTERCEPT PASSING THROUGH ORIGIN. ggplot  
+sq <- ggplot(RSQTGdata, aes(x = sqrt_DPH_Height, y = sqrt_Biomass_kg_ha))+
+  geom_point()+
+  geom_smooth(method = "lm", se = TRUE, color = "red")+
+  geom_smooth(method = "lm", formula = y ~ x - 1, colour = "blue") + # zero‑intercept
+  annotate("text",
+           x = min(RSQTGdata$sqrt_DPH_Height, na.rm = TRUE),
+           y = max(RSQTGdata$sqrt_Biomass_kg_ha, na.rm = TRUE),
+           label = eq,   hjust = 0, size = 3, colour = "red") +
+  annotate("text",
+           x = min(RSQTGdata$sqrt_DPH_Height, na.rm = TRUE),
+           y = 0.90 * max(RSQTGdata$sqrt_Biomass_kg_ha, na.rm = TRUE),            
+           label = eq0,  hjust = 0, size = 3, colour = "blue") +
+  labs(x = "sqrt DPM Height (cm)",
+       y = "sqrt Standing grass biomass (kg/ha)") +
+  theme_beautiful()
+
+
+#ggsave plot
+
+ggsave(sq, filename = "Plots/ 2Robust regression- SQRT BIOMASS and Intercept.png",
+      width = 16, height = 14, units = "cm")  
+
+##############################################################################
+######################################################################################
+
+##Using same data to fit INTERCEPT PASSING THROUGH ORIGIN   
+WGdata <- read_csv(here("DATA/DPM.csv"))
+
+################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
+# 2. Convert weight from grams to kg/ha
+#    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
+frame_area <- pi * (0.17^2)  # = 0.0908 m²
+WGdata$Biomass_kg_ha <- WGdata$Weight * 10 / frame_area
+
+
+# 3. Linear regression: Biomass ~ DPH
+modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = WGdata)
+
+modelWG0 <- lm(Biomass_kg_ha ~ 0 + DPH_Height, data = WGdata)   # intercept = 0
+
+#summary(modelWG)
+# tab_model(modelWG)
+
+###adding annotation to the plot
+
+# Extract coefficients
+coefs <- coef(modelWG)
+intercept <- round(coefs[1], 2)
+slope <- round(coefs[2], 2)
+
+# Create equation string for annotation
+# Build the equation string (biomass = intercept + slope * x)
+eq <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
+
+coef <- coefficients(modelWG)
+r2 <- summary(modelWG)$r.squared
+n <- nobs(modelWG)
+eq <- paste0(
+  "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+  "R² = ", round(r2, 3), ", n = ", n)
+
+##2 -- zero‑intercept line (parallel construction) --
+coef0 <- coefficients(modelWG0)                # only the slope
+r2_0  <- summary(modelWG0)$r.squared
+eq0   <- paste0(
+  "y = ", round(coef0[1], 2), "x\n",
+  "R² = ", round(r2_0, 3), ", n = ", n)
+
+##Using same data to fit INTERCEPT PASSING THROUGH ORIGIN   
+
+Oli <- ggplot(WGdata, aes(x = DPH_Height, y = Biomass_kg_ha))+
+  geom_point()+
+  geom_smooth(method = "lm", se = TRUE, color = "red")+
+  geom_smooth(method = "lm", formula = y ~ x - 1, colour = "blue") + # zero‑intercept
+  annotate("text",
+           x = min(WGdata$DPH_Height, na.rm = TRUE),
+           y = max(WGdata$Biomass_kg_ha, na.rm = TRUE),
+           label = eq,   hjust = 0, size = 3, colour = "red") +
+  annotate("text",
+           x = min(WGdata$DPH_Height, na.rm = TRUE),
+           y = 0.90 * max(WGdata$Biomass_kg_ha, na.rm = TRUE),            
+           label = eq0,  hjust = 0, size = 3, colour = "blue") +
+  labs(x = "DPM Height (cm)",
+       y = "Standing grass biomass (kg/ha)") +
+  theme_beautiful()
+
+#ggsave
+#ggsave (Oli, filename = "Plots/ OLS BIOMASS and Intercept.png",
+       # width = 16, height = 14, units = "cm") 
+
+####################################################
+
+# LOAD DATA - SQUARE ROOT VARIABLES
+SQGdata <- read_csv(here("DATA/DPM.csv"))
+
+####### DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
+# 2. Convert weight from grams to kg/ha
+#    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
+frame_area <- pi * (0.17^2)  # = 0.0908 m²
+SQGdata$Biomass_kg_ha <- SQGdata$Weight * 10 / frame_area
+
+#LOG TRANSFORMING BOTH VARIABLE
+#Log-transform both variables (natural log)
+SQGdata$sqrt_Biomass_kg_ha <- sqrt(SQGdata$Biomass_kg_ha)
+SQGdata$sqrt_DPH_Height <- sqrt(SQGdata$DPH_Height)
+
+# Fit a linear model using log-transformed variables
+modelSG <- lm(sqrt_Biomass_kg_ha ~ sqrt_DPH_Height, data = SQGdata)
+#tab_model(modelSG)
+
+# Extract coefficients
+coefs <- coef(modelSG)
+intercept <- round(coefs[1], 2)
+slope <- round(coefs[2], 2)
+
+# Create equation string for annotation
+# Build the equation string (biomass = intercept + slope * x)
+eq1 <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
+
+coef <- coefficients(modelSG)
+r2 <- summary(modelSG)$r.squared
+n <- nobs(modelSG)
+eq1 <- paste0(
+  "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+  "R² = ", round(r2, 3), ", n = ", n)
+
+
+
+## Plot Sqrt regression
+Olii <- ggplot(SQGdata, aes(y = sqrt_Biomass_kg_ha, x = sqrt_DPH_Height)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  geom_smooth(method = "lm", formula = y ~ x - 1, colour = "blue") + # zero‑intercept+
+  annotate("text", x = Inf, y = -Inf, label = eq1, hjust = 1.1, vjust = -0.5, size = 4, color = "black") +
+  labs( x = "sqrt Dpm height (cm)",
+        y = "sqrt Standing grass biomass (kg/ha)"
+  ) +
+  theme_beautiful()
+
+#ggsave
+ggsave (Olii, filename = "Plots/ OLS SQRT BIOMASS and Intercept.png",
+ width = 16, height = 14, units = "cm") 
+
+######################################################################################
+
+### LOG TRANSFORMED VARIABLES
+
+WGdata <- read_csv(here("DATA/DPM.csv"))
+
+################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
+# 2. Convert weight from grams to kg/ha
+#    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
+frame_area <- pi * (0.17^2)  # = 0.0908 m²
+WGdata$Biomass_kg_ha <- WGdata$Weight * 10 / frame_area
+
+#LOG TRANSFORMING BOTH VARIABLE
+#Log-transform both variables (natural log)
+WGdata$log_Biomass_kg_ha <- log(WGdata$Biomass_kg_ha)
+WGdata$log_DPH_Height <- log(WGdata$DPH_Height)
+
+# Fit a linear model using log-transformed variables
+modelG <- lm(log_Biomass_kg_ha ~ log_DPH_Height, data = WGdata)
+#tab_model(modelG)
+
+# Extract coefficients
+coefs <- coef(modelG)
+intercept <- round(coefs[1], 2)
+slope <- round(coefs[2], 2)
+
+# Create equation string for annotation
+# Build the equation string (biomass = intercept + slope * x)
+eq1 <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
+
+coef <- coefficients(modelG)
+r2 <- summary(modelG)$r.squared
+n <- nobs(modelG)
+eq1 <- paste0(
+  "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+  "R² = ", round(r2, 3), ", n = ", n)
+
+
+
+## Plot log-log regression
+Olg <- ggplot(WGdata, aes(y = log_Biomass_kg_ha, x = log_DPH_Height)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  geom_smooth(method = "lm", formula = y ~ x - 1, colour = "blue") + # zero‑intercept+
+  annotate("text", x = Inf, y = -Inf, label = eq1, hjust = 1.1, vjust = -0.5, size = 4, color = "black") +
+  labs( x = "Log Dpm height (cm)",
+        y = "Log Standing grass biomass (kg/ha)"
+  ) +
+  theme_beautiful()
+
+#ggsave
+ggsave (Olg, filename = "Plots/ OLS LOG BIOMASS and Intercept.png",
+        width = 16, height = 14, units = "cm") 
+
+
+
+
+#COMBINING IMAGES TO CREATE MULTI PANEL
+# Function to create ggplot from PNG  - BIOMASSS & INTERCEPT LINE
+create_plot <- function(img_path, label){
+  img <- readPNG(img_path)
+  ggplot() +
+    annotation_raster(img, xmin=-Inf, xmax=Inf, ymin=-Inf, ymax=Inf) +
+    annotate("text", x=0.98, y=0.98, label=label, 
+             color="black", size=6, hjust=1, vjust=9) +
+    theme_void()
+}
+
+# Create individual plots
+p1 <- create_plot("Plots/ OLS BIOMASS and Intercept.png", "a")
+p2 <- create_plot("Plots/TLS2 Biomass & intercept.png", "b")
+p3 <- create_plot("Plots/ Robust regression-BIOMASS and Intercept.png", "c")
+
+# Combine and save
+CombinedPlot1 <- p1 + p2 + p3
+
+ggsave( filename = "Plots/ CombinedPlot1.png",
+       width = 12, height = 4)  
+
+
+
+###################### SQUARE ROOTED VARIABLES
+
+#COMBINING IMAGES TO CREATE MULTI PANEL
+# Function to create ggplot from PNG  - BIOMASSS & INTERCEPT LINE
+create_plot <- function(img_path, label){
+  img <- readPNG(img_path)
+  ggplot() +
+    annotation_raster(img, xmin=-Inf, xmax=Inf, ymin=-Inf, ymax=Inf) +
+    annotate("text", x=0.98, y=0.98, label=label, 
+             color="black", size=6, hjust=1, vjust=9) +
+    theme_void()
+}
+
+# Create individual plots
+p1 <- create_plot("Plots/ OLS SQRT BIOMASS and Intercept.png", "a")
+p2 <- create_plot("Plots/TLS2 SQRT Biomass & intercept.png", "b")
+p3 <- create_plot("Plots/ 2Robust regression- SQRT BIOMASS and Intercept.png", "c")
+
+# Combine and save
+CombinedPlot2 <- p1 + p2 + p3
+
+ggsave( filename = "Plots/ CombinedPlot2.png",
+        width = 12, height = 4)  
+
+#####################################################################################
+############################## 
+
+        #######LOG TRANSFORMED VARIABLES
+
+#COMBINING IMAGES TO CREATE MULTI PANEL
+# Function to create ggplot from PNG  - BIOMASSS & INTERCEPT LINE
+create_plot <- function(img_path, label){
+  img <- readPNG(img_path)
+  ggplot() +
+    annotation_raster(img, xmin=-Inf, xmax=Inf, ymin=-Inf, ymax=Inf) +
+    annotate("text", x=0.98, y=0.98, label=label, 
+             color="black", size=6, hjust=1, vjust=9) +
+    theme_void()
+}
+
+# Create individual plots
+p1 <- create_plot("Plots/ OLS LOG BIOMASS and Intercept.png", "a")
+p2 <- create_plot("Plots/2TLS LOG Biomass.png", "b")
+p3 <- create_plot("Plots/ Robust regression-Log BIOMASS and Intercept.png", "c")
+
+# Combine and save
+CombinedPlot3 <- p1 + p2 + p3
+
+ggsave( filename = "Plots/ CombinedPlot3.png",
+        width = 12, height = 4)  
