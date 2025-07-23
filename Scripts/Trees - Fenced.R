@@ -14,6 +14,7 @@ library(sjPlot)
 library(flextable)
 library(officer)
 library(glmmTMB)
+library(DHARMa)   # model diagnostics GLMM
 library(performance)  # model diagnostics
 
 theme_beautiful <- function() {
@@ -221,7 +222,7 @@ ggsave(Trd,filename ="Plots/TREE Density FENCED Violinplot.png",
 
 
 ###########################################################################################
-#################################### SAPLING DENSITY  SAPLING DENSITY SALING DENSITY
+#################################### SEEDLING HEIGHT AND  SEEDLING DENSITY SEEDLING DENSITY
 
 # lLoad data
 SapF <- read_csv("DATA/March2025/WoodyPC.csv")
@@ -301,32 +302,74 @@ ggsave(Sdc,filename ="Plots/Delta Seedlings Height FENCED boxplotplot.png",
         width = 16, height = 14, units = "cm")
  
  ########
- #############################################SEEDLINGS DENSITY SEEDLING DENSITY
+ #############################################   SEEDLINGS DENSITY SEEDLING DENSITY
  ######## ── 1. Density per subplot‑year ───────────────────────────────────────────
+ SapF <- read_csv("DATA/March2025/WoodyPC.csv")
+ 
+ ## create 
+ SapF <- SapF %>% 
+   mutate(
+     woody_cat = case_when(
+       Woody_class == "Cut stump"          ~ "Cut stump",
+       between(`Max_height(m)`, 0.05, 0.50)          ~ "Seedlings",
+       between(`Max_height(m)`, 0.51, 1.49)          ~ "Saplings",
+       TRUE                                 ~ NA_character_
+     )
+   )
+ 
  seed_sub <- SapF %>% 
    filter(woody_cat == "Seedlings", Year %in% c(2024, 2025)) %>% 
-   count(Site, Plot, Subplot, Treatment, Fenced, Year, name = "Seedlings") %>% 
+   count(Site, Plot, Subplot, Treatment, Fenced, Encroachment_level, Year, name = "Seedlings") %>% 
    mutate(density_ha = Seedlings * 10000 / 600)     # convert to ha⁻¹
  
  # ── 2. Aggregate to Treatment × Fenced × Year (mean density) ──────────────
  seed_treat <- seed_sub %>% 
-   group_by(Site, Plot, Subplot, Treatment, Fenced, Year) %>% 
+   group_by(Site, Plot, Subplot, Treatment, Fenced, Encroachment_level, Year) %>% 
    summarise(mean_dens_ha = mean(density_ha), .groups = "drop")  # ← use sum() if preferred
+ 
+ 
+ seed_treat1 <- seed_sub %>%
+   group_by(Site, Subplot) %>%
+   filter(all(c(2024, 2025) %in% Year)) %>%
+   ungroup() %>%
+   group_by(Site, Plot, Subplot, Treatment, Fenced, Encroachment_level, Year) %>%
+   summarise(meam_dens_ha = mean(density_ha), .groups = "drop")
+ 
  
  # ── 3. Pivot the two years side‑by‑side and compute Δ‑density ─────────────
  Seedling_Delta <- seed_treat %>% 
    pivot_wider(names_from  = Year,
                values_from = mean_dens_ha,
                names_glue  = "dens_{Year}") %>% 
-   mutate(delta_Sdens = dens_2025 - dens_2024)        # 2022 − 2021
+   mutate(delta_Sdens = dens_2025 - dens_2024)        
+ 
+
+ ### Removing non‑finite (NA, ±Inf) *and* (if on log scale) non‑positive ──
+ sed_delta_clean <-  Seedling_Delta %>% 
+   filter(
+     is.finite(delta_Sdens),   # drop NA / Inf / -Inf
+     delta_Sdens != 0          # <- only if you’re using a log scale; otherwise omit
+   )
+ 
  
  ##Mixed models analysis for seedlings
    #sd_delta <- lmer(delta_Sdens~ Treatment * Fenced +(1|Site), data = Seedling_Delta)
    #summary(sd_delta)
  
+seD <- glmmTMB(delta_Sdens ~ Treatment * Fenced  + (1 | Site/Plot/Subplot),
+                   data = sed_delta_clean, family = gaussian(link = "identity")) 
+summary(seD)
+
+
  
+## GLMM FOR 3 WAY INTERACTIONS
+seDd1 <- glmmTMB(delta_Sdens ~ Treatment * Encroachment_level + (1 | Site/Plot/Subplot),
+               data = sed_delta_clean, family = gaussian(link = "identity")) 
+summary(seDd1)
+
+
  # ── 4. Boxplot of change in density by Treatment & Fencing ────────────────
- Seb <- ggplot(Seedling_Delta,
+ Seb <- ggplot(sed_delta_clean,
         aes(x = Fenced, y = delta_Sdens, fill = Fenced)) + facet_wrap(~Treatment)+ 
    geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
    #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
@@ -339,9 +382,51 @@ ggsave(Sdc,filename ="Plots/Delta Seedlings Height FENCED boxplotplot.png",
  #saving BOXPLOT plot
  ggsave(Seb,filename ="Plots/Delta Seedlings density FENCED Boxplotplot.png",
         width = 16, height = 14, units = "cm")
+ 
+ 
+ 
+ #### visualisation ENCROACHEMNT LEVEL
+ 
+ Seb1 <- ggplot(Seedling_Delta,
+               aes(x = Encroachment_level, y = delta_Sdens, fill = Encroachment_level)) + facet_wrap(~Treatment)+ 
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Encroachment_level", y = "Δ Seedlings density per ha") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ 
+ #saving BOXPLOT plot - ENCROACHMEMNT LEVEL
+ ggsave(Seb1,filename ="Plots/Delta Seedlings density EL Boxplotplot.png",
+        width = 16, height = 14, units = "cm")
+ 
+## Violin plot - Seedling density ENCROACHMENT LEVEL
+ ggplot(Seedling_Delta,
+        aes(x = Encroachment_level, y = delta_Sdens, fill = Encroachment_level)) + facet_wrap(~Treatment)+  
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Encroachment_level", y = "Δ Seedling density per ha") +
+   theme_beautiful() +
+   theme(legend.position = "none")
 
- ########################################
+##################################################################################################
+ #############################################################
  ########################################### SAPLINGS SAPLINGS SAPLINGS HEIGHT
+ 
+ #Load data
+ SapF <- read_csv("DATA/March2025/WoodyPC.csv")
+ 
+## create 
+ SapF <- SapF %>% 
+   mutate(
+     woody_cat = case_when(
+       Woody_class == "Cut stump"          ~ "Cut stump",
+       between(`Max_height(m)`, 0.05, 0.50)          ~ "Seedlings",
+       between(`Max_height(m)`, 0.51, 1.49)          ~ "Saplings",
+       TRUE                                 ~ NA_character_
+     )
+   )
  
  # Step 1: Filter saplings only and years 
  saplings_df <- SapF %>%
@@ -359,10 +444,37 @@ ggsave(Sdc,filename ="Plots/Delta Seedlings Height FENCED boxplotplot.png",
    labs(x = "Fenced", y = "Saplings max_height(m)") +
    theme_beautiful() +
    theme(legend.position = "none")
- 
+
+
  #saving BOXPLOT plot
  ggsave(Sdp,filename ="Plots/Saplings Height FENCED boxplotplot.png",
         width = 16, height = 14, units = "cm")
+ 
+##################################################### 
+###################################################NUMBER OF SAPLING RECRUITMENT
+ 
+ # Summarize total weight by Site, Treatment, and Year
+ grass_summary <- saplings_df %>%  
+   filter(!is.na(`Max_height(m)`), Year %in% c(2024, 2025)) %>%
+   group_by(Site, Plot, Subplot, Fenced, Treatment, Year) %>%
+   summarise(total_height = round(sum(`Max_height(m)`)), .groups = "drop")
+ 
+ #Mixed models analysis for number of saplings
+ sapl <- lmer(total_height~ Treatment * Fenced +(1|Site), data = grass_summary)
+ summary(sapl)
+ 
+ # Plot the results
+ ggplot(grass_summary,
+        aes(x = Fenced, y = total_height, fill = Fenced)) + facet_wrap(~Treatment)+ 
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fenced", y = "Total saplings") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ 
+
+ 
  
  ############# Compute saplings Δ‑height (2024 − 2025) per Site/Plot/Subplot/Treatment/Fenced ----
  # Take the mean height within each grouping for each year before differencing.
@@ -480,11 +592,37 @@ ggsave(Sdc,filename ="Plots/Delta Seedlings Height FENCED boxplotplot.png",
    )
 
  ##Mixed models analysis for resprouts
- res_delta <- lmer(No_of_resprouts~ Treatment * Fenced +(1|Site), data = resprouts_df)
- summary(res_delta)
+    #res_delta <- lmer(No_of_resprouts~ Treatment * Fenced +(1|Site), data = resprouts_df)
+     # summary(res_delta)
  
-  
- # Step 2: Create a boxplot for  resprout
+ ## GLMM for resprouts
+Resc <- glmmTMB(No_of_resprouts ~ Treatment * Fenced  + (1 | Site/Plot/Subplot),
+                 data = resprouts_df, family = poisson (link = "log"))
+summary(Resc)  
+
+#Checking for oversdispersion
+performance::check_overdispersion(Resc) # Overdispersion detected hence using alternative model NB
+
+##Glmm using Negative binomial - FENCING
+Res1 <- glmmTMB(No_of_resprouts ~ Treatment * Fenced  + (1 | Site/Plot/Subplot),
+                data = resprouts_df, family = nbinom2())
+
+summary(Res1) 
+
+
+##GLMM ENCROACHMENT LEVELS
+Res2 <- glmmTMB(No_of_resprouts ~ Treatment * Encroachment_level  + (1 | Site/Plot/Subplot),
+                data = resprouts_df, family = nbinom2())
+
+summary(Res2) 
+
+### GLMM FIXED FACTORS INTERACTION
+Res3 <- glmmTMB(No_of_resprouts ~ Treatment *  Fenced * Encroachment_level  + (1 | Site/Plot/Subplot),
+                data = resprouts_df, family = nbinom2())
+summary(Res3) 
+
+
+ # Step 2: Create a boxplot for  resprout (FENCING) 
  Rbp <- ggplot(resprouts_df,
                aes(x = Fenced, y = No_of_resprouts, fill = Fenced)) + facet_wrap(~Treatment)+ 
    geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
@@ -496,6 +634,20 @@ ggsave(Sdc,filename ="Plots/Delta Seedlings Height FENCED boxplotplot.png",
 ## Save boxplot Resprouts
  #ggsave(Rbp,filename ="Plots/Resprouts count FENCED boxplot.png",
         #width = 16, height = 14, units = "cm")
+ 
+ ###### Visualisation No. of resprout (ENCROACHMENT LEVELS)
+ Rbp1 <- ggplot(resprouts_df,
+               aes(x = Encroachment_level, y = No_of_resprouts, fill = Encroachment_level)) + facet_wrap(~Treatment)+ 
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Encroachment_level", y = "Average no. of resprouts on cut stumps") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ ## Save boxplot Resprouts - ENCROACHMENT LEVEL
+ ggsave(Rbp1,filename ="Plots/Resprouts count ENCROACHED boxplot.png",
+ width = 16, height = 14, units = "cm")
+ 
  
  #### ### Violin plot for resprouts on cut stumps
  Rpv <- ggplot(resprouts_df,
@@ -547,6 +699,7 @@ ggsave(Sdc,filename ="Plots/Delta Seedlings Height FENCED boxplotplot.png",
  #sempler <- lmer(simpson_index~ Treatment * Fenced +(1|Site), data =SeedSimp)
  #summary(sempler) # no diffference in Simpsons diversity across treatments. Though Fencing matters removing the fence lowers the seedling simpson index
  
+
  ##Visualisation; Boxplot
  See <- ggplot(SeedSimp, aes(x = Fenced, y = simpson_index, fill = Fenced)) + facet_wrap(~Treatment) +
    geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
@@ -860,4 +1013,174 @@ SapF <- SapF %>%
  
 
 ###############################################################
+ ########### SIMPSONS INDEX OF DIVERSITY (1 - D)
+ 
+ SapF <- read_csv("DATA/March2025/WoodyPC.csv")
+ 
+ #Data   
+ SapF <- SapF %>% 
+   mutate(
+     woody_cat = case_when(
+       Woody_class == "Cut stump"          ~ "Cut stump",
+       between(`Max_height(m)`, 0.05, 0.50)          ~ "Seedlings",
+       between(`Max_height(m)`, 0.51, 1.49)          ~ "Saplings",
+       between(`Max_height(m)`, 1.5, 21.0)           ~ "Trees",
+       TRUE                                 ~ NA_character_
+     )
+   ) 
+ ### new 
+ treeS <- SapF %>%
+   filter(
+     woody_cat == "Trees",
+     Year %in% c(2024, 2025)
+   )
+ 
+ #create vector
+ TrSimpD <- treeS %>%
+   filter(!is.na(Species_name)) %>%  
+   group_by(Site, Plot, Subplot, Fenced, Treatment,Encroachment_level, Year, Species_name) %>% 
+   summarise(abundance = n())%>%
+   summarise(
+     Simpson_index1 = 1 - sum((abundance / sum(abundance))^2),
+     .groups = "drop"
+   )
+ 
+ 
+ #### USING Mixed models
+ # GLMM - Use Beta regression as its designed for continuous outcomes between 0 and 1
+
+ tsimpD3 <- glmmTMB(Simpson_index1 ~ Treatment * Year * Fenced  + (1 | Site/Plot/Subplot),
+                    data = TrSimpD, family = beta_family(link = "logit"))
+
+  summary(tsimpD3)
+ 
+###Including encroachment level on interactions
+  tsimpD4 <- glmmTMB(Simpson_index1 ~ Treatment * Year * Encroachment_level  + (1 | Site/Plot/Subplot),
+                     data = TrSimpD, family = beta_family(link = "logit"))
+  
+  summary(tsimpD4)  
+  
+# Test and compare estimated marginal means of treatment over time
+  #emm1 <- emmeans(tsimpD3, ~ Treatment | Fenced)
+  #pairs(emm1)
+  
+# Or plot interactions
+  plot(emm1)  
+  
+
+ ##Visualisation; Boxplot for 1-D (FENCING) 
+ tsr <- ggplot(TrSimpD, aes(x = Fenced, y = Simpson_index1, fill = Fenced)) + facet_wrap(~Treatment) +
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fenced", y = "Trees Simpsons index of diversity (1-D)") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ # Visualisation for Encroachment level  
+ betsd <- ggplot(TrSimpD, aes(x = Encroachment_level, y = Simpson_index1, fill =  Encroachment_level)) + facet_wrap(~Treatment) +
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Encroachment_level", y = "Trees Simpsons index of diversity (1-D)") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ ##saving BOXPLOT plot for Fenced 
+ #ggsave(tsr,filename ="Plots/Trees Simpsons INDEX of DIVERSITY  Boxplot.png",
+        #width = 16, height = 14, units = "cm")
+ 
+ ggsave(betsd,filename ="Plots/Trees Simpsons INDEX of DIVERSITY BE  Boxplot.png",
+        width = 16, height = 14, units = "cm")
+ 
+ #### Violin plot for Simpson's diversity
+ tsdv <- ggplot(TrSimpD, aes(x = Fenced, y = Simpson_index1, fill = Fenced)) + facet_wrap(~Treatment) +
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fenced", y = "Trees Simpsons index of diversity (1-D)") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ #saving VIOLINPLOT plot
+ ggsave(tsdv,filename ="Plots/Trees Simpsons Iindex of Diversity Violinplot.png",
+      width = 16, height = 14, units = "cm")
+ 
+ ###############################################################################
+ ###################################  Δ SIMPSONS INDEX OF DIVERSITY (1-D) TREES 
+ 
+ ## Calculate species abundance per plot
+ TrSimpD <- treeS %>%
+   filter(!is.na(Species_name)) %>%  
+   group_by(Site, Plot, Subplot, Fenced, Treatment,Encroachment_level, Year, Species_name) %>% 
+   summarise(abundance = n())%>%
+   summarise(
+     Simpson_index1 = 1 - sum((abundance / sum(abundance))^2),
+     .groups = "drop"
+   )
+ 
+ 
+ # . Pivot the two years side‑by‑side and compute Δ SIMPSONS DIVERSITY
+ tsd_Delta <- TrSimpD %>% 
+   pivot_wider(names_from  = Year,
+               values_from = Simpson_index1,
+               names_glue  = "sw_{Year}") %>% 
+   mutate(Simpson_index1 = sw_2025 - sw_2024)   
+ 
+ ### Removing non‑finite (NA, ±Inf) *and* (if on log scale) non‑positive ──
+ tsd_delta_clean <- tsd_Delta %>% 
+   filter(
+     is.finite(Simpson_index1),   # drop NA / Inf / -Inf
+     Simpson_index1 != 0          # <- only if you’re using a log scale; otherwise omit
+   )
+ 
+ ####Mixed models analysis
+ tsimpDD <- glmmTMB(Simpson_index1 ~ Treatment * Fenced  + (1 | Site/Plot/Subplot),
+                    data = tsd_delta_clean, family = gaussian(link = "identity"))
+ 
+ summary(tsimpDD)
+ 
+ ###Including encroachment level on interactions
+ tsimpD1 <- glmmTMB(Simpson_index1 ~ Treatment * Encroachment_level  + (1 | Site/Plot/Subplot),
+                    data = tsd_delta_clean, family = gaussian(link = "identity"))
+ 
+ summary(tsimpD1)  
+ 
+
+ ##Visualisation; Boxplot (1-D)
+ trsd <- ggplot(tsd_delta_clean, aes(x = Fenced, y = Simpson_index1, fill = Fenced)) + facet_wrap(~Treatment) +
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fenced", y = "Δ Trees Simpsons index of diversity (1-D)") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ ####saving BOXPLOT plot
+ ggsave(trsd,filename ="Plots/Delta Trees Simpsons index of diversity Boxplot.png",
+ width = 16, height = 14, units = "cm")
+ 
+ #### Violin plot for Simpson's diversity - FENCING
+ tsvi <- ggplot(tsd_delta_clean, aes(x = Fenced, y = Simpson_index1, fill = Fenced)) + facet_wrap(~Treatment) +
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fenced", y = "Δ Trees Simpsons index of diversity (1-D)") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+##saving VIOLINPLOT plot - FENCING
+ ggsave(tsvi,filename ="Plots/ Delta Trees Simpsons ID Violinplot.png",
+        width = 16, height = 14, units = "cm")
+ 
+ 
+ ##### Violin plot for Simpson's diversity - ENCROACHMENT LEVEL
+ tsvii <- ggplot(tsd_delta_clean, aes(x = Encroachment_level, y = Simpson_index1, fill = Fenced)) + facet_wrap(~Treatment) +
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Encroachment_level", y = "Δ Trees Simpsons index of diversity (1-D)") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ ##saving VIOLINPLOT plot - ENCROACHMENT LEVEL
+ ggsave(tsvii,filename ="Plots/ Delta Trees Simpsons ID Violinplot BE.png",
+        width = 16, height = 14, units = "cm")
+ 
+ #############################################
  
