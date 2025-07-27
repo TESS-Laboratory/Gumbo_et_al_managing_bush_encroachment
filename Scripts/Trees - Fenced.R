@@ -16,6 +16,9 @@ library(officer)
 library(glmmTMB)
 library(DHARMa)   # model diagnostics GLMM
 library(performance)  # model diagnostics
+library(car)
+
+
 
 theme_beautiful <- function() {
   theme_bw() +
@@ -69,6 +72,7 @@ Ttdata <- Ttdata %>%
         # Check missing values
          summary(Ttdata$Trees)
          
+#######         
      ###2. Create Pre/Post Variable
   Ttdata <- Ttdata %>%
   mutate(period = ifelse(as.numeric(as.character(Year)) < 2025, "PRE", "POST")) %>%
@@ -234,9 +238,11 @@ SapF <- SapF %>%
       Woody_class == "Cut stump"          ~ "Cut stump",
       between(`Max_height(m)`, 0.05, 0.50)          ~ "Seedlings",
       between(`Max_height(m)`, 0.51, 1.49)          ~ "Saplings",
+      between(`Max_height(m)`, 1.5, 21.0)           ~ "Trees",
       TRUE                                 ~ NA_character_
     )
   )
+
 
 ###
 # Step 1: Filter seed only and years 2021 and 2022
@@ -313,18 +319,20 @@ ggsave(Sdc,filename ="Plots/Delta Seedlings Height FENCED boxplotplot.png",
        Woody_class == "Cut stump"          ~ "Cut stump",
        between(`Max_height(m)`, 0.05, 0.50)          ~ "Seedlings",
        between(`Max_height(m)`, 0.51, 1.49)          ~ "Saplings",
+       between(`Max_height(m)`, 1.5, 21.0)           ~ "Trees",
        TRUE                                 ~ NA_character_
      )
    )
  
+ 
  seed_sub <- SapF %>% 
    filter(woody_cat == "Seedlings", Year %in% c(2024, 2025)) %>% 
-   count(Site, Plot, Subplot, Treatment, Fenced, Encroachment_level, Year, name = "Seedlings") %>% 
+   count(Site, Plot, Subplot, Treatment, Fencing, Encroachment_level, Year, name = "Seedlings") %>% 
    mutate(density_ha = Seedlings * 10000 / 600)     # convert to ha⁻¹
  
  # ── 2. Aggregate to Treatment × Fenced × Year (mean density) ──────────────
  seed_treat <- seed_sub %>% 
-   group_by(Site, Plot, Subplot, Treatment, Fenced, Encroachment_level, Year) %>% 
+   group_by(Site, Plot, Subplot, Treatment, Fencing, Encroachment_level, Year) %>% 
    summarise(mean_dens_ha = mean(density_ha), .groups = "drop")  # ← use sum() if preferred
  
  
@@ -332,12 +340,12 @@ ggsave(Sdc,filename ="Plots/Delta Seedlings Height FENCED boxplotplot.png",
    group_by(Site, Subplot) %>%
    filter(all(c(2024, 2025) %in% Year)) %>%
    ungroup() %>%
-   group_by(Site, Plot, Subplot, Treatment, Fenced, Encroachment_level, Year) %>%
+   group_by(Site, Plot, Subplot, Treatment, Fencing, Encroachment_level, Year) %>%
    summarise(meam_dens_ha = mean(density_ha), .groups = "drop")
  
  
  # ── 3. Pivot the two years side‑by‑side and compute Δ‑density ─────────────
- Seedling_Delta <- seed_treat %>% 
+ Seedling_Delta <- seed_treat1 %>% 
    pivot_wider(names_from  = Year,
                values_from = mean_dens_ha,
                names_glue  = "dens_{Year}") %>% 
@@ -424,9 +432,11 @@ summary(seDd1)
        Woody_class == "Cut stump"          ~ "Cut stump",
        between(`Max_height(m)`, 0.05, 0.50)          ~ "Seedlings",
        between(`Max_height(m)`, 0.51, 1.49)          ~ "Saplings",
+       between(`Max_height(m)`, 1.5, 21.0)           ~ "Trees",
        TRUE                                 ~ NA_character_
      )
    )
+ 
  
  # Step 1: Filter saplings only and years 
  saplings_df <- SapF %>%
@@ -581,7 +591,21 @@ summary(seDd1)
  
  
  ##########################################################
- ######################################################## RESPROUTS RESPROUTS
+ ######################################################## RESPROUTS RESPROUTS RESPROUTS
+ SapF <- read_csv("DATA/March2025/WoodyPC.csv")
+ 
+ ## create 
+ SapF <- SapF %>% 
+   mutate(
+     woody_cat = case_when(
+       Woody_class == "Cut stump"          ~ "Cut stump",
+       between(`Max_height(m)`, 0.05, 0.50)          ~ "Seedlings",
+       between(`Max_height(m)`, 0.51, 1.49)          ~ "Saplings",
+       between(`Max_height(m)`, 1.5, 21.0)           ~ "Trees",
+       TRUE                                 ~ NA_character_
+     )
+   )
+ 
  
  # Step 1: Filter Cut stumps only and years 
  resprouts_df <- SapF %>%
@@ -591,6 +615,7 @@ summary(seDd1)
      !Treatment %in% c("C", "F")  # exclude the two treatments
    )
 
+ 
  ##Mixed models analysis for resprouts
     #res_delta <- lmer(No_of_resprouts~ Treatment * Fenced +(1|Site), data = resprouts_df)
      # summary(res_delta)
@@ -661,6 +686,58 @@ summary(Res3)
 ### Save Violinplot Resprouts
  #ggsave(Rpv,filename ="Plots/Resprouts count FENCED Violinplot.png",
        # width = 16, height = 14, units = "cm")
+ 
+ 
+ ## CUT STUMPS DETERMINED AT SPECIES LEVEL 
+ Sppresprouts2 <- SapF %>%
+   filter(
+     woody_cat == "Cut stump",
+     Year %in% c(2025),
+     !Treatment %in% c("C", "F")  # exclude the two treatments
+   ) %>%
+   group_by(Site, Plot, Subplot, Treatment, Fenced, Encroachment_level, Species_name) %>%
+   summarise(
+     No_of_resprouts = sum(No_of_resprouts, na.rm = TRUE),
+     mean_No_of_resprouts = mean(No_of_resprouts, na.rm = TRUE),
+     n_Cut_stump = n(),
+     .groups = "drop"
+   )
+ 
+## Correcting GLMM for some factors not accounted for in Encroachment level
+ 
+ #Sppresprouts2$Encroachment_level <- as.factor(Sppresprouts2$Encroachment_level)
+ 
+ #contrasts(Sppresprouts2$Encroachment_level) <- contr.sum(2)
+ 
+ #str(Sppresprouts2$Encroachment_level)  # Should say "Factor w/ 2 levels"
+ 
+ 
+## GLMM resprouts per species  
+ ResSP <- glmmTMB(No_of_resprouts ~ Treatment * Encroachment_level * Fenced  + (1 | Site/Plot/Subplot),
+                 data = Sppresprouts2, family = nbinom2())
+ 
+summary(ResSP) 
+ 
+
+emmeans(ResSP, ~ Encroachment_level)
+ 
+ ## Visualisation of RESPROUTING AT SPECIES LEVEL 
+ 
+ sRP<-Sppresprouts2 %>%
+   ggplot(aes(x = reorder(Species_name, -No_of_resprouts), y = No_of_resprouts)) +
+   geom_col(fill = "forestgreen") +
+   labs(
+     x = "Woody Species",
+     y = "Number of resprouts"
+   ) +
+   theme_beautiful() +
+   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+ 
+ ## Save boxplot Resprouts at SPECIES LEVEL
+ ggsave(sRP,filename ="Plots/Resprouts at  SPECIES boxplot.png",
+        width = 16, height = 14, units = "cm")
+ 
+ 
  
 ###################################################################################################
 ##########################################################################################
@@ -1182,5 +1259,364 @@ SapF <- SapF %>%
  ggsave(tsvii,filename ="Plots/ Delta Trees Simpsons ID Violinplot BE.png",
         width = 16, height = 14, units = "cm")
  
- #############################################
+#################################################
  
+#### TREE HEIGHT REDONE
+
+SapF <- read_csv("DATA/March2025/WoodyPC2.csv")
+ 
+ # Converting heights to tress, saplings and seedlings and excluding cut stump. 
+Ttdata  <- SapF %>% 
+mutate(
+     woody_cat = case_when(
+       Woody_class == "Cut stump"          ~ "Cut stump",
+       between(`Max_height(m)`, 0.05, 0.50)          ~ "Seedlings",
+       between(`Max_height(m)`, 0.51, 1.49)          ~ "Saplings",
+       between(`Max_height(m)`, 1.5, 21.0)           ~ "Trees",
+       TRUE                                 ~ NA_character_
+     )
+   )
+ 
+ 
+ #### Step 1: Filter trees only and years 2021 and 2022
+ Ttdata  <- SapF %>%
+   filter(
+     woody_cat == "Trees",
+     Year %in% c(2024, 2025)
+   )         
+ 
+ # Step 2: Create a boxplot for TREEs height 
+ ggplot(Ttdata ,
+        aes(x = Fencing, y =`Max_height(m)`, fill = Fencing)) + facet_wrap(~Treatment)+ 
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   #geom_jitter(width = 0.15, size = 1.5, alpha = 0.8) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fencing", y = "Trees Max_height(m)") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ ####Mixed models analysis
+ treeH <- glmmTMB(`Max_height(m)` ~ Treatment * Fencing  + (1 | Site/Plot/Subplot),
+                    data = Ttdata, family = nbinom12 (link = "log")) 
+ summary(treeH)
+ 
+## GLMM FOR 3 WAY INTERACTIONS
+treeHg <- glmmTMB(`Max_height(m)` ~ Treatment * Fencing * Encroachment_level   + (1 | Site/Plot/Subplot),
+                  data = Ttdata, family = poisson (link = "log")) 
+summary(treeHg) #data severly overdispersed than the nbinomial can handle. take next steps to check mean, variance
+
+# checking if variance is > 1
+var(Ttdata$`Max_height(m)`) / mean(Ttdata$`Max_height(m)`) # var = 0.4390
+
+##test for zero inflation 
+sum(Ttdata$`Max_height(m)` ) / length(Ttdata$`Max_height(m)`)  # Proportion of zeros
+
+# Run diagnostics
+summary(treeHg)  # Check for warnings  
+diagnostics::check_convergence(treeHg)   
+ 
+ ############# Compute Δ‑height (2024 − 2025) per Site/Plot/Subplot/Treatment/Fenced ----
+ # Take the mean height within each grouping for each year before differencing.
+ delta_Theight <- Ttdata  %>%
+   group_by(Site, Plot, Subplot, Treatment, Fencing, Encroachment_level, Year) %>%
+   summarise(mean_height = mean(`Max_height(m)`, na.rm = TRUE), .groups = "drop_last") %>%
+   pivot_wider(
+     names_from  = Year,
+     values_from = mean_height,
+     names_glue  = "height_{Year}"
+   ) %>%
+   mutate(delta_T = height_2025 - height_2024) %>%
+   drop_na(delta_T)   # keep groups where both years are present
+ 
+ # --- 4. Visualise: boxplot of Δ‑height by Treatment & Fencing -------------
+ Tree <- ggplot(delta_Theight,
+                aes(x = Fencing, y = delta_T, fill = Fencing)) + facet_wrap(~Treatment)+ 
+   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fencing", y = "Δ Trees max_height(m)") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ #saving BOXPLOT plot
+ ggsave(Tree,filename ="Plots/Delta Trees Height FENCED boxplotplot.png",
+        width = 16, height = 14, units = "cm")
+ 
+ 
+ #### ### Violin plot for delta TREE height
+ vT <- ggplot(delta_Theight,
+               aes(x = Fencing, y = delta_T, fill = Fencing)) + facet_wrap(~Treatment)+  
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Fencing", y = "Δ Tree max. height (m)") +
+   theme_beautiful() +
+   theme(legend.position = "none")
+ 
+ #saving BOXPLOT plot
+ ggsave(vT,filename ="Plots/Delta Tree Height FENCED Violinplot.png",
+        width = 16, height = 14, units = "cm")               
+ 
+ 
+ 
+###### Visualisation TREE HEIGHT - ENCROACHMENT LEVEL
+ ggplot(delta_Theight,
+ aes(x = Encroachment_level, y = delta_T, fill = Encroachment_level)) + facet_wrap(~Treatment)+ 
+  geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Encroachment level", y = "Δ Trees max_height(m)") +
+  theme_beautiful() +
+  theme(legend.position = "none")
+
+#saving BOXPLOT plot
+ggsave(Tree,filename ="Plots/Delta Trees Height ENCROACHED boxplotplot.png",
+       width = 16, height = 14, units = "cm")
+
+
+#### ### Violin plot for delta TREE height
+vT1 <- ggplot(delta_Theight,
+             aes(x = Encroachment_level, y = delta_T, fill = Fenced)) + facet_wrap(~Treatment)+  
+  geom_violin(trim = FALSE)+
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Encroachment level", y = "Δ Tree max. height (m)") +
+  theme_beautiful() +
+  theme(legend.position = "none")
+
+#saving VIOLIN PLOT - ENCROACHED
+ggsave(vT1,filename ="Plots/Delta Tree Height ENCROACHED Violinplot.png",
+       width = 16, height = 14, units = "cm")               
+
+
+## GLMM analysis for tree Height
+tg<- glmmTMB(delta_T ~ Treatment * Fenced + (1|Site/Plot), data = delta_Theight,
+             family = gaussian(link = "identity"))
+summary(tg)
+
+# 3 way interaction 
+trHeight <- glmmTMB( delta_T ~ Treatment * Fencing * Encroachment_level + (1|Site/Plot/Subplot), data = delta_Theight, 
+              family = gaussian(link = "identity"))  
+summary(trHeight)
+
+
+
+
+tg1<- lmer(delta_T ~ Treatment * Fencing + (1|Site/Plot), data = delta_Theight)
+
+summary(tg1)
+
+
+## Make "Unfenced" the reference level (to see "fenced" coefficients)
+# Check current class of FieldType
+
+class(delta_Theight$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+delta_Theight$Fencing <- factor(delta_Theight$Fencing, ordered = FALSE)
+
+# Verify
+levels(delta_Theight$Fencing)  # Should show "Open" "Closed" (or vice versa)
+
+# Set "Fenced" as the reference level (to see "Unfenced" coefficients)
+delta_Theight$Fencing <- relevel(delta_Theight$Fencing, ref = "Unfenced")
+
+# Check if your model exists and is a valid GLMM object
+class(tg1)  # Should print "lmerMod" or "glmmTMB"
+
+# Correct way to extract random effects variances
+summary(tg1)$varcor  # For lmer models
+
+# check sample size per group
+(table(delta_Theight$Treatment, delta_Theight$Fencing, delta_Theight$Encroachment_level))
+
+#MIXED MODEL for Treatment and Fencing
+tg1<- lmer(delta_T ~ Treatment * Fencing + (1|Site), data = delta_Theight)
+summary(tg1)
+
+#Mixed models T*F*E
+tg2<- lmer(delta_T ~ Treatment * Fencing * Encroachment_level* + (1|Site), data = delta_Theight)
+summary(tg2)
+
+########################################
+##################################### TREE DENSITY TREE DENSITY TREE DENSITY
+
+SapF <- read_csv("DATA/March2025/WoodyPC2.csv")
+
+
+## create 
+SapF <- SapF %>% 
+  mutate(
+    woody_cat = case_when(
+      Woody_class == "Cut stump"          ~ "Cut stump",
+      between(`Max_height(m)`, 0.05, 0.50)          ~ "Seedlings",
+      between(`Max_height(m)`, 0.51, 1.49)          ~ "Saplings",
+      between(`Max_height(m)`, 1.5, 21.0)           ~ "Trees",
+      TRUE                                 ~ NA_character_
+    )
+  )
+
+
+Treesub <- SapF %>% 
+  filter(woody_cat == "Trees", Year %in% c(2024, 2025)) %>% 
+  count(Site, Plot, Subplot, Treatment, Fencing, Encroachment_level, Year, name = "Trees") %>% 
+  mutate(density_ha = Trees * 10000 / 600)     # convert to ha⁻¹
+
+# ── 2. Aggregate to Treatment × Fenced × Year (mean density) ──────────────
+trees_treat <- Treesub %>% 
+  group_by(Site, Plot, Subplot, Treatment, Fencing, Encroachment_level, Year) %>% 
+  summarise(mean_dens_ha = mean(density_ha), .groups = "drop")  # ← use sum() if preferred
+
+
+
+# ── 3. Pivot the two years side‑by‑side and compute Δ‑density ─────────────
+Tree_DeltaD <- trees_treat %>% 
+  pivot_wider(names_from  = Year,
+              values_from = mean_dens_ha,
+              names_glue  = "dens_{Year}") %>% 
+  mutate(delta_Tdens = dens_2025 - dens_2024)        
+
+
+
+### Make "Unfenced" the reference level (to see "fenced" coefficients)
+# Check current class of FieldType
+
+class(Tree_DeltaD$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+Tree_DeltaD$Fencing <- factor(Tree_DeltaD$Fencing, ordered = FALSE)
+
+# Verify
+levels(Tree_DeltaD$Fencing)  # Should show "Open" "Closed" (or vice versa)
+
+# Set "Fenced" as the reference level (to see "Unfenced" coefficients)
+Tree_DeltaD$Fencing <- relevel(Tree_DeltaD$Fencing, ref = "Unfenced")
+
+# Check if your model exists and is a valid GLMM object
+class(tre)  # Should print "lmerMod" or "glmmTMB"
+
+# Correct way to extract random effects variances
+summary(tre)$varcor  # For lmer models
+
+
+##Mixed models analysis for seedlings
+
+tre <- glmmTMB(delta_Tdens ~ Treatment * Fencing  + (1 | Site/Plot/Subplot),
+               data = Tree_DeltaD, family = gaussian(link = "identity")) 
+summary(tre)
+
+
+
+## GLMM FOR 3 WAY INTERACTIONS
+tre2 <- glmmTMB(delta_Tdens ~ Treatment * Fencing * Encroachment_level  + (1 | Site/Plot/Subplot),
+               data = Tree_DeltaD, family = gaussian(link = "identity")) 
+summary(tre2)
+
+
+treL <- lmer(delta_Tdens ~ Treatment * Fencing * Encroachment_level + (1|Site), data = Tree_DeltaD)
+summary(treL)
+
+
+tre3 <- glmmTMB(delta_Tdens ~ Treatment * Fencing * Encroachment_level  + (1 | Site),
+                family = gaussian(link = "identity"), data = Tree_DeltaD, dispformula = ~1) 
+summary(tre3)
+
+
+# Using + (1 |Site) +  (1 |Plot)
+  #tre3 <- glmmTMB(delta_Tdens ~ Treatment * Fencing * Encroachment_level  + (1 | Site)+ (1 |Plot) + (1 |Subplot),
+              #  data = Tree_DeltaD, family = gaussian(link = "identity")) 
+  #summary(tre3)
+
+
+#check for NAs
+any(is.na(resid(tre2)))  # Check for NA residuals
+any(is.infinite(resid(tre2)))  # Check for Inf/-Inf
+
+##2. Verify Model Convergence.  For non-lm models (e.g., glm, lmer), check convergence:
+
+ #tre2$converged  # Should be TRUE
+
+
+
+##Check for residuals
+qqnorm(resid(tre2))
+qqline(resid(tre2))
+
+
+##Check for outliers
+residuals_std <- scale(resid(tre2))  # Standardize residuals
+outliers <- which(abs(residuals_std) > 3)  # Find outliers
+print(outliers)
+
+
+## Shapiro-Wilk Test for Normality
+
+shapiro.test(resid(tre2))  #p < 0.05 → residuals are non-normal.
+  # result p = 0.000167, hence residuals are normal
+
+##B. Levene’s Test for Homoscedasticity
+# Bin fitted values into 3-5 groups
+fitted_binned <- cut(fitted(tre2), breaks = 5)
+leveneTest(resid(tre2) ~ fitted_binned)  # p < 0.05 → unequal variance (heteroscedasticity)
+
+##Plot the conditional effects (e.g., using emmeans or ggeffects):
+emm <- emmeans(tre2, ~ Treatment | Fencing * Encroachment_level)
+plot(emm)
+
+
+## Use likelihood ratio tests (LRTs) to compare nested models
+anova(tre2, complex_model, test = "LRT")  
+
+
+###filter control
+TrefILTERTHF <- SapF %>% 
+  filter(woody_cat == "Trees", Year %in% c(2024, 2025), Treatment %in% "F") %>% 
+  count(Site, Plot, Subplot, Treatment, Fencing, Encroachment_level, Year, name = "Trees") %>% 
+  mutate(density_ha = Trees * 10000 / 600)     # convert to ha⁻¹
+
+
+
+## refitting and comparing 2-way and 3-way interactions 
+
+# Fit the 2-way interaction model (simpler model)
+tre2a <- glmmTMB(delta_Tdens ~ Treatment * Fencing + Treatment * Encroachment_level + Fencing * Encroachment_level  + (1 | Site/Plot/Subplot),
+                data = Tree_DeltaD, family = gaussian(link = "identity"))
+summary(tre2a)
+
+# Fit the 3-way interaction model (complex model)
+tre3a <- glmmTMB(delta_Tdens ~ Treatment  * Encroachment_level * Fencing + (1 | Site),
+                 data = Tree_DeltaD, family = gaussian(link = "identity"))
+summary(tre3a) 
+
+
+#Model failed to converge, try this one 
+tre3a <- glmmTMB(delta_Tdens ~ Treatment  * Encroachment_level * Fencing + (1 | Site),
+                control = glmmTMBControl(optimizer = optim, optArgs = list(method = "BFGS")),
+                data = Tree_DeltaD)
+
+#try another model for converging
+tre3_opt <- glmmTMB(
+  delta_Tdens ~ Treatment  * Encroachment_level * Fencing +
+      (1 | Site),
+    control = glmmTMBControl(
+      optimizer = optim,
+      optArgs = list(method = "BFGS")
+    ),
+    data = Tree_DeltaD
+  )
+
+summary(tre3_opt) # this model too has failed to converge, results producing NaN
+
+
+#Check for excess zeros 
+table(Tree_DeltaD$delta_Tdens == 0)  # Check for excess zeros
+
+# visualising 3way 
+ggplot(Tree_DeltaD, aes(x = Treatment, y = delta_Tdens, color = Fencing)) +
+  geom_boxplot() +
+  facet_wrap(~ Encroachment_level) +
+  theme_beautiful()
+
+###2. Now Compare the two models tre2a and tre3a with Likelihood Ratio Test (LRT)
+
+anova(tre2a, tre3a, test = "LRT")  # Or test = "Chisq"
+
+
+summary(tre3a)
+
