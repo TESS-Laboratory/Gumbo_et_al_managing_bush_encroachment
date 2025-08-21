@@ -279,7 +279,7 @@ woody_split25$Saplings <- ifelse(woody_split25$Size_Class == "Saplings",woody_sp
 woody_split25$Trees <- ifelse(woody_split25$Size_Class == "Trees", woody_split25$`Max_height(m)`, NA)
 
 ### Save the new dataset with separate columns
-     write.csv(woody_split25, "woody_with_separate_columns25.csv", row.names = FALSE)
+    # write.csv(woody_split25, "woody_with_separate_columns25.csv", row.names = FALSE)
 
 ######################################################################################################
 

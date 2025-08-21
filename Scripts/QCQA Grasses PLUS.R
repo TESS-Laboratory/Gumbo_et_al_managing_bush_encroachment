@@ -1212,6 +1212,8 @@ sprintf("y = %.2f %+.2fx\nR² = %.3f, n = %d", int, slope,  r2, n)
 
 eq0 <- sprintf("y = %.2f %+.2fx\nR² = %.3f, n = %d", int, slope,  r2, n)
 
+
+
 ##Using same data to fit INTERCEPT PASSING THROUGH ORIGIN   
 
 rlbLO <- ggplot(RGdata, aes(x = log_DPH_Height, y = log_Biomass_kg_ha))+
@@ -1225,15 +1227,33 @@ rlbLO <- ggplot(RGdata, aes(x = log_DPH_Height, y = log_Biomass_kg_ha))+
   annotate("text",
            x = min(RGdata$log_DPH_Height, na.rm = TRUE),
            y = 0.90 * max(RGdata$log_Biomass_kg_ha, na.rm = TRUE),            
-           label = eq0,  hjust = 0, size = 3, colour = "blue") +
+          label = eq0,  hjust = 0, size = 3, colour = "blue") +
+  labs(x = "log DPM Height (cm)",
+       y = "log Standing grass biomass (kg/ha)") +
+  theme_beautiful()
+#ggsave plot
+ggsave(rlbLO, filename = "Plots/ Robust regression-Log BIOMASS and Intercept.png",
+       width = 16, height = 14, units = "cm")  
+
+
+# REMOVING intercept line
+rob <-  ggplot(RGdata, aes(x = log_DPH_Height, y = log_Biomass_kg_ha))+
+  geom_point()+
+  geom_smooth(method = "lm", se = TRUE, color = "red")+
+  #geom_smooth(method = "lm", formula = y ~ x - 1, colour = "blue") + # zero‑intercept
+  annotate("text",
+           x = min(RGdata$log_DPH_Height, na.rm = TRUE),
+           y = max(RGdata$log_Biomass_kg_ha, na.rm = TRUE),
+           #label = eq,   hjust = 0, size = 3, colour = "red") +
   labs(x = "log DPM Height (cm)",
        y = "log Standing grass biomass (kg/ha)") +
   theme_beautiful()
 
-
 #ggsave plot
- ggsave(rlbLO, filename = "Plots/ Robust regression-Log BIOMASS and Intercept.png",
+ggsave(rob, filename = "Plots/ 2Robust regression-Log BIOMASS no intercept.png",
        width = 16, height = 14, units = "cm")  
+
+
 
 
 ####################################################################

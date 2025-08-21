@@ -464,13 +464,13 @@ summary(seDd1)
 ###################################################NUMBER OF SAPLING RECRUITMENT
  
  # Summarize total weight by Site, Treatment, and Year
- grass_summary <- saplings_df %>%  
+ sap_summary <- saplings_df %>%  
    filter(!is.na(`Max_height(m)`), Year %in% c(2024, 2025)) %>%
-   group_by(Site, Plot, Subplot, Fenced, Treatment, Year) %>%
+   group_by(Site, Plot, Subplot, Fencing, Treatment, Year) %>%
    summarise(total_height = round(sum(`Max_height(m)`)), .groups = "drop")
  
  #Mixed models analysis for number of saplings
- sapl <- lmer(total_height~ Treatment * Fenced +(1|Site), data = grass_summary)
+ sapl <- lmer(total_height~ Treatment * Fenced +(1|Site), data = sap_summary)
  summary(sapl)
  
  # Plot the results

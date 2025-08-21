@@ -38,7 +38,7 @@ print(sapply(WC, class))
 
 # Range and summary of numeric variables
 cat("\n---- HEIGHT SUMMARY ----\n")
-print(summary(WC$Max_Height(m)))
+print(summary(WC$`Max_height(m)`))
 
 cat("\n---- Fencing ----\n")
 print(summary(WC$Fenced))
@@ -52,7 +52,7 @@ print(length(unique(WC$Species_name)))
 print(head(unique(WC$Species_name), 50))  # show first 10 species
 
 # Outlier detection (boxplot)
-boxplot(TC$Height, main = "Boxplot of Height", ylab = "Max_Height(m)", col = "lightblue")
+boxplot(WC$Height, main = "Boxplot of Height", ylab = "`Max_height(m)`", col = "lightblue")
 
 ####### ----------------------------########################################
 # QUALITY ASSURANCE (QA)
