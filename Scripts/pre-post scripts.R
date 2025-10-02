@@ -75,7 +75,9 @@ SapF <- SapF %>%
       between(`Max_height(m)`, 0.51, 1.49)          ~ "Saplings",
       between(`Max_height(m)`, 1.5, 21.0)           ~ "Trees",
       TRUE                             ~ NA_character_
-    )
+    ),
+    Treatment = factor(Treatment),
+    Fencing = factor(Fencing)
   )
 
 
@@ -180,7 +182,7 @@ qqline(resid(Treeden))
 performance::check_convergence(Treeden) # TRUE the model converged
 
 ## MODEL performance
-performance::check_model(Treeden)
+performance::check_model(Treeden2)
 
 
 ##Check for outliers
@@ -392,8 +394,21 @@ Seedpp<- ggplot(strt_comparison2,
   ) +
   theme_beautiful() 
 
+## increaseing font size for x and y axis
+Seedpp2<- ggplot(strt_comparison2, 
+                aes(x = Treatment, y = density_ha, fill = Period)) + facet_wrap(~Fencing)+ 
+  geom_boxplot(alpha = 0.8, outlier.shape = NA, position = position_dodge(width = 0.8)) +
+  labs(x = "Treatment", 
+       y = "Seedlings density per ha",
+  ) +
+  theme_beautiful() +
+  theme(
+    axis.title = element_text(size = 14),      # Axis titles
+    axis.text = element_text(size = 12)        # Axis tick labels
+  )
+
 ##saving pre& post treatment BOXPLOT  -  excluding encroachment level
-ggsave(Seedpp,filename ="Plots/PP Seedling Density BOXplot.png",
+ggsave(Seedpp2,filename ="Plots/bPP Seedling Density BOXplot.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -411,11 +426,23 @@ Seedbxp <- ggplot(Seedlings_Delta,
                   aes(x = Treatment, y = delta_Seeddens)) + facet_wrap(~ Fencing)+ 
   geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
   geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Treatment", y = "Δ Seedling density per ha") +
+  labs(x = "Treatment", y = "Change in Seedling density per ha") +
   theme_beautiful() #
 
+## increased font size for x and y axis
+Seedbxp1 <- ggplot(Seedlings_Delta,
+                  aes(x = Treatment, y = delta_Seeddens)) + facet_wrap(~ Fencing)+ 
+  geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Treatment", y = "Change in Seedling density per ha") +
+  theme_beautiful() +
+  theme(
+    axis.title = element_text(size = 14),      # Axis titles
+    axis.text = element_text(size = 12)        # Axis tick labels
+  )
+
 ##saving BOXPLOT - seedling density 
-ggsave(Seedbxp,filename ="Plots/3Delta Seedling Density INTERACTIONS BOXplot.png",
+ggsave(Seedbxp1,filename ="Plots/3bDelta Seedling Density INTERACTIONS BOXplot.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -441,27 +468,32 @@ Seedl3 <- glmmTMB(delta_Seeddens ~ Treatment * Fencing + (1|Site) + (1|Plot),  #
                   data = Seedlings_Delta, family = gaussian(link = "identity"))
 summary(Seedl3) #  converged
 
-##2 random effects as independent
+##2 fixed effects as independent
 Seedl1 <- glmmTMB(delta_Seeddens ~ Treatment + Fencing + (1|Site) + (1|Plot),  # Crossed effects,
                   data = Seedlings_Delta, family = gaussian(link = "identity"))
 summary(Seedl1)
 
 
 #check if model converged
-performance::check_convergence(Seedl1) # TRUE the model converged
+performance::check_convergence(Seedl3) # TRUE the model converged
 
 # MODEL performance
-performance::check_model(Seedl1)
+performance::check_model(Seedl3)
 
 # Shapiro-Wilk Test for Normal distribution of residuals
-shapiro.test(resid(Seedl1))  #p < 0.05 → residuals are non-normal.
+shapiro.test(resid(Seedl3))  #p < 0.05 → residuals are non-normal.
 # result p = 0.7431, hence residuals are normal
+
+
+#Q-Q plots check if residuals of a model follow a normal distribution.
+qqnorm(resid(Seedl3)) 
+qqline(resid(Seedl3))
 
 ##B. Levene’s Test for Homoscedasticity
 # Bin fitted values into 3-5 groups
-fitted_binned <- cut(fitted(Seedl1), breaks = 5)
-leveneTest(resid(Seedl1) ~ fitted_binned)  # p < 0.05 → unequal variance (heteroscedasticity)
-# results p = 0.7637 equal variance 
+fitted_binned <- cut(fitted(Seedl3), breaks = 5)
+leveneTest(resid(Seedl3) ~ fitted_binned)  # p < 0.05 → unequal variance (heteroscedasticity)
+# results p = 0.918 equal variance 
 
 #Variance Inflation Factor (VIF) to detect collinearity,VIF > 5 or 10 is problematic shows high collinearity
 VIF(Seedl3)
@@ -579,11 +611,13 @@ SapL1 <- glmmTMB(delta_Sapsdens ~ Treatment * Fencing + (1|Site) + (1|Plot),  # 
 summary(SapL1)
 
 #2. Random effects no interaction 
-SapL2 <- glmmTMB(delta_Sapsdens ~ Treatment + Fencing + (1|Site) + (1|Plot),  # Crossed effects,
+SapL2 <- glmmTMB(delta_Sapsdens ~ Treatment + Fencing + (1|Site), #+ (1|Plot),  # Crossed effects,
                  data = Saplings_Delta, family = gaussian(link = "identity"))
 summary(SapL2)
 
 #check if model converged
+performance::check_convergence(SapL1) # FALSE the model ddnt converge
+
 performance::check_convergence(SapL2) # TRUE the model converged
 
 # MODEL performance
@@ -715,7 +749,7 @@ resprouts_df <- SapF %>%
   filter(
     woody_cat == "Cut stump",
     Year %in% c(2025),
-    !Treatment %in% c("C", "F")  # exclude the two treatments
+    !Treatment %in% c("C", "F", "TFB")  # exclude the two treatments
   )
 
 
@@ -1176,24 +1210,7 @@ qqline(resid(robust_model))
 
 
 
-
-
-
-##########################################RESPROUTS ON CUT STUMPS
-#Filter Cut stumps only and years 
-Resprouts_df <- SapF %>%
-  filter(
-    woody_cat == "Cut stump",
-    Year %in% c(2025),
-    !Treatment %in% c("C", "F")  # exclude the two treatments
-  )
-
-
-
-
-
-
-###CHECKING FOR MULTICOLLINEARITY
+#######  CHECKING FOR MULTICOLLINEARITY
 
 #Look at cross-tabulation of factors
 
@@ -1239,14 +1256,60 @@ CramerV(table(trt_comparison2$Treatment, trt_comparison2$Fencing))
 #Cramér’s V tells you how strong the association is (0 = none, 1 = perfect association).
 
 
-## TO CHECK IF RANDOM EFFECTS (Site and Paddock) are correlated
+## TO CHECK IF RANDOM EFFECTS (Site and Plot) are correlated
 
 table(trt_comparison2$Site, trt_comparison2$Plot)
   
-#To see how much variation each random effect explains
+#To check how much variation each random effect explains
 VarCorr(mod_t)
 #If both variance components are >0 → both contribute.
 #If one ≈0 → you could drop that random effect.
- # RESULT: site = 0.6, Paddock = 0.0000156 
+ # RESULT: site = 0.6, Plot = 0.0000156 
 
+
+#checking for crossed effects
+cat("\nSites and Plot:\n")
+print(table(strt_comparison2$Site, strt_comparison2$Plot))  # Crossed structure check
   
+## Checking for groups and if they are balanced
+table(strt_comparison2$Site) # <5 groups not recommended
+
+# Check for balance random effects
+strt_comparison2 %>%
+  count(Site, Year) %>%
+  print(n = Inf)  # Show all combinations
+
+
+# Check factor levels on Fixed effects
+table(strt_comparison2$Treatment)
+table(strt_comparison2$Fencing)
+
+# Ensure factors are properly coded
+str(strt_comparison2$Treatment)  # Should be factor, not character
+
+# convert from character to factor
+# Convert to factor
+SapF$Treatment <- as.factor(SapF$Treatment)
+
+# Ensure factors are properly coded
+str(SapF$Treatment)
+
+str(strt_comparison2)
+
+
+# 2. Basic structure
+cat("\n2. DATA STRUCTURE\n")
+cat("   Total observations:", nrow(strt_comparison2), "\n")
+cat("   Variables:", ncol(strt_comparison2), "\n")
+
+
+# Rule of thumb: need multiple observations per group
+observations_per_group <- strt_comparison2 %>%
+  group_by(Site) %>%
+  summarise(n = n())
+
+
+
+
+
+
