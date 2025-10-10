@@ -1,0 +1,275 @@
+---
+title: "GLMM modeling: Design choices in GLMM, interpretation of the diagnostic plots and preliminary interpretation of results"
+author: "Taps"
+editor: visual
+format: 
+  html:
+    colorlinks: true
+    toc: true
+    toc-depth: 3
+    code-fold: true
+---
+
+**Title: Managing bush encroachment on a holistically managed rangeland in a semi-arid savanna**
+
+**Research objectives:**   
+
+i\. To determine the efficacy of selected bush encroachment management strategies including woody plant thinning, targeted herbicide application, browsers (goats), and prescribed fire, on seedling density, sapling recruitment, and resprouting dynamics.
+
+ii\. To evaluate the effects of bush encroachment management strategies on above-ground grass biomass, grass species richness, and diversity at encroached sites.
+
+# Why Generalised Linear Mixed Models (GLMMs)?
+
+GLMMs are an extension of:
+
+a.     **Linear Models (LM):** Assume normally distributed data. Many ecological responses (e.g., presence/absence, counts, proportions) are not normal.
+
+b.     **Generalised Linear Models (GLM):** Solve the non-normal distribution problem (e.g., using Poisson for counts, Binomial for presence/absence) but still assume all data points are independent.
+
+c.     **Linear Mixed Models (LMM):** Solve the non-independence problem by adding random effects, but assume the response variable is normally distributed.
+
+-   Handles complex data structures: GLMMs can account for nested or hierarchical data structures, which are common in ecology (e.g., individuals within sites, species within communities). GLMMs can account for the hierarchical structure of data collected across multiple sites or over time. GLMMs can be used to analyse the structure and composition of communities, accounting for the complex interactions between species and environmental factors.
+
+-   GLMMs can cope with complicated data structures like nested data, temporal and spatial correlation, and repeated measurements for all types of data (continuous, binary, proportional, counts, and counts with lots of zeros) (Zuur et al.,2009)
+
+-   Model used : Seedl3 \<- glmmTMB(delta_Seeddens \~ Treatment \* Fencing + (1\|Site) + (1\|Plot), data = Seedlings_Delta, family = gaussian(link = "identity"))
+
+# GLMMs in use
+
+## 1. Data structure
+
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 1. Data structure."}
+
+library(tidyverse)
+library(vegan)
+library(multcompView)
+library(patchwork)
+library(lmerTest)
+library(ggplot2)
+library(dplyr)
+library(Matrix)
+library(lme4)
+library(emmeans)
+library(here) ## MOST IMPORTANT NOT TO FORGET THIS ONE in quarto
+library(robustbase)
+library(sjPlot)
+library(flextable)
+library(officer)
+library(glmmTMB)
+library(DHARMa)   # model diagnostics GLMM
+library(performance)  # model diagnostics
+library(car)
+library(openxlsx)
+library(broom.mixed) #convert model objects to data frames
+library(corrplot)
+library(robustlmm) # for robust regression analysis
+library(boot)  # For bootsrapping
+library(DescTools)
+library(effectsize)
+
+theme_beautiful <- function() {
+  theme_bw() +
+    theme(
+      text = element_text(family = "Helvetica"),
+      axis.text = element_text(size = 8, color = "black"),
+      axis.title = element_text(size = 8, color = "black"),
+      axis.line.x = element_line(size = 0.3, color = "black"),
+      axis.line.y = element_line(size = 0.3, color = "black"),
+      axis.ticks = element_line(size = 0.3, color = "black"),
+      panel.border = element_blank(),
+      panel.grid.major.x = element_blank(),
+      panel.grid.minor.x = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      panel.grid.major.y = element_blank(),
+      plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), units = , "cm"),
+      plot.title = element_text(
+        size = 8,
+        vjust = 1,
+        hjust = 0.5,
+        color = "black"
+      ),
+      legend.text = element_text(size = 8, color = "black"),
+      legend.title = element_text(size = 8, color = "black"),
+      legend.position = c(0.9, 0.9),
+      legend.key.size = unit(0.9, "line"),
+      legend.background = element_rect(
+        color = "black",
+        fill = "transparent",
+        size = 2,
+        linetype = "blank"
+      )
+    )
+}
+
+## LOAD DATA
+
+SapF <- read_csv(here("DATA/March2025/WoodyPC3.csv"))
+
+## create seedling, sapling, trees and cut-stump row
+SapF <- SapF %>% 
+mutate(
+woody_cat = case_when(
+Woody_class == "Cut stump"          ~ "Cut stump",
+between(`Max_height(m)`, 0.05, 0.50)~ "Seedlings",
+between(`Max_height(m)`, 0.51, 1.49)~ "Saplings",
+between(`Max_height(m)`, 1.5, 21.0) ~ "Trees",
+TRUE                             ~ NA_character_
+),
+Treatment = factor(Treatment),
+ Fencing = factor(Fencing)
+)
+
+ 
+#Filter SEEDLINGS  
+Seedlings <- SapF %>% 
+  filter(woody_cat == "Seedlings", Year %in% c(2024, 2025),
+         !Treatment %in% c("TFB")) %>% 
+  count(Site, Plot, Subplot, Treatment, Fencing,Year, name = "Seedlings") %>% 
+  mutate(density_ha = Seedlings * 10000 / 600)     # convert to ha⁻¹
+
+#comparing at treatment level
+
+Seed_treat <- Seedlings %>% 
+  group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>% 
+  summarise(mean_dens_ha = mean(density_ha), .groups = "drop")  
+
+
+#sort pre and post treatment
+strt_comparison2 <- Seedlings %>%
+  filter(Year %in% c(2024, 2025)) %>%
+  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
+
+#reorder so that pre-treatment appears first then post treatment second on the plots
+strt_comparison2 <- strt_comparison2 %>%
+  mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
+
+##Pivot the two years side‑by‑side and compute Δ seedling density
+Seedlings_Delta <- Seed_treat %>% 
+  pivot_wider(names_from  = Year,
+              values_from = mean_dens_ha,
+              names_glue  = "dens_{Year}") %>% 
+  mutate(delta_Seeddens = dens_2025 - dens_2024) 
+
+#GLMM to test effect of treatment * fencing on seedling density###################
+
+# Make "Unfenced" the reference level 
+
+class(Seedlings_Delta$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+Seedlings_Delta$Fencing <- factor(Seedlings_Delta$Fencing, ordered = FALSE)
+
+# Verify
+levels(Seedlings_Delta$Fencing)  # Should show "Open" "Closed" (or vice versa)
+
+# Set "Unfenced" as the reference level 
+Seedlings_Delta$Fencing <- relevel(Seedlings_Delta$Fencing, ref = "Unfenced")
+
+
+# Site and plot as (crossed) random effects
+Seedl3 <- glmmTMB(delta_Seeddens ~ Treatment * Fencing + (1|Site) + (1|Plot),  
+                  data = Seedlings_Delta, family = gaussian(link = "identity"))
+
+
+# check if model converged
+performance::check_convergence(Seedl3) # TRUE the model converged
+
+# MODEL performance
+performance::check_model(Seedl3)
+
+# Shapiro-Wilk Test for Normal distribution of residuals
+shapiro.test(resid(Seedl3))  #p < 0.05 → residuals are non-normal.
+# result p = 0.7431, hence residuals are normal. We have sufficient evidence to conclude that the sample data comes from a population that is normally distributed
+
+## create a Q-Q plot of your residuals: 
+qqnorm(resid(Seedl3)) 
+qqline(resid(Seedl3))
+
+
+##B. Levene’s Test for Homoscedasticity
+# Bin fitted values into 3-5 groups
+fitted_binned <- cut(fitted(Seedl3), breaks = 5)
+leveneTest(resid(Seedl3) ~ fitted_binned)  # p < 0.05 → unequal variance (heteroscedasticity)
+# results p = 0.918 equal variance 
+
+# Assumption on Homoscedasticity
+
+ # check homoscedasticity by creating a fitted value vs. residual plot. The scatterplot should show the fitted values of the model vs. the residuals of those fitted values.
+
+# Line should be flat and horizontal if the homoscedasticity assumption is met.
+
+#Dealing with heteroscedasticity (unequal variance) - log transforming the response variable, weighted regression (assigning weights to each data point based on the variance of its fitted value).
+
+# results of the model
+summary(Seedl3)
+
+```
+
+![](images/clipboard-718361938.png)
+
+Example of Q-Q plot that shows that the normality of residuals assumptions is not met.
+
+\- Tests such as Shapiro Wilko, Kolmogorov-Smironov, Jarque-Barre, or D’Agostino-Pearson are sensitive to large sample sizes, they may conclude non-normality of residuals when you have a large sample size.
+
+-   best to visually check your Q-Q plot to ascertain whether a dataset follows a normal distribution
+
+**Dealing with non-normal data**: perform one of the following transformations (log, square root, cube root) to the response variable (y).
+
+**Assumption on Homoscedasticity**
+
+\- check heteroscedasticity by creating a *fitted value vs. residual plot*. The scatterplot should show the fitted values of the model vs. the residuals of those fitted values.
+
+-   even spread out of data. Line should be flat and horizontal if the homoscedasticity assumption is met.
+
+**Dealing with heteroscedasticity** - log transforming the response variable, weighted regression (assigning weights to each data point based on the variance of its fitted value).
+
+**Interpretation of Results**
+
+1.  Fencing in control plots leads to a significant increase (p = 0.0158) in seedling density.
+
+2.  TF and fencing is associated with a significant reduction (p = 0.0147) in seedling density
+
+3.  Treatment TF is highly effective at reducing the seedling proliferation caused by fencing. It could be a targeted management intervention for suppressing seedling density at SHR.
+
+4.  However, the major driver of variability is at site level. The overall success of these management interventions will be site context-dependent.
+
+5.  **DESIGN CHOICES**
+
+-   should be informed by data structure, research question / hypothesis, and knowledge of the system being studied.
+
+-   choices to be made in selection of apt GLMM:
+
+    i\. Function and link distribution - does the response variable follow Gaussian, Poisson, Binomial, Negative binomial, Gamma. and their corresponding link.
+
+    ii\. Fixed effects structure - main effects, interactions or polynomial terms?
+
+    iii\. Random effects structure - crossed vs nested design, random slope or random intercept
+
+    iv\. Model performance - complexity, convergence, AIC, BIC
+
+2.  Data structure
+
+    str(strt_comparison2)
+
+```         
+$ Site      : chr [1:188] "A" "A" "A" "A" ...  
+$ Plot      : num [1:188] 1 1 1 1 1 1 1 1 2 2 ...  
+$ Subplot   : chr [1:188] "Z1" "Z1" "Z2" "Z2" ...  
+$ Treatment : Factor w/ 5 levels "C", "F", "TF", "TFB", "THF"  
+$ Fencing   : Factor w/ 2 levels "Fenced", "Unfenced"  
+$ Year      : num [1:188] 2024 2025 2024 2025 2024 ...  
+$ Seedlings : int [1:188] 44 50 66 119 32 42 100 58 65 83 ...  
+$ density_ha: num [1:188] 733 833 1100 1983 533 ...  
+$ Period    : Factor w/ 2 levels "Pre-treatment","Post-Treatment"
+```
+
+```{r}
+# Shapiro-Wilk Test for Normal distribution of residuals
+shapiro.test(resid(Seedl3))  #p < 0.05 → residuals are non-normal.
+# result p = 0.7431, hence residuals are normal. We have sufficient evidence to conclude that the sample data comes from a population that is normally distributed
+
+## create a Q-Q plot of your residuals: 
+qqnorm(resid(Seedl3)) 
+qqline(resid(Seedl3))
+
+```

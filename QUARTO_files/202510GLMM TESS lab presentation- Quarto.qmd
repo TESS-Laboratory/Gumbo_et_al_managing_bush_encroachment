@@ -44,7 +44,7 @@ c.     **Linear Mixed Models (LMM):** account for non-independence with ran
 
         ii\. Fixed effects structure - main effects, interactions or polynomial terms?
 
-        iii\. Random effects structure - crossed vs nested design, random slope or random intercept
+        iii\. Random effects structure - crossed, nested design, random intercept
 
         # **Data structure**
 
@@ -277,7 +277,7 @@ qqline(resid(Seedl3))
 
 ![](images/clipboard-755286098.png)
 
-Example of Q-Q plot that shows that the normality of residuals assumptions is not met.
+Illustration of a Q-Q plot indicating non-normality of residuals, violating the assumption of normality.
 
 **Dealing with non-normal data**: perform one of the following transformations (log, square root, cube root) to the response variable (y).
 

@@ -25,6 +25,8 @@ library(robustlmm) # for robust regression analysis
 library(boot)  # For bootsrapping
 library(DescTools)
 library(effectsize) # For easy centering
+library(marginaleffects)
+library(effects)
 #library(glmmLasso)  # for LASSO regression
 #library(glmnet)
 
@@ -118,7 +120,7 @@ Seedpp3<- ggplot(strt_comparison2,
   )
 
 ##saving pre& post treatment BOXPLOT  -  excluding TFB
-ggsave(Seedpp3,filename ="Plots/TFB PP Seedling Density BOXplot.png",
+ #ggsave(Seedpp3,filename ="Plots/TFB PP Seedling Density BOXplot.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -150,11 +152,47 @@ ggsave(Seedbxp2,filename ="Plots/TFB DELTA Seedling Density BOXplot.png",
        width = 16, height = 14, units = "cm") 
 
 
+##### GLMM to test effect of treatment * fencing on seedling density###################
+
+# Make "Unfenced" the reference level 
+
+class(Seedlings_Delta1$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+Seedlings_Delta1$Fencing <- factor(Seedlings_Delta1$Fencing, ordered = FALSE)
+
+# Verify
+levels(Seedlings_Delta1$Fencing)  # Should show "Open" "Closed" (or vice versa)
+
+# Set "Fenced" as the reference level 
+Seedlings_Delta1$Fencing <- relevel(Seedlings_Delta1$Fencing, ref = "Unfenced")
+
 
 #GLMM for seedling density 
 Seedl4 <- glmmTMB(delta_Seeddens ~ Treatment * Fencing + (1|Site) + (1|Plot),  # Crossed effects,
-                data = Seedlings_Delta, family = gaussian(link = "identity"))
+                data = Seedlings_Delta1, family = gaussian(link = "identity"))
 summary(Seedl4)
+
+
+## check model performance
+
+performance::check_model(Seedl4)
+
+
+### POST HOC ANALYSIS FOR SEEDLINGS 
+
+# Tukey HSD pairwise comparisons
+treat_comparisons <- emmeans(Seedl4, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
+summary(treat_comparisons$contrasts)
+
+### Margin effects for seedlings
+
+# Get the fixed effects coefficients
+model_summary <- summary(Seedl4)
+fixed_effects <- model_summary$coefficients$cond
+
+cat("Fixed Effects (Marginal Effects for Gaussian Model):\n")
+print(fixed_effects)
 
 
 ########################################SAPLING DENSITY  SAPLING DENSITY SAPLING
@@ -202,7 +240,7 @@ ggsave(Sapp1,filename ="Plots/PP TFB Saplings Density BOXplot.png",
 
 ################################# DELTA SAPLING DENSITY
 
-#Pivot the two years side‑by‑side and compute Δ sapling density ─────────────
+#Pivot the two years side‑by‑side and compute Δ sapling density
 Saplings_Delta <- Sap_treat %>% 
   pivot_wider(names_from  = Year,
               values_from = mean_dens_ha,
@@ -226,6 +264,33 @@ Sapbxp1 <- ggplot(Saplings_Delta,
 ggsave(Sapbxp1,filename ="Plots/3 TFB Delta Sapling Density BOXplot.png",
        width = 16, height = 14, units = "cm")  
 
+
+##### GLMM to test effect of treatment * fencing on sapling density###################
+
+# Make "Unfenced" the reference level 
+
+class(Saplings_Delta$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+Saplings_Delta$Fencing <- factor(Saplings_Delta$Fencing, ordered = FALSE)
+
+# Verify
+levels(Saplings_Delta$Fencing)  # Should show "Open" "Closed" (or vice versa)
+
+# Set "Fenced" as the reference level 
+Saplings_Delta$Fencing <- relevel(Saplings_Delta$Fencing, ref = "Unfenced")
+
+#GLMM for sapling density 
+Sapl4 <- glmmTMB(delta_Sapsdens ~ Treatment * Fencing + (1|Site),  
+                  data = Saplings_Delta, family = gaussian(link = "identity"))
+summary(Sapl4)
+
+
+### POST HOC ANALYSIS FOR SAPLINGS 
+
+# Tukey HSD pairwise comparisons
+treat_comparisons <- emmeans(Sapl4, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
+summary(treat_comparisons$contrasts)
 
 ############################ RESPROUTS  RESPROUTS RESPROUTS ####################
 
@@ -275,10 +340,20 @@ ggsave(Respbx1,filename ="Plots/PP TFB RESPROUTS BOXplot.png",
        width = 16, height = 14, units = "cm")  
 
 
+##GLMM for resprouts on cut stumps  
+Respr4 <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+                 data = resprouts_df, family = gaussian(link = "identity"))
+summary(Respr4)
+
+### POST HOC ANALYSIS FOR RESPROUTS 
+# Tukey HSD pairwise comparisons
+treat_comparisons3 <- emmeans(Respr4, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
+summary(treat_comparisons3$contrasts)
 
 
 
 ################################################################################################
+## GRASSES     GRASSES   GRASSES GRASSES
 
 Grasses <- read_csv("DATA/March2025/GrassesCombinedCleaned2.csv")
 
@@ -354,7 +429,25 @@ Grasbx2 <- ggplot(delta_GRHeight,
 ggsave(Grasbx2,filename ="Plots/3 TFB Delta Grass height BOXplot.png",
        width = 16, height = 14, units = "cm") 
 
+###### GLMM to test effect of treatment * fencing on Grass height ##################
 
+# Make "Unfenced" the reference level 
+
+class(delta_GRHeight$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+delta_GRHeight$Fencing <- factor(delta_GRHeight$Fencing, ordered = FALSE)
+
+# Verify
+levels(delta_GRHeight$Fencing)  # Should show "Open" "Closed" (or vice versa)
+
+# Set "Fenced" as the reference level 
+delta_GRHeight$Fencing <- relevel(delta_GRHeight$Fencing, ref = "Unfenced")
+
+#GLMM for sapling density 
+Grashg <- glmmTMB(delta_GR ~ Treatment * Fencing + (1|Site),  
+                 data = delta_GRHeight, family = gaussian(link = "identity"))
+summary(Grashg)
 
 
 #################################### GRASS SPECIES RICHNESS
@@ -491,7 +584,52 @@ GSWc1 <- ggplot(SW_Delta,
         axis.text = element_text(size = 12))
 
 ##ggsave
-ggsave(GSWc1,filename ="Plots/3 TFB Delta Grass S-WeinerFENCED boxplot.png",
+#ggsave(GSWc1,filename ="Plots/3 TFB Delta Grass S-WeinerFENCED boxplot.png",
        width = 16, height = 14, units = "cm")
 
+
+###### GLMM to test effect of treatment * fencing on Grass diversity ##################
+
+# Make "Unfenced" the reference level 
+
+class(SW_Delta$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+SW_Delta$Fencing <- factor(SW_Delta$Fencing, ordered = FALSE)
+
+# Verify
+levels(SW_Delta$Fencing)  # Should show "Open" "Closed" (or vice versa)
+
+# Set "Fenced" as the reference level 
+SW_Delta$Fencing <- relevel(SW_Delta$Fencing, ref = "Unfenced")
+
+#GLMM for sapling density 
+Grasdiv <- glmmTMB(delta_SW ~ Treatment * Fencing + (1|Site)+ (1|Plot),  
+                  data = SW_Delta, family = gaussian(link = "identity"))
+
+summary(Grasdiv)
+
+
+## check model performance
+performance::check_model(Grasdiv)
+
+############# POST HOC ANALYSIS FOR GRASS DIVERSITY 
+# Tukey HSD pairwise comparisons
+Grass_diversity <- emmeans(Grasdiv, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
+summary(Grass_diversity$contrasts)
+
+
+##################Marginal effects for Grass diversity
+#Check Your Model First
+
+# Check model summary
+summary(Grasdiv)
+
+# Check the formula
+formula(Grasdiv)
+
+# Check if it's really a Gaussian model
+family(Grasdiv)
+## Check what type of model this really is
+class(Grasdiv)   #=glmmTMB
 

@@ -1227,8 +1227,10 @@ cor(X)  # see if columns are highly correlated #the results show that Treatment
 #use generalized VIF (GVIF) which is designed for factors with >2 levels:
 
 library(car)
-mod <- lm(density_ha ~ Treatment + Fencing, data = trt_comparison2)
-v <- vif(mod)
+
+
+mod1 <- lm(density_ha ~ Treatment + Fencing, data = strt_comparison2)
+v <- vif(mod1)
 
 #using adjusted GVIF
 # If your model has categorical predictors, vif() returns a matrix with GVIF and Df
@@ -1309,6 +1311,18 @@ observations_per_group <- strt_comparison2 %>%
   summarise(n = n())
 
 
+### Create the fitted-residual(homoscedasticity) plot
+fitted_vals <- fitted(Seedl4)
+residuals <- resid(Seedl4)
+
+ggplot(data = NULL, aes(x = fitted_vals, y = residuals)) +
+  geom_point(alpha = 0.6) +
+  geom_hline(yintercept = 0, color = "red", linetype = "solid") +
+  #geom_smooth(method = "loess", color = "blue", se = FALSE) +
+  labs(
+       x = "Fitted Values", 
+       y = "Residuals") +
+  theme_beautiful()
 
 
 
