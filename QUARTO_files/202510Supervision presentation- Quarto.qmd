@@ -1,0 +1,516 @@
+---
+title: " Group supervision meeting October 2025"
+author: "Taps"
+editor: visual
+format: 
+  html:
+    colorlinks: true
+    toc: true
+    toc-depth: 3
+    code-fold: true
+---
+
+-   **AGENDA**
+
+    -   Discuss preliminary results - the discrepancies between LMM results and post-hoc analysis
+
+**Title: Managing bush encroachment on a holistically managed rangeland in a semi-arid savanna**
+
+**Research objectives:**   
+
+i\. To determine the efficacy of selected bush encroachment management strategies including woody plant thinning, targeted herbicide application, browsers (goats), and prescribed fire, on seedling density, sapling recruitment, and resprouting dynamics.
+
+ii\. To evaluate the effects of bush encroachment management strategies on above-ground grass biomass, grass species richness, and diversity at encroached sites.
+
+**Research hypotheses**
+
+a\) Combining woody plant thinning, prescribed fire, and goat browsing (TFB) will result in a substantial reduction in seedling and sapling densities. The impact of these combined management strategies is expected to be more pronounced in unfenced plots.
+
+b\) Integrating woody plant thinning, targeted herbicide application, and prescribed fire (THF) on cut stumps would result in a substantial reduction in resprouts, and the decrease will be consistent across fenced and unfenced rangelands.
+
+c\) The above-ground grass biomass will  increase across all treatments where tree thinning is done  (due to increased light penetration and water availability (Ludwig et al., 2004b). However, integrating woody plant thinning, prescribed fire, and targeted herbicide application (THF) will substantially increase grass above-ground biomass, with fenced plots experiencing a significant increase.
+
+d\) Grass species richness is expected to increase in treatments where woody plants are thinned, as some grass species may have been excluded from the closed canopies. Although grass species richness and Shannon-Weiner index will significantly increase in the THF treatment, this increase will be more pronounced in across unfenced plots.
+
+-    
+
+    -   
+
+        # **Data structure**
+
+        str(strt_comparison2)
+
+    ```         
+    $ Site      : chr [1:188] "A" "A" "A" "A" ...   
+    $ Plot      : num [1:188] 1 1 1 1 1 1 1 1 2 2 ...   
+    $ Subplot   : chr [1:188] "Z1" "Z1" "Z2" "Z2" ...   
+    $ Treatment : Factor w/ 5 levels "C", "F", "TF", "TFB", "THF"  
+    $ Fencing   : Factor w/ 2 levels "Fenced", "Unfenced"   
+    $ Year      : num [1:188] 2024 2025 2024 2025 2024 ...  
+    $ Seedlings : int [1:188] 44 50 66 119 32 42 100 58 65 83 ...  
+    $ density_ha: num [1:188] 733 833 1100 1983 533 ...   
+    $ Period    : Factor w/ 2 levels "Pre-treatment","Post-Treatment"
+    ```
+
+    Response variable - Change in seedling density
+
+    Fixed effects - Treatment, Fencing
+
+    Random effects - Site, Plot
+
+# [PRELIMINARY RESULTS]{.underline}
+
+# a) Test efficacy of treatment and fencing on seedling density
+
+```{r, warning=FALSE, message=FALSE}
+
+library(tidyverse)
+library(vegan)
+library(multcompView)
+library(patchwork)
+library(lmerTest)
+library(Matrix)
+library(lme4)
+library(emmeans)
+library(here) ## MOST IMPORTANT NOT TO FORGET THIS ONE in quarto
+library(robustbase)
+library(sjPlot)
+library(flextable)
+library(officer)
+library(glmmTMB)
+library(DHARMa)   # model diagnostics GLMM
+library(performance)  # model diagnostics
+library(car)
+library(openxlsx)
+library(broom.mixed) #convert model objects to data frames
+library(corrplot)
+library(robustlmm) # for robust regression analysis
+library(boot)  # For bootsrapping
+library(DescTools)
+library(effectsize) # For easy centering
+library(marginaleffects)
+library(effects)
+library(ggeffects)
+
+theme_beautiful <- function() {
+  theme_bw() +
+    theme(
+      text = element_text(family = "Helvetica"),
+      axis.text = element_text(size = 8, color = "black"),
+      axis.title = element_text(size = 8, color = "black"),
+      axis.line.x = element_line(size = 0.3, color = "black"),
+      axis.line.y = element_line(size = 0.3, color = "black"),
+      axis.ticks = element_line(size = 0.3, color = "black"),
+      panel.border = element_blank(),
+      panel.grid.major.x = element_blank(),
+      panel.grid.minor.x = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      panel.grid.major.y = element_blank(),
+      plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), units = , "cm"),
+      plot.title = element_text(
+        size = 8,
+        vjust = 1,
+        hjust = 0.5,
+        color = "black"
+      ),
+      legend.text = element_text(size = 8, color = "black"),
+      legend.title = element_text(size = 8, color = "black"),
+      legend.position = c(0.9, 0.9),
+      legend.key.size = unit(0.9, "line"),
+      legend.background = element_rect(
+        color = "black",
+        fill = "transparent",
+        size = 2,
+        linetype = "blank"
+      )
+    )
+}
+
+## LOAD DATA
+
+SapF <- read_csv(here("DATA/March2025/WoodyPC4.csv"))
+
+## create seedling, sapling, trees and cut-stump row
+SapF <- SapF %>% 
+mutate(
+woody_cat = case_when(
+Woody_class == "Cut stump"          ~ "Cut stump",
+between(`Max_height(m)`, 0.05, 0.50)~ "Seedlings",
+between(`Max_height(m)`, 0.51, 1.49)~ "Saplings",
+between(`Max_height(m)`, 1.5, 21.0) ~ "Trees",
+TRUE                             ~ NA_character_
+),
+Treatment = factor(Treatment),
+ Fencing = factor(Fencing)
+)
+
+ 
+#Filter SEEDLINGS  
+Seedlings <- SapF %>% 
+  filter(woody_cat == "Seedlings", Year %in% c(2024, 2025),
+         !Treatment %in% c("TFB")) %>% 
+  count(Site, Plot, Subplot, Treatment, Fencing,Year, name = "Seedlings") %>% 
+  mutate(density_ha = Seedlings * 10000 / 600)     # convert to ha⁻¹
+
+#comparing at treatment level
+
+Seed_treat <- Seedlings %>% 
+  group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>% 
+  summarise(mean_dens_ha = mean(density_ha), .groups = "drop")  
+
+
+#sort pre and post treatment
+strt_comparison2 <- Seedlings %>%
+  filter(Year %in% c(2024, 2025)) %>%
+  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
+
+#reorder so that pre-treatment appears first then post treatment second on the plots
+strt_comparison2 <- strt_comparison2 %>%
+  mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
+
+##Pivot the two years side‑by‑side and compute Δ seedling density
+Seedlings_Delta <- Seed_treat %>% 
+  pivot_wider(names_from  = Year,
+              values_from = mean_dens_ha,
+              names_glue  = "dens_{Year}") %>% 
+  mutate(delta_Seeddens = dens_2025 - dens_2024) 
+
+#GLMM to test effect of treatment * fencing on seedling density###################
+
+# Make "Unfenced" the reference level 
+
+class(Seedlings_Delta$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+Seedlings_Delta$Fencing <- factor(Seedlings_Delta$Fencing, ordered = FALSE)
+
+# Verify
+levels(Seedlings_Delta$Fencing)  # Should show "Open" "Closed" (or vice versa)
+
+# Set "Unfenced" as the reference level 
+Seedlings_Delta$Fencing <- relevel(Seedlings_Delta$Fencing, ref = "Unfenced")
+
+
+# Site and plot as (crossed) random effects
+Seedl3 <- glmmTMB(delta_Seeddens ~ Treatment * Fencing + (1|Site),                data = Seedlings_Delta)
+
+
+# check if model converged
+#performance::check_convergence(Seedl3) # TRUE the model converged
+
+# MODEL performance
+#performance::check_model(Seedl3)
+
+# Shapiro-Wilk Test for Normal distribution of residuals
+ #shapiro.test(resid(Seedl3))  #p < 0.05 → residuals are non-normal.
+# result p = 0.7431, hence residuals are normal. We have sufficient evidence to conclude that the sample data comes from a population that is normally distributed
+
+## create a Q-Q plot of your residuals: 
+ #qqnorm(resid(Seedl3)) 
+ #qqline(resid(Seedl3))
+
+
+##B. Levene’s Test for Homoscedasticity
+# Bin fitted values into 3-5 groups
+ #fitted_binned <- cut(fitted(Seedl3), breaks = 5)
+ #leveneTest(resid(Seedl3) ~ fitted_binned)  # p < 0.05 → unequal variance (heteroscedasticity)
+# results p = 0.918 equal variance 
+
+# Assumption on Homoscedasticity
+
+ # check homoscedasticity by creating a fitted value vs. residual plot. The scatterplot should show the fitted values of the model vs. the residuals of those fitted values.
+
+# Line should be flat and horizontal if the homoscedasticity assumption is met.
+
+#Dealing with heteroscedasticity (unequal variance) - log transforming the response variable, weighted regression (assigning weights to each data point based on the variance of its fitted value).
+
+# results of the model
+#summary(Seedl3)
+
+```
+
+Seedl4 \<- lmer(delta_Seeddens \~ Treatment \* Fencing + (1\|Site/Plot),\
+data = Seedlings_Delta) \## did not converge
+
+Seed5 \<- lmer(delta_Seeddens \~ Treatment \* Fencing + (1\|Site)+ (1\|Plot), data = Seedlings_Delta1) \## did not converge
+
+Seedl3 \<- lmer(delta_Seeddens \~ Treatment \* Fencing + (1\|Site), data = Seedlings_Delta1)
+
+-Before interpreting results from the model it is indispensible to :
+
+\#**check if model converged**
+
+performance::check_convergence(Seedl3) \# TRUE the model converged
+
+\# **check model performance**
+
+performance::check_model(Seedl3)
+
+# Preliminary results from the model
+
+```{r, warning=FALSE, message=FALSE}
+#check if model converged
+
+performance::check_convergence(Seedl3) # TRUE the model converged
+
+# check model performance
+
+performance::check_model(Seedl3)
+
+# results of the model: change in seedling density  
+summary(Seedl3)
+```
+
+**Post-hoc analysis for seedling density**
+
+```{r, warning=FALSE, message=FALSE}
+# Tukey HSD pairwise comparisons
+treat_comparisons <- emmeans(Seedl3, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
+summary(treat_comparisons$contrasts)
+
+
+```
+
+**Visualising results**
+
+```{r, warning=FALSE, message=FALSE, fig.cap="Figure 1. Seedling density substantially reduced by TF in fenced plots at SHR five months post treatment."}
+### Marginal effects for treatment * fencing on seedlings
+Seeden <- ggpredict(Seedl3, terms = c("Treatment", "Fencing"))
+plot(Seeden) +  #Store the plot in an object for saving 
+  labs(y = "Change in seedling density per ha",
+       x = "Treatment") +
+  theme_beautiful()+ 
+  ggtitle(NULL)+
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
+  theme(
+    axis.title = element_text(size = 14),      # Axis titles
+    axis.text = element_text(size = 12)        # Axis tick labels
+  )
+```
+
+**Interpretation of Results**
+
+1.  TF and fencing were associated with a significant reduction in seedling density (p = 0.0147). Treatment TF and fencing were highly effective at reducing the seedling proliferation.
+
+2.  Post-hoc analysis reveal that THF and TF treatments in fenced plots significantly reduced seedling density when compared to the the baseline (p \< 0.05). 
+
+# b) Test efficacy of treatment and fencing on sapling density
+
+```{r, warning=FALSE, message=FALSE}
+#Filter SAPLINGS  
+Saplings <- SapF %>% 
+  filter(woody_cat == "Saplings", Year %in% c(2024, 2025),
+         !Treatment %in% c("TFB")) %>% 
+  count(Site, Plot, Subplot, Treatment, Fencing,Year, name = "Saplings") %>% 
+  mutate(density_ha = Saplings * 10000 / 600)     # convert to ha⁻¹
+
+#comparing at treatment level
+
+Sap_treat <- Saplings %>% 
+  group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>% 
+  summarise(mean_dens_ha = mean(density_ha), .groups = "drop")  
+
+#Summary stats for saplings 
+Saplsummary_stats <- Saplings %>%
+  group_by(Treatment, Year) %>%
+  summarise(
+    N = n(),                                   # number of observations per treatment
+    mean_density = mean(density_ha, na.rm = TRUE),
+    sd_density = sd(density_ha, na.rm = TRUE)
+  ) %>%
+  ungroup()
+
+
+#sort pre and post treatment
+sptrt_comparison2 <- Saplings %>%
+  filter(Year %in% c(2024, 2025)) %>%
+  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
+
+##reorder so that pre-treatment appears first then post treatment second on the plots
+sptrt_comparison2 <- sptrt_comparison2 %>%
+  mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
+
+#Pivot the two years side‑by‑side and compute Δ sapling density
+Saplings_Delta <- Sap_treat %>% 
+  pivot_wider(names_from  = Year,
+              values_from = mean_dens_ha,
+              names_glue  = "dens_{Year}") %>% 
+  mutate(delta_Sapsdens = dens_2025 - dens_2024) 
+
+
+# Make "Unfenced" the reference level 
+
+class(Saplings_Delta$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+Saplings_Delta$Fencing <- factor(Saplings_Delta$Fencing, ordered = FALSE)
+
+# Verify
+levels(Saplings_Delta$Fencing)  # Should show "Open" "Closed" (or vice versa)
+
+# Set "Fenced" as the reference level 
+Saplings_Delta$Fencing <- relevel(Saplings_Delta$Fencing, ref = "Unfenced")
+
+#### Convert character variables to factors
+Saplings_Delta$Treatment <- as.factor(Saplings_Delta$Treatment)
+Saplings_Delta$Fencing <- as.factor(Saplings_Delta$Fencing)
+
+
+# LMM for sapling
+Sapl5 <- lmer(delta_Sapsdens ~ Treatment * Fencing + (1|Site),  
+                 data = Saplings_Delta)
+summary(Sapl5)
+```
+
+**Post hoc analysis for sapling density**
+
+```{r,warning=FALSE, message=FALSE}
+# Tukey HSD pairwise comparisons
+Sptreat_comparisons <- emmeans(Sapl5, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
+summary(Sptreat_comparisons$contrasts)
+
+```
+
+**Visualising results**
+
+```{r,warning=FALSE, message=FALSE, fig.cap="Figure 2. Sapling density substantially reduced by THF in unfenced plots at SHR five months post treatment."}
+
+#marginal effects
+Sapden <- ggpredict(Sapl5, terms = c("Treatment", "Fencing"))
+plot(Sapden) +     
+  labs(y = "Change in sapling density per ha",
+       x = "Treatment") +
+  theme_beautiful()+ 
+  ggtitle(NULL)+
+  theme(
+    axis.title = element_text(size = 14),      # Axis titles
+    axis.text = element_text(size = 12)        # Axis tick labels
+  )+
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)
+
+```
+
+**Results interpretation**
+
+-   LMM analysis reveal that THF substantially reduced sapling density in unfenced plots (p \< 0.05) similarly the post-hoc analysis show that THF in unfenced plots significantly reduced sapling density (p \< 0.05). Furthermore, the post-hoc analysis reveal that TF and THF in fenced plots strongly reduced sapling density (p \< 0.05).
+
+# c) Test efficacy of treatment and fencing on grass Shannon-Weiner index
+
+```{r,warning=FALSE, message=FALSE, fig.cap="Figure 3. Grass Shannon-Weiner diversity substantially reduced by THF in unfenced plots at SHR five months post treatment."}
+
+#load data
+Grasses <- read_csv(here("DATA/March2025/GrassesCombinedCleaned3.csv"))
+
+# Calculate Shannon-Wiener Diversity Index at Site and Plot level
+GrSWeiner <- Grasses%>%
+  filter(!is.na(Species_name),
+         Year %in% c(2024, 2025),!Treatment %in% c("TFB"))%>%   # keep only pre/post years
+  group_by(Site, Plot, Subplot, Treatment, Year, Fencing, Species_name)%>%
+  summarise(Spp_count = n(), .groups = "drop" )
+
+## Calculate Shannon-Wiener Diversity Index at Site and Plot level
+grSWdiversity <- GrSWeiner %>%
+  group_by(Site, Plot, Subplot,Treatment, Year, Fencing) %>%                   # Group by Site and Plot
+  summarise(
+    Shannon_Diversity = -sum((Spp_count / sum(Spp_count)) * (Spp_count / sum(Spp_count))),
+    .groups = "drop")%>%
+  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
+
+##reorder so that pre-treatment appears first then post treatment second on the plots
+grSWdiversity <- grSWdiversity %>%
+  mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
+
+###### DELTA SHANNON-WEINER DIVERSITY INDEX
+Gdiv <- Grasses%>%
+  filter(!is.na(Species_name),
+         Year %in% c(2024, 2025), !Treatment %in% c("TFB"))%>%   # keep only pre/post years
+  group_by(Site, Plot, Subplot, Treatment, Year, Fencing, Species_name)%>%
+  summarise(Spp_count = n(), .groups = "drop" )
+
+# Calculate Shannon-Wiener Diversity Index log transforming
+Sdiversity_data <- Gdiv %>%
+  group_by(Site, Plot, Subplot,Treatment, Year, Fencing) %>%   # Group by Site and Plot
+  summarise(
+    Shannon_Diversity = -sum((Spp_count / sum(Spp_count)) * (Spp_count / sum(Spp_count))),
+    .groups = "drop"
+  )
+
+#  Pivot the two years side‑by‑side and compute Δ‑ grass Shannon-Weiner diversity
+SW_Delta <- Sdiversity_data %>% 
+  pivot_wider(names_from  = Year,
+              values_from = Shannon_Diversity,
+              names_glue  = "sw_{Year}") %>% 
+  mutate(delta_SW = sw_2025 - sw_2024)   
+
+### Convert character variables to factors
+SW_Delta$Treatment <- as.factor(SW_Delta$Treatment)
+SW_Delta$Fencing <- as.factor(SW_Delta$Fencing)
+
+# Make "Unfenced" the reference level 
+
+class(SW_Delta$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+SW_Delta$Fencing <- factor(SW_Delta$Fencing, ordered = FALSE)
+
+# Verify
+levels(SW_Delta$Fencing)  # Should show "Open" "Closed" (or vice versa)
+
+# Set "Fenced" as the reference level 
+SW_Delta$Fencing <- relevel(SW_Delta$Fencing, ref = "Unfenced")
+
+### Convert character variables to factors
+SW_Delta$Treatment <- as.factor(SW_Delta$Treatment)
+SW_Delta$Fencing <- as.factor(SW_Delta$Fencing)
+
+
+#LMM
+GrasD <- lmer(delta_SW ~ Treatment * Fencing + (1|Site),  
+                   data = SW_Delta)
+
+#check if model converged
+
+performance::check_convergence(GrasD) # TRUE the model converged
+
+# check model performance
+
+performance::check_model(GrasD)
+
+# results of the model: change in seedling density  
+
+summary(GrasD)
+```
+
+**Post-hoc analysis**
+
+```{r,warning=FALSE, message=FALSE}
+# Tukey HSD pairwise comparisons
+Grass_diversity <- emmeans(GrasD, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
+summary(Grass_diversity$contrasts)
+
+
+```
+
+**Visualisation grass diversity plot**
+
+```{r,warning=FALSE, message=FALSE, fig.cap="Figure 3. Grass Shannon-Weiner diversity index was not affected by treatment and fencing at SHR five months post treatment."}
+#marginal effects
+preds <- ggpredict(GrasD, terms = c("Treatment", "Fencing"))
+ plot(preds) +  
+  labs(y = "Change in Shannon-Weiner Diversity",
+       x = "Treatment") +
+  theme_beautiful()+ 
+  ggtitle(NULL)+
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
+  theme(
+    axis.title = element_text(size = 14),      # Axis titles
+    axis.text = element_text(size = 12)        # Axis tick labels
+  )
+
+```
+
+**Results interpretation**
+
+-   Treatment and fencing (F, TF, THF) did not significantly impact grass Shannon-Weiner diversity index (p \> 0.05) . the Control in unfenced plots had a strong positive effect (p \<0.05).
+
+-   Post-hoc analysis show no significant difference for all the treatments when compared to the control (p \> 0.05).
