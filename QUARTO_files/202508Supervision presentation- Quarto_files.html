@@ -46,7 +46,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#agenda-for-the-meeting-01-08-2025" id="toc-agenda-for-the-meeting-01-08-2025" class="nav-link active" data-scroll-target="#agenda-for-the-meeting-01-08-2025">Agenda for the meeting (01-08-2025)</a></li>
+  <li><a href="#agenda-for-the-meeting-29-08-2025" id="toc-agenda-for-the-meeting-29-08-2025" class="nav-link active" data-scroll-target="#agenda-for-the-meeting-29-08-2025">Agenda for the meeting (29-08-2025)</a></li>
   </ul>
 </nav>
 </div>
@@ -83,75 +83,100 @@ ul.task-list li input[type="checkbox"] {
 <p>ii. To evaluate the effects of bush encroachment management strategies on above-ground grass biomass, grass species richness, and diversity at encroached sites.</p>
 <p><strong>Hypothesis</strong></p>
 <ol type="1">
-<li>Targeted treatment combinations, such as tree thinning, prescribed fire, and browsing in unfenced plots will significantly decrease seedling density and sapling height in areas with moderate encroachment.</li>
-<li>Integrating tree thinning, targeted herbicide application, and prescribed fire will significantly reduce the number of resprouts on cut woody stumps in unfenced and moderately encroached areas.</li>
-<li>The above-ground grass biomass will&nbsp;increase across all treatments where tree thinning is done&nbsp; (due to increased light penetration and water availability (Ludwig et al., 2004) compared to fire-only treatments. undefined</li>
+<li>Targeted treatment combinations, such as tree thinning, prescribed fire, and browsing in unfenced plots will significantly decrease seedling density and sapling height.</li>
+<li>Integrating tree thinning, targeted herbicide application, and prescribed fire will significantly reduce the number of resprouts on cut woody stumps in unfenced plots.</li>
+<li>The above-ground grass biomass will&nbsp;increase across all treatments where tree thinning is done&nbsp; (due to increased light penetration and water availability (Ludwig et al., 2004).Thinning, herbicide application and prescribe fire will significantly increase above-ground grass biomass in fenced plots.</li>
+<li>Grass species richness is expected to increase in treatments where woody plants are thinned, as some grass species may have been excluded from the closed canopies.</li>
 </ol>
-<section id="agenda-for-the-meeting-01-08-2025" class="level1">
-<h1>Agenda for the meeting (01-08-2025)</h1>
+<section id="agenda-for-the-meeting-29-08-2025" class="level1">
+<h1>Agenda for the meeting (29-08-2025)</h1>
 <ul>
-<li>Preliminary results</li>
+<li><p>Experimental plot burns</p></li>
+<li><p>Preliminary results</p>
+<p><u><strong>Statistical analysis</strong></u></p>
+<p>The data was analysed using Generalised Linear Mixed Models (GLMM). For each hypothesis testing, I used the glmmTMB package in R. For most of the tests, I was focusing at the Delta for a specific response variable, hence the Gaussian family was used. An example of the model used for the tests is :</p>
+<p>glmmTMB(Seedlingdensity_ha ~ Treatment * Fencing + (1 | Site) + (1|Plot), &nbsp;data = seedlings, family = gaussian (link = “identity”)).</p>
+<p>The dependent variable is Seedlingdensity_ha. Fixed effects include Treatment and Fencing. The interaction effect of these fixed effects was determined ###explain why you did the interaction. # write the justification of why we doing the fencing.</p>
+<p>Random effects included Site and Plot. I checked for independence of random effects using the function: table(seedling_trt$Site, seedling_trt$Plot). It is not a nested design, as every site (A -F) has all five plots represented. (#To reduce redundancy in the model I dropped Plot, mainly because after testing for random effect variance estimate using VarCorr(my_model), the results, indicated that most of the variability was due to Site differences, and residuals. Plot contributed almost no extra variability once the Site is included). ### include Plot, include sentence in the results section that PLots contributed very little.</p>
+<p>For each test, I checked for model convergence, model performance, normality of residuals, homoscedasticity and Variance Inflated Factors (VIF).</p>
+<p>a. To check model convergence, I used: <strong>performance::check_convergence(my_model)</strong> where convergence was denoted by TRUE</p>
+<p>b. To check model performance, I used: <strong>performance::check_model(my_model).</strong> #include output of this in the quarto document.</p>
+<p>c. To check for Normal distribution of residuals, I used the Shapiro-Wilk Test. &nbsp;<strong>shapiro.test(resid(my_model)),</strong> where, p &lt; 0.05 meant that residuals are non-normal. #Check visually.</p>
+<p>d. To test for homoscedasticity, I used Levene’s Test for Homoscedasticity as follows:</p>
+<p>&nbsp;<strong>fitted_binned &lt;- cut(fitted(my_model), breaks = 5) leveneTest(resid(my_model) ~ fitted_binned).</strong> If the result had &nbsp;p &lt; 0.05 it meant that there was unequal variance (heteroscedasticity).</p>
+<p>e. To test for VIF I used the package ‘car’. An example of model that was used for checking .</p>
+<p><strong>mod &lt;- lm(seedlingdensity_ha~ Treatment + Fencing, data = seedling)</strong></p>
+<p><strong>v &lt;- vif(mod) and then I adjusted GVIF using 1/(2*Df)</strong></p>
+<p><strong>v_adj &lt;- v[, “GVIF”]^(1/(2*v[, “Df”]))</strong></p>
+<p><strong>v_adj.</strong></p>
+<p>The results showed that adjusted GVIFs were both 1, which is the lowest possible value. This means: there is no multicollinearity between Treatment and Fencing in the experimental design.</p>
+<p>Additionally, I also used Chisquare test to check for association</p>
+<p><strong>chisq.test(table(trt_comparison2$Treatment, trt_comparison2$Fencing)).</strong> The results showed a value = 1, meaning there is no association between treatment and fencing</p>
+<p>The Cramer’s V was used to check the strength of association using the following:</p>
+<p><strong>CramerV(table(trt_comparison2$Treatment, trt_comparison2$Fencing))</strong>. The result was 0 meaning there was no association between Treatment and Fencing. #Cramér’s V indicates how strong the association is (0 = none, 1 = perfect association).</p>
+<ul>
+<li>Alpha level was set at 0.05.</li>
 </ul>
 <ol type="1">
-<li><p>Tree Simspon’s index of Diversity</p>
-<p><img src="images/clipboard-2762573822.png" class="img-fluid" width="595"></p>
-<p>Figure 1. Tree Simpson’s index of Diversity did not change across treatments at SHR five months post-treatment.</p></li>
+<li><u><strong>To test the effects of treatments and fencing on seedling density</strong></u></li>
 </ol>
+<p><img src="images/clipboard-581562776.png" class="img-fluid" width="270"><img src="images/clipboard-2370853081.png" class="img-fluid" width="270"></p></li>
+</ul>
+<p>Figure 1. Effect of treatment, and fencing on seedling density at SHR five months post treatment.</p>
+<p><u>Interpretation</u></p>
 <ul>
-<li><p>There is no statistical evidence to show that treatment had an effect on tree Simpson’s index of diversity.</p>
+<li><p>In unfenced plots, treatments F,&nbsp;TF,&nbsp;TFB,&nbsp;and THF, their main effects were not statistically significant (p &gt; 0.05).</p></li>
+<li><p>Fencing has a significant effect (p = 0.00931), on seedling density. On Control plots that were seedling density was significantly higher than in unfenced plots. This suggests that, in the absence of follow-up treatment, fencing promotes seedling proliferation.</p></li>
+<li><p>Interaction effect: Treatments F, TFB, and THF in fenced plots did not significantly reduce seedling density (p = 0.369, 0.148 and 0.092, respectively). Although the estimates are negative and large.&nbsp; I am not confident that the effect is real and not due to random chance.</p></li>
+<li><p>TF on fenced plots significantly (p = 0.0086) reduced seedling density. The large negative coefficient indicates that on fenced plots, TF was very effective at&nbsp;reducing seedling density&nbsp;compared to the control.&nbsp;</p></li>
+<li><p>TFB on its own (p = 0.706) and when fenced (p = 0.148) did not significantly reduce seedling density. TFB does not appear to be a uniq effective treatment. Its performance was not significantly different from the control, either with or without fencing.</p>
+<p>##Relative to the controls we see that TFB does not significantly reduce seedling density, irrespective of whether it was fenced (p = 0.148) or unfenced (p = 0.706).</p>
 <ol start="2" type="1">
-<li><strong>Seedling density</strong></li>
-</ol></li>
-</ul>
-<p><img src="images/clipboard-1363665080.png" class="img-fluid" width="647"></p>
-<p>Figure 2. Effect of treatment, fencing and encroachment level on seedling density at SHR five months post treatment.</p>
-<ul>
-<li><p>When compared to control treatment F&nbsp;increases seedling density significantly (1569.45, p = 0.0165).</p></li>
-<li><p>Other treatments (TF, TFB, THF) do not show significant effects (p &gt; 0.05).</p></li>
-<li><p>TF × fencing significantly decreased seedling density (-2116.56, p = 0.005).</p></li>
-<li><p>Fire in highly encroached areas significantly reduced seedling density (-2315.47, p = 0.002).</p>
-<p>-Fencing generally increases seedling density, but this effect is&nbsp;reduced&nbsp;when combined with TF.</p>
-<p>-Treatment F increases seedling density, but this effect is&nbsp;strongly weakened in highly encroached areas.</p></li>
-</ul>
-<ol start="3" type="1">
-<li><p><strong>Sapling height</strong></p>
-<p><img src="images/clipboard-4068710853.png" class="img-fluid" width="609"></p>
-<p>Figure 3. Sapling height at SHR five months post treatment.</p></li>
+<li><u><strong>To test the effects of treatments and fencing on resprouts population on cut stumps</strong></u></li>
 </ol>
-<ul>
-<li><p>TF significantly increases&nbsp;(+0.251, p &lt; 0.0001) sapling height.</p></li>
-<li><p>TFB significantly increases&nbsp;(+0.179, p = 0.015) sapling height.</p></li>
+<p><img src="images/clipboard-3526324547.png" class="img-fluid" width="526"></p></li>
 </ul>
-<!-- -->
+<p>Figure 2. Effect of treatment, and fencing on number of resprouts on cut stumps at SHR five months post-treatment.</p>
+<p><u>Interpretation</u></p>
 <ul>
-<li>Treatment and interactions had no effect on sapling height</li>
+<li><p>The number of resprouts for the control group in unfenced plots is significant (p &lt; 0.001) and positive (7.8237).&nbsp;</p></li>
+<li><p>THF significantly (p &lt; 0.001) reduces the number of resprouts,&nbsp;and this effect is consistent regardless of fencing.</p></li>
+<li><p>Fencing alone significantly (p = 0.0191) increases the number of resprouts in control plots.</p></li>
+<li><p>TFB has no significant effect&nbsp;on its own (p = 0.4137) or in combination with fencing (p = &nbsp;0.1708).</p></li>
 </ul>
-<p><strong>Resprouts on cut stumps</strong></p>
-<p><img src="images/clipboard-4060223960.png" class="img-fluid" width="616"></p>
-<p>Figure 4. Effect of treatment, fencing and encroachment level on number of resprout on cut stumps at SHR five months post-treatment.</p>
+<pre><code>3.  **To test the effects of treatments and fencing on the grass DPM height**</code></pre>
+<p><img src="images/clipboard-1431186357.png" class="img-fluid" width="317"></p>
+<p><img src="images/clipboard-3609966066.png" class="img-fluid" width="317"></p>
+<p>Figure 3. Mean grass DPM height (cm) at SHR five months post-treatment.</p>
+<p><u><strong>Interpretation</strong></u></p>
 <ul>
-<li>THF significantly reduces (p &lt; 0.0001) the number of resprouts on cut stumps.</li>
+<li><p>On unfenced plots, no treatment had a significant impact (p &gt; 0.05) on above-ground grass DPM height compared to the control.</p></li>
+<li><p>Interaction terms: The effect of the treatments on grass DPM height did not differ (p &gt; 0.05) between fenced and unfenced plots. In other words, fencing did not make any treatment more or less effective.</p>
+<p>From the results, generally, none of these treatments causes a significant increase or decrease in Grass DPM height.</p></li>
 </ul>
-<!-- -->
+<ol start="4" type="1">
+<li><p><strong>To test the effect of treatment and fencing on grass species richness</strong></p>
+<p><img src="images/clipboard-3710810934.png" class="img-fluid" width="273"><img src="images/clipboard-73947810.png" class="img-fluid" width="276"></p></li>
+</ol>
+<p>Figure 4. Grass species richness at SHR five months post treatment.</p>
+<p><strong>Interpretation</strong></p>
 <ul>
-<li>THF × fencing shows that fencing significantly decreases resprouts on cut stumps (-1.391, p &lt; 0.05)</li>
-<li>THF reduces the number of resprouts in moderately and highly encroached areas, and fencing does enhance the effect of THF on resprouts on cut stumps.&nbsp;</li>
+<li><p>The Control in unfenced plots significantly (p = 0.000434) increased grass species richness compared to other treatments.</p></li>
+<li><p>THF caused a significant (p &lt; 0.01) and substantial&nbsp;decrease in grass species richness.&nbsp;</p></li>
+<li><p>Fencing alone or in combination with treatments does not significantly (p &gt; 0.05) alter grass species richness.</p></li>
 </ul>
-<p><img src="images/clipboard-3135797840.png" class="img-fluid" width="647"></p>
-<p>Figure 5. Mean grass DPM height (cm) at SHR five months post-treatment.</p>
+<ol start="5" type="1">
+<li><u><strong>To test the effect of treatment and fencing on grass species diversity</strong></u></li>
+</ol>
+<p><img src="images/clipboard-67756329.png" class="img-fluid" width="269"></p>
+<p><img src="images/clipboard-304452399.png" class="img-fluid" width="330"></p>
+<p>Figure 5. Grass Shannon-Weiner diversity index at SHR five months post treatment.</p>
+<p>The rlmer was used. GLMM with Gaussian family and log transformation could not be used as their residuals were non-normally distributed.</p>
 <ul>
-<li><p>There was no significant difference (p &gt; 0.05) in grass DPM height across treatments.</p></li>
-<li><p>Treatment interactions did not show any statistical evidence of their effect on grass DPM height at SHR.</p>
-<p><img src="images/clipboard-1235014416.png" class="img-fluid" width="600"></p></li>
+<li><p>Treatments (C, F, TF, TFB) had no significant effect on grass species diversity .</p></li>
+<li><p>The only clear effect was that&nbsp;THF significantly reduced grass species diversity compared to the control, and this effect was consistent across both fenced and unfenced plots.</p></li>
+<li><p>Fencing did not interact with any treatment to influence the outcome; the outcome was negligible.&nbsp;</p></li>
 </ul>
-<p>Figure 6. Grass Shannon-Weiner diversity shows no change five months post-treatment at SHR.</p>
-<ul>
-<li><p>There was no statistical evidence (p &gt; 0.05) to show that treament had an effect on grass Shannon-Weiner diversity index.</p></li>
-<li><p>Treatment interactions did not significantly affect grass Shannon-Weiner diversity index.</p></li>
-</ul>
-<p>GRASS BIOMASS</p>
-<p><img src="images/clipboard-259839611.png" class="img-fluid" width="649"></p>
-<p>Figure 7. Above-ground grass biomass is strongly predicted by DPM height (cm) at Shangani Holistic Ranch using robust linear regression with log transformed variables.</p>
 </section>
 
 </main>

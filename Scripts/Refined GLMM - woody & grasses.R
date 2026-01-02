@@ -1,4 +1,4 @@
-#### this script analyses data,with the TFB treatment excluded. 
+#### this script analyses data with the TFB treatment excluded. 
 library(tidyverse)
 library(vegan)
 library(multcompView)
@@ -26,6 +26,10 @@ library(effectsize) # For easy centering
 library(marginaleffects)
 library(effects)
 library(ggeffects)
+library(knitr)  # for table
+library(gtsummary)
+library(MASS)
+library(multcomp) # for compact letters
 #library(glmmLasso)  # for LASSO regression
 #library(glmnet)
 
@@ -118,7 +122,7 @@ strt_comparison2 <- strt_comparison2 %>%
 
 
 ## increasing font size for x and y axis
-Seedpp3<- ggplot(strt_comparison2, 
+Seedpp3 <- ggplot(strt_comparison2, 
                  aes(x = Treatment, y = density_ha, fill = Period)) + facet_wrap(~Fencing)+ 
   geom_boxplot(alpha = 0.8, outlier.shape = NA, position = position_dodge(width = 0.8)) +
   labs(x = "Treatment", 
@@ -161,12 +165,12 @@ Seedbxp2 <- ggplot(Seedlings_Delta1,
   )
 
 ##saving Delta treatment BOXPLOT  -  excluding TFB
-ggsave(Seedbxp2,filename ="Plots/TFB DELTA Seedling Density BOXplot.png",
+ #ggsave(Seedbxp2,filename ="Plots/TFB DELTA Seedling Density BOXplot.png",
        width = 16, height = 14, units = "cm") 
 
 
 
-### Calculate absolute percentage change between 2024 and 2025 for each treatment
+### Calculate  percentage change between 2024 and 2025 for each treatment
 percentage_change <- Seedsummary_stats %>%
   pivot_wider(
     names_from = Year,
@@ -178,7 +182,7 @@ percentage_change <- Seedsummary_stats %>%
   ) %>%
   select(Treatment, Fencing, mean_density_2024, mean_density_2025, absolute_change, percentage_change)
 
-percentage_change
+  #percentage_change
 
 # Create a formatted flextable
 word_table <- percentage_change %>%
@@ -194,7 +198,7 @@ word_table <- percentage_change %>%
   #save_as_docx(word_table, path = "absolute_change_table.docx")
 
 
-##### GLMM to test effect of treatment * fencing on seedling density###################
+##### to test effect of treatment * fencing on seedling density###################
 
 # Make "Unfenced" the reference level 
 
@@ -209,38 +213,69 @@ levels(Seedlings_Delta1$Fencing)  # Should show "Open" "Closed" (or vice versa)
 # Set "Fenced" as the reference level 
 Seedlings_Delta1$Fencing <- relevel(Seedlings_Delta1$Fencing, ref = "Unfenced")
 
+##### Convert character variables to factors
+Seedlings_Delta1$Treatment <- as.factor(Seedlings_Delta1$Treatment)
+Seedlings_Delta1$Fencing <- as.factor(Seedlings_Delta1$Fencing)
+
 
 #GLMM for seedling density 
-Seedl4 <- glmmTMB(delta_Seeddens ~ Treatment * Fencing + (1|Site) + (1|Plot),  # Crossed effects,
+Seedl4 <- glmmTMB(delta_Seeddens ~ Treatment * Fencing + (1|Site) + (1|Plot),  
                 data = Seedlings_Delta1, family = gaussian(link = "identity"))
-summary(Seedl4)
+summary(Seedl4)   #model converged
+
+tbl_regression(Seedl4)
 
 
-## glmm nested structure
-See5 <- lmer(delta_Seeddens ~ Treatment * Fencing + (1|Site/Plot),  
+## USING GLMM with controller
+   #Seedl4b <- glmmTMB(delta_Seeddens ~ Treatment * Fencing + (1|Site) + (1|Plot),  
+   #data = Seedlings_Delta1, family = gaussian(link = "identity"),control = glmmTMBControl(
+       #optCtrl = list(iter.max = 1e5, eval.max = 1e5)
+        #))
+
+
+
+##GLMM nested
+Seedl4b <- glmmTMB(delta_Seeddens ~ Treatment * Fencing + (1|Site/Plot),  
+                  data = Seedlings_Delta1, family = gaussian(link = "identity"))
+summary(Seedl4b) # model did not converge
+
+
+## lmm nested structure
+See5 <- lmer(delta_Seeddens ~ Treatment * Fencing + (1|Site)+(1|Plot),  
                   data = Seedlings_Delta1)
-summary(See5)
 
+summary(See5) #did not converge, caused the singular Hessian matrix
+
+# Check if Plot is nested within Site
+ with(Seedlings_Delta1, table(Plot, Site))              #completely crossed not nested.
+   ##The model can't separate the variance between these two random effects because they're perfectly confounded (perfect multicollinearity).
+   #the design has no independent Plot effect - each plot is represented equally across all sites
+  #The model was trying to estimate variance for two perfectly correlated random effects
 
 
 # using the LMM
-Seed5 <- lmer(delta_Seeddens ~ Treatment * Fencing + (1|Site)+ (1|Plot),  # Crossed effects,
+Seedl5 <- lmer(delta_Seeddens ~ Treatment * Fencing + (1|Site),  
                   data = Seedlings_Delta1)
 
-summary(Seed5)
+summary(Seedl5)
+
+
+marginaleffects::avg_slopes(Seedl5)
 
 # check model convergence
-performance::check_convergence(Seed5)
+performance::check_convergence(Seedl5)
 
 ## check model performance
 
-performance::check_model(Seedl4)
+performance::check_model(Seedl5)
 
+#check for singularity
+performance::check_singularity(Seedl4b) # FALSE desired shows- all random effects have nonzero variance → stable
 
 ### POST HOC ANALYSIS FOR SEEDLINGS 
 # Tukey HSD pairwise comparisons
-treat_comparisons <- emmeans(Seedl5, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
-summary(treat_comparisons$contrasts)
+sedtreat_comparisons <- emmeans(Seedl5, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
+summary(sedtreat_comparisons$contrasts)
 
 ### Marginal effects for treatment * fencing on seedlings
 Seeden <- ggpredict(Seedl5, terms = c("Treatment", "Fencing"))
@@ -253,12 +288,10 @@ Se <- plot(Seeden) +     #Store the plot in an object for saving using ggsave la
   theme(
     axis.title = element_text(size = 14),      # Axis titles
     axis.text = element_text(size = 12)        # Axis tick labels
-  )
-#+
-  #ggtitle("(b)")
+
 
 ## saving marginal effects plot
-ggsave(Se,filename ="Plots/ME Change in seedling density.png",
+  #ggsave(Se,filename ="Plots/ME Change in seedling density.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -379,7 +412,7 @@ Sapp1<- ggplot(sptrt_comparison2,
   )
 
 ##saving pre& post treatment BOXPLOT  -  excluding encroachment level
-ggsave(Sapp1,filename ="Plots/PP TFB Saplings Density BOXplot.png",
+ #ggsave(Sapp1,filename ="Plots/PP TFB Saplings Density BOXplot.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -434,7 +467,7 @@ Sapbxp1 <- ggplot(Saplings_Delta,
   
 
 ##saving BOXPLOT - sapling density 
-ggsave(Sapbxp1,filename ="Plots/3 TFB Delta Sapling Density BOXplot.png",
+ #ggsave(Sapbxp1,filename ="Plots/3 TFB Delta Sapling Density BOXplot.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -523,11 +556,49 @@ multi_panel <- (Sapp1 / Sp) +   # "/" for stacking vertically, or "|" for side-b
   theme(
     axis.text = element_text(size = 12),        # Increase axis label font size
     axis.title = element_text(size = 12),       # Increase axis title font size
-    plot.tag = element_text(size = 12, hjust = 0)  # Ensure left alignment
+    plot.tag = element_text(size = 12, hjust = 0)
+  )
+
+##save multipanel
+ #ggsave(multi_panel,filename ="Plots/Multipanel Saplings.png",
+       width = 16, height = 14, units = "cm")  
+
+
+
+
+########VIOLIN PLOT  SAPLINGS
+#### Violin Saplings density
+SapViolin<- ggplot(sptrt_comparison2, 
+                   aes(x = Treatment, y = density_ha, fill = Period)) + facet_wrap(~Fencing)+
+  geom_violin(trim = FALSE)+
+  geom_hline(yintercept = 0, linetype = "dashed") +  
+  labs(x = "Treatment", 
+       y = "Sapling density per ha",
+  ) +
+  theme_beautiful() +
+  theme(
+    axis.title = element_text(size = 14),      # Axis titles
+    axis.text = element_text(size = 12)        # Axis tick labels
   )
 
 
-ggsave(multi_panel,filename ="Plots/Multipanel Saplings.png",
+# Combine the plots in a single layout
+multi_panel <- (SapViolin / Sp) +   # "/" for stacking vertically, or "|" for side-by-side
+  plot_layout(heights = c(3, 4)) +  # Adjust relative heights
+  plot_annotation(
+    tag_levels = 'a',
+    tag_prefix = '(',
+    tag_suffix = ')',
+    theme = theme(plot.tag = element_text(size = 12, hjust = 0))  # Left align tags
+  ) &
+  theme(
+    axis.text = element_text(size = 12),        # Increase axis label font size
+    axis.title = element_text(size = 12),       # Increase axis title font size
+    plot.tag = element_text(size = 12, hjust = 0)  # Ensure left alignment
+  )
+
+#saving using ggsave
+ggsave(multi_panel,filename ="Plots/Multipanel Violin Saplings.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -552,7 +623,6 @@ resprouts_df <- SapF %>%
     Year %in% c(2025),
     !Treatment %in% c("C", "F", "TFB")  # exclude the three treatments
   )
-
 
 
 ### Make "Unfenced" the reference level (to see "fenced" coefficients)
@@ -590,8 +660,21 @@ Respbx1 <- ggplot(resprouts_df,
   )
 
 
+##violin plot
+RespVio <- ggplot(resprouts_df,
+                aes(x = Treatment, y = No_of_resprouts)) + facet_wrap(~Fencing)+ 
+  geom_violin(trim = TRUE)+
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Treatment", y = "Average no.of resprouts per cut stump") +
+  theme_beautiful() +
+  theme(
+    axis.title = element_text(size = 14),      # Axis titles
+    axis.text = element_text(size = 12)        # Axis tick labels
+  )
+
+
 ##saving BOXPLOT - INTERACTIONS
-ggsave(Respbx1,filename ="Plots/PP TFB RESPROUTS BOXplot.png",
+ggsave(RespVio,filename ="Plots/RESPROUTS VIOLIN plot.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -602,7 +685,7 @@ summary(Respr4)
 
 
 ##using poisson family 
-Respr5b <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site)+(1|Plot),  
+Respr5b <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
                   data = resprouts_df, family = poisson(link = log))
 summary(Respr5b)
 
@@ -613,7 +696,7 @@ Respr5c <- lmer(No_of_resprouts ~ Treatment * Fencing + (1|Site)+ (1|Plot),
 
 summary(Respr5c)
 
-espr5c <- lme(No_of_resprouts ~ Treatment * Fencing + (1|Site)+ (1|Plot),  
+espr5c <- lme(No_of_resprouts ~ Treatment * Fencing + (1|Site/Plot),  
                data = resprouts_df)
 
 
@@ -624,13 +707,13 @@ performance::check_model(Respr4)
 
 ### POST HOC ANALYSIS FOR RESPROUTS 
 # Tukey HSD pairwise comparisons
-Rstreat_comparisons3 <- emmeans(Respr4, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
+Rstreat_comparisons3 <- emmeans(Respr5b, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
 summary(Rstreat_comparisons3$contrasts)
 
 # Using ggeffects on resprouts
-Resprouts <- ggpredict(Respr5c, terms = c("Treatment", "Fencing"))
+Resprouts <- ggpredict(Respr5b, terms = c("Treatment", "Fencing"))
    #plot(preds)
-Resprouts <- ggpredict(Respr5c, terms = c("Treatment", "Fencing"))
+Resprouts <- ggpredict(Respr5b, terms = c("Treatment", "Fencing"))
 Res <- plot(Resprouts) + 
   labs(y = "Average number of resprouts per cut stump",
        x = "Treatment") +
@@ -640,8 +723,9 @@ Res <- plot(Resprouts) +
     axis.title = element_text(size = 14),      # Axis titles
     axis.text = element_text(size = 12)        # Axis tick labels
   )
+
 ## saving marginal effects plot
-ggsave(Res,filename ="Plots/ME Resprouts.png",
+ggsave(Res,filename ="Plots/ME Violin Resprouts.png",
        width = 16, height = 14, units = "cm") 
 
 
@@ -743,7 +827,7 @@ Grbx1<- ggplot(grass_height,
   )
 
 ##saving pre& post treatment BOXPLOT  -  excluding encroachment level
-ggsave(Grbx1,filename ="Plots/PP TFB Grass height BOXplot.png",
+  #ggsave(Grbx1,filename ="Plots/PP TFB Grass height BOXplot.png",
        width = 16, height = 14, units = "cm") 
 
 
@@ -777,7 +861,7 @@ Grasbx2 <- ggplot(delta_GRHeight,
   )
 
 ##saving pre& post treatment BOXPLOT  -  excluding encroachment level
-ggsave(Grasbx2,filename ="Plots/3 TFB Delta Grass height BOXplot.png",
+ #ggsave(Grasbx2,filename ="Plots/3 TFB Delta Grass height BOXplot.png",
        width = 16, height = 14, units = "cm") 
 
 ###### GLMM to test effect of treatment * fencing on Grass height ##################
@@ -804,18 +888,40 @@ Grashg <- glmmTMB(delta_GR ~ Treatment * Fencing + (1|Site),
                  data = delta_GRHeight, family = gaussian(link = "identity"))
 summary(Grashg)
 
+##with intercept for plot
+Grashg2 <- glmmTMB(delta_GR ~ Treatment * Fencing + (1|Site)+ (1|Plot),  
+                  data = delta_GRHeight, family = gaussian(link = "identity"))
+summary(Grashg2)
+
 
 ##LMM for grass height
-Grashg1 <- lmer(delta_GR ~ Treatment * Fencing + (1|Site) + (Plot),  
+Grashg1 <- lmer(delta_GR ~ Treatment * Fencing + (1|Site),  
                   data = delta_GRHeight)
 summary(Grashg1)
 
 
+# check model convergence
+performance::check_convergence(Grashg1)
+
+## check model performance
+
+performance::check_model(Grashg1)
+
+#check for singularity
+performance::check_singularity(Grashg1) # FALSE desired shows- all random effects have nonzero variance → stable
+
+### POST HOC ANALYSIS FOR SEEDLINGS 
+# Tukey HSD pairwise comparisons
+grtreat_comparisons <- emmeans(Grashg1, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
+summary(grtreat_comparisons$contrasts)
+
+
 ##Marginal effects grass height
-Gheight <- ggpredict(Grashg, terms = c("Treatment", "Fencing"))
+Gheight <- ggpredict(Grashg1, terms = c("Treatment", "Fencing"))
 ght <-plot(Gheight) + 
   labs(y = "Change in grass DPM height (cm)",
       x = "Treatment") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
   theme_beautiful()+ 
   ggtitle(NULL)+
   theme(
@@ -874,13 +980,14 @@ Grrbx1<- ggplot(Grass_rich,
   labs(x = "Treatment", 
        y = "Grass species richness") +
   theme_beautiful() +
+  scale_y_continuous(limits = c(2, 14), breaks = seq(2, 14, by = 4)) +
   theme(
     axis.title = element_text(size = 14),      # Axis titles
     axis.text = element_text(size = 12)        # Axis tick labels
   )
 
 ##saving pre& post treatment BOXPLOT  -  excluding TFB
-ggsave(Grrbx1,filename ="Plots/PP TFB Grass Richness BOXplot.png",
+  #ggsave(Grrbx1,filename ="Plots/PP TFB Grass Richness BOXplot.png",
        width = 16, height = 14, units = "cm") 
 
 
@@ -911,7 +1018,7 @@ GrRRbx2 <- ggplot(grassR_delta,
 
 
 ##saving pre& post treatment BOXPLOT  -  excluding encroachment level
-ggsave(GrRRbx2,filename ="Plots/3 TFB Delta Grass Richness BOXplot.png",
+ #ggsave(GrRRbx2,filename ="Plots/3 TFB Delta Grass Richness BOXplot.png",
        width = 16, height = 14, units = "cm") 
 
 
@@ -938,9 +1045,9 @@ grassR_delta$Fencing <- as.factor(grassR_delta$Fencing)
 
 
 #GLMM for species richness 
-Grasrich <- glmmTMB(delta ~ Treatment * Fencing + (1|Site)+ (1|Plot),  
+ #Grasrich <- glmmTMB(delta ~ Treatment * Fencing + (1|Site)+ (1|Plot),  
                   data = grassR_delta, family = gaussian(link = "identity"))
-summary(Grasrich)
+ #summary(Grasrich)
 
 
 ## Using LMM instead of glmm
@@ -968,6 +1075,7 @@ grsp <-plot(SppR2) +
   labs(y = "Change in grass species richness",
        x = "Treatment") +
   theme_beautiful()+ 
+  geom_hline(yintercept = 0, linetype = "dashed") +
   ggtitle(NULL)+
   theme(
     axis.title = element_text(size = 14),      # Axis titles
@@ -978,12 +1086,6 @@ grsp <-plot(SppR2) +
 ggsave(grsp,filename ="Plots/ME Change in Grass species richness.png",
        width = 16, height = 14, units = "cm") 
 
-
-
-# effects with separate plots for fenced and unfenced
-eff1 <- allEffects(Grasrich)
-summary(eff1)
-plot(eff1)
 
 
 ### Combine the plots in a single layout
@@ -1008,32 +1110,8 @@ ggsave(multi_panel5,filename ="Plots/Multipanel Grass richness.png",
 
 
 
-#####.  Grass species richness changes
-Grass_rich <- Grasses %>%
-  filter(!is.na(Species_name),
-         Year %in% c(2024, 2025), !Treatment %in% c("TFB")) %>%   
-  group_by(Treatment, Fencing, Year) %>%
-  summarise(spp_richness = n_distinct(Species_name), .groups = "drop") %>%
-  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
-# 2a. Calculate changes using pivot_wider 
-Richness_changes <- Grasses %>%
-  select(Year, Treatment) %>%
-  pivot_wider(
-    names_from = Year, 
-    values_from = spp_richness,
-    names_prefix = "richness_"
-  ) %>%
-  mutate(
-    absolute_change = richness_2025 - richness_2024,
-    percent_change = ((richness_2025 - richness_2024) / richness_2024) * 100
-  ) %>%
-  rename(
-    pre_richness = richness_2024,
-    post_richness = richness_2025
-  )
-
-
+####################
 ### 3. Species list per treatment
 Species_by_treatment <- Grasses %>%
   filter(!is.na(Species_name),
@@ -1105,6 +1183,7 @@ Grasses %>%
   ) %>%
   ungroup()
 
+
 #################################  GRASS SPECIES DIVERSITY  
 
 # Calculate Shannon-Wiener Diversity Index at Site and Plot level
@@ -1114,7 +1193,7 @@ GrSWeiner <- Grasses%>%
   group_by(Site, Plot, Subplot, Treatment, Year, Fencing, Species_name)%>%
   summarise(Spp_count = n(), .groups = "drop" )
 
-## Calculate Shannon-Wiener Diversity Index at Site and Plot level
+## Calculate Shannon-Wiener Diversity Index at treatment level
 grSWdiversity <- GrSWeiner %>%
   group_by(Site, Plot, Subplot,Treatment, Year, Fencing) %>%                   # Group by Site and Plot
   summarise(
@@ -1133,12 +1212,13 @@ GSW1 <- ggplot(grSWdiversity,
   #geom_hline(yintercept = 0, linetype = "dashed") +
   labs(x = "Treatment", y = "Shannon-Weiner diversity") +  #rename the y-axis
   theme_beautiful() +
+  scale_y_continuous(limits = c(0, 3), breaks = seq(0, 3, by = 1.5)) +
   theme(legend.position = "top") +
   theme(axis.title = element_text(size = 14),
         axis.text = element_text(size = 12))
 
 ##ggsave
-ggsave(GSW1,filename ="Plots/PP TFB Grass S-Weiner index FENCED boxplot.png",
+  #ggsave(GSW1,filename ="Plots/PP TFB Grass S-Weiner index FENCED boxplot.png",
        width = 16, height = 14, units = "cm")
 
 
@@ -1149,7 +1229,7 @@ Gdiv <- Grasses%>%
   group_by(Site, Plot, Subplot, Treatment, Year, Fencing, Species_name)%>%
   summarise(Spp_count = n(), .groups = "drop" )
 
-# Calculate Shannon-Wiener Diversity Index log transforming
+# Calculate Shannon-Wiener Diversity Index 
 Sdiversity_data <- Gdiv %>%
   group_by(Site, Plot, Subplot,Treatment, Year, Fencing) %>%   # Group by Site and Plot
   summarise(
@@ -1206,10 +1286,10 @@ SW_Delta$Fencing <- as.factor(SW_Delta$Fencing)
 
 
 #GLMM for grass diversity 
-Grasdiv <- glmmTMB(delta_SW ~ Treatment * Fencing + (1|Site)+ (1|Plot),  
+  #Grasdiv <- glmmTMB(delta_SW ~ Treatment * Fencing + (1|Site)+ (1|Plot),  
                   data = SW_Delta, family = gaussian(link = "identity"))
 
-summary(Grasdiv)
+  #summary(Grasdiv)
 
 
 
@@ -1219,6 +1299,12 @@ GrasD <- lmer(delta_SW ~ Treatment * Fencing + (1|Site),
 
 summary(GrasD)
 
+
+### LMM with plot intercept
+GrasD2 <- lmer(delta_SW ~ Treatment * Fencing + (1|Site)+ (1|Plot),  
+ data = SW_Delta) #boundary (singular) fit: see help('isSingular')
+
+summary(GrasD2) 
 
 
 ## check model performance
@@ -1237,6 +1323,7 @@ preds <- ggpredict(GrasD, terms = c("Treatment", "Fencing"))
 grdiv <- plot(preds) +  
   labs(y = "Change in Shannon-Weiner Diversity",
        x = "Treatment") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
   theme_beautiful()+ 
   ggtitle(NULL)+
   geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
@@ -1271,12 +1358,12 @@ multi_panel6 <- (GSW1 / grdiv) +   # "/" for stacking vertically, or "|" for sid
 ggsave(multi_panel6,filename ="Plots/Multipanel Grass Shannon diversity.png",
        width = 16, height = 14, units = "cm")  
 
-
+ 
 
 
 ### absolute change
 
-##Summary stats for seedlings 
+##Summary stats for grass diversity 
 GrassDsummary_stats <- grSWdiversity %>%
   group_by(Treatment,Fencing, Year) %>%
   summarise(
@@ -1334,75 +1421,228 @@ sum(is.na(Seedlings_Delta1$delta_Seeddens))
 sum(is.na(Seedlings_Delta1$Treatment))
 sum(is.na(Seedlings_Delta1$Fencing))
 
-### Comprehensive check for N observations
-comprehensive_N <- Grasses %>%
-  filter(!is.na(DPM_Height),
-         Year %in% c(2024, 2025),
-         !Treatment %in% c("SPG")) %>% 
-  group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
-  summarise(
-    N = n(),
-    .groups = 'drop'
+
+
+
+################################ USING EMMEANS
+
+# Estimated marginal means for Treatment within Fencing for SEEDLINGS
+Seedemm <- emmeans(Seedl5, ~ Treatment | Fencing, type = "response")
+
+# Compare each treatment to Control with Tukey adjustment (or "none" if you only want vs control)
+contrast_vs_control <- contrast(Seedemm, method = "trt.vs.ctrl", ref = "C")
+summary(contrast_vs_control, infer = TRUE)
+
+# generate letters using cld in multicomp package
+Seedcld_emm <- cld(Seedemm, adjust = "tukey", Letters = letters, type = "response")
+cld_tbl <- as.data.frame(Seedcld_emm)
+
+
+# prepare clean database for plotting
+plot_df <- cld_tbl %>%
+  rename(
+    EMM = emmean,
+    CI_lower = lower.CL,
+    CI_upper = upper.CL,
+    Group = .group
   ) %>%
-  arrange(Site, Plot, Subplot, Treatment, Fencing, Year)
+  mutate(Group = str_trim(Group))  # Clean whitespace
 
 
-### steps to inserting astericks to show significance
-# Extract coefficient table
-coefs <- summary(GrasD)$coefficients
 
-# Convert to data frame
-pvals_df <- data.frame(
-  term = rownames(coefs),
-  p.value = coefs[, "Pr(>|t|)"]
-)
-
-# Create significance stars
-pvals_df$stars <- cut(
-  pvals_df$p.value,
-  breaks = c(-Inf, 0.001, 0.01, 0.05, Inf),
-  labels = c("***", "**", "*", "")
-)
-
-pvals_df
-
-#get marginal predictions
-preds <- as.data.frame(ggpredict(GrasD, terms = c("Treatment", "Fencing")))
-head(preds)
-
-
-##matching 
-# Create a helper column for matching
-preds$term <- paste0("Treatment", preds$x)
-
-# Merge stars into the prediction data
-preds_annotated <- merge(preds, pvals_df, by = "term", all.x = TRUE)
-
-# Replace NAs with empty strings
-preds_annotated$stars[is.na(preds_annotated$stars)] <- ""
-
-
-##add significance stars  
-ggplot(preds_annotated, aes(x = x, y = predicted, color = group, group = group)) +
-  geom_line(linewidth = 1) +
-  geom_point(size = 3) +
-  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, fill = group),
-              alpha = 0.2, color = NA) +
-  geom_text(
-    aes(label = stars, y = conf.high + 1),  # stars above whiskers
-    size = 6, color = "black"
-  ) +
-  scale_color_brewer(palette = "Dark2") +
-  scale_fill_brewer(palette = "Dark2") +
+## Visualisation using ggplot
+semm <- ggplot(plot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)) +
+  geom_point(position = position_dodge(width = 0.35), size = 3) +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper),
+                position = position_dodge(width = 0.35), width = 0.12) +
+  geom_text(aes(label = Group,
+                y = CI_upper + 0.25 * max(EMM)),
+            position = position_dodge(width = 0.35), size = 3, color = "black") +
+  scale_color_manual(values = c("Fenced" = "#8c510a", "Unfenced" = "#d8b365")) +
+  theme_classic(base_size = 14) +
+  labs(color = "Fencing")+  # Optional: rename legend title
   labs(
-    title = "Marginal Effects of Treatment × Kraaling",
     x = "Treatment",
-    y = "Predicted Height (cm)",
-    color = "Fencing",
-    fill = "Fencing"
+    y = "Change in seedling density per ha",
   ) +
-  theme_minimal(base_size = 14) +
+  theme_classic()+ 
+  ggtitle(NULL)+
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),
-    legend.position = "top"
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12))
+
+
+
+## saving marginal effects plot
+  #ggsave(semm,filename ="Plots/EMM Change in seedling density.png",
+       width = 16, height = 14, units = "cm")
+
+
+
+######
+semm1 <- ggplot(plot_df, aes(Treatment, EMM, color = Treatment)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper), width = 0.12) +
+  geom_text(aes(label = Group, y = CI_upper + 0.07 * max(EMM)),
+            color = "black", size = 5) +
+  facet_wrap(~ Fencing, nrow = 1) +
+  theme_bw(base_size = 14) +
+  theme(
+    legend.position = "none",
+    panel.grid = element_blank(),
+    strip.background = element_rect(fill = "white", color = "black"),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  ) +
+  labs(
+    x = "Treatment",
+    y = "EMM Change in seedling density per ha "
   )
+
+
+##### EMM FOR SAPLING DENSITY
+# Estimated marginal means for Treatment within Fencing 
+Saplemm <- emmeans(Sapl5, ~ Treatment | Fencing, type = "response")
+
+# Compare each treatment to Control with Tukey adjustment (or "none" if you only want vs control)
+spcontrast_vs_control <- contrast(Saplemm, method = "trt.vs.ctrl", ref = "C")
+summary(spcontrast_vs_control, infer = TRUE)
+
+# generate letters using cld in multicomp package
+Saplcld_emm <- cld(Saplemm, adjust = "tukey", Letters = letters, type = "response")
+cld_tbl <- as.data.frame(Saplcld_emm)
+
+
+# prepare clean database for plotting
+splot_df <- cld_tbl %>%
+  rename(
+    EMM = emmean,
+    CI_lower = lower.CL,
+    CI_upper = upper.CL,
+    Group = .group
+  ) %>%
+  mutate(Group = str_trim(Group))  # Clean whitespace
+
+
+
+## Visualisation using ggplot for saplings
+spemm <- ggplot(splot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)) +
+  geom_point(position = position_dodge(width = 0.35), size = 3) +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper),
+                position = position_dodge(width = 0.35), width = 0.12) +
+  geom_text(aes(label = Group,
+                y = CI_upper + 0.25 * max(EMM)),
+            position = position_dodge(width = 0.35), size = 3, color = "black") +
+  scale_color_manual(values = c("Fenced" = "#8c510a", "Unfenced" = "#d8b365")) +
+  theme_classic(base_size = 14) +
+  labs(color = "Fencing")+  # Optional: rename legend title
+  labs(
+    x = "Treatment",
+    y = "Change in sapling density per ha",
+  ) +
+  theme_classic()+ 
+  ggtitle(NULL)+
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
+  theme(
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12))
+
+
+######## EMM FOR GRASS RICHNESS
+# Estimated marginal means for Treatment within Fencing 
+GRemm <- emmeans(modelRich, ~ Treatment | Fencing, type = "response")
+
+# Compare each treatment to Control with Tukey adjustment (or "none" if you only want vs control)
+grcontrast_vs_control <- contrast(GRemm, method = "trt.vs.ctrl", ref = "C")
+summary(grcontrast_vs_control, infer = TRUE)
+
+# generate letters using cld in multicomp package
+Grlcld_emm <- cld(GRemm, adjust = "tukey", Letters = letters, type = "response")
+cld_tbl <- as.data.frame(Grlcld_emm)
+
+
+# prepare clean database for plotting
+gplot_df <- cld_tbl %>%
+  rename(
+    EMM = emmean,
+    CI_lower = lower.CL,
+    CI_upper = upper.CL,
+    Group = .group
+  ) %>%
+  mutate(Group = str_trim(Group))  # Clean whitespace
+
+
+
+## Visualisation using ggplot for grass richness
+Grld_emm <- ggplot(gplot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)) +
+  geom_point(position = position_dodge(width = 0.35), size = 3) +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper),
+                position = position_dodge(width = 0.35), width = 0.12) +
+  geom_text(aes(label = Group,
+                y = CI_upper + 0.25 * max(EMM)),
+            position = position_dodge(width = 0.35), size = 3, color = "black") +
+  scale_color_manual(values = c("Fenced" = "#8c510a", "Unfenced" = "#d8b365")) +
+  theme_classic(base_size = 14) +
+  labs(color = "Fencing")+  # Optional: rename legend title
+  labs(
+    x = "Treatment",
+    y = "Change in grass species richness",
+  ) +
+  theme_classic()+ 
+  ggtitle(NULL)+
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
+  theme(
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12))
+
+
+
+## ### EMM FOR GRASS DIVERSITY
+# Estimated marginal means for Treatment within Fencing 
+GDemm <- emmeans(GrasD, ~ Treatment | Fencing, type = "response")
+
+# Compare each treatment to Control with Tukey adjustment (or "none" if you only want vs control)
+gDcontrast_vs_control <- contrast(GDemm, method = "trt.vs.ctrl", ref = "C")
+summary(gDcontrast_vs_control, infer = TRUE)
+
+# generate letters using cld in multicomp package
+GDcld_emm <- cld(GDemm, adjust = "tukey", Letters = letters, type = "response")
+cld_tbl <- as.data.frame(GDcld_emm)  # TUKEY  changed to Sidak
+
+
+# prepare clean database for plotting
+gdplot_df <- cld_tbl %>%
+  rename(
+    EMM = emmean,
+    CI_lower = lower.CL,
+    CI_upper = upper.CL,
+    Group = .group
+  ) %>%
+  mutate(Group = str_trim(Group))  # Clean whitespace
+
+
+
+## Visualisation using ggplot for grass diversity
+Gdm <- ggplot(gdplot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)) +
+  geom_point(position = position_dodge(width = 0.35), size = 3) +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper),
+                position = position_dodge(width = 0.35), width = 0.12) +
+  geom_text(aes(label = Group,
+                y = CI_upper + 0.25 * max(EMM)),
+            position = position_dodge(width = 0.35), size = 3, color = "black") +
+  scale_color_manual(values = c("Fenced" = "#8c510a", "Unfenced" = "#d8b365")) +
+  theme_classic(base_size = 14) +
+  labs(color = "Fencing")+  # Optional: rename legend title
+  labs(
+    x = "Treatment",
+    y = "Change in Shannon-Weiner index",
+  ) +
+  theme_classic()+ 
+  ggtitle(NULL)+
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
+  theme(
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12))
+
+
+

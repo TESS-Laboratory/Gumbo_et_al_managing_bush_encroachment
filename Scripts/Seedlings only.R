@@ -304,7 +304,7 @@ SPSimp <- ggplot(Splot_diversity_simpson, aes(x = interaction(Site, Plot), y = s
     plot.tag.position = c(0, 0.999)) # Adjust tag position (x, y)  
 
 # Saving as png
-ggsave(SPSimp,
+#ggsave(SPSimp,
        filename = "C:/workspace/gumbo_dev/Plots/ Seedlings SIMPSON Index SPLOT.png",
        width = 16, height = 14, units = "cm" )
 

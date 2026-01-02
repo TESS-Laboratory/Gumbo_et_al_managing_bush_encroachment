@@ -267,8 +267,8 @@ tlsq_fit <- function(x, y, through_origin = FALSE) {
 }
 
 
-#Log-transform both variables (natural log)
-# 4.  Fit TLS models on the *log‑scale* -----------------------------
+#Sqrt-transform both variables (sqrt)
+# 4.  Fit TLS models on the *sqrt‑scale* -----------------------------
 # ------------------------------------------------------------------
 tlsq_free  <- tlsq_fit(df_tlsq$sqrt_DPH_Height, df_tlsq$sqrt_Biomass_kg_ha)                     # free intercept
 tlsq_zero  <- tlsq_fit(df_tlsq$sqrt_DPH_Height, df_tlsq$sqrt_Biomass_kg_ha, through_origin = TRUE) # through origin
@@ -276,16 +276,16 @@ tlsq_zero  <- tlsq_fit(df_tlsq$sqrt_DPH_Height, df_tlsq$sqrt_Biomass_kg_ha, thro
 n_obs     <- nrow(df_tlsq)
 r2_proxy  <- cor(df_tlsq$sqrt_DPH_Height, df_tlsq$sqrt_Biomass_kg_ha)^2                        # proxy R² on log scale
 
-# 4a.  Build annotation strings (include n) -------------------------
-# ------------------------------------------------------------------
+# 4a.  Build annotation strings (include n) 
+
 eq_tlsq1 <- sprintf("sqrt (y) = %.2f + %.2f·sqrt(x)\nn = %d", 
-                    tls_free$intercept, tls_free$slope, as.integer (n_obs))
+                    tlsq_free$intercept, tlsq_free$slope, as.integer (n_obs))
 
 
 eq_tlsq0 <- sprintf("sqrt (y) = %.2f + %.2f·sqrt(x)\nn = %d", 
-                    tls_zero$intercept, tls_zero$slope, as.integer(n_obs))
+                    tlsq_zero$intercept, tlsq_zero$slope, as.integer(n_obs))
 
-##5.  Plot on log‑log scale ----------------------------------------
+##5.  Plot on sqrt scale ----------------------------------------
 
 ggplot(df_tlsq, aes(x = sqrt_DPH_Height, y = sqrt_Biomass_kg_ha)) +
   geom_point() +
@@ -302,5 +302,30 @@ ggplot(df_tlsq, aes(x = sqrt_DPH_Height, y = sqrt_Biomass_kg_ha)) +
   labs(x = "Sqrt DPM height (cm)", y = " Sqrt Standing grass biomass (kg/ha)") +
   theme_beautiful()
 
+
+
+# METHOD 1: Direct extraction of model coefficients
+if (exists("tlsq_free")) {
+  cat("YOUR MODEL COEFFICIENTS:\n")
+  cat("=======================\n")
+  cat(sprintf("Intercept: %.4f\n", tlsq_free$intercept))
+  cat(sprintf("Slope: %.4f\n", tlsq_free$slope))
+  cat(sprintf("Model: sqrt(Biomass) = %.4f + %.4f × sqrt(Height)\n", 
+              tlsq_free$intercept, tlsq_free$slope))
+}
+
+# Quick check
+cat("Checking your two models:\n")
+cat("=========================\n")
+if(exists("tlsq_free")) {
+  cat("Red model coefficients:\n")
+  cat(sprintf("  Intercept: %.4f\n", tlsq_free$intercept))
+  cat(sprintf("  Slope: %.4f\n", tlsq_free$slope))
+}
+if(exists("tlsq_zero")) {
+  cat("\nBlue model coefficients:\n")
+  cat(sprintf("  Intercept: 0 (forced)\n"))
+  cat(sprintf("  Slope: %.4f\n", tlsq_zero$slope))
+}
 
 

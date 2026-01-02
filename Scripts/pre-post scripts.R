@@ -1311,6 +1311,19 @@ observations_per_group <- strt_comparison2 %>%
   summarise(n = n())
 
 
+
+# 1. Check basic data structure
+print("Treatment x Fencing table:")
+table(Seedlings_Delta1$Treatment, Seedlings_Delta1$Fencing)
+
+print("Location counts:")
+table(Seedlings_Delta1$Site)
+
+print("Response variable summary:")
+summary(Seedlings_Delta1$delta_Seeddens)
+
+
+
 ### Create the fitted-residual(homoscedasticity) plot
 fitted_vals <- fitted(Seedl4)
 residuals <- resid(Seedl4)
