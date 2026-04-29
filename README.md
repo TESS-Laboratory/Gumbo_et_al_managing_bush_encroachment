@@ -8,17 +8,13 @@ This repository contains preliminary data from vegetation surveys, R codes for p
 
  b. 'Fire.csv' - shows data of unburnt vegetation (2024) in each subplot
 
- c. 'Grasses.csv' - conatains data for 2024 grass survey.
+ c. 'GrassesCombinedCleaned3.csv' - data for 2024 and 2025 grasses survey combined.
 
- d. 'Woody_sizeclasses.csv' - data for 2024 woody plants survey.
+ d. 'WoodyPC4.csv' - data for 2024 and 2025 woody plants survey.
+ 
+ e. 'WoodyP_harmonized.csv' - data from taxonomic harmonisation of woody plants.
 
- e. 'Grasses25.csv' - data for 2025 grass survey.
-
- f. 'GrassesCombined.csv' - data for 2024 and 2025 grasses survey combined.
-
- g. 'Woody_with_separate_columns25.csv' - data for 2024 and 2025 woody plants survey.
-
- h. 'WoodyPC.csv' - data for 2025 woody plants survey.
+ f. 'Grasses_Harmonised.csv' - data from taxonomic harmonisation of grasses.
 
 
 2. 'Scripts' contains the scripts used in analysis.
