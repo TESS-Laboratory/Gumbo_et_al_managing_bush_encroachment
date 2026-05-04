@@ -56,3 +56,16 @@ rsconnect/
 # exclude WFO
 DATA/WFO_Backbone/
 
+# exclude CHIRPS
+chirps_monthly/
+DATA/chirps-v2.0.monthly.nc
+
+# Treatment pics
+DATA/Treatments/
+
+# DPM pics
+DATA/DPM pics/
+
+# SHR map
+DATA/SHR_Map_pics/
+
