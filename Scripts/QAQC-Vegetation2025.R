@@ -10,7 +10,7 @@ library(dataMaid)
 df <- read.csv("your_dataset.csv", stringsAsFactors = FALSE)
 TC <- read_csv("DATA/March2025/Woodyplants25.csv")
 
-WC <- read_csv("DATA/March2025/WoodyPC.csv")
+WC <- read_csv("DATA/March2025/Woody2426.csv")
 
 # ----------------------------
 # QUALITY CHECK (QC)
@@ -90,7 +90,7 @@ cat("\nQA/QC script completed. Check QAQC_Report.html for detailed results.\n")
 
 #################################################################### 
 
-WCdata <- read_csv("DATA/March2025/Woodyplants25.csv")
+WCdata <- read_csv("DATA/March2025/Woody2426.csv")
 # Convert Spp_name to UTF-8 encoding
 WCdata <- WCdata %>%
   mutate(Species_name = stri_enc_toutf8(Species_name))

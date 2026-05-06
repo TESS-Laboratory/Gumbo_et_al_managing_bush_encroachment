@@ -1089,7 +1089,7 @@ Robustdata <- read_csv(here("DATA/DPM.csv"))
     theme_beautiful()
 
   
-############################ SHR MODEL AND INTERCEPT LINE ######
+#################### USING ROBUST LINEAR REGRESSION
   
   ################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO SQUARE ROOT
   # 2. Convert weight from grams to kg/ha
@@ -1257,7 +1257,7 @@ ggsave(rob, filename = "Plots/ 2Robust regression-Log BIOMASS no intercept.png",
 
 
 ####################################################################
-################################## SQUARE ROOTED VARIABLES  SQRT
+####################### SQUARE ROOTED VARIABLES -  ROBUST LINEAR REGRESSION
 
 RSQTGdata <- read_csv(here("DATA/DPM.csv"))
 

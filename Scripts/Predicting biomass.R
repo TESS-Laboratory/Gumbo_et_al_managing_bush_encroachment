@@ -140,7 +140,7 @@ cat(sprintf("Ratio (Zero/Free): %.2f\n",
 
 #### COMPARRING RMSE
 
-# COMPLETE RMSE ANALYSIS FOR YOUR MODEL
+# COMPLETE RMSE ANALYSIS FOR THE MODEL
 # =======================================
 
 
@@ -254,26 +254,26 @@ heights_data$Biomass_kg_ha <- predict_biomass(heights_data$DPM_Height)
  #write.csv(heights_data, "biomass_predictions.csv", row.names = FALSE)
 
 
+
 ########### determining Biomass
 
-
 Biomasssummary<- heights_data %>%
-  filter(!is.na(Biomass),
+  filter(!is.na(Biomass_kg_ha),
          Year %in% c(2024, 2025),!Treatment %in% c("TFB")) %>% 
   group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
-  summarise(mean_Biomass = mean(Biomass, na.rm = TRUE)) %>%
+  summarise(mean_Biomass = mean(Biomass_kg_ha, na.rm = TRUE)) %>%
   ungroup() 
 
 ### Convert character variables to factors
 heights_data$Treatment <- as.factor(heights_data$Treatment)
 heights_data$Fencing <- as.factor(heights_data$Fencing)
 
-# Calculate mean grass height for pre and post treatment
+# Calculate mean grass BIOMASS for pre and post treatment
 biomass2 <- heights_data %>%
-  filter(!is.na(Biomass),
+  filter(!is.na(Biomass_kg_ha),
          Year %in% c(2024, 2025),!Treatment %in% c("TFB"))%>% 
   group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
-  summarise(mean_Biomass = mean(Biomass, na.rm = TRUE),
+  summarise(mean_Biomass = mean(Biomass_kg_ha, na.rm = TRUE),
             #n_observations = n(),
             .groups = "drop") %>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
@@ -293,7 +293,8 @@ Gbimviolin<- ggplot(grass_biom,
                position = position_dodge(0.8), 
                size = 2, color = "black") + 
   labs(x = "Treatment", 
-       y = "Above-ground grass biomass (kgDM/ha)",
+       #y = "Above-ground grass biomass (kgDM/ha)",
+       y = expression("Above-ground grass biomass ("*kg~ha^{-1}*")")
   ) +
   theme_classic()+
   theme(
@@ -309,7 +310,7 @@ delta_Gbiomass <- heights_data  %>%
   filter(Year %in% c(2024, 2025),
          !Treatment %in% c("TFB")) %>% 
   group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
-  summarise(mean_Biomass = mean(Biomass, na.rm = TRUE), .groups = "drop_last") %>%
+  summarise(mean_Biomass = mean(Biomass_kg_ha, na.rm = TRUE), .groups = "drop_last") %>%
   pivot_wider(
     names_from  = Year,
     values_from = mean_Biomass,
@@ -327,7 +328,7 @@ Grasbiom2 <- ggplot(delta_Gbiomass,
                position = position_dodge(0.8), 
                size = 2, color = "black") +
   geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Treatment", y = "Change in grass biomass (kgDM/ha)") +
+  labs(x = "Treatment", y = "Change in grass biomass ("*kg~ha^{-1}*")") +
   theme_classic() +
   scale_fill_manual(values = c("Fenced" = "#8c510a", "Unfenced" = "#d8b365"))
 
@@ -371,16 +372,16 @@ performance::check_model(Grasbiom1)
 #check for singularity
 performance::check_singularity(Grasbiom1) # FALSE desired shows- all random effects have nonzero variance → stable
 
-### POST HOC ANALYSIS FOR SEEDLINGS 
+### POST HOC ANALYSIS 
 # Tukey HSD pairwise comparisons
-grbiom_comparisons <- emmeans(Grasbiom1, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
+grbiom_comparisons <- emmeans(Grasbiom1, specs = pairwise ~ Treatment | Fencing, adjust = "Dunnett")
 summary(grbiom_comparisons$contrasts)
 
 
-##Marginal effects grass height
+##Marginal effects grass biomass
 Gbiomass <- ggpredict(Grasbiom1, terms = c("Treatment", "Fencing"))
 gbt2 <-plot(Gbiomass, colors = c( "#d8b365", "#8c510a")) + 
-  labs(y = "Change in grass biomass (kgDM/ha)",
+  labs(y = "Change in grass biomass ("*kg~ha^{-1}*")",
        x = "Treatment") +
   geom_hline(yintercept = 0, linetype = "dashed") +
   theme_classic()+ 
@@ -401,7 +402,7 @@ Biocontrast_vs_control <- contrast(Biomemm, method = "trt.vs.ctrl", ref = "C")
 summary(Biocontrast_vs_control, infer = TRUE)
 
 # generate letters using cld in multicomp package
-Biomcld_emm <- cld(Biomemm, adjust = "tukey", Letters = letters, type = "response")
+Biomcld_emm <- cld(Biomemm, adjust = "Dunnett", Letters = letters, type = "response")
 cld_tbl <- as.data.frame(Biomcld_emm)
 
 
@@ -429,7 +430,7 @@ Bioemm <- ggplot(Bplot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)
   labs(color = "Fencing")+  # Optional: rename legend title
   labs(
     x = "Treatment",
-    y = "Change in aboveground biomass per ha",
+    y = "Change in grass biomass ("*kg~ha^{-1}*")",
   ) +
   theme_classic()+ 
   geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
@@ -456,57 +457,10 @@ multi_panelgbim <- (Gbimviolin/ Grasbiom2 / Bioemm) +   # "/" for stacking verti
 
 
 ##ggsave multipanel grass BIOMASS
- ggsave(multi_panelgbim,filename ="Plots/Multipanel EMMGrass biomass.png",
+ #ggsave(multi_panelgbim,filename ="Plots/Multipanel 2EMMGrass biomass.png",
        width = 16, height = 14, units = "cm")  
 
  
  
 
-#########
- #Summary stats for Grass biomass 
- # ---- 1. Summaries (mean, SD, SE) ----
- GrassBsummary_stats2 <- heights_data %>%
-   group_by(Treatment, Fencing, Year) %>%
-   summarise(
-     N = n(),
-     mean_Biomass = mean(Biomass, na.rm = TRUE),
-     sd_Biomass = sd(Biomass, na.rm = TRUE),
-     se_Biomass = sd_Biomass / sqrt(N)
-   ) %>%
-   ungroup() %>%
-   mutate(
-     mean_se = sprintf("%.2f ± %.2f", mean_Biomass, se_Biomass)   # combined column
-   )
- 
- 
- 
- ### Calculate absolute percentage change between 2024 and 2025 for each treatment
- GBpercentage_change2 <- GrassBsummary_stats2 %>%
-   pivot_wider(
-     names_from = Year,
-     values_from = c(mean_Biomass, sd_mean_Biomass, N)
-   ) %>%
-   mutate(
-     percentage_change = ((mean_Biomass_2025 - mean_Biomass_2024) / mean_Biomass_2024) * 100,
-     absolute_change = mean_Biomass_2025 - mean_Biomass_2024
-   ) %>%
-  select(Treatment,Fencing, mean_Biomass_2024, mean_Biomass_2025, absolute_change, percentage_change)
- 
- 
- # Create a formatted flextable
- word_table <- GrassBsummary_stats2 %>%
-   flextable() %>%
-   set_caption("Table : Changes in above-ground biomass") %>%
-   theme_zebra() %>%
-   bold(part = "header") %>%
-   align(align = "center", part = "all") %>%
-   colformat_num(j = c(2:5), digits = 2) %>%  # Adjust columns and decimal places
-   autofit()
- 
- 
- # Save as Word document
- save_as_docx(word_table, path = "Change in above-ground biomass_table.docx")
- 
- 
- 
  

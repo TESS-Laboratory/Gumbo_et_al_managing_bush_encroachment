@@ -106,10 +106,6 @@ print(summary_table)
 
 
 # optional visualization
-
-
-library(ggplot2)
-
 # Summary data
 summary_data <- data.frame(
   Category = c(
@@ -157,16 +153,19 @@ ggsave("Taxonomic_Harmonization.png", width = 16, height = 10, dpi = 300, bg="wh
 # load data and clean to remain with unique species
  #Grass_species <- read_csv("DATA/Harmonised Taxonomisation/Grasses_species.csv")
 
-#unique_species <- unique(Grass_species$Species_name)
-#unique_species
+Grass_species <-read_csv("DATA/March2025/2Grasses2426.csv")
 
-   #write.csv(unique_species, "DATA/Harmonised Taxonomisation/Grasses_species2.csv", row.names = FALSE)
+unique_species <- unique(Grass_species$Species_name)
+unique_species
+
+write.csv(unique_species, "DATA/Harmonised Taxonomisation/Grasses_UNIQUEspecies26.csv", row.names = FALSE)
+
 
 
 
 #load and clean data
 
-Grass_species <- read_csv("DATA/Harmonised Taxonomisation/Grasses_species2.csv")
+Grass_species <- read_csv("DATA/Harmonised Taxonomisation/Grasses_UNIQUEspecies26.csv")
 
 # 
 africa_species <- Grass_species %>% 
@@ -230,7 +229,7 @@ species_Harmonized <- species_Harmonized %>%
 
 
 # Save to file
-write.csv(species_Harmonized, "DATA/Harmonized_GRspp.csv", row.names = FALSE)
+write.csv(species_Harmonized, "DATA/hHarmonized2026b_GRspp.csv", row.names = FALSE)
 
 
 #write.csv(best_matches, "DATA/best_matches_GRspp.csv", row.names = FALSE)
@@ -258,3 +257,4 @@ nrow(unmatched)
 summary_table <- best_matches %>%
   group_by(taxonomicStatus, New.accepted) %>%
   summarise(count = n(), .groups = "drop")
+
