@@ -84,13 +84,6 @@ SapF <- SapF %>%
     Fencing = factor(Fencing)
   )
 
-#Filter SEEDLINGS  
-SeedlingsSD <- SapF %>% 
-  filter(woody_cat == "Seedlings", Year %in% c(2024, 2025),
-         !Treatment %in% c("TFB")) %>% 
-  group_by(Treatment, Fencing,Year, Species_name, name = "Seedlings") %>% 
-  summarise(abundance = n(), .groups = 'drop')
-
 
 #FOR all woody plants
 AllSD <- SapF %>% 
@@ -102,15 +95,11 @@ AllSD <- SapF %>%
 
 ## Calculate species abundance per plot
 
-# Calculate seedlings Simpson's Index for each plot 
+# Calculate  Simpson's Index  
 ASimp_diversity_simpson <- AllSD  %>%
   group_by(Treatment, Fencing, Year) %>% 
   summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
 
-#sort pre and post treatment
-AsD_comparison <- ASimp_diversity_simpson %>%
-  filter(Year %in% c(2024, 2025)) %>%
-  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
 
 
@@ -132,77 +121,92 @@ AsD_comparison3 <- ASisimpson %>%
 
 
 #reorder so that pre-treatment appears first then post treatment second on the plots
-AsD_comparison3 <- sD_comparison3 %>%
+AsD_comparison3 <- AsD_comparison3 %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
 
 
 
-# Create point plot with facets for woody plants
-ASIMP <- ggplot(AsD_comparison3, aes(x = Treatment, y = simpson_index, 
-                           color = as.factor(Period), shape = as.factor(Period))) +
-  geom_point(size = 2, position = position_dodge(0.3)) +
-  facet_wrap(~Fencing, ncol = 1) +
-  labs(x = "Treatment", 
-       y = "Woody plants Simpson's diversity index", 
-       color = "Period",
-       shape = "Period") +
-  theme_classic() +
-  scale_color_manual(values = c("Pre-treatment" = "#1b7837", "Post-treatment" = "#a6dba0"))
-
-
-# Saving as png
-ggsave(ASIMP,
-       filename = "Plots/Woodyplant SimpDiversity.png",
-       width = 16, height = 14, units = "cm" )
+# Create point plot with facets for woody plants - 
+  #ASIMP <- ggplot(AsD_comparison3, aes(x = Treatment, y = simpson_index, 
+                           #color = as.factor(Period), shape = as.factor(Period))) +
+  #geom_point(size = 2, position = position_dodge(0.3)) +
+  #facet_wrap(~Fencing, ncol = 1) +
+  #labs(x = "Treatment", 
+   #    y = "Woody plants Simpson's diversity index", 
+    #   color = "Period",
+     #  shape = "Period") +
+  #theme_classic() +
+   #scale_color_manual(values = c("Pre-treatment" = "#1b7837", "Post-treatment" = "#a6dba0"))
 
 
 
-################### SITE-level analysis
+####### REFINED ggplot for combined treatment, period and fencing
+# Ensure Period is ordered correctly
 
-AllSD2 <- SapF %>% 
+SDw <- ggplot(AsD_comparison3, aes(x = Period, y = simpson_index, 
+                   color = Fencing, group = Fencing)) +
+  
+  # Add lines connecting Pre to Post for each Kraaling type
+  geom_line(size = 1.2, alpha = 0.7) +
+  
+  # Add points
+  geom_point(size = 2.5) +
+  
+  # Facet by Treatment - each treatment gets its own panel
+  facet_grid(. ~ Treatment, scales = "free_x", space = "free_x") +
+  
+  # Y-axis limits
+  scale_y_continuous(limits = c(0.5, 1.5), expand = c(0, 0)) +
+  
+  # Customize colors
+  scale_color_manual(values = c("Fenced" = "#D55E00", "Unfenced" = "#0072B2"),
+                     name = "Fencing") +
+  
+  labs(x = "Period", y = "Woody plants Simpson's diversity index") +
+  
+  theme_beautiful() +
+  theme(
+    legend.position = "top",
+    legend.box = "horizontal",
+    legend.title = element_text(face = "bold"),
+    axis.title = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 9.5, hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(face = "bold", size = 10),
+    panel.spacing = unit(0.2, "lines")  # Space between treatment facets
+  )
+
+### save plot
+ #ggsave(SDw, filename = "Plots/S2impdiversityALL.png", width = 16, height = 12, units = "cm")
+
+
+
+#################################################################################
+############         CALCULATING SIMPSONS DIVERSITY INDEX FOR SEEDLINGS
+
+###SEEDLINGS
+
+
+#Filter SEEDLINGS  
+Seedlings <- SapF %>% 
+  filter(woody_cat == "Seedlings", Year %in% c(2024, 2025)) %>% 
+  count(Site, Plot, Subplot, Treatment, Fencing,Year, name = "Seedlings") %>% 
+  mutate(density_ha = Seedlings * 10000 / 600)     # convert to ha⁻¹
+
+#filter TFB treatment
+SDsimp <- SapF %>% 
   filter( Year %in% c(2024, 2025),
-          !Treatment %in% c("TFB")) %>% 
-  group_by(Site,Year, Species_name) %>% 
+          !Treatment %in% c("TFB"), 
+          woody_cat == "Seedlings")%>% 
+  group_by(Treatment, Fencing,Year, Species_name) %>% 
   summarise(abundance = n(), .groups = 'drop')
 
 
-## simpsons  
-A2Simp_diversity_simpson <- AllSD2  %>%
-  group_by(Site, Year) %>% 
-  summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
-
-
-
-
-#create vector
-AllSD3 <- SapF %>% 
-  filter( Year %in% c(2024, 2025),!is.na(Species_name)) %>%  
-  group_by(Site, Plot, Subplot, Fencing, Treatment, Year, Species_name) %>% 
-  summarise(abundance = n())%>%
-  summarise(
-    Simpson_index1 = 1 - sum((abundance / sum(abundance))^2),
-    .groups = "drop")
-
-##Visualisation; Boxplot for 1-D  
-tsr <- ggplot(AllSD3, aes(x = Site, y = Simpson_index1, fill = Fencing)) + facet_wrap(~Fencing) +
-  geom_boxplot(alpha = 0.7, outlier.shape = NA, width = 0.6) +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Site", y = "Simpsons index of diversity (1-D)") +
-  theme_beautiful() +
-  theme(legend.position = "none")
-
-
-#sort pre and post treatment at site level
-AsD_comparison2 <- A2Simp_diversity_simpson %>%
+# Calculate seedlings Simpson's diversity index for each plot by year
+SeedSimp <- SDsimp %>%
   filter(Year %in% c(2024, 2025)) %>%
-  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
-
-
-# Calculate Simpson's Index for woody plants at site level
-A2Sisimpson <- AllSD2 %>%
-  filter(Year %in% c(2024, 2025)) %>%
-  group_by(Site, Year) %>%
+  group_by(Treatment, Fencing, Year) %>%
   summarise(
     total_individuals = sum(abundance, na.rm = TRUE),  
     sum_n_squared = sum(abundance * (abundance - 1), na.rm = TRUE),
@@ -211,168 +215,193 @@ A2Sisimpson <- AllSD2 %>%
   )
 
 
-
 #sort pre and post treatment for woody plants
-A2sD_comparison3 <- A2Sisimpson %>%
+SED_comparison3 <- SeedSimp %>%
   filter(Year %in% c(2024, 2025)) %>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
-
 #reorder so that pre-treatment appears first then post treatment second on the plots
-A2sD_comparison3 <- A2sD_comparison3 %>%
+SED_comparison3 <- SED_comparison3 %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
 
-# Create point plot with facets for woody plants
-SIMPsite <- ggplot(A2sD_comparison3, aes(x = Site, y = simpson_index, 
-                                     color = as.factor(Period), shape = as.factor(Period))) +
-  geom_point(size = 2, position = position_dodge(0.3)) +
- # facet_wrap(~Fencing, ncol = 1) +
-  labs(x = "Site", 
-       y = "Woody plants Simpson's diversity index", 
-       color = "Period",
-       shape = "Period") +
-  theme_classic() +
-  scale_color_manual(values = c("Pre-treatment" = "#1b7837", "Post-treatment" = "#a6dba0"))
+##GGPLOT
+# Ensure Period is ordered correctly
 
-
-##### bar plot
-ggplot(A2sD_comparison3, aes(x = Site, y = simpson_index, 
-                             color = as.factor(Period), shape = as.factor(Period))) +
-  geom_bar(stat = "identity", position = position_dodge(0.8), width = 0.7) +  # facet_wrap(~Fencing, ncol = 1) +
-  labs(x = "Site", 
-       y = "Woody plants Simpson's diversity index", 
-       color = "Period",
-       shape = "Period") +
-  theme_classic() +
-  scale_color_manual(values = c("Pre-treatment" = "#1b7837", "Post-treatment" = "#a6dba0"))
-
-
-##### violin plot
-
-#ggplot(strt_comparison2, 
- #      aes(x = Treatment, y = density_ha, fill = Period)) + facet_wrap(~Fencing)+ 
+Seedw <- ggplot(SED_comparison3, aes(x = Period, y = simpson_index, 
+                                     color = Fencing, group = Fencing)) +
   
-gplot(A2sD_comparison3, aes(x = Site, y = simpson_index, 
-                            color = as.factor(Period), shape = as.factor(Period))) +
-geom_violin(trim = TRUE)+
-  geom_hline(yintercept = 0, linetype = "dashed") +    
-  stat_summary(fun = mean, geom = "point", 
-               position = position_dodge(0.8), 
-               size = 2, color = "black") +
-  labs(x = "Treatment", 
-       y = "Seedlings density per ha",
-  ) +
-  theme_classic() +
+  # Add lines connecting Pre to Post for each Kraaling type
+  geom_line(size = 1.2, alpha = 0.7) +
+  
+  # Add points
+  geom_point(size = 2.5) +
+  
+  # Facet by Treatment - each treatment gets its own panel
+  facet_grid(. ~ Treatment, scales = "free_x", space = "free_x") +
+  
+  # Y-axis limits
+  scale_y_continuous(limits = c(0.5, 1.5), expand = c(0, 0)) +
+  
+  # Customize colors
+  scale_color_manual(values = c("Fenced" = "#D55E00", "Unfenced" = "#0072B2"),
+                     name = "Fencing") +
+  
+  labs(x = "Period", y = "Seedlings Simpson's diversity index") +
+  
+  theme_beautiful() +
   theme(
-    axis.title = element_text(size = 8),      # Axis titles
-    axis.text = element_text(size = 8)        # Axis tick labels
-  )+
-  scale_fill_manual(values = c("Pre-treatment" = "#1b7837", "Post-treatment" = "#a6dba0"))
+    legend.position = "top",
+    legend.box = "horizontal",
+    legend.title = element_text(face = "bold"),
+    axis.title = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 9.5, hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(face = "bold", size = 10),
+    panel.spacing = unit(0.2, "lines")  # Space between treatment facets
+  )
 
-# Saving as png
-ggsave(SIMPsite,
-       filename = "Plots/Site SimpDiversity.png",
-       width = 16, height = 14, units = "cm" )
-
-
-
-
-
-
-#####
-############         CALCULATING SIMPSONS DIVERSITY INDEX FOR SEEDLINGS
-
-# Calculate species abundance per plot
-
-# Calculate seedlings Simpson's Index for each plot 
-Simp_diversity_simpson <- SeedlingsSD  %>%
-  group_by(Treatment, Fencing, Year) %>% 
-  summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
-
-#sort pre and post treatment
-sD_comparison2 <- Simp_diversity_simpson %>%
-  filter(Year %in% c(2024, 2025)) %>%
-  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
+### save plot
+#ggsave(Seedw, filename = "Plots/SEEDSIMPpdiversityALL.png", width = 16, height = 12, units = "cm")
 
 
-#reorder so that pre-treatment appears first then post treatment second on the plots
-sD_comparison2 <- sD_comparison2 %>%
-  mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
+####################################
+##### DETERMINING SAPLINGS SIMPSONS DIVERSITY
+
+#Filter SAPLINGS  
+Saplings <- SapF %>% 
+  filter(woody_cat == "Saplings", Year %in% c(2024, 2025)) %>% 
+  count(Site, Plot, Subplot, Treatment, Fencing,Year, name = "Saplings") %>% 
+  mutate(density_ha = Saplings * 10000 / 600)     # convert to ha⁻¹
+
+#filter TFB treatment
+SPsimp <- SapF %>% 
+  filter( Year %in% c(2024, 2025),
+          !Treatment %in% c("TFB"), 
+          woody_cat == "Saplings")%>% 
+  group_by(Treatment, Fencing,Year, Species_name) %>% 
+  summarise(abundance = n(), .groups = 'drop')
 
 
-
-ggplot(sD_comparison2, aes(x = Treatment, y = simpson_index, fill = Period)) + facet_wrap(~Fencing)+
-  geom_violin(trim = TRUE) +
-  geom_hline(yintercept = 0, linetype = "dashed") +    
-  stat_summary(fun = mean, geom = "point", 
-               position = position_dodge(0.8), 
-               size = 2, color = "black") +
-  labs(x = "Treatment", y = "Simpsons diversity for seedlings") +
-  theme_classic()
-
-
-table(sD_comparison2$Treatment, sD_comparison2$Fencing)
-
-
-
-
-sample_sizes <- SeedlingsSD %>%
-  group_by(Treatment, Fencing, Year) %>%
-  summarise(n_plots = n_distinct(Treatment), .groups = 'drop')
-print(sample_sizes)
-
-
-# Calculate Simpson's Index
-Sisimpson <- SeedlingsSD %>%
+# Calculate seedlings Simpson's diversity index for each plot by year
+SapSimp <- SPsimp %>%
   filter(Year %in% c(2024, 2025)) %>%
   group_by(Treatment, Fencing, Year) %>%
   summarise(
-    total_individuals = sum(abundance, na.rm = TRUE),  # Changed from Count
+    total_individuals = sum(abundance, na.rm = TRUE),  
     sum_n_squared = sum(abundance * (abundance - 1), na.rm = TRUE),
     simpson_index = 1 - (sum_n_squared / (total_individuals * (total_individuals - 1))),
     .groups = 'drop'
   )
 
-#sort pre and post treatment
-sD_comparison3 <- Sisimpson %>%
+
+#sort pre and post treatment for woody plants
+SAP_comparison3 <- SapSimp %>%
   filter(Year %in% c(2024, 2025)) %>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
 
 #reorder so that pre-treatment appears first then post treatment second on the plots
-sD_comparison3 <- sD_comparison3 %>%
+SAP_comparison3 <- SAP_comparison3 %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
 
+##GGPLOT
+# Ensure Period is ordered correctly
+
+Sapw <- ggplot(SAP_comparison3, aes(x = Period, y = simpson_index, 
+                                     color = Fencing, group = Fencing)) +
+  
+  # Add lines connecting Pre to Post for each Kraaling type
+  geom_line(size = 1.2, alpha = 0.7) +
+  
+  # Add points
+  geom_point(size = 2.5) +
+  
+  # Facet by Treatment - each treatment gets its own panel
+  facet_grid(. ~ Treatment, scales = "free_x", space = "free_x") +
+  
+  # Y-axis limits
+  scale_y_continuous(limits = c(0.5, 1.5), expand = c(0, 0)) +
+  
+  # Customize colors
+  scale_color_manual(values = c("Fenced" = "#D55E00", "Unfenced" = "#0072B2"),
+                     name = "Fencing") +
+  
+  labs(x = "Period", y = "Saplings Simpson's diversity index") +
+  
+  theme_beautiful() +
+  theme(
+    legend.position = "top",
+    legend.box = "horizontal",
+    legend.title = element_text(face = "bold"),
+    axis.title = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 9.5, hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(face = "bold", size = 10),
+    panel.spacing = unit(0.2, "lines")  # Space between treatment facets
+  )
+
+### save plot
+#ggsave(Sapw, filename = "Plots/SAPsimpdiversityALL.png", width = 16, height = 12, units = "cm")
 
 
-# Create point plot with facets
-ggplot(sD_comparison3, aes(x = Treatment, y = simpson_index, 
-                      color = as.factor(Year), shape = as.factor(Year))) +
-  geom_point(size = 4, position = position_dodge(0.3)) +
-  facet_wrap(~Fencing, ncol = 1) +
-  labs(x = "Treatment", 
-       y = "Simpson's Diversity Index", 
-       color = "Year",
-       shape = "Year") +
-  theme_classic() +
-  scale_color_manual(values = c("2024" = "#1b7837", "2025" = "#a6dba0"))
+## Combine the plots in a single layout
+ # removing legend on panel b and c
 
+# Remove legend from plot Seedw
+Seedw <- Seedw + theme(legend.position = "none")
 
-ggplot(sD_comparison3, aes(x = Treatment, y = simpson_index, 
-                           color = as.factor(Period), shape = as.factor(Period))) +
-  geom_point(size = 4, position = position_dodge(0.3)) +
-  facet_wrap(~Fencing, ncol = 1) +
-  labs(x = "Treatment", 
-       y = "Simpson's Diversity Index", 
-       color = "Period",
-       shape = "Period") +
-  theme_classic() +
-  scale_color_manual(values = c("Pre-treatment" = "#1b7837", "Post-treatment" = "#a6dba0"))
+# Remove legend from plot C  
+Sapw <- Sapw + theme(legend.position = "none")
 
+# Keep legend on plot A (if not already there)
+SDw <- SDw + theme(legend.position = "top")
 
-# Saving as png
-ggsave(SsIMP,
-       filename = "C:/workspace/gumbo_dev/Plots/ SEEDLINGSIMP Diversity Index SITE.png",
-       width = 16, height = 14, units = "cm" )
+## removing facets on panel b and c
+# First, remove facet strips from plots 
+Seedw <- Seedw + theme(strip.text = element_blank(), strip.background = element_blank())
+Sapw <- Sapw + theme(strip.text = element_blank(), strip.background = element_blank())
+
+# Keep facet on plot A (if it has facet)
+SDw <- SDw  # Keep as is
+
+# removing period nn panel b and c
+# Remove x-axis from plots B and C
+
+SDw <- SDw + theme(
+  axis.text.x = element_blank(),      # Remove x-axis text
+  axis.ticks.x = element_blank(),     # Remove x-axis ticks  
+  axis.title.x = element_blank()      # Remove x-axis title
+)
+ # for panel b
+Seedw <- Seedw + theme(
+  axis.text.x = element_blank(),      # Remove x-axis text
+  axis.ticks.x = element_blank(),     # Remove x-axis ticks
+  axis.title.x = element_blank()      # Remove x-axis title
+)
+
+# Keep x-axis on panel c
+Sapw <- Sapw  # Keep as is
+
+# Now combine them
+multi_panelsIMP <- (SDw / Seedw / Sapw) +   # "/" for stacking vertically
+  plot_layout(heights = c(1, 1, 1), guides = "collect") +
+  plot_annotation(
+    tag_levels = 'a',
+    tag_prefix = '(',
+    tag_suffix = ')',
+    theme = theme(plot.tag = element_text(size = 6, hjust = 0))
+  ) &
+  theme(
+    axis.text = element_text(size = 6),
+    axis.title = element_text(size = 5.5),
+    plot.tag = element_text(size = 6, hjust = 0),
+    legend.position = "top"
+  )
+
+##saving using ggsave
+ggsave(multi_panelsIMP,filename ="Plots/Multipanel WoodySIMP.png",
+       width = 16, height = 14, units = "cm")  
+
+################################################################################
