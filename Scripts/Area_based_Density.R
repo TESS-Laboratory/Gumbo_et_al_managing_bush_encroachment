@@ -66,7 +66,7 @@ theme_beautiful <- function() {
 
 # Read data
 A <- read_csv("DATA/GEODE_Subplot_area.csv")
-B <- read.csv("DATA/March2025/Woody2426.csv")#, stringsAsFactors = FALSE)
+B <- read.csv("DATA/March2025/Woody2426b.csv")#, stringsAsFactors = FALSE)
 
 
 # Ensure consistent column names (case-sensitive)
@@ -129,7 +129,7 @@ Seedsummary_stats <- Seedlings %>%
 
 #sort pre and post treatment
 strt_comparison2 <- Seedlings %>%
-  filter(Year %in% c(2024, 2025)) %>%
+  filter(Year %in% c(2024, 2026)) %>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
 
@@ -148,7 +148,7 @@ Seedlings_Delta1 <- Seed_treat %>%
   mutate(delta_Seeddens = dens_2026 - dens_2024) 
 
 
-#
+
 ##### to test effect of treatment * fencing on seedling density###################
 
 # Make "Unfenced" the reference level 
@@ -301,8 +301,182 @@ multi_panelsE <- (SeedViolin/Seedbviolin/ semm) +   # "/" for stacking verticall
   )
 
 #saving using ggsave
-ggsave(multi_panelsE,filename ="Plots/AreaEMMViolin Seedlings.png",
+ggsave(multi_panelsE,filename ="Plots/AreaEMMViolin26b Seedlings.png",
        width = 16, height = 14, units = "cm")  
+
+
+#########################################################################################
+
+### SAPLINGS
+
+#
+# calculating seedling density
+Saplings <- SapF %>%
+  filter(
+    woody_cat == "Saplings",
+    Year %in% c(2024, 2026),
+    !Treatment %in% "ZZZ"
+  ) %>%
+  count(
+    Site, Plot, Subplot, Treatment, Fencing, Year, Area,
+    name = "Saplings"
+  ) %>%
+  mutate(
+    density_ha = Saplings * 10000 / Area
+  )
+
+
+#comparing at treatment level
+
+Sap_treat <- Saplings %>% 
+  group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>% 
+  summarise(mean_dens_ha = mean(density_ha), .groups = "drop")  
+
+
+#Summary stats for seedlings 
+Sapsummary_stats <- Saplings %>%
+  group_by(Treatment,Fencing,Year) %>%
+  summarise(
+    N = n(),                                   # number of observations per treatment
+    mean_density = mean(density_ha, na.rm = TRUE),
+    sd_density = sd(density_ha, na.rm = TRUE)
+  ) %>%
+  ungroup()
+
+#sort pre and post treatment
+strt_comparison2 <- Saplings %>%
+  filter(Year %in% c(2024, 2026)) %>%
+  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
+
+
+#reorder so that pre-treatment appears first then post treatment second on the plots
+strt_comparison2 <- strt_comparison2 %>%
+  mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
+
+
+#################DELTA SAPLING DENSITY
+
+#Pivot the two years side‑by‑side and compute Δ sapling density ─────────────
+Saplings_Delta1 <- Sap_treat %>% 
+  pivot_wider(names_from  = Year,
+              values_from = mean_dens_ha,
+              names_glue  = "dens_{Year}") %>% 
+  mutate(delta_Sapdens = dens_2026 - dens_2024) 
+
+
+
+##### to test effect of treatment * fencing on seedling density###################
+
+# Make "Unfenced" the reference level 
+
+class(Saplings_Delta1$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+Saplings_Delta1$Fencing <- factor(Saplings_Delta1$Fencing, ordered = FALSE)
+
+# Verify
+levels(Saplings_Delta1$Fencing)  
+
+# Set "Fenced" as the reference level 
+Saplings_Delta1$Fencing <- relevel(Saplings_Delta1$Fencing, ref = "Unfenced")
+
+### Convert character variables to factors
+Saplings_Delta1$Treatment <- as.factor(Saplings_Delta1$Treatment)
+Saplings_Delta1$Fencing <- as.factor(Saplings_Delta1$Fencing)
+
+
+
+# using the LMM for analysis
+Sapl5 <- lmer(delta_Sapdens ~ Treatment * Fencing + (1|Site),  
+               data = Saplings_Delta1)
+
+summary(Sapl5)
+
+#
+## increasing font size for x and y axis
+SapViolin<- ggplot(strt_comparison2, 
+                    aes(x = Treatment, y = density_ha, fill = Period)) + facet_wrap(~Fencing)+ 
+  geom_violin(trim = TRUE)+
+  geom_hline(yintercept = 0, linetype = "dashed") +    
+  stat_summary(fun = mean, geom = "point", 
+               position = position_dodge(0.8), 
+               size = 1.4, color = "black") +
+  labs(x = "Treatment", 
+       # y = "Saplings density per ha",
+       y = expression("Sapling density "*ha^{-1}*"")
+  ) +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 8),      # Axis titles
+    axis.text = element_text(size = 8)        # Axis tick labels
+  )+
+  scale_fill_manual(values = c("Pre-treatment" = "#1b7837", "Post-treatment" = "#a6dba0"))
+
+
+## violin plot seedling delta
+Sapbviolin <- ggplot(Saplings_Delta1,
+                      aes(x = Treatment, y = delta_Sapdens, fill = Fencing))+ 
+  geom_violin(trim = FALSE)+
+  geom_hline(yintercept = 0, linetype = "dashed") +  
+  stat_summary(fun = mean, geom = "point", 
+               position = position_dodge(0.8), 
+               size = 1, color = "black") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Treatment", 
+       #y = "Change in Saplings density per ha",
+       y = expression("Change in Sapling density "*ha^{-1}*"")
+  ) +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 6),  # Axis titles reduced from 12 to 8
+    axis.text = element_text(size = 6)) +
+  scale_fill_manual(values = c("Fenced" = "#8c510a", "Unfenced" = "#d8b365"))
+
+
+##marginal effects plot
+Sapden1 <- ggpredict(Sapl5, terms = c("Treatment", "Fencing"))
+Sap <- plot(Sapden1, colors = c( "#d8b365", "#8c510a"))  +    
+  labs(#y = "Change in Saplings density per ha",
+    y = expression("Change in Sapling density "*ha^{-1}*""),
+    x = "Treatment") +
+  theme_classic()+ 
+  ggtitle(NULL)+
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
+  theme(
+    axis.title = element_text(size = 6),      # Axis titles
+    axis.text = element_text(size = 6))
+
+
+## saving marginal effects plot
+#ggsave(See,filename ="Plots/ME Change in seedling density.png",
+width = 16, height = 14, units = "cm")  
+
+
+
+########### USING EMMEANS
+# Estimated marginal means for Treatment within Kraaling (if needed)
+Seedemm <- emmeans(Sapl5, ~ Treatment | Fencing, type = "response")
+
+# Compare each treatment to Control with Tukey adjustment (or "none" if you only want vs control)
+contrast_vs_control <- contrast(Seedemm, method = "trt.vs.ctrl", ref = "C")
+summary(contrast_vs_control, infer = TRUE)
+
+# generate letters using cld in multicomp package
+Seedcld_emm <- cld(Seedemm, adjust = "Dunnett", Letters = letters, type = "response")
+cld_tbl <- as.data.frame(Seedcld_emm)
+
+
+# prepare clean database for plotting
+plot_df <- cld_tbl %>%
+  rename(
+    EMM = emmean,
+    CI_lower = lower.CL,
+    CI_upper = upper.CL,
+    Group = .group
+  ) %>%
+  mutate(Group = str_trim(Group))  # Clean whitespace
+
+
 
 
   

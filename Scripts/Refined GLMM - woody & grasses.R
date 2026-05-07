@@ -214,8 +214,8 @@ levels(Seedlings_Delta1$Fencing)  # Should show "Open" "Closed" (or vice versa)
 Seedlings_Delta1$Fencing <- relevel(Seedlings_Delta1$Fencing, ref = "Unfenced")
 
 ##### Convert character variables to factors
-Seedlings_Delta1$Treatment <- as.factor(Seedlings_Delta1$Treatment)
-Seedlings_Delta1$Fencing <- as.factor(Seedlings_Delta1$Fencing)
+ #Seedlings_Delta1$Treatment <- as.factor(Seedlings_Delta1$Treatment)
+ #Seedlings_Delta1$Fencing <- as.factor(Seedlings_Delta1$Fencing)
 
 
 #GLMM for seedling density 
@@ -269,13 +269,19 @@ performance::check_convergence(Seedl5)
 
 performance::check_model(Seedl5)
 
+# if performance check model fails to display the ploy,  second option to use;
+dev.new()
+print(check_model(Seedl5))
+
+
 #check for singularity
 performance::check_singularity(Seedl4b) # FALSE desired shows- all random effects have nonzero variance → stable
 
 ### POST HOC ANALYSIS FOR SEEDLINGS 
-# Tukey HSD pairwise comparisons
+#  pairwise comparisons
 sedtreat_comparisons <- emmeans(Seedl5, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
 summary(sedtreat_comparisons$contrasts)
+
 
 ### Marginal effects for treatment * fencing on seedlings
 Seeden <- ggpredict(Seedl5, terms = c("Treatment", "Fencing"))
@@ -346,15 +352,10 @@ plot(me_Fencing) +
        y = "Predicted Outcome")
 
 
-#Combine plots (optional)
-#library(patchwork)
-plot(me_Treatment) + plot(me_Fencing) # this does not show how treatment performs in fenced or unfenced
-
-
 
 
 ##SEEDLINGS demographics
-##arrange seedlings count by treatmnet, fencing, year
+##arrange seedlings count by treatment, fencing, year
 SeedlingCOUNT <- SapF %>% 
   filter(woody_cat == "Seedlings", Year %in% c(2024, 2025),
          !Treatment %in% c("TFB")) %>% 
