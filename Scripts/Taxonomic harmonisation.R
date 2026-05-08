@@ -15,6 +15,7 @@ unique_species
 # save unique woody species
 write.csv(unique_species, "DATA/Harmonised Taxonomisation/Woody_UNIQUEspecies26.csv", row.names = FALSE)
 
+
 #load data of unique species
 Woody_species <- read_csv("DATA/Harmonised Taxonomisation/Woody_UNIQUEspecies26.csv")
 
@@ -163,10 +164,14 @@ ggsave("Taxonomic_Harmonization.png", width = 16, height = 10, dpi = 300, bg="wh
 
 Grass_species <-read_csv("DATA/March2025/2Grasses2426.csv")
 
+
+# 2024 grasses taxonomic 
+#Grass_species <-read_csv("DATA/March2025/Grasses2024.csv")
+
 unique_species <- unique(Grass_species$Species_name)
 unique_species
 
-#write.csv(unique_species, "DATA/Harmonised Taxonomisation/Grasses_UNIQUEspecies26.csv", row.names = FALSE)
+write.csv(unique_species, "DATA/Harmonised Taxonomisation/Grasses_UNIQUEspecies26.csv", row.names = FALSE)
 
 
 
@@ -237,7 +242,7 @@ species_Harmonized <- species_Harmonized %>%
 
 
 # Save to file
-write.csv(species_Harmonized, "DATA/hHarmonized2026b_GRspp.csv", row.names = FALSE)
+write.csv(species_Harmonized, "DATA/hHarmonized2024_GRspp.csv", row.names = FALSE)
 
 
 #write.csv(best_matches, "DATA/best_matches_GRspp.csv", row.names = FALSE)

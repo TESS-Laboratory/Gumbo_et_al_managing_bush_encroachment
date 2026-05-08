@@ -309,8 +309,7 @@ ggsave(multi_panelsE,filename ="Plots/AreaEMMViolin26b Seedlings.png",
 
 ### SAPLINGS
 
-#
-# calculating seedling density
+# calculating sapling density
 Saplings <- SapF %>%
   filter(
     woody_cat == "Saplings",
@@ -333,7 +332,7 @@ Sap_treat <- Saplings %>%
   summarise(mean_dens_ha = mean(density_ha), .groups = "drop")  
 
 
-#Summary stats for seedlings 
+#Summary stats for saplings 
 Sapsummary_stats <- Saplings %>%
   group_by(Treatment,Fencing,Year) %>%
   summarise(
@@ -448,26 +447,26 @@ Sap <- plot(Sapden1, colors = c( "#d8b365", "#8c510a"))  +
 
 
 ## saving marginal effects plot
-#ggsave(See,filename ="Plots/ME Change in seedling density.png",
+#ggsave(Sap,filename ="Plots/ME Change in sapling density.png",
 width = 16, height = 14, units = "cm")  
 
 
 
 ########### USING EMMEANS
 # Estimated marginal means for Treatment within Kraaling (if needed)
-Seedemm <- emmeans(Sapl5, ~ Treatment | Fencing, type = "response")
+Sapemm <- emmeans(Sapl5, ~ Treatment | Fencing, type = "response")
 
 # Compare each treatment to Control with Tukey adjustment (or "none" if you only want vs control)
-contrast_vs_control <- contrast(Seedemm, method = "trt.vs.ctrl", ref = "C")
+contrast_vs_control <- contrast(Sapemm, method = "trt.vs.ctrl", ref = "C")
 summary(contrast_vs_control, infer = TRUE)
 
 # generate letters using cld in multicomp package
-Seedcld_emm <- cld(Seedemm, adjust = "Dunnett", Letters = letters, type = "response")
-cld_tbl <- as.data.frame(Seedcld_emm)
+Sapcld_emm <- cld(Sapemm, adjust = "Dunnett", Letters = letters, type = "response")
+cld_tbl <- as.data.frame(Sapcld_emm)
 
 
 # prepare clean database for plotting
-plot_df <- cld_tbl %>%
+spplot_df <- cld_tbl %>%
   rename(
     EMM = emmean,
     CI_lower = lower.CL,
@@ -477,6 +476,149 @@ plot_df <- cld_tbl %>%
   mutate(Group = str_trim(Group))  # Clean whitespace
 
 
+### Visualisation using ggplot
+sapmm <- ggplot(spplot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)) +
+  geom_point(position = position_dodge(width = 0.35), size = 2.5) +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper),
+                position = position_dodge(width = 0.35), width = 0.12) +
+  geom_text(aes(label = Group,
+                y = CI_upper + 0.5 * max(EMM)),
+            position = position_dodge(width = 0.35), size = 3, color = "black") +
+  scale_color_manual(values = c("Fenced" = "#8c510a", "Unfenced" = "#d8b365")) +
+  labs(color = "Fencing")+  # Optional: rename legend title
+  labs(
+    x = "Treatment",
+    #y = "Change in seedling density per ha",
+    y = expression("Change in Sapling density "*ha^{-1}*"")
+  ) +
+  theme_classic()+ 
+  ggtitle(NULL)+
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
+  theme(
+    axis.title = element_text(size = 8),      # Axis titles
+    axis.text = element_text(size = 8))
+
+
+
+## Combine the plots in a single layout
+multi_panelsap <- (SapViolin/Sapbviolin/ sapmm) +   # "/" for stacking vertically, or "|" for side-by-side
+  plot_layout(heights = c(1, 1, 1)) +  # Adjust relative heights
+  plot_annotation(
+    tag_levels = 'a',
+    tag_prefix = '(',
+    tag_suffix = ')',
+    theme = theme(plot.tag = element_text(size = 6, hjust = 0))  # Left align tags
+  ) &
+  theme(
+    axis.text = element_text(size = 7),        # Increase axis label font size
+    axis.title = element_text(size = 7),       # Increase axis title font size
+    plot.tag = element_text(size = 7, hjust = 0)  # Ensure left alignment
+  )
+
+#saving using ggsave
+ggsave(multi_panelsap,filename ="Plots/AreaEMMViolin26b Seedlings.png",
+       width = 16, height = 14, units = "cm")  
+
+
+############################################################################################
+
+
+############################ RESPROUTS  RESPROUTS RESPROUTS ####################
+
+# Step 1: Filter Cut stumps only and years 
+resprouts_df <- SapF %>%
+  filter(
+    woody_cat == "Cut stump",
+    Year %in% c(2026),
+    !Treatment %in% c("C", "F")  # exclude the two treatments
+  )
+
+### Make "Unfenced" the reference level (to see "fenced" coefficients)
+# Check current class of FieldType
+
+class(resprouts_df$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+resprouts_df$Fencing <- factor(resprouts_df$Fencing, ordered = FALSE)
+
+# Verify
+levels(resprouts_df$Fencing)  # Should show "Open" "Closed" (or vice versa)
+
+# Set "Fenced" as the reference level (to see "Unfenced" coefficients)
+resprouts_df$Fencing <- relevel(resprouts_df$Fencing, ref = "Unfenced")
+
+### Convert character variables to factors
+resprouts_df$Treatment <- as.factor(resprouts_df$Treatment)
+resprouts_df$Fencing <- as.factor(resprouts_df$Fencing)
+
+
+# Scale Variables to ensure convergence:
+#resprouts_df$deltens_scaled <- as.numeric(scale(resprouts_df$No_of_resprouts))
+
+#violin plot
+RespVio <- ggplot(resprouts_df, aes(x = Treatment, y = No_of_resprouts,
+                      fill = Fencing)) + 
+  geom_violin(trim = TRUE)+
+  stat_summary(fun = mean, geom = "point", 
+               position = position_dodge(0.8), 
+               size = 2, color = "black") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Treatment", y = "Average no.of resprouts per cut stump") +
+  theme_beautiful() +
+  theme(
+    axis.title = element_text(size = 14),      # Axis titles
+    axis.text = element_text(size = 12)) +
+    scale_fill_manual(values = c("Fenced"   = "green", "Unfenced" = "magenta"))
+
+
+##saving Violin PLOT - resprouts
+ggsave(RespVio,filename ="Plots/RESPROUTS26 VIOLIN plot.png",
+       width = 16, height = 14, units = "cm")  
+
+
+
+##GLMM for resprouts on cut stumps  
+
+##using poisson family 
+Respr5b <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+                   data = resprouts_df, family = poisson(link = log))
+summary(Respr5b)
+
+
+#### Using LMM instead of glmm
+Respr5c <- lmer(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+                data = resprouts_df)
+
+summary(Respr5c)
+
+
+## check model performance
+performance::check_model(Respr5c)
+
+
+
+### POST HOC ANALYSIS FOR RESPROUTS 
+# Tukey HSD pairwise comparisons
+Rstreat_comparisons3 <- emmeans(Respr5c, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
+summary(Rstreat_comparisons3$contrasts)
+
+# Using ggeffects on resprouts
+Resprouts <- ggpredict(Respr5c, terms = c("Treatment", "Fencing"))
+#plot(preds)
+Resprouts <- ggpredict(Respr5c, terms = c("Treatment", "Fencing"))
+Res <- plot(Resprouts) + 
+  labs(y = "Average number of resprouts per cut stump",
+       x = "Treatment") +
+  theme_beautiful()+ 
+  ggtitle(NULL)+
+  theme(
+    axis.title = element_text(size = 14),      # Axis titles
+    axis.text = element_text(size = 12)        # Axis tick labels
+  )
+
+# ## saving marginal effects plot
+# ggsave(Res,filename ="Plots/ME Violin Resprouts.png",
+#        width = 16, height = 14, units = "cm") 
 
 
   

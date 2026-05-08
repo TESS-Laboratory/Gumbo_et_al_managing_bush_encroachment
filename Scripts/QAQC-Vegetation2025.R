@@ -4,13 +4,13 @@ library(dataMaid)
 
 # Load required packages
 #if (!require("dataMaid")) install.packages("dataMaid", dependencies = TRUE)
-library(dataMaid)
+#library(dataMaid)
 
 # Load your dataset
 df <- read.csv("your_dataset.csv", stringsAsFactors = FALSE)
 TC <- read_csv("DATA/March2025/Woodyplants25.csv")
 
-WC <- read_csv("DATA/March2025/Woody2426.csv")
+WC <- read_csv("DATA/March2025/Woody2426b.csv")
 
 # ----------------------------
 # QUALITY CHECK (QC)
@@ -90,7 +90,7 @@ cat("\nQA/QC script completed. Check QAQC_Report.html for detailed results.\n")
 
 #################################################################### 
 
-WCdata <- read_csv("DATA/March2025/Woody2426.csv")
+WCdata <- read_csv("DATA/March2025/Woody2426b.csv")
 # Convert Spp_name to UTF-8 encoding
 WCdata <- WCdata %>%
   mutate(Species_name = stri_enc_toutf8(Species_name))
@@ -99,6 +99,23 @@ WCdata <- WCdata %>%
 # Check for Missing Values
 missing_spp <- sum(is.na(WCdata$Species_name))
 cat("Missing values in Species_name:", missing_spp, "\n")
+
+
+# Trimming spaces
+WCdata <- WCdata %>%
+  mutate(Site = str_trim(Site),
+         Species_name = str_trim(Species_name))
+
+# Checking for consistency
+unique_sites <- unique(WCdata$Site)
+unique_species <- unique(WCdata$Species_name)
+
+print("Unique values in 'Site' after standardization:")
+print(unique_sites)
+
+print("Unique values in 'Species_name' after standardization:")
+print(unique_species)
+
 
 # Summarize Unique Entries
 unique_spp <- WCdata %>%
@@ -202,6 +219,13 @@ sum(is.na(Grassesdata2$Species_name))
 
 # This should return character(0) or an empty list
 unique(Grassesdata2$Species_name[!is.na(Grassesdata2$Species_name) & Grassesdata2$Species_name == "NA"])
+
+
+# Summarize Unique species
+unique_spp <- Grassesdata2 %>%
+  count(Species_name) %>%
+  arrange(desc(n))
+
 
 
 #########################################
