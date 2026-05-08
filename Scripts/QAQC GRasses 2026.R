@@ -1,7 +1,6 @@
 
-GC <- read_csv("DATA/March2025/GrassesHeight26.csv")
 
-GC <- read_csv("C:/Users/tg488/OneDrive - University of Exeter/Project development - Taps/BE Kobotoolbox/Vegetation2025/March 2026/2Grasses2426.csv")
+GC <- read_csv ("DATA/March2025/Grasses2426Updated.csv")
 
 # ----------------------------
 # QUALITY CHECK (QC)
@@ -105,6 +104,10 @@ GC <- GC %>%
          Fencing = str_trim(Fencing),
          Treatment = str_trim(Treatment))
 
+# Summarize Unique species
+unique_spp <- GC %>%
+  count(Species_name) %>%
+  arrange(desc(n))
 
 # Checking for consistency
 unique_sites <- unique(GC$Site)
@@ -123,4 +126,4 @@ print("Cleaned data:")
 print(GC)
 
 ###### saving cleaned data
-write_csv(GC, "DATA/March2025/Grasses2426b.csv")
+write_csv(GC, "DATA/March2025/Grasses2426Updated2.csv")
