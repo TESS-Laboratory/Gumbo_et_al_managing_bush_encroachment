@@ -1,15 +1,10 @@
 
 #### plot with PERIOD AS facet :  SEEDLING DENSITY
 SeedViolin2 <- ggplot(strt_comparison2, 
-       aes(x = Treatment, y = density_ha, fill = Fencing)) +
-  
+       aes(x = Treatment, y = density_ha, fill = Fencing)) + 
   facet_wrap(~Period, nrow = 1) +
-  
-  geom_violin(trim = TRUE,
-              position = position_dodge(0.8)) +
-  
+  geom_violin(trim = TRUE,position = position_dodge(0.8)) +
   geom_hline(yintercept = 0, linetype = "dashed") +
-  
   stat_summary(fun = mean,
                geom = "point",
                position = position_dodge(0.8),
@@ -19,11 +14,7 @@ SeedViolin2 <- ggplot(strt_comparison2,
     x = "Treatment",
     y = expression("Seedling density" * ha^{-1}),
     fill = "Fencing"
-  ) +
-  
-  theme_classic() +
-  
-  theme(
+  ) + theme_classic() + theme(
     axis.title = element_text(size = 8),
     axis.text = element_text(size = 8),
     strip.text = element_text(size = 9, face = "bold"),
@@ -37,7 +28,35 @@ SeedViolin2 <- ggplot(strt_comparison2,
     )
   )
   
-  
+
+### grass BIOMASS
+
+ggplot(biomass2, 
+       aes(x = Treatment, y = mean_Biomass, fill = Fencing))+ facet_wrap(~Period, nrow = 1)+ 
+  geom_violin(trim = TRUE,position = position_dodge(0.8)) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  stat_summary(fun = mean,
+               geom = "point",
+               position = position_dodge(0.8),
+               size = 1.4,
+               color = "black")  + 
+  labs(x = "Treatment", 
+       #y = "Above-ground grass biomass (kgDM/ha)",
+       y = expression("Above-ground grass biomass ("*kg~ha^{-1}*")")
+  ) + 
+  theme_classic()+ theme(
+    axis.title = element_text(size = 8),
+    axis.text = element_text(size = 8),
+    strip.text = element_text(size = 9, face = "bold"),
+    legend.position = "right"
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Unfenced" = "purple",
+      "Fenced"   = "green"
+    )
+  )
+
   
 #### 
   

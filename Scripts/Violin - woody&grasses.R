@@ -384,9 +384,6 @@ GrasVio <- ggplot(delta_GRHeight,
   geom_hline(yintercept = 0, linetype = "dashed") +
   labs(x = "Treatment", y = "Change in Grass height (cm)") +
   theme_classic() +
-  #scale_fill_manual(values = c("Fenced" = "saddlebrown", "Unfenced" = "navajowhite"))
-  #scale_fill_brewer(palette = "YlOrBr")  # Yellow-Orange-Brown palette
-  #scale_fill_manual(values = c("#8c510a", "#d8b365"))  # Dark brown, light brown
   scale_fill_manual(values = c("Fenced" = "#8c510a", "Unfenced" = "#d8b365"))
 
 

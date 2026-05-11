@@ -66,7 +66,7 @@ theme_beautiful <- function() {
 
 # Read data
 A <- read_csv("DATA/GEODE_Subplot_area.csv")
-B <- read.csv("DATA/March2025/Woody2426b.csv")#, stringsAsFactors = FALSE)
+B <- read.csv("DATA/March2025/Woody2426b.csv", stringsAsFactors = FALSE)
 
 
 # Ensure consistent column names (case-sensitive)
@@ -453,10 +453,10 @@ width = 16, height = 14, units = "cm")
 
 
 ########### USING EMMEANS
-# Estimated marginal means for Treatment within Kraaling (if needed)
+# Estimated marginal means for Treatment within Fencing (if needed)
 Sapemm <- emmeans(Sapl5, ~ Treatment | Fencing, type = "response")
 
-# Compare each treatment to Control with Tukey adjustment (or "none" if you only want vs control)
+# Compare each treatment to Control with Dunnett adjustment (or "none" if you only want vs control)
 contrast_vs_control <- contrast(Sapemm, method = "trt.vs.ctrl", ref = "C")
 summary(contrast_vs_control, infer = TRUE)
 

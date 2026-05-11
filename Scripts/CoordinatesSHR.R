@@ -654,7 +654,9 @@ nrow(Cdf_clean)
 
 
 ########## redoing polygon and calculating area using cleaned data
-# 
+
+Cdf_clean <- read_csv("Data/RefinedSHR_points.csv")
+
 Cdf_clean <- Cdf_clean |>
   filter(grepl("CR|CENTER", I.D_code))
 
