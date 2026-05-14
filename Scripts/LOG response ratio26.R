@@ -37,7 +37,7 @@ library(multcomp)
 
 # Read data
 A <- read_csv("DATA/GEODE_Subplot_area.csv")
-B <- read.csv("DATA/March2025/Woody2426b.csv", stringsAsFactors = FALSE)
+B <- read.csv("DATA/March2025/Woody2426.csv", stringsAsFactors = FALSE)
 
 
 # Ensure consistent column names (case-sensitive)
@@ -59,7 +59,7 @@ SapF <- B_merged %>%
       Woody_class == "Cut stump"          ~ "Cut stump",
       between(Max_height.m., 0.05, 0.50)          ~ "Seedlings",
       between(Max_height.m., 0.51, 1.49)          ~ "Saplings",
-      between(Max_height.m., 1.5, 21.0)           ~ "Trees",
+      between(Max_height.m., 1.5, 25.0)           ~ "Trees",
       TRUE                             ~ NA_character_
     ),
     Treatment = factor(Treatment),
@@ -70,9 +70,7 @@ SapF <- B_merged %>%
 Seedlings <- SapF %>%
   filter(
     woody_cat == "Seedlings",
-    Year %in% c(2024, 2026),
-    !Treatment %in% "ZZZ"
-  ) %>%
+    Year %in% c(2024, 2026)) %>%
   count(
     Site, Plot, Subplot, Treatment, Fencing, Year, Area,
     name = "Seedlings"
@@ -430,30 +428,47 @@ plot_data$Fencing <- factor(plot_data$Fencing,
                              labels = c("Fenced", "Unfenced"))
 
 # Check the data
-head(plot_data)
+ #head(plot_data)
 
 
 ##### Percentage change plot 
-SeedVc<- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  geom_point(position = position_dodge(0.3), size = 1.4) +
-  geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
-                position = position_dodge(0.3), width = 0.15) +
-  #geom_line(position = position_dodge(0.3)) +
-  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),name = "Fencing") +
-  scale_y_continuous(
-    breaks = seq(-100, 200, 50),  # Breaks every 50 from -100 to 200
-    #labels = function(x) paste0(x, "%")
-  )+
-  # scale_y_continuous(labels = function(x) paste0(x, "%")) +
-  labs(x = "Treatment", y = " % proprtional change Seedling density") +
-  theme_classic()
+# SeedVc<- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
+#   geom_hline(yintercept = 0, linetype = "dashed") +
+#   geom_point(position = position_dodge(0.3), size = 1.4) +
+#   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
+#                 position = position_dodge(0.3), width = 0.15) +
+#   #geom_line(position = position_dodge(0.3)) +
+#   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),name = "Fencing") +
+#   scale_y_continuous(
+#     breaks = seq(-100, 200, 50),  # Breaks every 50 from -100 to 200
+#     #labels = function(x) paste0(x, "%")
+#   )+
+#   # scale_y_continuous(labels = function(x) paste0(x, "%")) +
+#   labs(x = "Treatment", y = " % proprtional change Seedling density") +
+#   theme_classic()
+
+### inverted axis. y = treatment
+SeedVd <- ggplot(plot_data, aes(x = pct_change, y = Treatment, color = Fencing)) +
+  geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.5) +
+  geom_point(size = 2.0, position = position_dodge(0.5)) +
+  geom_errorbarh(aes(xmin = CI_lower_pct, xmax = CI_upper_pct),
+                 height = 0.5, size = 0.9, position = position_dodge(0.5)) +
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
+  scale_x_continuous(breaks = seq(-100, 250, 50)) +
+  labs(x = "Change in Seedling density relative to Control (%)",
+       y = "Treatment") +
+  # theme(legend.position = "top") +
+  theme_classic()+ 
+  ggtitle(NULL)+
+  theme(
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12))
 
 
 # Create multipanel plot
 
 ####  Combine the plots in a single layout
-multi_panelSe <- (SeedVa/SeedVb/SeedVc) +   # "/" for stacking vertically, or "|" for side-by-side
+multi_panelSe <- (SeedVa/SeedVb/SeedVd) +   # "/" for stacking vertically, or "|" for side-by-side
   plot_layout(heights = c(1, 1, 1)) +  # Adjust relative heights
   plot_annotation(
     tag_levels = 'a',
@@ -469,7 +484,7 @@ multi_panelSe <- (SeedVa/SeedVb/SeedVc) +   # "/" for stacking vertically, or "|
 
 
 ##ggsave multipanel grass richness
-ggsave(multi_panelSe,filename ="Plots/Seedlings ViolinLog.png",
+ggsave(multi_panelSe,filename ="Plots/Seedlings ViolinLog2.png",
            width = 16, height = 14, units = "cm")
 
 
@@ -569,8 +584,6 @@ Saplings_Delta1$Fencing <- factor(Saplings_Delta1$Fencing, ordered = FALSE)
 # Verify
 levels(Saplings_Delta1$Fencing)  
 
-# Set "Fenced" as the reference level 
-Saplings_Delta1$Fencing <- relevel(Saplings_Delta1$Fencing, ref = "Unfenced")
 
 ### Convert character variables to factors
 Saplings_Delta1$Treatment <- as.factor(Saplings_Delta1$Treatment)
@@ -579,6 +592,8 @@ Saplings_Delta1$Fencing <- factor(Saplings_Delta1$Fencing,
                                    levels = c("Fenced", "Unfenced"),
                                    labels = c("Fenced", "Unfenced"))
 
+# Set "Fenced" as the reference level 
+Saplings_Delta1$Fencing <- relevel(Saplings_Delta1$Fencing, ref = "Unfenced")
 
 
 
@@ -803,8 +818,6 @@ Splot_data$Fencing <- factor(Splot_data$Fencing,
 
 #### visualisation
 ggplot(Splot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
-  # geom_vline(xintercept = 0, linetype = "dashed", color = "black",linewidth = 0.5) +
-  # geom_point(size = 3.5, position = position_dodge(0.5)) +
   geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.8) +
   geom_point(size = 3.5, position = position_dodge(0.5)) +
   geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL),
@@ -849,25 +862,42 @@ head(Splot_data)
 
 
 ##### Percentage change plot 
-SapVc<- ggplot(Splot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  geom_point(position = position_dodge(0.3), size = 1.5) +
-  geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
-                position = position_dodge(0.3), width = 0.15) +
-  #geom_line(position = position_dodge(0.3)) +
-  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
-                     name = "Fencing") +
-  scale_y_continuous(
-    breaks = seq(-100, 200, 25),  # Breaks every 50 from -100 to 200
-    #labels = function(x) paste0(x, "%")
-  )+
-  labs(x = "Treatment", y = "% Change in sapling density") +
-  theme_classic()
+# SapVc<- ggplot(Splot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
+#   geom_hline(yintercept = 0, linetype = "dashed") +
+#   geom_point(position = position_dodge(0.3), size = 1.5) +
+#   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
+#                 position = position_dodge(0.3), width = 0.15) +
+#   #geom_line(position = position_dodge(0.3)) +
+#   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
+#                      name = "Fencing") +
+#   scale_y_continuous(
+#     breaks = seq(-100, 200, 25),  # Breaks every 50 from -100 to 200
+#     #labels = function(x) paste0(x, "%")
+#   )+
+#   labs(x = "Treatment", y = "Proportional Δ sapling density(%)") +
+#   theme_classic()
 
+
+######## inverted x y axis - treatment on x-axis
+SapVd <- ggplot(Splot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
+  geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.5) +
+  geom_point(size = 2.0, position = position_dodge(0.5)) +
+  geom_errorbarh(aes(xmin = CI_lower_pct, xmax = CI_upper_pct),
+                 height = 0.5, size = 0.9, position = position_dodge(0.5)) +
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
+  scale_x_continuous(breaks = seq(-80, 50, 20)) +
+  labs(x = "Change in sapling density relative to Control (%)",
+       y = "Treatment") +
+ # theme(legend.position = "top") +
+  theme_classic()+ 
+  ggtitle(NULL)+
+  theme(
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12))
 
 
 ####  Combine the plots in a single layout
-multi_panelSap <- (SapVa/SapVb/SapVc) +   # "/" for stacking vertically, or "|" for side-by-side
+multi_panelSap <- (SapVa/SapVb/SapVd) +   # "/" for stacking vertically, or "|" for side-by-side
   plot_layout(heights = c(1, 1, 1)) +  # Adjust relative heights
   plot_annotation(
     tag_levels = 'a',
@@ -883,7 +913,7 @@ multi_panelSap <- (SapVa/SapVb/SapVc) +   # "/" for stacking vertically, or "|" 
 
 
 ##ggsave multipanel grass richness
-ggsave(multi_panelSap,filename ="Plots/Saplings ViolinLog.png",
+ggsave(multi_panelSap,filename ="Plots/Saplings ViolinLog2.png",
        width = 16, height = 14, units = "cm")
 
 
@@ -970,7 +1000,7 @@ biomass2 <- biomass2 %>%
   geom_hline(yintercept = 0, linetype = "dashed") +  
   stat_summary(fun = mean, geom = "point", 
                position = position_dodge(0.8), 
-               size = 2, color = "black") + 
+               size = 1.5, color = "black") + 
   labs(x = "Treatment", 
        #y = "Above-ground grass biomass (kgDM/ha)",
        y = expression("Above-ground grass biomass ("*kg~ha^{-1}*")")
@@ -989,7 +1019,7 @@ biomass2 <- biomass2 %>%
   #geom_hline(yintercept = 0, linetype = "dashed") +  
   stat_summary(fun = mean, geom = "point", 
                position = position_dodge(0.8), 
-               size = 1, color = "black") + 
+               size = 1.5, color = "black") + 
   labs(x = "Treatment", 
        #y = "Above-ground grass biomass (kgDM/ha)",
        y = expression("Above-ground grass biomass ("*kg~ha^{-1}*")")
@@ -1066,7 +1096,7 @@ Gbb <- ggplot(delta_GRBiomass,
   geom_violin(alpha = 0.7, position = position_dodge(0.8), width = 0.7) +
   stat_summary(fun = mean, geom = "point", 
                position = position_dodge(0.8), 
-               size = 1, color = "black") +
+               size = 1.5, color = "black") +
   geom_hline(yintercept = 0, linetype = "dashed") +
   labs(x = "Treatment", y = "Δ Aboveground grass biomass ("*kg~ha^{-1}*")") +
   theme_classic() +
@@ -1088,7 +1118,6 @@ biomass_LRR <- heights_data %>%
   
   # Step 2: Aggregate to site-level (Location) means
   group_by(Site, Fencing, Year) %>%
-  summarise(SiteMean = mean(MeanBiomass, na.rm = TRUE), .groups = "drop") %>%
   
 
 ### 
@@ -1208,28 +1237,47 @@ plot_data$Fencing <- factor(plot_data$Fencing,
                             levels = c("Fenced", "Unfenced"),
                             labels = c("Fenced", "Unfenced"))
 
-# Check the data
-head(plot_data)
 
 
 ##### Percentage change plot 
-Gbc <- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  geom_point(position = position_dodge(0.3), size = 3) +
-  geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
-                position = position_dodge(0.3), width = 0.15) +
-  #geom_line(position = position_dodge(0.3)) +
-  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
-                     name = "Fencing") +
-  scale_y_continuous(
-    breaks = seq(-100, 200, 5)#,  # Breaks every 50 from -100 to 200
-    #labels = function(x) paste0(x, "%")  # to include % on the scale
-  )+
-  labs(x = "Treatment", y = "Biomass proportional change (%)") +
-  theme_classic()+
+# Gbc <- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
+#   geom_hline(yintercept = 0, linetype = "dashed") +
+#   geom_point(position = position_dodge(0.3), size = 3) +
+#   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
+#                 position = position_dodge(0.3), width = 0.15) +
+#   #geom_line(position = position_dodge(0.3)) +
+#   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
+#                      name = "Fencing") +
+#   scale_y_continuous(
+#     breaks = seq(-100, 200, 5)#,  # Breaks every 50 from -100 to 200
+#     #labels = function(x) paste0(x, "%")  # to include % on the scale
+#   )+
+#   labs(x = "Treatment", y = "Biomass proportional change (%)") +
+#   theme_classic()+
+#   theme(
+#     axis.title = element_text(size = 8),      # Axis titles
+#     axis.text = element_text(size = 8))
+
+
+
+## Percent change. Ineverted axis. y = Treatment  
+
+Gbc <- ggplot(plot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
+  geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.5) +
+  geom_point(size = 2.0, position = position_dodge(0.5)) +
+  geom_errorbarh(aes(xmin = CI_lower_pct, xmax = CI_upper_pct),
+                 height = 0.5, size = 0.9, position = position_dodge(0.5)) +
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
+  #scale_x_continuous(breaks = seq(-50, 150, 20)) +
+  labs(x = "Change in Above-ground grass biomass relative to Control (%)",
+       y = "Treatment") +
+  # theme(legend.position = "top") +
+  theme_classic()+ 
+  ggtitle(NULL)+
   theme(
-    axis.title = element_text(size = 8),      # Axis titles
-    axis.text = element_text(size = 8))
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12))
+
 
 
 ####  Combine the plots in a single layout
@@ -1248,7 +1296,7 @@ multi_panelBiom <- (GbA/Gbb/ Gbc) +   # "/" for stacking vertically, or "|" for 
   )
 
 #saving using ggsave
-ggsave(multi_panelBiom,filename ="Plots/GrassBIOMASS violinLog.png",
+ggsave(multi_panelBiom,filename ="Plots/GrassBIOMASS violinLog2.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -1277,7 +1325,7 @@ GrRa <- ggplot(Grass_rich,
   #geom_hline(yintercept = 0, linetype = "dashed") +  
   stat_summary(fun = mean, geom = "point", 
                position = position_dodge(0.8), 
-               size = 1, color = "black") +   
+               size = 1.5, color = "black") +   
   labs(x = "Treatment", 
        y = "Grass species richness") +
   theme_classic() +
@@ -1335,7 +1383,7 @@ GrRb <- ggplot(grassR_delta,aes(x = Treatment, y = delta, fill = Fencing)) +
   geom_violin(alpha = 0.7, position = position_dodge(0.8), width = 0.7) +
   stat_summary(fun = mean, geom = "point", 
                position = position_dodge(0.8), 
-               size = 1, color = "black") +
+               size = 1.5, color = "black") +
   geom_hline(yintercept = 0, linetype = "dashed") +
   labs(x = "Treatment", y = "Δ Grass species richness") +
   theme_classic() +
@@ -1468,27 +1516,44 @@ head(plot_data)
 
 
 ##### Percentage change plot 
-GrRC<-ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  geom_point(position = position_dodge(0.3), size = 3) +
-  geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
-                position = position_dodge(0.3), width = 0.15) +
-  #geom_line(position = position_dodge(0.3)) +
-  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
-                     name = "Fencing") +
-  scale_y_continuous(
-    breaks = seq(-100, 150, 5)#,  # Breaks every 50 from -100 to 200
-    #labels = function(x) paste0(x, "%")  # to include % on the scale
-  )+
-  labs(x = "Treatment", y = "Grass richness proportional change (%)") +
-  theme_classic()+
-  theme(axis.title = element_text(size = 8),  # Axis titles size
-   axis.text = element_text(size = 8)) 
+# GrRC<-ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
+#   geom_hline(yintercept = 0, linetype = "dashed") +
+#   geom_point(position = position_dodge(0.3), size = 3) +
+#   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
+#                 position = position_dodge(0.3), width = 0.15) +
+#   #geom_line(position = position_dodge(0.3)) +
+#   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
+#                      name = "Fencing") +
+#   scale_y_continuous(
+#     breaks = seq(-100, 150, 5)#,  # Breaks every 50 from -100 to 200
+#     #labels = function(x) paste0(x, "%")  # to include % on the scale
+#   )+
+#   labs(x = "Treatment", y = "Grass richness proportional change (%)") +
+#   theme_classic()+
+#   theme(axis.title = element_text(size = 8),  # Axis titles size
+#    axis.text = element_text(size = 8)) 
 
+
+# Percent change plot. y = Treatment
+GrRD<-ggplot(plot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
+  geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.5) +
+  geom_point(size = 2.0, position = position_dodge(0.5)) +
+  geom_errorbarh(aes(xmin = CI_lower_pct, xmax = CI_upper_pct),
+                 height = 0.5, size = 0.9, position = position_dodge(0.5)) +
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
+  #scale_x_continuous(breaks = seq(-50, 150, 20)) +
+  labs(x = "Change in Grass species richness relative to Control (%)",
+       y = "Treatment") +
+  # theme(legend.position = "top") +
+  theme_classic()+ 
+  ggtitle(NULL)+
+  theme(
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12))
 
 
 ####  Combine the plots in a single layout
-multi_panelRich <- (GrRa/GrRb/ GrRC) +   # "/" for stacking vertically, or "|" for side-by-side
+multi_panelRich <- (GrRa/GrRb/ GrRD) +   # "/" for stacking vertically, or "|" for side-by-side
   plot_layout(heights = c(1, 1, 1)) +  # Adjust relative heights
   plot_annotation(
     tag_levels = 'a',
@@ -1503,7 +1568,7 @@ multi_panelRich <- (GrRa/GrRb/ GrRC) +   # "/" for stacking vertically, or "|" f
   )
 
 #saving using ggsave
-ggsave(multi_panelBiom,filename ="Plots/GrassRICHNESS ViolinLog.png",
+ggsave(multi_panelBiom,filename ="Plots/GrassRICHNESS ViolinLog2.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -1533,36 +1598,23 @@ grSWdiversity <- grSWdiversity %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
 ###### violin pre vs post treatment
-<<<<<<< HEAD
-GSWa <- ggplot(grSWdiversity,
-                    aes(x = Treatment, y =Shannon_Diversity, fill = Fencing)) + facet_wrap(~Period)+ 
-  geom_violin(trim = TRUE)+
-  #geom_hline(yintercept = 0, linetype = "dashed") +  
-=======
-GSWViolin <- ggplot(grSWdiversity,
-                    aes(x = Treatment, y =Shannon_Diversity, fill = Period)) + facet_wrap(~Fencing)+ 
-  geom_violin(trim = TRUE)+
-  geom_hline(yintercept = 0, linetype = "dashed") +  
->>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
-  stat_summary(fun = mean, geom = "point", 
-               position = position_dodge(0.8), 
-               size = 1, color = "black") +
-  labs(x = "Treatment", 
-<<<<<<< HEAD
-       y = "Shannon-Weiner diversity index",
-  ) + theme_classic()+
-  theme(axis.title = element_text(size = 8),
-        axis.text = element_text(size = 8)) +  # Axis tick labels
-  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
-=======
-       y = "Shannon-Weiner diversity",
-  ) + theme_classic()+
-  theme(axis.title = element_text(size = 8),
-        axis.text = element_text(size = 8)) +  # Axis tick labels
-  scale_fill_manual(values = c("Pre-treatment" = "#1b7837", "Post-treatment" = "#a6dba0"))
-
->>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
-
+  
+GSWa <- ggplot(grSWdiversity,aes(x = Treatment, y =Shannon_Diversity, fill = Fencing))+ facet_wrap(~Period)+ 
+    geom_violin(trim = TRUE)+
+    #geom_hline(yintercept = 0, linetype = "dashed") +  
+    stat_summary(fun = mean, geom = "point", 
+                 position = position_dodge(0.8), 
+                 size = 1.5, color = "black") +   
+    labs(x = "Treatment", 
+         y = "Shannon-Weiner diversity index") +
+    theme_classic() +
+    theme(
+      axis.title = element_text(size = 8),      # Axis titles
+      axis.text = element_text(size = 8)        # Axis tick labels
+    ) +
+    scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
+  
+  
 
 
 ####### DELTA SHANNON-WEINER DIVERSITY INDEX
@@ -1590,13 +1642,9 @@ SW_Delta <- Sdiversity_data %>%
 ### Convert character variables to factors
 SW_Delta$Treatment <- as.factor(SW_Delta$Treatment)
 SW_Delta$Fencing <- as.factor(SW_Delta$Fencing)
-<<<<<<< HEAD
 SW_Delta$Fencing <- factor(SW_Delta$Fencing, 
                     levels = c("Fenced", "Unfenced"),
                      labels = c("Fenced", "Unfenced"))
-=======
-
->>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
 
 ### GLMM to test effect of treatment * fencing on Grass diversity ##################
 
@@ -1613,13 +1661,11 @@ levels(SW_Delta$Fencing)  # Should show "Open" "Closed" (or vice versa)
 # Set "Fenced" as the reference level 
 SW_Delta$Fencing <- relevel(SW_Delta$Fencing, ref = "Unfenced")
 
-<<<<<<< HEAD
-=======
+
 ### Convert character variables to factors
 SW_Delta$Treatment <- as.factor(SW_Delta$Treatment)
 SW_Delta$Fencing <- as.factor(SW_Delta$Fencing)
 
->>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
 
 ##LMM
 GrasD <- lmer(delta_SW ~ Treatment * Fencing + (1|Site),  
@@ -1629,12 +1675,12 @@ summary(GrasD)
 
 
 # Plot LMM output grass diversity (delta)
-<<<<<<< HEAD
+
 GSWb <- ggplot(SW_Delta,aes(x = Treatment, y = delta_SW, fill = Fencing)) +
   geom_violin(alpha = 0.7, position = position_dodge(0.8), width = 0.7) +
   stat_summary(fun = mean, geom = "point", 
                position = position_dodge(0.8), 
-               size = 1, color = "black") +
+               size = 1.5, color = "black") +
   geom_hline(yintercept = 0, linetype = "dashed") +
   labs(x = "Treatment", y = "Δ Grass Shannon-Weiner diversity") +
   theme_classic() +
@@ -1642,21 +1688,10 @@ GSWb <- ggplot(SW_Delta,aes(x = Treatment, y = delta_SW, fill = Fencing)) +
   theme(
     axis.title = element_text(size = 8),  # Axis titles size
     axis.text = element_text(size = 8)) 
-=======
-Grspp <- ggplot(SW_Delta,aes(x = Treatment, y = delta_SW, fill = Fencing)) +
-  geom_violin(alpha = 0.7, position = position_dodge(0.8), width = 0.7) +
-  stat_summary(fun = mean, geom = "point", 
-               position = position_dodge(0.8), 
-               size = 2, color = "black") +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Treatment", y = "Absolute change in grass diversity") +
-  theme_classic() +
-  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
->>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
 
 
 
-################ USING LOG RESPONSE RATIO FOR GRASS RICHNESS  #####
+################ USING LOG RESPONSE RATIO FOR GRASS diversity  #####
 
 
 ###  Step 1: Calculate lnRR for each site, treatment, fencing ,
@@ -1773,37 +1808,47 @@ plot_data$Fencing <- factor(plot_data$Fencing,
                             levels = c("Fenced", "Unfenced"),
                             labels = c("Fenced", "Unfenced"))
 
-# Check the data
-head(plot_data)
-
 
 ##### Percentage change plot 
-<<<<<<< HEAD
-GSWc<- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
-=======
-ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
->>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  geom_point(position = position_dodge(0.3), size = 3) +
-  geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
-                position = position_dodge(0.3), width = 0.15) +
-  #geom_line(position = position_dodge(0.3)) +
-  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
-                     name = "Fencing") +
-  scale_y_continuous(
-    breaks = seq(-100, 150, 5)#,  # Breaks every 50 from -100 to 200
-    #labels = function(x) paste0(x, "%")  # to include % on the scale
-  )+
-<<<<<<< HEAD
-  labs(x = "Treatment", y = "Diversity proportional change (%)") +
-  theme_classic()+
+# GSWc<- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
+# ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
+#   geom_hline(yintercept = 0, linetype = "dashed") +
+#   geom_point(position = position_dodge(0.3), size = 3) +
+#   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
+#                 position = position_dodge(0.3), width = 0.15) +
+#   #geom_line(position = position_dodge(0.3)) +
+#   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
+#                      name = "Fencing") +
+#   scale_y_continuous(
+#     breaks = seq(-100, 150, 5)#,  # Breaks every 50 from -100 to 200
+#     #labels = function(x) paste0(x, "%")  # to include % on the scale
+#   )+
+#   labs(x = "Treatment", y = "Diversity proportional change (%)") +
+#   theme_classic()+
+#   theme(
+#     axis.title = element_text(size = 8),  # Axis titles size
+#     axis.text = element_text(size = 8)) 
+
+
+# Percent change plot. y = Treatment
+GSWD<-ggplot(plot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
+  geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.5) +
+  geom_point(size = 2.0, position = position_dodge(0.5)) +
+  geom_errorbarh(aes(xmin = CI_lower_pct, xmax = CI_upper_pct),
+                 height = 0.5, size = 0.9, position = position_dodge(0.5)) +
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
+  #scale_x_continuous(breaks = seq(-50, 150, 20)) +
+  labs(x = "Change in Grass Shannon-Weiner diversity relative to Control (%)",
+       y = "Treatment") +
+  theme_classic()+ 
+  ggtitle(NULL)+
   theme(
-    axis.title = element_text(size = 8),  # Axis titles size
-    axis.text = element_text(size = 8)) 
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12))
 
 
 # # Combine the plots in a single layout
-SWmulti_panel <- (GSWa/GSWb/GSWc) +   # "/" for stacking vertically, or "|" for side-by-side
+SWmulti_panel <- (GSWa/GSWb/GSWD) +   # "/" for stacking vertically, or "|" for side-by-side
   plot_layout(heights = c(1, 1, 1)) +  # Adjust relative heights
   plot_annotation(
     tag_levels = 'a',
@@ -1817,14 +1862,10 @@ SWmulti_panel <- (GSWa/GSWb/GSWc) +   # "/" for stacking vertically, or "|" for 
     plot.tag = element_text(size = 8, hjust = 0))  # Ensure left alignment
   
 ##ggsave multipanel grass richness
-ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog.png",
+ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog2.png",
        width = 16, height = 14, units = "cm")
 
-=======
-  labs(x = "Treatment", y = "Grass diversity proportional change (%)") +
-  #theme_classic()
-  theme_beautiful()
->>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
+
 
 ############################################################################################
 

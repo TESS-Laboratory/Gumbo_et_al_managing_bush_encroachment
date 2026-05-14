@@ -63,15 +63,34 @@ SeedANCO <- lmer(
 
 summary(SeedANCO)
 
-# 
-# model_mixed2 <- lmer(Y2026 ~ Treatment * Fencing + Y2024 +(1 | Site),
-#   data = Seed_wide,control = lmerControl(autoscale = TRUE))  # Add this
-# options(scipen = 10) 
-# 
-# summary(model_mixed2)
-# # Or just for one object
-# print(summary(model_mixed2), digits = 3)  # Rounds to 3 decimal places
-# 
+SeedANCO1 <- lmer(Y2026 ~ Treatment  * Fencing* Y2024 +(1 | Site),
+                 data = Seed_wide)
+summary(SeedANCO1)
+
+##
+# 1. Linearity: Relationship between pre and post is linear
+ggplot(Seed_wide, aes(x = Y2024, y = Y2026, color = Treatment)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_minimal()
+
+
+# 2. Homogeneity of regression slopes (crucial assumption!)
+# Interaction term should NOT be significant
+model_slopes <- lm(Y2026 ~ Treatment * Fencing *Y2024, data = Seed_wide)
+summary(model_slopes)  # group:pre interaction p > 0.05 = assumption met
+
+
+# 3. Normality of residuals
+residuals <- residuals(lm(Y2026 ~ Treatment *Fencing + Y2024, data = Seed_wide))
+shapiro.test(residuals)  # p > 0.05 = normal
+qqnorm(residuals); qqline(residuals)
+
+
+# 4. Homogeneity of variances
+leveneTest(Y2026 ~ Treatment, data = Seed_wide)  # p > 0.05 = equal variances
+
+
 # #check for singularity
 # performance::check_singularity(model_mixed2) # FALSE desired shows- all random effects have nonzero variance → stable
 
