@@ -81,6 +81,7 @@ Seedlings <- SapF %>%
     density_ha = Seedlings * 10000 / Area
   )
 
+<<<<<<< HEAD
 #comparing at treatment level
 
 Seed_treat <- Seedlings %>% 
@@ -206,6 +207,8 @@ Seedlings <- SapF %>%
     density_ha = Seedlings * 10000 / Area)
 
 
+=======
+>>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
 # prepared seedlings data
 SeedLOG <- SapF %>%
   filter(
@@ -433,12 +436,17 @@ head(plot_data)
 
 
 ##### Percentage change plot 
+<<<<<<< HEAD
 SeedVc<- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
+=======
+ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
+>>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
   geom_hline(yintercept = 0, linetype = "dashed") +
   geom_point(position = position_dodge(0.3), size = 3) +
   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
                 position = position_dodge(0.3), width = 0.15) +
   #geom_line(position = position_dodge(0.3)) +
+<<<<<<< HEAD
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),name = "Fencing") +
   scale_y_continuous(
     breaks = seq(-100, 200, 50),  # Breaks every 50 from -100 to 200
@@ -468,6 +476,19 @@ multi_panelSe <- (SeedVa/SeedVb/SeedVc) +   # "/" for stacking vertically, or "|
 ##ggsave multipanel grass richness
 > ggsave(SWmulti_panel,filename ="Plots/Seedlings ViolinLog.png",
          +        width = 16, height = 14, units = "cm")
+=======
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
+                     name = "Fencing") +
+  scale_y_continuous(
+    breaks = seq(-100, 200, 50),  # Breaks every 50 from -100 to 200
+    labels = function(x) paste0(x, "%")
+  )+
+  # scale_y_continuous(labels = function(x) paste0(x, "%")) +
+  labs(x = "Treatment", y = " % Change from control") +
+  theme_beautiful()
+
+
+>>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
 
 
 ### LOLLIPOP PLOT
@@ -1380,19 +1401,35 @@ grSWdiversity <- grSWdiversity %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
 ###### violin pre vs post treatment
+<<<<<<< HEAD
 GSWa <- ggplot(grSWdiversity,
                     aes(x = Treatment, y =Shannon_Diversity, fill = Fencing)) + facet_wrap(~Period)+ 
   geom_violin(trim = TRUE)+
   #geom_hline(yintercept = 0, linetype = "dashed") +  
+=======
+GSWViolin <- ggplot(grSWdiversity,
+                    aes(x = Treatment, y =Shannon_Diversity, fill = Period)) + facet_wrap(~Fencing)+ 
+  geom_violin(trim = TRUE)+
+  geom_hline(yintercept = 0, linetype = "dashed") +  
+>>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
   stat_summary(fun = mean, geom = "point", 
                position = position_dodge(0.8), 
                size = 1, color = "black") +
   labs(x = "Treatment", 
+<<<<<<< HEAD
        y = "Shannon-Weiner diversity index",
   ) + theme_classic()+
   theme(axis.title = element_text(size = 8),
         axis.text = element_text(size = 8)) +  # Axis tick labels
   scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
+=======
+       y = "Shannon-Weiner diversity",
+  ) + theme_classic()+
+  theme(axis.title = element_text(size = 8),
+        axis.text = element_text(size = 8)) +  # Axis tick labels
+  scale_fill_manual(values = c("Pre-treatment" = "#1b7837", "Post-treatment" = "#a6dba0"))
+
+>>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
 
 
 
@@ -1421,9 +1458,13 @@ SW_Delta <- Sdiversity_data %>%
 ### Convert character variables to factors
 SW_Delta$Treatment <- as.factor(SW_Delta$Treatment)
 SW_Delta$Fencing <- as.factor(SW_Delta$Fencing)
+<<<<<<< HEAD
 SW_Delta$Fencing <- factor(SW_Delta$Fencing, 
                     levels = c("Fenced", "Unfenced"),
                      labels = c("Fenced", "Unfenced"))
+=======
+
+>>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
 
 ### GLMM to test effect of treatment * fencing on Grass diversity ##################
 
@@ -1440,6 +1481,13 @@ levels(SW_Delta$Fencing)  # Should show "Open" "Closed" (or vice versa)
 # Set "Fenced" as the reference level 
 SW_Delta$Fencing <- relevel(SW_Delta$Fencing, ref = "Unfenced")
 
+<<<<<<< HEAD
+=======
+### Convert character variables to factors
+SW_Delta$Treatment <- as.factor(SW_Delta$Treatment)
+SW_Delta$Fencing <- as.factor(SW_Delta$Fencing)
+
+>>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
 
 ##LMM
 GrasD <- lmer(delta_SW ~ Treatment * Fencing + (1|Site),  
@@ -1449,6 +1497,7 @@ summary(GrasD)
 
 
 # Plot LMM output grass diversity (delta)
+<<<<<<< HEAD
 GSWb <- ggplot(SW_Delta,aes(x = Treatment, y = delta_SW, fill = Fencing)) +
   geom_violin(alpha = 0.7, position = position_dodge(0.8), width = 0.7) +
   stat_summary(fun = mean, geom = "point", 
@@ -1461,6 +1510,17 @@ GSWb <- ggplot(SW_Delta,aes(x = Treatment, y = delta_SW, fill = Fencing)) +
   theme(
     axis.title = element_text(size = 8),  # Axis titles size
     axis.text = element_text(size = 8)) 
+=======
+Grspp <- ggplot(SW_Delta,aes(x = Treatment, y = delta_SW, fill = Fencing)) +
+  geom_violin(alpha = 0.7, position = position_dodge(0.8), width = 0.7) +
+  stat_summary(fun = mean, geom = "point", 
+               position = position_dodge(0.8), 
+               size = 2, color = "black") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Treatment", y = "Absolute change in grass diversity") +
+  theme_classic() +
+  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
+>>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
 
 
 
@@ -1586,7 +1646,11 @@ head(plot_data)
 
 
 ##### Percentage change plot 
+<<<<<<< HEAD
 GSWc<- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
+=======
+ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
+>>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
   geom_hline(yintercept = 0, linetype = "dashed") +
   geom_point(position = position_dodge(0.3), size = 3) +
   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
@@ -1598,6 +1662,7 @@ GSWc<- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, gro
     breaks = seq(-100, 150, 5)#,  # Breaks every 50 from -100 to 200
     #labels = function(x) paste0(x, "%")  # to include % on the scale
   )+
+<<<<<<< HEAD
   labs(x = "Treatment", y = "Diversity proportional change (%)") +
   theme_classic()+
   theme(
@@ -1623,6 +1688,11 @@ SWmulti_panel <- (GSWa/GSWb/GSWc) +   # "/" for stacking vertically, or "|" for 
 ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog.png",
        width = 16, height = 14, units = "cm")
 
+=======
+  labs(x = "Treatment", y = "Grass diversity proportional change (%)") +
+  #theme_classic()
+  theme_beautiful()
+>>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
 
 ############################################################################################
 
