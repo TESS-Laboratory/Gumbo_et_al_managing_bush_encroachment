@@ -47,14 +47,33 @@ Seed_wide$Treatment <- relevel(
   Seed_wide$Treatment,
   ref = "C")
 
+
+# Set "Fenced" as the reference level 
+Seed_wide$Fencing <- relevel(Seed_wide$Fencing, ref = "Unfenced")
+
+
 #--------------------------------------------------
 # STEP 4: Mixed ANCOVA model
 #--------------------------------------------------
 
-model_mixed <- lmer(
-  Y2026 ~ Treatment * Fencing + Y2024 +
-    (1 | Site),
+SeedANCO <- lmer(
+  Y2026 ~ Treatment * Fencing + Y2024 +(1 | Site) ,
   data = Seed_wide)
+
+
+summary(SeedANCO)
+
+# 
+# model_mixed2 <- lmer(Y2026 ~ Treatment * Fencing + Y2024 +(1 | Site),
+#   data = Seed_wide,control = lmerControl(autoscale = TRUE))  # Add this
+# options(scipen = 10) 
+# 
+# summary(model_mixed2)
+# # Or just for one object
+# print(summary(model_mixed2), digits = 3)  # Rounds to 3 decimal places
+# 
+# #check for singularity
+# performance::check_singularity(model_mixed2) # FALSE desired shows- all random effects have nonzero variance → stable
 
 ## Diagnostics
 #code to create a Q-Q plot
@@ -67,18 +86,11 @@ qqline(model_mixed$residuals, datax = FALSE, distribution = qnorm, probs = c(0.2
 # STEP 5: Dunnett-adjusted comparisons
 #--------------------------------------------------
 
-sedaemm <- emmeans(
-  model_mixed,
-  ~ Treatment | Fencing)
+sedaemm <- emmeans(SeedANCO, ~ Treatment | Fencing)
 
-dunnett_results <- contrast(
-  sedaemm,
-  method = "dunnett")
+dunnett_results <- contrast(sedaemm, method = "dunnett")
 
-summary(
-  dunnett_results,
-  infer = TRUE
-)
+summary( dunnett_results,infer = TRUE)
 
 #--------------------------------------------------
 # STEP 6: Create dataframe for plotting
@@ -89,57 +101,26 @@ sedemm_df <- as.data.frame(sedaemm)
 #--------------------------------------------------
 # STEP 7: Publication-quality plot
 #--------------------------------------------------
-
-p <- ggplot(
-  sedemm_df,
-  aes(
-    x = Treatment,
-    y = emmean,
-    fill = Fencing
-  )
-) +
-  
-  geom_col(
-    position = position_dodge(width = 0.8),
-    width = 0.7,
-    color = "black"
+ ggplot(sedemm_df, aes(Treatment, emmean, color = Fencing, group = Fencing)) +
+  geom_point(position = position_dodge(width = 0.35), size = 2.5) +
+  geom_errorbar(aes(ymin = lower.CL, ymax = upper.CL),
+                position = position_dodge(width = 0.35), width = 0.12) +
+  # geom_text(aes(label = Group,
+  #               y = upper.CL + 0.5 * max(emmeans)),
+            #position = position_dodge(width = 0.35), size = 3, color = "black") +
+  scale_color_manual(values = c("Fenced" = "#8c510a", "Unfenced" = "#d8b365")) +
+  labs(color = "Fencing")+  # Optional: rename legend title
+  labs(
+    x = "Treatment",
+    y = expression(" proportional change "*ha^{-1}*"")
   ) +
-  
-  geom_errorbar(
-    aes(
-      ymin = lower.CL,
-      ymax = upper.CL
-    ),
-    position = position_dodge(width = 0.8),
-    width = 0.15,
-    linewidth = 0.7
-  ) +
-  
-  labs(x = "Treatment", y = expression(Density~(ha^{-1})),
-    fill = "Fencing"
-  ) + theme_classic() +
-  theme(plot.title = element_text(face = "bold",size = 18), 
-        plot.subtitle = element_text(size = 13),
-    axis.text.x = element_text(
-      angle = 20,
-      hjust = 1
-    ),
-    
-    legend.position = "top",
-    
-    legend.title = element_text(
-      face = "bold"
-    ),
-    
-    panel.grid.minor = element_blank(),
-    
-    panel.border = element_rect(
-      linewidth = 1
-    )
-  )
+  theme_classic()+ 
+  ggtitle(NULL)+
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
+  theme(
+    axis.title = element_text(size = 8),      # Axis titles
+    axis.text = element_text(size = 8))
 
-# Display plot
-p
 
 #--------------------------------------------------
 # STEP 8: Save high-resolution figure

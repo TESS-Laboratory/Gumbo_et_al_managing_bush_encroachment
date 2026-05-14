@@ -81,7 +81,6 @@ Seedlings <- SapF %>%
     density_ha = Seedlings * 10000 / Area
   )
 
-<<<<<<< HEAD
 #comparing at treatment level
 
 Seed_treat <- Seedlings %>% 
@@ -132,8 +131,6 @@ Seedlings_Delta1$Fencing <- factor(Seedlings_Delta1$Fencing, ordered = FALSE)
 # Verify
 levels(Seedlings_Delta1$Fencing)  
 
-# Set "Fenced" as the reference level 
-Seedlings_Delta1$Fencing <- relevel(Seedlings_Delta1$Fencing, ref = "Unfenced")
 
 ### Convert character variables to factors
 Seedlings_Delta1$Treatment <- as.factor(Seedlings_Delta1$Treatment)
@@ -142,6 +139,10 @@ Seedlings_Delta1$Fencing <- as.factor(Seedlings_Delta1$Fencing)
 Seedlings_Delta1$Fencing <- factor(Seedlings_Delta1$Fencing, 
                             levels = c("Fenced", "Unfenced"),
                             labels = c("Fenced", "Unfenced"))
+
+# Set "Unfenced" as the reference level 
+Seedlings_Delta1$Fencing <- relevel(Seedlings_Delta1$Fencing, ref = "Unfenced")
+
 
 
 # using the LMM for analysis
@@ -178,7 +179,7 @@ SeedVb <- ggplot(Seedlings_Delta1,
   geom_hline(yintercept = 0, linetype = "dashed") +  
   stat_summary(fun = mean, geom = "point", 
                position = position_dodge(0.8), 
-               size = 1, color = "black") +
+               size = 1.4, color = "black") +
   geom_hline(yintercept = 0, linetype = "dashed") +
   labs(x = "Treatment", 
        #y = "Change in Seedlings density per ha",
@@ -192,13 +193,12 @@ SeedVb <- ggplot(Seedlings_Delta1,
   scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
 
 
+
 # calculating seedling density
 Seedlings <- SapF %>%
   filter(
     woody_cat == "Seedlings",
-    Year %in% c(2024, 2026),
-    !Treatment %in% "ZZZ"
-  ) %>%
+    Year %in% c(2024, 2026)) %>%
   count(
     Site, Plot, Subplot, Treatment, Fencing, Year, Area,
     name = "Seedlings"
@@ -207,9 +207,7 @@ Seedlings <- SapF %>%
     density_ha = Seedlings * 10000 / Area)
 
 
-=======
->>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
-# prepared seedlings data
+# prepare seedlings data for LOG RESPONSE RATIO
 SeedLOG <- SapF %>%
   filter(
     woody_cat == "Seedlings",
@@ -436,17 +434,12 @@ head(plot_data)
 
 
 ##### Percentage change plot 
-<<<<<<< HEAD
 SeedVc<- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
-=======
-ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
->>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
   geom_hline(yintercept = 0, linetype = "dashed") +
-  geom_point(position = position_dodge(0.3), size = 3) +
+  geom_point(position = position_dodge(0.3), size = 1.4) +
   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
                 position = position_dodge(0.3), width = 0.15) +
   #geom_line(position = position_dodge(0.3)) +
-<<<<<<< HEAD
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),name = "Fencing") +
   scale_y_continuous(
     breaks = seq(-100, 200, 50),  # Breaks every 50 from -100 to 200
@@ -454,7 +447,7 @@ ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fe
   )+
   # scale_y_continuous(labels = function(x) paste0(x, "%")) +
   labs(x = "Treatment", y = " % proprtional change Seedling density") +
-  theme_beautiful()
+  theme_classic()
 
 
 # Create multipanel plot
@@ -473,22 +466,11 @@ multi_panelSe <- (SeedVa/SeedVb/SeedVc) +   # "/" for stacking vertically, or "|
     axis.title = element_text(size = 8),       # Increase axis title font size
     plot.tag = element_text(size = 8, hjust = 0)  # Ensure left alignment
   )
+
+
 ##ggsave multipanel grass richness
-> ggsave(SWmulti_panel,filename ="Plots/Seedlings ViolinLog.png",
-         +        width = 16, height = 14, units = "cm")
-=======
-  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
-                     name = "Fencing") +
-  scale_y_continuous(
-    breaks = seq(-100, 200, 50),  # Breaks every 50 from -100 to 200
-    labels = function(x) paste0(x, "%")
-  )+
-  # scale_y_continuous(labels = function(x) paste0(x, "%")) +
-  labs(x = "Treatment", y = " % Change from control") +
-  theme_beautiful()
-
-
->>>>>>> 5aa1ad4ddae6600b320fe370fea9845b0149238e
+ggsave(multi_panelSe,filename ="Plots/Seedlings ViolinLog.png",
+           width = 16, height = 14, units = "cm")
 
 
 ### LOLLIPOP PLOT
@@ -521,8 +503,135 @@ multi_panelSe <- (SeedVa/SeedVb/SeedVc) +   # "/" for stacking vertically, or "|
 
 #### SAPLINGS  SAPLINGS  SAPLINGS SAPLINGS 
 
+# calculating sapling density
+Saplings <- SapF %>%
+  filter(
+    woody_cat == "Saplings",
+    Year %in% c(2024, 2026)
+  ) %>%
+  count(
+    Site, Plot, Subplot, Treatment, Fencing, Year, Area,
+    name = "Saplings"
+  ) %>%
+  mutate(
+    density_ha = Saplings * 10000 / Area
+  )
 
-# prepared seedlings data
+
+#comparing at treatment level
+
+Sap_treat <- Saplings %>% 
+  group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>% 
+  summarise(mean_dens_ha = mean(density_ha), .groups = "drop")  
+
+
+#Summary stats for saplings 
+Sapsummary_stats <- Saplings %>%
+  group_by(Treatment,Fencing,Year) %>%
+  summarise(
+    N = n(),                                   # number of observations per treatment
+    mean_density = mean(density_ha, na.rm = TRUE),
+    sd_density = sd(density_ha, na.rm = TRUE)
+  ) %>%
+  ungroup()
+
+#sort pre and post treatment
+strt_comparison2 <- Saplings %>%
+  filter(Year %in% c(2024, 2026)) %>%
+  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
+
+
+#reorder so that pre-treatment appears first then post treatment second on the plots
+strt_comparison2 <- strt_comparison2 %>%
+  mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
+
+
+#################DELTA SAPLING DENSITY
+
+#Pivot the two years side‑by‑side and compute Δ sapling density ─────────────
+Saplings_Delta1 <- Sap_treat %>% 
+  pivot_wider(names_from  = Year,
+              values_from = mean_dens_ha,
+              names_glue  = "dens_{Year}") %>% 
+  mutate(delta_Sapdens = dens_2026 - dens_2024) 
+
+
+
+##### to test effect of treatment * fencing on seedling density###################
+
+# Make "Unfenced" the reference level 
+
+class(Saplings_Delta1$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+Saplings_Delta1$Fencing <- factor(Saplings_Delta1$Fencing, ordered = FALSE)
+
+# Verify
+levels(Saplings_Delta1$Fencing)  
+
+# Set "Fenced" as the reference level 
+Saplings_Delta1$Fencing <- relevel(Saplings_Delta1$Fencing, ref = "Unfenced")
+
+### Convert character variables to factors
+Saplings_Delta1$Treatment <- as.factor(Saplings_Delta1$Treatment)
+
+Saplings_Delta1$Fencing <- factor(Saplings_Delta1$Fencing, 
+                                   levels = c("Fenced", "Unfenced"),
+                                   labels = c("Fenced", "Unfenced"))
+
+
+
+
+
+# using the LMM for analysis
+Sapl5 <- lmer(delta_Sapdens ~ Treatment * Fencing + (1|Site),  
+              data = Saplings_Delta1)
+
+summary(Sapl5)
+
+#### PLOTS
+# raw results using means
+SapVa<- ggplot(strt_comparison2, 
+                   aes(x = Treatment, y = density_ha, fill = Fencing)) + facet_wrap(~Period)+ 
+  geom_violin(trim = TRUE)+
+  #geom_hline(yintercept = 0, linetype = "dashed") +    
+  stat_summary(fun = mean, geom = "point", 
+               position = position_dodge(0.8), 
+               size = 1.4, color = "black") +
+  labs(x = "Treatment", 
+       # y = "Saplings density per ha",
+       y = expression("Sapling density "*ha^{-1}*"")
+  ) +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 8),      # Axis titles
+    axis.text = element_text(size = 8)        # Axis tick labels
+  )+
+  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
+
+
+## violin plot seedling delta
+SapVb <- ggplot(Saplings_Delta1,
+                     aes(x = Treatment, y = delta_Sapdens, fill = Fencing))+ 
+  geom_violin(trim = FALSE)+
+  geom_hline(yintercept = 0, linetype = "dashed") +  
+  stat_summary(fun = mean, geom = "point", 
+               position = position_dodge(0.8), 
+               size = 1.4, color = "black") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Treatment", 
+       #y = "Change in Saplings density per ha",
+       y = expression("Δ Sapling density "*ha^{-1}*"")
+  ) +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 8),  # Axis titles reduced from 12 to 8
+    axis.text = element_text(size = 8)) +
+  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
+
+
+
+# prepare saplings data for LOG RESPONSE RATIO
 SapLOG <- SapF %>%
   filter(
     woody_cat == "Saplings",
@@ -740,21 +849,44 @@ head(Splot_data)
 
 
 ##### Percentage change plot 
-ggplot(Splot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
+SapVc<- ggplot(Splot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
   geom_hline(yintercept = 0, linetype = "dashed") +
-  geom_point(position = position_dodge(0.3), size = 3) +
+  geom_point(position = position_dodge(0.3), size = 1.5) +
   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
                 position = position_dodge(0.3), width = 0.15) +
   #geom_line(position = position_dodge(0.3)) +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
                      name = "Fencing") +
   scale_y_continuous(
-    breaks = seq(-100, 200, 50),  # Breaks every 50 from -100 to 200
-    labels = function(x) paste0(x, "%")
+    breaks = seq(-100, 200, 25),  # Breaks every 50 from -100 to 200
+    #labels = function(x) paste0(x, "%")
   )+
-  # scale_y_continuous(labels = function(x) paste0(x, "%")) +
-  labs(x = "Treatment", y = "% Change in sapling density relative to Control") +
-  theme_beautiful()
+  labs(x = "Treatment", y = "% Change in sapling density") +
+  theme_classic()
+
+
+
+####  Combine the plots in a single layout
+multi_panelSap <- (SapVa/SapVb/SapVc) +   # "/" for stacking vertically, or "|" for side-by-side
+  plot_layout(heights = c(1, 1, 1)) +  # Adjust relative heights
+  plot_annotation(
+    tag_levels = 'a',
+    tag_prefix = '(',
+    tag_suffix = ')',
+    theme = theme(plot.tag = element_text(size = 6, hjust = 0))  # Left align tags
+  ) &
+  theme(
+    axis.text = element_text(size = 8),        # Increase axis label font size
+    axis.title = element_text(size = 8),       # Increase axis title font size
+    plot.tag = element_text(size = 8, hjust = 0)  # Ensure left alignment
+  )
+
+
+##ggsave multipanel grass richness
+ggsave(multi_panelSap,filename ="Plots/Saplings ViolinLog.png",
+       width = 16, height = 14, units = "cm")
+
+
 
 
 

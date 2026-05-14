@@ -533,6 +533,16 @@ resprouts_df <- SapF %>%
     !Treatment %in% c("C", "F")  # exclude the two treatments
   )
 
+sample_sizes <- SapF %>%
+  group_by(Site, Plot, Subplot,Treatment, Fencing,Trees,Year) %>%
+  summarise(
+    n = n(),
+    .groups = 'drop'
+  )
+
+
+
+
 ### Make "Unfenced" the reference level (to see "fenced" coefficients)
 # Check current class of FieldType
 
@@ -621,4 +631,134 @@ Res <- plot(Resprouts) +
 #        width = 16, height = 14, units = "cm") 
 
 
-  
+##################################################################################
+###################################################################################
+
+#### TREE DENSITY 
+
+# calculating tree density
+Trees <- SapF %>%
+  filter(
+    woody_cat == "Trees",
+    Year %in% c(2024, 2026)) %>%
+  count(
+    Site, Plot, Subplot, Treatment, Fencing, Year, Area,
+    name = "Trees"
+  ) %>%
+  mutate(
+    density_ha = Trees * 10000 / Area
+  )
+
+
+
+#comparing at treatment level
+
+Trees_treat <- Trees %>% 
+  group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>% 
+  summarise(mean_dens_ha = mean(density_ha), .groups = "drop")  
+
+
+#Summary stats for seedlings 
+Treessummary_stats <- Trees %>%
+  group_by(Treatment,Fencing,Year) %>%
+  summarise(
+    N = n(),                                   # number of observations per treatment
+    mean_density = mean(density_ha, na.rm = TRUE),
+    sd_density = sd(density_ha, na.rm = TRUE)
+  ) %>%
+  ungroup()
+
+#sort pre and post treatment
+tree_comparison2 <- Trees %>%
+  filter(Year %in% c(2024, 2026)) %>%
+  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
+
+
+#reorder so that pre-treatment appears first then post treatment second on the plots
+tree_comparison2 <- tree_comparison2 %>%
+  mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
+
+##################################DELTA SEEDLING DENSITY
+
+#Pivot the two years side‑by‑side and compute Δ seedling density ─────────────
+Trees_Delta1 <- Trees_treat %>% 
+  pivot_wider(names_from  = Year,
+              values_from = mean_dens_ha,
+              names_glue  = "dens_{Year}") %>% 
+  mutate(delta_Treedens = dens_2026 - dens_2024) 
+
+
+
+##### to test effect of treatment * fencing on seedling density###################
+
+# Make "Unfenced" the reference level 
+
+class(Trees_Delta1$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+Trees_Delta1$Fencing <- factor(Trees_Delta1$Fencing, ordered = FALSE)
+
+# Verify
+levels(Trees_Delta1$Fencing)  
+
+
+
+### Convert character variables to factors
+Trees_Delta1$Treatment <- as.factor(Trees_Delta1$Treatment)
+
+
+Trees_Delta1$Fencing <- factor(Trees_Delta1$Fencing, 
+                                   levels = c("Fenced", "Unfenced"),
+                                   labels = c("Fenced", "Unfenced"))
+
+# Set "Fenced" as the reference level 
+Trees_Delta1$Fencing <- relevel(Trees_Delta1$Fencing, ref = "Fenced")
+
+# using the LMM for analysis
+Treel5 <- lmer(delta_Treedens ~ Treatment * Fencing + (1|Site),  
+               data = Trees_Delta1)
+
+summary(Treel5)
+
+
+## increasing font size for x and y axis
+TreeVa<- ggplot(tree_comparison2, 
+                aes(x = Treatment, y = density_ha, fill = Fencing)) + facet_wrap(~Period)+ 
+  geom_violin(trim = TRUE)+
+  #geom_hline(yintercept = 0, linetype = "dashed") +    
+  stat_summary(fun = mean, geom = "point", 
+               position = position_dodge(0.8), 
+               size = 1.4, color = "black") +
+  labs(x = "Treatment", 
+       # y = "Seedlings density per ha",
+       y = expression("Tree density "*ha^{-1}*"")
+  ) +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 8),      # Axis titles
+    axis.text = element_text(size = 8)        # Axis tick labels
+  ) +
+  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
+
+
+## violin plot tree delta
+TreeVb <- ggplot(Trees_Delta1,
+                 aes(x = Treatment, y = delta_Treedens, fill = Fencing))+ 
+  geom_violin(trim = FALSE)+
+  geom_hline(yintercept = 0, linetype = "dashed") +  
+  stat_summary(fun = mean, geom = "point", 
+               position = position_dodge(0.8), 
+               size = 1, color = "black") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Treatment", 
+       #y = "Change in Seedlings density per ha",
+       y = expression("Δ Tree density "*ha^{-1}*"")
+  ) +  
+  scale_y_continuous( breaks = seq(-10000, 10000, 2000))+
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 8),  # Axis titles reduced from 12 to 8
+    axis.text = element_text(size = 8)) +
+  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
+
+

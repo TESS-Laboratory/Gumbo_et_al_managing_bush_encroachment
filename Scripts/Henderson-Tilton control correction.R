@@ -42,8 +42,8 @@ Seed_Delta1 <- Seedling2_wide %>%
       (
         1 -
           (
-            (dens_2016 / dens_2014) *
-              (control_2014 / control_2016)
+            (dens_2026 / dens_2024) *
+              (control_2024 / control_2026)
           )
       ) * 100,
       3
@@ -73,8 +73,6 @@ plot(Seed_ht)
 qqnorm(residuals(Seed_ht))
 qqline(residuals(Seed_ht))
 
-# generating emmeans
-emmeans(Seed_ht, ~ Treatment * Fencing)
 
 # 
 ########### USING EMMEANS
@@ -125,7 +123,111 @@ semm <- ggplot(htplot_df, aes(Treatment, EMM, color = Fencing, group = Fencing))
     axis.text = element_text(size = 8))
 
 
-################################
+###################################   SAPLINGS SAPLINGS
+# Pivot years wide
+Sapling2_wide <- Sap_treat %>%
+  pivot_wider(
+    names_from = Year,
+    values_from = mean_dens_ha,
+    names_glue = "dens_{Year}"
+  )
+
+#Extract control values within Site × Fencing
+
+controlSapl <- Sapling2_wide %>%
+  filter(Treatment == "C") %>%
+  dplyr::select(
+    Site,
+    Fencing,
+    control_2024 = dens_2024,
+    control_2026 = dens_2026
+  )
+
+
+# Join controls back and calculate Henderson–Tilton correction
+Saplings_Delta1 <- Sapling2_wide %>%
+  left_join(
+    controlSapl,
+    by = c("Site", "Fencing")
+  ) %>%
+  mutate(
+    
+    delta_Sapdens = dens_2026 - dens_2024,
+    
+    HT_corrected = round(
+      (1 -
+          (
+            (dens_2026 / dens_2024) *
+              (control_2024 / control_2026)
+          )
+      ) * 100,
+      3
+    )
+  )
+#suppressing scientific notation
+options(scipen = 999)
+
+
+
+### LMM test using the HT_corrected
+
+Sap_ht <- lmer(HT_corrected ~ Treatment * Fencing + (1 | Site),
+                data = Saplings_Delta1)
+
+summary(Sap_ht)
+
+
+##
+# 
+########### USING EMMEANS
+# Estimated marginal means for Treatment within Kraaling (if needed)
+Saphtemm <- emmeans(Sap_ht, ~ Treatment | Fencing, type = "response")
+
+# Compare each treatment to Control with Tukey adjustment (or "none" if you only want vs control)
+contrast_vs_control <- contrast(Saphtemm, method = "trt.vs.ctrl", ref = "C")
+summary(contrast_vs_control, infer = TRUE)
+
+# generate letters using cld in multicomp package
+Saphtcld_emm <- cld(Saphtemm, adjust = "Dunnett", Letters = letters, type = "response")
+cldht_tbl <- as.data.frame(Saphtcld_emm)
+
+
+# prepare clean database for plotting
+sphtplot_df <- cldht_tbl %>%
+  rename(
+    EMM = emmean,
+    CI_lower = lower.CL,
+    CI_upper = upper.CL,
+    Group = .group
+  ) %>%
+  mutate(Group = str_trim(Group))  # Clean whitespace
+
+
+
+## Visualisation using ggplot
+spemm <- ggplot(sphtplot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)) +
+  geom_point(position = position_dodge(width = 0.35), size = 2.5) +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper),
+                position = position_dodge(width = 0.35), width = 0.12) +
+  geom_text(aes(label = Group,
+                y = CI_upper + 0.5 * max(EMM)),
+            position = position_dodge(width = 0.35), size = 3, color = "black") +
+  scale_color_manual(values = c("Fenced" = "green", "Unfenced" = "magenta")) +
+  labs(color = "Fencing")+  # Optional: rename legend title
+  labs(
+    x = "Treatment",
+    y = expression("Control corrected: Sapling density "*ha^{-1}*"")
+  ) +
+  theme_classic()+ 
+  ggtitle(NULL)+
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
+  theme(
+    axis.title = element_text(size = 8),      # Axis titles
+    axis.text = element_text(size = 8))
+
+
+
+
 
 ### GRASS BIOMASS
 
