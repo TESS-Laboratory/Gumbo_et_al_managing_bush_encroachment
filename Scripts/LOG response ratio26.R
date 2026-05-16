@@ -132,7 +132,6 @@ levels(Seedlings_Delta1$Fencing)
 
 ### Convert character variables to factors
 Seedlings_Delta1$Treatment <- as.factor(Seedlings_Delta1$Treatment)
-Seedlings_Delta1$Fencing <- as.factor(Seedlings_Delta1$Fencing)
 
 Seedlings_Delta1$Fencing <- factor(Seedlings_Delta1$Fencing, 
                             levels = c("Fenced", "Unfenced"),
@@ -192,7 +191,7 @@ SeedVb <- ggplot(Seedlings_Delta1,
 
 
 
-# calculating seedling density
+# calculating seedling density FOR LOG RATIO 
 Seedlings <- SapF %>%
   filter(
     woody_cat == "Seedlings",
@@ -308,6 +307,10 @@ SSeed_lnRR <- SSeed_lnRR %>%
     )
   )
 
+
+
+
+
 #---------------------------------------------------
 # 7. View results
 #---------------------------------------------------
@@ -386,15 +389,13 @@ plot_data$Fencing <- factor(plot_data$Fencing,
 
 #### visualisation
 ggplot(plot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
-  # geom_vline(xintercept = 0, linetype = "dashed", color = "black",linewidth = 0.5) +
-  # geom_point(size = 3.5, position = position_dodge(0.5)) +
   geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.8) +
   geom_point(size = 3.5, position = position_dodge(0.5)) +
   geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL),
                  height = 0.2, size = 0.8, position = position_dodge(0.5)) +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
   scale_x_continuous(breaks = seq(-2, 2, 0.5)) +
-  labs(x = "Log Response Ratio (lnRR) ± 95% CI",
+  labs(x = "lnRR Seedling density relative to Control",
        y = "Treatments") +
  #theme_beautiful() +
   theme(legend.position = "top") +
@@ -1067,10 +1068,10 @@ delta_GRBiomass$Fencing <- relevel(delta_GRBiomass$Fencing, ref = "Unfenced")
 
 ### Convert character variables to factors
 delta_GRBiomass$Treatment <- as.factor(delta_GRBiomass$Treatment)
-delta_GRBiomass$Fencing <- as.factor(delta_GRBiomass$Fencing)
 delta_GRBiomass$Fencing <- factor(delta_GRBiomass$Fencing, 
-                            levels = c("Fenced", "Unfenced"),
-                            labels = c("Fenced", "Unfenced"))
+                                  levels = c("Fenced", "Unfenced"),
+                                  labels = c("Fenced", "Unfenced"))
+
 
 ##LMM for grass height
 Grasbiom1 <- lmer(delta_GR ~ Treatment * Fencing + (1|Site),  
@@ -1091,6 +1092,8 @@ performance::check_singularity(Grasbiom1) # FALSE desired shows- all random effe
 
 
 ###Visualise: Violin plot of Δ‑grass biomass
+
+
 Gbb <- ggplot(delta_GRBiomass,
                   aes(x = Treatment, y = delta_GR, fill = Fencing))+ 
   geom_violin(alpha = 0.7, position = position_dodge(0.8), width = 0.7) +
@@ -1114,10 +1117,7 @@ Gbb <- ggplot(delta_GRBiomass,
 biomass_LRR <- heights_data %>%
   filter(Year %in% c(2024, 2026)) %>%
   group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
-  summarise(MeanBiomass = mean(Biomass_kg_ha, na.rm = TRUE), .groups = "drop") %>%
-  
-  # Step 2: Aggregate to site-level (Location) means
-  group_by(Site, Fencing, Year) %>%
+  summarise(MeanBiomass = mean(Biomass_kg_ha, na.rm = TRUE), .groups = "drop") 
   
 
 ### 
