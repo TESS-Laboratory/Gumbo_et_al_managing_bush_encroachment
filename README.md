@@ -2,19 +2,15 @@ Managing bush encroachment on a holistically managed rangeland in a semi-arid sa
 
 This repository contains preliminary data from vegetation surveys, R codes for processing, analysing and visualising data.
 
-1. 'Data' contains the project data that has been used for analysis.
+1. 'Data' - contains the project data that has been used for analysis. some files found include:
   
- a. 'DPM.csv' - contains DPM heights and oven dried weight for grass samples collected at SHR in 2025
+ a. 'Grasses2426updated.csv' - data for 2024 and 2026 grasses survey.
 
- b. 'Fire.csv' - shows data of unburnt vegetation (2024) in each subplot
-
- c. 'GrassesCombinedCleaned3.csv' - data for 2024 and 2025 grasses survey combined.
-
- d. 'WoodyPC4.csv' - data for 2024 and 2025 woody plants survey.
+ b. 'WoodyPlants26.csv' - data for 2024 and 2026 woody plants survey.
  
- e. 'WoodyP_harmonized.csv' - data from taxonomic harmonisation of woody plants.
+ c. 'Harmonized_WPspp26' - data from taxonomic harmonisation of woody plants.
 
- f. 'Grasses_Harmonised.csv' - data from taxonomic harmonisation of grasses.
+ d. 'Harmonized2026b_GRspp.csv' - data from taxonomic harmonisation of grasses.
 
 
 2. 'Scripts' contains the scripts used in analysis.
