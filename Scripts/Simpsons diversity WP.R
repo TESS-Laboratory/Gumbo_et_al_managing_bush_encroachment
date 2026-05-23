@@ -68,7 +68,7 @@ theme_beautiful <- function() {
 
 ## LOAD DATA
 
-SapF <- read_csv("DATA/March2025/WoodyPC4.csv")
+SapF <- read_csv("DATA/March2025/WoodyPlants26.csv")
 
 ## create seedling, sapling, trees and cut-stump row
 SapF <- SapF %>% 
@@ -87,9 +87,8 @@ SapF <- SapF %>%
 
 #FOR all woody plants
 AllSD <- SapF %>% 
-  filter( Year %in% c(2024, 2025),
-         !Treatment %in% c("TFB")) %>% 
-  group_by(Treatment, Fencing,Year, Species_name) %>% 
+  filter( Year %in% c(2024, 2026)) %>% 
+  group_by(Site, Plot, Subplot, Treatment, Fencing,Year, Species_name) %>% 
   summarise(abundance = n(), .groups = 'drop')
 
 
@@ -105,7 +104,7 @@ ASimp_diversity_simpson <- AllSD  %>%
 
 # Calculate Simpson's Index for woody plants
 ASisimpson <- AllSD %>%
-  filter(Year %in% c(2024, 2025)) %>%
+  filter(Year %in% c(2024, 2026)) %>%
   group_by(Treatment, Fencing, Year) %>%
   summarise(
     total_individuals = sum(abundance, na.rm = TRUE),  
@@ -116,7 +115,7 @@ ASisimpson <- AllSD %>%
 
 #sort pre and post treatment for woody plants
 AsD_comparison3 <- ASisimpson %>%
-  filter(Year %in% c(2024, 2025)) %>%
+  filter(Year %in% c(2024, 2026)) %>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
 
@@ -157,23 +156,20 @@ SDw <- ggplot(AsD_comparison3, aes(x = Period, y = simpson_index,
   facet_grid(. ~ Treatment, scales = "free_x", space = "free_x") +
   
   # Y-axis limits
-  scale_y_continuous(limits = c(0.5, 1.5), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0.5, 2.0), expand = c(0, 0)) +
   
   # Customize colors
-  scale_color_manual(values = c("Fenced" = "#D55E00", "Unfenced" = "#0072B2"),
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
                      name = "Fencing") +
   
-  labs(x = "Period", y = "Woody plants Simpson's diversity index") +
+  labs(x = "Period", y = "Woody plants Simpson's diversity") +
   
-  theme_beautiful() +
+  theme_classic() +
   theme(
     legend.position = "top",
     legend.box = "horizontal",
-    legend.title = element_text(face = "bold"),
-    axis.title = element_text(face = "bold"),
-    axis.text.x = element_text(angle = 9.5, hjust = 0.5),
+    axis.text.x = element_text(angle = 0.5, hjust = 0.5),
     strip.background = element_blank(),
-    strip.text = element_text(face = "bold", size = 10),
     panel.spacing = unit(0.2, "lines")  # Space between treatment facets
   )
 
@@ -189,15 +185,22 @@ SDw <- ggplot(AsD_comparison3, aes(x = Period, y = simpson_index,
 
 
 #Filter SEEDLINGS  
-Seedlings <- SapF %>% 
-  filter(woody_cat == "Seedlings", Year %in% c(2024, 2025)) %>% 
-  count(Site, Plot, Subplot, Treatment, Fencing,Year, name = "Seedlings") %>% 
-  mutate(density_ha = Seedlings * 10000 / 600)     # convert to ha⁻¹
+# calculating seedling density
+Seedlings <- SapF %>%
+  filter(
+    woody_cat == "Seedlings",
+    Year %in% c(2024, 2026)) %>%
+  count(
+    Site, Plot, Subplot, Treatment, Fencing, Year, Area,
+    name = "Seedlings"
+  ) %>%
+  mutate(
+    density_ha = Seedlings * 10000 / Area
+  )
 
 #filter TFB treatment
 SDsimp <- SapF %>% 
-  filter( Year %in% c(2024, 2025),
-          !Treatment %in% c("TFB"), 
+  filter( Year %in% c(2024, 2026),
           woody_cat == "Seedlings")%>% 
   group_by(Treatment, Fencing,Year, Species_name) %>% 
   summarise(abundance = n(), .groups = 'drop')
@@ -205,7 +208,7 @@ SDsimp <- SapF %>%
 
 # Calculate seedlings Simpson's diversity index for each plot by year
 SeedSimp <- SDsimp %>%
-  filter(Year %in% c(2024, 2025)) %>%
+  filter(Year %in% c(2024, 2026)) %>%
   group_by(Treatment, Fencing, Year) %>%
   summarise(
     total_individuals = sum(abundance, na.rm = TRUE),  
@@ -217,7 +220,7 @@ SeedSimp <- SDsimp %>%
 
 #sort pre and post treatment for woody plants
 SED_comparison3 <- SeedSimp %>%
-  filter(Year %in% c(2024, 2025)) %>%
+  filter(Year %in% c(2024, 2026)) %>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
 #reorder so that pre-treatment appears first then post treatment second on the plots
@@ -241,23 +244,23 @@ Seedw <- ggplot(SED_comparison3, aes(x = Period, y = simpson_index,
   facet_grid(. ~ Treatment, scales = "free_x", space = "free_x") +
   
   # Y-axis limits
-  scale_y_continuous(limits = c(0.5, 1.5), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0.5, 2.0), expand = c(0, 0)) +
   
   # Customize colors
-  scale_color_manual(values = c("Fenced" = "#D55E00", "Unfenced" = "#0072B2"),
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
                      name = "Fencing") +
   
-  labs(x = "Period", y = "Seedlings Simpson's diversity index") +
+  labs(x = "Period", y = "Seedlings Simpson's diversity ") +
   
-  theme_beautiful() +
+  theme_classic() +
   theme(
     legend.position = "top",
     legend.box = "horizontal",
-    legend.title = element_text(face = "bold"),
-    axis.title = element_text(face = "bold"),
-    axis.text.x = element_text(angle = 9.5, hjust = 0.5),
+    # legend.title = element_text(face = "bold"),
+    # axis.title = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 0.5, hjust = 0.5),
     strip.background = element_blank(),
-    strip.text = element_text(face = "bold", size = 10),
+    #strip.text = element_text(face = "bold", size = 10),
     panel.spacing = unit(0.2, "lines")  # Space between treatment facets
   )
 
@@ -269,14 +272,22 @@ Seedw <- ggplot(SED_comparison3, aes(x = Period, y = simpson_index,
 ##### DETERMINING SAPLINGS SIMPSONS DIVERSITY
 
 #Filter SAPLINGS  
-Saplings <- SapF %>% 
-  filter(woody_cat == "Saplings", Year %in% c(2024, 2025)) %>% 
-  count(Site, Plot, Subplot, Treatment, Fencing,Year, name = "Saplings") %>% 
-  mutate(density_ha = Saplings * 10000 / 600)     # convert to ha⁻¹
+
+Saplings  <- SapF %>%
+  filter(
+    woody_cat == "Saplings",
+    Year %in% c(2024, 2026)) %>%
+  count(
+    Site, Plot, Subplot, Treatment, Fencing, Year, Area,
+    name = "Saplings"
+  ) %>%
+  mutate(
+    density_ha = Saplings * 10000 / Area)
+
 
 #filter TFB treatment
 SPsimp <- SapF %>% 
-  filter( Year %in% c(2024, 2025),
+  filter( Year %in% c(2024, 2026),
           !Treatment %in% c("TFB"), 
           woody_cat == "Saplings")%>% 
   group_by(Treatment, Fencing,Year, Species_name) %>% 
@@ -285,7 +296,7 @@ SPsimp <- SapF %>%
 
 # Calculate seedlings Simpson's diversity index for each plot by year
 SapSimp <- SPsimp %>%
-  filter(Year %in% c(2024, 2025)) %>%
+  filter(Year %in% c(2024, 2026)) %>%
   group_by(Treatment, Fencing, Year) %>%
   summarise(
     total_individuals = sum(abundance, na.rm = TRUE),  
@@ -297,7 +308,7 @@ SapSimp <- SPsimp %>%
 
 #sort pre and post treatment for woody plants
 SAP_comparison3 <- SapSimp %>%
-  filter(Year %in% c(2024, 2025)) %>%
+  filter(Year %in% c(2024, 2026)) %>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
 
@@ -322,24 +333,24 @@ Sapw <- ggplot(SAP_comparison3, aes(x = Period, y = simpson_index,
   facet_grid(. ~ Treatment, scales = "free_x", space = "free_x") +
   
   # Y-axis limits
-  scale_y_continuous(limits = c(0.5, 1.5), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0.5, 2.0), expand = c(0, 0)) +
   
   # Customize colors
-  scale_color_manual(values = c("Fenced" = "#D55E00", "Unfenced" = "#0072B2"),
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
                      name = "Fencing") +
   
-  labs(x = "Period", y = "Saplings Simpson's diversity index") +
+  labs(x = "Period", y = "Saplings Simpson's diversity") +
   
-  theme_beautiful() +
+  theme_classic() +
   theme(
     legend.position = "top",
     legend.box = "horizontal",
-    legend.title = element_text(face = "bold"),
-    axis.title = element_text(face = "bold"),
-    axis.text.x = element_text(angle = 9.5, hjust = 0.5),
+    # legend.title = element_text(face = "bold"),
+    # axis.title = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 0.5, hjust = 0.5),
     strip.background = element_blank(),
-    strip.text = element_text(face = "bold", size = 10),
-    panel.spacing = unit(0.2, "lines")  # Space between treatment facets
+    #strip.text = element_text(face = "bold", size = 10),
+    panel.spacing = unit(0.0, "lines")  # Space between treatment facets
   )
 
 ### save plot
@@ -395,13 +406,13 @@ multi_panelsIMP <- (SDw / Seedw / Sapw) +   # "/" for stacking vertically
   ) &
   theme(
     axis.text = element_text(size = 6),
-    axis.title = element_text(size = 5.5),
-    plot.tag = element_text(size = 6, hjust = 0),
+    axis.title = element_text(size = 7),
+    plot.tag = element_text(size = 8, hjust = 0),
     legend.position = "top"
   )
 
 ##saving using ggsave
-ggsave(multi_panelsIMP,filename ="Plots/Multipanel WoodySIMP.png",
+ggsave(multi_panelsIMP,filename ="Plots/Multipanel WoodySIMP2a.png",
        width = 16, height = 14, units = "cm")  
 
 ################################################################################

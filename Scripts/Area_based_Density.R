@@ -66,7 +66,7 @@ theme_beautiful <- function() {
 
 # Read data
 A <- read_csv("DATA/GEODE_Subplot_area.csv")
-B <- read.csv("DATA/March2025/Woody2426b.csv", stringsAsFactors = FALSE)
+B <- read.csv("DATA/March2025/WoodyPlants26.csv", stringsAsFactors = FALSE)
 
 
 # Ensure consistent column names (case-sensitive)
@@ -578,11 +578,11 @@ RespVio <- ggplot(resprouts_df, aes(x = Treatment, y = No_of_resprouts,
   theme(
     axis.title = element_text(size = 14),      # Axis titles
     axis.text = element_text(size = 12)) +
-    scale_fill_manual(values = c("Fenced"   = "green", "Unfenced" = "magenta"))
+    scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
 
 
 ##saving Violin PLOT - resprouts
-ggsave(RespVio,filename ="Plots/RESPROUTS26 VIOLIN plot.png",
+ggsave(RespVio,filename ="Plots/RESPROUTS VIOLIN26 plot.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -648,8 +648,20 @@ Trees <- SapF %>%
   mutate(
     density_ha = Trees * 10000 / Area
   )
-
-
+#exclude
+Trees2 <- SapF %>%
+  filter(
+    woody_cat == "Trees ",
+    Year %in% c(2024, 2026),
+    BD != "Y" | is.na(BD)
+  ) %>%
+  count(
+    Site, Plot, Subplot, Treatment, Fencing, Year, Area,
+    name = "Trees"
+  ) %>%
+  mutate(
+    density_ha = Trees * 10000 / Area
+  )
 
 #comparing at treatment level
 
@@ -712,7 +724,7 @@ Trees_Delta1$Fencing <- factor(Trees_Delta1$Fencing,
                                    labels = c("Fenced", "Unfenced"))
 
 # Set "Fenced" as the reference level 
-Trees_Delta1$Fencing <- relevel(Trees_Delta1$Fencing, ref = "Fenced")
+Trees_Delta1$Fencing <- relevel(Trees_Delta1$Fencing, ref = "Unfenced")
 
 # using the LMM for analysis
 Treel5 <- lmer(delta_Treedens ~ Treatment * Fencing + (1|Site),  
@@ -742,7 +754,7 @@ TreeVa<- ggplot(tree_comparison2,
 
 
 ## violin plot tree delta
-TreeVb <- ggplot(Trees_Delta1,
+ ggplot(Trees_Delta1,
                  aes(x = Treatment, y = delta_Treedens, fill = Fencing))+ 
   geom_violin(trim = FALSE)+
   geom_hline(yintercept = 0, linetype = "dashed") +  
@@ -759,6 +771,257 @@ TreeVb <- ggplot(Trees_Delta1,
   theme(
     axis.title = element_text(size = 8),  # Axis titles reduced from 12 to 8
     axis.text = element_text(size = 8)) +
-  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
+  scale_fill_manual(values = c("Fenced" = "olivedrab", "Unfenced" = "magenta1"))
 
 
+ 
+ 
+ # prepare trees data for LOG RESPONSE RATIO
+ TreeLOG <- SapF %>%
+   filter(
+     woody_cat == "Trees",
+     Year %in% c(2024, 2026)
+   ) %>%
+   count(
+     Site,
+     Plot,
+     Subplot,
+     Treatment,
+     Fencing,
+     Year,
+     Area,
+     name = "Trees"
+   ) %>%
+   mutate(
+     density_ha = Trees * 10000 / Area
+   )
+ 
+ #---------------------------------------------------
+ # 2. Convert to wide format
+ #---------------------------------------------------
+ 
+ Tree_wide <- TreeLOG %>%
+   dplyr::select(
+     Site,
+     Plot,
+     Subplot,
+     Treatment,
+     Fencing,
+     Year,
+     Area,
+     density_ha
+   ) %>%
+   pivot_wider(
+     names_from = Year,
+     values_from = density_ha,
+     names_prefix = "Y"
+   )
+ 
+ # Result:
+ # Y2024 = pretreatment density
+ # Y2026 = posttreatment density
+ 
+ #---------------------------------------------------
+ # 3. Extract control values
+ #---------------------------------------------------
+ 
+ Tcontrol_data <- Tree_wide %>%
+   filter(Treatment == "C") %>%
+   dplyr::select(
+     Site,Plot,Subplot, Fencing,
+     C_pre = Y2024,
+     C_post = Y2026
+   )
+     
+ 
+ ##Create control means
+ Tcontrol_data <- Tree_wide %>%
+   filter(Treatment == "C") %>%
+   group_by(Site, Fencing) %>%
+   summarise(
+     C_pre = mean(Y2024, na.rm = TRUE),
+     C_post = mean(Y2026, na.rm = TRUE),
+     .groups = "drop"
+   )
+ 
+ #---------------------------------------------------
+ # 4. Join control data to treatments
+ #---------------------------------------------------
+ Tree_lnRR <- Tree_wide %>%
+   filter(Treatment != "C") %>%
+   left_join(
+     Tcontrol_data,
+     by = c("Site", "Fencing")
+   )
+ 
+ #---------------------------------------------------
+ # 5. Handle zeros
+ #---------------------------------------------------
+ 
+ # seed_lnRR <- seed_lnRR %>%
+ #   mutate(
+ #     Y2014 = ifelse(Y2024 == 0, 0.001, 2024),
+ #     Y2016 = ifelse(Y2026 == 0, 0.001, Y2026),
+ #     C_pre = ifelse(C_pre == 0, 0.001, C_pre),
+ #     C_post = ifelse(C_post == 0, 0.001, C_post)
+ #   )
+ 
+ #---------------------------------------------------
+ # 6. Calculate Log Response Ratio
+ #---------------------------------------------------
+ 
+ Tree_lnRR <- Tree_lnRR %>%
+   mutate(
+     lnRR = log(
+       (Y2026 / Y2024) /
+         (C_post / C_pre)))
+ 
+ #---------------------------------------------------
+ # 8. Treatment summaries
+ #---------------------------------------------------
+ 
+ Tree_summary <- Tree_lnRR %>%
+   group_by(Treatment, Fencing) %>%
+   summarise(
+     mean_lnRR = mean(lnRR, na.rm = TRUE),
+     sd_lnRR = sd(lnRR, na.rm = TRUE),
+     n = n(),
+     se_lnRR = sd_lnRR / sqrt(n)
+   )
+ 
+ #print(seedlingD_summary)
+ 
+ 
+ ### Calculating n for each Treatment × Fencing combination
+ sample_sizes2 <- Tree_lnRR %>%
+   group_by(Treatment, Fencing) %>%
+   summarise(
+     n = n(),
+     .groups = 'drop'
+   )
+ 
+ #---------------------------------------------------
+ # 9. Mixed-effects model
+ #---------------------------------------------------
+ Treelog <- lmer(lnRR  ~ Treatment * Fencing + (1 | Site),
+                 data = Tree_lnRR)
+ 
+ summary(Treelog)
+ 
+ #---------------------------------------------------
+ # 10. Plot lnRR
+ #---------------------------------------------------
+ 
+ ggplot(Tree_lnRR,
+        aes(x = Treatment, y = lnRR, fill = Fencing))+ 
+   geom_violin(trim = FALSE)+
+   geom_hline(yintercept = 0, linetype = "dashed") +  
+   stat_summary(fun = mean, geom = "point", 
+                position = position_dodge(0.8), 
+                size = 1, color = "black") +
+   geom_hline(yintercept = 0, linetype = "dashed") +
+   labs(x = "Treatment", 
+        y = expression("Log response ratio: Tree density "*ha^{-1}*"")
+   ) +
+   theme_classic() +
+   theme(
+     axis.title = element_text(size = 12),  # Axis titles reduced from 16 to 12
+     axis.text = element_text(size = 12)) +
+   scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
+ 
+ 
+ ##### OPTION 2 visualising lnRR results using emmeans
+ 
+ # Get estimated marginal means for both factors
+ Tremm_interaction <- emmeans(Treelog, ~ Treatment | Fencing)
+ 
+ # Convert to dataframe
+ Tplot_data <- as.data.frame(Tremm_interaction)
+ 
+ # Ensure factors are properly labeled
+ Tplot_data$Treatment <- factor(Tplot_data$Treatment, 
+                                levels = c("F", "TF", "TFB", "THF"))
+ Tplot_data$Fencing <- factor(Tplot_data$Fencing, 
+                              levels = c("Fenced", "Unfenced"),
+                              labels = c("Fenced", "Unfenced"))
+ 
+ #### visualisation
+ ggplot(Tplot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
+   geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.8) +
+   geom_point(size = 3.5, position = position_dodge(0.5)) +
+   geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL),
+                  height = 0.2, size = 0.8, position = position_dodge(0.5)) +
+   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
+   scale_x_continuous(breaks = seq(-2, 2, 0.5)) +
+   labs(x = "LnRR Tree density relative to the control ",
+        y = "Treatment") +
+   #theme_beautiful() +
+   theme(legend.position = "top") +
+   theme_classic()+ 
+   ggtitle(NULL)+
+   theme(
+     axis.title = element_text(size = 12),      # Axis titles
+     axis.text = element_text(size = 12))
+ 
+ 
+ # Save high-resolution versions
+ #ggsave("treatment_kraaling_interaction_point.png", p, width = 8, height = 5, dpi = 300, bg = "white")
+ 
+ 
+ ####### CONVERT lnRR to PERCENTAGE CHANGE #####
+ # Get estimated marginal means for Treatment × Fencing interaction
+ Tremm_interaction <- emmeans(Treelog, ~ Treatment | Fencing)
+ tplot_data_raw <- as.data.frame(Tremm_interaction)
+ 
+ # Convert to percentage change
+ Tplot_data <- tplot_data_raw
+ Tplot_data$pct_change <- (exp(tplot_data_raw$emmean) - 1) * 100
+ Tplot_data$CI_lower_pct <- (exp(tplot_data_raw$lower.CL) - 1) * 100
+ Tplot_data$CI_upper_pct <- (exp(tplot_data_raw$upper.CL) - 1) * 100
+ 
+ # Clean up factors
+ Tplot_data$Treatment <- factor(Tplot_data$Treatment, 
+                                levels = c("F", "TF", "TFB", "THF"))
+ Tplot_data$Fencing <- factor(Tplot_data$Fencing, 
+                              levels = c("Fenced", "Unfenced"),
+                              labels = c("Fenced", "Unfenced"))
+ 
+ # Check the data
+ head(Tplot_data)
+ 
+ 
+ ##### Percentage change plot 
+ # SapVc<- ggplot(Splot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
+ #   geom_hline(yintercept = 0, linetype = "dashed") +
+ #   geom_point(position = position_dodge(0.3), size = 1.5) +
+ #   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
+ #                 position = position_dodge(0.3), width = 0.15) +
+ #   #geom_line(position = position_dodge(0.3)) +
+ #   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
+ #                      name = "Fencing") +
+ #   scale_y_continuous(
+ #     breaks = seq(-100, 200, 25),  # Breaks every 50 from -100 to 200
+ #     #labels = function(x) paste0(x, "%")
+ #   )+
+ #   labs(x = "Treatment", y = "Proportional Δ sapling density(%)") +
+ #   theme_classic()
+ 
+ 
+ ######## inverted x y axis - treatment on x-axis
+ Treed <- ggplot(Tplot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
+   geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.5) +
+   geom_point(size = 2.0, position = position_dodge(0.5)) +
+   geom_errorbarh(aes(xmin = CI_lower_pct, xmax = CI_upper_pct),
+                  height = 0.5, size = 0.9, position = position_dodge(0.5)) +
+   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
+   scale_x_continuous(breaks = seq(-80, 50, 20)) +
+   labs(x = "Change in Tree density relative to Control (%)",
+        y = "Treatment") +
+   # theme(legend.position = "top") +
+   theme_classic()+ 
+   ggtitle(NULL)+
+   theme(
+     axis.title = element_text(size = 12),      # Axis titles
+     axis.text = element_text(size = 12))
+ 
+ 
