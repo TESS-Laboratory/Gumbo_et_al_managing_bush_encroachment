@@ -1,6 +1,8 @@
 ############# DETERMINING WOODY PLANTS DENSITY LOG RESPONSE RATIO
 
+library(MASS)
 library(tidyverse)
+library(performance)  # model diagnostics
 library(ggpubr)
 library(RColorBrewer)
 library(scales)
@@ -16,7 +18,6 @@ library(flextable)
 library(officer)
 library(glmmTMB)
 library(DHARMa)   # model diagnostics GLMM
-library(performance)  # model diagnostics
 library(car)
 library(openxlsx)
 library(broom.mixed) #convert model objects to data frames
@@ -27,9 +28,10 @@ library(marginaleffects)
 library(effects)
 library(ggeffects)
 library(knitr)  # for table
-library(gtsummary)
-library(MASS)
+library(gtsummary) # for descriptive statistics tables
 library(multcomp)
+library(vegan)
+
 
 #---------------------------------------------------
 # 1. Calculate weed density
@@ -37,7 +39,7 @@ library(multcomp)
 
 # Read data
 A <- read_csv("DATA/GEODE_Subplot_area.csv")
-B <- read.csv("DATA/March2025/Woody2426.csv", stringsAsFactors = FALSE)
+B <- read.csv("DATA/March2025/WOODYP2426.csv", stringsAsFactors = FALSE)
 
 
 # Ensure consistent column names (case-sensitive)
@@ -77,6 +79,15 @@ Seedlings <- SapF %>%
   ) %>%
   mutate(
     density_ha = Seedlings * 10000 / Area
+  )
+
+
+### Calculating n for each Treatment × Fencing combination
+sample_sizes <- Seedlings %>%
+  group_by(Treatment, Fencing) %>%
+  summarise(
+    n = n(),
+    .groups = 'drop'
   )
 
 #comparing at treatment level
@@ -148,8 +159,21 @@ Seedl5 <- lmer(delta_Seeddens ~ Treatment * Fencing + (1|Site),
 
 summary(Seedl5)
 
+## check model performance
 
-## increasing font size for x and y axis
+performance::check_model(Seedl5) # this one not displaying plots
+
+check_model(Seedl5, check = "qq")
+check_model(Seedl5, check = "normality")
+check_model(Seedl5, check = "homogeneity")
+plot(Seedl5)
+
+## GGplots
+
+strt_comparison2$Fencing <- factor( strt_comparison2$Fencing,
+  levels = c("Unfenced", "Fenced")) #ordering Fencing level to start with Unfenced
+
+
 SeedVa<- ggplot(strt_comparison2, 
                     aes(x = Treatment, y = density_ha, fill = Fencing)) + facet_wrap(~Period)+ 
   geom_violin(trim = TRUE)+
@@ -163,8 +187,8 @@ SeedVa<- ggplot(strt_comparison2,
   ) +
   theme_classic() +
   theme(
-    axis.title = element_text(size = 8),      # Axis titles
-    axis.text = element_text(size = 8)        # Axis tick labels
+    axis.title = element_text(size = 9),      # Axis titles
+    axis.text = element_text(size = 9)        # Axis tick labels
   ) +
   scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
 
@@ -185,8 +209,8 @@ SeedVb <- ggplot(Seedlings_Delta1,
   scale_y_continuous( breaks = seq(-10000, 10000, 2000))+
   theme_classic() +
   theme(
-    axis.title = element_text(size = 8),  # Axis titles reduced from 12 to 8
-    axis.text = element_text(size = 8)) +
+    axis.title = element_text(size = 9),  # Axis titles reduced from 12 to 8
+    axis.text = element_text(size = 9)) +
   scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
 
 
@@ -310,7 +334,6 @@ SSeed_lnRR <- SSeed_lnRR %>%
 
 
 
-
 #---------------------------------------------------
 # 7. View results
 #---------------------------------------------------
@@ -350,6 +373,11 @@ Seedllog <- lmer(lnRR  ~ Treatment * Fencing + (1 | Site),
 summary(Seedllog)
 
 
+check_model(Seedllog, check = "qq")
+check_model(Seedllog, check = "normality")
+check_model(Seedllog, check = "homogeneity")
+plot(Seedllog)
+
 #---------------------------------------------------
 # 10. Plot lnRR
 #---------------------------------------------------
@@ -383,9 +411,16 @@ plot_data <- as.data.frame(emm_interaction)
 # Ensure factors are properly labeled
 plot_data$Treatment <- factor(plot_data$Treatment, 
                               levels = c("F", "TF", "TFB", "THF"))
+
+# plot_data$Fencing <- factor(plot_data$Fencing, 
+#                              levels = c("Fenced", "Unfenced"),
+#                              labels = c("Fenced", "Unfenced"))
+
+
+# reodering fencing level 
 plot_data$Fencing <- factor(plot_data$Fencing, 
-                             levels = c("Fenced", "Unfenced"),
-                             labels = c("Fenced", "Unfenced"))
+                            levels = c("Unfenced", "Fenced"),
+                            labels = c("Unfenced", "Fenced"))
 
 #### visualisation
 ggplot(plot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
@@ -421,15 +456,17 @@ plot_data$pct_change <- (exp(plot_data_raw$emmean) - 1) * 100
 plot_data$CI_lower_pct <- (exp(plot_data_raw$lower.CL) - 1) * 100
 plot_data$CI_upper_pct <- (exp(plot_data_raw$upper.CL) - 1) * 100
 
+# rounding off to 2 decimaL places
+plot_data <- plot_data %>%
+  mutate(across(where(is.numeric), round, 2))
+
 # Clean up factors
 plot_data$Treatment <- factor(plot_data$Treatment, 
                               levels = c("F", "TF", "TFB", "THF"))
 plot_data$Fencing <- factor(plot_data$Fencing, 
-                             levels = c("Fenced", "Unfenced"),
-                             labels = c("Fenced", "Unfenced"))
+                             levels = c("Unfenced", "Fenced"),
+                             labels = c("Unfenced", "Fenced"))
 
-# Check the data
- #head(plot_data)
 
 
 ##### Percentage change plot 
@@ -475,17 +512,17 @@ multi_panelSe <- (SeedVa/SeedVb/SeedVd) +   # "/" for stacking vertically, or "|
     tag_levels = 'a',
     tag_prefix = '(',
     tag_suffix = ')',
-    theme = theme(plot.tag = element_text(size = 6, hjust = 0))  # Left align tags
+    theme = theme(plot.tag = element_text(size = 8, hjust = 0))  # Left align tags
   ) &
   theme(
-    axis.text = element_text(size = 8),        # Increase axis label font size
-    axis.title = element_text(size = 8),       # Increase axis title font size
-    plot.tag = element_text(size = 8, hjust = 0)  # Ensure left alignment
+    axis.text = element_text(size = 10),        # Increase axis label font size
+    axis.title = element_text(size = 12),       # Increase axis title font size
+    plot.tag = element_text(size = 10, hjust = 0)  # Ensure left alignment
   )
 
 
 ##ggsave multipanel grass richness
-ggsave(multi_panelSe,filename ="Plots/Seedlings ViolinLog2.png",
+ggsave(multi_panelSe,filename ="Plots/Seedlings ViolinLog1A.png",
            width = 16, height = 14, units = "cm")
 
 
@@ -552,13 +589,13 @@ Sapsummary_stats <- Saplings %>%
   ungroup()
 
 #sort pre and post treatment
-strt_comparison2 <- Saplings %>%
+sptrt_comparison2 <- Saplings %>%
   filter(Year %in% c(2024, 2026)) %>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
 
 #reorder so that pre-treatment appears first then post treatment second on the plots
-strt_comparison2 <- strt_comparison2 %>%
+sptrt_comparison2 <- strt_comparison2 %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
 
@@ -590,8 +627,8 @@ levels(Saplings_Delta1$Fencing)
 Saplings_Delta1$Treatment <- as.factor(Saplings_Delta1$Treatment)
 
 Saplings_Delta1$Fencing <- factor(Saplings_Delta1$Fencing, 
-                                   levels = c("Fenced", "Unfenced"),
-                                   labels = c("Fenced", "Unfenced"))
+                                   levels = c("Unfenced", "Fenced"),
+                                   labels = c("Unfenced", "Fenced"))
 
 # Set "Fenced" as the reference level 
 Saplings_Delta1$Fencing <- relevel(Saplings_Delta1$Fencing, ref = "Unfenced")
@@ -605,9 +642,20 @@ Sapl5 <- lmer(delta_Sapdens ~ Treatment * Fencing + (1|Site),
 
 summary(Sapl5)
 
+# 
+# # Model diagnostics
+# check_model(Sapl5, check = "qq")
+# check_model(Sapl5, check = "normality")
+# check_model(Sapl5, check = "homogeneity")
+# plot(Sapl5)
+
+
 #### PLOTS
 # raw results using means
-SapVa<- ggplot(strt_comparison2, 
+sptrt_comparison2$Fencing <- factor( sptrt_comparison2$Fencing,
+ levels = c("Unfenced", "Fenced")) #ordering Fencing level to start with Unfenced
+
+SapVa<- ggplot(sptrt_comparison2, 
                    aes(x = Treatment, y = density_ha, fill = Fencing)) + facet_wrap(~Period)+ 
   geom_violin(trim = TRUE)+
   #geom_hline(yintercept = 0, linetype = "dashed") +    
@@ -620,8 +668,8 @@ SapVa<- ggplot(strt_comparison2,
   ) +
   theme_classic() +
   theme(
-    axis.title = element_text(size = 8),      # Axis titles
-    axis.text = element_text(size = 8)        # Axis tick labels
+    axis.title = element_text(size = 9),      # Axis titles
+    axis.text = element_text(size = 9)        # Axis tick labels
   )+
   scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
 
@@ -641,8 +689,8 @@ SapVb <- ggplot(Saplings_Delta1,
   ) +
   theme_classic() +
   theme(
-    axis.title = element_text(size = 8),  # Axis titles reduced from 12 to 8
-    axis.text = element_text(size = 8)) +
+    axis.title = element_text(size = 9),  # Axis titles reduced from 12 to 8
+    axis.text = element_text(size = 9)) +
   scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
 
 
@@ -780,6 +828,14 @@ Sapllog <- lmer(lnRR  ~ Treatment * Fencing + (1 | Site),
 
 summary(Sapllog)
 
+
+# # Model diagnostics
+check_model(Sapllog, check = "qq")
+check_model(Sapllog, check = "normality")
+check_model(Sapllog, check = "homogeneity")
+plot(Sapllog)
+
+
 #---------------------------------------------------
 # 10. Plot lnRR
 #---------------------------------------------------
@@ -814,8 +870,8 @@ Splot_data <- as.data.frame(Spemm_interaction)
 Splot_data$Treatment <- factor(Splot_data$Treatment, 
                               levels = c("F", "TF", "TFB", "THF"))
 Splot_data$Fencing <- factor(Splot_data$Fencing, 
-                            levels = c("Fenced", "Unfenced"),
-                            labels = c("Fenced", "Unfenced"))
+                            levels = c("Unfenced", "Fenced"),
+                            labels = c("Unfenced", "Fenced"))
 
 #### visualisation
 ggplot(Splot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
@@ -851,15 +907,17 @@ Splot_data$pct_change <- (exp(splot_data_raw$emmean) - 1) * 100
 Splot_data$CI_lower_pct <- (exp(splot_data_raw$lower.CL) - 1) * 100
 Splot_data$CI_upper_pct <- (exp(splot_data_raw$upper.CL) - 1) * 100
 
+# rounding off to 2 decimaL places
+Splot_data <- Splot_data %>%
+  mutate(across(where(is.numeric), round, 2))
+
+
 # Clean up factors
 Splot_data$Treatment <- factor(Splot_data$Treatment, 
                               levels = c("F", "TF", "TFB", "THF"))
 Splot_data$Fencing <- factor(Splot_data$Fencing, 
-                            levels = c("Fenced", "Unfenced"),
-                            labels = c("Fenced", "Unfenced"))
-
-# Check the data
-head(Splot_data)
+                             levels = c("Unfenced", "Fenced"),
+                             labels = c("Unfenced", "Fenced"))
 
 
 ##### Percentage change plot 
@@ -891,10 +949,9 @@ SapVd <- ggplot(Splot_data, aes(x = pct_change, y = Treatment , color = Fencing)
        y = "Treatment") +
  # theme(legend.position = "top") +
   theme_classic()+ 
-  ggtitle(NULL)+
   theme(
-    axis.title = element_text(size = 12),      # Axis titles
-    axis.text = element_text(size = 12))
+    axis.title = element_text(size = 14),      # Axis titles
+    axis.text = element_text(size = 14))
 
 
 ####  Combine the plots in a single layout
@@ -904,17 +961,17 @@ multi_panelSap <- (SapVa/SapVb/SapVd) +   # "/" for stacking vertically, or "|" 
     tag_levels = 'a',
     tag_prefix = '(',
     tag_suffix = ')',
-    theme = theme(plot.tag = element_text(size = 6, hjust = 0))  # Left align tags
+    theme = theme(plot.tag = element_text(size = 8, hjust = 0))  # Left align tags
   ) &
   theme(
-    axis.text = element_text(size = 8),        # Increase axis label font size
-    axis.title = element_text(size = 8),       # Increase axis title font size
-    plot.tag = element_text(size = 8, hjust = 0)  # Ensure left alignment
+    axis.text = element_text(size = 10),        # Increase axis label font size
+    axis.title = element_text(size = 12),       # Increase axis title font size
+    plot.tag = element_text(size = 10, hjust = 0)  # Ensure left alignment
   )
 
 
 ##ggsave multipanel grass richness
-ggsave(multi_panelSap,filename ="Plots/Saplings ViolinLog2.png",
+ggsave(multi_panelSap,filename ="Plots/Saplings ViolinLog1A.png",
        width = 16, height = 14, units = "cm")
 
 
@@ -929,7 +986,7 @@ ggsave(multi_panelSap,filename ="Plots/Saplings ViolinLog2.png",
 # Load data
 heights_data <-  read_csv("DATA/March2025/2Grasses2426.csv")
 
-Grasses <- read_csv("DATA/March2025/Grasses2426Updated.csv")
+Grasses <- read_csv("DATA/March2025/Grasses2426Updated1.csv")
 
 
 # defining intercept and slope
@@ -995,22 +1052,27 @@ biomass2 <- biomass2 %>%
 
 
 ## VIOLIN plot- GRASS biomass post vs pre treatment 
- ggplot(biomass2, 
-      aes(x = Treatment, y = mean_Biomass, fill = Period)) + facet_wrap(~Fencing)+ 
-  geom_violin(trim = TRUE)+
-  geom_hline(yintercept = 0, linetype = "dashed") +  
-  stat_summary(fun = mean, geom = "point", 
-               position = position_dodge(0.8), 
-               size = 1.5, color = "black") + 
-  labs(x = "Treatment", 
-       #y = "Above-ground grass biomass (kgDM/ha)",
-       y = expression("Above-ground grass biomass ("*kg~ha^{-1}*")")
-  ) +
-  theme_classic()+
-  theme(
-    axis.title = element_text(size = 9),      # Axis titles
-    axis.text = element_text(size = 9))+
-  scale_fill_manual(values = c("Pre-treatment" = "#1b7837", "Post-treatment" = "#a6dba0"))
+
+biomass2$Fencing <- factor( sptrt_comparison2$Fencing,
+  levels = c("Unfenced", "Fenced")) #ordering Fencing level to start with Unfenced
+
+
+ # ggplot(biomass2, 
+ #      aes(x = Treatment, y = mean_Biomass, fill = Period)) + facet_wrap(~Fencing)+ 
+ #  geom_violin(trim = TRUE)+
+ #  geom_hline(yintercept = 0, linetype = "dashed") +  
+ #  stat_summary(fun = mean, geom = "point", 
+ #               position = position_dodge(0.8), 
+ #               size = 1.5, color = "black") + 
+ #  labs(x = "Treatment", 
+ #       #y = "Above-ground grass biomass (kgDM/ha)",
+ #       y = expression("Above-ground grass biomass ("*kg~ha^{-1}*")")
+ #  ) +
+ #  theme_classic()+
+ #  theme(
+ #    axis.title = element_text(size = 10),      # Axis titles
+ #    axis.text = element_text(size = 10))+
+ #  scale_fill_manual(values = c("Pre-treatment" = "#1b7837", "Post-treatment" = "#a6dba0"))
 
 
 ## changing facet wrap fencing to period
@@ -1023,7 +1085,7 @@ biomass2 <- biomass2 %>%
                size = 1.5, color = "black") + 
   labs(x = "Treatment", 
        #y = "Above-ground grass biomass (kgDM/ha)",
-       y = expression("Above-ground grass biomass ("*kg~ha^{-1}*")")
+       y = expression("Grass biomass ("*kg~ha^{-1}*")")
   ) +
   theme_classic()+
   theme(
@@ -1038,8 +1100,7 @@ biomass2 <- biomass2 %>%
 
 # using the mean BIOMASS within each grouping for each year.
 delta_GRBiomass <- heights_data  %>%
-  filter(Year %in% c(2024, 2026),
-         !Treatment %in% c("ZZZ")) %>% 
+  filter(Year %in% c(2024, 2026)) %>% 
   group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
   summarise (mean_Biomass = mean(Biomass_kg_ha, na.rm = TRUE),.groups = "drop")%>%
   pivot_wider(
@@ -1063,14 +1124,16 @@ delta_GRBiomass$Fencing <- factor(delta_GRBiomass$Fencing, ordered = FALSE)
 # Verify
 levels(delta_GRBiomass$Fencing)  # Should show "fenced" "unfenced" (or vice versa)
 
-# Set "Fenced" as the reference level 
-delta_GRBiomass$Fencing <- relevel(delta_GRBiomass$Fencing, ref = "Unfenced")
 
 ### Convert character variables to factors
 delta_GRBiomass$Treatment <- as.factor(delta_GRBiomass$Treatment)
 delta_GRBiomass$Fencing <- factor(delta_GRBiomass$Fencing, 
-                                  levels = c("Fenced", "Unfenced"),
-                                  labels = c("Fenced", "Unfenced"))
+                                  levels = c("Unfenced", "Fenced"),
+                                  labels = c("Unfenced", "Fenced"))
+
+# Set "UnFenced" as the reference level 
+delta_GRBiomass$Fencing <- relevel(delta_GRBiomass$Fencing, ref = "Unfenced")
+
 
 
 ##LMM for grass height
@@ -1079,6 +1142,8 @@ Grasbiom1 <- lmer(delta_GR ~ Treatment * Fencing + (1|Site),
 summary(Grasbiom1)
 
 
+#check for singularity
+performance::check_singularity(Grasbiom1) # FALSE desired shows- all random effects have nonzero variance → stable
 
 # check model convergence
 performance::check_convergence(Grasbiom1)
@@ -1087,8 +1152,11 @@ performance::check_convergence(Grasbiom1)
 
 performance::check_model(Grasbiom1)
 
-#check for singularity
-performance::check_singularity(Grasbiom1) # FALSE desired shows- all random effects have nonzero variance → stable
+plot(Grasbiom1)
+check_model(Grasbiom1, check = "homogeneity")
+check_model(Grasbiom1, check = "normality")
+check_model(Grasbiom1, check = "qq")
+
 
 
 ###Visualise: Violin plot of Δ‑grass biomass
@@ -1101,7 +1169,7 @@ Gbb <- ggplot(delta_GRBiomass,
                position = position_dodge(0.8), 
                size = 1.5, color = "black") +
   geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Treatment", y = "Δ Aboveground grass biomass ("*kg~ha^{-1}*")") +
+  labs(x = "Treatment", y = "Δ Grass biomass ("*kg~ha^{-1}*")") +
   theme_classic() +
   scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))+
   theme(
@@ -1191,8 +1259,8 @@ GBplot_data <- as.data.frame(GBemm_interaction)
 GBplot_data$Treatment <- factor(GBplot_data$Treatment, 
                               levels = c("F", "TF", "TFB", "THF"))
 GBplot_data$Fencing <- factor(GBplot_data$Fencing, 
-                            levels = c("Fenced", "Unfenced"),
-                            labels = c("Fenced", "Unfenced"))
+                            levels = c("Unfenced", "Fenced"),
+                            labels = c("Unfenced", "Fenced"))
 
 #### visualisation
 ggplot(GBplot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
@@ -1230,13 +1298,17 @@ plot_data$pct_change <- (exp(plot_data_raw$emmean) - 1) * 100
 plot_data$CI_lower_pct <- (exp(plot_data_raw$lower.CL) - 1) * 100
 plot_data$CI_upper_pct <- (exp(plot_data_raw$upper.CL) - 1) * 100
 
+# rounding off to 2 decimaL places
+ plot_data <- plot_data %>%
+  mutate(across(where(is.numeric), round, 2))
+
+
 # Clean up factors
 plot_data$Treatment <- factor(plot_data$Treatment, 
                               levels = c("F", "TF", "TFB", "THF"))
 plot_data$Fencing <- factor(plot_data$Fencing, 
-                            levels = c("Fenced", "Unfenced"),
-                            labels = c("Fenced", "Unfenced"))
-
+                            levels = c("Unfenced", "Fenced"),
+                            labels = c("Unfenced", "Fenced"))
 
 
 ##### Percentage change plot 
@@ -1269,7 +1341,7 @@ Gbc <- ggplot(plot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
                  height = 0.5, size = 0.9, position = position_dodge(0.5)) +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
   #scale_x_continuous(breaks = seq(-50, 150, 20)) +
-  labs(x = "Change in Above-ground grass biomass relative to Control (%)",
+  labs(x = "Change in above-ground grass biomass relative to Control (%)",
        y = "Treatment") +
   # theme(legend.position = "top") +
   theme_classic()+ 
@@ -1287,16 +1359,15 @@ multi_panelBiom <- (GbA/Gbb/ Gbc) +   # "/" for stacking vertically, or "|" for 
     tag_levels = 'a',
     tag_prefix = '(',
     tag_suffix = ')',
-    theme = theme(plot.tag = element_text(size = 6, hjust = 0))  # Left align tags
+    theme = theme(plot.tag = element_text(size = 8, hjust = 0))  # Left align tags
   ) &
   theme(
-    axis.text = element_text(size = 7),        # Increase axis label font size
-    axis.title = element_text(size = 7),       # Increase axis title font size
-    plot.tag = element_text(size = 7, hjust = 0)  # Ensure left alignment
-  )
+    axis.text = element_text(size = 10),        # Increase axis label font size
+    axis.title = element_text(size = 10),       # Increase axis title font size
+    plot.tag = element_text(size = 10, hjust = 0))  # Ensure left alignment
 
 #saving using ggsave
-ggsave(multi_panelBiom,filename ="Plots/GrassBIOMASS violinLog2.png",
+ggsave(multi_panelBiom,filename ="Plots/GrassBIOMASS violinLog1b.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -1318,6 +1389,11 @@ Grass_rich <- Grass_rich %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
 #Grass species richness violin 
+
+Grass_rich$Fencing <- factor( Grass_rich$Fencing,
+  levels = c("Unfenced", "Fenced")) #ordering Fencing level to start with Unfenced
+
+
 
 GrRa <- ggplot(Grass_rich, 
                     aes(x = Treatment, y = spp_richness, fill = Fencing)) + facet_wrap(~Period)+ 
@@ -1370,13 +1446,23 @@ grassR_delta$Treatment <- as.factor(grassR_delta$Treatment)
 grassR_delta$Fencing <- as.factor(grassR_delta$Fencing)
 
 grassR_delta$Fencing <- factor(grassR_delta$Fencing, 
-                                  levels = c("Fenced", "Unfenced"),
-                                  labels = c("Fenced", "Unfenced"))
+                                  levels = c("Unfenced", "Fenced"),
+                                  labels = c("Unfenced", "Fenced"))
 
 ##LMM for grass richness
 GrasRich1 <- lmer(delta ~ Treatment * Fencing + (1|Site),  
                   data = grassR_delta)
 summary(GrasRich1)
+
+# Model performance
+#plot(GrasRich1)
+# check_model(GrasRich1, check = "homogeneity")
+# check_model(GrasRich1, check = "normality")
+# check_model(GrasRich1, check = "qq")
+# 
+# qqnorm(residuals(GrasRich1)) #whether residuals are approximately normal.
+# qqline(residuals(GrasRich1))
+
 
 ## Plot LMM output
 GrRb <- ggplot(grassR_delta,aes(x = Treatment, y = delta, fill = Fencing)) +
@@ -1434,6 +1520,16 @@ GRilog <- lmer(GrLRR ~ Treatment * Fencing + (1|Site), data = GRich_LRR)
 
 summary(GRilog)
 
+
+# Model performance
+plot(GRilog)
+check_model(GRilog, check = "homogeneity")
+check_model(GRilog, check = "normality")
+check_model(GRilog, check = "qq")
+
+qqnorm(residuals(GRilog)) #whether residuals are approximately normal.
+qqline(residuals(GRilog))
+
 # Plot LRR
 ggplot(GRich_LRR,
        aes(x = Treatment, y = GrLRR, fill = Fencing))+ 
@@ -1465,8 +1561,8 @@ GRplot_data <- as.data.frame(GRemm_interaction)
 GRplot_data$Treatment <- factor(GRplot_data$Treatment, 
                                 levels = c("F", "TF", "TFB", "THF"))
 GRplot_data$Fencing <- factor(GRplot_data$Fencing, 
-                              levels = c("Fenced", "Unfenced"),
-                              labels = c("Fenced", "Unfenced"))
+                              levels = c("Unfenced", "Fenced"),
+                              labels = c("Unfenced", "Fenced"))
 
 #### visualisation
 ggplot(GRplot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
@@ -1504,12 +1600,17 @@ plot_data$pct_change <- (exp(plot_data_raw$emmean) - 1) * 100
 plot_data$CI_lower_pct <- (exp(plot_data_raw$lower.CL) - 1) * 100
 plot_data$CI_upper_pct <- (exp(plot_data_raw$upper.CL) - 1) * 100
 
+
+# rounding off to 2 decimaL places
+plot_data <- plot_data %>%
+  mutate(across(where(is.numeric), round, 2))
+
 # Clean up factors
 plot_data$Treatment <- factor(plot_data$Treatment, 
                               levels = c("F", "TF", "TFB", "THF"))
 plot_data$Fencing <- factor(plot_data$Fencing, 
-                            levels = c("Fenced", "Unfenced"),
-                            labels = c("Fenced", "Unfenced"))
+                            levels = c("Unfenced", "Fenced"),
+                            labels = c("Unfenced", "Fenced"))
 
 # Check the data
 head(plot_data)
@@ -1542,7 +1643,7 @@ GrRD<-ggplot(plot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
                  height = 0.5, size = 0.9, position = position_dodge(0.5)) +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
   #scale_x_continuous(breaks = seq(-50, 150, 20)) +
-  labs(x = "Change in Grass species richness relative to Control (%)",
+  labs(x = "Change in grass species richness relative to Control (%)",
        y = "Treatment") +
   # theme(legend.position = "top") +
   theme_classic()+ 
@@ -1562,13 +1663,13 @@ multi_panelRich <- (GrRa/GrRb/ GrRD) +   # "/" for stacking vertically, or "|" f
     theme = theme(plot.tag = element_text(size = 6, hjust = 0))  # Left align tags
   ) &
   theme(
-    axis.text = element_text(size = 7),        # Increase axis label font size
-    axis.title = element_text(size = 7),       # Increase axis title font size
-    plot.tag = element_text(size = 7, hjust = 0)  # Ensure left alignment
+    axis.text = element_text(size = 9),        # Increase axis label font size
+    axis.title = element_text(size = 11),       # Increase axis title font size
+    plot.tag = element_text(size = 10, hjust = 0)  # Ensure left alignment
   )
 
 #saving using ggsave
-ggsave(multi_panelBiom,filename ="Plots/GrassRICHNESS ViolinLog2.png",
+ggsave(multi_panelRich,filename ="Plots/GrassRICHNESS ViolinLog1A.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -1582,15 +1683,33 @@ ggsave(multi_panelBiom,filename ="Plots/GrassRICHNESS ViolinLog2.png",
 GrSWeiner <- Grasses%>%
   filter(!is.na(Species_name),
          Year %in% c(2024, 2026)) %>%   # keep only pre/post years
-  group_by(Site, Plot, Subplot, Treatment, Year, Fencing, Species_name)%>%
-  summarise(Spp_count = n(), .groups = "drop" )
+  group_by(Site, Plot, Subplot, Treatment, Year, Fencing, Number, Species_name)%>%
+  summarise(
+    total_abundance = sum(Number, na.rm = TRUE),
+    .groups = "drop_last"
+  )
+
 
 ## Calculate Shannon-Wiener Diversity Index at treatment level
-grSWdiversity <- GrSWeiner %>%
-  group_by(Site, Plot, Subplot,Treatment, Year, Fencing) %>%                   # Group by Site and Plot
-  summarise(
-    Shannon_Diversity = -sum((Spp_count / sum(Spp_count)) * log(Spp_count / sum(Spp_count))),
-    .groups = "drop")%>%
+
+    # Step 1: Aggregate to subplot × species level
+    subplot_abundance <- Grasses %>%
+      filter(!is.na(Species_name), Year %in% c(2024, 2026)) %>%
+      group_by(Site, Plot,Subplot, Treatment, Fencing, Year, Species_name) %>%
+      summarise(
+        total_abundance = sum(Number, na.rm = TRUE),
+        .groups = "drop"
+      )
+    
+    # Step 2: Calculate Shannon directly (no pivot_wider needed)
+    grSWdiversity <- subplot_abundance %>%
+      group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
+      summarise(
+        Shannon = diversity(total_abundance, index = "shannon"),
+        Richness = n_distinct(Species_name),
+        Total_grass = sum(total_abundance),
+        .groups = "drop"
+     )%>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
 ##reorder so that pre-treatment appears first then post treatment second on the plots
@@ -1598,15 +1717,20 @@ grSWdiversity <- grSWdiversity %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
 ###### violin pre vs post treatment
-  
-GSWa <- ggplot(grSWdiversity,aes(x = Treatment, y =Shannon_Diversity, fill = Fencing))+ facet_wrap(~Period)+ 
+grSWdiversity$Fencing <- factor( grSWdiversity$Fencing,
+                              levels = c("Unfenced", "Fenced")) #ordering Fencing level to start with Unfenced
+
+
+# violin plot showing pre and post treatment
+
+GSWa <- ggplot(grSWdiversity,aes(x = Treatment, y =Shannon, fill = Fencing))+ facet_wrap(~Period)+ 
     geom_violin(trim = TRUE)+
     #geom_hline(yintercept = 0, linetype = "dashed") +  
     stat_summary(fun = mean, geom = "point", 
                  position = position_dodge(0.8), 
                  size = 1.5, color = "black") +   
     labs(x = "Treatment", 
-         y = "Shannon-Weiner diversity index") +
+         y = "Shannon-Weiner index") +
     theme_classic() +
     theme(
       axis.title = element_text(size = 8),      # Axis titles
@@ -1614,37 +1738,41 @@ GSWa <- ggplot(grSWdiversity,aes(x = Treatment, y =Shannon_Diversity, fill = Fen
     ) +
     scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
   
-  
-
 
 ####### DELTA SHANNON-WEINER DIVERSITY INDEX
-Gdiv <- Grasses%>%
-  filter(!is.na(Species_name),
-         Year %in% c(2024, 2026))%>%   # keep only pre/post years
-  group_by(Site, Plot, Subplot, Treatment, Year, Fencing, Species_name)%>%
-  summarise(Spp_count = n(), .groups = "drop" )
 
-# Calculate Shannon-Wiener Diversity Index 
-Sdiversity_data <- Gdiv %>%
-  group_by(Site, Plot, Subplot,Treatment, Year, Fencing) %>%   # Group by Site and Plot
+  Gdiv <- subplot_abundance %>%
+  group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
   summarise(
-    Shannon_Diversity = -sum((Spp_count / sum(Spp_count)) * log(Spp_count / sum(Spp_count))),
+    Shannon = diversity(total_abundance, index = "shannon"),
+    Richness = n_distinct(Species_name),
+    Total_grass = sum(total_abundance),
     .groups = "drop"
-  )
+  )%>%
+  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
-#  Pivot the two years side‑by‑side and compute Δ‑ grass Shannon-Weiner diversity
-SW_Delta <- Sdiversity_data %>% 
-  pivot_wider(names_from  = Year,
-              values_from = Shannon_Diversity,
-              names_glue  = "sw_{Year}") %>% 
-  mutate(delta_SW = sw_2026 - sw_2024)   
+
+# Method 1: Using pivot_wider
+  SW_Delta <- grSWdiversity %>%
+  select(Site, Subplot, Treatment, Fencing, Year, Shannon) %>%
+  pivot_wider(
+    names_from = Year,
+    values_from = Shannon,
+    names_prefix = "Shannon_"
+  ) %>%
+  mutate(
+    delta_SW = Shannon_2026 - Shannon_2024
+  ) %>%
+  # Remove any rows with missing data
+  filter(!is.na(delta_SW))
+
 
 ### Convert character variables to factors
 SW_Delta$Treatment <- as.factor(SW_Delta$Treatment)
 SW_Delta$Fencing <- as.factor(SW_Delta$Fencing)
 SW_Delta$Fencing <- factor(SW_Delta$Fencing, 
-                    levels = c("Fenced", "Unfenced"),
-                     labels = c("Fenced", "Unfenced"))
+                    levels = c("Unfenced", "Fenced"),
+                     labels = c("Unfenced", "Fenced"))
 
 ### GLMM to test effect of treatment * fencing on Grass diversity ##################
 
@@ -1674,6 +1802,15 @@ GrasD <- lmer(delta_SW ~ Treatment * Fencing + (1|Site),
 summary(GrasD)
 
 
+# Model performance
+plot(GrasD)
+check_model(GrasD, check = "homogeneity")
+check_model(GrasD, check = "normality")
+check_model(GrasD, check = "qq")
+
+qqnorm(residuals(GrasD)) #whether residuals are approximately normal.
+qqline(residuals(GrasD))
+
 # Plot LMM output grass diversity (delta)
 
 GSWb <- ggplot(SW_Delta,aes(x = Treatment, y = delta_SW, fill = Fencing)) +
@@ -1682,7 +1819,7 @@ GSWb <- ggplot(SW_Delta,aes(x = Treatment, y = delta_SW, fill = Fencing)) +
                position = position_dodge(0.8), 
                size = 1.5, color = "black") +
   geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Treatment", y = "Δ Grass Shannon-Weiner diversity") +
+  labs(x = "Treatment", y = "Δ Shannon-Weiner index") +
   theme_classic() +
   scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))+
   theme(
@@ -1695,41 +1832,69 @@ GSWb <- ggplot(SW_Delta,aes(x = Treatment, y = delta_SW, fill = Fencing)) +
 
 
 ###  Step 1: Calculate lnRR for each site, treatment, fencing ,
-
-GRDiv_LRR <- Grasses %>%
-  filter(Year %in% c(2024, 2026)) %>% 
-  group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
-  summarise(Spp_count = n(), .groups = "drop" )%>%
-  # Separate control and treatment
-  mutate(Treatment_Group = ifelse(Treatment == "C", "C", "Treated")) %>%
-  # Wide format: one row per Plot/Subquadrat with Pre and Post columns
+lnRR4_results <- grSWdiversity  %>%
+  mutate(
+    Period = ifelse(Year == 2024, "Pre", "Post"),
+    Treatment_Group = ifelse(Treatment == "C", "Control", "Treatment")
+  ) %>%
   pivot_wider(
-    names_from = Year,
-    values_from = Spp_count,
-    names_prefix = "Year_"
+    id_cols = c(Site,Plot, Subplot, Treatment, Fencing, Treatment_Group),
+    names_from = Period,
+    values_from = Shannon
   ) %>%
-  rename(Pre = Year_2024, Post = Year_2026) %>%
-  # Calculate LRR for each treated plot using its paired control at the same Location
+  
+  # Calculate control means in a separate summarised dataframe
   group_by(Site, Fencing) %>%
-  mutate(
-    Control_Pre = mean(Pre[Treatment_Group == "C"], na.rm = TRUE),
-    Control_Post = mean(Post[Treatment_Group == "C"], na.rm = TRUE)
+  reframe(
+    Control_Pre = mean(Pre[Treatment_Group == "Control"], na.rm = TRUE),
+    Control_Post = mean(Post[Treatment_Group == "Control"], na.rm = TRUE)
   ) %>%
-  ungroup() %>%
-  filter(Treatment_Group == "Treated") %>%
-  mutate(
-    GdLRR = log( (Post / Pre) / (Control_Post / Control_Pre) )
+  
+  # Join back to the original data
+  right_join(
+    grSWdiversity  %>%
+      mutate(
+        Period = ifelse(Year == 2024, "Pre", "Post"),
+        Treatment_Group = ifelse(Treatment == "C", "Control", "Treatment")
+      ) %>%
+      pivot_wider(
+        id_cols = c(Site, Plot, Subplot, Treatment, Fencing, Treatment_Group),
+        names_from = Period,
+        values_from = Shannon
+      ),
+    by = c("Site", "Fencing")
   ) %>%
-  dplyr::select(Site, Plot, Subplot, Treatment, Fencing, Pre, Post, GdLRR) 
+  
+  # Keep only treated plots
+  filter(Treatment_Group == "Treatment") %>%
+  
+  # Calculate lnRR
+  mutate(
+    Treatment_ratio = Post / Pre,
+    Control_ratio = Control_Post / Control_Pre,
+    lnRR = log(Treatment_ratio / Control_ratio)
+  ) %>%
+  select(Site, Subplot, Treatment, Fencing, 
+         Pre, Post, Treatment_ratio, Control_ratio, lnRR)
 
+#head(lnRR4_results)
 
-# If zeros are present, add a small constant to avoid -Inf:  
-#log( (Post + 0.1) / (Pre + 0.1) ) / (C_post + 0.1) / (C_pre + 0.1)
 
 # run LMM
 GDilog <- lmer(GdLRR ~ Treatment * Fencing + (1|Site), data = GRDiv_LRR)
 
 summary(GDilog)
+
+
+# Model performance
+# plot(GDilog)
+# check_model(GDilog, check = "homogeneity")
+# check_model(GDilog, check = "normality")
+# check_model(GDilog, check = "qq")
+# 
+# qqnorm(residuals(GDilog)) #whether residuals are approximately normal.
+# qqline(residuals(GDilog))
+
 
 # Plot LRR
 ggplot(GRDiv_LRR,
@@ -1762,8 +1927,8 @@ GDplot_data <- as.data.frame(GDemm_interaction)
 GDplot_data$Treatment <- factor(GDplot_data$Treatment, 
                                 levels = c("F", "TF", "TFB", "THF"))
 GDplot_data$Fencing <- factor(GDplot_data$Fencing, 
-                              levels = c("Fenced", "Unfenced"),
-                              labels = c("Fenced", "Unfenced"))
+                              levels = c("Unfenced", "Fenced"),
+                              labels = c("Unfenced", "Fenced"))
 
 #### visualisation
 ggplot(GDplot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
@@ -1786,28 +1951,27 @@ ggplot(GDplot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
     axis.text = element_text(size = 12))
 
 
-# Save high-resolution versions
-#ggsave("treatment_kraaling_interaction_point.png", p, width = 8, height = 5, dpi = 300, bg = "white")
-
-
 ####### CONVERT lnRR to PERCENTAGE CHANGE #####
 # Get estimated marginal means for Treatment × Fencing interaction
 GDemm_interaction <- emmeans(GDilog, ~ Treatment | Fencing)
 plot_data_raw <- as.data.frame(GDemm_interaction)
 
 # Convert to percentage change
-plot_data <- plot_data_raw
-plot_data$pct_change <- (exp(plot_data_raw$emmean) - 1) * 100
-plot_data$CI_lower_pct <- (exp(plot_data_raw$lower.CL) - 1) * 100
-plot_data$CI_upper_pct <- (exp(plot_data_raw$upper.CL) - 1) * 100
+GDplot_data <- plot_data_raw
+GDplot_data$pct_change <- (exp(plot_data_raw$emmean) - 1) * 100
+GDplot_data$CI_lower_pct <- (exp(plot_data_raw$lower.CL) - 1) * 100
+GDplot_data$CI_upper_pct <- (exp(plot_data_raw$upper.CL) - 1) * 100
+
+# rounding off to 2 decimaL places
+GDplot_data <- GDplot_data %>%
+  mutate(across(where(is.numeric), round, 2))
 
 # Clean up factors
-plot_data$Treatment <- factor(plot_data$Treatment, 
+GDplot_data$Treatment <- factor(GDplot_data$Treatment, 
                               levels = c("F", "TF", "TFB", "THF"))
-plot_data$Fencing <- factor(plot_data$Fencing, 
-                            levels = c("Fenced", "Unfenced"),
-                            labels = c("Fenced", "Unfenced"))
-
+GDplot_data$Fencing <- factor(GDplot_data$Fencing, 
+                            levels = c("Unfenced", "Fenced"),
+                            labels = c("Unfenced", "Fenced"))
 
 ##### Percentage change plot 
 # GSWc<- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
@@ -1837,8 +2001,8 @@ GSWD<-ggplot(plot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
   geom_errorbarh(aes(xmin = CI_lower_pct, xmax = CI_upper_pct),
                  height = 0.5, size = 0.9, position = position_dodge(0.5)) +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
-  #scale_x_continuous(breaks = seq(-50, 150, 20)) +
-  labs(x = "Change in Grass Shannon-Weiner diversity relative to Control (%)",
+  scale_x_continuous(breaks = seq(-05, 25, 5)) +
+  labs(x = "Change in grass Shannon-Weiner diversity relative to Control (%)",
        y = "Treatment") +
   theme_classic()+ 
   ggtitle(NULL)+
@@ -1858,11 +2022,11 @@ SWmulti_panel <- (GSWa/GSWb/GSWD) +   # "/" for stacking vertically, or "|" for 
   ) &
   theme(
     axis.text = element_text(size = 8),        # Increase axis label font size
-    axis.title = element_text(size = 8),       # Increase axis title font size
-    plot.tag = element_text(size = 8, hjust = 0))  # Ensure left alignment
+    axis.title = element_text(size = 10),       # Increase axis title font size
+    plot.tag = element_text(size = 10, hjust = 0))  # Ensure left alignment
   
 ##ggsave multipanel grass richness
-ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog2.png",
+ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog1C.png",
        width = 16, height = 14, units = "cm")
 
 

@@ -1,4 +1,5 @@
 ###
+library(MASS)
 library(tidyverse)
 library(vegan)
 library(multcompView)
@@ -25,9 +26,8 @@ library(effects)
 library(ggeffects)
 library(knitr)  # for table
 library(gtsummary)
-library(MASS)
 library(multcomp)
-
+library(grid) # for multi-panels
 
 #create theme beautiful
 theme_beautiful <- function() {
@@ -66,7 +66,7 @@ theme_beautiful <- function() {
 
 # Read data
 A <- read_csv("DATA/GEODE_Subplot_area.csv")
-B <- read.csv("DATA/March2025/WoodyPlants26.csv", stringsAsFactors = FALSE)
+B <- read.csv("DATA/March2025/WOODY2426.csv", stringsAsFactors = FALSE)
 
 
 # Ensure consistent column names (case-sensitive)
@@ -533,14 +533,6 @@ resprouts_df <- SapF %>%
     !Treatment %in% c("C", "F")  # exclude the two treatments
   )
 
-sample_sizes <- SapF %>%
-  group_by(Site, Plot, Subplot,Treatment, Fencing,Trees,Year) %>%
-  summarise(
-    n = n(),
-    .groups = 'drop'
-  )
-
-
 
 
 ### Make "Unfenced" the reference level (to see "fenced" coefficients)
@@ -554,7 +546,7 @@ resprouts_df$Fencing <- factor(resprouts_df$Fencing, ordered = FALSE)
 # Verify
 levels(resprouts_df$Fencing)  # Should show "Open" "Closed" (or vice versa)
 
-# Set "Fenced" as the reference level (to see "Unfenced" coefficients)
+# Set "Unfenced" as the reference level (to see "Unfenced" coefficients)
 resprouts_df$Fencing <- relevel(resprouts_df$Fencing, ref = "Unfenced")
 
 ### Convert character variables to factors
@@ -571,18 +563,19 @@ RespVio <- ggplot(resprouts_df, aes(x = Treatment, y = No_of_resprouts,
   geom_violin(trim = TRUE)+
   stat_summary(fun = mean, geom = "point", 
                position = position_dodge(0.8), 
-               size = 2, color = "black") +
-  geom_hline(yintercept = 0, linetype = "dashed") +
+               size = 1.5, color = "black") +
+  #geom_hline(yintercept = 0, linetype = "dashed") +
+  scale_x_continuous(breaks = seq(1, 45, 5)) +
   labs(x = "Treatment", y = "Average no.of resprouts per cut stump") +
-  theme_beautiful() +
+  theme_classic() +
   theme(
-    axis.title = element_text(size = 14),      # Axis titles
+    axis.title = element_text(size = 12),      # Axis titles
     axis.text = element_text(size = 12)) +
     scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
 
 
 ##saving Violin PLOT - resprouts
-ggsave(RespVio,filename ="Plots/RESPROUTS VIOLIN26 plot.png",
+#ggsave(RespVio,filename ="Plots/RESPROUTS VIOLIN26 plot.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -590,47 +583,201 @@ ggsave(RespVio,filename ="Plots/RESPROUTS VIOLIN26 plot.png",
 ##GLMM for resprouts on cut stumps  
 
 ##using poisson family 
-Respr5b <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
-                   data = resprouts_df, family = poisson(link = log))
-summary(Respr5b)
+# Respr5b <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+#                    data = resprouts_df, family = poisson(link = log))
+# summary(Respr5b)
+# 
+# 
+# # option 2 using negative binomial
+# Respr5bc <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+#                    data = resprouts_df, family = nbinom2(link = "log"))
+
+
+
+# option 3 using tweedie distribution - to handle zeros
+
+R5b_tweedie <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+                       data = resprouts_df,
+                       family = tweedie(link = "log"))
+
+
+# diagnostics using DHARMA
+simTw <- simulateResiduals(R5b_tweedie)
+plot(simTw)
+
+# Explicit tests (should be non-significant if model meets DHARMA assumptions)
+testDispersion(simTw)
+testZeroInflation(simTw)
+testOutliers(simTw)
+
+# model summary
+summary(R5b_tweedie)
+
+# 
+# 
+# ## LMM analysis
+# Respr5D <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+#                    data = resprouts_df, family = Gamma(link = "log"))
+# 
+# summary(Respr5D)
+# # 
+# # # Model diagnostics
+# #  check_model(Respr5b, check = "qq")
+# #  check_model(R5b_tweedie, check = "normality")
+# # # check_model(Respr5b, check = "homogeneity")
+# # # plot(Respr5b)
+# 
+#  qqnorm(residuals(R5b_tweedie)) #whether residuals are approximately normal.
+# qqline(residuals(R5b_tweedie))
+
 
 
 #### Using LMM instead of glmm
-Respr5c <- lmer(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
-                data = resprouts_df)
+# Respr5c <- lmer(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+#                 data = resprouts_df)
+# 
+# summary(Respr5c)
 
-summary(Respr5c)
+# Model diagnostics
+# check_model(Respr5c, check = "qq")
+# check_model(Respr5c, check = "normality")
+# check_model(Respr5c, check = "homogeneity")
+# plot(Respr5c)
 
-
-## check model performance
-performance::check_model(Respr5c)
-
+# qqnorm(residuals(Respr5c)) #whether residuals are approximately normal.
+# # qqline(residuals(Respr5c))
+# 
+# ## check model performance
+# performance::check_model(Respr5c)
+# 
 
 
 ### POST HOC ANALYSIS FOR RESPROUTS 
-# Tukey HSD pairwise comparisons
-Rstreat_comparisons3 <- emmeans(Respr5c, specs = pairwise ~ Treatment | Fencing, adjust = "tukey")
+# pairwise comparisons
+Rstreat_comparisons3 <- emmeans(R5b_tweedie, specs = pairwise ~ Treatment | Fencing, adjust = "Dunnet")
 summary(Rstreat_comparisons3$contrasts)
 
-# Using ggeffects on resprouts
-Resprouts <- ggpredict(Respr5c, terms = c("Treatment", "Fencing"))
-#plot(preds)
-Resprouts <- ggpredict(Respr5c, terms = c("Treatment", "Fencing"))
-Res <- plot(Resprouts) + 
-  labs(y = "Average number of resprouts per cut stump",
-       x = "Treatment") +
-  theme_beautiful()+ 
+# Estimated marginal means for Treatment within Fencing (if needed)
+Rstreat_comparisons3 <- emmeans(R5b_tweedie, ~ Treatment | Fencing, type = "response")
+
+# Compare each treatment to Control with Dunnett adjustment (or "none" if you only want vs control)
+contrast_vs_control <- contrast(Rstreat_comparisons3, method = "trt.vs.ctrl", ref = "TF")
+summary(contrast_vs_control, infer = TRUE)
+
+# generate letters using cld in multicomp package
+Respcld_emm <- cld(Rstreat_comparisons3, adjust = "Dunnett", Letters = letters, type = "response")
+cld_tbl <- as.data.frame(Respcld_emm)
+
+
+# prepare clean database for plotting
+Rspplot_df <- cld_tbl %>%
+  rename(
+    EMM = response,
+    CI_lower = asymp.LCL, # tweedie used different typology for EMM and CIs
+    CI_upper = asymp.UCL,
+    Group = .group
+  ) %>%
+  mutate(Group = str_trim(Group))  # Clean whitespace
+
+
+# to check if log scale has been back transformed
+summary(emmeans(R5b_tweedie, ~ Treatment, type = "response"))
+ 
+### Visualisation using ggplot
+
+Rspplot_df$Fencing <- factor( Rspplot_df$Fencing,
+                                    levels = c("Unfenced", "Fenced")) #ordering Fencing level to start with Unfenced
+
+
+ Resp <- ggplot(Rspplot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)) +
+  geom_point(position = position_dodge(width = 0.35), size = 1.5) +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper),
+                position = position_dodge(width = 0.35), width = 0.12) +
+  geom_text(aes(label = Group,
+                y = CI_upper + 0.1 * max(EMM)),
+            position = position_dodge(width = 0.35), size = 4, color = "black") +
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))  +
+  labs(color = "Fencing")+  # Optional: rename legend title
+  labs(
+    x = "Treatment",
+    #y = "Change in seedling density per ha",
+    y = expression("Average number of resprouts per cut stump")
+  ) +
+  theme_classic()+ 
   ggtitle(NULL)+
+  #geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
   theme(
-    axis.title = element_text(size = 14),      # Axis titles
-    axis.text = element_text(size = 12)        # Axis tick labels
-  )
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12))
+
 
 # ## saving marginal effects plot
-# ggsave(Res,filename ="Plots/ME Violin Resprouts.png",
-#        width = 16, height = 14, units = "cm") 
+ #ggsave(Resp,filename ="Plots/ Violin Resprouts.png",
+#      width = 16, height = 14, units = "cm") 
 
+ 
+ 
 
+## Creating new panel with share y-axis title
+ 
+ # Remove internal left spacing
+ RespVio <- RespVio +
+   ylab(NULL) +
+   theme(
+     plot.margin = margin(0, 0, 0, 0),
+     axis.title.y = element_blank()
+   )
+ 
+ Resp <- Resp +
+   ylab(NULL) +
+   theme(
+     plot.margin = margin(0, 0, 0, 0),
+     axis.title.y = element_blank()
+   )
+ 
+ # Shared y-axis title
+ yleft <- wrap_elements(
+   panel = textGrob(
+     "Average number of resprouts per cut stump",
+     rot = 90,
+     gp = gpar(fontsize = 12)
+   )
+ )
+ 
+ # Add annotations DIRECTLY to plots
+ A_tag <- RespVio + labs(tag = "(a)")
+ B_tag <- Resp + labs(tag = "(b)")
+ 
+ # Combine plots
+ panels <- A_tag / B_tag
+ 
+ # Final layout
+ multi_panelRessp <- yleft + panels +
+   plot_layout(
+     widths = c(0.05, 1)
+   ) &
+   theme(
+     plot.tag = element_text(
+       size = 11,
+       face = "plain"
+     ),
+     #plot.tag.position = c(0.02, 0.98)
+     plot.tag.position = c(0.1, 0.999)
+   )
+ 
+ multi_panelRessp
+ 
+ 
+ 
+ 
+ # ## saving marginal effects plot
+ ggsave(multi_panelRessp,filename ="Plots/ MultiP3 Resprouts.png",
+        width = 16, height = 14, units = "cm") 
+ 
+
+ 
+ 
+ 
 ##################################################################################
 ###################################################################################
 
@@ -648,20 +795,22 @@ Trees <- SapF %>%
   mutate(
     density_ha = Trees * 10000 / Area
   )
-#exclude
-Trees2 <- SapF %>%
-  filter(
-    woody_cat == "Trees ",
-    Year %in% c(2024, 2026),
-    BD != "Y" | is.na(BD)
-  ) %>%
-  count(
-    Site, Plot, Subplot, Treatment, Fencing, Year, Area,
-    name = "Trees"
-  ) %>%
-  mutate(
-    density_ha = Trees * 10000 / Area
-  )
+ 
+ 
+# #exclude
+# Trees2 <- SapF %>%
+#   filter(
+#     woody_cat == "Trees ",
+#     Year %in% c(2024, 2026),
+#     BD != "Y" | is.na(BD))
+#  %>%
+#   count(
+#     Site, Plot, Subplot, Treatment, Fencing, Year, Area,
+#     name = "Trees"
+#   ) %>%
+#   mutate(
+#     density_ha = Trees * 10000 / Area
+#   )
 
 #comparing at treatment level
 
@@ -720,8 +869,8 @@ Trees_Delta1$Treatment <- as.factor(Trees_Delta1$Treatment)
 
 
 Trees_Delta1$Fencing <- factor(Trees_Delta1$Fencing, 
-                                   levels = c("Fenced", "Unfenced"),
-                                   labels = c("Fenced", "Unfenced"))
+                                   levels = c("Unfenced", "Fenced"),
+                                   labels = c("Unfenced", "Fenced"))
 
 # Set "Fenced" as the reference level 
 Trees_Delta1$Fencing <- relevel(Trees_Delta1$Fencing, ref = "Unfenced")
@@ -734,7 +883,12 @@ summary(Treel5)
 
 
 ## increasing font size for x and y axis
-TreeVa<- ggplot(tree_comparison2, 
+
+tree_comparison2$Fencing <- factor( tree_comparison2$Fencing,
+                                    levels = c("Unfenced", "Fenced")) #ordering Fencing level to start with Unfenced
+
+
+Treea<- ggplot(tree_comparison2, 
                 aes(x = Treatment, y = density_ha, fill = Fencing)) + facet_wrap(~Period)+ 
   geom_violin(trim = TRUE)+
   #geom_hline(yintercept = 0, linetype = "dashed") +    
@@ -754,7 +908,7 @@ TreeVa<- ggplot(tree_comparison2,
 
 
 ## violin plot tree delta
- ggplot(Trees_Delta1,
+ Treeb <- ggplot(Trees_Delta1,
                  aes(x = Treatment, y = delta_Treedens, fill = Fencing))+ 
   geom_violin(trim = FALSE)+
   geom_hline(yintercept = 0, linetype = "dashed") +  
@@ -771,7 +925,7 @@ TreeVa<- ggplot(tree_comparison2,
   theme(
     axis.title = element_text(size = 8),  # Axis titles reduced from 12 to 8
     axis.text = element_text(size = 8)) +
-  scale_fill_manual(values = c("Fenced" = "olivedrab", "Unfenced" = "magenta1"))
+  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta1"))
 
 
  
@@ -908,6 +1062,13 @@ TreeVa<- ggplot(tree_comparison2,
  
  summary(Treelog)
  
+ # check_model(Treelog, check = "homogeneity")
+ # check_model(Treelog, check = "normality")
+ # check_model(Treelog, check = "qq")
+ 
+ qqnorm(residuals(Treelog)) #whether residuals are approximately normal.
+ qqline(residuals(Treelog))
+ 
  #---------------------------------------------------
  # 10. Plot lnRR
  #---------------------------------------------------
@@ -942,8 +1103,8 @@ TreeVa<- ggplot(tree_comparison2,
  Tplot_data$Treatment <- factor(Tplot_data$Treatment, 
                                 levels = c("F", "TF", "TFB", "THF"))
  Tplot_data$Fencing <- factor(Tplot_data$Fencing, 
-                              levels = c("Fenced", "Unfenced"),
-                              labels = c("Fenced", "Unfenced"))
+                              levels = c("Unfenced", "Fenced"),
+                              labels = c("Unfenced", "Fenced"))
  
  #### visualisation
  ggplot(Tplot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
@@ -979,12 +1140,16 @@ TreeVa<- ggplot(tree_comparison2,
  Tplot_data$CI_lower_pct <- (exp(tplot_data_raw$lower.CL) - 1) * 100
  Tplot_data$CI_upper_pct <- (exp(tplot_data_raw$upper.CL) - 1) * 100
  
+ # rounding off to 2 decimaL places
+ Tplot_data <- Tplot_data %>%
+   mutate(across(where(is.numeric), round, 2))
+ 
  # Clean up factors
  Tplot_data$Treatment <- factor(Tplot_data$Treatment, 
                                 levels = c("F", "TF", "TFB", "THF"))
  Tplot_data$Fencing <- factor(Tplot_data$Fencing, 
-                              levels = c("Fenced", "Unfenced"),
-                              labels = c("Fenced", "Unfenced"))
+                              levels = c("Unfenced", "Fenced"),
+                              labels = c("Unfenced", "Fenced"))
  
  # Check the data
  head(Tplot_data)
@@ -1015,7 +1180,7 @@ TreeVa<- ggplot(tree_comparison2,
                   height = 0.5, size = 0.9, position = position_dodge(0.5)) +
    scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
    scale_x_continuous(breaks = seq(-80, 50, 20)) +
-   labs(x = "Change in Tree density relative to Control (%)",
+   labs(x = "Change in tree density relative to Control (%)",
         y = "Treatment") +
    # theme(legend.position = "top") +
    theme_classic()+ 
@@ -1024,4 +1189,25 @@ TreeVa<- ggplot(tree_comparison2,
      axis.title = element_text(size = 12),      # Axis titles
      axis.text = element_text(size = 12))
  
+ 
+ 
+ ####  Combine the plots in a single layout
+ multi_panelTree <- (Treea/Treeb/Treed) +   # "/" for stacking vertically, or "|" for side-by-side
+   plot_layout(heights = c(1, 1, 1)) +  # Adjust relative heights
+   plot_annotation(
+     tag_levels = 'a',
+     tag_prefix = '(',
+     tag_suffix = ')',
+     theme = theme(plot.tag = element_text(size = 8, hjust = 0))  # Left align tags
+   ) &
+   theme(
+     axis.text = element_text(size = 10),        # Increase axis label font size
+     axis.title = element_text(size = 12),       # Increase axis title font size
+     plot.tag = element_text(size = 10, hjust = 0)  # Ensure left alignment
+   )
+ 
+
+ ##saving using ggsave
+ ggsave(multi_panelTree,filename ="Plots/Multipanel Tree density.png",
+        width = 16, height = 14, units = "cm")  
  

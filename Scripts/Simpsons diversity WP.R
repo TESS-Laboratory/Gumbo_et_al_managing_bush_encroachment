@@ -68,7 +68,7 @@ theme_beautiful <- function() {
 
 ## LOAD DATA
 
-SapF <- read_csv("DATA/March2025/WoodyPlants26.csv")
+SapF <- read_csv("DATA/March2025/WOODYP2426.csv")
 
 ## create seedling, sapling, trees and cut-stump row
 SapF <- SapF %>% 
@@ -85,10 +85,43 @@ SapF <- SapF %>%
   )
 
 
+
+# Read data
+A <- read_csv("DATA/GEODE_Subplot_area.csv")
+B <- read.csv("DATA/March2025/WOODYP2426.csv", stringsAsFactors = FALSE)
+
+
+# Ensure consistent column names (case-sensitive)
+colnames(A) <- c("Site", "Plot", "Subplot", "Area")
+
+
+# Merge Area into B
+B_merged <- B %>%
+  dplyr::left_join(
+    A %>% dplyr::select(Site, Plot, Subplot, Area),
+    by = c("Site", "Plot", "Subplot")
+  )
+
+####################################### DETERMINING WOODY PLANTS SIMPSONS DIVERSITY
+# prepare data for seedlings
+SapF <- B_merged %>% 
+  mutate(
+    woody_cat = case_when(
+      Woody_class == "Cut stump"          ~ "Cut stump",
+      between(Max_height.m., 0.05, 0.50)          ~ "Seedlings",
+      between(Max_height.m., 0.51, 1.49)          ~ "Saplings",
+      between(Max_height.m., 1.5, 21.0)           ~ "Trees",
+      TRUE                             ~ NA_character_
+    ),
+    Treatment = factor(Treatment),
+    Fencing = factor(Fencing)
+  )
+
+
 #FOR all woody plants
 AllSD <- SapF %>% 
   filter( Year %in% c(2024, 2026)) %>% 
-  group_by(Site, Plot, Subplot, Treatment, Fencing,Year, Species_name) %>% 
+  group_by(Site, Plot, Subplot, Treatment, Fencing,Year, Species_name, Area) %>% 
   summarise(abundance = n(), .groups = 'drop')
 
 
@@ -98,7 +131,6 @@ AllSD <- SapF %>%
 ASimp_diversity_simpson <- AllSD  %>%
   group_by(Treatment, Fencing, Year) %>% 
   summarise(simpson_index = sum((abundance / sum(abundance))^2), .groups = 'drop')
-
 
 
 
@@ -412,7 +444,7 @@ multi_panelsIMP <- (SDw / Seedw / Sapw) +   # "/" for stacking vertically
   )
 
 ##saving using ggsave
-ggsave(multi_panelsIMP,filename ="Plots/Multipanel WoodySIMP2a.png",
+ggsave(multi_panelsIMP,filename ="Plots/Multipanel WoodySIMP2b.png",
        width = 16, height = 14, units = "cm")  
 
 ################################################################################
