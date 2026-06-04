@@ -55,6 +55,8 @@ rsconnect/
 
 # exclude WFO
 DATA/WFO_Backbone/
+DATA/WFO_Backbone.zip
+
 
 # exclude CHIRPS
 chirps_monthly/

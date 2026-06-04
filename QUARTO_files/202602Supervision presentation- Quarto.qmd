@@ -1,0 +1,380 @@
+---
+title: " Group supervision meeting February 2026"
+author: "Taps"
+editor: visual
+format: 
+  html:
+    colorlinks: true
+    toc: true
+    toc-depth: 3
+    code-fold: true
+---
+
+**Title: Managing bush encroachment on a holistically managed rangeland in a semi-arid savanna**
+
+**Research objectives:**   
+
+i\. To determine the efficacy of selected bush encroachment management strategies including woody plant thinning, targeted herbicide application, browsers (goats), and prescribed fire, on seedling density, sapling recruitment, and resprouting dynamics.
+
+ii\. To evaluate the effects of bush encroachment management strategies on above-ground grass biomass, grass species richness, and diversity at encroached sites.
+
+**Research hypotheses**
+
+a\) Combining woody plant thinning, prescribed fire, and goat browsing (TFB) will substantially lower woody plant seedling and sapling densities. The impact of these combined management strategies is expected to be more pronounced in unfenced subplots.
+
+b\) Integrating woody plant thinning, targeted herbicide application, and prescribed fire (THF) will result in a substantial reduction in the mean number of resprouts on cut stumps, with notably greater decreases observed in unfenced subplots.
+
+c\) The above-ground grass biomass will increase across all treatments where tree thinning is done (due to increased light penetration and water availability (Ludwig et al., 2004b). However, integrating woody plant thinning, prescribed fire, and targeted herbicide application (THF) will substantially increase grass above-ground biomass, with fenced plots experiencing a significant increase.
+
+d\) Grass species richness and diversity are expected to increase in plots where woody plants have been thinned, as dense canopies may have previously excluded certain grass species. I anticipate that the TFB treatment will lead to substantial increases in grass species richness and diversity, particularly within fenced subplots.
+
+-   
+
+    -   **AGENDA**
+
+        -   2026 plan
+        -   Fieldwork trip update (3 March - 20 April 2026)
+        -   Taxonomic harmonisation for woody and grass species
+        -   Updated conceptual framework
+        -   Browsing pressure
+        -   Group supervision meetings
+
+        # 
+
+# 1. Summary of 2026 plans
+
+1.  January-February 2026 – Finish implementing revisions to the dissertation draft based on the feedback from Andy.
+
+2.  March-April 2026 – Conduct vegetation surveys on all 30 study plots at Shangani Holistic Ranch. Updating subplot areas.
+
+3.  May-June 2026 – Data entry, Quality Assurance and Quality Control and taxonomic harmonisation scripts. Rerunning statistical analysis and interpretation of results.
+
+4.  30^th^ May 2026 – Submit Abstract to ORC.
+
+5.  15^th^ June – Send Andy Draft dissertation for review: Introduction, Methods, and updated Results
+
+6.  30^th^ June 2026 – Submit the complete dissertation draft for review by Allan (feedback agreed by 8^th^ July)
+
+7.  30^th^ June 2026 – Submit the complete dissertation draft for review by Sally (feedback agreed by 14^th^ July)
+
+8.  2^nd^ July – Submit the complete dissertation draft for review by Ilya (feedback agreed by 4^th^ July)
+
+9.  20^th^ August – Submit the complete dissertation draft for review by Tom (feedback agreed by 28^th^ August).
+
+10. 20^th^ August – Share updated recommendations for land managers’ with the supervisory team for input
+
+11. 28^th^ August 2026 – Draft manuscript ready to share for review by Andy.
+
+12. 24^th^ September 2026 – Deadline for the latest submission of the dissertation.
+
+13. 7^th^- 9^th^ October – Attend the Oppenheimer Research Conference in South Africa to present findings.
+
+# 2. Taxonomic harmonisation for woody and grass species
+
+-   To ensure the accuracy, validity[,]{.underline} and standardisation of the plant names in the (field-recorded) taxonomic data (Grenié et al., 2021) I applied taxonomic harmonisation using the *WorldFlora* package v1.14.5 (Kindt, 2020).
+
+-   All plant species were updated to the latest scientific names recommended by World Flora Online.
+
+# 3. Refined conceptual framework
+
+-   Selected management interventions mechanistic process
+
+    ```{r, warning=FALSE, message=FALSE,fig.cap="Figure 1. Provisional conceptual framework illustrating mechanisms by which selected management intervention suppress woody juvenile plants and impact the grass layer in savanna systems. Signed arrows indicate the direction of effects, with (+) denoting positive effects and (−) denoting negative effects on the receiving component."}
+
+    library(DiagrammeR)
+    library(DiagrammeRsvg)
+    library(rsvg)
+    library(ggplot2)
+    library(ggrepel)
+
+
+
+     
+      grViz("
+    digraph Woody_Suppression_Framework {
+
+      graph [layout = dot, rankdir = TB]
+
+      node [shape = box, style = filled, fillcolor = white, fontname = Helvetica]
+
+      # =========================
+      # TOP-LEVEL DRIVERS
+      # =========================
+      Cutting     [label = <<B>WOODY PLANT THINNING 🪵🪵</B>>] 
+      Fire        [label = <<B>FIRE 🔥🔥</B>>]
+      Browsing    [label = <<B>BROWSERS 🐐🐐</B>>]
+      Herbicide   [label = <<B>TARGETED HERBICIDE APPLICATION 🧴</B>>] 
+
+      # =========================
+      # DEMOGRAPHIC STAGES
+      # =========================
+      Adults      [label = 'Mature trees']
+      Seedlings   [label = 'Seedlings']
+      Saplings    [label = 'Saplings']
+      Resprouts   [label = 'Resprouts']
+
+      # =========================
+      # JUVENILE MECHANISMS
+      # =========================
+      JCarbon     [label = 'Non-structural\ncarbohydrates depletion']
+      Bottleneck  [label = 'Demographic\nBottleneck', shape = diamond]
+      Grass       [label = 'Grass competition']
+      GrassR      [label = 'Grass species richness']
+      GrassD      [label = 'Grass diversity']
+      # =========================
+      # FINAL OUTCOME
+      # =========================
+      Densification [label = 'Suppress bush\nencroachment', shape = oval]
+
+      # =========================
+      # DIRECT DISTURBANCE EFFECTS
+      # =========================
+
+      Cutting  -> Adults     [label = '(-)']
+      Cutting  -> Resprouts  [label = '(+)']
+
+      Herbicide -> Resprouts [label = '(-)']  # Herbicides reduce resprouts
+      Resprouts -> Grass [headlabel = '(+)', labeldistance = 3.0]
+      
+      Fire     -> Seedlings  [label = '(-)']
+      Fire     -> Saplings   [label = '(-)']
+      Fire     -> Resprouts  [label = '(-)']
+
+      Browsing -> Seedlings  [label = '(-)']
+      Browsing -> Saplings   [label = '(-)']
+      Browsing -> Resprouts  [label = '(-)']
+
+      # =========================
+      # EXPLICIT CARBON DEPLETION
+      # =========================
+
+      Saplings  -> JCarbon   [label = '(-)']
+      Resprouts -> JCarbon   [label = '(-)']
+      
+     
+
+      # =========================
+      # SIZE TRANSITIONS
+      # =========================
+
+      Seedlings -> Saplings     [label = '(+)']
+     
+
+      # =========================
+      # GRASS FEEDBACK
+      # =========================
+
+      Fire -> Grass         [label = '(+)']
+      Fire -> GrassR    [taillabel = '(+)', labeldistance = 6.5] #to move sign
+      Grass    -> Seedlings [headlabel = '(-)', labeldistance = 3.0]
+      Grass    -> Fire      [label = '(+)']
+      Cutting -> Grass      [label = '(+)']
+      Densification -> GrassR [label = '(+)']
+      GrassR -> GrassD [label = '(+)']
+      Browsing ->Densification [label = '(-)']
+      Densification -> Grass [label = '(+)']
+      
+      # =========================
+      # BOTTLENECK STRUCTURE
+      # =========================
+
+      Seedlings -> Bottleneck [label = '(+)']
+      Saplings  -> Bottleneck [label = '(+)']
+      Resprouts -> Bottleneck [label = '(+)']
+      JCarbon   -> Bottleneck [label = '(+)']
+      Herbicide -> Bottleneck [label = '(+)']  
+
+      Bottleneck -> Adults   [label = '(-)']
+
+      # =========================
+      # FINAL DENSIFICATION PATHWAY
+      # =========================
+
+      Adults -> Densification [label = '']
+
+    }
+    ")
+
+
+    ```
+
+-   Thinning reduces woody plant density and cover while stimulating resprouting on cut stumps. Thinning can also increase grass biomass.
+
+<!-- -->
+
+-   Fire can top-kill seedlings and saplings, limiting height growth and reinforcing size-class bottlenecks. Fire can increase grass competition.
+
+-   Targeted herbicide application can reduce resprouts after thinning, contributes to the demographic bottleneck, reducing recruitment.
+
+-   Browsers can suppress juveniles by consuming seedlings, limiting sapling and resprout growth through repeated defoliation and shoot removal.
+
+-   Browsing depletes NSC reserves, impairing resprouting capacity and reducing growth potential, thereby limiting escape to herbivore-resistant size classes. Indirectly, browsers can maintain grass dominance, which increases competition with woody seedlings and saplings. Fuel load promotes fire spread, further constraining juvenile survival and growth.
+
+-   Integrating management strategies can yield synergistic effect and improve overall efficacy.
+
+    (Elias & Tischew, 2016; Staver & Bond, 2014; Archibald et al., 2021; Schutz et al., 2010; Scogings & Gowda, 2019; Monegi et al., 2022, Mndela et al.,2024)
+
+# 4. Browsing pressure
+
+```{r, warning=FALSE, message=FALSE,fig.cap="Figure 2. Browsing pressure for the two 'browser' follow-up treatments implemented at SHR in May and November 2025."}
+
+library(tidyverse)
+library(vegan)
+library(multcompView)
+library(patchwork)
+library(here) ## MOST IMPORTANT NOT TO FORGET THIS ONE in quarto
+
+theme_beautiful <- function() {
+  theme_bw() +
+    theme(
+      text = element_text(family = "Helvetica"),
+      axis.text = element_text(size = 8, color = "black"),
+      axis.title = element_text(size = 8, color = "black"),
+      axis.line.x = element_line(size = 0.3, color = "black"),
+      axis.line.y = element_line(size = 0.3, color = "black"),
+      axis.ticks = element_line(size = 0.3, color = "black"),
+      panel.border = element_blank(),
+      panel.grid.major.x = element_blank(),
+      panel.grid.minor.x = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      panel.grid.major.y = element_blank(),
+      plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), units = , "cm"),
+      plot.title = element_text(
+        size = 8,
+        vjust = 1,
+        hjust = 0.5,
+        color = "black"
+      ),
+      legend.text = element_text(size = 8, color = "black"),
+      legend.title = element_text(size = 8, color = "black"),
+      legend.position = c(0.9, 0.9),
+      legend.key.size = unit(0.9, "line"),
+      legend.background = element_rect(
+        color = "black",
+        fill = "transparent",
+        size = 2,
+        linetype = "blank"
+      )
+    )
+}
+
+# USING ACTUAL PLOT AREA PER SITE
+# Read site-level data
+sites <- read_csv(here("DATA/CoordinatesS/Browser_plot_area.csv"))
+# Columns: Location, plot_area_ha
+
+# Constants
+avg_weight_kg <- 30  # average weight of goats (kg) 
+intake_rate_percent <- 3  # 3 % daily DM intake per goat
+
+daily_dm_per_goat <- (intake_rate_percent / 100) * avg_weight_kg
+hourly_dm_per_goat <- daily_dm_per_goat / 24   # consumption per hour
+
+# grouping
+browse_by_site <- sites %>%
+  mutate(
+    # Experiment 1
+    May_total_dm = 15 * hourly_dm_per_goat * 3,
+    `Initial_treatment_(May)` = May_total_dm / Plot_area_ha,
+    
+    # Experiment 2
+    Nov_total_dm = 30 * hourly_dm_per_goat * 5,
+    `Second_treatment_(November)` = Nov_total_dm / Plot_area_ha
+  )
+
+###### Shaping for stacked bar plots
+
+plot_df <- browse_by_site %>%
+  dplyr::select(Site, `Initial_treatment_(May)`,`Second_treatment_(November)`) %>% 
+  pivot_longer(
+    cols = c( `Initial_treatment_(May)`,`Second_treatment_(November)`),
+    names_to = "Period",
+    values_to = "provisional_browse_pressure_kg_ha"
+  ) 
+
+plot_df <- browse_by_site %>%
+  dplyr::select(Site, contains("Initial"), contains("Second")) %>%
+  pivot_longer(
+    cols = -Site,
+    names_to = "Period",
+    values_to = "provisional_browse_pressure_kg_ha"
+  )
+# stacking order
+plot_df$Period <- factor(
+  plot_df$Period,
+  levels = c("Initial_treatment_(May)", "Second_treatment_(November)")
+)
+
+## Visualising - stacked bar plots
+
+  ggplot(plot_df,
+              aes(x = Site,
+                  y = provisional_browse_pressure_kg_ha,
+                  fill = Period)) +
+  geom_col(position = position_stack(reverse = TRUE)) +
+  labs(y = "Provisional browse pressure (" *kg~ha^{-1}*")",
+       x = "Site") +
+  theme_classic() + 
+  theme(
+    legend.position = "top",
+    legend.title = element_blank(),
+    legend.text = element_text(size = 8),
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12)  
+  )
+
+```
+
+**Browse pressure** = (Number of goats in each plot × Average consumption rate × Amount of time spent in each plot) ÷ Plot area (ha)
+
+\- The Initial treatment utilised 15 goats for 3 hours per plot while the Second treatment utilised 30 goats for five hours per plot.
+
+# [PRELIMINARY RESULTS]{.underline}
+
+# a) Test efficacy of treatment and fencing on seedling density
+
+![](images/Multipanel%202EMMViolin%20Seedlings.png)
+
+Figure 3. Seedling density at SHR is affected by both the implemented treatment and the presence of fencing five months post-treatment. (a) Mean seedling density before and after treatment. Violin plots show the distribution of observations, with width proportional to observation density and black dots indicating arithmetic means. (b) Observation-based inference shows absolute change in mean seedling density across treatments within fenced and unfenced subplots. (c) Model-based inference estimates treatment effects while accounting for temporal variation (background change in control plots) and spatial variation (between sites).
+
+-   TF and THF substantially reduced seedling density in fenced subplots.
+
+# b) Test efficacy of treatment and fencing on sapling density
+
+![](images/Multipanel%202EMMViolin%20Saplings.png)
+
+Figure 4. Sapling density at SHR is affected by both the implemented treatment and the presence of fencing five months post-treatment.
+
+-   TF and THF substantially reduced sapling density in fenced subplots.
+
+# c) Test efficacy of treatment and fencing on resprouts population per cut stump
+
+![](images/RESPROUTS%20VIOLIN%20plot.png)
+
+Figure 5. The application of THF significantly reduced the average number of resprouts on cut stumps at SHR five months post-treatment.
+
+# d) Test efficacy of treatment and fencing on above-ground grass biomass
+
+![](images/Multipanel%202EMMGrass%20biomass.png)
+
+Figure 6. Above-ground grass biomass at SHR remained unaffected by treatment and fencing five months post-treatment.
+
+-   Above-ground grass biomass did not significantly change post treatment. Five months post-treatment , there is no clear indication that treatments affect above-ground grass biomass.
+
+# e) Test efficacy of treatment and fencing on grass species richness
+
+![](images/Multipanel%20EMMViolin%20Grass%20richness.png)
+
+Figure 7. Grass species richness at SHR remained unaffected by treatment and fencing five months post-treatment.
+
+-   Grass species richness in THF increased less than in the control.
+
+# f) Test efficacy of treatment and fencing on grass diversity
+
+![](images/Multipanel%20EMMViolin%20Grass%20diversity.png)
+
+Figure 8. Grass species diversity showed a small, non-significant increase across treatments and fencing five months post-treatment at SHR.
+
+-   There is no indication of treatment impacting grass species diversity.
+
+-   Resampling will be done at SHR in March - April and more refined analysis expected by June 2026.
