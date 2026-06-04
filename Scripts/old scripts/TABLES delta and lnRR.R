@@ -373,7 +373,7 @@ treedoc <- body_add_par(
 treedoc <- body_add_flextable(treedoc, treeft)
 
 #save
-print(treedoc, target = "Plots/DeltaTREES_Table.docx")
+print(treedoc, target = "Plots/DeltaTREES2_Table.docx")
 
 #################################### RELATIVE CHANGE SAPLINGS
 
@@ -398,7 +398,7 @@ pcnttree <- body_add_par(
 pcnttree <- body_add_flextable(pcnttree, treeft)
 
 #save
-print(pcnttree, target = "Plots/RelativeTREE_Table.docx")
+print(pcnttree, target = "Plots/RelativeTREE_Table2.docx")
 
 
 ###################################################################################
