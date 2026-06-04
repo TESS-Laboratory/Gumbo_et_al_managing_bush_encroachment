@@ -1,8 +1,10 @@
-Managing bush encroachment on a holistically managed rangeland in a semi-arid savanna in partnership with Shangani Holistic. 
+Managing bush encroachment on a holistically managed rangeland in a semi-arid savanna in partnership with Shangani Holistic, as part of the Oppenheimer Programme in African Landscape Systems (OPALS; https://opals-exeter.org/)
 
-This repository contains preliminary data from vegetation surveys, R codes for processing, analysing and visualising data.
+This repository contains data from vegetation surveys, R codes for processing, analysing and visualising data.
 
-1. 'Data' - contains the project data that has been used for analysis. some files found include:
+Contact Tapiwa Gumbo (tg488@exeter.ac.uk) and/or Andrew Cunliffe (a.cunliffe@exeter.ac.uk)
+
+1. 'Data' - contains the project data that has been used for analysis. INCOMPLETE LIST some files found include:
   
  a. 'Grasses2426updated.csv' - data for 2024 and 2026 grasses survey.
 
