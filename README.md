@@ -10,7 +10,7 @@ Contact Tapiwa Gumbo (tg488@exeter.ac.uk) and/or Andrew Cunliffe (a.cunliffe@exe
 
  b. 'WoodyPlants26.csv' - data for 2024 and 2026 woody plants survey.
  
- c. 'Harmonized_WPspp26' - data from taxonomic harmonisation of woody plants.
+ c. 'Harmonized_WPspp26' - output with the taxonomic harmonisation of grasses.
 
  d. 'Harmonized2026b_GRspp.csv' - data from taxonomic harmonisation of grasses.
 

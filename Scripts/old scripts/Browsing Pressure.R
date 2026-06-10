@@ -204,7 +204,8 @@ ggplot(browse_df,
 # USING ACTUAL PLOT AREA PER SITE
 
 # Read site-level data
-sites <- read_csv("DATA/CoordinatesS/Browser_plot_area.csv")
+sites <- read_csv("DATA/Coordinates/Browser_plot_area.csv")
+
 # Columns: Location, plot_area_ha
 
 # Constants
@@ -222,7 +223,7 @@ browse_by_site <- sites %>%
     
     # Experiment 2
     Nov_total_dm = 30 * hourly_dm_per_goat * 5,
-    `Initial_treatment_(November)` = Nov_total_dm / Plot_area_ha
+    `Second_treatment_(November)` = Nov_total_dm / Plot_area_ha
   )
 
 ###### Shaping for stacked bar plots
@@ -258,7 +259,7 @@ bpS <- ggplot(plot_df,
                   y = provisional_browse_pressure_kg_ha,
                   fill = Period)) +
   geom_col(position = position_stack(reverse = TRUE)) +
-  labs(y = "Provisional browse pressure ("*kg~ha^{-1}*")",
+  labs(y = "Browse pressure ("*kg~ha^{-1}*")",
        x = "Site") +
   theme_classic() + 
   theme(
@@ -270,5 +271,5 @@ bpS <- ggplot(plot_df,
   )
 
 # saving plot
-ggsave(bpS, filename = "Plots/provisionalBrowsing pressureSITE.png", 
+ggsave(bpS, filename = "Plots/Browsing pressureSITE.png", 
        width = 16, height = 12, units = "cm")

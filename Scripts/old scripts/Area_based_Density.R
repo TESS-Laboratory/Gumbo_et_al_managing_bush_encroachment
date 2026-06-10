@@ -67,7 +67,7 @@ theme_beautiful <- function() {
 # Read data
 A <- read_csv("DATA/GEODE_Subplot_area.csv")
 #B <- read.csv("DATA/March2025/WOODY2426.csv", stringsAsFactors = FALSE)
-B <- read.csv("DATA/March2025/Trees2426.csv", stringsAsFactors = FALSE)
+C <- read.csv("DATA/March2025/Trees2426.csv", stringsAsFactors = FALSE)
 
 
 # Ensure consistent column names (case-sensitive)
@@ -536,6 +536,30 @@ resprouts_df <- SapF %>%
 
 
 
+#Summary stats for resprouts 
+Respsummary_stats <- resprouts_df %>%
+group_by(Site, Treatment) %>%
+  summarise(
+    Total_resprouts = sum(No_of_resprouts, na.rm = TRUE),
+    Mean_resprouts = mean(No_of_resprouts, na.rm = TRUE),
+    Max_resprouts = max(No_of_resprouts, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(Total_resprouts))
+
+
+## check which species had more resprouts
+Species_resprouts <- resprouts_df %>%
+  group_by(Species_name, Treatment) %>%
+  summarise(
+    Total_resprouts = sum(No_of_resprouts, na.rm = TRUE),
+    N = n(),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(Total_resprouts))
+
+
+
 ### Make "Unfenced" the reference level (to see "fenced" coefficients)
 # Check current class of FieldType
 
@@ -783,7 +807,7 @@ Rspplot_df$Fencing <- factor( Rspplot_df$Fencing,
 ###################################################################################
 
 #### TREE DENSITY 
-
+ 
 # calculating tree density
 Trees <- SapF %>%
   filter(
@@ -1153,7 +1177,13 @@ Treea<- ggplot(tree_comparison2,
                               labels = c("Unfenced", "Fenced"))
  
  # Check the data
- head(Tplot_data)
+ #head(Tplot_data)
+ 
+ # TESTING statistical difference on fenced and unfenced per treatment
+ 
+ Tremm_interaction <- emmeans(Treelog, ~ Treatment | Fencing)
+ 
+ pairs(Tremm_interaction, simple = "each", adjust = "tukey")
  
  
  ##### Percentage change plot 
