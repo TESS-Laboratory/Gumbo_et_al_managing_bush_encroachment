@@ -67,7 +67,7 @@ theme_beautiful <- function() {
 # Read data
 A <- read_csv("DATA/GEODE_Subplot_area.csv")
 #B <- read.csv("DATA/March2025/WOODY2426.csv", stringsAsFactors = FALSE)
-C <- read.csv("DATA/March2025/Trees2426.csv", stringsAsFactors = FALSE)
+C <- read.csv("DATA/March2026/Trees2426.csv", stringsAsFactors = FALSE)
 
 
 # Ensure consistent column names (case-sensitive)
