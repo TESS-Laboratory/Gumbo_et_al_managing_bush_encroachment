@@ -39,7 +39,7 @@ library(vegan)
 
 # Read data
 A <- read_csv("DATA/GEODE_Subplot_area.csv")
-B <- read.csv("DATA/March2025/WOODYP2426.csv", stringsAsFactors = FALSE)
+B <- read.csv("DATA/March2026/WOODYP2426.csv", stringsAsFactors = FALSE)
 
 
 # Ensure consistent column names (case-sensitive)
@@ -984,9 +984,9 @@ ggsave(multi_panelSap,filename ="Plots/Saplings ViolinLog1A.png",
 ######   GRASS BIOMASS GRASS BIOMASS GRASS BIOMASS GRASS BIOMASS
 
 # Load data
-heights_data <-  read_csv("DATA/March2025/2Grasses2426.csv")
+heights_data <-  read_csv("DATA/March2026/2Grasses2426.csv")
 
-Grasses <- read_csv("DATA/March2025/Grasses2426Updated1.csv")
+Grasses <- read_csv("DATA/March2026/Grasses2426Updated1.csv")
 
 
 # defining intercept and slope

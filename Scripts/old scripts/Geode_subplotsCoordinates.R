@@ -8,7 +8,7 @@ library(terra)
 
 # load data
 geodepoints <- read.csv("DATA/CoordinatesS/GeodeplusSample.csv")
-
+#geodepoints <- read.csv("C:/Users/tg488/OneDrive - University of Exeter/Project development - Taps/Files from gumbo_dev/Coordinaates at SHR/GeodeplusSample.csv")
 ##
 
 pts_sf <- geodepoints
@@ -137,6 +137,12 @@ area_summary <- polygons_sf %>%
 # plot histogram
 Ghist <- ggplot(area_summary, aes(x = Area_m2)) +
   geom_histogram(bins = 25, fill = "steelblue", color = "black") +
+  geom_vline(
+    xintercept = 600,
+    linetype = "dashed",
+    color = "red",
+    linewidth = 0.5
+  ) +
   facet_wrap(~ Site) +
   labs(x = "Area (m²)", y = "Count") +
   theme_classic()

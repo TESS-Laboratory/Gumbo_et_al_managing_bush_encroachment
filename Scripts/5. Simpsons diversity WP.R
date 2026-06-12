@@ -1,5 +1,6 @@
 #### this script analyses data,with the TFB treatment excluded. 
 library(tidyverse)
+library(grid)
 library(vegan)
 library(multcompView)
 library(patchwork)
@@ -66,9 +67,55 @@ theme_beautiful <- function() {
     )
 }
 
+## ICON GROBS — simple tree / seedling / sapling silhouettes
+
+make_tree_grob <- function() {
+  gTree(children = gList(
+    rectGrob(x = 0.50, y = 0.10, width = 0.14, height = 0.32,
+             vjust = 0, gp = gpar(fill = "#6D4C41", col = NA)),
+    circleGrob(x = 0.50, y = 0.62, r = 0.30,
+               gp = gpar(fill = "#2E7D32", col = NA))
+  ))
+}
+
+make_seedling_grob <- function() {
+  gTree(children = gList(
+    segmentsGrob(x0 = 0.50, y0 = 0.05, x1 = 0.50, y1 = 0.52,
+                 gp = gpar(col = "#558B2F", lwd = 2.5)),
+    circleGrob(x = 0.32, y = 0.62, r = 0.20,
+               gp = gpar(fill = "#AED581", col = NA)),
+    circleGrob(x = 0.68, y = 0.62, r = 0.20,
+               gp = gpar(fill = "#AED581", col = NA)),
+    circleGrob(x = 0.50, y = 0.78, r = 0.14,
+               gp = gpar(fill = "#8BC34A", col = NA))
+  ))
+}
+
+make_sapling_grob <- function() {
+  gTree(children = gList(
+    rectGrob(x = 0.50, y = 0.10, width = 0.09, height = 0.28,
+             vjust = 0, gp = gpar(fill = "#A1887F", col = NA)),
+    polygonGrob(
+      x = c(0.50, 0.10, 0.90),
+      y = c(0.95, 0.38, 0.38),
+      gp = gpar(fill = "#66BB6A", col = NA)
+    )
+  ))
+}
+
+make_icon_plot <- function(grob) {
+  ggplot() +
+    annotation_custom(grob, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) +
+    theme_void()
+}
+
+tree_icon     <- make_icon_plot(make_tree_grob())
+seedling_icon <- make_icon_plot(make_seedling_grob())
+sapling_icon  <- make_icon_plot(make_sapling_grob())
+
 ## LOAD DATA
 
-SapF <- read_csv("DATA/March2025/WOODYP2426.csv")
+SapF <- read_csv("DATA/March2026/WOODY2426.csv")
 
 ## create seedling, sapling, trees and cut-stump row
 SapF <- SapF %>% 
@@ -88,7 +135,7 @@ SapF <- SapF %>%
 
 # Read data
 A <- read_csv("DATA/GEODE_Subplot_area.csv")
-B <- read.csv("DATA/March2025/WOODYP2426.csv", stringsAsFactors = FALSE)
+B <- read.csv("DATA/March2026/WOODY2426.csv", stringsAsFactors = FALSE)
 
 
 # Ensure consistent column names (case-sensitive)
@@ -427,14 +474,21 @@ Seedw <- Seedw + theme(
 # Keep x-axis on panel c
 Sapw <- Sapw  # Keep as is
 
+# Add manual panel labels before insets so icons are not auto-tagged
+SDw   <- SDw   + labs(tag = "(a)")
+Seedw <- Seedw + labs(tag = "(b)")
+Sapw  <- Sapw  + labs(tag = "(c)")
+
+# Add category icons to each panel (top-right corner; adjust left/bottom to reposition)
+SDw   <- SDw   + inset_element(tree_icon,     left = 0.88, bottom = 0.80, right = 1.00, top = 1.00, align_to = "plot")
+Seedw <- Seedw + inset_element(seedling_icon, left = 0.88, bottom = 0.80, right = 1.00, top = 1.00, align_to = "plot")
+Sapw  <- Sapw  + inset_element(sapling_icon,  left = 0.88, bottom = 0.80, right = 1.00, top = 1.00, align_to = "plot")
+
 # Now combine them
 multi_panelsIMP <- (SDw / Seedw / Sapw) +   # "/" for stacking vertically
   plot_layout(heights = c(1, 1, 1), guides = "collect") +
   plot_annotation(
-    tag_levels = 'a',
-    tag_prefix = '(',
-    tag_suffix = ')',
-    theme = theme(plot.tag = element_text(size = 6, hjust = 0))
+    theme = theme(plot.tag = element_text(size = 8, hjust = 0))
   ) &
   theme(
     axis.text = element_text(size = 6),
