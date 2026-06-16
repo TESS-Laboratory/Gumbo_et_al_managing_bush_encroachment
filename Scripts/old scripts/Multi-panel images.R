@@ -372,24 +372,19 @@ WCPD <- p1/p2 +   # "/" for stacking vertically, or "|" for side-by-side
   )   
 
 # saving
-ggsave(WCPD, filename = "Plots/Cover map2.png", width = 16, height = 14, units = "cm")
+ggsave(WCPD, filename = "Plots/Cover map3.png", width = 16, height = 14, units = "cm")
 
 
 
 
 ##### Trying option 2
 
-img_dir <- "path/to/your/folder"
 
-img_files <- c(
-  file.path(img_dir, "gt.png"),
-  file.path(img_dir, "gm.png")
-)
 
 img_dir <- "DATA/SHR_Map_pics"
 
 img_files <- c(
- file.path(img_dir,"SHR2_covermap.jpeg"), 
+ file.path(img_dir,"SHR2_covermap.png"), 
  file.path(img_dir, "Annual_woody_cover.png")
 )
 

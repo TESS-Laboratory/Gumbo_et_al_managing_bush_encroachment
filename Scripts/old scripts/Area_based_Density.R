@@ -241,7 +241,7 @@ width = 16, height = 14, units = "cm")
 # Estimated marginal means for Treatment within Kraaling (if needed)
 Seedemm <- emmeans(Seedl5, ~ Treatment | Fencing, type = "response")
 
-# Compare each treatment to Control with Tukey adjustment (or "none" if you only want vs control)
+# Compare each treatment to Control with dunnetts adjustment (or "none" if you only want vs control)
 contrast_vs_control <- contrast(Seedemm, method = "trt.vs.ctrl", ref = "C")
 summary(contrast_vs_control, infer = TRUE)
 
