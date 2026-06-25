@@ -261,7 +261,7 @@ print(pcntGRR, target = "Plots/RelativeGRichness_Table.docx")
 
 ########################################################## GRASS DIVERSITY 
 
-SummGrasD <- shannon_results %>%
+SummGrasD <- subplot_abundance %>%
   group_by( Treatment, Fencing, Year) %>%
   summarise(
     Shannon = diversity(total_abundance, index = "shannon"),
@@ -274,7 +274,7 @@ SummGrasD <- shannon_results %>%
 
 ##Pivot the two years side‑by‑side and compute Δ GRASS RICHNESS ─────────────
 graD_delta <- SummGrasD %>%
-  select(Treatment, Fencing, Year, Shannon) %>%
+  dplyr::select(Treatment, Fencing, Year, Shannon) %>%
   pivot_wider(
     names_from = Year,
     values_from = Shannon,
@@ -329,8 +329,27 @@ pcntGRD <- body_add_par(
 pcntGRD <- body_add_flextable(pcntGRD, graDft)
 
 #save
-print(pcntGRD, target = "Plots/RelativeGDiversity_Table.docx")
+print(pcntGRD, target = "Plots/RelativeGDiversity_Table2.docx")
 
+
+
+####################### PERCENT CHANGE GRASS DIVERSITY
+
+
+# Create a formatted table
+ft <- flextable(GDplot_data) %>%
+  theme_vanilla() %>%  # Clean, professional look
+  autofit() %>%        # Auto-adjust column widths
+  bold(part = "header") %>%  # Bold headers
+  # Optional: Add significance stars or custom formatting
+  # bg(., bg = "grey90", part = "header")  # Header background color
+  
+  # Save as Word document
+  doc <- read_docx() %>%
+  body_add_flextable(ft) %>%
+  body_add_par("", style = "Normal")  # Add a blank line
+
+print(doc, target = "Plots/RelativeGDiversity_Table2.docx")
 
 
 
@@ -375,7 +394,7 @@ treedoc <- body_add_flextable(treedoc, treeft)
 #save
 print(treedoc, target = "Plots/DeltaTREES2_Table.docx")
 
-#################################### RELATIVE CHANGE SAPLINGS
+#################################### RELATIVE CHANGE TREES
 
 # Convert object to table
 treeft <- flextable(Tplot_data) %>%

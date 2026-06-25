@@ -23,6 +23,7 @@ Contact Tapiwa Gumbo (tg488@exeter.ac.uk) and/or Andrew Cunliffe (a.cunliffe@exe
  i. '2Grasses2426updated.csv' - data for 2024 and 2026 grasses survey, used for biomass calculations.
  
  ii. 'Grasses2426Updated1.csv' - data for 2024 and 2026 grass survey.
+ iii. 'WOODY2426.csv' - data for 2024 and 2026 woody plants survey.
  
 
  d. 'WFO_Backbone' - this is a folder for WFO, used for the taxonomic harmonisation.

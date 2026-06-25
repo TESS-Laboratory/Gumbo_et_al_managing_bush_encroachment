@@ -1331,7 +1331,6 @@ plot_data$Fencing <- factor(plot_data$Fencing,
 #     axis.text = element_text(size = 8))
 
 
-
 ## Percent change. Ineverted axis. y = Treatment  
 
 Gbc <- ggplot(plot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
@@ -1754,7 +1753,7 @@ GSWa <- ggplot(grSWdiversity,aes(x = Treatment, y =Shannon, fill = Fencing))+ fa
 
 # Method 1: Using pivot_wider
   SW_Delta <- grSWdiversity %>%
-  select(Site, Subplot, Treatment, Fencing, Year, Shannon) %>%
+    dplyr::select(Site, Subplot, Treatment, Fencing, Year, Shannon) %>%
   pivot_wider(
     names_from = Year,
     values_from = Shannon,
@@ -1829,61 +1828,136 @@ GSWb <- ggplot(SW_Delta,aes(x = Treatment, y = delta_SW, fill = Fencing)) +
 
 
 ################ USING LOG RESPONSE RATIO FOR GRASS diversity  #####
+# 
+# ###  Step 1: Calculate lnRR for each site, treatment, fencing ,
+# lnRR4_results <- grSWdiversity  %>%
+#   mutate(
+#     Period = ifelse(Year == 2024, "Pre", "Post"),
+#     Treatment_Group = ifelse(Treatment == "C", "Control", "Treatment")
+#   ) %>%
+#   pivot_wider(
+#     id_cols = c(Site,Plot, Subplot, Treatment, Fencing, Treatment_Group),
+#     names_from = Period,
+#     values_from = Shannon
+#   ) %>%
+#   
+#   # Calculate control means in a separate summarised dataframe
+#   group_by(Site, Fencing) %>%
+#   reframe(
+#     Control_Pre = mean(Pre[Treatment_Group == "Control"], na.rm = TRUE),
+#     Control_Post = mean(Post[Treatment_Group == "Control"], na.rm = TRUE)
+#   ) %>%
+#   
+#   # Join back to the original data
+#   right_join(
+#     grSWdiversity  %>%
+#       mutate(
+#         Period = ifelse(Year == 2024, "Pre", "Post"),
+#         Treatment_Group = ifelse(Treatment == "C", "Control", "Treatment")
+#       ) %>%
+#       pivot_wider(
+#         id_cols = c(Site, Plot, Subplot, Treatment, Fencing, Treatment_Group),
+#         names_from = Period,
+#         values_from = Shannon
+#       ),
+#     by = c("Site", "Fencing")
+#   ) %>%
+#   
+#   # Keep only treated plots
+#   filter(Treatment_Group == "Treatment") %>%
+#   
+#   # Calculate lnRR
+#   mutate(
+#     Treatment_ratio = Post / Pre,
+#     Control_ratio = Control_Post / Control_Pre,
+#     lnRR = log(Treatment_ratio / Control_ratio)
+#   ) %>%
+#   select(Site, Subplot, Treatment, Fencing, 
+#          Pre, Post, Treatment_ratio, Control_ratio, lnRR)
+# 
+# #head(lnRR4_results)
 
 
-###  Step 1: Calculate lnRR for each site, treatment, fencing ,
-lnRR4_results <- grSWdiversity  %>%
-  mutate(
-    Period = ifelse(Year == 2024, "Pre", "Post"),
-    Treatment_Group = ifelse(Treatment == "C", "Control", "Treatment")
-  ) %>%
+
+################# Calculating lnRR using a constant of 0.01
+
+
+# --- D1. Calculate Shannon diversity LRR --------------------------------------
+
+# Step 1: Species-level abundance per subplot × year
+subplot_abundance <- Grasses |>
+  filter(!is.na(Species_name), Year %in% c(2024, 2026)) |>
+  group_by(Site, Plot, Subplot, Treatment, Fencing, Year, Species_name) |>
+  summarise(total_abundance = sum(Number, na.rm = TRUE), .groups = "drop")
+
+# Step 2: Shannon index per subplot × year
+sw_diversity <- subplot_abundance |>
+  group_by(Site, Plot, Subplot, Treatment, Fencing, Year) |>
+  summarise(
+    Shannon = diversity(total_abundance, index = "shannon"),
+    .groups = "drop"
+  )
+
+# Step 3: Compute LRR
+GDiv_lnRR <- sw_diversity |>
+  mutate(Treatment_Group = ifelse(Treatment == "C", "C", "Treated")) |>
   pivot_wider(
-    id_cols = c(Site,Plot, Subplot, Treatment, Fencing, Treatment_Group),
-    names_from = Period,
-    values_from = Shannon
-  ) %>%
-  
-  # Calculate control means in a separate summarised dataframe
-  group_by(Site, Fencing) %>%
-  reframe(
-    Control_Pre = mean(Pre[Treatment_Group == "Control"], na.rm = TRUE),
-    Control_Post = mean(Post[Treatment_Group == "Control"], na.rm = TRUE)
-  ) %>%
-  
-  # Join back to the original data
-  right_join(
-    grSWdiversity  %>%
-      mutate(
-        Period = ifelse(Year == 2024, "Pre", "Post"),
-        Treatment_Group = ifelse(Treatment == "C", "Control", "Treatment")
-      ) %>%
-      pivot_wider(
-        id_cols = c(Site, Plot, Subplot, Treatment, Fencing, Treatment_Group),
-        names_from = Period,
-        values_from = Shannon
-      ),
-    by = c("Site", "Fencing")
-  ) %>%
-  
-  # Keep only treated plots
-  filter(Treatment_Group == "Treatment") %>%
-  
-  # Calculate lnRR
+    names_from  = Year,
+    values_from = Shannon,
+    names_prefix = "Year_"
+  ) |>
+  rename(Pre = Year_2024, Post = Year_2026) |>
+  group_by(Site, Fencing) |>
   mutate(
-    Treatment_ratio = Post / Pre,
-    Control_ratio = Control_Post / Control_Pre,
-    lnRR = log(Treatment_ratio / Control_ratio)
-  ) %>%
-  select(Site, Subplot, Treatment, Fencing, 
-         Pre, Post, Treatment_ratio, Control_ratio, lnRR)
+    Control_Pre  = mean(Pre[Treatment_Group == "C"],  na.rm = TRUE),
+    Control_Post = mean(Post[Treatment_Group == "C"], na.rm = TRUE)
+  ) |>
+  ungroup() |>
+  filter(Treatment_Group == "Treated") |>
+  mutate(
+    # Pseudocount of 0.01 added to avoid log(0) when Shannon = 0 (single-species subplots)
+    GdLRR     = log(((Post + 0.01) / (Pre + 0.01)) / ((Control_Post + 0.01) / (Control_Pre + 0.01))),
+    Treatment = factor(Treatment, levels = c("F", "TF", "TFB", "THF")),
+    Fencing   = factor(Fencing,   levels = c("Unfenced", "Fenced"))
+  ) |>
+  dplyr::select(Site, Plot, Subplot, Treatment, Fencing, Pre, Post, GdLRR)
 
-#head(lnRR4_results)
+# Check for Inf / NaN
+GDiv_lnRR |>
+  summarise(
+    n_Inf = sum(is.infinite(GdLRR)),
+    n_NaN = sum(is.nan(GdLRR)),
+    n_NA  = sum(is.na(GdLRR))
+  )
 
 
-# run LMM
-GDilog <- lmer(GdLRR ~ Treatment * Fencing + (1|Site), data = GRDiv_LRR)
+# --- D2. Descriptive summary --------------------------------------------------
+
+grass_div_summary <- GDiv_lnRR |>
+  group_by(Treatment, Fencing) |>
+  summarise(
+    n        = n(),
+    mean_LRR = mean(GdLRR, na.rm = TRUE),
+    sd_LRR   = sd(GdLRR,   na.rm = TRUE),
+    se_LRR   = sd_LRR / sqrt(n),
+    .groups  = "drop"
+  )
+
+#print(grass_div_summary)
+
+
+# --- D3. Fit Linear Mixed Model -----------------------------------------------
+
+GDilog <- lmer(GdLRR ~ Treatment * Fencing + (1 | Site),
+                data = GDiv_lnRR)
 
 summary(GDilog)
+
+
+# # run LMM
+# GDilog <- lmer(GdLRR ~ Treatment * Fencing + (1|Site), data = GRDiv_LRR)
+# 
+# summary(GDilog)
 
 
 # Model performance
@@ -1897,7 +1971,7 @@ summary(GDilog)
 
 
 # Plot LRR
-ggplot(GRDiv_LRR,
+ggplot(GDiv_lnRR,
        aes(x = Treatment, y = GdLRR, fill = Fencing))+ 
   geom_violin(trim = FALSE)+
   geom_hline(yintercept = 0, linetype = "dashed") +  
@@ -1995,13 +2069,13 @@ GDplot_data$Fencing <- factor(GDplot_data$Fencing,
 
 
 # Percent change plot. y = Treatment
-GSWD<-ggplot(plot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
+GSWD<-ggplot(GDplot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
   geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.5) +
   geom_point(size = 2.0, position = position_dodge(0.5)) +
   geom_errorbarh(aes(xmin = CI_lower_pct, xmax = CI_upper_pct),
                  height = 0.5, size = 0.9, position = position_dodge(0.5)) +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
-  scale_x_continuous(breaks = seq(-05, 25, 5)) +
+  #scale_x_continuous(breaks = seq(-10, 25, 10)) +
   labs(x = "Change in grass Shannon-Weiner diversity relative to Control (%)",
        y = "Treatment") +
   theme_classic()+ 
@@ -2026,7 +2100,7 @@ SWmulti_panel <- (GSWa/GSWb/GSWD) +   # "/" for stacking vertically, or "|" for 
     plot.tag = element_text(size = 10, hjust = 0))  # Ensure left alignment
   
 ##ggsave multipanel grass richness
-ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog1C.png",
+ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog1D.png",
        width = 16, height = 14, units = "cm")
 
 
