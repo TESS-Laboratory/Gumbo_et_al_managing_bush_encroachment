@@ -204,7 +204,7 @@ ggplot(browse_df,
 # USING ACTUAL PLOT AREA PER SITE
 
 # Read site-level data
-sites <- read_csv("DATA/Coordinates/Browser_plot_area.csv")
+sites <- read_csv("DATA/Browser_plot_area.csv")
 
 # Columns: Location, plot_area_ha
 
@@ -244,12 +244,13 @@ plot_df <- browse_by_site %>%
     names_to = "Period",
     values_to = "provisional_browse_pressure_kg_ha"
   )
-# stacking order
+
+# stacking order with new labels
 plot_df$Period <- factor(
   plot_df$Period,
-  levels = c("Initial_treatment_(May)", "Second_treatment_(November)")
+  levels = c("Initial_treatment_(May)", "Second_treatment_(November)"),
+  labels = c("May 2025", "November 2025")
 )
-
 
 
 ## ggplot - stacked bar plots
@@ -259,7 +260,7 @@ bpS <- ggplot(plot_df,
                   y = provisional_browse_pressure_kg_ha,
                   fill = Period)) +
   geom_col(position = position_stack(reverse = TRUE)) +
-  labs(y = "Browse pressure ("*kg~ha^{-1}*")",
+  labs(y = "Estimated browse pressure ("*kg~ha^{-1}*")",
        x = "Site") +
   theme_classic() + 
   theme(
