@@ -1373,3 +1373,97 @@ ggplot(composite_summary, aes(x = composite_z, y = Treatment, fill = Fencing)) +
 
 ggsave("Plots/Composite_Performance_Ranking.png",
        width = 18, height = 14, units = "cm", dpi = 300, bg = "white")
+
+
+################################################################################
+# TREATMENT RANKING PER VARIABLE
+#
+# For each outcome, treatments are ranked from most to least effective within
+# each fencing level, based on the model-estimated % change (pct_change).
+#
+# Effectiveness direction:
+#   Suppression metrics (seedlings, saplings, trees):
+#     Most negative pct_change = Rank 1 (greatest reduction relative to control)
+#   Enhancement metrics (grass biomass, richness, diversity):
+#     Most positive pct_change = Rank 1 (greatest increase relative to control)
+#
+# Pairwise comparisons (Tukey-adjusted) follow each ranking to indicate which
+# differences are statistically distinguishable.
+################################################################################
+
+
+# Helper: rank treatments from most to least effective within each Fencing level
+# suppress = TRUE  -> lower pct_change is better (suppression metrics)
+# suppress = FALSE -> higher pct_change is better (enhancement metrics)
+rank_treatments <- function(emm_df_in, variable_label, suppress = FALSE) {
+  emm_df_in |>
+    group_by(Fencing) |>
+    mutate(
+      Rank = if (suppress) rank(pct_change, ties.method = "min")
+             else          rank(-pct_change, ties.method = "min")
+    ) |>
+    ungroup() |>
+    arrange(Fencing, Rank) |>
+    mutate(Variable = variable_label) |>
+    dplyr::select(Variable, Fencing, Rank, Treatment, pct_change, CI_lower_pct, CI_upper_pct, emmean)
+}
+
+
+# --- Grass Biomass (enhancement: higher pct_change = more effective) ----------
+
+cat("\n================================================================================\n")
+cat("  GRASS BIOMASS — Treatment ranking (most to least effective)\n")
+cat("================================================================================\n")
+rank_treatments(emm_gb_df, "Grass biomass", suppress = FALSE) |> print(n = Inf)
+cat("\nPairwise comparisons (Tukey) within each Fencing level:\n")
+print(pairs(emmeans(GBiomlog, ~ Treatment | Fencing), adjust = "tukey"))
+
+
+# --- Seedling Density (suppression: lower pct_change = more effective) --------
+
+cat("\n================================================================================\n")
+cat("  SEEDLING DENSITY — Treatment ranking (most to least effective)\n")
+cat("================================================================================\n")
+rank_treatments(emm_df, "Seedling density", suppress = TRUE) |> print(n = Inf)
+cat("\nPairwise comparisons (Tukey) within each Fencing level:\n")
+print(pairs(emmeans(Seedllog, ~ Treatment | Fencing), adjust = "tukey"))
+
+
+# --- Sapling Density (suppression: lower pct_change = more effective) ---------
+
+cat("\n================================================================================\n")
+cat("  SAPLING DENSITY — Treatment ranking (most to least effective)\n")
+cat("================================================================================\n")
+rank_treatments(emm_sap_df, "Sapling density", suppress = TRUE) |> print(n = Inf)
+cat("\nPairwise comparisons (Tukey) within each Fencing level:\n")
+print(pairs(emmeans(Saplog, ~ Treatment | Fencing), adjust = "tukey"))
+
+
+# --- Tree Density (suppression: lower pct_change = more effective) ------------
+
+cat("\n================================================================================\n")
+cat("  TREE DENSITY — Treatment ranking (most to least effective)\n")
+cat("================================================================================\n")
+rank_treatments(emm_tree_df, "Tree density", suppress = TRUE) |> print(n = Inf)
+cat("\nPairwise comparisons (Tukey) within each Fencing level:\n")
+print(pairs(emmeans(Treelog, ~ Treatment | Fencing), adjust = "tukey"))
+
+
+# --- Grass Richness (enhancement: higher pct_change = more effective) ---------
+
+cat("\n================================================================================\n")
+cat("  GRASS RICHNESS — Treatment ranking (most to least effective)\n")
+cat("================================================================================\n")
+rank_treatments(emm_gr_df, "Grass richness", suppress = FALSE) |> print(n = Inf)
+cat("\nPairwise comparisons (Tukey) within each Fencing level:\n")
+print(pairs(emmeans(GRiclog, ~ Treatment | Fencing), adjust = "tukey"))
+
+
+# --- Grass Diversity / Shannon (enhancement: higher pct_change = more effective)
+
+cat("\n================================================================================\n")
+cat("  GRASS DIVERSITY (Shannon) — Treatment ranking (most to least effective)\n")
+cat("================================================================================\n")
+rank_treatments(emm_gd_df, "Grass diversity", suppress = FALSE) |> print(n = Inf)
+cat("\nPairwise comparisons (Tukey) within each Fencing level:\n")
+print(pairs(emmeans(GDivlog, ~ Treatment | Fencing), adjust = "tukey"))
