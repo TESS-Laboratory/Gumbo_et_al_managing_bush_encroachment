@@ -590,8 +590,8 @@ RespVio <- ggplot(resprouts_df, aes(x = Treatment, y = No_of_resprouts,
                position = position_dodge(0.8), 
                size = 1.5, color = "black") +
   #geom_hline(yintercept = 0, linetype = "dashed") +
-  scale_x_continuous(breaks = seq(1, 45, 5)) +
-  labs(x = "Treatment", y = "Average no.of resprouts per cut stump") +
+  #scale_x_continuous(breaks = seq(1, 45, 5)) +
+  labs(x = "Treatment", y = "No.of resprouts per cut stump") +
   theme_classic() +
   theme(
     axis.title = element_text(size = 12),      # Axis titles
@@ -685,6 +685,10 @@ summary(Rstreat_comparisons3$contrasts)
 # Estimated marginal means for Treatment within Fencing (if needed)
 Rstreat_comparisons3 <- emmeans(R5b_tweedie, ~ Treatment | Fencing, type = "response")
 
+
+## Test effect of fencing within each treatment level
+ pairs(Rstreat_comparisons3, by = "Treatment")
+
 # Compare each treatment to Control with Dunnett adjustment (or "none" if you only want vs control)
 contrast_vs_control <- contrast(Rstreat_comparisons3, method = "trt.vs.ctrl", ref = "TF")
 summary(contrast_vs_control, infer = TRUE)
@@ -725,8 +729,8 @@ Rspplot_df$Fencing <- factor( Rspplot_df$Fencing,
   labs(color = "Fencing")+  # Optional: rename legend title
   labs(
     x = "Treatment",
-    #y = "Change in seedling density per ha",
-    y = expression("Average number of resprouts per cut stump")
+    #y = expression("Average number of resprouts per cut stump")
+    y = expression("Mean resprouts per cut stump")
   ) +
   theme_classic()+ 
   ggtitle(NULL)+
@@ -736,14 +740,33 @@ Rspplot_df$Fencing <- factor( Rspplot_df$Fencing,
     axis.text = element_text(size = 12))
 
 
-# ## saving marginal effects plot
- #ggsave(Resp,filename ="Plots/ Violin Resprouts.png",
-#      width = 16, height = 14, units = "cm") 
+ 
+ ## creating a multipanel for panels with 2 different y-axis
+ 
+ # # Combine the plots in a single layout
+ Resp2 <- (RespVio/Resp) +   # "/" for stacking vertically, or "|" for side-by-side
+   plot_layout(heights = c(1, 1,1)) +    # Adjust relative heights
+   plot_annotation(
+     tag_levels = 'a',
+     tag_prefix = '(',
+     tag_suffix = ')',
+     theme = theme(plot.tag = element_text(size = 8, hjust = 0))  # Left align tags
+   ) &
+   theme(
+     axis.text = element_text(size = 11),        # Increase axis label font size
+     axis.title = element_text(size = 10),       # Increase axis title font size
+     plot.tag = element_text(size = 12, hjust = 0))  # Ensure left alignment
+ 
+ 
+### saving plot
+ ggsave(Resp2,filename ="Plots/ 3Violin Resprouts.png",
+     width = 16, height = 14, units = "cm") 
 
  
  
+ 
 
-## Creating new panel with share y-axis title
+####### Creating new panel with share y-axis title
  
  # Remove internal left spacing
  RespVio <- RespVio +
@@ -1120,6 +1143,10 @@ Treea<- ggplot(tree_comparison2,
  
  # Get estimated marginal means for both factors
  Tremm_interaction <- emmeans(Treelog, ~ Treatment | Fencing)
+ 
+ ## Test effect of fencing within each treatment level
+  pairs(Tremm_interaction, by = "Treatment")
+ 
  
  # Convert to dataframe
  Tplot_data <- as.data.frame(Tremm_interaction)

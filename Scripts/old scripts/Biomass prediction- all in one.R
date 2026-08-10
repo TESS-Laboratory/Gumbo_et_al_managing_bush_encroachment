@@ -49,7 +49,7 @@ theme_beautiful <- function() {
 # load data
 WGdata <- read_csv("DATA/DPM.csv")
 WGsqtdata <- read_csv("DATA/DPM.csv")
-RSQTGdata <- read_csv(here("DATA/DPM.csv"))
+RSQTGdata <- read_csv("DATA/DPM.csv")
 
 ################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO TRANSFORMATION
 # 2. Convert weight from grams to kg/ha
@@ -483,10 +483,10 @@ abline(h = 0, lty = 2)
  
  ## adjusting font size for equations
  annotate("text", x = -Inf, y = Inf, label = Req_free,
-          hjust = -0.1, vjust = 1.5, color = "blue", size = 2.0) +
+          hjust = -0.1, vjust = 1.5, color = "blue", size = 5.0) +
    
    annotate("text", x = -Inf, y = Inf, label = Req_zero,
-            hjust = -0.1, vjust = 3.5, color = "red", size = 2.0) +
+            hjust = -0.1, vjust = 3.5, color = "red", size = 5.0) +
    labs(x = "Log DPM Height (cm)",
         y = "Log Standing grass biomass ("*kg~ha^{-1}*")") +
    theme_beautiful()+
@@ -593,7 +593,8 @@ abline(h = 0, lty = 2)
  
    
  ## Combine the plots in a single layout 
- multi_pBiomass <- (DPM | RLMB| COMB) +
+ #multi_pBiomass <- (DPM | RLMB| COMB) +
+   multi_pBiomass <- (RLMB| COMB)+
    plot_layout(
      nrow = 1,
      guides = "collect"
@@ -707,31 +708,31 @@ BiasC <- ggplot(plot_df, aes(x = x, y = Biomass, color = Model)) +
  
   
 #### Combine the plots in a single layout 
-multi_pBiomass <- (DPM | RLMB|BiasC) +   # "/" for stacking vertically, or "|" for side-by-side
-  plot_layout(
-    nrow = 1,
-    guides = "collect"
-  ) +
-  plot_annotation(
-    tag_levels = "a",
-    tag_prefix = "(",
-    tag_suffix = ")",
-    theme = theme(
-      plot.tag = element_text(size = 6, face = "plain", hjust = 0)
-    )
-  ) &
-  theme_classic() &
-  theme(
-    axis.text = element_text(size = 7),
-    axis.title = element_text(size = 8),
-    strip.text = element_text(size = 8, face = "plain"),
-    panel.grid.minor = element_blank(),
-    plot.margin = margin(5, 5, 5, 5)
-  )
-
-##ggsave multipanel 
-ggsave(multi_pBiomass,filename ="Plots/3BiasCdModelComparison Biomass.png",
-       width = 18, height = 6, units = "cm", dpi = 300)  
+# multi_pBiomass <- (DPM | RLMB|BiasC) +   # "/" for stacking vertically, or "|" for side-by-side
+#   plot_layout(
+#     nrow = 1,
+#     guides = "collect"
+#   ) +
+#   plot_annotation(
+#     tag_levels = "a",
+#     tag_prefix = "(",
+#     tag_suffix = ")",
+#     theme = theme(
+#       plot.tag = element_text(size = 6, face = "plain", hjust = 0)
+#     )
+#   ) &
+#   theme_classic() &
+#   theme(
+#     axis.text = element_text(size = 7),
+#     axis.title = element_text(size = 8),
+#     strip.text = element_text(size = 8, face = "plain"),
+#     panel.grid.minor = element_blank(),
+#     plot.margin = margin(5, 5, 5, 5)
+#   )
+# 
+# ##ggsave multipanel 
+#ggsave(multi_pBiomass,filename ="Plots/3BiasCdModelComparison Biomass.png",
+ #      width = 18, height = 6, units = "cm", dpi = 300)  
 
 ###########################################################
 
@@ -837,18 +838,20 @@ multi_pBiomass2 <- (RLMB/BiasC2) +   # "/" for stacking vertically, or "|" for s
   ) &
   theme_classic() &
   theme(
-    axis.text = element_text(size = 7),
-    axis.title = element_text(size = 8),
-    strip.text = element_text(size = 8, face = "plain"),
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 10),
+    strip.text = element_text(size = 10, face = "plain"),
     panel.grid.minor = element_blank(),
     plot.margin = margin( 3, 3)
   )
 
 
 ##ggsave multipanel 
-#ggsave(multi_pBiomass2,filename ="Plots/6BBiasCdModelComparison Biomass.png",
+ggsave(multi_pBiomass2,filename ="Plots/ModelComparison-BIOMASS.png",
        width = 16, height = 14, units = "cm", dpi = 300)
  
+
+
  #################### COMPARING AIC, RMSE, RSS, MAE FOR LOG TRANSFORMED
  
  ###### option 4
@@ -1160,116 +1163,3 @@ multi_pBiomass2 <- (RLMB/BiasC2) +   # "/" for stacking vertically, or "|" for s
  
 
  
- 
- ################## RLM SQRT COMPARING TROLLOPE, ZAMBATIS MODELS 
- #LOading data 
- comp2 <- read_csv("DATA/DPM_RLMSQRT.csv")  
- 
- # Reshape data to long format for ggplot
- df_long <- comp2 %>%
-   pivot_longer(cols = c("SHR_model", "Trollope", "Zambatis"),
-                names_to = "Model",
-                values_to = "Biomass")
- 
- ### Define the equations as text labels (adjust if your model names differ)
- equations <- data.frame(
-   Model = c("SHR_model", "Trollope", "Zambatis"),
-   label = c(
-     "~sqrt(italic(y)) == -4.60 + 13.95%*% sqrt(italic(x))",
-     "~ italic(y) == -3019 + 2260 %*% sqrt(italic(x))",
-     "~italic(y) ==(31.7176 %*% 0.3218^(1/italic(x)) %*% italic(x)^0.2834)^2"
-   ),
-   color = c("blue", "black", "brown"),
-   stringsAsFactors = FALSE
- )
- 
- 
- # Create the plot   
- # Equations placed in the BOTTOM-RIGHT corner
- COMB <- ggplot(df_long, aes(x = DPH_Height, y = Biomass, color = Model, linetype = Model)) +
-   geom_line(size = 0.8) +
-   geom_text(data = equations,
-             aes(label = label),
-             x = Inf,                  # right edge
-             y = -Inf,                 # bottom edge
-             hjust = 1.1,              # nudge slightly left from right edge
-             vjust = c(-5.0, -3.5, -1.5),  # negative values push text upward from bottom
-             color = equations$color,
-             size = 1.3,
-             fontface = "plain",
-             parse = TRUE) +    
-   
-   scale_color_manual(values = c("SHR_model" = "blue", 
-                                 "Trollope" = "black", 
-                                 "Zambatis" = "brown")) +
-   scale_linetype_manual(values = c("SHR_model" = "solid", 
-                                    "Trollope" = "solid", 
-                                    "Zambatis" = "solid")) +
-   labs(
-     x = "DPM Height (cm)",
-     y = "Standing grass biomass (kg/ha)",
-     color = "Model",
-     linetype = "Model"
-   ) +
-   theme_beautiful()+
-   theme(
-     legend.position = c(0, 1),
-     legend.justification = c(0, 0.8),
-     legend.box.just = "left")+
-   theme(
-     axis.title = element_text(size = 12),      # Axis titles
-     axis.text = element_text(size = 12)        # Axis tick labels
-   )
- 
- 
- ## save the plot
- #ggsave(COMB, filename = "Plots/ 2Model Comparisons RLMSQRT.png",width = 16, height = 14, units = "cm")   
- 
- 
- ## Combine the plots in a single layout 
- multi_pBiomass <- (DPM | RLMB2| COMB) +   # "/" for stacking vertically, or "|" for side-by-side
-   plot_layout(heights = c(1, 1, 1)) +  # Adjust relative heights
-   plot_annotation(
-     tag_levels = 'a',
-     tag_prefix = '(',
-     tag_suffix = ')',
-     theme = theme(plot.tag = element_text(size = 4, hjust = 0))  # Left align tags
-   ) &
-   theme(
-     axis.text = element_text(size = 8),        # Increase axis label font size
-     axis.title = element_text(size = 8),       # Increase axis title font size
-     plot.tag = element_text(size = 8, hjust = 0) # Ensure left alignment
-   )
- 
-##ggsave multipanel 
-  #ggsave(multi_pBiomass,filename ="Plots/RLMSQ Multipanel5 gBiomass.png",
-        width = 16, height = 12, units = "cm")  
- 
-################################################################
-
-#### CONVERTING SQRT RLM TO ACTUAL BIOMASS
-
-# Load data
-heights2_data <-  read_csv("DATA/March2025/GrassHeight.csv")
-
-# defining intercept and slope
-INTERCEPT <- -4.60
-SLOPE <- 13.95
-
-# Ensure height column
-if (!"DPM_Height" %in% names(heights2_data)) {
-  heights2_data$DPM_Height <- heights2_data[[names(heights2_data)[1]]]
-  cat("Using first column as Height_cm\n")
-}
-
-# Predict biomass
-predict_biomass <- function(h) {
-  sqrt_b <- INTERCEPT + SLOPE * sqrt(h)
-  sqrt_b <- pmax(0, sqrt_b)
-  return(sqrt_b^2)
-}
-
-heights2_data$Biomass_kg_ha <- predict_biomass(heights2_data$DPM_Height)
-
-# Save
-#write.csv(heights2_data, "SQRLMbiomass_predictions.csv", row.names = FALSE)
