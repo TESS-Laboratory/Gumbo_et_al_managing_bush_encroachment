@@ -39,7 +39,7 @@ library(vegan)
 
 # Read data
 A <- read_csv("DATA/GEODE_Subplot_area.csv")
-B <- read.csv("DATA/March2026/WOODYP2426.csv", stringsAsFactors = FALSE)
+B <- read.csv("DATA/March2026/WOODY2426.csv", stringsAsFactors = FALSE)
 
 
 # Ensure consistent column names (case-sensitive)
@@ -2107,3 +2107,239 @@ ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog1D.png",
 
 ############################################################################################
 
+
+############################ RESPROUTS  RESPROUTS RESPROUTS ####################
+
+# Step 1: Filter Cut stumps only and years 
+resprouts_df <- SapF %>%
+  filter(
+    woody_cat == "Cut stump",
+    Year %in% c(2026),
+    !Treatment %in% c("C", "F")  # exclude the two treatments
+  )
+
+
+
+#Summary stats for resprouts 
+Respsummary_stats <- resprouts_df %>%
+  group_by(Site, Treatment) %>%
+  summarise(
+    Total_resprouts = sum(No_of_resprouts, na.rm = TRUE),
+    Mean_resprouts = mean(No_of_resprouts, na.rm = TRUE),
+    Max_resprouts = max(No_of_resprouts, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(Total_resprouts))
+
+
+## check which species had more resprouts
+Species_resprouts <- resprouts_df %>%
+  group_by(Species_name, Treatment) %>%
+  summarise(
+    Total_resprouts = sum(No_of_resprouts, na.rm = TRUE),
+    N = n(),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(Total_resprouts))
+
+
+
+### Make "Unfenced" the reference level (to see "fenced" coefficients)
+# Check current class of FieldType
+
+class(resprouts_df$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+resprouts_df$Fencing <- factor(resprouts_df$Fencing, ordered = FALSE)
+
+# Verify
+levels(resprouts_df$Fencing)  # Should show "Open" "Closed" (or vice versa)
+
+# Set "Unfenced" as the reference level (to see "Unfenced" coefficients)
+resprouts_df$Fencing <- relevel(resprouts_df$Fencing, ref = "Unfenced")
+
+### Convert character variables to factors
+resprouts_df$Treatment <- as.factor(resprouts_df$Treatment)
+resprouts_df$Fencing <- as.factor(resprouts_df$Fencing)
+
+
+# Scale Variables to ensure convergence:
+#resprouts_df$deltens_scaled <- as.numeric(scale(resprouts_df$No_of_resprouts))
+
+#violin plot
+RespVio <- ggplot(resprouts_df, aes(x = Treatment, y = No_of_resprouts,
+                                    fill = Fencing)) + 
+  geom_violin(trim = TRUE)+
+  stat_summary(fun = mean, geom = "point", 
+               position = position_dodge(0.8), 
+               size = 1.5, color = "black") +
+  #geom_hline(yintercept = 0, linetype = "dashed") +
+  #scale_x_continuous(breaks = seq(1, 45, 5)) +
+  labs(x = "Treatment", y = "No.of resprouts per cut stump") +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12)) +
+  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
+
+
+##saving Violin PLOT - resprouts
+#ggsave(RespVio,filename ="Plots/RESPROUTS VIOLIN26 plot.png",
+width = 16, height = 14, units = "cm")  
+
+
+
+##GLMM for resprouts on cut stumps  
+
+##using poisson family 
+# Respr5b <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+#                    data = resprouts_df, family = poisson(link = log))
+# summary(Respr5b)
+# 
+# 
+# # option 2 using negative binomial
+# Respr5bc <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+#                    data = resprouts_df, family = nbinom2(link = "log"))
+
+
+
+# option 3 using tweedie distribution - to handle zeros
+
+R5b_tweedie <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+                       data = resprouts_df,
+                       family = tweedie(link = "log"))
+
+
+# diagnostics using DHARMA
+simTw <- simulateResiduals(R5b_tweedie)
+plot(simTw)
+
+# Explicit tests (should be non-significant if model meets DHARMA assumptions)
+testDispersion(simTw)
+testZeroInflation(simTw)
+testOutliers(simTw)
+
+# model summary
+summary(R5b_tweedie)
+
+# 
+# 
+# ## LMM analysis
+# Respr5D <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+#                    data = resprouts_df, family = Gamma(link = "log"))
+# 
+# summary(Respr5D)
+# # 
+# # # Model diagnostics
+# #  check_model(Respr5b, check = "qq")
+# #  check_model(R5b_tweedie, check = "normality")
+# # # check_model(Respr5b, check = "homogeneity")
+# # # plot(Respr5b)
+# 
+#  qqnorm(residuals(R5b_tweedie)) #whether residuals are approximately normal.
+# qqline(residuals(R5b_tweedie))
+
+
+
+#### Using LMM instead of glmm
+# Respr5c <- lmer(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+#                 data = resprouts_df)
+# 
+# summary(Respr5c)
+
+# Model diagnostics
+# check_model(Respr5c, check = "qq")
+# check_model(Respr5c, check = "normality")
+# check_model(Respr5c, check = "homogeneity")
+# plot(Respr5c)
+
+# qqnorm(residuals(Respr5c)) #whether residuals are approximately normal.
+# # qqline(residuals(Respr5c))
+# 
+# ## check model performance
+# performance::check_model(Respr5c)
+# 
+
+
+### POST HOC ANALYSIS FOR RESPROUTS 
+# pairwise comparisons
+Rstreat_comparisons3 <- emmeans(R5b_tweedie, specs = pairwise ~ Treatment | Fencing, adjust = "Dunnet")
+summary(Rstreat_comparisons3$contrasts)
+
+# Estimated marginal means for Treatment within Fencing (if needed)
+Rstreat_comparisons3 <- emmeans(R5b_tweedie, ~ Treatment | Fencing, type = "response")
+
+# Compare each treatment to Control with Dunnett adjustment (or "none" if you only want vs control)
+contrast_vs_control <- contrast(Rstreat_comparisons3, method = "trt.vs.ctrl", ref = "TF")
+summary(contrast_vs_control, infer = TRUE)
+
+# generate letters using cld in multicomp package
+Respcld_emm <- cld(Rstreat_comparisons3, adjust = "Dunnett", Letters = letters, type = "response")
+cld_tbl <- as.data.frame(Respcld_emm)
+
+
+# prepare clean database for plotting
+Rspplot_df <- cld_tbl %>%
+  rename(
+    EMM = response,
+    CI_lower = asymp.LCL, # tweedie used different typology for EMM and CIs
+    CI_upper = asymp.UCL,
+    Group = .group
+  ) %>%
+  mutate(Group = str_trim(Group))  # Clean whitespace
+
+
+# to check if log scale has been back transformed
+summary(emmeans(R5b_tweedie, ~ Treatment, type = "response"))
+
+### Visualisation using ggplot
+
+Rspplot_df$Fencing <- factor( Rspplot_df$Fencing,
+                              levels = c("Unfenced", "Fenced")) #ordering Fencing level to start with Unfenced
+
+
+Resp <- ggplot(Rspplot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)) +
+  geom_point(position = position_dodge(width = 0.35), size = 1.5) +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper),
+                position = position_dodge(width = 0.35), width = 0.12) +
+  geom_text(aes(label = Group,
+                y = CI_upper + 0.1 * max(EMM)),
+            position = position_dodge(width = 0.35), size = 4, color = "black") +
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))  +
+  labs(color = "Fencing")+  # Optional: rename legend title
+  labs(
+    x = "Treatment",
+    #y = expression("Average number of resprouts per cut stump")
+    y = expression("Mean resprouts per cut stump")
+  ) +
+  theme_classic()+ 
+  ggtitle(NULL)+
+  #geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
+  theme(
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12))
+
+
+
+## creating a multipanel for panels with 2 different y-axis
+
+# # Combine the plots in a single layout
+Resp2 <- (RespVio/Resp) +   # "/" for stacking vertically, or "|" for side-by-side
+  plot_layout(heights = c(1, 1,1)) +    # Adjust relative heights
+  plot_annotation(
+    tag_levels = 'a',
+    tag_prefix = '(',
+    tag_suffix = ')',
+    theme = theme(plot.tag = element_text(size = 8, hjust = 0))  # Left align tags
+  ) &
+  theme(
+    axis.text = element_text(size = 11),        # Increase axis label font size
+    axis.title = element_text(size = 10),       # Increase axis title font size
+    plot.tag = element_text(size = 12, hjust = 0))  # Ensure left alignment
+
+
+### saving plot
+ggsave(Resp2,filename ="Plots/ 3Violin Resprouts.png",
+       width = 16, height = 14, units = "cm") 
+
+######################################
