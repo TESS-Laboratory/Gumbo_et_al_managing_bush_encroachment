@@ -33,8 +33,361 @@ library(multcomp)
 library(vegan)
 
 
+
+####################################### DETERMINING WOODY PLANTS DENSITY
+
+# Read data
+A <- read_csv("DATA/GEODE_Subplot_area.csv")
+Bt <- read.csv("DATA/March2026/Trees2426.csv", stringsAsFactors = FALSE)
+
+# Ensure consistent column names (case-sensitive)
+colnames(A) <- c("Site", "Plot", "Subplot", "Area")
+
+# Merge Area into B
+Bt_merged <- Bt %>%
+  dplyr::left_join(
+    A %>% dplyr::select(Site, Plot, Subplot, Area),
+    by = c("Site", "Plot", "Subplot")
+  )
+
+
+# prepare data for trees
+SapFt <- Bt_merged %>% 
+  mutate(
+    woody_cat = case_when(
+      Woody_class == "Cut stump"         ~ "Cut stump",
+      between(Max_height.m., 1.5, 21.0) ~ "Trees",
+      TRUE                               ~ NA_character_
+    ),
+    Treatment = factor(Treatment),
+    Fencing = factor(Fencing)
+  )
+
+## TREE DENSITY 
+
+# calculating tree density
+Trees <- SapFt %>%
+  filter(
+    woody_cat == "Trees",
+    Year %in% c(2024, 2026)) %>%
+  count(
+    Site, Plot, Subplot, Treatment, Fencing, Year, Area,
+    name = "Trees"
+  ) %>%
+  mutate(
+    density_ha = Trees * 10000 / Area
+  )
+
+
+#comparing at treatment level
+
+Trees_treat <- Trees %>% 
+  group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>% 
+  summarise(mean_dens_ha = mean(density_ha), .groups = "drop")  
+
+
+#Summary stats for seedlings 
+Treessummary_stats <- Trees %>%
+  group_by(Treatment,Fencing,Year) %>%
+  summarise(
+    N = n(),  # number of observations per treatment
+    mean_density = mean(density_ha, na.rm = TRUE),
+    sd_density = sd(density_ha, na.rm = TRUE)
+  ) %>%
+  ungroup()
+
+#sort pre and post treatment
+tree_comparison2 <- Trees %>%
+  filter(Year %in% c(2024, 2026)) %>%
+  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
+
+
+#reorder so that pre-treatment appears first then post treatment second on the plots
+tree_comparison2 <- tree_comparison2 %>%
+  mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
+
+##################################DELTA TREE DENSITY
+
+#Pivot the two years side‑by‑side and compute Δ TREE density ─────────────
+Trees_Delta1 <- Trees_treat %>% 
+  pivot_wider(names_from  = Year,
+              values_from = mean_dens_ha,
+              names_glue  = "dens_{Year}") %>% 
+  mutate(delta_Treedens = dens_2026 - dens_2024) 
+
+
+
+##### to test effect of treatment * fencing on tree density###################
+
+# Make "Unfenced" the reference level 
+
+class(Trees_Delta1$Fencing)  # Likely "character" or "ordered factor"
+
+# Convert to unordered factor explicitly
+Trees_Delta1$Fencing <- factor(Trees_Delta1$Fencing, ordered = FALSE)
+
+# Verify
+levels(Trees_Delta1$Fencing)  
+
+
+### Convert character variables to factors
+Trees_Delta1$Treatment <- as.factor(Trees_Delta1$Treatment)
+
+
+Trees_Delta1$Fencing <- factor(Trees_Delta1$Fencing, 
+                               levels = c("Unfenced", "Fenced"),
+                               labels = c("Unfenced", "Fenced"))
+
+# Set "Fenced" as the reference level 
+Trees_Delta1$Fencing <- relevel(Trees_Delta1$Fencing, ref = "Unfenced")
+
+# using the LMM for analysis
+Treel5 <- lmer(delta_Treedens ~ Treatment * Fencing + (1|Site),  
+               data = Trees_Delta1)
+
+summary(Treel5)
+
+
+## increasing font size for x and y axis
+
+tree_comparison2$Fencing <- factor( tree_comparison2$Fencing,
+                                    levels = c("Unfenced", "Fenced")) #ordering Fencing level to start with Unfenced
+
+
+Treea<- ggplot(tree_comparison2, 
+               aes(x = Treatment, y = density_ha, fill = Fencing)) + facet_wrap(~Period)+ 
+  geom_violin(trim = TRUE)+
+  #geom_hline(yintercept = 0, linetype = "dashed") +    
+  stat_summary(fun = mean, geom = "point", 
+               position = position_dodge(0.8), 
+               size = 1.4, color = "black") +
+  labs(x = "Treatment", 
+       # y = "Seedlings density per ha",
+       y = expression("Tree density "*ha^{-1}*"")
+  ) +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 8),      # Axis titles
+    axis.text = element_text(size = 8)        # Axis tick labels
+  ) +
+  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
+
+
+## violin plot tree delta
+Treeb <- ggplot(Trees_Delta1,
+                aes(x = Treatment, y = delta_Treedens, fill = Fencing))+ 
+  geom_violin(trim = FALSE)+
+  geom_hline(yintercept = 0, linetype = "dashed") +  
+  stat_summary(fun = mean, geom = "point", 
+               position = position_dodge(0.8), 
+               size = 1, color = "black") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Treatment", 
+       #y = "Change in Seedlings density per ha",
+       y = expression("Δ Tree density "*ha^{-1}*"")
+  ) +  
+  scale_y_continuous( breaks = seq(-10000, 10000, 2000))+
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 8),  # Axis titles reduced from 12 to 8
+    axis.text = element_text(size = 8)) +
+  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta1"))
+
+
+
+
+###########################################################################
+### EFFECT OF TREATMENT ON TREE DENSITY (delta density model: Treel5) ###
+###########################################################################
+
+# Estimated marginal means for Treatment within each Fencing level
+Treeemm <- emmeans(Treel5, ~ Treatment | Fencing, type = "response")
+
+# Dunnett-style contrast: each treatment vs Control
+tree_contrast_vs_ctrl <- contrast(Treeemm, method = "trt.vs.ctrl", ref = "C")
+summary(tree_contrast_vs_ctrl, infer = TRUE)
+
+# CLD with Dunnett adjustment
+Treecld_emm <- cld(Treeemm, adjust = "Dunnett", Letters = letters, type = "response")
+tree_cld_tbl <- as.data.frame(Treecld_emm)
+
+# Prepare data frame for plotting
+tree_plot_df <- tree_cld_tbl %>%
+  rename(
+    EMM      = emmean,
+    CI_lower = lower.CL,
+    CI_upper = upper.CL,
+    Group    = .group
+  ) %>%
+  mutate(
+    Group   = str_trim(Group),
+    Fencing = factor(Fencing, levels = c("Unfenced", "Fenced"))
+  )
+
+# EMM plot: effect of Treatment on Δ tree density
+Treec <- ggplot(tree_plot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)) +
+  geom_point(position = position_dodge(width = 0.35), size = 2.5) +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper),
+                position = position_dodge(width = 0.35), width = 0.12) +
+  geom_text(aes(label = Group,
+                y = CI_upper + 0.15 * (max(CI_upper, na.rm = TRUE) - min(CI_lower, na.rm = TRUE))),
+            position = position_dodge(width = 0.35), size = 3, color = "black") +
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5) +
+  labs(
+    x     = "Treatment",
+    y     = expression("Change in tree density "*ha^{-1}*""),
+    color = "Fencing"
+  ) +
+  theme_classic() +
+  ggtitle(NULL) +
+  theme(
+    axis.title = element_text(size = 8),
+    axis.text  = element_text(size = 8)
+  )
+
+
+
+########## LOG RESPONSE RATIO (lnRR) — effect size relative to Control        
+
+
+# Prepare tree count data for lnRR
+TreeLOG <- SapFt %>%
+  filter(
+    woody_cat == "Trees",
+    Year %in% c(2024, 2026)
+  ) %>%
+  count(Site, Plot, Subplot, Treatment, Fencing, Year, Area, name = "Trees") %>%
+  mutate(density_ha = Trees * 10000 / Area)
+
+# Convert to wide format (Y2024 = pre-treatment, Y2026 = post-treatment)
+Tree_wide <- TreeLOG %>%
+  dplyr::select(Site, Plot, Subplot, Treatment, Fencing, Year, Area, density_ha) %>%
+  pivot_wider(names_from = Year, values_from = density_ha, names_prefix = "Y")
+
+# Control means per Site × Fencing (used as reference baseline)
+Tcontrol_data <- Tree_wide %>%
+  filter(Treatment == "C") %>%
+  group_by(Site, Fencing) %>%
+  summarise(
+    C_pre  = mean(Y2024, na.rm = TRUE),
+    C_post = mean(Y2026, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Join control means to treatment plots
+Tree_lnRR <- Tree_wide %>%
+  filter(Treatment != "C") %>%
+  left_join(Tcontrol_data, by = c("Site", "Fencing"))
+
+# Compute lnRR
+Tree_lnRR <- Tree_lnRR %>%
+  mutate(lnRR = log((Y2026 / Y2024) / (C_post / C_pre)))
+
+# Treatment × Fencing summaries
+Tree_summary <- Tree_lnRR %>%
+  group_by(Treatment, Fencing) %>%
+  summarise(
+    mean_lnRR = mean(lnRR, na.rm = TRUE),
+    sd_lnRR   = sd(lnRR, na.rm = TRUE),
+    n         = n(),
+    se_lnRR   = sd_lnRR / sqrt(n),
+    .groups   = "drop"
+  )
+
+# Mixed-effects model on lnRR
+Treelog <- lmer(lnRR ~ Treatment * Fencing + (1 | Site), data = Tree_lnRR)
+summary(Treelog)
+
+# Residual diagnostics
+qqnorm(residuals(Treelog))
+qqline(residuals(Treelog))
+
+
+###########################################################################
+### PERCENTAGE CHANGE relative to Control (from lnRR emmeans)          ###
+###########################################################################
+
+Tremm_interaction <- emmeans(Treelog, ~ Treatment | Fencing)
+
+
+Tplot_data <- as.data.frame(Tremm_interaction) %>%
+  mutate(
+    pct_change   = (exp(emmean)   - 1) * 100,
+    CI_lower_pct = (exp(lower.CL) - 1) * 100,
+    CI_upper_pct = (exp(upper.CL) - 1) * 100
+  ) %>%
+  mutate(across(where(is.numeric), round, 2)) %>%
+  mutate(
+    Treatment = factor(Treatment, levels = c("F", "TF", "TFB", "THF")),
+    Fencing   = factor(Fencing,   levels = c("Unfenced", "Fenced"))
+  )
+
+# Horizontal forest plot: % change in tree density relative to Control
+Treed <- ggplot(Tplot_data, aes(x = pct_change, y = Treatment, color = Fencing)) +
+  geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.5) +
+  geom_point(size = 2.0, position = position_dodge(0.5)) +
+  geom_errorbarh(aes(xmin = CI_lower_pct, xmax = CI_upper_pct),
+                 height = 0.5, linewidth = 0.9, position = position_dodge(0.5)) +
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
+  scale_x_continuous(breaks = seq(-80, 100, 20)) +
+  labs(
+    x     = "Change in tree density relative to Control (%)",
+    y     = "Treatment",
+    color = "Fencing"
+  ) +
+  theme_classic() +
+  ggtitle(NULL) +
+  theme(
+    axis.title = element_text(size = 8),
+    axis.text  = element_text(size = 8)
+  )
+
+
+#### MULTI-PANEL FIGURE                                                 
+# (a) Treea  – raw density by Period (pre vs post), coloured by Fencing
+# (b) Treeb  – Δ tree density violin by Fencing
+# (d) Treed  – % change relative to Control (lnRR-based forest plot)
+
+multi_panelTree <- (Treea / Treeb / Treed) +
+  plot_layout(heights = c(1, 1, 1, 1)) +
+  plot_annotation(
+    tag_levels = 'a',
+    tag_prefix = '(',
+    tag_suffix = ')',
+    theme = theme(plot.tag = element_text(size = 8, hjust = 0))  # Left align tags
+  ) &
+  theme(
+    axis.text = element_text(size = 10),        # Increase axis label font size
+    axis.title = element_text(size = 12),       # Increase axis title font size
+    plot.tag = element_text(size = 10, hjust = 0)  # Ensure left alignment
+  )
+
+## saving plot
+ggsave(multi_panelTree, filename = "Plots/Tree density.png",
+       width = 16, height = 14, units = "cm")
+
+
+###################
+######### EFFECT OF FENCING  
+
+emm_tree_fence_by_trt <- emmeans(Treel5, ~ Fencing | Treatment)
+
+fencing_tree_within_trt <- pairs(
+  emm_tree_fence_by_trt,
+  reverse = TRUE,   # Fenced - Unfenced (positive = Fenced higher Δ density)
+  adjust  = "holm"  
+)
+
+print(fencing_tree_within_trt)
+confint(fencing_tree_within_trt)
+
+
+######################################################################################
+#######################################################################################
+
 #---------------------------------------------------
-# 1. Calculate weed density
+# 1. Calculate SEEDLING, SAPLING DENSITY
 #---------------------------------------------------
 
 # Read data
@@ -331,9 +684,6 @@ SSeed_lnRR <- SSeed_lnRR %>%
     )
   )
 
-
-
-
 #---------------------------------------------------
 # 7. View results
 #---------------------------------------------------
@@ -468,23 +818,6 @@ plot_data$Fencing <- factor(plot_data$Fencing,
                              labels = c("Unfenced", "Fenced"))
 
 
-
-##### Percentage change plot 
-# SeedVc<- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
-#   geom_hline(yintercept = 0, linetype = "dashed") +
-#   geom_point(position = position_dodge(0.3), size = 1.4) +
-#   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
-#                 position = position_dodge(0.3), width = 0.15) +
-#   #geom_line(position = position_dodge(0.3)) +
-#   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),name = "Fencing") +
-#   scale_y_continuous(
-#     breaks = seq(-100, 200, 50),  # Breaks every 50 from -100 to 200
-#     #labels = function(x) paste0(x, "%")
-#   )+
-#   # scale_y_continuous(labels = function(x) paste0(x, "%")) +
-#   labs(x = "Treatment", y = " % proprtional change Seedling density") +
-#   theme_classic()
-
 ### inverted axis. y = treatment
 SeedVd <- ggplot(plot_data, aes(x = pct_change, y = Treatment, color = Fencing)) +
   geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.5) +
@@ -525,32 +858,46 @@ multi_panelSe <- (SeedVa/SeedVb/SeedVd) +   # "/" for stacking vertically, or "|
 ggsave(multi_panelSe,filename ="Plots/Seedlings ViolinLog1A.png",
            width = 16, height = 14, units = "cm")
 
+#################################### HYPOTHESIS TESTING SEEDLINGS
 
-### LOLLIPOP PLOT
- 
-# ggplot(plot_data, aes(x = pct_change, y = Treatment, color = Fencing)) +
-#   geom_vline(xintercept = 0, linetype = "dashed", color = "gray50", size = 0.8) +
-#   geom_segment(aes(x = 0, xend = pct_change, y = Treatment, yend = Treatment),
-#                position = position_dodge(0.5), size = 0.8) +
-#   geom_point(aes(x = pct_change), size = 4, position = position_dodge(0.5)) +
-#   geom_errorbarh(aes(xmin = CI_lower_pct, xmax = CI_upper_pct),
-#                  height = 0.2, size = 0.6, position = position_dodge(0.5)) +
-#   scale_color_manual(values = c("Unfenced" = "#D55E00", "Fenced" = "#009E73"),
-#                      name = "Fencing") +
-#   scale_x_continuous(breaks = seq(-100, 200, 25),
-#                      labels = paste0(seq(-100, 200, 25), "%")) +
-#   labs(x = " % change from the control",
-#        y = NULL,
-#        title = "Treatment effects on weed biomass") +
-#   theme_minimal(base_size = 12) +
-#   theme(plot.title = element_text(face = "bold", hjust = 0),
-#         plot.subtitle = element_text(color = "gray40", hjust = 0),
-#         axis.title = element_text(face = "bold"),
-#         axis.text = element_text(color = "black"),
-#         legend.position = "bottom",
-#         panel.grid.major.y = element_blank(),
-#         panel.grid.minor = element_blank())
-#
+## Is TFB in Unfenced subplots the most suppressive treatment?
+#   Planned contrasts within Unfenced subplots
+
+emm_unfenced <- emmeans(Seedllog, ~ Treatment, at = list(Fencing = "Unfenced"))
+
+
+# Direct one-sided test: TFB Unfenced < each other treatment (Unfenced)
+tfb_contrasts <- contrast(
+  emm_unfenced,
+  list(
+    "TFB vs F"   = c(-1,  0,  1,  0),
+    "TFB vs TF"  = c( 0, -1,  1,  0),
+    "TFB vs THF" = c( 0,  0,  1, -1)
+  ),
+  side = "<",   # one-sided: TFB is more suppressive (more negative)
+  adjust = "holm"
+)
+print(tfb_contrasts)
+
+
+###Fencing effect within each treatment ---------------------------------
+# Test: Is there a statistical difference between Fenced and Unfenced subplots
+# within each treatment? Contrasts Fenced vs Unfenced for F, TF, TFB, THF.
+
+emm_fence_by_trt <- emmeans(Seedllog, ~ Fencing | Treatment)
+
+fencing_within_trt <- pairs(
+  emm_fence_by_trt,
+  reverse = TRUE,    # Fenced - Unfenced (positive = Fenced has higher lnRR)
+  adjust  = "holm"   # Holm correction across the four treatment-level tests
+)
+
+print(fencing_within_trt)
+
+# Confidence intervals on the Fenced - Unfenced contrasts
+confint(fencing_within_trt)
+
+
 ################################################################################################
 ###############################################################################################
 
@@ -595,7 +942,7 @@ sptrt_comparison2 <- Saplings %>%
 
 
 #reorder so that pre-treatment appears first then post treatment second on the plots
-sptrt_comparison2 <- strt_comparison2 %>%
+sptrt_comparison2 <- sptrt_comparison2 %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
 
@@ -632,8 +979,6 @@ Saplings_Delta1$Fencing <- factor(Saplings_Delta1$Fencing,
 
 # Set "Fenced" as the reference level 
 Saplings_Delta1$Fencing <- relevel(Saplings_Delta1$Fencing, ref = "Unfenced")
-
-
 
 
 # using the LMM for analysis
@@ -809,7 +1154,6 @@ saplingD_summary <- SSapl_lnRR %>%
     se_lnRR = sd_lnRR / sqrt(n)
   )
 
-#print(seedlingD_summary)
 
 
 ### Calculating n for each Treatment × Fencing combination
@@ -976,10 +1320,420 @@ ggsave(multi_panelSap,filename ="Plots/Saplings ViolinLog1A.png",
 
 
 
+######## Sapling planned contrasts and fencing effect ########################
+
+# Is TFB in Unfenced subplots the most suppressive treatment?
+# Direct planned contrasts: TFB vs each other treatment within Unfenced.SAPLINGS
+Spemm_interaction <- emmeans(Sapllog, ~ Treatment | Fencing)
+
+emm_sap_unfenced <- emmeans(Sapllog, ~ Treatment, at = list(Fencing = "Unfenced"))
+sap_tfb_contrasts <- contrast(
+  emm_sap_unfenced,
+  list(
+    "TFB vs F"   = c(-1,  0,  1,  0),
+    "TFB vs TF"  = c( 0, -1,  1,  0),
+    "TFB vs THF" = c( 0,  0,  1, -1)
+  ),
+  side = "<",   # one-sided: TFB is more suppressive (more negative lnRR)
+  adjust = "holm"
+)
+print(sap_tfb_contrasts)
+
+
+## Effect of fencing within each treatment 
+# Test: Is there a statistical difference between Fenced and Unfenced subplots
+# within each treatment Contrasts Fenced vs Unfenced for F, TF, TFB, THF.
+
+sapemm_fence_by_trt <- emmeans(Sapllog, ~ Fencing | Treatment)
+
+fencing_within_trt <- pairs(
+  sapemm_fence_by_trt,
+  reverse = TRUE,    # Fenced - Unfenced (positive = Fenced has higher lnRR)
+  adjust  = "holm"   # Holm correction across the four treatment-level tests
+)
+
+print(fencing_within_trt)
+
+# Confidence intervals on the Fenced - Unfenced contrasts
+confint(fencing_within_trt)
+
 
 
 ######################################################################################################
 ##################################################################################################
+
+################################# GRASSES     BIOMASS CALIBRATION
+
+############ MODEL COMPARISONS
+
+# load data
+
+RSQTGdata <- read_csv("DATA/DPM.csv")
+
+################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO TRANSFORMATION
+# 2. Convert weight from grams to kg/ha
+#    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
+frame_area <- pi * (0.17^2)  # = 0.0908 m²
+RSQTGdata$Biomass_kg_ha <- RSQTGdata$Weight * 10 / frame_area
+
+
+# 3. Linear regression: Biomass ~ DPH
+modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = RSQTGdata)
+#summary(modelWG)
+# tab_model(modelWG)
+
+# model diagnostics
+qqnorm(residuals(modelWG))
+qqline(residuals(modelWG))
+
+# checking for equal variance
+plot(fitted(modelWG), residuals(modelWG),
+     xlab = "Fitted values",
+     ylab = "Residuals")
+abline(h = 0, lty = 2)
+
+
+
+###adding annotation to the plot
+
+# Extract coefficients
+coefs <- coef(modelWG)
+intercept <- round(coefs[1], 2)
+slope <- round(coefs[2], 2)
+
+# Create equation string for annotation
+# Build the equation string (biomass = intercept + slope * x)
+eq <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
+
+coef <- coefficients(modelWG)
+r2 <- summary(modelWG)$r.squared
+#n <- nobs(modelWG)
+eq <- paste0(
+  "y = ", round(coef[1], 2), " + ", round(coef[2], 2), "x\n",
+  "R² = ", round(r2, 3))#, ", n = ", n)
+
+
+# Plot with regression and equation
+
+DPM <- ggplot(RSQTGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) + 
+  geom_point(size = 0.7, color = "black") + 
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  annotate("text", x = Inf, y = -Inf, label = eq, hjust = 1.0, vjust = -0.1, size = 2.0, color = "black") +
+  labs( x = "DPM height (cm)",
+        y = "Standing grass biomass ("*kg~ha^{-1}*")") +
+  theme_beautiful()+
+  theme(
+    axis.title = element_text(size = 11),      # Axis titles
+    axis.text = element_text(size = 12)        # Axis tick labels
+  )
+
+## saving plot
+#ggsave(DPM,filename ="Plots/DPM&Biomass.png",width = 16, height = 14, units = "cm")  
+
+
+# MODEL performance
+#performance::check_model(modelWG)
+
+
+#############################################
+############# LOG TRANSFORMED RLM            LOG TRANSFORMED RLM     
+
+
+## 1. Convert weight from grams to kg/ha
+#    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
+frame_area <- pi * (0.17^2)  # = 0.0908 m²
+RSQTGdata$Biomass_kg_ha <- RSQTGdata$Weight * 10 / frame_area
+
+# --- Log-transform the variables (natural log) ---
+# Add small constant if any zeros in data (rare for height/biomass, but safe)
+
+# Here we use 1 as additive constant; adjust if needed
+#RSQTGdata$log_Biomass_kg_ha <- log(RSQTGdata$Biomass_kg_ha + 1)
+# RSQTGdata$log_DPH_Height  <- log(RSQTGdata$DPH_Height + 1)
+
+
+# If you're certain there are no zeros, you can skip +1:
+RSQTGdata$log_Biomass_kg_ha <- log(RSQTGdata$Biomass_kg_ha)
+RSQTGdata$log_DPH_Height  <- log(RSQTGdata$DPH_Height)
+
+# 1. Free-intercept robust model
+Rmodel_free <- RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ log_DPH_Height, data = RSQTGdata)
+
+int_free   <- round(coef(Rmodel_free)[["(Intercept)"]], 2)
+slope_free <- round(coef(Rmodel_free)[["log_DPH_Height"]], 2)
+
+# Clean equation: log(y) = intercept + slope * log(x)
+Req_free <- sprintf("log(y) = %.2f %+.2f log(x)", int_free, slope_free)
+
+# 2. Zero-intercept robust model (forced through origin)
+Rmodel_zero <- RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ 0 + log_DPH_Height, data = RSQTGdata)
+
+slope_zero <- round(coef(Rmodel_zero)[["log_DPH_Height"]], 2)
+
+# Clean equation: no intercept term
+Req_zero <- sprintf("log(y) = %.2f log(x)", slope_zero)
+
+
+#### --- ggplot with both models 
+RLMB <- ggplot(RSQTGdata, aes(x = log_DPH_Height, y = log_Biomass_kg_ha)) +
+  geom_point(color = "black", alpha = 0.54) +
+  
+  # Free-intercept line (solid blue)
+  geom_smooth(method = "lm", formula = y ~ x,
+              color = "blue", linewidth = 0.7, se = FALSE, fullrange = FALSE) +
+  
+  # Zero-intercept line (dashed red)
+  geom_smooth(method = "lm", formula = y ~ x - 1,
+              color = "red", linewidth = 0.7, linetype = "solid", se = FALSE, fullrange = FALSE) +
+  
+  
+  ## adjusting font size for equations
+  annotate("text", x = -Inf, y = Inf, label = Req_free,
+           hjust = -0.1, vjust = 1.5, color = "blue", size = 5.0) +
+  
+  annotate("text", x = -Inf, y = Inf, label = Req_zero,
+           hjust = -0.1, vjust = 3.5, color = "red", size = 5.0) +
+  labs(x = "Log DPM Height (cm)",
+       y = "Log Standing grass biomass ("*kg~ha^{-1}*")") +
+  theme_beautiful()+
+  theme(
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12)        # Axis tick labels
+  )
+
+## ggsave plot
+
+#ggsave(RLMB, filename = "Plots/ LogBiomass - RLM.png",width = 16, height = 14, units = "cm")   
+
+
+####
+# Free-intercept model
+model_log_free <- RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ log_DPH_Height, data = RSQTGdata)
+int_free   <- round(coef(model_log_free)[["(Intercept)"]], 3)
+slope_free <- round(coef(model_log_free)[["log_DPH_Height"]], 3)
+
+# Zero-intercept model
+model_log_zero <- RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ 0 + log_DPH_Height, data = RSQTGdata)
+slope_zero <- round(coef(model_log_zero)[["log_DPH_Height"]], 3)
+
+
+# ============================================
+# 1. BIAS CORRECTION 
+# ============================================
+
+intercept <- 4.67
+slope <- 1.141
+
+# Step 1: Calculate the median predictions from your Theil-Sen model
+# (Using your intercept of 4.87 and slope of 1.74)
+pred_median <- exp(4.67 + 1.14 * RSQTGdata$log_DPH_Height)
+
+# Step 2: Calculate the ratio of observed biomass to predicted median biomass
+ratios <- RSQTGdata$log_Biomass_kg_ha / pred_median
+
+# Step 3: Calculate the bias correction factor (CF) as the MEAN of the ratios
+# This is your non-parametric smearing factor to go from Median to Mean
+CF <- mean(ratios)
+
+# Step 4: Print the correction factor to see it
+print(CF)
+
+# Step 5: Apply the correction to get MEAN biomass predictions
+RSQTGdata$Biomass_Mean_Corrected <- pred_median * CF
+
+# Check if you have original-scale biomass
+if (!"Biomass_kg_ha" %in% names(RSQTGdata)) {
+  # If you only have log_Biomass_kg_ha, back-transform it
+  RSQTGdata$Biomass_kg_ha <- exp(RSQTGdata$log_Biomass_kg_ha)
+  cat("\nCreated Biomass_kg_ha from log_Biomass_kg_ha")
+}
+
+# Calculate median predictions (original scale)
+pred_median <- exp(intercept + slope * RSQTGdata$log_DPH_Height)
+
+# Calculate ratios (BOTH on original scale!)
+ratios <- RSQTGdata$Biomass_kg_ha / pred_median
+
+# Check ratios
+cat("\n===== RATIO STATISTICS =====")
+cat("\nMin:", min(ratios, na.rm = TRUE))
+cat("\nMax:", max(ratios, na.rm = TRUE))
+cat("\nMean:", mean(ratios, na.rm = TRUE))
+cat("\nMedian:", median(ratios, na.rm = TRUE))
+
+# Fit LOESS to ratios
+ratio_model <- loess(ratios ~ RSQTGdata$log_DPH_Height, span = 0.75)
+
+# Calculate CF for your data
+RSQTGdata$CF <- predict(ratio_model, RSQTGdata$log_DPH_Height)
+
+# Bias-corrected predictions
+RSQTGdata$Biomass_Mean_Corrected <- pred_median * RSQTGdata$CF
+
+# ============================================
+# 2. CREATE PREDICTION GRID
+# ============================================
+
+x_new <- seq(min(RSQTGdata$DPH_Height), 
+             max(RSQTGdata$DPH_Height), 
+             length.out = 120)
+
+# Predict CF for grid
+CF_grid <- predict(ratio_model, log(x_new))
+
+# Check if CF is reasonable
+cat("\n===== CF GRID STATISTICS =====")
+cat("\nCF min:", min(CF_grid, na.rm = TRUE))
+cat("\nCF max:", max(CF_grid, na.rm = TRUE))
+cat("\nCF mean:", mean(CF_grid, na.rm = TRUE))
+
+# If CF is still 0, there's a problem with your ratios
+if (all(CF_grid == 0, na.rm = TRUE)) {
+  stop("ERROR: All CF values are 0. Check your ratios calculation.")
+}
+
+# ============================================
+# 3. GENERATE PREDICTIONS
+# ============================================
+
+pred_df <- data.frame(
+  x = x_new,
+  SHR = exp(intercept + slope * log(x_new)) * CF_grid,
+  Trollope = -3019 + 2260 * sqrt(x_new),
+  Zambatis = (31.7176 * 0.3218^(1 / x_new) * x_new^0.2834)^2
+)
+
+# ============================================
+#  CHECK PREDICTIONS
+# ============================================
+
+cat("\n===== PREDICTION STATISTICS =====")
+cat("\nSaf range:", range(pred_df$Saf, na.rm = TRUE))
+cat("\nTrollope range:", range(pred_df$Trollope, na.rm = TRUE))
+cat("\nZambatis range:", range(pred_df$Zambatis, na.rm = TRUE))
+
+
+# ============================================
+# 4. PREPARE FOR PLOTTING - plot with EQUATION
+# ============================================
+
+
+plot_df <- pred_df %>%
+  pivot_longer(cols = -x, names_to = "Model", values_to = "Biomass")
+
+# ============================================
+# 5. CREATE EQUATIONS WITH N ABOVE
+# ============================================
+
+n_obs <- nrow(RSQTGdata)
+
+# Position for n label (above equations)
+y_max <- max(RSQTGdata$Biomass_kg_ha, na.rm = TRUE)
+y_min <- min(RSQTGdata$Biomass_kg_ha, na.rm = TRUE)
+y_range <- y_max - y_min
+
+# Create equation labels (without n)
+equations <- data.frame(
+  Model = c("SHR", "Trollope", "Zambatis"),
+  label = c(
+    "y = exp(4.67 + 1.141·log(x)) × CF(x)",
+    "y = -3019 + 2260·√x",
+    "y = (31.7176·0.3218^(1/x)·x^0.2834)²"
+  ),
+  x = min(RSQTGdata$DPH_Height) + 0.05 * diff(range(RSQTGdata$DPH_Height)),
+  y = c(
+    y_max - 0.20 * y_range,  # SHR (top)
+    y_max - 0.30 * y_range,  # Trollope (middle)
+    y_max - 0.40 * y_range   # Zambatis (bottom)
+  )
+)
+
+# Create n label (positioned above equations)
+n_label <- data.frame(
+  x = min(RSQTGdata$DPH_Height) + 0.05 * diff(range(RSQTGdata$DPH_Height)),
+  y = y_max - 0.10 * y_range,
+  label = paste0("n = ", n_obs)
+)
+
+# ============================================
+# 6. CREATE THE PLOT
+# ============================================
+
+model_colors <- c(
+  "SHR" = "blue",     
+  "Trollope" = "brown", 
+  "Zambatis" = "black"  
+)
+
+# ============================================================
+# MODEL COMPARISON MULTIPANEL  (RLMB / BiasC2)
+# ============================================================
+
+# model comparison plot 
+BiasC2_bc <- ggplot() +
+  geom_point(data = RSQTGdata,
+             aes(x = DPH_Height, y = Biomass_kg_ha),
+             alpha = 0.3, size = 1.5, color = "gray50") +
+  geom_line(data = plot_df,
+            aes(x = x, y = Biomass, color = Model, linetype = Model),
+            linewidth = 1.2) +
+  geom_text(data = n_label,
+            aes(x = -Inf, y = y, label = label),
+            hjust = 0, vjust = 1, size = 3.5,
+            fontface = "bold", color = "black") +
+  geom_text(data = equations,
+            aes(x = -Inf, y = y, label = label, color = Model),
+            hjust = 0, vjust = 1,
+            size = 3.0, lineheight = 1.0,
+            show.legend = FALSE) +
+  scale_color_manual(values = model_colors) +
+  scale_linetype_manual(values = c("solid", "solid", "solid")) +
+  labs(x = "DPM Height (cm)",
+       y = expression("Standing grass biomass ("*kg~ha^{-1}*")"),
+       color    = "Model",
+       linetype = "Model") +
+  theme_classic() +
+  theme(
+    legend.position      = c(0, 1),
+    legend.justification = c(0, 0.8),
+    legend.box.just      = "left",
+    axis.title           = element_text(size = 12),
+    axis.text            = element_text(size = 12)
+  )
+
+
+# Multipanel: RLMB (log-log) on top, BiasC2 (original scale) below
+multi_pBiomass2_bc <- (RLMB / BiasC2_bc) +
+  plot_layout(
+    nrow   = 2,
+    guides = "collect"
+  ) +
+  plot_annotation(
+    tag_levels = "a",
+    tag_prefix = "(",
+    tag_suffix = ")",
+    theme = theme(
+      plot.tag = element_text(size = 6, face = "plain", hjust = 0)
+    )
+  ) &
+  theme_classic() &
+  theme(
+    axis.text        = element_text(size = 10),
+    axis.title       = element_text(size = 10),
+    strip.text       = element_text(size = 10, face = "plain"),
+    panel.grid.minor = element_blank(),
+    plot.margin      = margin(3, 3)
+  )
+
+ggsave(multi_pBiomass2_bc,
+       filename = "Plots/ModelComparison-BIOMASS-BiasC.png",
+       width = 16, height = 14, units = "cm")
+
+
+
+
+#################################################################################################
+#############################
 
 ######   GRASS BIOMASS GRASS BIOMASS GRASS BIOMASS GRASS BIOMASS
 
@@ -1021,358 +1775,353 @@ heights_data$Biomass_kg_ha <- round(predict_biomass(heights_data$DPM_Height),2)
 #write.csv(heights_data, "biomass_predictions.csv", row.names = FALSE)
 
 
-########### determining Biomass
+# ============================================
+# CONVERT MEDIAN TO MEAN (WITH BIAS CORRECTION)
+# ============================================
 
-Biomasssummary2<- heights_data  %>%
+# converting median to mean 
+heights_data <- heights_data %>%
+  mutate(
+    Biomass_mean_kg_ha = case_when(
+      DPM_Height > 0 ~ Biomass_kg_ha * predict(ratio_model, log(DPM_Height)),
+      DPM_Height == 0 ~ Biomass_kg_ha  # Keep as 0
+    )
+  )
+
+# Summarize using mean()
+Biomasssummary2_mean <- heights_data %>%
   filter(Year %in% c(2024, 2026)) %>% 
   group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
   summarise(
-    mean_Biomass = mean(Biomass_kg_ha, na.rm = TRUE),
+    mean_Biomass = mean(Biomass_mean_kg_ha, na.rm = TRUE),
     .groups = "drop"
   )
 
+# ============================================
+# GRASS BIOMASS ANALYSIS (BIAS-CORRECTED)
+# ============================================
+
 ### Convert character variables to factors
 heights_data$Treatment <- as.factor(heights_data$Treatment)
-heights_data$Fencing <- as.factor(heights_data$Fencing)
+heights_data$Fencing   <- as.factor(heights_data$Fencing)
 
-# Calculate mean grass BIOMASS for pre and post treatment
+# ---------------------------------------------------
+# 1. Pre vs Post violin plot
+# ---------------------------------------------------
 
-biomass2 <- heights_data %>%
-  filter(Year %in% c(2024, 2026)) %>% 
+biomass2_bc <- heights_data %>%
+  filter(Year %in% c(2024, 2026)) %>%
   group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
   summarise(
-    mean_Biomass = mean(Biomass_kg_ha, na.rm = TRUE),
-    .groups = "drop") %>%
-  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
-
-
-##reorder so that pre-treatment appears first then post treatment second on the plots
-biomass2 <- biomass2 %>%
+    mean_Biomass = mean(Biomass_mean_kg_ha, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment")) %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
+# Reorder Fencing factor
+biomass2_bc$Fencing <- factor(biomass2_bc$Fencing,
+                              levels = c("Unfenced", "Fenced"))
 
-## VIOLIN plot- GRASS biomass post vs pre treatment 
+#plot
 
-biomass2$Fencing <- factor( sptrt_comparison2$Fencing,
-  levels = c("Unfenced", "Fenced")) #ordering Fencing level to start with Unfenced
-
-
- # ggplot(biomass2, 
- #      aes(x = Treatment, y = mean_Biomass, fill = Period)) + facet_wrap(~Fencing)+ 
- #  geom_violin(trim = TRUE)+
- #  geom_hline(yintercept = 0, linetype = "dashed") +  
- #  stat_summary(fun = mean, geom = "point", 
- #               position = position_dodge(0.8), 
- #               size = 1.5, color = "black") + 
- #  labs(x = "Treatment", 
- #       #y = "Above-ground grass biomass (kgDM/ha)",
- #       y = expression("Above-ground grass biomass ("*kg~ha^{-1}*")")
- #  ) +
- #  theme_classic()+
- #  theme(
- #    axis.title = element_text(size = 10),      # Axis titles
- #    axis.text = element_text(size = 10))+
- #  scale_fill_manual(values = c("Pre-treatment" = "#1b7837", "Post-treatment" = "#a6dba0"))
-
-
-## changing facet wrap fencing to period
- 
- GbA<- ggplot(biomass2,aes(x = Treatment, y = mean_Biomass, fill = Fencing)) + facet_wrap(~Period)+ 
-  geom_violin(trim = TRUE)+
-  #geom_hline(yintercept = 0, linetype = "dashed") +  
-  stat_summary(fun = mean, geom = "point", 
-               position = position_dodge(0.8), 
-               size = 1.5, color = "black") + 
-  labs(x = "Treatment", 
-       #y = "Above-ground grass biomass (kgDM/ha)",
-       y = expression("Grass biomass ("*kg~ha^{-1}*")")
-  ) +
-  theme_classic()+
+GbA_bc <- ggplot(biomass2_bc,
+                 aes(x = Treatment, y = mean_Biomass, fill = Fencing)) +
+  facet_wrap(~Period) +
+  geom_violin(trim = TRUE) +
+  stat_summary(fun = mean, geom = "point",
+               position = position_dodge(0.8),
+               size = 1.5, color = "black") +
+  labs(x = "Treatment",
+       y = expression("Grass biomass ("*kg~ha^{-1}*")")) +
+  theme_classic() +
   theme(
-    axis.title = element_text(size = 8),      # Axis titles
-    axis.text = element_text(size = 8))+
+    axis.title = element_text(size = 8),
+    axis.text  = element_text(size = 8)
+  ) +
   scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
 
 
+# ---------------------------------------------------
+# 2. Delta biomass (Δ = Post - Pre)
+# ---------------------------------------------------
 
-
-######DELTA GRASS BIOMASS
-
-# using the mean BIOMASS within each grouping for each year.
-delta_GRBiomass <- heights_data  %>%
-  filter(Year %in% c(2024, 2026)) %>% 
+delta_GRBiomass_bc <- heights_data %>%
+  filter(Year %in% c(2024, 2026)) %>%
   group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
-  summarise (mean_Biomass = mean(Biomass_kg_ha, na.rm = TRUE),.groups = "drop")%>%
+  summarise(mean_Biomass = mean(Biomass_mean_kg_ha, na.rm = TRUE), .groups = "drop") %>%
   pivot_wider(
     names_from  = Year,
     values_from = mean_Biomass,
     names_glue  = "Biomass_{Year}"
   ) %>%
   mutate(delta_GR = Biomass_2026 - Biomass_2024) %>%
-  drop_na(delta_GR)   # keep groups where both years are present
+  drop_na(delta_GR)
 
+### Convert to factors and set reference level
+delta_GRBiomass_bc$Treatment <- as.factor(delta_GRBiomass_bc$Treatment)
+delta_GRBiomass_bc$Fencing   <- factor(delta_GRBiomass_bc$Fencing,
+                                       levels = c("Unfenced", "Fenced"),
+                                       labels = c("Unfenced", "Fenced"))
+delta_GRBiomass_bc$Fencing   <- relevel(delta_GRBiomass_bc$Fencing, ref = "Unfenced")
 
-## GLMM to test effect of treatment * fencing on Grass biomass ##################
+## LMM for delta grass biomass
+Grasbiom_bc <- lmer(delta_GR ~ Treatment * Fencing + (1 | Site),
+                    data = delta_GRBiomass_bc)
+summary(Grasbiom_bc)
 
-# Make "Unfenced" the reference level 
+# Model diagnostics
+performance::check_singularity(Grasbiom_bc)
+performance::check_convergence(Grasbiom_bc)
+check_model(Grasbiom_bc, check = "qq")
+check_model(Grasbiom_bc, check = "normality")
+check_model(Grasbiom_bc, check = "homogeneity")
 
-class(delta_GRBiomass$Fencing)  # Likely "character" or "ordered factor"
-
-# Convert to unordered factor explicitly
-delta_GRBiomass$Fencing <- factor(delta_GRBiomass$Fencing, ordered = FALSE)
-
-# Verify
-levels(delta_GRBiomass$Fencing)  # Should show "fenced" "unfenced" (or vice versa)
-
-
-### Convert character variables to factors
-delta_GRBiomass$Treatment <- as.factor(delta_GRBiomass$Treatment)
-delta_GRBiomass$Fencing <- factor(delta_GRBiomass$Fencing, 
-                                  levels = c("Unfenced", "Fenced"),
-                                  labels = c("Unfenced", "Fenced"))
-
-# Set "UnFenced" as the reference level 
-delta_GRBiomass$Fencing <- relevel(delta_GRBiomass$Fencing, ref = "Unfenced")
-
-
-
-##LMM for grass height
-Grasbiom1 <- lmer(delta_GR ~ Treatment * Fencing + (1|Site),  
-                data = delta_GRBiomass)
-summary(Grasbiom1)
-
-
-#check for singularity
-performance::check_singularity(Grasbiom1) # FALSE desired shows- all random effects have nonzero variance → stable
-
-# check model convergence
-performance::check_convergence(Grasbiom1)
-
-## check model performance
-
-performance::check_model(Grasbiom1)
-
-plot(Grasbiom1)
-check_model(Grasbiom1, check = "homogeneity")
-check_model(Grasbiom1, check = "normality")
-check_model(Grasbiom1, check = "qq")
-
-
-
-###Visualise: Violin plot of Δ‑grass biomass
-
-
-Gbb <- ggplot(delta_GRBiomass,
-                  aes(x = Treatment, y = delta_GR, fill = Fencing))+ 
+## Violin plot of Δ grass biomass
+Gbb_bc <- ggplot(delta_GRBiomass_bc,
+                 aes(x = Treatment, y = delta_GR, fill = Fencing)) +
   geom_violin(alpha = 0.7, position = position_dodge(0.8), width = 0.7) +
-  stat_summary(fun = mean, geom = "point", 
-               position = position_dodge(0.8), 
+  stat_summary(fun = mean, geom = "point",
+               position = position_dodge(0.8),
                size = 1.5, color = "black") +
   geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Treatment", y = "Δ Grass biomass ("*kg~ha^{-1}*")") +
+  labs(x = "Treatment",
+       y = expression("Δ Grass biomass ("*kg~ha^{-1}*")")) +
   theme_classic() +
-  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))+
+  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
   theme(
-    axis.title = element_text(size = 8),      # Axis titles
-    axis.text = element_text(size = 8))
+    axis.title = element_text(size = 8),
+    axis.text  = element_text(size = 8)
+  )
 
 
+# ---------------------------------------------------
+# 3. Log Response Ratio (LRR)
+# ---------------------------------------------------
 
-#############
-############### USING LOG RESPONSE RATIO FOR GRASS BIOMASS  #####
-
-# Step 1: Calculate means for each site, treatment type, and year
-biomass_LRR <- heights_data %>%
+Gbiomass_LRR_bc <- heights_data %>%
   filter(Year %in% c(2024, 2026)) %>%
   group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
-  summarise(MeanBiomass = mean(Biomass_kg_ha, na.rm = TRUE), .groups = "drop") 
-  
-
-### 
-
-Gbiomass_LRR <- heights_data %>%
-  filter(Year %in% c(2024, 2026)) %>% 
-  group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
   summarise(
-    mean_biomass = mean(Biomass_kg_ha, na.rm = TRUE),  # average subsamples to plot level
+    mean_biomass = mean(Biomass_mean_kg_ha, na.rm = TRUE),
     .groups = "drop"
   ) %>%
-  # Separate control and treatment
   mutate(Treatment_Group = ifelse(Treatment == "C", "C", "Treated")) %>%
-  # Wide format: one row per Plot/Subquadrat with Pre and Post columns
   pivot_wider(
-    names_from = Year,
+    names_from  = Year,
     values_from = mean_biomass,
     names_prefix = "Year_"
   ) %>%
   rename(Pre = Year_2024, Post = Year_2026) %>%
-  # Calculate LRR for each treated plot using its paired control at the same Location
   group_by(Site, Fencing) %>%
   mutate(
-    Control_Pre = mean(Pre[Treatment_Group == "C"], na.rm = TRUE),
+    Control_Pre  = mean(Pre[Treatment_Group == "C"],  na.rm = TRUE),
     Control_Post = mean(Post[Treatment_Group == "C"], na.rm = TRUE)
   ) %>%
   ungroup() %>%
   filter(Treatment_Group == "Treated") %>%
   mutate(
-    LRR = log( (Post / Pre) / (Control_Post / Control_Pre) )
+    LRR = log((Post / Pre) / (Control_Post / Control_Pre))
   ) %>%
   dplyr::select(Site, Plot, Subplot, Treatment, Fencing, Pre, Post, LRR)
 
+# If zeros are present, add a small constant to avoid -Inf:
+# log( (Post + 0.1) / (Pre + 0.1) / ((C_post + 0.1) / (C_pre + 0.1)) )
 
-# If zeros are present, add a small constant to avoid -Inf:  
-   #log( (Post + 0.1) / (Pre + 0.1) ) / (C_post + 0.1) / (C_pre + 0.1) )
+## LMM on LRR
+GBiomlog_bc <- lmer(LRR ~ Treatment * Fencing + (1 | Site),
+                    data = Gbiomass_LRR_bc)
+summary(GBiomlog_bc)
 
-# run LMM
-GBiomlog <- lmer(LRR ~ Treatment * Fencing + (1|Site), data = Gbiomass_LRR)
+# ---------------------------------------------------
+# 4. Plot LRR (violin)
+# ---------------------------------------------------
 
-summary(GBiomlog)
-
-# Plot LRR
-ggplot(Gbiomass_LRR,
-       aes(x = Treatment, y = LRR, fill = Fencing))+ 
-  geom_violin(trim = FALSE)+
-  geom_hline(yintercept = 0, linetype = "dashed") +  
-  stat_summary(fun = mean, geom = "point", 
-               position = position_dodge(0.8), 
-               size = 1, color = "black") +
+ggplot(Gbiomass_LRR_bc,
+       aes(x = Treatment, y = LRR, fill = Fencing)) +
+  geom_violin(trim = FALSE) +
   geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Treatment", 
-       y = expression("Log response Aboveground biomass "*ha^{-1}*"")
-  ) +
+  stat_summary(fun = mean, geom = "point",
+               position = position_dodge(0.8),
+               size = 1, color = "black") +
+  labs(x = "Treatment",
+       y = expression("Log response aboveground biomass "*ha^{-1}*"")) +
   theme_classic() +
   theme(
-    axis.title = element_text(size = 12),  # Axis titles size
-    axis.text = element_text(size = 12)) +
+    axis.title = element_text(size = 12),
+    axis.text  = element_text(size = 12)
+  ) +
   scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
 
 
-##### OPTION 2 visualising lnRR results using emmeans
+# ---------------------------------------------------
+# 5. emmeans – lnRR point-range plot
+# ---------------------------------------------------
 
-# Get estimated marginal means for both factors
-GBemm_interaction <- emmeans(GBiomlog, ~ Treatment | Fencing)
+GBemm_bc <- emmeans(GBiomlog_bc, ~ Treatment | Fencing)
+GBplot_data_bc <- as.data.frame(GBemm_bc)
 
-# Convert to dataframe
-GBplot_data <- as.data.frame(GBemm_interaction)
+GBplot_data_bc$Treatment <- factor(GBplot_data_bc$Treatment,
+                                   levels = c("F", "TF", "TFB", "THF"))
+GBplot_data_bc$Fencing   <- factor(GBplot_data_bc$Fencing,
+                                   levels = c("Unfenced", "Fenced"),
+                                   labels = c("Unfenced", "Fenced"))
 
-# Ensure factors are properly labeled
-GBplot_data$Treatment <- factor(GBplot_data$Treatment, 
-                              levels = c("F", "TF", "TFB", "THF"))
-GBplot_data$Fencing <- factor(GBplot_data$Fencing, 
-                            levels = c("Unfenced", "Fenced"),
-                            labels = c("Unfenced", "Fenced"))
-
-#### visualisation
-ggplot(GBplot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
-  # geom_vline(xintercept = 0, linetype = "dashed", color = "black",linewidth = 0.5) +
-  # geom_point(size = 3.5, position = position_dodge(0.5)) +
+# plot log response plot
+ggplot(GBplot_data_bc, aes(x = emmean, y = Treatment, color = Fencing)) +
   geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.8) +
   geom_point(size = 3.5, position = position_dodge(0.5)) +
   geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL),
-                 height = 0.2, size = 0.8, position = position_dodge(0.5)) +
+                 height = 0.2, linewidth = 0.8, position = position_dodge(0.5)) +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
   scale_x_continuous(breaks = seq(-2, 2, 0.5)) +
-  labs(x = "Log Response Aboveground biomass",
-       y = "Treatments") +
-  #theme_beautiful() +
-  theme(legend.position = "top") +
-  theme_classic()+ 
-  ggtitle(NULL)+
+  labs(x = "Log response aboveground biomass",
+       y = "Treatment") +
+  theme_classic() +
+  ggtitle(NULL) +
   theme(
-    axis.title = element_text(size = 12),      # Axis titles
-    axis.text = element_text(size = 12))
+    axis.title = element_text(size = 12),
+    axis.text  = element_text(size = 12)
+  )
 
 
-# Save high-resolution versions
-#ggsave("treatment_kraaling_interaction_point.png", p, width = 8, height = 5, dpi = 300, bg = "white")
+# ---------------------------------------------------
+# 6. Convert lnRR to % change
+# ---------------------------------------------------
+
+GBemm_bc2      <- emmeans(GBiomlog_bc, ~ Treatment | Fencing)
+GBraw_bc       <- as.data.frame(GBemm_bc2)
+
+GBpct_bc <- GBraw_bc %>%
+  mutate(
+    pct_change   = (exp(emmean)    - 1) * 100,
+    CI_lower_pct = (exp(lower.CL)  - 1) * 100,
+    CI_upper_pct = (exp(upper.CL)  - 1) * 100
+  ) %>%
+  mutate(across(where(is.numeric), round, 2)) %>%
+  mutate(
+    Treatment = factor(Treatment, levels = c("F", "TF", "TFB", "THF")),
+    Fencing   = factor(Fencing,   levels = c("Unfenced", "Fenced"),
+                       labels = c("Unfenced", "Fenced"))
+  )
 
 
-####### CONVERT lnRR to PERCENTAGE CHANGE #####
-# Get estimated marginal means for Treatment × Fencing interaction
-GBemm_interaction <- emmeans(GBiomlog, ~ Treatment | Fencing)
-plot_data_raw <- as.data.frame(GBemm_interaction)
-
-# Convert to percentage change
-plot_data <- plot_data_raw
-plot_data$pct_change <- (exp(plot_data_raw$emmean) - 1) * 100
-plot_data$CI_lower_pct <- (exp(plot_data_raw$lower.CL) - 1) * 100
-plot_data$CI_upper_pct <- (exp(plot_data_raw$upper.CL) - 1) * 100
-
-# rounding off to 2 decimaL places
- plot_data <- plot_data %>%
-  mutate(across(where(is.numeric), round, 2))
-
-
-# Clean up factors
-plot_data$Treatment <- factor(plot_data$Treatment, 
-                              levels = c("F", "TF", "TFB", "THF"))
-plot_data$Fencing <- factor(plot_data$Fencing, 
-                            levels = c("Unfenced", "Fenced"),
-                            labels = c("Unfenced", "Fenced"))
-
-
-##### Percentage change plot 
-# Gbc <- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
-#   geom_hline(yintercept = 0, linetype = "dashed") +
-#   geom_point(position = position_dodge(0.3), size = 3) +
-#   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
-#                 position = position_dodge(0.3), width = 0.15) +
-#   #geom_line(position = position_dodge(0.3)) +
-#   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
-#                      name = "Fencing") +
-#   scale_y_continuous(
-#     breaks = seq(-100, 200, 5)#,  # Breaks every 50 from -100 to 200
-#     #labels = function(x) paste0(x, "%")  # to include % on the scale
-#   )+
-#   labs(x = "Treatment", y = "Biomass proportional change (%)") +
-#   theme_classic()+
-#   theme(
-#     axis.title = element_text(size = 8),      # Axis titles
-#     axis.text = element_text(size = 8))
-
-
-## Percent change. Ineverted axis. y = Treatment  
-
-Gbc <- ggplot(plot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
+## % change plot (Treatment on y-axis)
+Gbc_bc <- ggplot(GBpct_bc, aes(x = pct_change, y = Treatment, color = Fencing)) +
   geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.5) +
   geom_point(size = 2.0, position = position_dodge(0.5)) +
   geom_errorbarh(aes(xmin = CI_lower_pct, xmax = CI_upper_pct),
-                 height = 0.5, size = 0.9, position = position_dodge(0.5)) +
+                 height = 0.5, linewidth = 0.9, position = position_dodge(0.5)) +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
-  #scale_x_continuous(breaks = seq(-50, 150, 20)) +
-  labs(x = "Change in above-ground grass biomass relative to Control (%)",
+  labs(x = "Change in aboveground grass biomass relative to Control (%)",
        y = "Treatment") +
-  # theme(legend.position = "top") +
-  theme_classic()+ 
-  ggtitle(NULL)+
+  theme_classic() +
+  ggtitle(NULL) +
   theme(
-    axis.title = element_text(size = 12),      # Axis titles
-    axis.text = element_text(size = 12))
+    axis.title = element_text(size = 12),
+    axis.text  = element_text(size = 12)
+  )
 
 
+# ---------------------------------------------------
+# 7. Multipanel plot and save
+# ---------------------------------------------------
 
-####  Combine the plots in a single layout
-multi_panelBiom <- (GbA/Gbb/ Gbc) +   # "/" for stacking vertically, or "|" for side-by-side
-  plot_layout(heights = c(1, 1, 1)) +  # Adjust relative heights
+multi_panelBiom_bc <- (GbA_bc / Gbb_bc / Gbc_bc) +
+  plot_layout(heights = c(1, 1, 1)) +
   plot_annotation(
     tag_levels = 'a',
     tag_prefix = '(',
     tag_suffix = ')',
-    theme = theme(plot.tag = element_text(size = 8, hjust = 0))  # Left align tags
+    theme = theme(plot.tag = element_text(size = 8, hjust = 0))
   ) &
   theme(
-    axis.text = element_text(size = 10),        # Increase axis label font size
-    axis.title = element_text(size = 10),       # Increase axis title font size
-    plot.tag = element_text(size = 10, hjust = 0))  # Ensure left alignment
+    axis.text  = element_text(size = 10),
+    axis.title = element_text(size = 10),
+    plot.tag   = element_text(size = 10, hjust = 0)
+  )
 
-#saving using ggsave
-ggsave(multi_panelBiom,filename ="Plots/GrassBIOMASS violinLog1b.png",
-       width = 16, height = 14, units = "cm")  
+# save multi-panel plot
+ggsave(multi_panelBiom_bc,
+       filename = "Plots/GrassBIOMASS.png",
+       width = 16, height = 14, units = "cm")
 
+
+
+## Direct planned contrasts: THF vs each other treatment within Fenced.
+
+emm_gb_fenced <- emmeans(GBiomlog_bc, ~ Treatment, at = list(Fencing = "Fenced"))
+
+gb_thf_contrasts <- contrast(
+  emm_gb_fenced,
+  list(
+    "THF vs F"   = c(-1,  0,  0,  1),
+    "THF vs TF"  = c( 0, -1,  0,  1),
+    "THF vs TFB" = c( 0,  0, -1,  1)
+  ),
+  side = ">",   # one-sided: THF has higher LRR (greater biomass increase)
+  adjust = "holm"
+)
+print(gb_thf_contrasts)
+
+### Fencing effect within each treatment ------------------------------------
+# Contrasts Fenced vs Unfenced for F, TF, TFB, THF 
+
+emm_gb_fence_by_trt <- emmeans(GBiomlog_bc, ~ Fencing | Treatment)
+
+fencing_gb_within_trt <- pairs(
+  emm_gb_fence_by_trt,
+  reverse = TRUE,    # Fenced - Unfenced (positive = Fenced has higher LRR)
+  adjust  = "holm"
+)
+
+print(fencing_gb_within_trt)
+confint(fencing_gb_within_trt)
+
+
+
+######################## GRASS Biomass vs Seedling density
+
+#grass biomass combined with seedlings data
+
+
+gb <- delta_GRBiomass_bc |>
+  dplyr::select(Site, Plot, Subplot, Treatment, Fencing, delta_GR)
+
+scatter_data <- Seedlings_Delta1 |>
+  inner_join(gb, by = c("Site", "Plot", "Subplot", "Treatment", "Fencing"))
+
+
+# Scatter plot (faceted by Fencing, with trend line) ───────────
+
+plot_seed <- ggplot(scatter_data,
+                    aes(x = delta_GR, y = delta_Seeddens,
+                        color = Treatment, shape = Treatment)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "grey50") +
+  geom_smooth(aes(group = Fencing), method = "lm", se = TRUE,
+              color = "black", fill = "grey80", linewidth = 0.8) +
+  geom_point(size = 2.5, alpha = 0.8) +
+  facet_wrap(~Fencing) +
+  labs(
+    x = expression("Δ Aboveground grass biomass (kg "*ha^{-1}*")"),
+    y = expression("Δ Seedling density "*ha^{-1}),
+    color = "Treatment", shape = "Treatment"
+  ) +
+  theme_classic() +
+  theme(axis.title   = element_text(size = 11),
+        axis.text    = element_text(size = 10),
+        legend.title = element_text(size = 10),
+        legend.text  = element_text(size = 9),
+        strip.text   = element_text(size = 11))
+
+# SAVING
+#ggsave(plot_seed, filename = "Plots/GrassBiomass VS SeedlingDensity.png",
+       width = 16, height = 14, units = "cm", dpi = 300, bg = "white")
 
 
 ##################################################################################
-
+##################################################################################
 
 ### GRASS SPECIES RICHNESS
 # 1. Prepare data: richness per Site x Treatment x Year
@@ -1615,25 +2364,6 @@ plot_data$Fencing <- factor(plot_data$Fencing,
 head(plot_data)
 
 
-##### Percentage change plot 
-# GrRC<-ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
-#   geom_hline(yintercept = 0, linetype = "dashed") +
-#   geom_point(position = position_dodge(0.3), size = 3) +
-#   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
-#                 position = position_dodge(0.3), width = 0.15) +
-#   #geom_line(position = position_dodge(0.3)) +
-#   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
-#                      name = "Fencing") +
-#   scale_y_continuous(
-#     breaks = seq(-100, 150, 5)#,  # Breaks every 50 from -100 to 200
-#     #labels = function(x) paste0(x, "%")  # to include % on the scale
-#   )+
-#   labs(x = "Treatment", y = "Grass richness proportional change (%)") +
-#   theme_classic()+
-#   theme(axis.title = element_text(size = 8),  # Axis titles size
-#    axis.text = element_text(size = 8)) 
-
-
 # Percent change plot. y = Treatment
 GrRD<-ggplot(plot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
   geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.5) +
@@ -1673,8 +2403,43 @@ ggsave(multi_panelRich,filename ="Plots/GrassRICHNESS ViolinLog1A.png",
 
 
 
+#### Is TFB in Fenced subplots the treatment with the greatest richness increase?
+# Direct planned contrasts: TFB vs each other treatment within Fenced.
+
+emm_gR_fenced <- emmeans(GRilog, ~ Treatment, at = list(Fencing = "Fenced"))
+
+gR_tfb_contrasts <- contrast(
+  emm_gR_fenced,
+  list(
+    "TFB vs F"   = c(-1,  0,  1,  0),
+    "TFB vs TF"  = c( 0, -1,  1,  0),
+    "TFB vs THF" = c( 0,  0,  1, -1)
+  ),
+  side = ">",   
+  adjust = "holm"
+)
+
+print(gR_tfb_contrasts)
+
+
+### EFFECT of fencing on grass richness
+# Fencing effect within each treatment ------------------------------------
+# Contrasts Fenced vs Unfenced for F, TF, TFB, THF
+
+emm_gR_fence_by_trt <- emmeans(GRilog, ~ Fencing | Treatment)
+
+fencing_gR_within_trt <- pairs(
+  emm_gR_fence_by_trt,
+  reverse = TRUE,    
+  adjust  = "holm"
+)
+
+print(fencing_gR_within_trt)
+confint(fencing_gR_within_trt)
+
+
  
-###############################################################################  
+################################################################################  
 
 #### GRASS DIVERSITY
 
@@ -2047,26 +2812,6 @@ GDplot_data$Fencing <- factor(GDplot_data$Fencing,
                             levels = c("Unfenced", "Fenced"),
                             labels = c("Unfenced", "Fenced"))
 
-##### Percentage change plot 
-# GSWc<- ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
-# ggplot(plot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
-#   geom_hline(yintercept = 0, linetype = "dashed") +
-#   geom_point(position = position_dodge(0.3), size = 3) +
-#   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
-#                 position = position_dodge(0.3), width = 0.15) +
-#   #geom_line(position = position_dodge(0.3)) +
-#   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
-#                      name = "Fencing") +
-#   scale_y_continuous(
-#     breaks = seq(-100, 150, 5)#,  # Breaks every 50 from -100 to 200
-#     #labels = function(x) paste0(x, "%")  # to include % on the scale
-#   )+
-#   labs(x = "Treatment", y = "Diversity proportional change (%)") +
-#   theme_classic()+
-#   theme(
-#     axis.title = element_text(size = 8),  # Axis titles size
-#     axis.text = element_text(size = 8)) 
-
 
 # Percent change plot. y = Treatment
 GSWD<-ggplot(GDplot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
@@ -2105,6 +2850,41 @@ ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog1D.png",
 
 
 
+#### Is TFB in Fenced subplots the treatment with the greatest diversity increase?
+# Direct planned contrasts: TFB vs each other treatment within Fenced.
+
+emm_gd_fenced <- emmeans(GDilog, ~ Treatment, at = list(Fencing = "Fenced"))
+
+gd_tfb_contrasts <- contrast(
+  emm_gd_fenced,
+  list(
+    "TFB vs F"   = c(-1,  0,  1,  0),
+    "TFB vs TF"  = c( 0, -1,  1,  0),
+    "TFB vs THF" = c( 0,  0,  1, -1)
+  ),
+  side = ">",   
+  adjust = "holm"
+)
+print(gd_tfb_contrasts)
+
+
+### EFFECT of fencing on grass diversity
+# Fencing effect within each treatment ------------------------------------
+# Contrasts Fenced vs Unfenced for F, TF, TFB, THF
+
+emm_gd_fence_by_trt <- emmeans(GDilog, ~ Fencing | Treatment)
+
+fencing_gd_within_trt <- pairs(
+  emm_gd_fence_by_trt,
+  reverse = TRUE,    
+  adjust  = "holm"
+)
+
+print(fencing_gd_within_trt)
+confint(fencing_gd_within_trt)
+
+
+############################################################################################
 ############################################################################################
 
 
@@ -2191,19 +2971,7 @@ width = 16, height = 14, units = "cm")
 
 ##GLMM for resprouts on cut stumps  
 
-##using poisson family 
-# Respr5b <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
-#                    data = resprouts_df, family = poisson(link = log))
-# summary(Respr5b)
-# 
-# 
-# # option 2 using negative binomial
-# Respr5bc <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
-#                    data = resprouts_df, family = nbinom2(link = "log"))
-
-
-
-# option 3 using tweedie distribution - to handle zeros
+#  using tweedie distribution - to handle zeros
 
 R5b_tweedie <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
                        data = resprouts_df,
@@ -2341,5 +3109,20 @@ Resp2 <- (RespVio/Resp) +   # "/" for stacking vertically, or "|" for side-by-si
 ### saving plot
 ggsave(Resp2,filename ="Plots/ 3Violin Resprouts.png",
        width = 16, height = 14, units = "cm") 
+
+
+######################### EFFECT of fencing ON RESPROUTS --------------------------
+# Test: Is there a statistical difference between Fenced and Unfenced subplots
+# within each treatment? Contrasts Fenced vs Unfenced for TF, TFB, THF.
+
+respemm_fence_by_trt <- emmeans(R5b_tweedie, ~ Fencing | Treatment)
+
+resfencing_within_trt <- pairs(
+  respemm_fence_by_trt,
+  reverse = TRUE,    # Fenced - Unfenced 
+  adjust  = "holm"   # Holm correction across the three treatment-level tests
+)
+
+print(resfencing_within_trt)
 
 ######################################

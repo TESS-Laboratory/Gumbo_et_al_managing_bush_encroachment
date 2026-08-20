@@ -558,7 +558,7 @@ gb_increase_test <- test(emm_gb_full, null = 0, side = ">")
 # G4b. Are integrated treatments more effective than burning-only (F)?
 #      Planned contrast: mean(TF, TFB, THF) vs F, within each fencing level.
 
- #emm_gb_by_fencing <- emmeans(GBiomlog, ~ Treatment | Fencing)
+ emm_gb_by_fencing <- emmeans(GBiomlog, ~ Treatment | Fencing)
 
 gb_integrated_vs_burning <- contrast(
   emm_gb_by_fencing,

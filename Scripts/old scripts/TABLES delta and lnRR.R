@@ -126,68 +126,49 @@ print(pcntSap, target = "Plots/RelativeSAPLING_Table.docx")
 
 
 ########################################################################### GRASSES
+## GRASS BIOMASS
 
-# using the mean BIOMASS within each grouping for each year.
-GRBSumm <- heights_data  %>%
-  filter(Year %in% c(2024, 2026)) %>% 
-  group_by(Treatment, Fencing, Year) %>%
-  summarise (mean_Biomass = mean(Biomass_kg_ha, na.rm = TRUE),
-             N    = sum(!is.na(Biomass_kg_ha)),
-             .groups = "drop")%>%
-  pivot_wider(
-    names_from  = Year,
-    values_from = mean_Biomass,
-    names_glue  = "Biomass_{Year}"
-  ) %>%
-  mutate(delta_GR = Biomass_2026 - Biomass_2024) %>%
-  drop_na(delta_GR)
+# Summarise delta_GRBiomass_bc (bias-corrected Biomass_mean_kg_ha) to Treatment x Fencing
+GRBSumm_bc <- delta_GRBiomass_bc %>%
+  group_by(Treatment, Fencing) %>%
+  summarise(
+    Biomass_2024 = round(mean(Biomass_2024, na.rm = TRUE), 2),
+    Biomass_2026 = round(mean(Biomass_2026, na.rm = TRUE), 2),
+    delta_GR     = round(mean(delta_GR,     na.rm = TRUE), 2),
+    N            = n(),
+    .groups = "drop"
+  )
 
-# rounding off to 2 decimaL places
-GRBSumm <- GRBSumm %>%
-  mutate(across(where(is.numeric), round, 2))
-
-
-# Convert object to table
-grasft <- flextable(GRBSumm) %>%
+# Convert to table
+grasft_bc <- flextable(GRBSumm_bc) %>%
   theme_booktabs() %>%
   autofit()
 
-
-# Autofit column widths
-grabdoc <- read_docx()
-
-# Create Word document 
-grabdoc <- body_add_par(
-  grabdoc,
-  "Table 1. Absolute change in mean aboveground grass biomass"
+# Create Word document
+grabdoc_bc <- read_docx()
+grabdoc_bc <- body_add_par(
+  grabdoc_bc,
+  "Table 1. Absolute change in mean aboveground grass biomass (bias-corrected)"
 )
+grabdoc_bc <- body_add_flextable(grabdoc_bc, grasft_bc)
 
-# Add table
-grabdoc <- body_add_flextable(grabdoc, grasft)
+print(grabdoc_bc, target = "Plots/DeltaGrassB_Table.docx")
 
-#save
-print(grabdoc, target = "Plots/DeltaGrassB_Table.docx")
+#################################### RELATIVE CHANGE GRASS BIOMASS (bias-corrected)
 
-#################################### RELATIVE CHANGE GRASS BIOMASS
-
-# Convert object to table
-grasft <- flextable(plot_data) %>%
+# GBpct_bc: % change from emmeans on GBiomlog_bc (LMM fitted to bias-corrected LRR)
+grasft_pct <- flextable(GBpct_bc) %>%
   theme_booktabs() %>%
   autofit()
 
-# Autofit column widths
-pcntGRB <- read_docx()
+pcntGRB_bc <- read_docx()
+pcntGRB_bc <- body_add_par(
+  pcntGRB_bc,
+  "Table 1. Relative change in aboveground grass biomass relative to control (bias-corrected)"
+)
+pcntGRB_bc <- body_add_flextable(pcntGRB_bc, grasft_pct)
 
-# Create Word document 
-pcntGRB <- body_add_par(
-  pcntGRB,
-  "Table 1. Relative change in aboveground biomass")
-
-# Add table
-pcntGRB <- body_add_flextable(pcntGRB, grasft)
-
-#save
-print(pcntGRB, target = "Plots/RelativeGB_Table.docx")
+print(pcntGRB_bc, target = "Plots/RelativeGB_Table.docx")
 
 
 ##################################### GRASS RICHNESS

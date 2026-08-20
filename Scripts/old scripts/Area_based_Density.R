@@ -887,9 +887,9 @@ tree_comparison2 <- Trees %>%
 tree_comparison2 <- tree_comparison2 %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
-##################################DELTA SEEDLING DENSITY
+##################################DELTA TREE DENSITY
 
-#Pivot the two years side‑by‑side and compute Δ seedling density ─────────────
+#Pivot the two years side‑by‑side and compute Δ TREE density ─────────────
 Trees_Delta1 <- Trees_treat %>% 
   pivot_wider(names_from  = Year,
               values_from = mean_dens_ha,
@@ -898,7 +898,7 @@ Trees_Delta1 <- Trees_treat %>%
 
 
 
-##### to test effect of treatment * fencing on seedling density###################
+##### to test effect of treatment * fencing on tree density###################
 
 # Make "Unfenced" the reference level 
 
