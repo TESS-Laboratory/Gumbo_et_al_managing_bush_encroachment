@@ -29,10 +29,9 @@ Contact: Tapiwa Gumbo (tg488@exeter.ac.uk) and/or Andrew Cunliffe (a.cunliffe@ex
 | `GEODE_Subplot_area` | Subplot areas calculated from precise Geode coordinates. |
 | `March 2026/2Grasses2426updated.csv` | 2024 and 2026 grass survey data used for biomass calculations. |
 | `March 2026/Grasses2426Updated1.csv` | 2024 and 2026 grass survey data. |
-| `March 2026/WOODY2426.csv` | 2024 and 2026 woody plant survey data. |
+| `March 2026/WOODYP2426.csv` | 2024 and 2026 woody plant survey data. |
 | `Harmonized Taxonomisation/Harmonized_WPspp26` | Taxonomic harmonisation output for woody plants. |
 | `Harmonized Taxonomisation/Harmonized2026b_GRspp.csv` | Taxonomic harmonisation output for grasses. |
-| `chirps-v2.0.monthly` | Monthly CHIRPS rainfall data used in climate analysis. |
 | `WFO_Backbone/` | World Flora Online backbone data used for taxonomic harmonisation. |
 
 ## Other directories
@@ -40,4 +39,4 @@ Contact: Tapiwa Gumbo (tg488@exeter.ac.uk) and/or Andrew Cunliffe (a.cunliffe@ex
 | File | Description |
 |---|---|
 | `Plots/` | Figures generated from analysis scripts. |
-| `QUARTO_files/` | Output documents generated from Quarto. |
+

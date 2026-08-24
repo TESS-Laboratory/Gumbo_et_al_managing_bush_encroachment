@@ -38,21 +38,22 @@ library(vegan)
 
 # Read data
 A <- read_csv("DATA/GEODE_Subplot_area.csv")
-Bt <- read.csv("DATA/March2026/Trees2426.csv", stringsAsFactors = FALSE)
+B <- read.csv("DATA/March2026/WOODYP2426.csv", stringsAsFactors = FALSE)
+
 
 # Ensure consistent column names (case-sensitive)
 colnames(A) <- c("Site", "Plot", "Subplot", "Area")
 
+
 # Merge Area into B
-Bt_merged <- Bt %>%
+B_merged <- B %>%
   dplyr::left_join(
     A %>% dplyr::select(Site, Plot, Subplot, Area),
     by = c("Site", "Plot", "Subplot")
   )
 
-
 # prepare data for trees
-SapFt <- Bt_merged %>% 
+SapF <- B_merged %>% 
   mutate(
     woody_cat = case_when(
       Woody_class == "Cut stump"         ~ "Cut stump",
@@ -66,7 +67,7 @@ SapFt <- Bt_merged %>%
 ## TREE DENSITY 
 
 # calculating tree density
-Trees <- SapFt %>%
+Trees <- SapF %>%
   filter(
     woody_cat == "Trees",
     Year %in% c(2024, 2026)) %>%
@@ -144,6 +145,7 @@ Trees_Delta1$Fencing <- relevel(Trees_Delta1$Fencing, ref = "Unfenced")
 # using the LMM for analysis
 Treel5 <- lmer(delta_Treedens ~ Treatment * Fencing + (1|Site),  
                data = Trees_Delta1)
+
 
 summary(Treel5)
 
@@ -390,21 +392,6 @@ confint(fencing_tree_within_trt)
 # 1. Calculate SEEDLING, SAPLING DENSITY
 #---------------------------------------------------
 
-# Read data
-A <- read_csv("DATA/GEODE_Subplot_area.csv")
-B <- read.csv("DATA/March2026/WOODY2426.csv", stringsAsFactors = FALSE)
-
-
-# Ensure consistent column names (case-sensitive)
-colnames(A) <- c("Site", "Plot", "Subplot", "Area")
-
-
-# Merge Area into B
-B_merged <- B %>%
-  dplyr::left_join(
-    A %>% dplyr::select(Site, Plot, Subplot, Area),
-    by = c("Site", "Plot", "Subplot")
-  )
 
 ####################################### DETERMINING WOODY PLANTS DENSITY 
 # prepare data for seedlings
