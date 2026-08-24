@@ -3125,4 +3125,162 @@ resfencing_within_trt <- pairs(
 
 print(resfencing_within_trt)
 
-######################################
+##########################################################################################
+
+######
+# ─── 3. CLASSIFY resprouts response────────────────────────────────────────────────
+
+SapF2 <- B2_merged %>%
+  mutate(
+    woody_cat = case_when(
+      Woody_class == "Cut stump"             ~ "Cut stump",
+      between(Max_height.m., 0.05, 0.50)     ~ "Seedlings",
+      between(Max_height.m., 0.51, 1.49)     ~ "Saplings",
+      between(Max_height.m., 1.50, 21.0)     ~ "Trees",
+      TRUE                                   ~ NA_character_
+    )
+  )
+
+resprouts2 <- SapF2 %>%
+  filter(
+    woody_cat == "Cut stump",
+    Year == 2026,
+    !Treatment %in% c("C", "F")
+  ) %>%
+  mutate(
+    Treatment    = factor(Treatment, levels = c("TF", "TFB", "THF")),
+    Fencing      = factor(Fencing, levels = c("Unfenced", "Fenced")),
+    Species_name = factor(Species_name),
+    Site         = factor(Site)
+  )
+
+# ─── 5. FILTER: SPECIES WITH N >= 3 IN EACH TREATMENT (ACROSS FENCING) ───────
+
+sp_counts <- resprouts2 %>%
+  count(Species_name, Treatment) %>%          # total stumps per species × treatment
+  pivot_wider(names_from = Treatment,
+              values_from = n,
+              values_fill = 0)
+
+sp_eligible2 <- sp_counts %>%
+  filter(TF >= 3, TFB >= 3, THF >= 3) %>%
+  pull(Species_name)
+
+cat("Species meeting N >= 3 per treatment:", length(sp_eligible2), "\n")
+print(as.character(sp_eligible2))
+
+resprouts2_sp <- resprouts2 %>%
+  filter(Species_name %in% sp_eligible2) %>%
+  mutate(Species_name = droplevels(Species_name))
+
+# ─── 6. PER-SPECIES GLMMs: Treatment × Fencing ───────────────────────────────
+# Tweedie family handles zero-inflated resprout counts
+# Falls back to additive or Treatment-only model if interaction fails
+
+fit_sp2 <- function(d) {
+  tryCatch(
+    glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1 | Site),
+            data = d, family = tweedie(link = "log")),
+    error = function(e) {
+      tryCatch(
+        glmmTMB(No_of_resprouts ~ Treatment + Fencing + (1 | Site),
+                data = d, family = tweedie(link = "log")),
+        error = function(e2) {
+          tryCatch(
+            glmmTMB(No_of_resprouts ~ Treatment + (1 | Site),
+                    data = d, family = tweedie(link = "log")),
+            error = function(e3) NULL
+          )
+        }
+      )
+    }
+  )
+}
+
+sp2_models <- resprouts2_sp %>%
+  group_split(Species_name) %>%
+  set_names(levels(resprouts2_sp$Species_name)) %>%
+  map(fit_sp2)
+
+fitted2 <- names(Filter(Negate(is.null), sp2_models))
+cat("Models fitted for", length(fitted2), "species\n")
+
+# ─── 7. SPECIES ORDER: ranked by total cut stumps (most dominant at top) ──────
+
+sp_stump_order <- resprouts2_sp |>
+  count(Species_name, name = "N_stumps") |>
+  arrange(N_stumps) |>        # ascending so most dominant lands at top of y-axis
+  pull(Species_name) |>
+  as.character()
+
+# ─── 8. EMMEANS: Treatment within Fencing (back-transformed) ─────────────────
+
+sp2_emm <- imap_dfr(sp2_models, \(mod, sp) {
+  if (is.null(mod)) return(NULL)
+  tryCatch({
+    emm <- emmeans(mod, ~ Treatment | Fencing, type = "response")
+    df  <- as.data.frame(emm)
+    if ("asymp.LCL" %in% names(df)) df <- rename(df, lower.CL = asymp.LCL,
+                                                 upper.CL = asymp.UCL)
+    df %>% mutate(Species_name = sp)
+  }, error = function(e) NULL)
+}) %>%
+  mutate(
+    Treatment    = factor(Treatment, levels = c("TF", "TFB", "THF")),
+    Fencing      = factor(Fencing,   levels = c("Unfenced", "Fenced")),
+    Species_name = factor(Species_name,
+                          levels = sp_stump_order)
+  )
+
+# ─── 8. DUNNETT CONTRASTS: TFB & THF vs TF within each Fencing level ─────────
+
+sp2_contrasts <- imap_dfr(sp2_models, \(mod, sp) {
+  if (is.null(mod)) return(NULL)
+  tryCatch({
+    emm <- emmeans(mod, ~ Treatment | Fencing, type = "response")
+    cnt <- contrast(emm, method = "trt.vs.ctrl", ref = "TF")
+    as.data.frame(summary(cnt, infer = TRUE)) %>% mutate(Species_name = sp)
+  }, error = function(e) NULL)
+}) %>%
+  mutate(
+    Fencing      = factor(Fencing, levels = c("Unfenced", "Fenced")),
+    Species_name = factor(Species_name,
+                          levels = sp_stump_order)
+  )
+
+if ("asymp.LCL" %in% names(sp2_contrasts)) {
+  sp2_contrasts <- rename(sp2_contrasts, lower.CL = asymp.LCL,
+                          upper.CL = asymp.UCL)
+}
+
+print(sp2_contrasts)
+
+# ─── 9. PLOT A: EMMEANS — Treatment × Fencing per species ────────────────────
+
+p_emm2 <- ggplot(sp2_emm,
+                 aes(x = response, y = Species_name, color = Treatment)) +
+  geom_point(position = position_dodge(0.55), size = 2.2) +
+  geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL),
+                 height = 0.35, linewidth = 0.55,
+                 position = position_dodge(0.55)) +
+  facet_wrap(~ Fencing, ncol = 2) +
+  coord_cartesian(xlim = c(0, 35)) +
+  scale_color_manual(values = c("TF" = "red", "TFB" = "black", "THF" = "blue")) +
+  labs(x = "Mean resprouts per cut stump)",
+       y = NULL, color = "Treatment") +
+  theme_classic() +
+  theme(
+    axis.text.y  = element_text(size = 7, face = "italic"),
+    axis.text.x  = element_text(size = 8),
+    axis.title.x = element_text(size = 9),
+    strip.text   = element_text(size = 9, face = "bold"),
+    legend.text  = element_text(size = 8),
+    legend.title = element_text(size = 8),
+    plot.title   = element_text(size = 9, hjust = 0.5)
+  )
+
+p_emm2
+
+
+
+
