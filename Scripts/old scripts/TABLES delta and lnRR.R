@@ -101,7 +101,7 @@ sapdoc <- body_add_par(
 sapdoc <- body_add_flextable(sapdoc, sapft)
 
 #save
-print(sapdoc, target = "Plots/DeltaSAPLING_Table.docx")
+print(sapdoc, target = "Plots/2DeltaSAPLING_Table.docx")
 
 #################################### RELATIVE CHANGE SAPLINGS
 
@@ -122,7 +122,7 @@ pcntSap <- body_add_par(
 pcntSap <- body_add_flextable(pcntSap, sapft)
 
 #save
-print(pcntSap, target = "Plots/RelativeSAPLING_Table.docx")
+print(pcntSap, target = "Plots/2RelativeSAPLING_Table.docx")
 
 
 ########################################################################### GRASSES
@@ -373,7 +373,7 @@ treedoc <- body_add_par(
 treedoc <- body_add_flextable(treedoc, treeft)
 
 #save
-print(treedoc, target = "Plots/DeltaTREES2_Table.docx")
+print(treedoc, target = "Plots/2DeltaTREES2_Table.docx")
 
 #################################### RELATIVE CHANGE TREES
 
@@ -398,7 +398,7 @@ pcnttree <- body_add_par(
 pcnttree <- body_add_flextable(pcnttree, treeft)
 
 #save
-print(pcnttree, target = "Plots/RelativeTREE_Table2.docx")
+print(pcnttree, target = "Plots/2RelativeTREE_Table2.docx")
 
 
 ###################################################################################
