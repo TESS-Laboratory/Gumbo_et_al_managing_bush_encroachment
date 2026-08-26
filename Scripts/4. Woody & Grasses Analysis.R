@@ -1614,68 +1614,73 @@ plot_df <- pred_df %>%
 
 n_obs <- nrow(RSQTGdata)
 
-# Position for n label (above equations)
+# Get y-axis limits
 y_max <- max(RSQTGdata$Biomass_kg_ha, na.rm = TRUE)
 y_min <- min(RSQTGdata$Biomass_kg_ha, na.rm = TRUE)
 y_range <- y_max - y_min
 
-# Create equation labels (without n)
+# Small gap from the y-axis (3% of x range keeps text clear of the axis)
+x_gap <- min(RSQTGdata$DPH_Height) + 0.01 * diff(range(RSQTGdata$DPH_Height))
+
+# Create equation labels - NOW AT THE TOP
 equations <- data.frame(
   Model = c("SHR", "Trollope", "Zambatis"),
   label = c(
-    "y = exp(4.67 + 1.141·log(x)) × CF(x)",
+    "y = exp(4.67 + 1.14·log(x)) × CF(x)",
     "y = -3019 + 2260·√x",
     "y = (31.7176·0.3218^(1/x)·x^0.2834)²"
   ),
-  x = min(RSQTGdata$DPH_Height) + 0.05 * diff(range(RSQTGdata$DPH_Height)),
+  x = x_gap,
   y = c(
-    y_max - 0.20 * y_range,  # SHR (top)
-    y_max - 0.30 * y_range,  # Trollope (middle)
-    y_max - 0.40 * y_range   # Zambatis (bottom)
+    y_max - 0.10 * y_range,  # SHR (very top)
+    y_max - 0.20 * y_range,  # Trollope (slightly below)
+    y_max - 0.30 * y_range   # Zambatis (still near top)
   )
 )
 
-# Create n label (positioned above equations)
+# Create n label (positioned ABOVE or AT THE VERY TOP of equations)
 n_label <- data.frame(
-  x = min(RSQTGdata$DPH_Height) + 0.05 * diff(range(RSQTGdata$DPH_Height)),
-  y = y_max - 0.10 * y_range,
+  x     = x_gap,
+  y     = y_max - 0.00 * y_range,  # Just below top of plot
   label = paste0("n = ", n_obs)
 )
 
-# ============================================
-# 6. CREATE THE PLOT
-# ============================================
+# For even tighter spacing at the top:
+# n_label at very top, equations immediately below
+
+
 
 model_colors <- c(
-  "SHR" = "blue",     
-  "Trollope" = "brown", 
-  "Zambatis" = "black"  
+  "SHR" = "blue",      # Blue
+  "Trollope" = "brown", # Purple
+  "Zambatis" = "black"  # Orange
 )
+
 
 # ============================================================
 # MODEL COMPARISON MULTIPANEL  (RLMB / BiasC2)
 # ============================================================
 
-# model comparison plot 
+# Assign the model comparison plot (built in lines 154-198) to a named object
 BiasC2_bc <- ggplot() +
   geom_point(data = RSQTGdata,
              aes(x = DPH_Height, y = Biomass_kg_ha),
              alpha = 0.3, size = 1.5, color = "gray50") +
   geom_line(data = plot_df,
             aes(x = x, y = Biomass, color = Model, linetype = Model),
-            linewidth = 1.2) +
+            linewidth = 0.7) +
   geom_text(data = n_label,
-            aes(x = -Inf, y = y, label = label),
-            hjust = 0, vjust = 1, size = 3.5,
-            fontface = "bold", color = "black") +
+            aes(x = x, y = y, label = label),
+            hjust = 0, vjust = 1, size = 3.8,
+            fontface = "plain", color = "black") +
   geom_text(data = equations,
-            aes(x = -Inf, y = y, label = label, color = Model),
+            aes(x = x, y = y, label = label, color = Model),
             hjust = 0, vjust = 1,
             size = 3.0, lineheight = 1.0,
             show.legend = FALSE) +
   scale_color_manual(values = model_colors) +
   scale_linetype_manual(values = c("solid", "solid", "solid")) +
-  labs(x = "DPM Height (cm)",
+  labs(x = "DPM height (cm)",
        y = expression("Standing grass biomass ("*kg~ha^{-1}*")"),
        color    = "Model",
        linetype = "Model") +
@@ -1711,6 +1716,7 @@ multi_pBiomass2_bc <- (RLMB / BiasC2_bc) +
     panel.grid.minor = element_blank(),
     plot.margin      = margin(3, 3)
   )
+
 
 # saving plot
 ggsave(multi_pBiomass2_bc,
