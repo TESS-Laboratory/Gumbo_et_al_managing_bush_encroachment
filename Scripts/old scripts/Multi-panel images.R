@@ -123,207 +123,94 @@ multi_plott <- (p1 + p2) / (p3 + p4) +
 
 ############################################ CREATING MULTI-PANEL FOR TREATMENTS
 
-## Read images
-imgT1 <- image_read("DATA/Treatments/Thinning1.jpeg") 
+# ── 1. Read source images ────────────────────────────────────────────────────
+imgT1 <- image_read("DATA/Treatments/Thinning1.jpeg")
 imgT2 <- image_read("DATA/Treatments/Thinning2.JPG")
 imgH3 <- image_read("DATA/Treatments/Herbicide1.JPG")
 imgH4 <- image_read("DATA/Treatments/Herbicide2.JPG")
 imgF5 <- image_read("DATA/Treatments/Fire1.JPG")
-imgF6 <- image_read("DATA/Treatments/fire2.JPG") 
+imgF6 <- image_read("DATA/Treatments/fire2.JPG")
 imgG7 <- image_read("DATA/Treatments/Goats1.JPG")
 imgG8 <- image_read("DATA/Treatments/Goats2.JPG")
 
+# Panel order to match original layout:
+#   row 1: ppp1 (T1), ppp2 (T2)
+#   row 2: ppp4 (H4), ppp3 (H3)   ← note the swap in the original
+#   row 3: ppp5 (F5), ppp6 (F6)
+#   row 4: ppp7 (G7), ppp8 (G8)
+images_ordered <- list(imgT1, imgT2, imgH4, imgH3, imgF5, imgF6, imgG7, imgG8)
+labels         <- paste0("(", letters[1:8], ")")
 
-# Convert to raster objects
-gg1 <- rasterGrob(as.raster(imgT1))
-gg2 <- rasterGrob(as.raster(imgT2))
-gg3 <- rasterGrob(as.raster(imgH3))
-gg4 <- rasterGrob(as.raster(imgH4))
-gg5 <- rasterGrob(as.raster(imgF5))  
-gg6 <- rasterGrob(as.raster(imgF6))  
-gg7 <- rasterGrob(as.raster(imgG7))  
-gg8 <- rasterGrob(as.raster(imgG8))  
+# ── 2. Standardise all panels to the same pixel dimensions ──────────────────
+# Resize to a common width (height auto-scales), then crop/extend height to
+# a fixed value so the grid is perfectly regular.
+panel_w_px <- 900L   # width per panel in pixels
+panel_h_px <- 675L   # height per panel (4:3 crop); adjust to suit your photos
 
-
-## Create ggplot objects with NO margins
-ppp1 <- ggplot() + 
-  annotation_custom(gg1, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) + 
-  theme_beautiful() +
-  theme(plot.margin = margin(0, 0, 0, 0))
-
-ppp2 <- ggplot() + 
-  annotation_custom(gg2, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) + 
-  theme_beautiful() +
-  theme(plot.margin = margin(0, 0, 0, 0))
-
-ppp3 <- ggplot() + 
-  annotation_custom(gg3, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) + 
-  theme_beautiful() +
-  theme(plot.margin = margin(0, 0, 0, 0))
-
-ppp4 <- ggplot() + 
-  annotation_custom(gg4, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) + 
-  theme_beautiful() +
-  theme(plot.margin = margin(0, 0, 0, 0))
-
-ppp5 <- ggplot() + 
-  annotation_custom(gg5, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) + 
-  theme_beautiful() +
-  theme(plot.margin = margin(0, 0, 0, 0))
-
-ppp6 <- ggplot() + 
-  annotation_custom(gg6, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) + 
-  theme_beautiful() +
-  theme(plot.margin = margin(0, 0, 0, 0))
-
-ppp7 <- ggplot() + 
-  annotation_custom(gg7, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) + 
-  theme_beautiful() +
-  theme(plot.margin = margin(0, 0, 0, 0))
-
-ppp8 <- ggplot() + 
-  annotation_custom(gg8, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) + 
-  theme_beautiful() +
-  theme(plot.margin = margin(0, 0, 0, 0))
-
-
-# Arrange panels with minimal gaps
-Tmulti_plot <- (ppp1 + ppp2)/(ppp4 + ppp3)/(ppp5 + ppp6)/(ppp7+ppp8) +
-  plot_annotation(tag_levels = 'a', tag_prefix = '(', tag_suffix = ')') &
-  theme(
-    plot.tag = element_text(size = 10, face = 'plain', 
-                            color = "black",  
-                            margin = margin(0, 0, 0, 0)),
-    plot.tag.position = c(0.1, 0.95),  
-    plot.margin = margin(1, 1, 1, 1),
-    panel.spacing = unit(0.1, "cm"),      # Gap between ALL panels (rows & columns)
-    panel.spacing.x = unit(0.1, "cm"),    # Horizontal gap (between columns)
-    panel.spacing.y = unit(0.1, "cm"),   # VERTICAL gap (between rows) - SMALLER!
-    plot.background = element_blank()
+images_resized <- lapply(images_ordered, function(img) {
+  img |>
+    # Scale so width == panel_w_px; height adjusts proportionally
+    image_resize(paste0(panel_w_px, "x")) |>
+    # Crop / pad to the exact target height (gravity = North keeps top content)
+    image_extent(
+      geometry = paste0(panel_w_px, "x", panel_h_px),
+      gravity   = "North",
+      color     = "black"
     )
- 
-#plot.tag.background = element_rect(
- # fill = "white",
-  #colour = NA
+})
 
-#### option 2 white background on annotations
-Tmulti_plot <- (ppp1 + ppp2)/(ppp4 + ppp3)/(ppp5 + ppp6)/(ppp7+ppp8) +
-  plot_annotation(
-    tag_levels = "a",
-    tag_prefix = "(",
-    tag_suffix = ")"
-  ) &
-  theme(
-    # Annotation text
-    plot.tag = element_text(
-      size = 8,
-      face = "bold",
-      colour = "black",
-      margin = margin(1, 2, 1, 2)   # small padding inside white box
-    ),
-    
-    # Annotation position (inside image, top-left)
-    plot.tag.position = c(0.04, 0.98),
-    
-    # Small white rectangle ONLY behind annotation
-    plot.tag.background = element_rect(
-      fill = "white",
-      colour = "white"
-    ),
-    
-    # Increase image area + hairline spacing
-    plot.margin = margin(0, 0, 0, 0),
-    panel.spacing = unit(0.02, "cm")
-  )
+# ── 3. Annotate each panel individually ─────────────────────────────────────
+# Because the label is applied to each image before compositing, it is always
+# guaranteed to sit inside the top-left corner regardless of panel size or
+# arrangement.
 
-    
-## Save the multi-panel plot
- ggsave( Tmulti_plot, filename = "Plots/Treatment MPanel6Ery_plot.png",width = 11, height = 16, units = "cm")
+label_size   <- 42L   # font size in pixels
+label_x_pad  <- 18L   # pixels from left edge
+label_y_pad  <- 14L   # pixels from top edge
 
+images_labelled <- mapply(
+  function(img, lbl) {
+    image_annotate(
+      img,
+      text      = lbl,
+      size      = label_size,
+      weight    = 700,          # bold
+      location  = paste0("+", label_x_pad, "+", label_y_pad),
+      color     = "black",
+      boxcolor  = "white"       # small coloured box keeps label readable on any background
+    )
+  },
+  images_resized,
+  labels,
+  SIMPLIFY = FALSE
+)
 
-  
- 
-################ creating panel annotation with white background
+# ── 4. Add a thin border to each panel ──────────────────────────────────────
+# A 1 px border on every side means adjacent panels share a 2 px dividing line;
+# the outer frame stays 1 px. Adjust `divider_color` and `divider_px` as needed.
+divider_color <- "white"
+divider_px    <- 1L
 
- Tmulti_plot3 <- (ppp1 + ppp2)/(ppp4 + ppp3)/(ppp5 + ppp6)/(ppp7+ppp8) +
-   theme(
-     # Annotation text
-     plot.tag = element_text(
-       size = 8,
-       face = "bold",
-       colour = "black",
-       margin = margin(1, 1, 1, 1)   # small padding inside white box
-     ),
-     
-     # Increase image area + hairline spacing
-     plot.margin = margin(0, 0, 0, 0),
-     panel.spacing = unit(0.02, "cm")
-   )
- 
- 
- ## Save the multi-panel plot
- ggsave( Tmulti_plot3, filename = "Plots/TreatmentMplot2.png",width = 11, height = 16, units = "cm")
- 
+images_bordered <- lapply(images_labelled, function(img) {
+  image_border(img, color = divider_color, geometry = paste0(divider_px, "x", divider_px))
+})
+
+# ── 5. Composite into a 2-column × 4-row grid ───────────────────────────────
+make_row <- function(left, right) {
+  image_append(c(left, right), stack = FALSE)   # side by side
+}
+
+row1 <- make_row(images_bordered[[1]], images_bordered[[2]])
+row2 <- make_row(images_bordered[[3]], images_bordered[[4]])
+row3 <- make_row(images_bordered[[5]], images_bordered[[6]])
+row4 <- make_row(images_bordered[[7]], images_bordered[[8]])
+
+multipanel <- image_append(c(row1, row2, row3, row4), stack = TRUE)   # stack rows
+
+# ── 5. Save ──────────────────────────────────────────────────────────────────
+image_write(multipanel, "Plots/2Tmultipanel_annotated_fixed.png")
  
 
-########  white background on annotations 
- # Read image
- img <- image_read("Plots/TreatmentMPlot2.png")  # image with no annotations
-
-  # Image dimensions
- info <- image_info(img)
- w <- info$width
- h <- info$height
- 
- # Panel geometry
- n_col <- 2
- n_row <- 4
- panel_w <- w / n_col
- panel_h <- h / n_row
- 
- labels <- paste0("(", letters[1:8], ")")
- 
- # Padding inside each panel (adjust if needed)
- x_pad <- 20
- y_pad <- 40
- 
- # Loop over panels
- k <- 1
- for (row in 0:(n_row - 1)) {
-   for (col in 0:(n_col - 1)) {
-     
-     # Hairline gap between rows (pixels)
-     #row_gap <- 24   #
-     
-     x <- col * panel_w + x_pad
-     y <- row * panel_h + y_pad
-     #y <- row * panel_h + y_pad + row * row_gap # adding hairline gap between rows
-     
-     img <- image_annotate(
-       img,
-       text = labels[k],
-       size = 30,
-       weight = 400,
-       location = paste0("+", round(x), "+", round(y)),
-       color = "black",
-       boxcolor = "white"
-     )
-     
-     k <- k + 1
-   }
- }
- 
- # Save annotated figure
- image_write(img, "Plots/Tmultipanel_annotated3Ja.png")
- 
-
- 
- 
- 
- 
- 
- 
- 
  
 ######################################################################################
 

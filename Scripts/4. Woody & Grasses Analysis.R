@@ -1370,8 +1370,8 @@ modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = RSQTGdata)
 # tab_model(modelWG)
 
 # model diagnostics
-qqnorm(residuals(modelWG))
-qqline(residuals(modelWG))
+ #qqnorm(residuals(modelWG))
+ #qqline(residuals(modelWG))
 
 # checking for equal variance
 plot(fitted(modelWG), residuals(modelWG),
@@ -1511,15 +1511,15 @@ slope_zero <- round(coef(model_log_zero)[["log_DPH_Height"]], 3)
 intercept <- 4.67
 slope <- 1.141
 
-# Step 1: Calculate the median predictions from your Theil-Sen model
-# (Using your intercept of 4.87 and slope of 1.74)
+# Step 1: Calculate the median predictions from the Theil-Sen model
+# (Using  intercept of 4.67 and slope of 1.14)
 pred_median <- exp(4.67 + 1.14 * RSQTGdata$log_DPH_Height)
 
-# Step 2: Calculate the ratio of observed biomass to predicted median biomass
+# Step 2: Calculating the ratio of observed biomass to predicted median biomass
 ratios <- RSQTGdata$log_Biomass_kg_ha / pred_median
 
-# Step 3: Calculate the bias correction factor (CF) as the MEAN of the ratios
-# This is your non-parametric smearing factor to go from Median to Mean
+# Step 3: Calculating the bias correction factor (CF) as the MEAN of the ratios
+# This is a non-parametric smearing factor to go from Median to Mean
 CF <- mean(ratios)
 
 # Step 4: Print the correction factor to see it
@@ -1551,7 +1551,7 @@ cat("\nMedian:", median(ratios, na.rm = TRUE))
 # Fit LOESS to ratios
 ratio_model <- loess(ratios ~ RSQTGdata$log_DPH_Height, span = 0.75)
 
-# Calculate CF for your data
+# Calculate CF for the data
 RSQTGdata$CF <- predict(ratio_model, RSQTGdata$log_DPH_Height)
 
 # Bias-corrected predictions
@@ -1574,7 +1574,7 @@ cat("\nCF min:", min(CF_grid, na.rm = TRUE))
 cat("\nCF max:", max(CF_grid, na.rm = TRUE))
 cat("\nCF mean:", mean(CF_grid, na.rm = TRUE))
 
-# If CF is still 0, there's a problem with your ratios
+# If CF is still 0, there's a problem with ratios
 if (all(CF_grid == 0, na.rm = TRUE)) {
   stop("ERROR: All CF values are 0. Check your ratios calculation.")
 }
@@ -1712,6 +1712,7 @@ multi_pBiomass2_bc <- (RLMB / BiasC2_bc) +
     plot.margin      = margin(3, 3)
   )
 
+# saving plot
 ggsave(multi_pBiomass2_bc,
        filename = "Plots/ModelComparison-BIOMASS-BiasC.png",
        width = 16, height = 14, units = "cm")
@@ -2257,13 +2258,13 @@ summary(GRilog)
 
 
 # Model performance
-plot(GRilog)
-check_model(GRilog, check = "homogeneity")
-check_model(GRilog, check = "normality")
-check_model(GRilog, check = "qq")
+ #plot(GRilog)
+ #check_model(GRilog, check = "homogeneity")
+ #check_model(GRilog, check = "normality")
+ #check_model(GRilog, check = "qq")
 
-qqnorm(residuals(GRilog)) #whether residuals are approximately normal.
-qqline(residuals(GRilog))
+ #qqnorm(residuals(GRilog)) #whether residuals are approximately normal.
+ #qqline(residuals(GRilog))
 
 # Plot LRR
 ggplot(GRich_LRR,
@@ -2385,7 +2386,7 @@ multi_panelRich <- (GrRa/GrRb/ GrRD) +   # "/" for stacking vertically, or "|" f
   )
 
 #saving using ggsave
-ggsave(multi_panelRich,filename ="Plots/GrassRICHNESS ViolinLog1A.png",
+ #ggsave(multi_panelRich,filename ="Plots/GrassRICHNESS ViolinLog1A.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -2832,7 +2833,7 @@ SWmulti_panel <- (GSWa/GSWb/GSWD) +   # "/" for stacking vertically, or "|" for 
     plot.tag = element_text(size = 10, hjust = 0))  # Ensure left alignment
   
 ##ggsave multipanel grass richness
-ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog1D.png",
+ #ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog1D.png",
        width = 16, height = 14, units = "cm")
 
 
@@ -2977,11 +2978,7 @@ testOutliers(simTw)
 # model summary
 summary(R5b_tweedie)
 
-# 
-# 
-# ## LMM analysis
-# Respr5D <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
-#                    data = resprouts_df, family = Gamma(link = "log"))
+
 # 
 # summary(Respr5D)
 # # 
@@ -2994,26 +2991,6 @@ summary(R5b_tweedie)
 #  qqnorm(residuals(R5b_tweedie)) #whether residuals are approximately normal.
 # qqline(residuals(R5b_tweedie))
 
-
-
-#### Using LMM instead of glmm
-# Respr5c <- lmer(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
-#                 data = resprouts_df)
-# 
-# summary(Respr5c)
-
-# Model diagnostics
-# check_model(Respr5c, check = "qq")
-# check_model(Respr5c, check = "normality")
-# check_model(Respr5c, check = "homogeneity")
-# plot(Respr5c)
-
-# qqnorm(residuals(Respr5c)) #whether residuals are approximately normal.
-# # qqline(residuals(Respr5c))
-# 
-# ## check model performance
-# performance::check_model(Respr5c)
-# 
 
 
 ### POST HOC ANALYSIS FOR RESPROUTS 
@@ -3117,7 +3094,7 @@ print(resfencing_within_trt)
 ######
 # ─── 3. CLASSIFY resprouts response────────────────────────────────────────────────
 
-SapF2 <- B2_merged %>%
+SapF2 <- B_merged %>%
   mutate(
     woody_cat = case_when(
       Woody_class == "Cut stump"             ~ "Cut stump",
@@ -3240,7 +3217,8 @@ if ("asymp.LCL" %in% names(sp2_contrasts)) {
                           upper.CL = asymp.UCL)
 }
 
-print(sp2_contrasts)
+#print(sp2_contrasts)
+
 
 # ─── 9. PLOT A: EMMEANS — Treatment × Fencing per species ────────────────────
 
@@ -3253,12 +3231,12 @@ p_emm2 <- ggplot(sp2_emm,
   facet_wrap(~ Fencing, ncol = 2) +
   coord_cartesian(xlim = c(0, 35)) +
   scale_color_manual(values = c("TF" = "red", "TFB" = "black", "THF" = "blue")) +
-  labs(x = "Mean resprouts per cut stump)",
+  labs(x = "Mean resprouts per cut stump",
        y = NULL, color = "Treatment") +
   theme_classic() +
   theme(
-    axis.text.y  = element_text(size = 7, face = "italic"),
-    axis.text.x  = element_text(size = 8),
+    axis.text.y  = element_text(size = 9, face = "italic"),
+    axis.text.x  = element_text(size = 9),
     axis.title.x = element_text(size = 9),
     strip.text   = element_text(size = 9, face = "bold"),
     legend.text  = element_text(size = 8),
@@ -3266,7 +3244,11 @@ p_emm2 <- ggplot(sp2_emm,
     plot.title   = element_text(size = 9, hjust = 0.5)
   )
 
-p_emm2
+
+# saving plot
+ggsave(p_emm2,
+       filename = "Plots/Resprouts_Species_TreatFencing_N3.png",
+       width = 16, height = 14, units = "cm")
 
 
 

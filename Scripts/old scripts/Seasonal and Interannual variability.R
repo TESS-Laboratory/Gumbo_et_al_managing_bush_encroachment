@@ -267,8 +267,8 @@ mean_ugi_full <- mean(annual_variability_full$ugi, na.rm = TRUE)
 
 # Panel C: UGi through time
 panel_C <- ggplot(annual_variability_full, aes(x = YEAR, y = ugi)) +
-  geom_line(color = "#8B4513", linewidth = 0.9) +
-  geom_point(color = "#8B4513", size = 1.2) +
+  geom_line(color = "#4682B4", linewidth = 0.9) +
+  geom_point(color = "#4682B4", size = 1.2) +
   geom_hline(
     yintercept = mean_ugi_full,
     linetype   = "dashed",
