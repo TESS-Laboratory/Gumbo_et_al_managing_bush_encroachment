@@ -63,7 +63,7 @@ b.From RStudio
 
 ## 2. Setting up the R environment
 
-This project will use renv to ensure reproducibility. 
+This project uses *renv* to ensure reproducibility. 
 
 **Install the pinned package versions:**
 
