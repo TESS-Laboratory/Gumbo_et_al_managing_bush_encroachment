@@ -1,4 +1,4 @@
-############# DETERMINING WOODY PLANTS DENSITY LOG RESPONSE RATIO
+############# DETERMINING WOODY PLANTS DENSITY and GRASS LAYER
 
 library(MASS)
 library(tidyverse)
@@ -36,12 +36,12 @@ library(vegan)
 
 ####################################### DETERMINING WOODY PLANTS DENSITY
 
-# Read data
+# Loading data
 A <- read_csv("DATA/GEODE_Subplot_area.csv")
 B <- read.csv("DATA/March2026/WOODYP2426.csv", stringsAsFactors = FALSE)
 
 
-# Ensure consistent column names (case-sensitive)
+# Ensuring consistent column names (case-sensitive)
 colnames(A) <- c("Site", "Plot", "Subplot", "Area")
 
 
@@ -52,7 +52,7 @@ B_merged <- B %>%
     by = c("Site", "Plot", "Subplot")
   )
 
-# prepare data for trees
+# preparing data for trees
 SapF <- B_merged %>% 
   mutate(
     woody_cat = case_when(
@@ -97,7 +97,7 @@ Treessummary_stats <- Trees %>%
   ) %>%
   ungroup()
 
-#sort pre and post treatment
+#sorting pre and post treatment
 tree_comparison2 <- Trees %>%
   filter(Year %in% c(2024, 2026)) %>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
@@ -109,7 +109,7 @@ tree_comparison2 <- tree_comparison2 %>%
 
 ##################################DELTA TREE DENSITY
 
-#Pivot the two years side‑by‑side and compute Δ TREE density ─────────────
+#Pivoting the two years side‑by‑side and compute Δ TREE density ─────────────
 Trees_Delta1 <- Trees_treat %>% 
   pivot_wider(names_from  = Year,
               values_from = mean_dens_ha,
@@ -120,14 +120,14 @@ Trees_Delta1 <- Trees_treat %>%
 
 ##### to test effect of treatment * fencing on tree density###################
 
-# Make "Unfenced" the reference level 
+# Making "Unfenced" the reference level 
 
 class(Trees_Delta1$Fencing)  # Likely "character" or "ordered factor"
 
-# Convert to unordered factor explicitly
+# Converting to unordered factor explicitly
 Trees_Delta1$Fencing <- factor(Trees_Delta1$Fencing, ordered = FALSE)
 
-# Verify
+# Verifying
 levels(Trees_Delta1$Fencing)  
 
 
@@ -253,7 +253,7 @@ Treec <- ggplot(tree_plot_df, aes(Treatment, EMM, color = Fencing, group = Fenci
 ########## LOG RESPONSE RATIO (lnRR) — effect size relative to Control        
 
 
-# Prepare tree count data for lnRR
+# Preparing tree count data for lnRR
 TreeLOG <- SapFt %>%
   filter(
     woody_cat == "Trees",
@@ -262,7 +262,7 @@ TreeLOG <- SapFt %>%
   count(Site, Plot, Subplot, Treatment, Fencing, Year, Area, name = "Trees") %>%
   mutate(density_ha = Trees * 10000 / Area)
 
-# Convert to wide format (Y2024 = pre-treatment, Y2026 = post-treatment)
+# Converting to wide format (Y2024 = pre-treatment, Y2026 = post-treatment)
 Tree_wide <- TreeLOG %>%
   dplyr::select(Site, Plot, Subplot, Treatment, Fencing, Year, Area, density_ha) %>%
   pivot_wider(names_from = Year, values_from = density_ha, names_prefix = "Y")
@@ -394,7 +394,7 @@ confint(fencing_tree_within_trt)
 
 
 ####################################### DETERMINING WOODY PLANTS DENSITY 
-# prepare data for seedlings
+#  data for seedlings
 SapF <- B_merged %>% 
   mutate(
     woody_cat = case_when(
@@ -447,19 +447,19 @@ Seedsummary_stats <- Seedlings %>%
   ) %>%
   ungroup()
 
-#sort pre and post treatment
+#sorting pre and post treatment
 strt_comparison2 <- Seedlings %>%
   filter(Year %in% c(2024, 2026)) %>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
 
-#reorder so that pre-treatment appears first then post treatment second on the plots
+#reordering so that pre-treatment appears first then post treatment second on the plots
 strt_comparison2 <- strt_comparison2 %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
 ##################################DELTA SEEDLING DENSITY
 
-#Pivot the two years side‑by‑side and compute Δ seedling density ─────────────
+#Pivoting the two years side‑by‑side and computing Δ seedling density ─────────────
 Seedlings_Delta1 <- Seed_treat %>% 
   pivot_wider(names_from  = Year,
               values_from = mean_dens_ha,
@@ -470,18 +470,18 @@ Seedlings_Delta1 <- Seed_treat %>%
 
 ##### to test effect of treatment * fencing on seedling density###################
 
-# Make "Unfenced" the reference level 
+# Making "Unfenced" the reference level 
 
 class(Seedlings_Delta1$Fencing)  # Likely "character" or "ordered factor"
 
-# Convert to unordered factor explicitly
+# Converting to unordered factor explicitly
 Seedlings_Delta1$Fencing <- factor(Seedlings_Delta1$Fencing, ordered = FALSE)
 
 # Verify
 levels(Seedlings_Delta1$Fencing)  
 
 
-### Convert character variables to factors
+### Converting character variables to factors
 Seedlings_Delta1$Treatment <- as.factor(Seedlings_Delta1$Treatment)
 
 Seedlings_Delta1$Fencing <- factor(Seedlings_Delta1$Fencing, 
@@ -499,14 +499,14 @@ Seedl5 <- lmer(delta_Seeddens ~ Treatment * Fencing + (1|Site),
 
 summary(Seedl5)
 
-## check model performance
+## checking model performance
 
-performance::check_model(Seedl5) # this one not displaying plots
+ #####performance::check_model(Seedl5) # this one not displaying plots
 
-check_model(Seedl5, check = "qq")
-check_model(Seedl5, check = "normality")
-check_model(Seedl5, check = "homogeneity")
-plot(Seedl5)
+ #check_model(Seedl5, check = "qq")
+ #check_model(Seedl5, check = "normality")
+ #check_model(Seedl5, check = "homogeneity")
+ #plot(Seedl5)
 
 ## GGplots
 
@@ -568,7 +568,7 @@ Seedlings <- SapF %>%
     density_ha = Seedlings * 10000 / Area)
 
 
-# prepare seedlings data for LOG RESPONSE RATIO
+# preparing seedlings data for LOG RESPONSE RATIO
 SeedLOG <- SapF %>%
   filter(
     woody_cat == "Seedlings",
@@ -608,7 +608,7 @@ Seed_wide <- SeedLOG %>%
     values_from = density_ha,
     names_prefix = "Y"
   )
-
+   
 # Result:
 # Y2024 = pretreatment density
 # Y2026 = posttreatment density
@@ -745,7 +745,7 @@ emm_interaction <- emmeans(Seedllog, ~ Treatment | Fencing)
 # Convert to dataframe
 plot_data <- as.data.frame(emm_interaction)
 
-# Ensure factors are properly labeled
+# Ensuring factors are properly labeled
 plot_data$Treatment <- factor(plot_data$Treatment, 
                               levels = c("F", "TF", "TFB", "THF"))
 
@@ -769,7 +769,6 @@ ggplot(plot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
   scale_x_continuous(breaks = seq(-2, 2, 0.5)) +
   labs(x = "lnRR Seedling density relative to Control",
        y = "Treatments") +
- #theme_beautiful() +
   theme(legend.position = "top") +
 theme_classic()+ 
   ggtitle(NULL)+
@@ -778,12 +777,8 @@ theme_classic()+
     axis.text = element_text(size = 12))
 
 
-# Save high-resolution versions
-#ggsave("treatment_kraaling_interaction_point.png", p, width = 8, height = 5, dpi = 300, bg = "white")
-
-
 ####### CONVERT lnRR to PERCENTAGE CHANGE #####
-# Get estimated marginal means for Treatment × Fencing interaction
+#  estimated marginal means for Treatment × Fencing interaction
 emm_interaction <- emmeans(Seedllog, ~ Treatment | Fencing)
 plot_data_raw <- as.data.frame(emm_interaction)
 
@@ -823,7 +818,7 @@ SeedVd <- ggplot(plot_data, aes(x = pct_change, y = Treatment, color = Fencing))
     axis.text = element_text(size = 12))
 
 
-# Create multipanel plot
+# multipanel plot
 
 ####  Combine the plots in a single layout
 multi_panelSe <- (SeedVa/SeedVb/SeedVd) +   # "/" for stacking vertically, or "|" for side-by-side
@@ -912,30 +907,30 @@ Sap_treat <- Saplings %>%
   summarise(mean_dens_ha = mean(density_ha), .groups = "drop")  
 
 
-#Summary stats for saplings 
+# Summary stats for saplings 
 Sapsummary_stats <- Saplings %>%
   group_by(Treatment,Fencing,Year) %>%
   summarise(
     N = n(),                                   # number of observations per treatment
-    mean_density = mean(density_ha, na.rm = TRUE),
+    mean_density = mean(density_ha, na.rm = TRUE), 
     sd_density = sd(density_ha, na.rm = TRUE)
   ) %>%
   ungroup()
 
-#sort pre and post treatment
+#sorting pre and post treatment
 sptrt_comparison2 <- Saplings %>%
   filter(Year %in% c(2024, 2026)) %>%
-  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
+  mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))  
 
 
-#reorder so that pre-treatment appears first then post treatment second on the plots
+#reordering so that pre-treatment appears first then post treatment second on the plots
 sptrt_comparison2 <- sptrt_comparison2 %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
 
 #################DELTA SAPLING DENSITY
 
-#Pivot the two years side‑by‑side and compute Δ sapling density ─────────────
+#Pivoting the two years side‑by‑side and compute Δ sapling density ─────────────
 Saplings_Delta1 <- Sap_treat %>% 
   pivot_wider(names_from  = Year,
               values_from = mean_dens_ha,
@@ -950,21 +945,21 @@ Saplings_Delta1 <- Sap_treat %>%
 
 class(Saplings_Delta1$Fencing)  # Likely "character" or "ordered factor"
 
-# Convert to unordered factor explicitly
+# Converting to unordered factor explicitly
 Saplings_Delta1$Fencing <- factor(Saplings_Delta1$Fencing, ordered = FALSE)
 
 # Verify
 levels(Saplings_Delta1$Fencing)  
 
 
-### Convert character variables to factors
+### Converting character variables to factors
 Saplings_Delta1$Treatment <- as.factor(Saplings_Delta1$Treatment)
 
 Saplings_Delta1$Fencing <- factor(Saplings_Delta1$Fencing, 
                                    levels = c("Unfenced", "Fenced"),
                                    labels = c("Unfenced", "Fenced"))
 
-# Set "Fenced" as the reference level 
+# Setting "Fenced" as the reference level 
 Saplings_Delta1$Fencing <- relevel(Saplings_Delta1$Fencing, ref = "Unfenced")
 
 
@@ -1027,7 +1022,7 @@ SapVb <- ggplot(Saplings_Delta1,
 
 
 
-# prepare saplings data for LOG RESPONSE RATIO
+# preparing saplings data for LOG RESPONSE RATIO
 SapLOG <- SapF %>%
   filter(
     woody_cat == "Saplings",
@@ -1037,7 +1032,7 @@ SapLOG <- SapF %>%
     Site,
     Plot,
     Subplot,
-    Treatment,
+    Treatment, 
     Fencing,
     Year,
     Area,
@@ -1205,34 +1200,30 @@ Splot_data$Fencing <- factor(Splot_data$Fencing,
                             labels = c("Unfenced", "Fenced"))
 
 #### visualisation
-ggplot(Splot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
-  geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.8) +
-  geom_point(size = 3.5, position = position_dodge(0.5)) +
-  geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL),
-                 height = 0.2, size = 0.8, position = position_dodge(0.5)) +
-  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
-  scale_x_continuous(breaks = seq(-2, 2, 0.5)) +
-  labs(x = "LnRR Sapling density relative to the control ",
-       y = "Treatment") +
-  #theme_beautiful() +
-  theme(legend.position = "top") +
-  theme_classic()+ 
-  ggtitle(NULL)+
-  theme(
-    axis.title = element_text(size = 12),      # Axis titles
-    axis.text = element_text(size = 12))
+# ggplot(Splot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
+#   geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.8) +
+#   geom_point(size = 3.5, position = position_dodge(0.5)) +
+#   geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL),
+#                  height = 0.2, size = 0.8, position = position_dodge(0.5)) +
+#   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
+#   scale_x_continuous(breaks = seq(-2, 2, 0.5)) +
+#   labs(x = "LnRR Sapling density relative to the control ",
+#        y = "Treatment") +
+#   #theme_beautiful() +
+#   theme(legend.position = "top") +
+#   theme_classic()+ 
+#   ggtitle(NULL)+
+#   theme(
+#     axis.title = element_text(size = 12),      # Axis titles
+#     axis.text = element_text(size = 12))
+# 
 
-
-# Save high-resolution versions
-#ggsave("treatment_kraaling_interaction_point.png", p, width = 8, height = 5, dpi = 300, bg = "white")
-
-
-####### CONVERT lnRR to PERCENTAGE CHANGE #####
+####### CONVERTING lnRR to PERCENTAGE CHANGE #####
 # Get estimated marginal means for Treatment × Fencing interaction
 Spemm_interaction <- emmeans(Sapllog, ~ Treatment | Fencing)
 splot_data_raw <- as.data.frame(Spemm_interaction)
 
-# Convert to percentage change
+# Converting to percentage change
 Splot_data <- splot_data_raw
 Splot_data$pct_change <- (exp(splot_data_raw$emmean) - 1) * 100
 Splot_data$CI_lower_pct <- (exp(splot_data_raw$lower.CL) - 1) * 100
@@ -1249,24 +1240,6 @@ Splot_data$Treatment <- factor(Splot_data$Treatment,
 Splot_data$Fencing <- factor(Splot_data$Fencing, 
                              levels = c("Unfenced", "Fenced"),
                              labels = c("Unfenced", "Fenced"))
-
-
-##### Percentage change plot 
-# SapVc<- ggplot(Splot_data, aes(x = Treatment, y = pct_change, color = Fencing, group = Fencing)) +
-#   geom_hline(yintercept = 0, linetype = "dashed") +
-#   geom_point(position = position_dodge(0.3), size = 1.5) +
-#   geom_errorbar(aes(ymin = CI_lower_pct, ymax = CI_upper_pct),
-#                 position = position_dodge(0.3), width = 0.15) +
-#   #geom_line(position = position_dodge(0.3)) +
-#   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"),
-#                      name = "Fencing") +
-#   scale_y_continuous(
-#     breaks = seq(-100, 200, 25),  # Breaks every 50 from -100 to 200
-#     #labels = function(x) paste0(x, "%")
-#   )+
-#   labs(x = "Treatment", y = "Proportional Δ sapling density(%)") +
-#   theme_classic()
-
 
 ######## inverted x y axis - treatment on x-axis
 SapVd <- ggplot(Splot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
@@ -1285,12 +1258,12 @@ SapVd <- ggplot(Splot_data, aes(x = pct_change, y = Treatment , color = Fencing)
     axis.text = element_text(size = 14))
 
 
-####  Combine the plots in a single layout
+####  Combining the plots in a single layout
 multi_panelSap <- (SapVa/SapVb/SapVd) +   # "/" for stacking vertically, or "|" for side-by-side
   plot_layout(heights = c(1, 1, 1)) +  # Adjust relative heights
   plot_annotation(
     tag_levels = 'a',
-    tag_prefix = '(',
+    tag_prefix = '(', 
     tag_suffix = ')',
     theme = theme(plot.tag = element_text(size = 8, hjust = 0))  # Left align tags
   ) &
@@ -1383,13 +1356,13 @@ abline(h = 0, lty = 2)
 
 ###adding annotation to the plot
 
-# Extract coefficients
+# Extracting coefficients
 coefs <- coef(modelWG)
 intercept <- round(coefs[1], 2)
 slope <- round(coefs[2], 2)
 
-# Create equation string for annotation
-# Build the equation string (biomass = intercept + slope * x)
+# Create equation string for annotation 
+# Building the equation string (biomass = intercept + slope * x)
 eq <- paste0("Biomass== ", intercept, " + ", slope, " %*% Dpm")
 
 coef <- coefficients(modelWG)
@@ -1400,7 +1373,7 @@ eq <- paste0(
   "R² = ", round(r2, 3))#, ", n = ", n)
 
 
-# Plot with regression and equation
+# Plotting with regression and equation
 
 DPM <- ggplot(RSQTGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) + 
   geom_point(size = 0.7, color = "black") + 
@@ -1421,25 +1394,17 @@ DPM <- ggplot(RSQTGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
 # MODEL performance
 #performance::check_model(modelWG)
 
-
 #############################################
 ############# LOG TRANSFORMED RLM            LOG TRANSFORMED RLM     
 
 
-## 1. Convert weight from grams to kg/ha
+## 1. Converting weight from grams to kg/ha
 #    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
 frame_area <- pi * (0.17^2)  # = 0.0908 m²
 RSQTGdata$Biomass_kg_ha <- RSQTGdata$Weight * 10 / frame_area
 
-# --- Log-transform the variables (natural log) ---
-# Add small constant if any zeros in data (rare for height/biomass, but safe)
+# --- Log-transforming the variables (natural log) ---
 
-# Here we use 1 as additive constant; adjust if needed
-#RSQTGdata$log_Biomass_kg_ha <- log(RSQTGdata$Biomass_kg_ha + 1)
-# RSQTGdata$log_DPH_Height  <- log(RSQTGdata$DPH_Height + 1)
-
-
-# If you're certain there are no zeros, you can skip +1:
 RSQTGdata$log_Biomass_kg_ha <- log(RSQTGdata$Biomass_kg_ha)
 RSQTGdata$log_DPH_Height  <- log(RSQTGdata$DPH_Height)
 
@@ -1511,7 +1476,7 @@ slope_zero <- round(coef(model_log_zero)[["log_DPH_Height"]], 3)
 intercept <- 4.67
 slope <- 1.141
 
-# Step 1: Calculate the median predictions from the Theil-Sen model
+# Step 1: Calculating the median predictions from the Theil-Sen model
 # (Using  intercept of 4.67 and slope of 1.14)
 pred_median <- exp(4.67 + 1.14 * RSQTGdata$log_DPH_Height)
 
@@ -1522,23 +1487,23 @@ ratios <- RSQTGdata$log_Biomass_kg_ha / pred_median
 # This is a non-parametric smearing factor to go from Median to Mean
 CF <- mean(ratios)
 
-# Step 4: Print the correction factor to see it
+# Step 4: Print the correction factor
 print(CF)
 
-# Step 5: Apply the correction to get MEAN biomass predictions
+# Step 5: Applying the correction to get MEAN biomass predictions
 RSQTGdata$Biomass_Mean_Corrected <- pred_median * CF
 
-# Check if you have original-scale biomass
+# Checking if you have original-scale biomass
 if (!"Biomass_kg_ha" %in% names(RSQTGdata)) {
   # If you only have log_Biomass_kg_ha, back-transform it
   RSQTGdata$Biomass_kg_ha <- exp(RSQTGdata$log_Biomass_kg_ha)
   cat("\nCreated Biomass_kg_ha from log_Biomass_kg_ha")
 }
 
-# Calculate median predictions (original scale)
+# Calculating median predictions (original scale)
 pred_median <- exp(intercept + slope * RSQTGdata$log_DPH_Height)
 
-# Calculate ratios (BOTH on original scale!)
+# Calculating ratios (BOTH on original scale!) 
 ratios <- RSQTGdata$Biomass_kg_ha / pred_median
 
 # Check ratios
@@ -1548,10 +1513,10 @@ cat("\nMax:", max(ratios, na.rm = TRUE))
 cat("\nMean:", mean(ratios, na.rm = TRUE))
 cat("\nMedian:", median(ratios, na.rm = TRUE))
 
-# Fit LOESS to ratios
+# Fitting LOESS to ratios
 ratio_model <- loess(ratios ~ RSQTGdata$log_DPH_Height, span = 0.75)
 
-# Calculate CF for the data
+# Calculating CF for the data
 RSQTGdata$CF <- predict(ratio_model, RSQTGdata$log_DPH_Height)
 
 # Bias-corrected predictions
@@ -1565,16 +1530,16 @@ x_new <- seq(min(RSQTGdata$DPH_Height),
              max(RSQTGdata$DPH_Height), 
              length.out = 120)
 
-# Predict CF for grid
+# Predicting CF for grid
 CF_grid <- predict(ratio_model, log(x_new))
 
-# Check if CF is reasonable
+# Checking if CF is reasonable
 cat("\n===== CF GRID STATISTICS =====")
-cat("\nCF min:", min(CF_grid, na.rm = TRUE))
+cat("\nCF min:", min(CF_grid, na.rm = TRUE)) 
 cat("\nCF max:", max(CF_grid, na.rm = TRUE))
 cat("\nCF mean:", mean(CF_grid, na.rm = TRUE))
 
-# If CF is still 0, there's a problem with ratios
+# If CF is 0, there's a problem with ratios
 if (all(CF_grid == 0, na.rm = TRUE)) {
   stop("ERROR: All CF values are 0. Check your ratios calculation.")
 }
@@ -1638,7 +1603,7 @@ equations <- data.frame(
   )
 )
 
-# Create n label (positioned ABOVE or AT THE VERY TOP of equations)
+# Creating n label (positioned ABOVE or AT THE VERY TOP of equations)
 n_label <- data.frame(
   x     = x_gap,
   y     = y_max - 0.00 * y_range,  # Just below top of plot
@@ -1648,20 +1613,17 @@ n_label <- data.frame(
 # For even tighter spacing at the top:
 # n_label at very top, equations immediately below
 
-
-
 model_colors <- c(
   "SHR" = "blue",      # Blue
   "Trollope" = "brown", # Purple
   "Zambatis" = "black"  # Orange
 )
 
-
 # ============================================================
 # MODEL COMPARISON MULTIPANEL  (RLMB / BiasC2)
 # ============================================================
 
-# Assign the model comparison plot (built in lines 154-198) to a named object
+# Assign the model comparison plot to a named object
 BiasC2_bc <- ggplot() +
   geom_point(data = RSQTGdata,
              aes(x = DPH_Height, y = Biomass_kg_ha),
@@ -1731,7 +1693,7 @@ ggsave(multi_pBiomass2_bc,
 
 ######   GRASS BIOMASS GRASS BIOMASS GRASS BIOMASS GRASS BIOMASS
 
-# Load data
+# Loading data
 heights_data <-  read_csv("DATA/March2026/2Grasses2426.csv")
 
 Grasses <- read_csv("DATA/March2026/Grasses2426Updated1.csv")
@@ -1747,7 +1709,7 @@ if (!"DPM_Height" %in% names(heights_data)) {
   cat("Using first column as Height_cm\n")
 }
 
-# Predict biomass using log-transformed model
+# Predicting biomass using log-transformed model
 predict_biomass <- function(h) {
   
   # avoid log(0) or negative values
@@ -1782,12 +1744,12 @@ heights_data <- heights_data %>%
     )
   )
 
-# Summarize using mean()
+# Summarizing using mean()
 Biomasssummary2_mean <- heights_data %>%
   filter(Year %in% c(2024, 2026)) %>% 
   group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
   summarise(
-    mean_Biomass = mean(Biomass_mean_kg_ha, na.rm = TRUE),
+    mean_Biomass = mean(Biomass_mean_kg_ha, na.rm = TRUE), 
     .groups = "drop"
   )
 
@@ -1795,7 +1757,7 @@ Biomasssummary2_mean <- heights_data %>%
 # GRASS BIOMASS ANALYSIS (BIAS-CORRECTED)
 # ============================================
 
-### Convert character variables to factors
+### Converting character variables to factors
 heights_data$Treatment <- as.factor(heights_data$Treatment)
 heights_data$Fencing   <- as.factor(heights_data$Fencing)
 
@@ -1813,7 +1775,7 @@ biomass2_bc <- heights_data %>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment")) %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
-# Reorder Fencing factor
+# Reordering Fencing factor
 biomass2_bc$Fencing <- factor(biomass2_bc$Fencing,
                               levels = c("Unfenced", "Fenced"))
 
@@ -1852,7 +1814,7 @@ delta_GRBiomass_bc <- heights_data %>%
   mutate(delta_GR = Biomass_2026 - Biomass_2024) %>%
   drop_na(delta_GR)
 
-### Convert to factors and set reference level
+### Converting to factors and set reference level
 delta_GRBiomass_bc$Treatment <- as.factor(delta_GRBiomass_bc$Treatment)
 delta_GRBiomass_bc$Fencing   <- factor(delta_GRBiomass_bc$Fencing,
                                        levels = c("Unfenced", "Fenced"),
@@ -1865,11 +1827,11 @@ Grasbiom_bc <- lmer(delta_GR ~ Treatment * Fencing + (1 | Site),
 summary(Grasbiom_bc)
 
 # Model diagnostics
-performance::check_singularity(Grasbiom_bc)
-performance::check_convergence(Grasbiom_bc)
-check_model(Grasbiom_bc, check = "qq")
-check_model(Grasbiom_bc, check = "normality")
-check_model(Grasbiom_bc, check = "homogeneity")
+  # performance::check_singularity(Grasbiom_bc)
+  # performance::check_convergence(Grasbiom_bc)
+  # check_model(Grasbiom_bc, check = "qq")
+  # check_model(Grasbiom_bc, check = "normality")
+  # check_model(Grasbiom_bc, check = "homogeneity")
 
 ## Violin plot of Δ grass biomass
 Gbb_bc <- ggplot(delta_GRBiomass_bc,
@@ -2110,7 +2072,7 @@ plot_seed <- ggplot(scatter_data,
         strip.text   = element_text(size = 11))
 
 # SAVING
-#ggsave(plot_seed, filename = "Plots/GrassBiomass VS SeedlingDensity.png",
+ggsave(plot_seed, filename = "Plots/GrassBiomass VS SeedlingDensity.png",
        width = 16, height = 14, units = "cm", dpi = 300, bg = "white")
 
 
@@ -2118,7 +2080,7 @@ plot_seed <- ggplot(scatter_data,
 ##################################################################################
 
 ### GRASS SPECIES RICHNESS
-# 1. Prepare data: richness per Site x Treatment x Year
+# 1. Preparing data: richness per Site x Treatment x Year
 Grass_rich <- Grasses %>%
   filter(!is.na(Species_name),
          Year %in% c(2024, 2026)) %>%   # keep only pre/post years
@@ -2126,7 +2088,7 @@ Grass_rich <- Grasses %>%
   summarise(spp_richness = n_distinct(Species_name), .groups = "drop")%>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
-##reorder so that pre-treatment appears first then post treatment second on the plots
+##reordering so that pre-treatment appears first then post treatment second on the plots
 Grass_rich <- Grass_rich %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
@@ -2136,11 +2098,11 @@ Grass_rich$Fencing <- factor( Grass_rich$Fencing,
   levels = c("Unfenced", "Fenced")) #ordering Fencing level to start with Unfenced
 
 
-
+# plot
 GrRa <- ggplot(Grass_rich, 
                     aes(x = Treatment, y = spp_richness, fill = Fencing)) + facet_wrap(~Period)+ 
   geom_violin(trim = TRUE)+
-  #geom_hline(yintercept = 0, linetype = "dashed") +  
+  #geom_hline(yintercept = 0, linetype = "dashed") +
   stat_summary(fun = mean, geom = "point", 
                position = position_dodge(0.8), 
                size = 1.5, color = "black") +   
@@ -2162,7 +2124,7 @@ Grass_F <- Grasses %>%
   group_by(Site, Plot, Subplot, Treatment, Year, Fencing) %>%
   summarise(spp_richness = n_distinct(Species_name), .groups = "drop")
 
-##Pivot the two years side‑by‑side and compute Δ GRASS RICHNESS ─────────────
+##Pivoting the two years side‑by‑side and compute Δ GRASS RICHNESS ─────────────
 grassR_delta <- Grass_F %>%
   pivot_wider(names_from = Year, values_from = spp_richness, names_prefix = "Y") %>%
   mutate(delta = Y2026 - Y2024)
@@ -2170,20 +2132,20 @@ grassR_delta <- Grass_F %>%
 
 ## LMM to test effect of treatment * fencing on Grass richness ##################
 
-# Make "Unfenced" the reference level 
+# Making "Unfenced" the reference level 
 
 class(grassR_delta$Fencing)  # Likely "character" or "ordered factor"
 
-# Convert to unordered factor explicitly
+# Converting to unordered factor explicitly
 grassR_delta$Fencing <- factor(grassR_delta$Fencing, ordered = FALSE)
 
-# Verify
+# Verifying
 levels(grassR_delta$Fencing)  # Should show "fenced" "unfenced" (or vice versa)
 
-# Set "Fenced" as the reference level 
+# Setting "Fenced" as the reference level 
 grassR_delta$Fencing <- relevel(grassR_delta$Fencing, ref = "Unfenced")
 
-### Convert character variables to factors
+### Converting character variables to factors
 grassR_delta$Treatment <- as.factor(grassR_delta$Treatment)
 grassR_delta$Fencing <- as.factor(grassR_delta$Fencing)
 
@@ -2224,13 +2186,12 @@ GrRb <- ggplot(grassR_delta,aes(x = Treatment, y = delta, fill = Fencing)) +
 #########
 ############# USING LOG RESPONSE RATIO FOR GRASS RICHNESS  #####
 
-  
-###  Step 1: Calculate lnRR for each site, treatment, fencing ,
+###  Step 1: Calculating lnRR for each site, treatment, fencing ,
   
   GRich_LRR <- Grasses %>%
   filter(Year %in% c(2024, 2026)) %>% 
   group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
-  summarise(spp_richness = n_distinct(Species_name), .groups = "drop") %>%
+  summarise(spp_richness = n_distinct(Species_name), .groups = "drop") %>% 
   # Separate control and treatment
   mutate(Treatment_Group = ifelse(Treatment == "C", "C", "Treated")) %>%
   # Wide format: one row per Plot/Subquadrat with Pre and Post columns
@@ -2240,7 +2201,7 @@ GrRb <- ggplot(grassR_delta,aes(x = Treatment, y = delta, fill = Fencing)) +
     names_prefix = "Year_"
   ) %>%
   rename(Pre = Year_2024, Post = Year_2026) %>%
-  # Calculate LRR for each treated plot using its paired control at the same Location
+  # Calculating LRR for each treated plot using its paired control at the same Location
   group_by(Site, Fencing) %>%
   mutate(
     Control_Pre = mean(Pre[Treatment_Group == "C"], na.rm = TRUE),
@@ -2293,15 +2254,16 @@ ggplot(GRich_LRR,
 
 ##### OPTION 2 visualising lnRR results using emmeans
 
-# Get estimated marginal means for both factors
+# Getting estimated marginal means for both factors
 GRemm_interaction <- emmeans(GRilog, ~ Treatment | Fencing)
 
-# Convert to dataframe
+# Converting to dataframe
 GRplot_data <- as.data.frame(GRemm_interaction)
 
-# Ensure factors are properly labeled
+# Ensuring factors are properly labeled
 GRplot_data$Treatment <- factor(GRplot_data$Treatment, 
-                                levels = c("F", "TF", "TFB", "THF"))
+                                levels = c("F", "TF", "TFB", "THF")) 
+
 GRplot_data$Fencing <- factor(GRplot_data$Fencing, 
                               levels = c("Unfenced", "Fenced"),
                               labels = c("Unfenced", "Fenced"))
@@ -2327,16 +2289,12 @@ ggplot(GRplot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
     axis.text = element_text(size = 12))
 
 
-# Save high-resolution versions
-#ggsave("treatment_kraaling_interaction_point.png", p, width = 8, height = 5, dpi = 300, bg = "white")
-
-
-####### CONVERT lnRR to PERCENTAGE CHANGE #####
+####### CONVERTING lnRR to PERCENTAGE CHANGE #####
 # Get estimated marginal means for Treatment × Fencing interaction
 GRemm_interaction <- emmeans(GRilog, ~ Treatment | Fencing)
 plot_data_raw <- as.data.frame(GRemm_interaction)
 
-# Convert to percentage change
+# Converting to percentage change 
 plot_data <- plot_data_raw
 plot_data$pct_change <- (exp(plot_data_raw$emmean) - 1) * 100
 plot_data$CI_lower_pct <- (exp(plot_data_raw$lower.CL) - 1) * 100
@@ -2376,7 +2334,7 @@ GrRD<-ggplot(plot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
     axis.text = element_text(size = 12))
 
 
-####  Combine the plots in a single layout
+#### multi-panel plots in a single layout
 multi_panelRich <- (GrRa/GrRb/ GrRD) +   # "/" for stacking vertically, or "|" for side-by-side
   plot_layout(heights = c(1, 1, 1)) +  # Adjust relative heights
   plot_annotation(
@@ -2391,8 +2349,8 @@ multi_panelRich <- (GrRa/GrRb/ GrRD) +   # "/" for stacking vertically, or "|" f
     plot.tag = element_text(size = 10, hjust = 0)  # Ensure left alignment
   )
 
-#saving using ggsave
- #ggsave(multi_panelRich,filename ="Plots/GrassRICHNESS ViolinLog1A.png",
+#saving plot
+  ggsave(multi_panelRich,filename ="Plots/GrassRICHNESS ViolinLog1A.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -2437,18 +2395,18 @@ confint(fencing_gR_within_trt)
 
 #### GRASS DIVERSITY
 
-# Calculate Shannon-Wiener Diversity Index at Site and Plot level
+# Calculating Shannon-Wiener Diversity Index at Site and Plot level
 GrSWeiner <- Grasses%>%
   filter(!is.na(Species_name),
          Year %in% c(2024, 2026)) %>%   # keep only pre/post years
   group_by(Site, Plot, Subplot, Treatment, Year, Fencing, Number, Species_name)%>%
-  summarise(
+  summarise( 
     total_abundance = sum(Number, na.rm = TRUE),
     .groups = "drop_last"
   )
 
 
-## Calculate Shannon-Wiener Diversity Index at treatment level
+## Calculating Shannon-Wiener Diversity Index at treatment level
 
     # Step 1: Aggregate to subplot × species level
     subplot_abundance <- Grasses %>%
@@ -2459,18 +2417,18 @@ GrSWeiner <- Grasses%>%
         .groups = "drop"
       )
     
-    # Step 2: Calculate Shannon directly (no pivot_wider needed)
+    # Step 2: Calculating Shannon directly (no pivot_wider needed)
     grSWdiversity <- subplot_abundance %>%
       group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
       summarise(
         Shannon = diversity(total_abundance, index = "shannon"),
-        Richness = n_distinct(Species_name),
+        Richness = n_distinct(Species_name), 
         Total_grass = sum(total_abundance),
         .groups = "drop"
      )%>%
   mutate(Period = ifelse(Year == 2024, "Pre-treatment", "Post-treatment"))
 
-##reorder so that pre-treatment appears first then post treatment second on the plots
+##reordering so that pre-treatment appears first then post treatment second on the plots
 grSWdiversity <- grSWdiversity %>%
   mutate(Period = factor(Period, levels = c("Pre-treatment", "Post-treatment")))
 
@@ -2525,7 +2483,7 @@ GSWa <- ggplot(grSWdiversity,aes(x = Treatment, y =Shannon, fill = Fencing))+ fa
   filter(!is.na(delta_SW))
 
 
-### Convert character variables to factors
+### Converting character variables to factors
 SW_Delta$Treatment <- as.factor(SW_Delta$Treatment)
 SW_Delta$Fencing <- as.factor(SW_Delta$Fencing)
 SW_Delta$Fencing <- factor(SW_Delta$Fencing, 
@@ -2534,21 +2492,20 @@ SW_Delta$Fencing <- factor(SW_Delta$Fencing,
 
 ### GLMM to test effect of treatment * fencing on Grass diversity ##################
 
-# Make "Unfenced" the reference level 
 
 class(SW_Delta$Fencing)  # Likely "character" or "ordered factor"
 
-# Convert to unordered factor explicitly
+# Converting  to unordered factor explicitly
 SW_Delta$Fencing <- factor(SW_Delta$Fencing, ordered = FALSE)
 
 # Verify
 levels(SW_Delta$Fencing)  # Should show "Open" "Closed" (or vice versa)
 
-# Set "Fenced" as the reference level 
+# Set "Unfenced" as the reference level 
 SW_Delta$Fencing <- relevel(SW_Delta$Fencing, ref = "Unfenced")
 
 
-### Convert character variables to factors
+### Converting character variables to factors
 SW_Delta$Treatment <- as.factor(SW_Delta$Treatment)
 SW_Delta$Fencing <- as.factor(SW_Delta$Fencing)
 
@@ -2587,66 +2544,16 @@ GSWb <- ggplot(SW_Delta,aes(x = Treatment, y = delta_SW, fill = Fencing)) +
 
 
 ################ USING LOG RESPONSE RATIO FOR GRASS diversity  #####
-# 
-# ###  Step 1: Calculate lnRR for each site, treatment, fencing ,
-# lnRR4_results <- grSWdiversity  %>%
-#   mutate(
-#     Period = ifelse(Year == 2024, "Pre", "Post"),
-#     Treatment_Group = ifelse(Treatment == "C", "Control", "Treatment")
-#   ) %>%
-#   pivot_wider(
-#     id_cols = c(Site,Plot, Subplot, Treatment, Fencing, Treatment_Group),
-#     names_from = Period,
-#     values_from = Shannon
-#   ) %>%
-#   
-#   # Calculate control means in a separate summarised dataframe
-#   group_by(Site, Fencing) %>%
-#   reframe(
-#     Control_Pre = mean(Pre[Treatment_Group == "Control"], na.rm = TRUE),
-#     Control_Post = mean(Post[Treatment_Group == "Control"], na.rm = TRUE)
-#   ) %>%
-#   
-#   # Join back to the original data
-#   right_join(
-#     grSWdiversity  %>%
-#       mutate(
-#         Period = ifelse(Year == 2024, "Pre", "Post"),
-#         Treatment_Group = ifelse(Treatment == "C", "Control", "Treatment")
-#       ) %>%
-#       pivot_wider(
-#         id_cols = c(Site, Plot, Subplot, Treatment, Fencing, Treatment_Group),
-#         names_from = Period,
-#         values_from = Shannon
-#       ),
-#     by = c("Site", "Fencing")
-#   ) %>%
-#   
-#   # Keep only treated plots
-#   filter(Treatment_Group == "Treatment") %>%
-#   
-#   # Calculate lnRR
-#   mutate(
-#     Treatment_ratio = Post / Pre,
-#     Control_ratio = Control_Post / Control_Pre,
-#     lnRR = log(Treatment_ratio / Control_ratio)
-#   ) %>%
-#   select(Site, Subplot, Treatment, Fencing, 
-#          Pre, Post, Treatment_ratio, Control_ratio, lnRR)
-# 
-# #head(lnRR4_results)
-
-
 
 ################# Calculating lnRR using a constant of 0.01
 
 
-# --- D1. Calculate Shannon diversity LRR --------------------------------------
+# --- D1. Calculating Shannon diversity LRR --------------------------------------
 
 # Step 1: Species-level abundance per subplot × year
 subplot_abundance <- Grasses |>
   filter(!is.na(Species_name), Year %in% c(2024, 2026)) |>
-  group_by(Site, Plot, Subplot, Treatment, Fencing, Year, Species_name) |>
+  group_by(Site, Plot, Subplot, Treatment, Fencing, Year, Species_name)  |>
   summarise(total_abundance = sum(Number, na.rm = TRUE), .groups = "drop")
 
 # Step 2: Shannon index per subplot × year
@@ -2657,12 +2564,12 @@ sw_diversity <- subplot_abundance |>
     .groups = "drop"
   )
 
-# Step 3: Compute LRR
+# Step 3: Computing LRR
 GDiv_lnRR <- sw_diversity |>
   mutate(Treatment_Group = ifelse(Treatment == "C", "C", "Treated")) |>
   pivot_wider(
     names_from  = Year,
-    values_from = Shannon,
+    values_from = Shannon, 
     names_prefix = "Year_"
   ) |>
   rename(Pre = Year_2024, Post = Year_2026) |>
@@ -2681,7 +2588,7 @@ GDiv_lnRR <- sw_diversity |>
   ) |>
   dplyr::select(Site, Plot, Subplot, Treatment, Fencing, Pre, Post, GdLRR)
 
-# Check for Inf / NaN
+# Checking for Inf / NaN
 GDiv_lnRR |>
   summarise(
     n_Inf = sum(is.infinite(GdLRR)),
@@ -2750,17 +2657,18 @@ ggplot(GDiv_lnRR,
 
 ##### OPTION 2 visualising lnRR results using emmeans
 
-# Get estimated marginal means for both factors
+# Getting estimated marginal means for both factors
 GDemm_interaction <- emmeans(GDilog, ~ Treatment | Fencing)
 
-# Convert to dataframe
+# Converting to dataframe
 GDplot_data <- as.data.frame(GDemm_interaction)
 
-# Ensure factors are properly labeled
+# Ensuring factors are properly labeled
 GDplot_data$Treatment <- factor(GDplot_data$Treatment, 
-                                levels = c("F", "TF", "TFB", "THF"))
+                                levels = c("F", "TF", "TFB", "THF")) 
+
 GDplot_data$Fencing <- factor(GDplot_data$Fencing, 
-                              levels = c("Unfenced", "Fenced"),
+                              levels = c("Unfenced", "Fenced"), 
                               labels = c("Unfenced", "Fenced"))
 
 #### visualisation
@@ -2784,13 +2692,13 @@ ggplot(GDplot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
     axis.text = element_text(size = 12))
 
 
-####### CONVERT lnRR to PERCENTAGE CHANGE #####
-# Get estimated marginal means for Treatment × Fencing interaction
+####### CONVERTING lnRR to PERCENTAGE CHANGE #####
+# Getting estimated marginal means for Treatment × Fencing interaction
 GDemm_interaction <- emmeans(GDilog, ~ Treatment | Fencing)
 plot_data_raw <- as.data.frame(GDemm_interaction)
 
-# Convert to percentage change
-GDplot_data <- plot_data_raw
+# Converting to percentage change
+GDplot_data <- plot_data_raw 
 GDplot_data$pct_change <- (exp(plot_data_raw$emmean) - 1) * 100
 GDplot_data$CI_lower_pct <- (exp(plot_data_raw$lower.CL) - 1) * 100
 GDplot_data$CI_upper_pct <- (exp(plot_data_raw$upper.CL) - 1) * 100
@@ -2824,7 +2732,7 @@ GSWD<-ggplot(GDplot_data, aes(x = pct_change, y = Treatment , color = Fencing)) 
     axis.text = element_text(size = 12))
 
 
-# # Combine the plots in a single layout
+# # multipanel  plots in a single layout
 SWmulti_panel <- (GSWa/GSWb/GSWD) +   # "/" for stacking vertically, or "|" for side-by-side
   plot_layout(heights = c(1, 1, 1)) +  # Adjust relative heights
   plot_annotation(
@@ -2838,7 +2746,7 @@ SWmulti_panel <- (GSWa/GSWb/GSWD) +   # "/" for stacking vertically, or "|" for 
     axis.title = element_text(size = 10),       # Increase axis title font size
     plot.tag = element_text(size = 10, hjust = 0))  # Ensure left alignment
   
-##ggsave multipanel grass richness
+##ggsave multipanel plot
  #ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog1D.png",
        width = 16, height = 14, units = "cm")
 
@@ -2884,7 +2792,7 @@ confint(fencing_gd_within_trt)
 
 ############################ RESPROUTS  RESPROUTS RESPROUTS ####################
 
-# Step 1: Filter Cut stumps only and years 
+# Step 1: Filtering Cut stumps only and years 
 resprouts_df <- SapF %>%
   filter(
     woody_cat == "Cut stump",
@@ -2906,7 +2814,7 @@ Respsummary_stats <- resprouts_df %>%
   arrange(desc(Total_resprouts))
 
 
-## check which species had more resprouts
+## checking which species had more resprouts
 Species_resprouts <- resprouts_df %>%
   group_by(Species_name, Treatment) %>%
   summarise(
@@ -2918,27 +2826,24 @@ Species_resprouts <- resprouts_df %>%
 
 
 
-### Make "Unfenced" the reference level (to see "fenced" coefficients)
+###
 # Check current class of FieldType
 
 class(resprouts_df$Fencing)  # Likely "character" or "ordered factor"
 
-# Convert to unordered factor explicitly
+# Converting to unordered factor explicitly
 resprouts_df$Fencing <- factor(resprouts_df$Fencing, ordered = FALSE)
 
-# Verify
+# Verifying
 levels(resprouts_df$Fencing)  # Should show "Open" "Closed" (or vice versa)
 
-# Set "Unfenced" as the reference level (to see "Unfenced" coefficients)
+# Setting "Unfenced" as the reference level (to see "Unfenced" coefficients)
 resprouts_df$Fencing <- relevel(resprouts_df$Fencing, ref = "Unfenced")
 
-### Convert character variables to factors
+### Converting character variables to factors
 resprouts_df$Treatment <- as.factor(resprouts_df$Treatment)
 resprouts_df$Fencing <- as.factor(resprouts_df$Fencing)
 
-
-# Scale Variables to ensure convergence:
-#resprouts_df$deltens_scaled <- as.numeric(scale(resprouts_df$No_of_resprouts))
 
 #violin plot
 RespVio <- ggplot(resprouts_df, aes(x = Treatment, y = No_of_resprouts,
@@ -3007,21 +2912,21 @@ summary(Rstreat_comparisons3$contrasts)
 # Estimated marginal means for Treatment within Fencing (if needed)
 Rstreat_comparisons3 <- emmeans(R5b_tweedie, ~ Treatment | Fencing, type = "response")
 
-# Compare each treatment to Control with Dunnett adjustment (or "none" if you only want vs control)
+# Comparing each treatment to Control with Dunnett adjustment (or "none" if you only want vs control)
 contrast_vs_control <- contrast(Rstreat_comparisons3, method = "trt.vs.ctrl", ref = "TF")
 summary(contrast_vs_control, infer = TRUE)
 
-# generate letters using cld in multicomp package
+# generating letters using cld in multicomp package
 Respcld_emm <- cld(Rstreat_comparisons3, adjust = "Dunnett", Letters = letters, type = "response")
 cld_tbl <- as.data.frame(Respcld_emm)
 
 
-# prepare clean database for plotting
+# preparing clean database for plotting
 Rspplot_df <- cld_tbl %>%
   rename(
     EMM = response,
     CI_lower = asymp.LCL, # tweedie used different typology for EMM and CIs
-    CI_upper = asymp.UCL,
+    CI_upper = asymp.UCL, 
     Group = .group
   ) %>%
   mutate(Group = str_trim(Group))  # Clean whitespace
@@ -3061,7 +2966,7 @@ Resp <- ggplot(Rspplot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)
 
 ## creating a multipanel for panels with 2 different y-axis
 
-# # Combine the plots in a single layout
+# # Combining the plots in a single layout
 Resp2 <- (RespVio/Resp) +   # "/" for stacking vertically, or "|" for side-by-side
   plot_layout(heights = c(1, 1,1)) +    # Adjust relative heights
   plot_annotation(
