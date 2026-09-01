@@ -32,6 +32,7 @@ Contact: Tapiwa Gumbo (tg488@exeter.ac.uk) and/or Andrew Cunliffe (a.cunliffe@ex
 |---|---|
 | `Coordinates/Coordinates_SHR.xlsx` | Geode coordinates for study subplots used in analysis. |
 | `GEODE_Subplot_area` | Subplot areas calculated from precise Geode coordinates. |
+| `DPM.csv` | Biomass calibration data. |
 | `March 2026/2Grasses2426updated.csv` | 2024 and 2026 grass survey data used for biomass calculations. |
 | `March 2026/Grasses2426Updated1.csv` | 2024 and 2026 grass survey data. |
 | `March 2026/WOODYP2426.csv` | 2024 and 2026 woody plant survey data. |

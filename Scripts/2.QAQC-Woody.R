@@ -1,16 +1,11 @@
+
 library(tidyverse)
 library(stringi)
 library(dataMaid)
 
-# Load required packages
-#if (!require("dataMaid")) install.packages("dataMaid", dependencies = TRUE)
-#library(dataMaid)
+# Loading dataset
 
-# Load your dataset
-df <- read.csv("your_dataset.csv", stringsAsFactors = FALSE)
-TC <- read_csv("DATA/March2025/Woodyplants25.csv")
-
-WC <- read_csv("DATA/March2025/Woody2426b.csv")
+WC <- read_csv("DATA/March2026/WOODYP2426.csv")
 
 # ----------------------------
 # QUALITY CHECK (QC)
@@ -21,13 +16,13 @@ str(WC)
 summary(WC)
 
 cat("\n---- HEAD OF DATA ----\n")
-print(head(df))
+print(head(WC))
 
-# Check for missing values
+# Checking for missing values
 cat("\n---- MISSING VALUES ----\n")
 print(colSums(is.na(WC)))
 
-# Check for duplicate rows
+# Checking for duplicate rows
 cat("\n---- DUPLICATES ----\n")
 duplicated_rows <- WC[duplicated(WC), ]
 cat("Number of duplicated rows: ", nrow(duplicated_rows), "\n")
@@ -90,7 +85,8 @@ cat("\nQA/QC script completed. Check QAQC_Report.html for detailed results.\n")
 
 #################################################################### 
 
-WCdata <- read_csv("DATA/March2025/Woody2426b.csv")
+WCdata <- read_csv("DATA/March2026/WOODYP2426.csv")
+
 # Convert Spp_name to UTF-8 encoding
 WCdata <- WCdata %>%
   mutate(Species_name = stri_enc_toutf8(Species_name))
@@ -117,7 +113,7 @@ print("Unique values in 'Species_name' after standardization:")
 print(unique_species)
 
 
-# Summarize Unique Entries
+# Summarising Unique Entries
 unique_spp <- WCdata %>%
   count(Species_name) %>%
   arrange(desc(n))
@@ -125,7 +121,7 @@ unique_spp <- WCdata %>%
 
 #######QA AND QC ON SITE, PLOTS, SUBPLOTS
 
-# 1. Check for Missing Values 
+# 1. Checking for missing Values 
 missing_values <- WCdata %>%
   summarize(
     Missing_Site = sum(is.na(Site)),
@@ -135,7 +131,7 @@ missing_values <- WCdata %>%
 cat("Missing values in variables:\n")
 print(missing_values)
 
-# 2. Check for Duplicate Combinations
+# 2. Checking for Duplicate Combinations
 duplicates <- WCdata %>%
   group_by(Site, Plot, Subplot) %>%
   summarize(count = n()) %>%
@@ -144,8 +140,8 @@ duplicates <- WCdata %>%
 cat("Duplicate combinations of Site, Plot, and Subplot:\n")
 print(duplicates)
 
-# 3. Validate Against Expected Values
-# Example: Define expected values for Site, Plot, and Subplot
+# 3. Validating against expected values
+# Example: Defining expected values for Site, Plot, and Subplot
 expected_sites <- c("A", "B", "C", "D", "E", "F")
 expected_subplots <- c("Z1", "Z2", "Z3", "Z4")
 
@@ -159,7 +155,7 @@ invalid_entries <- WCdata %>%
 cat("Invalid entries:\n")
 print(invalid_entries)
 
-# 4. Standardize Formatting
+# 4. Standardising Formatting
 WCdata <- WCdata %>%
   mutate(
     Site = str_to_upper(str_trim(Site)),        # Convert Site to uppercase
@@ -168,7 +164,7 @@ WCdata <- WCdata %>%
   )
 
 # 5. Logical Consistency Check
-# Example: Ensure each Plot belongs to a unique Site
+# Example: Ensuring each Plot belongs to a unique Site
 logical_issues <- WCdata %>%
   group_by(Plot) %>%
   summarize(unique_sites = n_distinct(Site)) %>%
@@ -180,67 +176,7 @@ print(logical_issues)
 # View the cleaned data
 head(WCdata)
 
+###### saving cleaned data
+#write_csv(WCdata, "DATA/March2026/WoodyplantsUpdated.csv")
+
 #####################################################################
-######################################  GRASSES GRASSES GRASSES GRASSES 
-
-Grassesdata2 <- read_csv("DATA/March2025/Grasses25.csv")
-
-##### Convert to UTF-8 encoding
-Grassesdata2 <- Grassesdata2 %>%
-  mutate(across(everything(), ~iconv(., from = "latin1", to = "UTF-8")))
-
-
-# 1. Standardizing case
-Grassesdata2 <- Grassesdata2 %>%
-  mutate(Site = str_to_upper(Site),
-         Species_name = str_to_sentence(Species_name),
-         Subplot = str_to_upper(Subplot))
-
-# 2. Trimming spaces
-Grassesdata2 <- Grassesdata2 %>%
-  mutate(Site = str_trim(Site),
-         Species_name = str_trim(Species_name))
-
-# Checking for consistency
-unique_sites <- unique(Grassesdata2$Site)
-unique_species <- unique(Grassesdata2$Species_name)
-
-print("Unique values in 'Site' after standardization:")
-print(unique_sites)
-
-print("Unique values in 'Spp_name' after standardization:")
-print(unique_species)
-
-# OPTIONAL: Just in case, explicitly set empty strings in Species to NA
-Grassesdata2$Species_name[Grassesdata2$Species_name == ""] <- NA
-
-# Check how many NAs you have in the Species column now
-sum(is.na(Grassesdata2$Species_name))
-
-# This should return character(0) or an empty list
-unique(Grassesdata2$Species_name[!is.na(Grassesdata2$Species_name) & Grassesdata2$Species_name == "NA"])
-
-
-# Summarize Unique species
-unique_spp <- Grassesdata2 %>%
-  count(Species_name) %>%
-  arrange(desc(n))
-
-
-
-#########################################
-# Load data and treat "" and "NA" as NA globally
-df <- read.csv("DATA/March2025/Grasses25.csv", na.strings = c("", "NA"))
-            
-#define columns to be cleaned
-columns_to_clean <- c("Species_name", "Fencing", "Treatment", "DPM_Height")
-
-# Replace empty strings with NA in specified columns (redundant safeguard)
-df[columns_to_clean] <- lapply(df[columns_to_clean], function(x) {
-  x[x == ""] <- NA
-  return(x)
-})
-
-# Optional: Confirm how many NA values per column
-sapply(df[columns_to_clean], function(x) sum(is.na(x)))
-

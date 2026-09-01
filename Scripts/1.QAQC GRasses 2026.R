@@ -1,6 +1,6 @@
 
 
-GC <- read_csv ("DATA/March2025/Grasses2426Updated.csv")
+GC <- read_csv ("DATA/March2026/Grasses2426Updated1.csv")
 
 # ----------------------------
 # QUALITY CHECK (QC)
@@ -63,7 +63,7 @@ cat("\n---- INVALID TREATMENT VALUES ----\n")
 print(invalid_treatments)
 
 
-## Count observations per subplot  # FILTERING NA per column
+## Counting observations per subplot  # FILTERING NA per column
 Qaqc_counts2 <- GC %>%
   group_by(Year, Site, Plot, Subplot) %>%
 summarise(
@@ -82,7 +82,7 @@ BQaqc_issues <- Qaqc_counts2 %>%
 
 
 ####################################### QC QA
-##### Convert to UTF-8 encoding
+##### Converting to UTF-8 encoding
 GC <- GC%>%
   mutate(across(everything(), ~iconv(., from = "latin1", to = "UTF-8")))
 
@@ -104,7 +104,7 @@ GC <- GC %>%
          Fencing = str_trim(Fencing),
          Treatment = str_trim(Treatment))
 
-# Summarize Unique species
+# Summarising Unique species
 unique_spp <- GC %>%
   count(Species_name) %>%
   arrange(desc(n))
@@ -126,4 +126,4 @@ print("Cleaned data:")
 print(GC)
 
 ###### saving cleaned data
-write_csv(GC, "DATA/March2025/Grasses2426Updated2.csv")
+ #write_csv(GC, "DATA/March2026/Grasses2426Updated2.csv")

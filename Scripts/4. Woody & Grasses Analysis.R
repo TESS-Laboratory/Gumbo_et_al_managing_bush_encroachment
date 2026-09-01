@@ -2747,7 +2747,7 @@ SWmulti_panel <- (GSWa/GSWb/GSWD) +   # "/" for stacking vertically, or "|" for 
     plot.tag = element_text(size = 10, hjust = 0))  # Ensure left alignment
   
 ##ggsave multipanel plot
- #ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog1D.png",
+ ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog1D.png",
        width = 16, height = 14, units = "cm")
 
 
@@ -3003,9 +3003,9 @@ print(resfencing_within_trt)
 ##########################################################################################
 
 ######
-# ─── 3. CLASSIFY resprouts response────────────────────────────────────────────────
+# 1. CLASSIFYNG RESPROUTS SPECIES response────────────────────────────────────────────────
 
-SapF2 <- B_merged %>%
+SapF <- B_merged %>%
   mutate(
     woody_cat = case_when(
       Woody_class == "Cut stump"             ~ "Cut stump",
@@ -3015,8 +3015,10 @@ SapF2 <- B_merged %>%
       TRUE                                   ~ NA_character_
     )
   )
+# ─── 2. FILTERING TO RESPROUTS ────────────────────────────────────
+# All cut stumps in 2026; No_of_resprouts = 0 are valid observations
 
-resprouts2 <- SapF2 %>%
+resprouts2 <- SapF %>%
   filter(
     woody_cat == "Cut stump",
     Year == 2026,
@@ -3029,10 +3031,10 @@ resprouts2 <- SapF2 %>%
     Site         = factor(Site)
   )
 
-# ─── 5. FILTER: SPECIES WITH N >= 3 IN EACH TREATMENT (ACROSS FENCING) ───────
+# ─── 3. FILTERING: SPECIES WITH N >= 3 IN EACH TREATMENT (ACROSS FENCING) ───────
 
 sp_counts <- resprouts2 %>%
-  count(Species_name, Treatment) %>%          # total stumps per species × treatment
+  count(Species_name, Treatment) %>%
   pivot_wider(names_from = Treatment,
               values_from = n,
               values_fill = 0)
@@ -3048,99 +3050,89 @@ resprouts2_sp <- resprouts2 %>%
   filter(Species_name %in% sp_eligible2) %>%
   mutate(Species_name = droplevels(Species_name))
 
-# ─── 6. PER-SPECIES GLMMs: Treatment × Fencing ───────────────────────────────
-# Tweedie family handles zero-inflated resprout counts
-# Falls back to additive or Treatment-only model if interaction fails
+# Checking data structure
+str(resprouts2_sp)
+summary(resprouts2_sp)
 
-fit_sp2 <- function(d) {
-  tryCatch(
-    glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1 | Site),
-            data = d, family = tweedie(link = "log")),
-    error = function(e) {
-      tryCatch(
-        glmmTMB(No_of_resprouts ~ Treatment + Fencing + (1 | Site),
-                data = d, family = tweedie(link = "log")),
-        error = function(e2) {
-          tryCatch(
-            glmmTMB(No_of_resprouts ~ Treatment + (1 | Site),
-                    data = d, family = tweedie(link = "log")),
-            error = function(e3) NULL
-          )
-        }
-      )
-    }
-  )
-}
+# Checking the response variable
+class(resprouts2_sp$No_of_resprouts)
+summary(resprouts2_sp$No_of_resprouts)
+hist(resprouts2_sp$No_of_resprouts, breaks = 20, main = "Distribution of Resprout Counts")
 
-sp2_models <- resprouts2_sp %>%
-  group_split(Species_name) %>%
-  set_names(levels(resprouts2_sp$Species_name)) %>%
-  map(fit_sp2)
+# Checking for NAs in the response variable
+sum(is.na(resprouts2_sp$No_of_resprouts))
+summary(resprouts2_sp$No_of_resprouts)
 
-fitted2 <- names(Filter(Negate(is.null), sp2_models))
-cat("Models fitted for", length(fitted2), "species\n")
+# Checking for NAs in other important columns
+sum(is.na(resprouts2_sp$Treatment))
+sum(is.na(resprouts2_sp$Fencing))
+sum(is.na(resprouts2_sp$Species_name))
+sum(is.na(resprouts2_sp$Site))
+sum(is.na(resprouts2_sp$Plot))
 
-# ─── 7. SPECIES ORDER: ranked by total cut stumps (most dominant at top) ──────
 
+# ─── MODEL SELECTION FOR COUNT DATA ────────────────────────────────────────
+
+# Making sure factors are properly coded
+resprouts2_sp$Treatment <- factor(resprouts2_sp$Treatment)
+resprouts2_sp$Fencing <- factor(resprouts2_sp$Fencing)
+resprouts2_sp$Species_name <- factor(resprouts2_sp$Species_name)
+
+
+#  MODEL WITH POST-HOC TESTS 
+# Using the reduced model approach 
+best_model <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + 
+                        Treatment * Species_name + 
+                        Fencing * Species_name + 
+                        (1|Site),
+                      data = resprouts2_sp,
+                      family = nbinom2)
+
+
+
+# ─── MODEL DIAGNOSTICS ──────────────────────────────────────────────────────
+
+simulationOutput <- simulateResiduals(fittedModel = best_model, n = 250)
+plot(simulationOutput)
+testZeroInflation(simulationOutput)
+testDispersion(simulationOutput)
+
+
+
+# ─── POST-HOC ANALYSIS ────────────────────────────────────────────────────
+
+# Specific comparisons - Treatment × Fencing interaction for each species
+# Note: Since 3-way interaction was removed, we look at 2-way interactions
+emm_interaction <- emmeans(best_model, ~ Treatment * Fencing | Species_name)
+interaction_pairs <- pairs(emm_interaction, adjust = "tukey")
+print(interaction_pairs)
+
+# VISUALIZATION WITH BACK-TRANSFORMED VALUES (ACTUAL COUNTS) ────────────
+# using predicted means 
+emm_results <- as.data.frame(emmeans(best_model, 
+                                     ~ Treatment * Fencing * Species_name,
+                                     type = "response"))
+
+#  SPECIES ORDER: ranking by total cut stumps (most dominant at top) ──────
 sp_stump_order <- resprouts2_sp |>
   count(Species_name, name = "N_stumps") |>
   arrange(N_stumps) |>        # ascending so most dominant lands at top of y-axis
   pull(Species_name) |>
   as.character()
 
-# ─── 8. EMMEANS: Treatment within Fencing (back-transformed) ─────────────────
+# Applying the species order to the emm_results
+emm_results$Species_name <- factor(emm_results$Species_name, 
+                                   levels = sp_stump_order)
 
-sp2_emm <- imap_dfr(sp2_models, \(mod, sp) {
-  if (is.null(mod)) return(NULL)
-  tryCatch({
-    emm <- emmeans(mod, ~ Treatment | Fencing, type = "response")
-    df  <- as.data.frame(emm)
-    if ("asymp.LCL" %in% names(df)) df <- rename(df, lower.CL = asymp.LCL,
-                                                 upper.CL = asymp.UCL)
-    df %>% mutate(Species_name = sp)
-  }, error = function(e) NULL)
-}) %>%
-  mutate(
-    Treatment    = factor(Treatment, levels = c("TF", "TFB", "THF")),
-    Fencing      = factor(Fencing,   levels = c("Unfenced", "Fenced")),
-    Species_name = factor(Species_name,
-                          levels = sp_stump_order)
-  )
+##### plotting  
 
-# ─── 8. DUNNETT CONTRASTS: TFB & THF vs TF within each Fencing level ─────────
-
-sp2_contrasts <- imap_dfr(sp2_models, \(mod, sp) {
-  if (is.null(mod)) return(NULL)
-  tryCatch({
-    emm <- emmeans(mod, ~ Treatment | Fencing, type = "response")
-    cnt <- contrast(emm, method = "trt.vs.ctrl", ref = "TF")
-    as.data.frame(summary(cnt, infer = TRUE)) %>% mutate(Species_name = sp)
-  }, error = function(e) NULL)
-}) %>%
-  mutate(
-    Fencing      = factor(Fencing, levels = c("Unfenced", "Fenced")),
-    Species_name = factor(Species_name,
-                          levels = sp_stump_order)
-  )
-
-if ("asymp.LCL" %in% names(sp2_contrasts)) {
-  sp2_contrasts <- rename(sp2_contrasts, lower.CL = asymp.LCL,
-                          upper.CL = asymp.UCL)
-}
-
-#print(sp2_contrasts)
-
-
-# ─── 9. PLOT A: EMMEANS — Treatment × Fencing per species ────────────────────
-
-p_emm2 <- ggplot(sp2_emm,
-                 aes(x = response, y = Species_name, color = Treatment)) +
-  geom_point(position = position_dodge(0.55), size = 2.2) +
-  geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL),
+multi_sp2 <- ggplot(emm_results, aes(x = response, y = Species_name, 
+                                     color = Treatment)) +
+  geom_point(size = 2, position = position_dodge(width = 0.6)) +
+  geom_errorbarh(aes(xmin = asymp.LCL, xmax = asymp.UCL),
                  height = 0.35, linewidth = 0.55,
                  position = position_dodge(0.55)) +
-  facet_wrap(~ Fencing, ncol = 2) +
-  coord_cartesian(xlim = c(0, 35)) +
+  facet_wrap(~Fencing, ncol = 2, scales = "free_x") +
   scale_color_manual(values = c("TF" = "red", "TFB" = "black", "THF" = "blue")) +
   labs(x = "Mean resprouts per cut stump",
        y = NULL, color = "Treatment") +
@@ -3155,12 +3147,11 @@ p_emm2 <- ggplot(sp2_emm,
     plot.title   = element_text(size = 9, hjust = 0.5)
   )
 
-
-# saving plot
-ggsave(p_emm2,
-       filename = "Plots/Resprouts_Species_TreatFencing_N3.png",
+# saving
+ggsave(multi_sp2,
+       filename = "Plots/Resprouting_SpeciesN3.png",
        width = 16, height = 14, units = "cm")
 
-
+#####################################################################################
 
 

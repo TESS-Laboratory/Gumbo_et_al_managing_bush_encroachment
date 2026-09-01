@@ -6,20 +6,20 @@ library(tidyr)
 
 
 #load and clean data
-Woody <- read_csv("DATA/March2025/Woody2426b.csv")
+Woody <- read_csv("DATA/March2026/WOODYP2426.csv")
 
 # unique species
 unique_species <- unique(Woody$Species_name)
 unique_species
 
-# save unique woody species
-write.csv(unique_species, "DATA/Harmonised Taxonomisation/Woody_UNIQUEspecies26.csv", row.names = FALSE)
+# saving unique woody species
+ write.csv(unique_species, "DATA/Harmonised Taxonomisation/Woody_UNIQUEspecies26.csv", row.names = FALSE)
 
 
-#load data of unique species
+#loading data of unique species
 Woody_species <- read_csv("DATA/Harmonised Taxonomisation/Woody_UNIQUEspecies26.csv")
 
-# check african species 
+# checking african species 
 africa_species <- Woody_species %>% 
   distinct(Species_name)   # one row per species
 
@@ -33,11 +33,11 @@ africa_species <- africa_species %>%
   )
 
 
-# Extract species names from the dataframe
+# Extracting species names from the dataframe
 species_list <- africa_species$Species_name
 
 
-# Load WFO backbone into memory
+# Loading WFO backbone into memory
 WFO.remember()  # assumes 'classification.csv' is in working directory
 
 # (optional) Clean names to remove authorship or punctuation
@@ -45,14 +45,14 @@ WFO.remember()  # assumes 'classification.csv' is in working directory
 prepared <- WFO.prepare(spec.data = species_list)
 cleaned_names <- prepared$spec.name  # this will be used for matching
 
-# Match cleaned species names with WFO backbone
+# Matching cleaned species names with WFO backbone
 matches <- WFO.match(spec.data = cleaned_names, WFO.data = WFO.data)
 
 
-# Pick the best single match per species
+# Picking the best single match per species
 best_matches <- WFO.one(matches)
 
-# Combine harmonized names with original data
+# Combining harmonized names with original data
 selected_columns <- c(
   "spec.name", 
   "scientificName", 
@@ -80,18 +80,18 @@ species_Harmonized <- species_Harmonized %>%
 
 
 # Save to file
-write.csv(species_Harmonized, "DATA/Harmonized_WPspp26.csv", row.names = FALSE)
+#write.csv(species_Harmonized, "DATA/Harmonized_WPspp26.csv", row.names = FALSE)
 
 
-write.csv(best_matches, "DATA/best_matches_WPspp.csv", row.names = FALSE)
+#write.csv(best_matches, "DATA/best_matches_WPspp.csv", row.names = FALSE)
 
 
-# result summary
+# Result summary
 
-table(best_matches$Matched)  # answer = 95
+table(best_matches$Matched)  
 
 
-table(best_matches$taxonomicStatus) #answer = 95
+table(best_matches$taxonomicStatus) 
 
 
 table(best_matches$New.accepted)
@@ -112,71 +112,23 @@ summary_table <- best_matches %>%
 print(summary_table)
 
 
-
-
-# optional visualization
-# Summary data
-summary_data <- data.frame(
-  Category = c(
-    "Matched - Accepted",
-    "Matched - Synonym Replaced",
-    "Matched - Unchecked",
-    "Unmatched"
-  ),
-  Count = c(1795, 126, 7, 9)
-)
-
-# Add percentages
-summary_data <- summary_data %>%
-  mutate(Percentage = round(Count / sum(Count) * 100, 1),
-         Label = paste0(Percentage, "%"))
-
-# Plot with percentage labels
-ggplot(summary_data, aes(x = Category, y = Count)) +
-  geom_bar(stat = "identity", fill = "#0072B2", width = 0.7) +
-  geom_text(aes(label = Label), vjust = -0.5, size = 6) +
-  labs(
-    #title = "Taxonomic Harmonization Summary (WorldFlora)",
-    y = "Number of species",
-    x = "Taxonomic status"
-  ) +
-  theme_minimal(base_size = 18) +
-  theme(
-    axis.text.x = element_text(angle = 20, hjust = 1, size = 22),
-    axis.text.y = element_text(size = 22),
-    axis.title.x = element_text(size = 20),
-    axis.title.y = element_text(size = 20),
-    plot.title = element_text(face = "bold", size = 20, hjust = 0.5)
-  )
-
-
-ggsave("Taxonomic_Harmonization.png", width = 16, height = 10, dpi = 300, bg="white")
-
-
-
-
 ################################################################################
 
 ## TAXONOMIC HARMONISATION FOR GRASS SPECIES
 
-# load data and clean to remain with unique species
- #Grass_species <- read_csv("DATA/Harmonised Taxonomisation/Grasses_species.csv")
+# loading data and clean to remain with unique species
 
-Grass_species <-read_csv("DATA/March2025/2Grasses2426.csv")
+Grass_species <-read_csv("DATA/March2026/Grasses2426Updated1.csv")
 
 
-# 2024 grasses taxonomic 
-#Grass_species <-read_csv("DATA/March2025/Grasses2024.csv")
-
+# extracting unique species
 unique_species <- unique(Grass_species$Species_name)
 unique_species
 
-write.csv(unique_species, "DATA/Harmonised Taxonomisation/Grasses_UNIQUEspecies26.csv", row.names = FALSE)
+#write.csv(unique_species, "DATA/Harmonised Taxonomisation/Grasses_UNIQUEspecies26.csv", row.names = FALSE)
 
 
-
-
-#load and clean data
+#loading data
 
 Grass_species <- read_csv("DATA/Harmonised Taxonomisation/Grasses_UNIQUEspecies26.csv")
 
@@ -195,26 +147,26 @@ africa_species <- Grass_species %>%
 
 
 
-# Extract species names from the dataframe
+# Extracting species names from the dataframe
 species_list <- africa_species$Species_name
 
 
-# Load WFO backbone into memory
+# Loading WFO backbone into memory
 WFO.remember()  # assumes 'classification.csv' is in working directory
 
-# (optional) Clean names to remove authorship or punctuation
+# (optional) Cleaning names to remove authorship or punctuation
 # Only if names include authorship like "(L.) Willd."
 prepared <- WFO.prepare(spec.data = species_list)
 cleaned_names <- prepared$spec.name  # this will be used for matching
 
-# Match cleaned species names with WFO backbone
+# Matching cleaned species names with WFO backbone
 matches <- WFO.match(spec.data = cleaned_names, WFO.data = WFO.data)
 
 
-# Pick the best single match per species
+# Picking the best single match per species
 best_matches <- WFO.one(matches)
 
-# Combine harmonized names with original data
+# Combining harmonized names with original data
 selected_columns <- c(
   "spec.name", 
   "scientificName", 
@@ -233,16 +185,14 @@ selected_columns <- c(
 harmonized_info <- best_matches[, selected_columns]
 
 
-
 species_Harmonized <- cbind(africa_species, harmonized_info)
-
 
 species_Harmonized <- species_Harmonized %>%
   filter(!is.na(genus))
 
 
 # Save to file
-write.csv(species_Harmonized, "DATA/hHarmonized2024_GRspp.csv", row.names = FALSE)
+ #write.csv(species_Harmonized, "DATA/HarmonizedGrass_GRspp.csv", row.names = FALSE)
 
 
 #write.csv(best_matches, "DATA/best_matches_GRspp.csv", row.names = FALSE)
