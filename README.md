@@ -1,3 +1,5 @@
+
+
 # Project overview
 
 This repository supports research on managing bush encroachment on a holistically 
@@ -11,6 +13,8 @@ productivity and community composition.
 The repository contains raw and processed data, analysis scripts, and output figures.
 
 Contact: Tapiwa Gumbo (tg488@exeter.ac.uk) and/or Andrew Cunliffe (a.cunliffe@exeter.ac.uk)
+
+Use of this code is licensed under Licence: GNU GPL v3
 
 ---
 
@@ -87,13 +91,12 @@ This project uses *renv* to ensure reproducibility.
    3.`03_Taxonomic_Harmonisation.R`  
   
    4.`04_Woody_and_Grasses_Analysis.R` 
+
    
-  
+---  
 ## **ACKNOWLEDGEMENTS** 
 
 We sincerely thank the Oppenheimer Programme in African Landscape Systems (OPALS), 
 supported by Oppenheimer Generations Research and Conservation, 
 the University of Exeter, Sarah Turvill, and Shangani Holistic Ranch, for their 
-financial and institutional support. Additionally, we appreciate the staff at 
-Shangani Holistic Ranch for their assistance with the fieldwork.
-     
+financial and institutional support. 
