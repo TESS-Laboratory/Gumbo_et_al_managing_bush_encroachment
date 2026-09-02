@@ -49,7 +49,7 @@ Use of this code is licensed under Licence: GNU GPL v3
 |:---|:---|
 | `Plots/` |    Figures generated from analysis scripts. | 
 
-
+---
 
 ## **Getting started**
 
