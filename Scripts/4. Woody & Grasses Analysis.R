@@ -2864,7 +2864,7 @@ RespVio <- ggplot(resprouts_df, aes(x = Treatment, y = No_of_resprouts,
 
 ##saving Violin PLOT - resprouts
 #ggsave(RespVio,filename ="Plots/RESPROUTS VIOLIN26 plot.png",
-width = 16, height = 14, units = "cm")  
+#width = 16, height = 14, units = "cm")  
 
 
 
@@ -2932,7 +2932,7 @@ Rspplot_df <- cld_tbl %>%
   mutate(Group = str_trim(Group))  # Clean whitespace
 
 
-# to check if log scale has been back transformed
+# checking if log scale has been back transformed
 summary(emmeans(R5b_tweedie, ~ Treatment, type = "response"))
 
 ### Visualisation using ggplot
@@ -3151,6 +3151,32 @@ multi_sp2 <- ggplot(emm_results, aes(x = response, y = Species_name,
 ggsave(multi_sp2,
        filename = "Plots/Resprouting_SpeciesN3.png",
        width = 16, height = 14, units = "cm")
+
+
+#  COMPLETE CONTRASTS WITH TF AS REFERENCE  ──────────
+
+# Creating custom contrasts with TF as reference
+# First, getting the emmeans
+emm_all <- emmeans(best_model, ~ Treatment * Fencing * Species_name, 
+                   type = "response")
+
+# Create contrast matrix for TFB vs TF and THF vs TF
+contrast_list <- list(
+  "TFB_vs_TF" = c(1, -1, 0),  # Assuming order: TF, TFB, THF
+  "THF_vs_TF" = c(1, 0, -1)
+)
+
+# Apply contrasts
+custom_contrasts <- contrast(emm_all, 
+                             method = list(
+                               "TFB - TF" = c(-1, 1, 0),
+                               "THF - TF" = c(-1, 0, 1)
+                             ),
+                             adjust = "BH")
+
+# View results
+print(custom_contrasts)
+
 
 #####################################################################################
 

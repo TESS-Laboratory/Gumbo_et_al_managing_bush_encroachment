@@ -89,5 +89,11 @@ This project uses *renv* to ensure reproducibility.
    4.`04_Woody_and_Grasses_Analysis.R` 
    
   
-     
+## **ACKNOWLEDGEMENTS** 
+
+We sincerely thank the Oppenheimer Programme in African Landscape Systems (OPALS), 
+supported by Oppenheimer Generations Research and Conservation, 
+the University of Exeter, Sarah Turvill, and Shangani Holistic Ranch, for their 
+financial and institutional support. Additionally, we appreciate the staff at 
+Shangani Holistic Ranch for their assistance with the fieldwork.
      
