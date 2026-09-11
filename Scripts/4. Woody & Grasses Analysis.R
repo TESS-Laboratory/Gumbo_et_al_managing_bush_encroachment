@@ -197,64 +197,11 @@ Treeb <- ggplot(Trees_Delta1,
 
 
 
-
-###########################################################################
-### EFFECT OF TREATMENT ON TREE DENSITY (delta density model: Treel5) ###
-###########################################################################
-
-# Estimated marginal means for Treatment within each Fencing level
-Treeemm <- emmeans(Treel5, ~ Treatment | Fencing, type = "response")
-
-# Dunnett-style contrast: each treatment vs Control
-tree_contrast_vs_ctrl <- contrast(Treeemm, method = "trt.vs.ctrl", ref = "C")
-summary(tree_contrast_vs_ctrl, infer = TRUE)
-
-# CLD with Dunnett adjustment
-Treecld_emm <- cld(Treeemm, adjust = "Dunnett", Letters = letters, type = "response")
-tree_cld_tbl <- as.data.frame(Treecld_emm)
-
-# Prepare data frame for plotting
-tree_plot_df <- tree_cld_tbl %>%
-  rename(
-    EMM      = emmean,
-    CI_lower = lower.CL,
-    CI_upper = upper.CL,
-    Group    = .group
-  ) %>%
-  mutate(
-    Group   = str_trim(Group),
-    Fencing = factor(Fencing, levels = c("Unfenced", "Fenced"))
-  )
-
-# EMM plot: effect of Treatment on Δ tree density
-Treec <- ggplot(tree_plot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)) +
-  geom_point(position = position_dodge(width = 0.35), size = 2.5) +
-  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper),
-                position = position_dodge(width = 0.35), width = 0.12) +
-  geom_text(aes(label = Group,
-                y = CI_upper + 0.15 * (max(CI_upper, na.rm = TRUE) - min(CI_lower, na.rm = TRUE))),
-            position = position_dodge(width = 0.35), size = 3, color = "black") +
-  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5) +
-  labs(
-    x     = "Treatment",
-    y     = expression("Change in tree density "*ha^{-1}*""),
-    color = "Fencing"
-  ) +
-  theme_classic() +
-  ggtitle(NULL) +
-  theme(
-    axis.title = element_text(size = 8),
-    axis.text  = element_text(size = 8)
-  )
-
-
-
 ########## LOG RESPONSE RATIO (lnRR) — effect size relative to Control        
 
 
 # Preparing tree count data for lnRR
-TreeLOG <- SapFt %>%
+TreeLOG <- SapF %>%
   filter(
     woody_cat == "Trees",
     Year %in% c(2024, 2026)
@@ -301,9 +248,13 @@ Tree_summary <- Tree_lnRR %>%
 Treelog <- lmer(lnRR ~ Treatment * Fencing + (1 | Site), data = Tree_lnRR)
 summary(Treelog)
 
-# Residual diagnostics
-qqnorm(residuals(Treelog))
-qqline(residuals(Treelog))
+# Model diagnostics
+ # qqnorm(residuals(Treelog))
+ # qqline(residuals(Treelog))
+ # check_model(Treelog, check = "qq")
+ # check_model(Treelog, check = "normality")
+ # check_model(Treelog, check = "homogeneity")
+ # check_collinearity(Treelog)
 
 
 ###########################################################################
@@ -709,7 +660,7 @@ Seedllog <- lmer(lnRR  ~ Treatment * Fencing + (1 | Site),
 
 summary(Seedllog)
 
-
+#Residuals 
 check_model(Seedllog, check = "qq")
 check_model(Seedllog, check = "normality")
 check_model(Seedllog, check = "homogeneity")
@@ -718,24 +669,6 @@ plot(Seedllog)
 #---------------------------------------------------
 # 10. Plot lnRR
 #---------------------------------------------------
-
-ggplot(SSeed_lnRR,
-       aes(x = Treatment, y = lnRR, fill = Fencing))+ 
-  geom_violin(trim = FALSE)+
-  geom_hline(yintercept = 0, linetype = "dashed") +  
-  stat_summary(fun = mean, geom = "point", 
-               position = position_dodge(0.8), 
-               size = 1, color = "black") +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Treatment", 
-       y = expression("Log response Seedling density "*ha^{-1}*"")
-  ) +
-  theme_classic() +
-  theme(
-    axis.title = element_text(size = 6),  # Axis titles reduced from 12 to 8
-    axis.text = element_text(size = 6)) +
-  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
-
 
 ##### OPTION 2 visualising lnRR results using emmeans
 
@@ -749,32 +682,11 @@ plot_data <- as.data.frame(emm_interaction)
 plot_data$Treatment <- factor(plot_data$Treatment, 
                               levels = c("F", "TF", "TFB", "THF"))
 
-# plot_data$Fencing <- factor(plot_data$Fencing, 
-#                              levels = c("Fenced", "Unfenced"),
-#                              labels = c("Fenced", "Unfenced"))
-
 
 # reodering fencing level 
 plot_data$Fencing <- factor(plot_data$Fencing, 
                             levels = c("Unfenced", "Fenced"),
                             labels = c("Unfenced", "Fenced"))
-
-#### visualisation
-ggplot(plot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
-  geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.8) +
-  geom_point(size = 3.5, position = position_dodge(0.5)) +
-  geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL),
-                 height = 0.2, size = 0.8, position = position_dodge(0.5)) +
-  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
-  scale_x_continuous(breaks = seq(-2, 2, 0.5)) +
-  labs(x = "lnRR Seedling density relative to Control",
-       y = "Treatments") +
-  theme(legend.position = "top") +
-theme_classic()+ 
-  ggtitle(NULL)+
-  theme(
-    axis.title = element_text(size = 12),      # Axis titles
-    axis.text = element_text(size = 12))
 
 
 ####### CONVERT lnRR to PERCENTAGE CHANGE #####
@@ -990,7 +902,6 @@ SapVa<- ggplot(sptrt_comparison2,
                position = position_dodge(0.8), 
                size = 1.4, color = "black") +
   labs(x = "Treatment", 
-       # y = "Saplings density per ha",
        y = expression("Sapling density "*ha^{-1}*"")
   ) +
   theme_classic() +
@@ -1124,7 +1035,7 @@ SSapl_lnRR <- SSapl_lnRR %>%
         (C_post / C_pre)))
 
 #---------------------------------------------------
-# 8. Treatment summaries
+# 7. Treatment summaries
 #---------------------------------------------------
 
 saplingD_summary <- SSapl_lnRR %>%
@@ -1147,7 +1058,7 @@ sample_sizes2 <- SSapl_lnRR %>%
   )
 
 #---------------------------------------------------
-# 9. Mixed-effects model
+# 8. Mixed-effects model
 #---------------------------------------------------
 Sapllog <- lmer(lnRR  ~ Treatment * Fencing + (1 | Site),
                  data = SSapl_lnRR)
@@ -1163,28 +1074,10 @@ plot(Sapllog)
 
 
 #---------------------------------------------------
-# 10. Plot lnRR
+#  Plot lnRR
 #---------------------------------------------------
 
-ggplot(SSapl_lnRR,
-       aes(x = Treatment, y = lnRR, fill = Fencing))+ 
-  geom_violin(trim = FALSE)+
-  geom_hline(yintercept = 0, linetype = "dashed") +  
-  stat_summary(fun = mean, geom = "point", 
-               position = position_dodge(0.8), 
-               size = 1, color = "black") +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Treatment", 
-       y = expression("Log response ratio: Sapling density "*ha^{-1}*"")
-  ) +
-  theme_classic() +
-  theme(
-    axis.title = element_text(size = 12),  # Axis titles reduced from 16 to 12
-    axis.text = element_text(size = 12)) +
-  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
-
-
-##### OPTION 2 visualising lnRR results using emmeans
+##### Visualising lnRR results using emmeans
 
 # Get estimated marginal means for both factors
 Spemm_interaction <- emmeans(Sapllog, ~ Treatment | Fencing)
@@ -1198,25 +1091,6 @@ Splot_data$Treatment <- factor(Splot_data$Treatment,
 Splot_data$Fencing <- factor(Splot_data$Fencing, 
                             levels = c("Unfenced", "Fenced"),
                             labels = c("Unfenced", "Fenced"))
-
-#### visualisation
-# ggplot(Splot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
-#   geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.8) +
-#   geom_point(size = 3.5, position = position_dodge(0.5)) +
-#   geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL),
-#                  height = 0.2, size = 0.8, position = position_dodge(0.5)) +
-#   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
-#   scale_x_continuous(breaks = seq(-2, 2, 0.5)) +
-#   labs(x = "LnRR Sapling density relative to the control ",
-#        y = "Treatment") +
-#   #theme_beautiful() +
-#   theme(legend.position = "top") +
-#   theme_classic()+ 
-#   ggtitle(NULL)+
-#   theme(
-#     axis.title = element_text(size = 12),      # Axis titles
-#     axis.text = element_text(size = 12))
-# 
 
 ####### CONVERTING lnRR to PERCENTAGE CHANGE #####
 # Get estimated marginal means for Treatment × Fencing interaction
@@ -1318,13 +1192,393 @@ print(fencing_within_trt)
 confint(fencing_within_trt)
 
 
+############################################################################################
+############################################################################
+
+##########RESPROUTS RESPROUTS RESPROUTS  RESPROUTS RESPROUTS ####################
+
+# Step 1: Filtering Cut stumps only and years 
+resprouts_df <- SapF %>%
+  filter(
+    woody_cat == "Cut stump",
+    Year %in% c(2026),
+    !Treatment %in% c("C", "F")  # exclude the two treatments
+  )
+
+
+
+#Summary stats for resprouts 
+Respsummary_stats <- resprouts_df %>%
+  group_by(Site, Treatment) %>%
+  summarise(
+    Total_resprouts = sum(No_of_resprouts, na.rm = TRUE),
+    Mean_resprouts = mean(No_of_resprouts, na.rm = TRUE),
+    Max_resprouts = max(No_of_resprouts, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(Total_resprouts))
+
+
+## checking which species had more resprouts
+Species_resprouts <- resprouts_df %>%
+  group_by(Species_name, Treatment) %>%
+  summarise(
+    Total_resprouts = sum(No_of_resprouts, na.rm = TRUE),
+    N = n(),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(Total_resprouts))
+
+
+
+###
+# Check current class of FieldType
+
+class(resprouts_df$Fencing)  # Likely "character" or "ordered factor"
+
+# Converting to unordered factor explicitly
+resprouts_df$Fencing <- factor(resprouts_df$Fencing, ordered = FALSE)
+
+# Verifying
+levels(resprouts_df$Fencing)  # Should show "Open" "Closed" (or vice versa)
+
+# Setting "Unfenced" as the reference level (to see "Unfenced" coefficients)
+resprouts_df$Fencing <- relevel(resprouts_df$Fencing, ref = "Unfenced")
+
+### Converting character variables to factors
+resprouts_df$Treatment <- as.factor(resprouts_df$Treatment)
+resprouts_df$Fencing <- as.factor(resprouts_df$Fencing)
+
+
+#violin plot
+RespVio <- ggplot(resprouts_df, aes(x = Treatment, y = No_of_resprouts,
+                                    fill = Fencing)) + 
+  geom_violin(trim = TRUE)+
+  stat_summary(fun = mean, geom = "point", 
+               position = position_dodge(0.8), 
+               size = 1.5, color = "black") +
+  #geom_hline(yintercept = 0, linetype = "dashed") +
+  #scale_x_continuous(breaks = seq(1, 45, 5)) +
+  labs(x = "Treatment", y = "No.of resprouts per cut stump") +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12)) +
+  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
+
+
+##saving Violin PLOT - resprouts
+#ggsave(RespVio,filename ="Plots/RESPROUTS VIOLIN26 plot.png",
+#width = 16, height = 14, units = "cm")  
+
+
+
+##GLMM for resprouts on cut stumps  
+
+#  using tweedie distribution - to handle zeros
+
+R5b_tweedie <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
+                       data = resprouts_df,
+                       family = tweedie(link = "log"))
+
+
+# diagnostics using DHARMA
+simTw <- simulateResiduals(R5b_tweedie)
+plot(simTw)
+
+# Explicit tests (should be non-significant if model meets DHARMA assumptions)
+testDispersion(simTw)
+testZeroInflation(simTw)
+testOutliers(simTw)
+
+# model summary
+summary(R5b_tweedie)
+
+
+# # # Model diagnostics
+#  qqnorm(residuals(R5b_tweedie)) #whether residuals are approximately normal.
+# qqline(residuals(R5b_tweedie))
+
+
+### POST HOC ANALYSIS FOR RESPROUTS 
+# pairwise comparisons
+Rstreat_comparisons3 <- emmeans(R5b_tweedie, specs = pairwise ~ Treatment | Fencing, adjust = "Dunnet")
+summary(Rstreat_comparisons3$contrasts)
+
+# Estimated marginal means for Treatment within Fencing (if needed)
+Rstreat_comparisons3 <- emmeans(R5b_tweedie, ~ Treatment | Fencing, type = "response")
+
+# Comparing each treatment to Control with Dunnett adjustment (or "none" if you only want vs control)
+contrast_vs_control <- contrast(Rstreat_comparisons3, method = "trt.vs.ctrl", ref = "TF")
+summary(contrast_vs_control, infer = TRUE)
+
+# generating letters using cld in multicomp package
+Respcld_emm <- cld(Rstreat_comparisons3, adjust = "Dunnett", Letters = letters, type = "response")
+cld_tbl <- as.data.frame(Respcld_emm)
+
+
+# preparing clean database for plotting
+Rspplot_df <- cld_tbl %>%
+  rename(
+    EMM = response,
+    CI_lower = asymp.LCL, # tweedie used different typology for EMM and CIs
+    CI_upper = asymp.UCL, 
+    Group = .group
+  ) %>%
+  mutate(Group = str_trim(Group))  # Clean whitespace
+
+
+# checking if log scale has been back transformed
+summary(emmeans(R5b_tweedie, ~ Treatment, type = "response"))
+
+### Visualisation using ggplot
+
+Rspplot_df$Fencing <- factor( Rspplot_df$Fencing,
+                              levels = c("Unfenced", "Fenced")) #ordering Fencing level to start with Unfenced
+
+
+Resp <- ggplot(Rspplot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)) +
+  geom_point(position = position_dodge(width = 0.35), size = 1.5) +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper),
+                position = position_dodge(width = 0.35), width = 0.12) +
+  geom_text(aes(label = Group,
+                y = CI_upper + 0.1 * max(EMM)),
+            position = position_dodge(width = 0.35), size = 4, color = "black") +
+  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))  +
+  labs(color = "Fencing")+  # Optional: rename legend title
+  labs(
+    x = "Treatment",
+    #y = expression("Average number of resprouts per cut stump")
+    y = expression("Mean resprouts per cut stump")
+  ) +
+  theme_classic()+ 
+  ggtitle(NULL)+
+  #geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
+  theme(
+    axis.title = element_text(size = 12),      # Axis titles
+    axis.text = element_text(size = 12))
+
+
+
+## creating a multipanel for panels with 2 different y-axis
+
+# # Combining the plots in a single layout
+Resp2 <- (RespVio/Resp) +   # "/" for stacking vertically, or "|" for side-by-side
+  plot_layout(heights = c(1, 1,1)) +    # Adjust relative heights
+  plot_annotation(
+    tag_levels = 'a',
+    tag_prefix = '(',
+    tag_suffix = ')',
+    theme = theme(plot.tag = element_text(size = 8, hjust = 0))  # Left align tags
+  ) &
+  theme(
+    axis.text = element_text(size = 11),        # Increase axis label font size
+    axis.title = element_text(size = 10),       # Increase axis title font size
+    plot.tag = element_text(size = 12, hjust = 0))  # Ensure left alignment
+
+
+### saving plot
+ggsave(Resp2,filename ="Plots/ 3Violin Resprouts.png",
+       width = 16, height = 14, units = "cm") 
+
+
+######################### EFFECT of fencing ON RESPROUTS --------------------------
+# Test: Is there a statistical difference between Fenced and Unfenced subplots
+# within each treatment? Contrasts Fenced vs Unfenced for TF, TFB, THF.
+
+respemm_fence_by_trt <- emmeans(R5b_tweedie, ~ Fencing | Treatment)
+
+resfencing_within_trt <- pairs(
+  respemm_fence_by_trt,
+  reverse = TRUE,    # Fenced - Unfenced 
+  adjust  = "holm"   # Holm correction across the three treatment-level tests
+)
+
+print(resfencing_within_trt)
+
+##########################################################################################
+
+######
+# 1. CLASSIFYNG RESPROUTS SPECIES response────────────────────────────────────────────────
+
+SapF <- B_merged %>%
+  mutate(
+    woody_cat = case_when(
+      Woody_class == "Cut stump"             ~ "Cut stump",
+      between(Max_height.m., 0.05, 0.50)     ~ "Seedlings",
+      between(Max_height.m., 0.51, 1.49)     ~ "Saplings",
+      between(Max_height.m., 1.50, 21.0)     ~ "Trees",
+      TRUE                                   ~ NA_character_
+    )
+  )
+# ─── 2. FILTERING TO RESPROUTS ────────────────────────────────────
+# All cut stumps in 2026; No_of_resprouts = 0 are valid observations
+
+resprouts2 <- SapF %>%
+  filter(
+    woody_cat == "Cut stump",
+    Year == 2026,
+    !Treatment %in% c("C", "F")
+  ) %>%
+  mutate(
+    Treatment    = factor(Treatment, levels = c("TF", "TFB", "THF")),
+    Fencing      = factor(Fencing, levels = c("Unfenced", "Fenced")),
+    Species_name = factor(Species_name),
+    Site         = factor(Site)
+  )
+
+# ─── 3. FILTERING: SPECIES WITH N >= 3 IN EACH TREATMENT (ACROSS FENCING) ───────
+
+sp_counts <- resprouts2 %>%
+  count(Species_name, Treatment) %>%
+  pivot_wider(names_from = Treatment,
+              values_from = n,
+              values_fill = 0)
+
+sp_eligible2 <- sp_counts %>%
+  filter(TF >= 3, TFB >= 3, THF >= 3) %>%
+  pull(Species_name)
+
+cat("Species meeting N >= 3 per treatment:", length(sp_eligible2), "\n")
+print(as.character(sp_eligible2))
+
+resprouts2_sp <- resprouts2 %>%
+  filter(Species_name %in% sp_eligible2) %>%
+  mutate(Species_name = droplevels(Species_name))
+
+# Checking data structure
+str(resprouts2_sp)
+summary(resprouts2_sp)
+
+# Checking the response variable
+class(resprouts2_sp$No_of_resprouts)
+summary(resprouts2_sp$No_of_resprouts)
+hist(resprouts2_sp$No_of_resprouts, breaks = 20, main = "Distribution of Resprout Counts")
+
+# Checking for NAs in the response variable
+sum(is.na(resprouts2_sp$No_of_resprouts))
+summary(resprouts2_sp$No_of_resprouts)
+
+# Checking for NAs in other important columns
+sum(is.na(resprouts2_sp$Treatment))
+sum(is.na(resprouts2_sp$Fencing))
+sum(is.na(resprouts2_sp$Species_name))
+sum(is.na(resprouts2_sp$Site))
+sum(is.na(resprouts2_sp$Plot))
+
+
+# ─── MODEL SELECTION FOR COUNT DATA ────────────────────────────────────────
+
+# Making sure factors are properly coded
+resprouts2_sp$Treatment <- factor(resprouts2_sp$Treatment)
+resprouts2_sp$Fencing <- factor(resprouts2_sp$Fencing)
+resprouts2_sp$Species_name <- factor(resprouts2_sp$Species_name)
+
+
+#  MODEL WITH POST-HOC TESTS 
+# Using the reduced model approach 
+best_model <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + 
+                        Treatment * Species_name + 
+                        Fencing * Species_name + 
+                        (1|Site),
+                      data = resprouts2_sp,
+                      family = nbinom2)
+
+
+
+# ─── MODEL DIAGNOSTICS ──────────────────────────────────────────────────────
+
+simulationOutput <- simulateResiduals(fittedModel = best_model, n = 250)
+plot(simulationOutput)
+testZeroInflation(simulationOutput)
+testDispersion(simulationOutput)
+
+
+
+# ─── POST-HOC ANALYSIS ────────────────────────────────────────────────────
+
+# Specific comparisons - Treatment × Fencing interaction for each species
+# Note: Since 3-way interaction was removed, we look at 2-way interactions
+emm_interaction <- emmeans(best_model, ~ Treatment * Fencing | Species_name)
+interaction_pairs <- pairs(emm_interaction, adjust = "tukey")
+print(interaction_pairs)
+
+# VISUALIZATION WITH BACK-TRANSFORMED VALUES (ACTUAL COUNTS) ────────────
+# using predicted means 
+emm_results <- as.data.frame(emmeans(best_model, 
+                                     ~ Treatment * Fencing * Species_name,
+                                     type = "response"))
+
+#  SPECIES ORDER: ranking by total cut stumps (most dominant at top) ──────
+sp_stump_order <- resprouts2_sp |>
+  count(Species_name, name = "N_stumps") |>
+  arrange(N_stumps) |>        # ascending so most dominant lands at top of y-axis
+  pull(Species_name) |>
+  as.character()
+
+# Applying the species order to the emm_results
+emm_results$Species_name <- factor(emm_results$Species_name, 
+                                   levels = sp_stump_order)
+
+##### plotting  
+
+multi_sp2 <- ggplot(emm_results, aes(x = response, y = Species_name, 
+                                     color = Treatment)) +
+  geom_point(size = 2, position = position_dodge(width = 0.6)) +
+  geom_errorbarh(aes(xmin = asymp.LCL, xmax = asymp.UCL),
+                 height = 0.35, linewidth = 0.55,
+                 position = position_dodge(0.55)) +
+  facet_wrap(~Fencing, ncol = 2, scales = "free_x") +
+  scale_color_manual(values = c("TF" = "red", "TFB" = "black", "THF" = "blue")) +
+  labs(x = "Mean resprouts per cut stump",
+       y = NULL, color = "Treatment") +
+  theme_classic() +
+  theme(
+    axis.text.y  = element_text(size = 9, face = "italic"),
+    axis.text.x  = element_text(size = 9),
+    axis.title.x = element_text(size = 9),
+    strip.text   = element_text(size = 9, face = "bold"),
+    legend.text  = element_text(size = 8),
+    legend.title = element_text(size = 8),
+    plot.title   = element_text(size = 9, hjust = 0.5)
+  )
+
+# saving
+ggsave(multi_sp2,
+       filename = "Plots/Resprouting_SpeciesN3.png",
+       width = 16, height = 14, units = "cm")
+
+
+#  COMPLETE CONTRASTS WITH TF AS REFERENCE  ──────────
+
+# Creating custom contrasts with TF as reference
+# First, getting the emmeans
+emm_all <- emmeans(best_model, ~ Treatment * Fencing * Species_name, 
+                   type = "response")
+
+# Create contrast matrix for TFB vs TF and THF vs TF
+contrast_list <- list(
+  "TFB_vs_TF" = c(1, -1, 0),  # Assuming order: TF, TFB, THF
+  "THF_vs_TF" = c(1, 0, -1)
+)
+
+# Apply contrasts
+custom_contrasts <- contrast(emm_all, 
+                             method = list(
+                               "TFB - TF" = c(-1, 1, 0),
+                               "THF - TF" = c(-1, 0, 1)
+                             ),
+                             adjust = "BH")
+
+# View results
+print(custom_contrasts)
+
 
 ######################################################################################################
 ##################################################################################################
 
 ################################# GRASSES     BIOMASS CALIBRATION
 
-############ MODEL COMPARISONS
 
 # load data
 
@@ -1447,7 +1701,7 @@ RLMB <- ggplot(RSQTGdata, aes(x = log_DPH_Height, y = log_Biomass_kg_ha)) +
            hjust = -0.1, vjust = 3.5, color = "red", size = 5.0) +
   labs(x = "Log DPM Height (cm)",
        y = "Log Standing grass biomass ("*kg~ha^{-1}*")") +
-  theme_beautiful()+
+  theme_classic()+
   theme(
     axis.title = element_text(size = 12),      # Axis titles
     axis.text = element_text(size = 12)        # Axis tick labels
@@ -1888,30 +2142,15 @@ Gbiomass_LRR_bc <- heights_data %>%
 GBiomlog_bc <- lmer(LRR ~ Treatment * Fencing + (1 | Site),
                     data = Gbiomass_LRR_bc)
 summary(GBiomlog_bc)
-
-# ---------------------------------------------------
-# 4. Plot LRR (violin)
-# ---------------------------------------------------
-
-ggplot(Gbiomass_LRR_bc,
-       aes(x = Treatment, y = LRR, fill = Fencing)) +
-  geom_violin(trim = FALSE) +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  stat_summary(fun = mean, geom = "point",
-               position = position_dodge(0.8),
-               size = 1, color = "black") +
-  labs(x = "Treatment",
-       y = expression("Log response aboveground biomass "*ha^{-1}*"")) +
-  theme_classic() +
-  theme(
-    axis.title = element_text(size = 12),
-    axis.text  = element_text(size = 12)
-  ) +
-  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
+  
+# check_model(GBiomlog_bc, check = "qq")
+# check_model(GBiomlog_bc, check = "normality")
+# check_model(GBiomlog_bc, check = "homogeneity")
+ 
 
 
 # ---------------------------------------------------
-# 5. emmeans – lnRR point-range plot
+# 4. emmeans – lnRR point-range plot
 # ---------------------------------------------------
 
 GBemm_bc <- emmeans(GBiomlog_bc, ~ Treatment | Fencing)
@@ -1923,26 +2162,9 @@ GBplot_data_bc$Fencing   <- factor(GBplot_data_bc$Fencing,
                                    levels = c("Unfenced", "Fenced"),
                                    labels = c("Unfenced", "Fenced"))
 
-# plot log response plot
-ggplot(GBplot_data_bc, aes(x = emmean, y = Treatment, color = Fencing)) +
-  geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.8) +
-  geom_point(size = 3.5, position = position_dodge(0.5)) +
-  geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL),
-                 height = 0.2, linewidth = 0.8, position = position_dodge(0.5)) +
-  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
-  scale_x_continuous(breaks = seq(-2, 2, 0.5)) +
-  labs(x = "Log response aboveground biomass",
-       y = "Treatment") +
-  theme_classic() +
-  ggtitle(NULL) +
-  theme(
-    axis.title = element_text(size = 12),
-    axis.text  = element_text(size = 12)
-  )
-
 
 # ---------------------------------------------------
-# 6. Convert lnRR to % change
+# 5. Convert lnRR to % change
 # ---------------------------------------------------
 
 GBemm_bc2      <- emmeans(GBiomlog_bc, ~ Treatment | Fencing)
@@ -2159,11 +2381,10 @@ GrasRich1 <- lmer(delta ~ Treatment * Fencing + (1|Site),
 summary(GrasRich1)
 
 # Model performance
-#plot(GrasRich1)
-# check_model(GrasRich1, check = "homogeneity")
 # check_model(GrasRich1, check = "normality")
+# check_model(GrasRich1, check = "homogeneity")
 # check_model(GrasRich1, check = "qq")
-# 
+
 # qqnorm(residuals(GrasRich1)) #whether residuals are approximately normal.
 # qqline(residuals(GrasRich1))
 
@@ -2233,26 +2454,8 @@ summary(GRilog)
  #qqnorm(residuals(GRilog)) #whether residuals are approximately normal.
  #qqline(residuals(GRilog))
 
-# Plot LRR
-ggplot(GRich_LRR,
-       aes(x = Treatment, y = GrLRR, fill = Fencing))+ 
-  geom_violin(trim = FALSE)+
-  geom_hline(yintercept = 0, linetype = "dashed") +  
-  stat_summary(fun = mean, geom = "point", 
-               position = position_dodge(0.8), 
-               size = 1, color = "black") +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Treatment", 
-       y = expression("Log response grass richness "*ha^{-1}*"")
-  ) +
-  theme_classic() +
-  theme(
-    axis.title = element_text(size = 12),  # Axis titles size
-    axis.text = element_text(size = 12)) +
-  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
 
-
-##### OPTION 2 visualising lnRR results using emmeans
+#####  visualising lnRR results using emmeans
 
 # Getting estimated marginal means for both factors
 GRemm_interaction <- emmeans(GRilog, ~ Treatment | Fencing)
@@ -2267,27 +2470,6 @@ GRplot_data$Treatment <- factor(GRplot_data$Treatment,
 GRplot_data$Fencing <- factor(GRplot_data$Fencing, 
                               levels = c("Unfenced", "Fenced"),
                               labels = c("Unfenced", "Fenced"))
-
-#### visualisation
-ggplot(GRplot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
-  # geom_vline(xintercept = 0, linetype = "dashed", color = "black",linewidth = 0.5) +
-  # geom_point(size = 3.5, position = position_dodge(0.5)) +
-  geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.8) +
-  geom_point(size = 3.5, position = position_dodge(0.5)) +
-  geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL),
-                 height = 0.2, size = 0.8, position = position_dodge(0.5)) +
-  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
-  #scale_x_continuous(breaks = seq(-2, 0, 2)) +
-  labs(x = "Log response grass richness",
-       y = "Treatments") +
-  #theme_beautiful() +
-  theme(legend.position = "top") +
-  theme_classic()+ 
-  ggtitle(NULL)+
-  theme(
-    axis.title = element_text(size = 12),      # Axis titles
-    axis.text = element_text(size = 12))
-
 
 ####### CONVERTING lnRR to PERCENTAGE CHANGE #####
 # Get estimated marginal means for Treatment × Fencing interaction
@@ -2518,13 +2700,13 @@ summary(GrasD)
 
 
 # Model performance
-plot(GrasD)
-check_model(GrasD, check = "homogeneity")
-check_model(GrasD, check = "normality")
-check_model(GrasD, check = "qq")
+ #plot(GrasD)
+ #check_model(GrasD, check = "homogeneity")
+ #check_model(GrasD, check = "normality")
+ #check_model(GrasD, check = "qq")
 
-qqnorm(residuals(GrasD)) #whether residuals are approximately normal.
-qqline(residuals(GrasD))
+ #qqnorm(residuals(GrasD)) #whether residuals are approximately normal.
+ #qqline(residuals(GrasD))
 
 # Plot LMM output grass diversity (delta)
 
@@ -2620,42 +2802,17 @@ GDilog <- lmer(GdLRR ~ Treatment * Fencing + (1 | Site),
 summary(GDilog)
 
 
-# # run LMM
-# GDilog <- lmer(GdLRR ~ Treatment * Fencing + (1|Site), data = GRDiv_LRR)
-# 
-# summary(GDilog)
-
-
 # Model performance
 # plot(GDilog)
 # check_model(GDilog, check = "homogeneity")
 # check_model(GDilog, check = "normality")
 # check_model(GDilog, check = "qq")
-# 
+ 
 # qqnorm(residuals(GDilog)) #whether residuals are approximately normal.
 # qqline(residuals(GDilog))
 
 
-# Plot LRR
-ggplot(GDiv_lnRR,
-       aes(x = Treatment, y = GdLRR, fill = Fencing))+ 
-  geom_violin(trim = FALSE)+
-  geom_hline(yintercept = 0, linetype = "dashed") +  
-  stat_summary(fun = mean, geom = "point", 
-               position = position_dodge(0.8), 
-               size = 1, color = "black") +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Treatment", 
-       y = expression("Grass diversity proportional change "*ha^{-1}*"")
-  ) +
-  theme_classic() +
-  theme(
-    axis.title = element_text(size = 12),  # Axis titles size
-    axis.text = element_text(size = 12)) +
-  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
-
-
-##### OPTION 2 visualising lnRR results using emmeans
+##### Visualising lnRR results using emmeans
 
 # Getting estimated marginal means for both factors
 GDemm_interaction <- emmeans(GDilog, ~ Treatment | Fencing)
@@ -2670,27 +2827,6 @@ GDplot_data$Treatment <- factor(GDplot_data$Treatment,
 GDplot_data$Fencing <- factor(GDplot_data$Fencing, 
                               levels = c("Unfenced", "Fenced"), 
                               labels = c("Unfenced", "Fenced"))
-
-#### visualisation
-ggplot(GDplot_data, aes(x = emmean, y = Treatment, color = Fencing)) +
-  # geom_vline(xintercept = 0, linetype = "dashed", color = "black",linewidth = 0.5) +
-  # geom_point(size = 3.5, position = position_dodge(0.5)) +
-  geom_vline(xintercept = 0, linetype = "longdash", color = "black", linewidth = 0.8) +
-  geom_point(size = 3.5, position = position_dodge(0.5)) +
-  geom_errorbarh(aes(xmin = lower.CL, xmax = upper.CL),
-                 height = 0.2, size = 0.8, position = position_dodge(0.5)) +
-  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
-  #scale_x_continuous(breaks = seq(-2, 0, 0.1)) +
-  labs(x = "Log response grass diversity",
-       y = "Treatments") +
-  #theme_beautiful() +
-  theme(legend.position = "top") +
-  theme_classic()+ 
-  ggtitle(NULL)+
-  theme(
-    axis.title = element_text(size = 12),      # Axis titles
-    axis.text = element_text(size = 12))
-
 
 ####### CONVERTING lnRR to PERCENTAGE CHANGE #####
 # Getting estimated marginal means for Treatment × Fencing interaction
@@ -2751,7 +2887,6 @@ SWmulti_panel <- (GSWa/GSWb/GSWD) +   # "/" for stacking vertically, or "|" for 
        width = 16, height = 14, units = "cm")
 
 
-
 #### Is TFB in Fenced subplots the treatment with the greatest diversity increase?
 # Direct planned contrasts: TFB vs each other treatment within Fenced.
 
@@ -2787,397 +2922,5 @@ confint(fencing_gd_within_trt)
 
 
 ############################################################################################
-############################################################################################
-
-
-############################ RESPROUTS  RESPROUTS RESPROUTS ####################
-
-# Step 1: Filtering Cut stumps only and years 
-resprouts_df <- SapF %>%
-  filter(
-    woody_cat == "Cut stump",
-    Year %in% c(2026),
-    !Treatment %in% c("C", "F")  # exclude the two treatments
-  )
-
-
-
-#Summary stats for resprouts 
-Respsummary_stats <- resprouts_df %>%
-  group_by(Site, Treatment) %>%
-  summarise(
-    Total_resprouts = sum(No_of_resprouts, na.rm = TRUE),
-    Mean_resprouts = mean(No_of_resprouts, na.rm = TRUE),
-    Max_resprouts = max(No_of_resprouts, na.rm = TRUE),
-    .groups = "drop"
-  ) %>%
-  arrange(desc(Total_resprouts))
-
-
-## checking which species had more resprouts
-Species_resprouts <- resprouts_df %>%
-  group_by(Species_name, Treatment) %>%
-  summarise(
-    Total_resprouts = sum(No_of_resprouts, na.rm = TRUE),
-    N = n(),
-    .groups = "drop"
-  ) %>%
-  arrange(desc(Total_resprouts))
-
-
-
-###
-# Check current class of FieldType
-
-class(resprouts_df$Fencing)  # Likely "character" or "ordered factor"
-
-# Converting to unordered factor explicitly
-resprouts_df$Fencing <- factor(resprouts_df$Fencing, ordered = FALSE)
-
-# Verifying
-levels(resprouts_df$Fencing)  # Should show "Open" "Closed" (or vice versa)
-
-# Setting "Unfenced" as the reference level (to see "Unfenced" coefficients)
-resprouts_df$Fencing <- relevel(resprouts_df$Fencing, ref = "Unfenced")
-
-### Converting character variables to factors
-resprouts_df$Treatment <- as.factor(resprouts_df$Treatment)
-resprouts_df$Fencing <- as.factor(resprouts_df$Fencing)
-
-
-#violin plot
-RespVio <- ggplot(resprouts_df, aes(x = Treatment, y = No_of_resprouts,
-                                    fill = Fencing)) + 
-  geom_violin(trim = TRUE)+
-  stat_summary(fun = mean, geom = "point", 
-               position = position_dodge(0.8), 
-               size = 1.5, color = "black") +
-  #geom_hline(yintercept = 0, linetype = "dashed") +
-  #scale_x_continuous(breaks = seq(1, 45, 5)) +
-  labs(x = "Treatment", y = "No.of resprouts per cut stump") +
-  theme_classic() +
-  theme(
-    axis.title = element_text(size = 12),      # Axis titles
-    axis.text = element_text(size = 12)) +
-  scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))
-
-
-##saving Violin PLOT - resprouts
-#ggsave(RespVio,filename ="Plots/RESPROUTS VIOLIN26 plot.png",
-#width = 16, height = 14, units = "cm")  
-
-
-
-##GLMM for resprouts on cut stumps  
-
-#  using tweedie distribution - to handle zeros
-
-R5b_tweedie <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + (1|Site),  
-                       data = resprouts_df,
-                       family = tweedie(link = "log"))
-
-
-# diagnostics using DHARMA
-simTw <- simulateResiduals(R5b_tweedie)
-plot(simTw)
-
-# Explicit tests (should be non-significant if model meets DHARMA assumptions)
-testDispersion(simTw)
-testZeroInflation(simTw)
-testOutliers(simTw)
-
-# model summary
-summary(R5b_tweedie)
-
-
-# 
-# summary(Respr5D)
-# # 
-# # # Model diagnostics
-# #  check_model(Respr5b, check = "qq")
-# #  check_model(R5b_tweedie, check = "normality")
-# # # check_model(Respr5b, check = "homogeneity")
-# # # plot(Respr5b)
-# 
-#  qqnorm(residuals(R5b_tweedie)) #whether residuals are approximately normal.
-# qqline(residuals(R5b_tweedie))
-
-
-
-### POST HOC ANALYSIS FOR RESPROUTS 
-# pairwise comparisons
-Rstreat_comparisons3 <- emmeans(R5b_tweedie, specs = pairwise ~ Treatment | Fencing, adjust = "Dunnet")
-summary(Rstreat_comparisons3$contrasts)
-
-# Estimated marginal means for Treatment within Fencing (if needed)
-Rstreat_comparisons3 <- emmeans(R5b_tweedie, ~ Treatment | Fencing, type = "response")
-
-# Comparing each treatment to Control with Dunnett adjustment (or "none" if you only want vs control)
-contrast_vs_control <- contrast(Rstreat_comparisons3, method = "trt.vs.ctrl", ref = "TF")
-summary(contrast_vs_control, infer = TRUE)
-
-# generating letters using cld in multicomp package
-Respcld_emm <- cld(Rstreat_comparisons3, adjust = "Dunnett", Letters = letters, type = "response")
-cld_tbl <- as.data.frame(Respcld_emm)
-
-
-# preparing clean database for plotting
-Rspplot_df <- cld_tbl %>%
-  rename(
-    EMM = response,
-    CI_lower = asymp.LCL, # tweedie used different typology for EMM and CIs
-    CI_upper = asymp.UCL, 
-    Group = .group
-  ) %>%
-  mutate(Group = str_trim(Group))  # Clean whitespace
-
-
-# checking if log scale has been back transformed
-summary(emmeans(R5b_tweedie, ~ Treatment, type = "response"))
-
-### Visualisation using ggplot
-
-Rspplot_df$Fencing <- factor( Rspplot_df$Fencing,
-                              levels = c("Unfenced", "Fenced")) #ordering Fencing level to start with Unfenced
-
-
-Resp <- ggplot(Rspplot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)) +
-  geom_point(position = position_dodge(width = 0.35), size = 1.5) +
-  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper),
-                position = position_dodge(width = 0.35), width = 0.12) +
-  geom_text(aes(label = Group,
-                y = CI_upper + 0.1 * max(EMM)),
-            position = position_dodge(width = 0.35), size = 4, color = "black") +
-  scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))  +
-  labs(color = "Fencing")+  # Optional: rename legend title
-  labs(
-    x = "Treatment",
-    #y = expression("Average number of resprouts per cut stump")
-    y = expression("Mean resprouts per cut stump")
-  ) +
-  theme_classic()+ 
-  ggtitle(NULL)+
-  #geom_hline(yintercept = 0, linetype = "dashed", color = "black", linewidth = 0.5)+
-  theme(
-    axis.title = element_text(size = 12),      # Axis titles
-    axis.text = element_text(size = 12))
-
-
-
-## creating a multipanel for panels with 2 different y-axis
-
-# # Combining the plots in a single layout
-Resp2 <- (RespVio/Resp) +   # "/" for stacking vertically, or "|" for side-by-side
-  plot_layout(heights = c(1, 1,1)) +    # Adjust relative heights
-  plot_annotation(
-    tag_levels = 'a',
-    tag_prefix = '(',
-    tag_suffix = ')',
-    theme = theme(plot.tag = element_text(size = 8, hjust = 0))  # Left align tags
-  ) &
-  theme(
-    axis.text = element_text(size = 11),        # Increase axis label font size
-    axis.title = element_text(size = 10),       # Increase axis title font size
-    plot.tag = element_text(size = 12, hjust = 0))  # Ensure left alignment
-
-
-### saving plot
-ggsave(Resp2,filename ="Plots/ 3Violin Resprouts.png",
-       width = 16, height = 14, units = "cm") 
-
-
-######################### EFFECT of fencing ON RESPROUTS --------------------------
-# Test: Is there a statistical difference between Fenced and Unfenced subplots
-# within each treatment? Contrasts Fenced vs Unfenced for TF, TFB, THF.
-
-respemm_fence_by_trt <- emmeans(R5b_tweedie, ~ Fencing | Treatment)
-
-resfencing_within_trt <- pairs(
-  respemm_fence_by_trt,
-  reverse = TRUE,    # Fenced - Unfenced 
-  adjust  = "holm"   # Holm correction across the three treatment-level tests
-)
-
-print(resfencing_within_trt)
-
-##########################################################################################
-
-######
-# 1. CLASSIFYNG RESPROUTS SPECIES response────────────────────────────────────────────────
-
-SapF <- B_merged %>%
-  mutate(
-    woody_cat = case_when(
-      Woody_class == "Cut stump"             ~ "Cut stump",
-      between(Max_height.m., 0.05, 0.50)     ~ "Seedlings",
-      between(Max_height.m., 0.51, 1.49)     ~ "Saplings",
-      between(Max_height.m., 1.50, 21.0)     ~ "Trees",
-      TRUE                                   ~ NA_character_
-    )
-  )
-# ─── 2. FILTERING TO RESPROUTS ────────────────────────────────────
-# All cut stumps in 2026; No_of_resprouts = 0 are valid observations
-
-resprouts2 <- SapF %>%
-  filter(
-    woody_cat == "Cut stump",
-    Year == 2026,
-    !Treatment %in% c("C", "F")
-  ) %>%
-  mutate(
-    Treatment    = factor(Treatment, levels = c("TF", "TFB", "THF")),
-    Fencing      = factor(Fencing, levels = c("Unfenced", "Fenced")),
-    Species_name = factor(Species_name),
-    Site         = factor(Site)
-  )
-
-# ─── 3. FILTERING: SPECIES WITH N >= 3 IN EACH TREATMENT (ACROSS FENCING) ───────
-
-sp_counts <- resprouts2 %>%
-  count(Species_name, Treatment) %>%
-  pivot_wider(names_from = Treatment,
-              values_from = n,
-              values_fill = 0)
-
-sp_eligible2 <- sp_counts %>%
-  filter(TF >= 3, TFB >= 3, THF >= 3) %>%
-  pull(Species_name)
-
-cat("Species meeting N >= 3 per treatment:", length(sp_eligible2), "\n")
-print(as.character(sp_eligible2))
-
-resprouts2_sp <- resprouts2 %>%
-  filter(Species_name %in% sp_eligible2) %>%
-  mutate(Species_name = droplevels(Species_name))
-
-# Checking data structure
-str(resprouts2_sp)
-summary(resprouts2_sp)
-
-# Checking the response variable
-class(resprouts2_sp$No_of_resprouts)
-summary(resprouts2_sp$No_of_resprouts)
-hist(resprouts2_sp$No_of_resprouts, breaks = 20, main = "Distribution of Resprout Counts")
-
-# Checking for NAs in the response variable
-sum(is.na(resprouts2_sp$No_of_resprouts))
-summary(resprouts2_sp$No_of_resprouts)
-
-# Checking for NAs in other important columns
-sum(is.na(resprouts2_sp$Treatment))
-sum(is.na(resprouts2_sp$Fencing))
-sum(is.na(resprouts2_sp$Species_name))
-sum(is.na(resprouts2_sp$Site))
-sum(is.na(resprouts2_sp$Plot))
-
-
-# ─── MODEL SELECTION FOR COUNT DATA ────────────────────────────────────────
-
-# Making sure factors are properly coded
-resprouts2_sp$Treatment <- factor(resprouts2_sp$Treatment)
-resprouts2_sp$Fencing <- factor(resprouts2_sp$Fencing)
-resprouts2_sp$Species_name <- factor(resprouts2_sp$Species_name)
-
-
-#  MODEL WITH POST-HOC TESTS 
-# Using the reduced model approach 
-best_model <- glmmTMB(No_of_resprouts ~ Treatment * Fencing + 
-                        Treatment * Species_name + 
-                        Fencing * Species_name + 
-                        (1|Site),
-                      data = resprouts2_sp,
-                      family = nbinom2)
-
-
-
-# ─── MODEL DIAGNOSTICS ──────────────────────────────────────────────────────
-
-simulationOutput <- simulateResiduals(fittedModel = best_model, n = 250)
-plot(simulationOutput)
-testZeroInflation(simulationOutput)
-testDispersion(simulationOutput)
-
-
-
-# ─── POST-HOC ANALYSIS ────────────────────────────────────────────────────
-
-# Specific comparisons - Treatment × Fencing interaction for each species
-# Note: Since 3-way interaction was removed, we look at 2-way interactions
-emm_interaction <- emmeans(best_model, ~ Treatment * Fencing | Species_name)
-interaction_pairs <- pairs(emm_interaction, adjust = "tukey")
-print(interaction_pairs)
-
-# VISUALIZATION WITH BACK-TRANSFORMED VALUES (ACTUAL COUNTS) ────────────
-# using predicted means 
-emm_results <- as.data.frame(emmeans(best_model, 
-                                     ~ Treatment * Fencing * Species_name,
-                                     type = "response"))
-
-#  SPECIES ORDER: ranking by total cut stumps (most dominant at top) ──────
-sp_stump_order <- resprouts2_sp |>
-  count(Species_name, name = "N_stumps") |>
-  arrange(N_stumps) |>        # ascending so most dominant lands at top of y-axis
-  pull(Species_name) |>
-  as.character()
-
-# Applying the species order to the emm_results
-emm_results$Species_name <- factor(emm_results$Species_name, 
-                                   levels = sp_stump_order)
-
-##### plotting  
-
-multi_sp2 <- ggplot(emm_results, aes(x = response, y = Species_name, 
-                                     color = Treatment)) +
-  geom_point(size = 2, position = position_dodge(width = 0.6)) +
-  geom_errorbarh(aes(xmin = asymp.LCL, xmax = asymp.UCL),
-                 height = 0.35, linewidth = 0.55,
-                 position = position_dodge(0.55)) +
-  facet_wrap(~Fencing, ncol = 2, scales = "free_x") +
-  scale_color_manual(values = c("TF" = "red", "TFB" = "black", "THF" = "blue")) +
-  labs(x = "Mean resprouts per cut stump",
-       y = NULL, color = "Treatment") +
-  theme_classic() +
-  theme(
-    axis.text.y  = element_text(size = 9, face = "italic"),
-    axis.text.x  = element_text(size = 9),
-    axis.title.x = element_text(size = 9),
-    strip.text   = element_text(size = 9, face = "bold"),
-    legend.text  = element_text(size = 8),
-    legend.title = element_text(size = 8),
-    plot.title   = element_text(size = 9, hjust = 0.5)
-  )
-
-# saving
-ggsave(multi_sp2,
-       filename = "Plots/Resprouting_SpeciesN3.png",
-       width = 16, height = 14, units = "cm")
-
-
-#  COMPLETE CONTRASTS WITH TF AS REFERENCE  ──────────
-
-# Creating custom contrasts with TF as reference
-# First, getting the emmeans
-emm_all <- emmeans(best_model, ~ Treatment * Fencing * Species_name, 
-                   type = "response")
-
-# Create contrast matrix for TFB vs TF and THF vs TF
-contrast_list <- list(
-  "TFB_vs_TF" = c(1, -1, 0),  # Assuming order: TF, TFB, THF
-  "THF_vs_TF" = c(1, 0, -1)
-)
-
-# Apply contrasts
-custom_contrasts <- contrast(emm_all, 
-                             method = list(
-                               "TFB - TF" = c(-1, 1, 0),
-                               "THF - TF" = c(-1, 0, 1)
-                             ),
-                             adjust = "BH")
-
-# View results
-print(custom_contrasts)
-
-
-#####################################################################################
 
 
