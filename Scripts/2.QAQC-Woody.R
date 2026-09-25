@@ -5,7 +5,7 @@ library(dataMaid)
 
 # Loading dataset
 
-WC <- read_csv("DATA/March2026/WOODYP2426.csv")
+WC <- read_csv("DATA/March2026/WOODYP2426OG.csv")
 
 # ----------------------------
 # QUALITY CHECK (QC)
@@ -67,18 +67,13 @@ invalid_treatments <- setdiff(unique(WC$Treatment), expected_treatments)
 cat("\n---- INVALID TREATMENT VALUES ----\n")
 print(invalid_treatments)
 
-# Logical check: Height = 0 but Value != 0
-cat("\n---- LOGICAL CHECK:Max_Height(m) = 0 but Value != 0 ----\n")
-inconsistent <- subset(WC$ Max_Height(m)== 0 & Value != 0)
-print(nrow(inconsistent))
-print(head(inconsistent)) 
 
 # ----------------------------
 # OPTIONAL: Automated QA/QC Report
 # ----------------------------
 
 # Generate HTML QA/QC report
-makeDataReport(df, output = "html", replace = TRUE, file = "QAQC_Report")
+makeDataReport(WC, output = "html", replace = TRUE, file = "QAQC_Report")
 
 cat("\nQA/QC script completed. Check QAQC_Report.html for detailed results.\n")
 
@@ -106,10 +101,10 @@ WCdata <- WCdata %>%
 unique_sites <- unique(WCdata$Site)
 unique_species <- unique(WCdata$Species_name)
 
-print("Unique values in 'Site' after standardization:")
+print("Unique values in 'Site' after standardisation:")
 print(unique_sites)
 
-print("Unique values in 'Species_name' after standardization:")
+print("Unique values in 'Species_name' after standardisation:")
 print(unique_species)
 
 
@@ -177,6 +172,6 @@ print(logical_issues)
 head(WCdata)
 
 ###### saving cleaned data
-#write_csv(WCdata, "DATA/March2026/WoodyplantsUpdated.csv")
+#write_csv(WCdata, "DATA/March2026/WOODYP2426.csv")
 
 #####################################################################

@@ -6,7 +6,7 @@ library(tidyr)
 
 
 #load and clean data
-Woody <- read_csv("DATA/March2026/WOODYP2426.csv")
+Woody <- read_csv("DATA/March2026/WOODYP2426OG.csv")
 
 # unique species
 unique_species <- unique(Woody$Species_name)
@@ -16,25 +16,22 @@ unique_species
  write.csv(unique_species, "DATA/Harmonised Taxonomisation/Woody_UNIQUEspecies26.csv", row.names = FALSE)
 
 
-#loading data of unique species
-Woody_species <- read_csv("DATA/Harmonised Taxonomisation/Woody_UNIQUEspecies26.csv")
-
-# checking african species 
-africa_species <- Woody_species %>% 
-  distinct(Species_name)   # one row per species
-
-#
-africa_species <- africa_species %>%
-  filter(
-    !str_detect(
-      Species_name,
-      regex("^\\s*[^\\s]+\\s+(sp\\.?|spp\\.?)\\b", ignore_case = TRUE)
-    )
-  )
-
-
-# Extracting species names from the dataframe
-species_list <- africa_species$Species_name
+ #loading data of unique species
+ Woody_species <- unique_species
+ 
+ # checking african species 
+ africa_species <- unique(Woody_species)
+ 
+ #
+ africa_species <- africa_species[
+   !str_detect(
+     africa_species,
+     regex("^\\s*[^\\s]+\\s+(sp\\.?|spp\\.?)\\b", ignore_case = TRUE)
+   )
+ ]
+ 
+ # Extracting species names from the dataframe
+ species_list <- africa_species
 
 
 # Loading WFO backbone into memory
@@ -52,7 +49,7 @@ matches <- WFO.match(spec.data = cleaned_names, WFO.data = WFO.data)
 # Picking the best single match per species
 best_matches <- WFO.one(matches)
 
-# Combining harmonized names with original data
+# Combining harmonised names with original data
 selected_columns <- c(
   "spec.name", 
   "scientificName", 
@@ -68,19 +65,19 @@ selected_columns <- c(
 )
 
 
-harmonized_info <- best_matches[, selected_columns]
+harmonised_info <- best_matches[, selected_columns]
 
 
 
-species_Harmonized <- cbind(africa_species, harmonized_info)
+species_Harmonised <- cbind(africa_species, harmonised_info)
 
 
-species_Harmonized <- species_Harmonized %>%
+species_Harmonised <- species_Harmonised %>%
   filter(!is.na(genus))
 
 
 # Save to file
-#write.csv(species_Harmonized, "DATA/Harmonized_WPspp26.csv", row.names = FALSE)
+#write.csv(species_Harmonised, "DATA/Harmonised_WPspp26.csv", row.names = FALSE)
 
 
 #write.csv(best_matches, "DATA/best_matches_WPspp.csv", row.names = FALSE)
@@ -118,7 +115,7 @@ print(summary_table)
 
 # loading data and clean to remain with unique species
 
-Grass_species <-read_csv("DATA/March2026/Grasses2426Updated1.csv")
+Grass_species <-read_csv("DATA/March2026/Grasses2426OG.csv")
 
 
 # extracting unique species

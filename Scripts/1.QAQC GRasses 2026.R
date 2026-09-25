@@ -11,7 +11,7 @@ str(GC)
 summary(GC)
 
 cat("\n---- HEAD OF DATA ----\n")
-print(head(df))
+print(head(GC))
 
 # Check for missing values
 cat("\n---- MISSING VALUES ----\n")
@@ -87,7 +87,7 @@ GC <- GC%>%
   mutate(across(everything(), ~iconv(., from = "latin1", to = "UTF-8")))
 
 
-# 1. Standardizing case
+# 1. Standardising case
 GC <- GC %>% 
   mutate(Site = str_to_upper(Site),                 # keep this step
          Species_name = str_replace(                        # 1) make everything lower case
@@ -115,10 +115,10 @@ unique_species <- unique(GC$Species_name)
 unique_fencing <- unique(GC$Fencing)
 unique_treatemnt <- unique(GC$Treatment)
 
-print("Unique values in 'Site' after standardization:")
+print("Unique values in 'Site' after standardisation:")
 print(unique_sites)
 
-print("Unique values in 'Species_name' after standardization:")
+print("Unique values in 'Species_name' after standardisation:")
 print(unique_species)
 
 # Summary of the cleaned data
@@ -126,4 +126,4 @@ print("Cleaned data:")
 print(GC)
 
 ###### saving cleaned data
- #write_csv(GC, "DATA/March2026/Grasses2426Updated2.csv")
+ #write_csv(GC, "DATA/March2026/Grasses2426Updated1.csv")
