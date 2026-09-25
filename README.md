@@ -37,8 +37,10 @@ Use of this code is licensed under Licence: GNU GPL v3
 |File |    Description |
 |---|---|
 | `Coordinates/Coordinates_SHR.xlsx` | Geode coordinates for study subplots used in analysis. |
-| `GEODE_Subplot_area` | Subplot areas calculated from precise Geode coordinates. |
+| `GEODE_Subplot_area.csv` | Subplot areas calculated from precise Geode coordinates. |
 | `SHR_DPM_height_biomass_calibration_2025.csv` | Aboveground grass biomass calibration data. |
+| `March 2026/WOODYP2426OG.csv`| 2024 and 2026 data before taxonomic harmonisation|
+| `March2026/Grasses2426OG.csv`| 2024 and 2026 data before taxonomic harmonisation |
 | `March 2026/2Grasses2426.csv` | 2024 and 2026 grass survey data used for biomass calculations. |
 | `March 2026/Grasses2426Updated1.csv` | 2024 and 2026 grass survey data. |
 | `March 2026/WOODYP2426.csv` | 2024 and 2026 woody plant survey data. |
