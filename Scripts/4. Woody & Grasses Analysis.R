@@ -1380,6 +1380,8 @@ Resp <- ggplot(Rspplot_df, aes(Treatment, EMM, color = Fencing, group = Fencing)
                 y = CI_upper + 0.1 * max(EMM)),
             position = position_dodge(width = 0.35), size = 4, color = "black") +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))  +
+  scale_y_continuous(limits = c(0, NA),
+                     expand = expansion(mult = c(0, 0.3)))+
   labs(color = "Fencing")+  # Optional: rename legend title
   labs(
     x = "Treatment",

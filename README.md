@@ -12,6 +12,8 @@ productivity and community composition.
 
 The repository contains raw and processed data, analysis scripts, and output figures.
 
+A static version of this repo is available at: (https://doi.org/10.5281/zenodo.22797687)
+
 Contact: Tapiwa Gumbo (tg488@exeter.ac.uk) and/or Andrew Cunliffe (a.cunliffe@exeter.ac.uk)
 
 Use of this code is licensed under Licence: GNU GPL v3
@@ -25,8 +27,8 @@ Use of this code is licensed under Licence: GNU GPL v3
 
 |Script |   Description |
 |---|---|
-| `01_QAQC_Grasses2026.R` | Quality assurance and quality control for 2026 grass survey data. |
-| `02_QAQC_Woody.R` | Quality assurance and quality control for woody plant survey data. |
+| `01_QAQC GRasses 2026.R` | Quality assurance and quality control for 2026 grass survey data. |
+| `02_QAQC-Woody.R` | Quality assurance and quality control for woody plant survey data. |
 | `03_Taxonomic_Harmonisation.R` | Taxonomic harmonisation for grasses and woody plants using the World Flora Online backbone. |
 | `04_Woody_and_Grasses_Analysis.R` | Statistical analysis and figure generation for woody plants and grasses. |
 
@@ -36,12 +38,12 @@ Use of this code is licensed under Licence: GNU GPL v3
 |---|---|
 | `Coordinates/Coordinates_SHR.xlsx` | Geode coordinates for study subplots used in analysis. |
 | `GEODE_Subplot_area` | Subplot areas calculated from precise Geode coordinates. |
-| `DPM.csv` | Biomass calibration data. |
-| `March 2026/2Grasses2426updated.csv` | 2024 and 2026 grass survey data used for biomass calculations. |
+| `SHR_DPM_height_biomass_calibration_2025.csv` | Aboveground grass biomass calibration data. |
+| `March 2026/2Grasses2426.csv` | 2024 and 2026 grass survey data used for biomass calculations. |
 | `March 2026/Grasses2426Updated1.csv` | 2024 and 2026 grass survey data. |
 | `March 2026/WOODYP2426.csv` | 2024 and 2026 woody plant survey data. |
-| `Harmonized Taxonomisation/Harmonized_WPspp26` | Taxonomic harmonisation output for woody plants. |
-| `Harmonized Taxonomisation/Harmonized2026b_GRspp.csv` | Taxonomic harmonisation output for grasses. |
+| `Harmonised Taxonomisation/Harmonised_WPspp26` | Taxonomic harmonisation output for woody plants. |
+| `Harmonised Taxonomisation/Harmonised2026b_GRspp.csv` | Taxonomic harmonisation output for grasses. |
 | `WFO_Backbone/` | World Flora Online backbone data used for taxonomic harmonisation. |
 
 ## Plots
@@ -84,9 +86,9 @@ This project uses *renv* to ensure reproducibility.
 
   Unless otherwise stated, scripts should be run in numerical order:
 
-   1.`01_QAQC_Grasses2026.R`  
+   1.`01_QAQC GRasses 2026.R`  
   
-   2.`02_QAQC_Woody.R` 
+   2.`02_QAQC-Woody.R` 
   
    3.`03_Taxonomic_Harmonisation.R`  
   
