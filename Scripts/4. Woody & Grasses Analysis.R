@@ -281,14 +281,15 @@ Tree_summary <- Tree_lnRR %>%
 # Mixed-effects model on lnRR
 Treelog <- lmer(lnRR ~ Treatment * Fencing + (1 | Site), data = Tree_lnRR)
 summary(Treelog)
+ #tab_model(Treelog)
 
 # Model diagnostics
- # qqnorm(residuals(Treelog))
- # qqline(residuals(Treelog))
- # check_model(Treelog, check = "qq")
- # check_model(Treelog, check = "normality")
- # check_model(Treelog, check = "homogeneity")
- # check_collinearity(Treelog)
+  qqnorm(residuals(Treelog))
+  qqline(residuals(Treelog))
+  check_model(Treelog, check = "qq")
+  check_model(Treelog, check = "normality")
+  check_model(Treelog, check = "homogeneity")
+  check_collinearity(Treelog)
 
 
 ###########################################################################
@@ -917,9 +918,9 @@ summary(Sapl5)
 
 # 
 # # Model diagnostics
-# check_model(Sapl5, check = "qq")
-# check_model(Sapl5, check = "normality")
-# check_model(Sapl5, check = "homogeneity")
+ check_model(Sapl5, check = "qq")
+ check_model(Sapl5, check = "normality")
+ check_model(Sapl5, check = "homogeneity")
 # plot(Sapl5)
 
 
@@ -1578,7 +1579,7 @@ multi_sp2 <- ggplot(emm_results, aes(x = response, y = Species_name,
   )
 
 # saving
-ggsave(multi_sp2,
+#ggsave(multi_sp2,
        filename = "Plots/Resprouting_SpeciesN3.png",
        width = 16, height = 14, units = "cm")
 
@@ -2169,17 +2170,15 @@ Gbiomass_LRR_bc <- heights_data %>%
   ) %>%
   dplyr::select(Site, Plot, Subplot, Treatment, Fencing, Pre, Post, LRR)
 
-# If zeros are present, add a small constant to avoid -Inf:
-# log( (Post + 0.1) / (Pre + 0.1) / ((C_post + 0.1) / (C_pre + 0.1)) )
-
 ## LMM on LRR
 GBiomlog_bc <- lmer(LRR ~ Treatment * Fencing + (1 | Site),
                     data = Gbiomass_LRR_bc)
 summary(GBiomlog_bc)
   
-# check_model(GBiomlog_bc, check = "qq")
-# check_model(GBiomlog_bc, check = "normality")
-# check_model(GBiomlog_bc, check = "homogeneity")
+#model diagnostics
+ check_model(GBiomlog_bc, check = "qq")
+ check_model(GBiomlog_bc, check = "normality")
+ check_model(GBiomlog_bc, check = "homogeneity")
  
 
 
@@ -2470,9 +2469,6 @@ GrRb <- ggplot(grassR_delta,aes(x = Treatment, y = delta, fill = Fencing)) +
   dplyr::select(Site, Plot, Subplot, Treatment, Fencing, Pre, Post, GrLRR) 
 
 
-# If zeros are present, add a small constant to avoid -Inf:  
-#log( (Post + 0.1) / (Pre + 0.1) ) / (C_post + 0.1) / (C_pre + 0.1)
-
 # run LMM
 GRilog <- lmer(GrLRR ~ Treatment * Fencing + (1|Site), data = GRich_LRR)
 
@@ -2481,9 +2477,9 @@ summary(GRilog)
 
 # Model performance
  #plot(GRilog)
- #check_model(GRilog, check = "homogeneity")
- #check_model(GRilog, check = "normality")
- #check_model(GRilog, check = "qq")
+ check_model(GRilog, check = "homogeneity")
+ check_model(GRilog, check = "normality")
+ check_model(GRilog, check = "qq")
 
  #qqnorm(residuals(GRilog)) #whether residuals are approximately normal.
  #qqline(residuals(GRilog))
@@ -2838,9 +2834,9 @@ summary(GDilog)
 
 # Model performance
 # plot(GDilog)
-# check_model(GDilog, check = "homogeneity")
-# check_model(GDilog, check = "normality")
-# check_model(GDilog, check = "qq")
+ check_model(GDilog, check = "homogeneity")
+ check_model(GDilog, check = "normality")
+ check_model(GDilog, check = "qq")
  
 # qqnorm(residuals(GDilog)) #whether residuals are approximately normal.
 # qqline(residuals(GDilog))
