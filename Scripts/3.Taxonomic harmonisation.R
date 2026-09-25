@@ -127,33 +127,29 @@ unique_species
 
 #loading data
 
-Grass_species <- read_csv("DATA/Harmonised Taxonomisation/Grasses_UNIQUEspecies26.csv")
+Grass_species <- Gunique_species
 
-# 
-africa_species <- Grass_species %>% 
-  distinct(Species_name)   # one row per species
+# checking african species 
+africa_species <- unique(Grass_species)
 
 #
-africa_species <- Grass_species %>%
-  filter(
-    !str_detect(
-      Species_name,
-      regex("^\\s*[^\\s]+\\s+(sp\\.?|spp\\.?)\\b", ignore_case = TRUE)
-    )
+africa_species <- africa_species[
+  !str_detect(
+    africa_species,
+    regex("^\\s*[^\\s]+\\s+(sp\\.?|spp\\.?)\\b", ignore_case = TRUE)
   )
-
-
+]
 
 # Extracting species names from the dataframe
-species_list <- africa_species$Species_name
+species_list <- africa_species
+species_list
+# Cleaning the species_list: removing NA 
+species_list_clean <- species_list[!is.na(species_list) & species_list != ""]
 
 
-# Loading WFO backbone into memory
-WFO.remember()  # assumes 'classification.csv' is in working directory
-
-# (optional) Cleaning names to remove authorship or punctuation
+# (optional) Clean names to remove authorship or punctuation
 # Only if names include authorship like "(L.) Willd."
-prepared <- WFO.prepare(spec.data = species_list)
+prepared <- WFO.prepare(spec.data = species_list_clean)
 cleaned_names <- prepared$spec.name  # this will be used for matching
 
 # Matching cleaned species names with WFO backbone
@@ -163,7 +159,7 @@ matches <- WFO.match(spec.data = cleaned_names, WFO.data = WFO.data)
 # Picking the best single match per species
 best_matches <- WFO.one(matches)
 
-# Combining harmonized names with original data
+# Combining harmonised names with original data
 selected_columns <- c(
   "spec.name", 
   "scientificName", 
@@ -179,42 +175,16 @@ selected_columns <- c(
 )
 
 
-harmonized_info <- best_matches[, selected_columns]
+Gharmonised_info <- best_matches[, selected_columns]
 
+Gspecies_Harmonised <- tibble(Species_name = africa_species) %>%
+  left_join(Gharmonised_info, by = c("Species_name" = "spec.name"))
 
-species_Harmonized <- cbind(africa_species, harmonized_info)
-
-species_Harmonized <- species_Harmonized %>%
+Gspecies_Harmonised <- Gspecies_Harmonised %>%
   filter(!is.na(genus))
 
 
 # Save to file
- #write.csv(species_Harmonized, "DATA/HarmonizedGrass_GRspp.csv", row.names = FALSE)
+write.csv(Gspecies_Harmonised, "DATA/Harmonised Taxonomisation/Harmonised2026b_GRspp.csv", row.names = FALSE)
 
-
-#write.csv(best_matches, "DATA/best_matches_GRspp.csv", row.names = FALSE)
-
-
-# result summary
-
-table(best_matches$Matched)
-
-
-table(best_matches$taxonomicStatus)
-
-
-table(best_matches$New.accepted)
-
-
-synonyms <- best_matches %>% filter(New.accepted == TRUE)
-nrow(synonyms)
-
-
-unmatched <- best_matches %>% filter(Matched == FALSE)
-nrow(unmatched)
-
-
-summary_table <- best_matches %>%
-  group_by(taxonomicStatus, New.accepted) %>%
-  summarise(count = n(), .groups = "drop")
 
