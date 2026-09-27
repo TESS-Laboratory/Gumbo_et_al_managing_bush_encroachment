@@ -128,9 +128,9 @@ print(missing_values)
 
 # 2. Checking for Duplicate Combinations
 duplicates <- WCdata %>%
-  group_by(Site, Plot, Subplot) %>%
-  summarize(count = n()) %>%
-  filter(count > 2)
+  dplyr::group_by(Site, Plot, Subplot) %>%
+  dplyr::summarize(count = n()) %>%
+  dplyr::filter(count > 2)
 
 cat("Duplicate combinations of Site, Plot, and Subplot:\n")
 print(duplicates)
@@ -141,7 +141,7 @@ expected_sites <- c("A", "B", "C", "D", "E", "F")
 expected_subplots <- c("Z1", "Z2", "Z3", "Z4")
 
 invalid_entries <- WCdata %>%
-  filter(
+  dplyr::filter(
     !Site %in% expected_sites |
       Plot < 1 | Plot > 100 |  # Example range for Plot (adjust as needed)
       !Subplot %in% expected_subplots
@@ -161,9 +161,9 @@ WCdata <- WCdata %>%
 # 5. Logical Consistency Check
 # Example: Ensuring each Plot belongs to a unique Site
 logical_issues <- WCdata %>%
-  group_by(Plot) %>%
-  summarize(unique_sites = n_distinct(Site)) %>%
-  filter(unique_sites > 1)
+  dplyr::group_by(Plot) %>%
+  dplyr::summarize(unique_sites = n_distinct(Site)) %>%
+  dplyr::filter(unique_sites > 1)
 
 cat("Logical consistency issues:\n")
 print(logical_issues)
