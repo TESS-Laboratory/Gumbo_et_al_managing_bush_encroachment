@@ -1616,17 +1616,17 @@ print(custom_contrasts)
 
 # load data
 
-RSQTGdata <- read_csv("DATA/DPM.csv")
+RSQTGdata <- read_csv("DATA/SHR_DPM_height_biomass_calibration_2025.csv")
 
-################## DPM HEIGHT ~ OVEN DRIED WEIGHT. NO TRANSFORMATION
-# 2. Convert weight from grams to kg/ha
+################## DPM HEIGHT ~ OVEN DRIED Dry_biomass_g. NO TRANSFORMATION
+# 2. Convert Dry_biomass_g from grams to kg/ha
 #    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
 frame_area <- pi * (0.17^2)  # = 0.0908 m²
-RSQTGdata$Biomass_kg_ha <- RSQTGdata$Weight * 10 / frame_area
+RSQTGdata$Biomass_kg_ha <- RSQTGdata$Dry_biomass_g * 10 / frame_area
 
 
 # 3. Linear regression: Biomass ~ DPH
-modelWG <- lm(Biomass_kg_ha ~ DPH_Height, data = RSQTGdata)
+modelWG <- lm(Biomass_kg_ha ~ DPM_height_cm, data = RSQTGdata)
 #summary(modelWG)
 # tab_model(modelWG)
 
@@ -1663,7 +1663,7 @@ eq <- paste0(
 
 # Plotting with regression and equation
 
-DPM <- ggplot(RSQTGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) + 
+DPM <- ggplot(RSQTGdata, aes(x = DPM_height_cm, y = Biomass_kg_ha)) + 
   geom_point(size = 0.7, color = "black") + 
   geom_smooth(method = "lm", se = FALSE, color = "blue") +
   annotate("text", x = Inf, y = -Inf, label = eq, hjust = 1.0, vjust = -0.1, size = 2.0, color = "black") +
@@ -1686,36 +1686,36 @@ DPM <- ggplot(RSQTGdata, aes(x = DPH_Height, y = Biomass_kg_ha)) +
 ############# LOG TRANSFORMED RLM            LOG TRANSFORMED RLM     
 
 
-## 1. Converting weight from grams to kg/ha
+## 1. Converting Dry_biomass_g from grams to kg/ha
 #    Area of 34cm diameter disc = π * (0.17 m)^2 = 0.0908 m²
 frame_area <- pi * (0.17^2)  # = 0.0908 m²
-RSQTGdata$Biomass_kg_ha <- RSQTGdata$Weight * 10 / frame_area
+RSQTGdata$Biomass_kg_ha <- RSQTGdata$Dry_biomass_g * 10 / frame_area
 
 # --- Log-transforming the variables (natural log) ---
 
 RSQTGdata$log_Biomass_kg_ha <- log(RSQTGdata$Biomass_kg_ha)
-RSQTGdata$log_DPH_Height  <- log(RSQTGdata$DPH_Height)
+RSQTGdata$log_DPM_height_cm <- log(RSQTGdata$DPM_height_cm)
 
 # 1. Free-intercept robust model
-Rmodel_free <- RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ log_DPH_Height, data = RSQTGdata)
+Rmodel_free <- RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ log_DPM_height_cm, data = RSQTGdata)
 
 int_free   <- round(coef(Rmodel_free)[["(Intercept)"]], 2)
-slope_free <- round(coef(Rmodel_free)[["log_DPH_Height"]], 2)
+slope_free <- round(coef(Rmodel_free)[["log_DPM_height_cm"]], 2)
 
 # Clean equation: log(y) = intercept + slope * log(x)
 Req_free <- sprintf("log(y) = %.2f %+.2f log(x)", int_free, slope_free)
 
 # 2. Zero-intercept robust model (forced through origin)
-Rmodel_zero <- RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ 0 + log_DPH_Height, data = RSQTGdata)
+Rmodel_zero <- RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ 0 + log_DPM_height_cm, data = RSQTGdata)
 
-slope_zero <- round(coef(Rmodel_zero)[["log_DPH_Height"]], 2)
+slope_zero <- round(coef(Rmodel_zero)[["log_DPM_height_cm"]], 2)
 
 # Clean equation: no intercept term
 Req_zero <- sprintf("log(y) = %.2f log(x)", slope_zero)
 
 
 #### --- ggplot with both models 
-RLMB <- ggplot(RSQTGdata, aes(x = log_DPH_Height, y = log_Biomass_kg_ha)) +
+RLMB <- ggplot(RSQTGdata, aes(x = log_DPM_height_cm, y = log_Biomass_kg_ha)) +
   geom_point(color = "black", alpha = 0.54) +
   
   # Free-intercept line (solid blue)
@@ -1748,13 +1748,13 @@ RLMB <- ggplot(RSQTGdata, aes(x = log_DPH_Height, y = log_Biomass_kg_ha)) +
 
 ####
 # Free-intercept model
-model_log_free <- RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ log_DPH_Height, data = RSQTGdata)
+model_log_free <- RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ log_DPM_height_cm, data = RSQTGdata)
 int_free   <- round(coef(model_log_free)[["(Intercept)"]], 3)
-slope_free <- round(coef(model_log_free)[["log_DPH_Height"]], 3)
+slope_free <- round(coef(model_log_free)[["log_DPM_height_cm"]], 3)
 
 # Zero-intercept model
-model_log_zero <- RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ 0 + log_DPH_Height, data = RSQTGdata)
-slope_zero <- round(coef(model_log_zero)[["log_DPH_Height"]], 3)
+model_log_zero <- RobustLinearReg::theil_sen_regression(log_Biomass_kg_ha ~ 0 + log_DPM_height_cm, data = RSQTGdata)
+slope_zero <- round(coef(model_log_zero)[["log_DPM_height_cm"]], 3)
 
 
 # ============================================
@@ -1766,7 +1766,7 @@ slope <- 1.141
 
 # Step 1: Calculating the median predictions from the Theil-Sen model
 # (Using  intercept of 4.67 and slope of 1.14)
-pred_median <- exp(4.67 + 1.14 * RSQTGdata$log_DPH_Height)
+pred_median <- exp(4.67 + 1.14 * RSQTGdata$log_DPM_height_cm)
 
 # Step 2: Calculating the ratio of observed biomass to predicted median biomass
 ratios <- RSQTGdata$log_Biomass_kg_ha / pred_median
@@ -1789,7 +1789,7 @@ if (!"Biomass_kg_ha" %in% names(RSQTGdata)) {
 }
 
 # Calculating median predictions (original scale)
-pred_median <- exp(intercept + slope * RSQTGdata$log_DPH_Height)
+pred_median <- exp(intercept + slope * RSQTGdata$log_DPM_height_cm)
 
 # Calculating ratios (BOTH on original scale!) 
 ratios <- RSQTGdata$Biomass_kg_ha / pred_median
@@ -1802,10 +1802,10 @@ cat("\nMean:", mean(ratios, na.rm = TRUE))
 cat("\nMedian:", median(ratios, na.rm = TRUE))
 
 # Fitting LOESS to ratios
-ratio_model <- loess(ratios ~ RSQTGdata$log_DPH_Height, span = 0.75)
+ratio_model <- loess(ratios ~ RSQTGdata$log_DPM_height_cm, span = 0.75)
 
 # Calculating CF for the data
-RSQTGdata$CF <- predict(ratio_model, RSQTGdata$log_DPH_Height)
+RSQTGdata$CF <- predict(ratio_model, RSQTGdata$log_DPM_height_cm)
 
 # Bias-corrected predictions
 RSQTGdata$Biomass_Mean_Corrected <- pred_median * RSQTGdata$CF
@@ -1814,8 +1814,8 @@ RSQTGdata$Biomass_Mean_Corrected <- pred_median * RSQTGdata$CF
 # 2. CREATE PREDICTION GRID
 # ============================================
 
-x_new <- seq(min(RSQTGdata$DPH_Height), 
-             max(RSQTGdata$DPH_Height), 
+x_new <- seq(min(RSQTGdata$DPM_height_cm), 
+             max(RSQTGdata$DPM_height_cm), 
              length.out = 120)
 
 # Predicting CF for grid
@@ -1873,7 +1873,7 @@ y_min <- min(RSQTGdata$Biomass_kg_ha, na.rm = TRUE)
 y_range <- y_max - y_min
 
 # Small gap from the y-axis (3% of x range keeps text clear of the axis)
-x_gap <- min(RSQTGdata$DPH_Height) + 0.01 * diff(range(RSQTGdata$DPH_Height))
+x_gap <- min(RSQTGdata$DPM_height_cm) + 0.01 * diff(range(RSQTGdata$DPM_height_cm))
 
 # Create equation labels - NOW AT THE TOP
 equations <- data.frame(
@@ -1914,7 +1914,7 @@ model_colors <- c(
 # Assign the model comparison plot to a named object
 BiasC2_bc <- ggplot() +
   geom_point(data = RSQTGdata,
-             aes(x = DPH_Height, y = Biomass_kg_ha),
+             aes(x = DPM_height_cm, y = Biomass_kg_ha),
              alpha = 0.3, size = 1.5, color = "gray50") +
   geom_line(data = plot_df,
             aes(x = x, y = Biomass, color = Model, linetype = Model),
@@ -1982,7 +1982,7 @@ ggsave(multi_pBiomass2_bc,
 ######   GRASS BIOMASS GRASS BIOMASS GRASS BIOMASS GRASS BIOMASS
 
 # Loading data
-heights_data <-  read_csv("DATA/March2026/2Grasses2426.csv")
+heights_data <-  read_csv("DATA/March2026/Grasses2426Updated1.csv")
 
 Grasses <- read_csv("DATA/March2026/Grasses2426Updated1.csv")
 
