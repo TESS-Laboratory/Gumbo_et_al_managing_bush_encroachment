@@ -27,23 +27,23 @@ Use of this code is licensed under Licence: GNU GPL v3
 
 |Script |   Description |
 |---|---|
-| `01_QAQC GRasses 2026.R` | Quality assurance and quality control for 2026 grass survey data. |
-| `02_QAQC-Woody.R` | Quality assurance and quality control for woody plant survey data. |
-| `03_Taxonomic_Harmonisation.R` | Taxonomic harmonisation for grasses and woody plants using the World Flora Online backbone. |
-| `04_Woody_&_Grasses_Analysis.R` | Statistical analysis and figure generation for woody plants and grasses. |
+| `1.QAQC GRasses 2026.R` | Quality assurance and quality control for 2026 grass survey data. |
+| `2.QAQC-Woody.R` | Quality assurance and quality control for woody plant survey data. |
+| `3.Taxonomic Harmonisation.R` | Taxonomic harmonisation for grasses and woody plants using the World Flora Online backbone. |
+| `4.Woody & Grasses Analysis.R` | Statistical analysis and figure generation for woody plants and grasses. |
 
 ## Data
 
 |File |    Description |
 |---|---|
-| `Coordinates/Coordinates_SHR.xlsx` | Geode coordinates for study subplots used in analysis. |
+| `Coordinates\Coordinates GEODE+garmin\Coordinates SHR.xlsx` | Geode coordinates for study subplots used in analysis. |
 | `GEODE_Subplot_area.csv` | Subplot areas calculated from precise Geode coordinates. |
 | `SHR_DPM_height_biomass_calibration_2025.csv` | Aboveground grass biomass calibration data. |
 | `March2026/WOODYP2426OG.csv`| 2024 and 2026 data before taxonomic harmonisation.|
 | `March2026/Grasses2426OG.csv`| 2024 and 2026 data before taxonomic harmonisation. |
 | `March2026/Grasses2426Updated1.csv` | 2024 and 2026 grass survey data. |
 | `March2026/WOODYP2426.csv` | 2024 and 2026 woody plant survey data. |
-| `Harmonised Taxonomisation/Harmonised_WPspp26` | Taxonomic harmonisation output for woody plants. |
+| `Harmonised Taxonomisation/Harmonised_WPspp26.csv` | Taxonomic harmonisation output for woody plants. |
 | `Harmonised Taxonomisation/Harmonised2026b_GRspp.csv` | Taxonomic harmonisation output for grasses. |
 | `WFO_Backbone/` | World Flora Online backbone data used for taxonomic harmonisation. |
 
@@ -87,13 +87,13 @@ This project uses *renv* to ensure reproducibility.
 
   Unless otherwise stated, scripts should be run in numerical order:
 
-   1.`01_QAQC GRasses 2026.R`  
+   1.`1.QAQC GRasses 2026.R`  
   
-   2.`02_QAQC-Woody.R` 
+   2.`2.QAQC-Woody.R` 
   
-   3.`03_Taxonomic_Harmonisation.R`  
+   3.`3.Taxonomic Harmonisation.R`  
   
-   4.`04_Woody_&_Grasses_Analysis.R` 
+   4.`4.Woody & Grasses Analysis.R` 
 
    
 ---  
