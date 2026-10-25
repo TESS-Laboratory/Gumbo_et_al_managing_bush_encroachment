@@ -76,7 +76,7 @@ B <- read.csv("DATA/March2026/WOODYP2426.csv", stringsAsFactors = FALSE)
 
 
 # Ensuring consistent column names (case-sensitive)
-colnames(A) <- c("Site", "Plot", "Subplot", "Area")
+colnames(A) <- c("Site", "Plot", "Subplot", "Area", "Area_ha", "Code")
 
 
 # Merge Area into B
@@ -261,7 +261,7 @@ Tcontrol_data <- Tree_wide %>%
 # Join control means to treatment plots
 Tree_lnRR <- Tree_wide %>%
   filter(Treatment != "C") %>%
-  left_join(Tcontrol_data, by = c("Site", "Fencing"))
+  left_join (Tcontrol_data, by = c("Site", "Fencing"))
 
 # Compute lnRR
 Tree_lnRR <- Tree_lnRR %>%
@@ -319,7 +319,7 @@ Treed <- ggplot(Tplot_data, aes(x = pct_change, y = Treatment, color = Fencing))
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
   scale_x_continuous(breaks = seq(-80, 100, 20)) +
   labs(
-    x     = "Change in tree density relative to Control (%)",
+    x     = "Baseline-adjusted tree density change relative to control (%)",
     y     = "Treatment",
     color = "Fencing"
   ) +
@@ -351,7 +351,7 @@ multi_panelTree <- (Treea / Treeb / Treed) +
   )
 
 ## saving plot
-ggsave(multi_panelTree, filename = "Plots/Tree density.png",
+ggsave(multi_panelTree, filename = "Plots/Tree density2.png",
        width = 16, height = 14, units = "cm")
 
 
@@ -754,7 +754,7 @@ SeedVd <- ggplot(plot_data, aes(x = pct_change, y = Treatment, color = Fencing))
                  height = 0.5, size = 0.9, position = position_dodge(0.5)) +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
   scale_x_continuous(breaks = seq(-100, 250, 50)) +
-  labs(x = "Change in Seedling density relative to Control (%)",
+  labs(x = "Baseline-adjusted seedling density change relative to control(%)",
        y = "Treatment") +
   # theme(legend.position = "top") +
   theme_classic()+ 
@@ -783,7 +783,7 @@ multi_panelSe <- (SeedVa/SeedVb/SeedVd) +   # "/" for stacking vertically, or "|
 
 
 ##ggsave multipanel grass richness
-ggsave(multi_panelSe,filename ="Plots/Seedlings ViolinLog1A.png",
+ggsave(multi_panelSe,filename ="Plots/Seedling density2.png",
            width = 16, height = 14, units = "cm")
 
 #################################### HYPOTHESIS TESTING SEEDLINGS
@@ -1157,7 +1157,7 @@ SapVd <- ggplot(Splot_data, aes(x = pct_change, y = Treatment , color = Fencing)
                  height = 0.5, size = 0.9, position = position_dodge(0.5)) +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
   scale_x_continuous(breaks = seq(-80, 50, 20)) +
-  labs(x = "Change in sapling density relative to Control (%)",
+  labs(x = "Baseline-adjusted sapling density change relative to control(%)",
        y = "Treatment") +
  # theme(legend.position = "top") +
   theme_classic()+ 
@@ -1183,7 +1183,7 @@ multi_panelSap <- (SapVa/SapVb/SapVd) +   # "/" for stacking vertically, or "|" 
 
 
 ##ggsave multipanel grass richness
-ggsave(multi_panelSap,filename ="Plots/Saplings ViolinLog1A.png",
+ggsave(multi_panelSap,filename ="Plots/Sapling density.png",
        width = 16, height = 14, units = "cm")
 
 
@@ -1342,7 +1342,7 @@ summary(Rstreat_comparisons3$contrasts)
 # Estimated marginal means for Treatment within Fencing (if needed)
 Rstreat_comparisons3 <- emmeans(R5b_tweedie, ~ Treatment | Fencing, type = "response")
 
-# Comparing each treatment to Control with Dunnett adjustment (or "none" if you only want vs control)
+# Comparing each treatment to TF with Dunnett adjustment 
 contrast_vs_control <- contrast(Rstreat_comparisons3, method = "trt.vs.ctrl", ref = "TF")
 summary(contrast_vs_control, infer = TRUE)
 
@@ -1589,23 +1589,34 @@ ggsave(multi_sp2,
 # First, getting the emmeans
 emm_all <- emmeans(best_model, ~ Treatment * Fencing * Species_name, 
                    type = "response")
+trt_levels <- levels(emm_all@grid$Treatment)
+stopifnot(setequal(trt_levels, c("TF", "TFB", "THF")))
 
-# Create contrast matrix for TFB vs TF and THF vs TF
+# Creating contrast matrix for TFB vs TF and THF vs TF
+
+make_contrast <- function(a, b, levels) {
+  v <- setNames(rep(0, length(levels)), levels)
+  v[a] <-  1
+  v[b] <- -1
+  v
+}
+
 contrast_list <- list(
-  "TFB_vs_TF" = c(1, -1, 0),  # Assuming order: TF, TFB, THF
-  "THF_vs_TF" = c(1, 0, -1)
+  "TFB - TF" = make_contrast("TFB", "TF", trt_levels),
+  "THF - TF" = make_contrast("THF", "TF", trt_levels)
 )
 
-# Apply contrasts
-custom_contrasts <- contrast(emm_all, 
-                             method = list(
-                               "TFB - TF" = c(-1, 1, 0),
-                               "THF - TF" = c(-1, 0, 1)
-                             ),
-                             adjust = "BH")
+# Applying contrasts
 
-# View results
-print(custom_contrasts)
+custom_contrasts <- contrast(
+  emm_all,
+  method = contrast_list,
+  by     = c("Fencing", "Species_name"),   
+  adjust = "BH",
+  infer  = c(TRUE, TRUE)
+)
+# viewing results
+summary(custom_contrasts)
 
 
 ######################################################################################################
@@ -2225,7 +2236,7 @@ Gbc_bc <- ggplot(GBpct_bc, aes(x = pct_change, y = Treatment, color = Fencing)) 
   geom_errorbarh(aes(xmin = CI_lower_pct, xmax = CI_upper_pct),
                  height = 0.5, linewidth = 0.9, position = position_dodge(0.5)) +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
-  labs(x = "Change in aboveground grass biomass relative to Control (%)",
+  labs(x = "Baseline-adjusted aboveground grass biomass change relative to control (%)",
        y = "Treatment") +
   theme_classic() +
   ggtitle(NULL) +
@@ -2255,7 +2266,7 @@ multi_panelBiom_bc <- (GbA_bc / Gbb_bc / Gbc_bc) +
 
 # save multi-panel plot
 ggsave(multi_panelBiom_bc,
-       filename = "Plots/GrassBIOMASS.png",
+       filename = "Plots/GrassBiomass BA.png",
        width = 16, height = 14, units = "cm")
 
 
@@ -2444,7 +2455,8 @@ GrRb <- ggplot(grassR_delta,aes(x = Treatment, y = delta, fill = Fencing)) +
 ###  Step 1: Calculating lnRR for each site, treatment, fencing ,
   
   GRich_LRR <- Grasses %>%
-  filter(Year %in% c(2024, 2026)) %>% 
+  filter(!is.na(Species_name),
+         Year %in% c(2024, 2026)) %>% 
   group_by(Site, Plot, Subplot, Treatment, Fencing, Year) %>%
   summarise(spp_richness = n_distinct(Species_name), .groups = "drop") %>% 
   # Separate control and treatment
@@ -2517,7 +2529,7 @@ plot_data$CI_lower_pct <- (exp(plot_data_raw$lower.CL) - 1) * 100
 plot_data$CI_upper_pct <- (exp(plot_data_raw$upper.CL) - 1) * 100
 
 
-# rounding off to 2 decimaL places
+# rounding off to 2 decimal places
 plot_data <- plot_data %>%
   mutate(across(where(is.numeric), round, 2))
 
@@ -2540,7 +2552,7 @@ GrRD<-ggplot(plot_data, aes(x = pct_change, y = Treatment , color = Fencing)) +
                  height = 0.5, size = 0.9, position = position_dodge(0.5)) +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
   #scale_x_continuous(breaks = seq(-50, 150, 20)) +
-  labs(x = "Change in grass species richness relative to Control (%)",
+  labs(x = "Baseline-adjusted grass species richness change relative to control (%)",
        y = "Treatment") +
   # theme(legend.position = "top") +
   theme_classic()+ 
@@ -2566,7 +2578,7 @@ multi_panelRich <- (GrRa/GrRb/ GrRD) +   # "/" for stacking vertically, or "|" f
   )
 
 #saving plot
-  ggsave(multi_panelRich,filename ="Plots/GrassRICHNESS ViolinLog1A.png",
+  ggsave(multi_panelRich,filename ="Plots/GrassRICHNESS BA.png",
        width = 16, height = 14, units = "cm")  
 
 
@@ -2662,7 +2674,7 @@ GSWa <- ggplot(grSWdiversity,aes(x = Treatment, y =Shannon, fill = Fencing))+ fa
                  position = position_dodge(0.8), 
                  size = 1.5, color = "black") +   
     labs(x = "Treatment", 
-         y = "Shannon-Weiner index") +
+         y = "Shannon-Wiener index") +
     theme_classic() +
     theme(
       axis.title = element_text(size = 8),      # Axis titles
@@ -2750,7 +2762,7 @@ GSWb <- ggplot(SW_Delta,aes(x = Treatment, y = delta_SW, fill = Fencing)) +
                position = position_dodge(0.8), 
                size = 1.5, color = "black") +
   geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Treatment", y = "Δ Shannon-Weiner index") +
+  labs(x = "Treatment", y = "Δ Shannon-Wiener index") +
   theme_classic() +
   scale_fill_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta"))+
   theme(
@@ -2893,7 +2905,7 @@ GSWD<-ggplot(GDplot_data, aes(x = pct_change, y = Treatment , color = Fencing)) 
                  height = 0.5, size = 0.9, position = position_dodge(0.5)) +
   scale_color_manual(values = c("Fenced" = "#1B5", "Unfenced" = "magenta")) +
   #scale_x_continuous(breaks = seq(-10, 25, 10)) +
-  labs(x = "Change in grass Shannon-Weiner diversity relative to Control (%)",
+  labs(x = "Baseline-adjusted Shannon-Wiener diversity change relative to control (%)",
        y = "Treatment") +
   theme_classic()+ 
   ggtitle(NULL)+
@@ -2917,7 +2929,7 @@ SWmulti_panel <- (GSWa/GSWb/GSWD) +   # "/" for stacking vertically, or "|" for 
     plot.tag = element_text(size = 10, hjust = 0))  # Ensure left alignment
   
 ##ggsave multipanel plot
- ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ViolinLog1D.png",
+ ggsave(SWmulti_panel,filename ="Plots/Grass DIVERSITY ba.png",
        width = 16, height = 14, units = "cm")
 
 

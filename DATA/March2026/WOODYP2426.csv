@@ -14827,8 +14827,8 @@ Year,Site,Plot,Subplot,Fencing,Encroachment_level,Treatment,Species_name,Max_hei
 2024,C,2,Z4,Unfenced,High,TFB,Allophylus africanus,0.35,NA,NA,NA,NA
 2024,C,2,Z4,Unfenced,High,TFB,Allophylus africanus,0.5,NA,NA,NA,NA
 2024,C,2,Z4,Unfenced,High,TFB,Allophylus africanus,0.8,NA,NA,NA,NA
-2024,C,2,Z4,Unfenced,High,TFB,Azanza garckeana,2.3,,,,
-2024,C,2,Z4,Unfenced,High,TFB,Azanza garckeana,3.6,,,,
+2024,C,2,Z4,Unfenced,High,TFB,Thespesia garckeana,2.3,,,,
+2024,C,2,Z4,Unfenced,High,TFB,Thespesia garckeana,3.6,,,,
 2024,C,2,Z4,Unfenced,High,TFB,Berchemia zeyheri,1,NA,NA,NA,NA
 2024,C,2,Z4,Unfenced,High,TFB,Boscia foetida,0.25,NA,NA,NA,NA
 2024,C,2,Z4,Unfenced,High,TFB,Boscia foetida,0.3,NA,NA,NA,NA
@@ -16631,7 +16631,7 @@ Year,Site,Plot,Subplot,Fencing,Encroachment_level,Treatment,Species_name,Max_hei
 2024,C,4,Z1,Fenced,High,F,Peltophorum africanum,3.2,,,,
 2024,C,4,Z1,Fenced,High,F,Peltophorum africanum,3,,,,
 2024,C,4,Z1,Fenced,High,F,Pterocarpus rotundifolius,2,,,,
-2024,C,4,Z1,Fenced,High,F,Rhus lancea,4.2,,,,
+2024,C,4,Z1,Fenced,High,F,Searsia lancea,4.2,,,,
 2024,C,4,Z1,Fenced,High,F,Sclerocarya birrea,5,,,,
 2024,C,4,Z1,Fenced,High,F,Senegalia rehmanniana,2.8,,,,
 2024,C,4,Z1,Fenced,High,F,Senegalia rehmanniana,0.3,NA,NA,NA,NA
@@ -16719,7 +16719,7 @@ Year,Site,Plot,Subplot,Fencing,Encroachment_level,Treatment,Species_name,Max_hei
 2024,C,4,Z2,Fenced,High,F,Albizia harveyi,0.7,NA,NA,NA,NA
 2024,C,4,Z2,Fenced,High,F,Allophylus africanus,3,,,,
 2024,C,4,Z2,Fenced,High,F,Allophylus africanus,0.6,NA,NA,NA,NA
-2024,C,4,Z2,Fenced,High,F,Azanza garckeana,2,,,,
+2024,C,4,Z2,Fenced,High,F,Thespesia garckeana,2,,,,
 2024,C,4,Z2,Fenced,High,F,Berchemia zeyheri,0.9,NA,NA,NA,NA
 2024,C,4,Z2,Fenced,High,F,Combretum apiculatum,3.4,,,,
 2024,C,4,Z2,Fenced,High,F,Combretum apiculatum,5.5,,,,
@@ -29233,7 +29233,7 @@ Year,Site,Plot,Subplot,Fencing,Encroachment_level,Treatment,Species_name,Max_hei
 2024,E,3,Z2,Unfenced,High,F,Fluegga virosa,0.9,NA,NA,NA,NA
 2024,E,3,Z2,Unfenced,High,F,Fluegga virosa,1,NA,NA,NA,NA
 2024,E,3,Z2,Unfenced,High,F,Fluegga virosa,1.3,NA,NA,NA,NA
-2024,E,3,Z2,Unfenced,High,F,Gardenia spathulifolia,1.5,,,,
+2024,E,3,Z2,Unfenced,High,F,Gardenia volkensii subsp. spatulifolia,1.5,,,,
 2024,E,3,Z2,Unfenced,High,F,Grewia decomovulata,1.8,,,,
 2024,E,3,Z2,Unfenced,High,F,Grewia decomovulata,0.25,NA,NA,NA,NA
 2024,E,3,Z2,Unfenced,High,F,Grewia decomovulata,0.3,NA,NA,NA,NA
@@ -56421,13 +56421,13 @@ Year,Site,Plot,Subplot,Fencing,Encroachment_level,Treatment,Species_name,Max_hei
 2026,F,1,Z1,Fenced,Moderate,C,Ziziphus mucronata,0.3,NA,NA,NA,NA
 2026,F,1,Z1,Fenced,Moderate,C,Ziziphus mucronata,0.35,NA,NA,NA,NA
 2026,F,1,Z1,Fenced,Moderate,C,Ziziphus mucronata,0.4,NA,NA,NA,NA
-2026,F,1,Z2,Fenced,Moderate,C,Azanza garckeana,0.65,NA,NA,NA,NA
-2026,F,1,Z2,Fenced,Moderate,C,Azanza garckeana,0.65,NA,NA,NA,NA
-2026,F,1,Z2,Fenced,Moderate,C,Azanza garckeana,0.65,NA,NA,NA,NA
-2026,F,1,Z2,Fenced,Moderate,C,Azanza garckeana,0.65,NA,NA,NA,NA
-2026,F,1,Z2,Fenced,Moderate,C,Azanza garckeana,0.65,NA,NA,NA,NA
-2026,F,1,Z2,Fenced,Moderate,C,Azanza garckeana,0.65,NA,NA,NA,NA
-2026,F,1,Z2,Fenced,Moderate,C,Azanza garckeana,1.3,NA,NA,NA,NA
+2026,F,1,Z2,Fenced,Moderate,C,Thespesia garckeana,0.65,NA,NA,NA,NA
+2026,F,1,Z2,Fenced,Moderate,C,Thespesia garckeana,0.65,NA,NA,NA,NA
+2026,F,1,Z2,Fenced,Moderate,C,Thespesia garckeana,0.65,NA,NA,NA,NA
+2026,F,1,Z2,Fenced,Moderate,C,Thespesia garckeana,0.65,NA,NA,NA,NA
+2026,F,1,Z2,Fenced,Moderate,C,Thespesia garckeana,0.65,NA,NA,NA,NA
+2026,F,1,Z2,Fenced,Moderate,C,Thespesia garckeana,0.65,NA,NA,NA,NA
+2026,F,1,Z2,Fenced,Moderate,C,Thespesia garckeana,1.3,NA,NA,NA,NA
 2026,F,1,Z2,Fenced,Moderate,C,Colophospermum mopane,0.9,NA,NA,NA,NA
 2026,F,1,Z2,Fenced,Moderate,C,Colophospermum mopane,1.2,NA,NA,NA,NA
 2026,F,1,Z2,Fenced,Moderate,C,Combretum apiculatum,0.4,NA,NA,NA,NA
@@ -62683,7 +62683,7 @@ Year,Site,Plot,Subplot,Fencing,Encroachment_level,Treatment,Species_name,Max_hei
 2026,C,2,Z3,Fenced,,TFB,Ziziphus mucronata,4,,,,
 2026,C,2,Z3,Fenced,,TFB,Ziziphus mucronata,2,,,,
 2026,C,2,Z4,Unfenced,High,TFB,Allophylus africanus,3.5,,,,
-2026,C,2,Z4,Unfenced,,TFB,Azanza garckeana,2,,,,
+2026,C,2,Z4,Unfenced,,TFB,Thespesia garckeana,2,,,,
 2026,C,2,Z4,Unfenced,,TFB,Combretum hereroense,6,,,,
 2026,C,2,Z4,Unfenced,,TFB,Combretum hereroense,2,,,,
 2026,C,2,Z4,Unfenced,,TFB,Dichrostachys cinerea,3,,,,
@@ -63010,7 +63010,7 @@ Year,Site,Plot,Subplot,Fencing,Encroachment_level,Treatment,Species_name,Max_hei
 2026,C,4,Z1,Fenced,,F,Albizia harveyi,2.9,,,,
 2026,C,4,Z1,Fenced,,F,Albizia harveyi,2.9,,,,
 2026,C,4,Z1,Fenced,,F,Albizia harveyi,2.6,,,,
-2026,C,4,Z1,Fenced,,F,Azanza garckeana,2.4,,,,
+2026,C,4,Z1,Fenced,,F,Thespesia garckeana,2.4,,,,
 2026,C,4,Z1,Fenced,,F,Combretum apiculatum,3.5,,,,
 2026,C,4,Z1,Fenced,,F,Combretum apiculatum,5.5,,,,
 2026,C,4,Z1,Fenced,High,F,Combretum hereroense,2.9,,,,
@@ -63113,7 +63113,7 @@ Year,Site,Plot,Subplot,Fencing,Encroachment_level,Treatment,Species_name,Max_hei
 2026,C,4,Z1,Fenced,High,F,Grewia monticola,2.1,,,,
 2026,C,4,Z1,Fenced,High,F,Peltophorum africanum,2.4,,,,
 2026,C,4,Z1,Fenced,High,F,Peltophorum africanum,2.5,,,,
-2026,C,4,Z1,Fenced,High,F,Rhus lancea,4,,,,
+2026,C,4,Z1,Fenced,High,F,Searsia lancea,4,,,,
 2026,C,4,Z1,Fenced,High,F,Terminalia sericea,6,,,,
 2026,C,4,Z1,Fenced,High,F,Terminalia sericea,6,,,,
 2026,C,4,Z1,Fenced,High,F,Terminalia sericea,4.7,,,,
@@ -63155,7 +63155,7 @@ Year,Site,Plot,Subplot,Fencing,Encroachment_level,Treatment,Species_name,Max_hei
 2026,C,4,Z1,Fenced,High,F,Ziziphus mucronata,4,,,,
 2026,C,4,Z1,Fenced,High,F,Ziziphus mucronata,3.4,,,,
 2026,C,4,Z2,Fenced,High,F,Allophylus africanus,2.4,,,,
-2026,C,4,Z2,Fenced,,F,Azanza garckeana,1.8,,,,
+2026,C,4,Z2,Fenced,,F,Thespesia garckeana,1.8,,,,
 2026,C,4,Z2,Fenced,,F,Combretum apiculatum,3.9,,,,
 2026,C,4,Z2,Fenced,,F,Combretum apiculatum,3,,,,
 2026,C,4,Z2,Fenced,,F,Combretum hereroense,7,,,,
@@ -67367,7 +67367,7 @@ Year,Site,Plot,Subplot,Fencing,Encroachment_level,Treatment,Species_name,Max_hei
 2026,E,3,Z4,Unfenced,High,F,Allophylus africanus,2,,,,
 2026,E,3,Z4,Unfenced,High,F,Allophylus africanus,3.5,,,,
 2026,E,3,Z4,Unfenced,High,F,Allophylus africanus,2,,,,
-2026,E,3,Z4,Unfenced,High,F,Azanza garckeana,10,,,,
+2026,E,3,Z4,Unfenced,High,F,Thespesia garckeana,10,,,,
 2026,E,3,Z4,Unfenced,High,F,Balanites maughamii,5,,,,
 2026,E,3,Z4,Unfenced,High,F,Combretum apiculatum,3.5,,,,
 2026,E,3,Z4,Unfenced,High,F,Combretum apiculatum,4,,,,

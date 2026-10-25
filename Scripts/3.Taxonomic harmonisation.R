@@ -127,7 +127,7 @@ unique_species
 
 #loading data
 
-Grass_species <- Gunique_species
+Grass_species <- unique_species
 
 # checking african species 
 africa_species <- unique(Grass_species)
