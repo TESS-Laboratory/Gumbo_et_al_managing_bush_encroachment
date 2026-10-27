@@ -1,4 +1,6 @@
-
+library(tidyverse)
+library(stringi)
+library(dataMaid)
 
 GC <- read_csv ("DATA/March2026/Grasses2426Updated1.csv")
 
